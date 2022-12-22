@@ -1,2 +1,2 @@
 # Ecommerce_QA
-Automation suite for PPE Release is store here. 
+Automation suite for PPE and WPS Project
