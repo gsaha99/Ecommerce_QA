@@ -1,1 +1,2 @@
-./Test Data/Automation_Datasheet.xlsx
+# ignore all .xlsx files in Test Data 
+Test Data/**/*.xlsx
