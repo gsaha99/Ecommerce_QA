@@ -1,2 +1,2 @@
 # ignore all .xlsx files in Test Data 
-Test Data/**/*.xlsx
+#Test Data/**/*.xlsx
