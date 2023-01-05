@@ -6,6 +6,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,6 +22,7 @@ import PageObjectRepo.app_Hybris_BO_Repo;
 import PageObjectRepo.app_Riskified_Repo;
 import PageObjectRepo.app_VET_Repo;
 import utilities.CaptureScreenshot;
+import utilities.CustomMethods;
 import utilities.DriverModule;
 import utilities.PaymentGateway;
 import utilities.Reporting;
@@ -43,6 +45,8 @@ public class Vet_Test_Suite extends DriverModule {
 	app_Riskified_Repo RiskifiedRepo;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
+	public static String EmailConfirmationText="//button/div[contains(text(),'Order Confirmation')]";
+	
 
 	@BeforeTest
 	public void initializeRepo() {
@@ -111,10 +115,10 @@ public class Vet_Test_Suite extends DriverModule {
 				driver.get("https://yopmail.com/en/");
 				VET.enterEmailIdInYopmail(email);
 				VET.clickOnArrowButton();
-				if(checkIfOrderConfirmationMailReceived()) {
+				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 					Reporting.updateTestReport("Order Confirmation mail was received",
 	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					validateOrderConfirmationMailContent(tax,total);
+					CustomMethods.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
 				}
 				else {
 					Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -415,10 +419,10 @@ public class Vet_Test_Suite extends DriverModule {
 				driver.get("https://yopmail.com/en/");
 				VET.enterEmailIdInYopmail(email);
 				VET.clickOnArrowButton();
-				if(checkIfOrderConfirmationMailReceived()) {
+				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 					Reporting.updateTestReport("Order Confirmation mail was received",
 	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					validateOrderConfirmationMailContent(tax,total);
+					CustomMethods.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
 				}
 				else {
 					Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -568,10 +572,10 @@ public class Vet_Test_Suite extends DriverModule {
 				driver.get("https://yopmail.com/en/");
 				VET.enterEmailIdInYopmail(email);
 				VET.clickOnArrowButton();
-				if(checkIfOrderConfirmationMailReceived()) {
+				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 					Reporting.updateTestReport("Order Confirmation mail was received",
 	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					validateOrderConfirmationMailContent(tax,total);
+					CustomMethods.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
 				}
 				else {
 					Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -1221,83 +1225,8 @@ public class Vet_Test_Suite extends DriverModule {
 		}
 	}
 	
-	/*
-	 * @Description: Checks if order confirmation mail was received
-	 * @Date: 02/01/23
-	 */
-	public boolean checkIfOrderConfirmationMailReceived() throws IOException{
-		try {
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-			int timeOutSeconds=60;
-			int flag=0;
-			WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-			WebElement element2 = null;
 
-			/* The purpose of this loop is to wait for maximum of 60 seconds */
-			for (int i = 0; i < timeOutSeconds / 5; i++) {
 
-				try {
-					driver.switchTo().frame("ifinbox");
-					element2=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button/div[contains(text(),'Order Confirmation')]")));
-
-					if(element2.isDisplayed()==true)
-					{
-						flag=1;
-						driver.switchTo().defaultContent();
-						break;
-					}
-
-				} catch (Exception e) {
-					driver.switchTo().defaultContent(); 
-					element1.click();
-
-				}
-			}
-
-			if(flag==1)  return true;
-			else return false;
-		}
-		catch(Exception e) {
-			Reporting.updateTestReport("Order Confirmation mail was not received with exception: "+e.getMessage(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			return false;
-		}			}
-
-	/*
-	 * @Description: Fetches the mail content of Order Confirmation mail, order total, tax and shipping
-	 * @Date: 02/01/23
-	 */
-
-	public void validateOrderConfirmationMailContent(String tax, String total) throws IOException {
-		try {
-			driver.switchTo().frame("ifmail");
-			String orderTotalInMail=driver.findElement(By.xpath("//td[contains(text(),'Total:')]/following-sibling::td")).getText();
-			String taxInMail=driver.findElement(By.xpath("//td[contains(text(),'Tax:')]/following-sibling::td")).getText();
-			//Validation of tax
-			if(!tax.contentEquals(" ")) {
-				if(tax.contentEquals(taxInMail))
-					Reporting.updateTestReport(taxInMail+" : shown as shipping in Order Confirmation mail was same as Shipping charge in Order Confirmation page: "+tax,
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				else
-					Reporting.updateTestReport(taxInMail+" : shown as shipping in Order Confirmation mail was not same as Shipping charge in Order Confirmation page: "+tax,
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-
-			//Validation of Order Total
-			if(total.contentEquals(orderTotalInMail)) 
-				Reporting.updateTestReport(orderTotalInMail+" : shown as Order total in Order Confirmation mail was same as tax in Order Confirmation page: "+total,
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else
-				Reporting.updateTestReport(orderTotalInMail+" : shown as Order total in Order Confirmation mail was not same as total in Order Confirmation page: "+total,
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);			
-			driver.switchTo().defaultContent();
-
-		}
-		catch(Exception e){
-			Reporting.updateTestReport("Order total and tax validation couldn't be done: "+e.getMessage(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
 	
 	/*
 	 * @Date: 2/1/23

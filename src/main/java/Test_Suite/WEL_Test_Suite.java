@@ -200,7 +200,6 @@ public class WEL_Test_Suite extends DriverModule {
 			Thread.sleep(1000);
 			// JS.executeScript("window.scrollBy(0,600)");
 			ScrollingWebPage.PageScrolldown(driver, 0, 600);
-			
 			WEL.ClickonCMAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonExploreCourseCMAProduct();
