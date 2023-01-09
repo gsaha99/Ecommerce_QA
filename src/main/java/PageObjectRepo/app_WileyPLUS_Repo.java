@@ -52,16 +52,10 @@ public class app_WileyPLUS_Repo {
 	WebElement MultipleTermsWileyPLUSTab;
 	@FindBy(xpath="//*[contains(text(),'Standard Pricing')]")
 	WebElement StandardPricingText;
-	@FindBy(xpath="//p[contains(text(),\"Log in and find your course to view your school's pricing. Your school may have custom pricing options.\")]")
-	WebElement GreyBoxTextWileyPLUSPDP;
 	@FindBy(xpath="//h5[contains(text(),\"View your school's pricing \")]")
 	WebElement GreyBoxHeaderWileyPLUSPDP;
 	@FindBy(xpath="//button[contains(text(),'Log in to WileyPLUS')]")
 	WebElement LoginToWileyPLUSButton;
-	@FindBy(xpath="//p[contains(text(),'Pay less now to purchase Single Term Access to WileyPLUS. Access expires 5 months from day of purchase.')]")
-	WebElement SingleTermWileyPLUSText;
-	@FindBy(xpath="//p[contains(text(),' by purchasing Multiple Term Access to WileyPLUS. Access expires 12 months from day of purchase.')]")
-	WebElement MultipleTermWileyPLUSText;
 	@FindBy(xpath="//span[text()='Multiple Term Access to WileyPLUS']/parent::span/parent::div/following-sibling::div/following-sibling::div/span[@class='item-price item-price-value']")
 	WebElement MultiTermAccessPrice;
 	@FindBy(xpath="//span[text()='Single Term Access to WileyPLUS']/parent::span/parent::div/following-sibling::div/following-sibling::div/span[@class='item-price item-price-value']")
@@ -575,7 +569,7 @@ public class app_WileyPLUS_Repo {
 	 * @Date:27/12/22
 	 * @Description: Verfy the Grey box in WileyPLUS PDP
 	 */
-	public void checkGreyBoxWileyPLUSTab() throws IOException{
+	public void checkGreyBoxWileyPLUSTab(WebDriver driver,String greyBoxText) throws IOException{
 		try {
 			if(GreyBoxHeaderWileyPLUSPDP.isDisplayed()) 
 				Reporting.updateTestReport("The header text: "+GreyBoxHeaderWileyPLUSPDP.getText()+" was present",
@@ -584,6 +578,7 @@ public class app_WileyPLUS_Repo {
 				Reporting.updateTestReport("The header text in grey box was not present",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			try {
+				WebElement GreyBoxTextWileyPLUSPDP=driver.findElement(By.xpath("//p[contains(text(),\""+greyBoxText+"\")]"));
 				if(GreyBoxTextWileyPLUSPDP.isDisplayed()) 
 					Reporting.updateTestReport("The text: "+GreyBoxTextWileyPLUSPDP.getText()+" was present",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -626,8 +621,10 @@ public class app_WileyPLUS_Repo {
 	 * @Date: 27/12/22
 	 * @Description: Checks if Single Term WileyPLUS Text is present  
 	 */
-	public void checkSingleTermWileyPLUSText() throws IOException{
+	public void checkSingleTermWileyPLUSText(WebDriver driver,String singleTermText) throws IOException{
 		try {
+			WebElement SingleTermWileyPLUSText=driver.findElement(By.xpath("//p[contains(text(),'"
+		+singleTermText+"')]"));
 			if(SingleTermWileyPLUSText.isDisplayed()) 
 				Reporting.updateTestReport("Single Term WileyPLUS Text: "+SingleTermWileyPLUSText.getText()+" was present in WileyPLUS tab ",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -646,8 +643,10 @@ public class app_WileyPLUS_Repo {
 	 * @Date: 27/12/22
 	 * @Description: Checks if Multiple Term WileyPLUS Text is present  
 	 */
-	public void checkMultipleTermWileyPLUSText() throws IOException{
+	public void checkMultipleTermWileyPLUSText(WebDriver driver,String multiTermText) throws IOException{
 		try {
+			WebElement MultipleTermWileyPLUSText=driver.findElement(By.xpath("//p[contains(text(),'"
+					+multiTermText+"')]"));
 			if(MultipleTermWileyPLUSText.isDisplayed()) 
 				Reporting.updateTestReport("Multiple Term WileyPLUS Text: "+MultipleTermWileyPLUSText.getText()+" was present in WileyPLUS tab ",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -666,10 +665,12 @@ public class app_WileyPLUS_Repo {
 	 * @Date: 27/12/22
 	 * @Description: Fetches the percentage from Multiterm page
 	 */
-	public String fetchPercentageMultiTerm() throws IOException{
+	public String fetchPercentageMultiTerm(WebDriver driver, String multiTermText) throws IOException{
 		try {
-			String multiTermText=MultipleTermWileyPLUSText.getText();
-			String[] A=multiTermText.split(" ");
+			WebElement MultipleTermWileyPLUSText=driver.findElement(By.xpath("//p[contains(text(),'"
+					+multiTermText+"')]"));
+			String multipleTermText=MultipleTermWileyPLUSText.getText();
+			String[] A=multipleTermText.split(" ");
 			String[] B=A[1].split("%");
 			String value=B[0];
 			Reporting.updateTestReport("Multiple Term percentage: "+value+" was returned", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -916,17 +917,15 @@ public class app_WileyPLUS_Repo {
 		try {
 			SelectCountryDropDown.click();
 			//Total 6 countries are present in the datasheet
-			
-			String[] countries=countryList.split("|");
-			System.out.println(countries);
-			for(int i=0;i<countries.length;i++) {
+			String[] countries=countryList.split(",");
+			for(String country:countries) {
 				try {
-					String xpathOfCountry="//option[contains(text(),'"+countries[i]+"')]";
+					String xpathOfCountry="//option[contains(text(),'"+country+"')]";
 					if(driver.findElement(By.xpath(xpathOfCountry)).isDisplayed())
-						Reporting.updateTestReport(countries[i]+" was present in the country dropdown",
+						Reporting.updateTestReport(country+" was present in the country dropdown",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					else
-						Reporting.updateTestReport(countries[i]+" was not present in the country dropdown",
+						Reporting.updateTestReport(country+" was not present in the country dropdown",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 				catch(Exception e) {

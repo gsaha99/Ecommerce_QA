@@ -344,13 +344,13 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			WileyPLUS.checkSingleTermWileyPLUSTab();
 			WileyPLUS.checkMultipleTermsWileyPLUSTab();
 			WileyPLUS.checkStandardPricicngTextWileyPLUSTab();
-			WileyPLUS.checkMultipleTermWileyPLUSText();
+			WileyPLUS.checkMultipleTermWileyPLUSText(driver,excelOperation.getTestData("MultipleTermWileyPLUSText", "Generic_Messages", "Data"));
 			WileyPLUS.clickOnSingleTermWileyPLUSButton();
-			WileyPLUS.checkSingleTermWileyPLUSText();
+			WileyPLUS.checkSingleTermWileyPLUSText(driver,excelOperation.getTestData("SingleTermWileyPLUSText", "Generic_Messages", "Data"));
 			WileyPLUS.checkStandardPricicngTextWileyPLUSTab();
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(0,500)");
-			WileyPLUS.checkGreyBoxWileyPLUSTab();
+			WileyPLUS.checkGreyBoxWileyPLUSTab(driver,excelOperation.getTestData("WileyPLUS_Grey_Box_Text", "Generic_Messages", "Data"));
 			WileyPLUS.checkLoginToWileyPLUSButton();
 			
 			
@@ -391,7 +391,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			WileyPLUS.checkSingleTermWileyPLUSTab();
 			WileyPLUS.checkMultipleTermsWileyPLUSTab();
-			String multiTermPercentage=WileyPLUS.fetchPercentageMultiTerm();
+			String multiTermPercentage=WileyPLUS.fetchPercentageMultiTerm(driver,excelOperation.getTestData("MultipleTermWileyPLUSText", "Generic_Messages", "Data"));
 			Double multiTermPrice=Double.valueOf(WileyPLUS.fetchMultiTermAccessPrice());
 			WileyPLUS.clickOnSingleTermWileyPLUSButton();
 			Double singleTermPrice=Double.valueOf(WileyPLUS.fetchSingleTermAccessPrice());
@@ -664,7 +664,15 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				WileyPLUS.clickOnSaveAndContinueButton();
 				WileyPLUS.checkIfUserInBillingStep();
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Cardholder name ield in Card information"
+							+ " section was not clickable and caused timeout exception"
+							, CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 				WileyPLUS.enterCardHolderName(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "First_Name"));
 				driver.switchTo().defaultContent();
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
@@ -682,7 +690,15 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				WileyPLUS.enterFirstName(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "First_Name"));
 				WileyPLUS.enterLastName(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Last_Name"));
 				WileyPLUS.selectCountry(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Bill_Country"));
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
+				try{
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Billing address line 1 was not clickable"
+							+ " and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 				WileyPLUS.enterAddressLine1Billing(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Bill_Address_line1"));
 				WileyPLUS.enterZipBilling(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Bill_Zip_Code"));
 				//wiley.enterCityBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_City"));
@@ -758,7 +774,15 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				WileyPLUS.clickOnSaveAndContinueButton();
 				WileyPLUS.checkIfUserInBillingStep();
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Cardholder name ield in Card information"
+							+ " section was not clickable and caused timeout exception"
+							, CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 				WileyPLUS.enterCardHolderName(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "First_Name"));
 				driver.switchTo().defaultContent();
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
@@ -776,7 +800,15 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				WileyPLUS.enterFirstName(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "First_Name"));
 				WileyPLUS.enterLastName(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Last_Name"));
 				WileyPLUS.selectCountry(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Country"));
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
+				try{
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Billing address line 1 was not clickable"
+							+ " and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 				WileyPLUS.enterAddressLine1Billing(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Address_line1"));
 				WileyPLUS.enterZipBilling(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Zip_Code"));
 				WileyPLUS.enterPhoneNumberBilling(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Phone_Number"));
@@ -848,11 +880,18 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				WileyPLUS.enterFirstName(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "First_Name"));
 				WileyPLUS.enterLastName(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Last_Name"));
 				WileyPLUS.selectCountry(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_Country"));
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+				try{
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
+							+ " and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
 				WileyPLUS.enterAddressLine1Shipping(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_Address_line1"));
 				WileyPLUS.enterShippingZIPCode(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_Zip_Code"));
-				WileyPLUS.enterShippingCity(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_City"));
-				WileyPLUS.enterState(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_State"));
+				//WileyPLUS.enterShippingCity(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_City"));
+				//WileyPLUS.enterState(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_State"));
 				WileyPLUS.enterPhoneNumberShipping(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_Phone_Number"));
 				WileyPLUS.clickOnSaveAndContinueButton();
 				try {
@@ -862,7 +901,15 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				}
 				WileyPLUS.checkIfUserInBillingStep();
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Cardholder name ield in Card information"
+							+ " section was not clickable and caused timeout exception"
+							, CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 				WileyPLUS.enterCardHolderName(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "First_Name"));
 				driver.switchTo().defaultContent();
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
