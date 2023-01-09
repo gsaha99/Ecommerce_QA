@@ -66,7 +66,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'View Cart')]")));
 			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700);
+			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 			wiley.clickOnProceedToCheckoutButton();
 			String email=wiley.enterEmailIdInCreateAccountForm();
 			wiley.clickOnCreateAccountButton();
@@ -109,12 +109,12 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			wiley.clickOnPlaceOrderButton();
 			if(wiley.checkIfUserIsInOrderConfirmation()) Reporting.updateTestReport("User is in Order Confirmation page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else Reporting.updateTestReport("User was not in Order Confirmation page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			ScrollingWebPage.PageScrolldown(driver,0,300);
+			ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 			String orderID=wiley.fetchOrderId();
 			excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Order_Id", orderID);
 			excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
 			excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
-			ScrollingWebPage.PageScrolldown(driver,0,500);
+			ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 			String tax=wiley.fetchTaxAmount();
 			String orderTotal=wiley.fetchOrderTotal();
 			
@@ -167,7 +167,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			wiley.enterExistingWileyUserMailID(email);
 			wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Password"));
 			wiley.clickOnLogInAndContinueButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700);
+			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 			wiley.clickOnProceedToCheckoutButton();
 			driver.switchTo().frame(0);
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));

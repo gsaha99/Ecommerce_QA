@@ -12,21 +12,23 @@ import Test_Suite.WEL_Test_Suite;
 public class ScrollingWebPage {
 	
 
-	public static void PageScrolldown(WebDriver driver, Integer xcord, Integer ycord) throws IOException {
+	public static void PageScrolldown(WebDriver driver, Integer xcord, Integer ycord,String SS_path) throws IOException {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(" + xcord + "," + ycord + ")");
 		} catch (Exception e) {
-			e.getMessage();
+			Reporting.updateTestReport("Unable to Scroll Down", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.WARNING);
 		}
 	}
 
-	public static void PageScrollUp(WebDriver driver, Integer xcord, Integer ycord) throws IOException {
+	public static void PageScrollUp(WebDriver driver, Integer xcord, Integer ycord,String SS_path) throws IOException {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(" + xcord + "," + ycord + ")");
 		} catch (Exception e) {
-			e.getMessage();
+			Reporting.updateTestReport("Unable to Scroll Up", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.WARNING);
 		}
 	}
 

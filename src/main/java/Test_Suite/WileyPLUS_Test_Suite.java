@@ -593,7 +593,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				driver.navigate().refresh();
 				WileyPLUS.checkIfUserIsOnCartPage(driver);
 				WileyPLUS.checkBrandNameWileyPLUS();
-				ScrollingWebPage.PageScrolldown(driver,0,700);
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				WileyPLUS.clickOnProceedToCheckoutButton();
 				String email=WileyPLUS.enterEmailIdInCreateAccountForm();
 				WileyPLUS.clickOnCreateAccountButton();
@@ -623,7 +623,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				driver.navigate().refresh();
 				WileyPLUS.checkIfUserIsOnCartPage(driver);
 				WileyPLUS.checkBrandNameWileyPLUS();
-				ScrollingWebPage.PageScrolldown(driver,0,700);
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				WileyPLUS.clickOnProceedToCheckoutButton();
 				String email=WileyPLUS.enterEmailIdInCreateAccountForm();
 				WileyPLUS.clickOnCreateAccountButton();
@@ -655,7 +655,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				WileyPLUS.checkIfUserIsOnCartPage(driver);
 				WileyPLUS.checkBrandNameWileyPLUS();
 				WileyPLUS.checkCourseNameInCartPage(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Course"));
-				ScrollingWebPage.PageScrolldown(driver,0,700);
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				WileyPLUS.clickOnProceedToCheckoutButton();
 				String email=WileyPLUS.enterEmailIdInCreateAccountForm();
 				WileyPLUS.clickOnCreateAccountButton();
@@ -699,12 +699,12 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				WileyPLUS.clickOnPlaceOrderButton();
 				String orderconfirmation = driver.getTitle();
 				if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-					ScrollingWebPage.PageScrolldown(driver,0,300);
+					ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 					WileyPLUS.checkCourseNameInOrderConfirmationPage(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Course"));
 					String orderId = WileyPLUS.fetchOrderId();
 					excelOperation.updateTestData("TC15", "WileyPLUS_Test_Data", "Order_Id", orderId);
 					excelOperation.updateTestData("TC15", "WileyPLUS_Test_Data", "Email_Id", email);
-					ScrollingWebPage.PageScrolldown(driver,0,500);
+					ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 					String ordertotal = WileyPLUS.fetchOrderTotal();
 					String taxamount = WileyPLUS.fetchTaxAmount();
 					excelOperation.updateTestData("TC15", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
@@ -789,11 +789,11 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				WileyPLUS.clickOnPlaceOrderButton();
 				String orderconfirmation = driver.getTitle();
 				if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-					ScrollingWebPage.PageScrolldown(driver,0,300);
+					ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 					String orderId = WileyPLUS.fetchOrderId();
 					excelOperation.updateTestData("TC16", "WileyPLUS_Test_Data", "Order_Id", orderId);
 					excelOperation.updateTestData("TC16", "WileyPLUS_Test_Data", "Email_Id", email);
-					ScrollingWebPage.PageScrolldown(driver,0,500);
+					ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 					String ordertotal = WileyPLUS.fetchOrderTotal();
 					String taxamount = WileyPLUS.fetchTaxAmount();
 					excelOperation.updateTestData("TC16", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
@@ -804,7 +804,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					WileyPLUS.checkBrandNameWileyPLUS();
 					WileyPLUS.clickOnProceedToCheckoutButton();
 					WileyPLUS.checkIfUserInBillingStep();
-					ScrollingWebPage.PageScrolldown(driver,0,300);
+					ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 					String xpathOfGlobalSavedAddress="//*[contains(text(),' "
 					+excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Address_line1")+
 					"')]/following-sibling::div[contains(text(),'"+excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Country")+"')]";
@@ -881,11 +881,11 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				WileyPLUS.clickOnPlaceOrderButton();
 				String orderconfirmation = driver.getTitle();
 				if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-					ScrollingWebPage.PageScrolldown(driver,0,300);
+					ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 					String orderId = WileyPLUS.fetchOrderId();
 					excelOperation.updateTestData("TC17", "WileyPLUS_Test_Data", "Order_Id", orderId);
 					excelOperation.updateTestData("TC17", "WileyPLUS_Test_Data", "Email_Id", email);
-					ScrollingWebPage.PageScrolldown(driver,0,500);
+					ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 					String ordertotal = WileyPLUS.fetchOrderTotal();
 					String taxamount = WileyPLUS.fetchTaxAmount();
 					excelOperation.updateTestData("TC17", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
@@ -992,7 +992,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				WileyPLUS.clickOnAddToCartButton();
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'View Cart')]")));
 				WileyPLUS.clickOnViewCartButton();
-				ScrollingWebPage.PageScrolldown(driver,0,700);
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				WileyPLUS.clickOnContinueShoppingButton();
 				try {
 					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing, Education and Research')]")));
