@@ -628,6 +628,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC15_PlaceOrder_CMACPACFA_DigitalProducts_ForNewUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC15_PlaceOrder_CMACPACFA_DigitalProducts_ForNewUser");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
@@ -636,17 +637,17 @@ public class WEL_Test_Suite extends DriverModule {
 			Thread.sleep(2000);
 			WEL.ClickonExploreCourseCMAProduct();
 			Thread.sleep(3000);
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonViewCourseForCMAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonCMAeBook();
 			Thread.sleep(2000);
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			Thread.sleep(1000);
 			WEL.ClickonCMAAddToCart();
 			WEL.ClickWELIconCheckoutPage();
 			Thread.sleep(2000); //
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonCPAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonExploreCourseCMAProduct();
@@ -662,25 +663,21 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.ClickOnCPAAddProduct();
 			WEL.ClickWELIconCheckoutPage();
 			Thread.sleep(2000); 
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonCFAProduct();
 			Thread.sleep(2000);
-			WEL.ClickonExploreCourseCMAProduct(); //
-
-			ScrollingWebPage.PageDown(driver);
+			WEL.ClickonExploreCourseCMAProduct(); 
+			ScrollingWebPage.PageDown(driver, SS_path);
 			Thread.sleep(2000);
-			WEL.ClickonViewCourseForCFAProduct(); //
-
-			ScrollingWebPage.PageDown(driver);
+			WEL.ClickonViewCourseForCFAProduct(); 
+			ScrollingWebPage.PageDown(driver, SS_path);
 			Thread.sleep(2000);
 			WEL.ClickonViewCourseLinkForCFAProduct();
 			Thread.sleep(2000);
 			WEL.ClickeBookforCFAProduct();
 			Thread.sleep(3000); //
-
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickOnCIAAddProduct();
-
 			WEL.ClickonCheckOutOnCartPage();
 			String Gemail = WEL.EnterGuestUser();
 			WEL.ClickingOnCreateAccoutButton();
@@ -726,7 +723,7 @@ public class WEL_Test_Suite extends DriverModule {
 			String orderID = WEL.fetchOrderId();
 			excelOperation.updateTestData("TC15", "WEL_Test_Data", "Order_Id", orderID);
 			// JS.executeScript("window.scrollBy(0,600)");
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			String tax = WEL.fetchTaxAmount();
 			excelOperation.updateTestData("TC15", "WEL_Test_Data", "Tax", tax);
 			String orderTotal = WEL.fetchOrderTotal();
@@ -761,66 +758,50 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC16_PlaceOrder_CMACPACFA_DigitalProducts_ForExistingUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC16_PlaceOrder_CMACPACFA_DigitalProducts_ForExistingUser");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
-			// JS.executeScript("window.scrollBy(0,600)");
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonCMAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonExploreCourseCMAProduct();
 			Thread.sleep(3000);
-			// JS.executeScript("window.scrollBy(0,300)");
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonViewCourseForCMAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonCMAeBook();
 			Thread.sleep(2000);
-			// JS.executeScript("window.scrollBy(0,400)");
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			Thread.sleep(1000);
 			WEL.ClickonCMAAddToCart();
 			WEL.ClickWELIconCheckoutPage();
 			Thread.sleep(2000);
-			// JS.executeScript("window.scrollBy(0,400)");
-			// ScrollingWebPage.PageScrolldown(driver, 0, 400);
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonCPAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonExploreCourseCMAProduct();
-			// JS.executeScript("window.scrollBy(0,800)");
 			ScrollingWebPage.PageScrolldown(driver, 0, 800);
-			// ScrollingWebPage.PageDown(driver);
 			Thread.sleep(1000);
 			WEL.ClickonViewCourseForCPAProduct();
-			// JS.executeScript("window.scrollBy(0,400)");
 			ScrollingWebPage.PageScrolldown(driver, 0, 400);
-//			ScrollingWebPage.PageDown(driver);
 			Thread.sleep(1000);
 			WEL.ClickOnCPAAddProduct();
 			WEL.ClickWELIconCheckoutPage();
 			Thread.sleep(2000);
-			// JS.executeScript("window.scrollBy(0,400)");
-			// ScrollingWebPage.PageScrolldown(driver, 0, 400);
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonCFAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonExploreCourseCMAProduct();
-			// JS.executeScript("window.scrollBy(0,800)");
-			// ScrollingWebPage.PageScrolldown(driver, 0, 800);
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			Thread.sleep(1000);
 			WEL.ClickonViewCourseForCFAProduct();
-			// JS.executeScript("window.scrollBy(0,300)");
-			// ScrollingWebPage.PageScrolldown(driver, 0, 300);
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			Thread.sleep(1000);
 			WEL.ClickonViewCourseLinkForCFAProduct();
 			WEL.ClickeBookforCFAProduct();
 			Thread.sleep(1000);
-			/// JS.executeScript("window.scrollBy(0,650)");
-			// ScrollingWebPage.PageScrolldown(driver, 0, 650);
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickOnCIAAddProduct();
 			WEL.ClickonCheckOutOnCartPage();
 			WEL.EnterexistingUserName(excelOperation.getTestData("TC16", "WEL_Test_Data", "Email_Address"));
@@ -857,9 +838,7 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.clickOnPlaceOrderButton();
 			String orderID = WEL.fetchOrderId();
 			excelOperation.updateTestData("TC16", "WEL_Test_Data", "Order_Id", orderID);
-			// JS.executeScript("window.scrollBy(0,600)");
-//			ScrollingWebPage.PageScrolldown(driver, 0, 600);
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			String tax = WEL.fetchTaxAmount();
 			excelOperation.updateTestData("TC16", "WEL_Test_Data", "Tax", tax);
 			String orderTotal = WEL.fetchOrderTotal();
@@ -895,34 +874,30 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC20_PlaceOrder_OfOther_ProductsCIACAIAFor_NewUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC20_PlaceOrder_OfOther_ProductsCIACAIAFor_NewUser");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
-			// JS.executeScript("window.scrollBy(0,700)");
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickOnCIAProduct();
 			WEL.ClickOnShopCourseForCIAProduct();
 			Thread.sleep(1000);
-			// JS.executeScript("window.scrollBy(0,300)");
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickOnViewCourseForCIAProduct();
 			Thread.sleep(2000);
-			// JS.executeScript("window.scrollBy(0,600)");
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			Thread.sleep(1000);
 			WEL.ClickOnCIAAddProduct();
 
 			WEL.ClickWELIconCheckoutPage();
 			Thread.sleep(2000);
-			ScrollingWebPage.PageDown(driver);
-			// JS.executeScript("window.scrollBy(0,500)");
+			ScrollingWebPage.PageDown(driver, SS_path);
 			Thread.sleep(1000);
 			WEL.ClickOnCAIAProduct();
 			Thread.sleep(1000);
 			WEL.ClickOnLevel1TestBankForCAIAProduct();
 			Thread.sleep(1000);
-			// JS.executeScript("window.scrollBy(0,600)");
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickOnCAIAAddProduct();
 			WEL.ClickonCheckOutOnCartPage();
 			String Gemail = WEL.EnterGuestUser();
@@ -971,8 +946,7 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.clickOnPlaceOrderButton();
 			String orderID = WEL.fetchOrderId();
 			excelOperation.updateTestData("TC20", "WEL_Test_Data", "Order_Id", orderID);
-			// JS.executeScript("window.scrollBy(0,600)");
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			String tax = WEL.fetchTaxAmount();
 			excelOperation.updateTestData("TC20", "WEL_Test_Data", "Tax", tax);
 			String orderTotal = WEL.fetchOrderTotal();
@@ -1125,6 +1099,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC22_PlaceOrder_CPACMACFA_FreeTrailFor_ExistingUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC22_PlaceOrder_CPACMACFA_FreeTrailFor_ExistingUser");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
@@ -1250,23 +1225,24 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC24_PlaceOrder_UsingSavedShippingAddress_ForExistingUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC24_PlaceOrder_UsingSavedShippingAddress_ForExistingUser");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageScrolldown(driver,0,600);
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonCMAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonExploreCourseCMAProduct();
 			Thread.sleep(3000);
 			ScrollingWebPage.PageScrolldown(driver,0,300);
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonViewCourseForCMAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonCMAeBook();
 			Thread.sleep(2000);
 			ScrollingWebPage.PageScrolldown(driver,0,400);
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			Thread.sleep(1000);
 			WEL.ClickonCMAAddToCart();
 			WEL.ClickonCheckOutOnCartPage();
@@ -1305,8 +1281,8 @@ public class WEL_Test_Suite extends DriverModule {
 			String orderID = WEL.fetchOrderId();
 			excelOperation.updateTestData("TC16", "WEL_Test_Data", "Order_Id", orderID);
 			// JS.executeScript("window.scrollBy(0,600)");
-			ScrollingWebPage.PageDown(driver);
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			String tax = WEL.fetchTaxAmount();
 			excelOperation.updateTestData("TC16", "WEL_Test_Data", "Tax", tax);
 			String orderTotal = WEL.fetchOrderTotal();
@@ -1330,20 +1306,17 @@ public class WEL_Test_Suite extends DriverModule {
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
-			// JS.executeScript("window.scrollBy(0,600)");
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonCMAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonExploreCourseCMAProduct();
 			Thread.sleep(3000);
-			// JS.executeScript("window.scrollBy(0,300)");
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonViewCourseForCMAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonCMAPrinteBook();
 			Thread.sleep(2000);
-			// JS.executeScript("window.scrollBy(0,400)");
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			Thread.sleep(1000);
 			WEL.ClickonCMAAddToCart();
 			WEL.ClickonCheckOutOnCartPage();
@@ -1352,8 +1325,7 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.ClickonLoginAndContinue();
 			WEL.ClickonCheckOutOnCartPage();
 			WEL.ClickonCheckOutOnCartPage();
-			// JS.executeScript("window.scrollBy(0,300)");
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickOnAddNewAddressButton();
 			WEL.GuestFirstName(excelOperation.getTestData("TC25", "WEL_Test_Data", "Guest_Fname"));
 			WEL.GuestLastName(excelOperation.getTestData("TC25", "WEL_Test_Data", "Guest_Lname"));
@@ -1426,10 +1398,11 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC31_ShippingAndBilling_AddressSamefor_NewUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC31_ShippingAndBilling_AddressSamefor_NewUser");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickOnCIAProduct();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'SHOP')]")));
@@ -1447,7 +1420,7 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("The View Course link on CIA PDP was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickOnViewCourseForCIAProduct();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
@@ -1456,7 +1429,7 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Add to cart button on CIA PDP was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickOnCIAAddProduct();
 			WEL.ClickonCheckOutOnCartPage();
 			String Gemail = WEL.EnterGuestUser();
@@ -1510,11 +1483,11 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC32_ShippingAndBilling_AddressDifferentfor_NewUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC32_ShippingAndBilling_AddressDifferentfor_NewUser");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
-			// ScrollingWebPage.PageScrolldown(driver, 0, 510);
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickOnCIAProduct();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'SHOP')]")));
@@ -1533,8 +1506,7 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("The View Course link on CIA PDP was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			} 
-			// ScrollingWebPage.PageScrolldown(driver, 0, 800);
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickOnViewCourseForCIAProduct(); //
 			Thread.sleep(2000);
 			try {
@@ -1544,8 +1516,7 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Add to cart button on CIA PDP was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			// ScrollingWebPage.PageScrolldown(driver, 0, 710);
-			ScrollingWebPage.PageDown(driver);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickOnCIAAddProduct();
 			WEL.ClickonCheckOutOnCartPage();
 			String Gemail = WEL.EnterGuestUser();
