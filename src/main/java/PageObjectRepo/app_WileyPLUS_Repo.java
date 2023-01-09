@@ -86,18 +86,6 @@ public class app_WileyPLUS_Repo {
 	WebElement SaveAndContinueButton;
 	@FindBy(id = "address.country")
 	WebElement SelectCountryDropDown;
-	@FindBy(xpath="//option[contains(text(),'Afghanistan')]")
-	WebElement Afganistan;
-	@FindBy(xpath="//option[contains(text(),'Nigeria')]")
-	WebElement Nigeria;
-	@FindBy(xpath="//option[contains(text(),'Germany')]")
-	WebElement Germany;
-	@FindBy(xpath="//option[contains(text(),'Canada')]")
-	WebElement Canada;
-	@FindBy(xpath="//option[contains(text(),'New Zealand')]")
-	WebElement New_Zealand;
-	@FindBy(xpath="//option[contains(text(),'Colombia')]")
-	WebElement Colombia;
 	@FindBy(xpath="//span[contains(text(),'Shipping Address')]")
 	WebElement ShippingText;
 	@FindBy(xpath="//span[text()='Billing Address']")
@@ -924,49 +912,32 @@ public class app_WileyPLUS_Repo {
 	 * @Date: 02/01/23
 	 * @Description: Clicks on the country drop down in shipping
 	 */
-	public void checkGlobalCountryList() throws IOException{
+	public void checkGlobalCountryList(WebDriver driver,String countryList) throws IOException{
 		try {
 			SelectCountryDropDown.click();
-			if(Afganistan.isDisplayed())
-				Reporting.updateTestReport("Asian country Afganistan was present in the country dropdown",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else
-				Reporting.updateTestReport("Asian country Afganistan was not present in the country dropdown",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			if(Nigeria.isDisplayed())
-				Reporting.updateTestReport("African country Nigeria was present in the country dropdown",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else
-				Reporting.updateTestReport("African country Nigeria was not present in the country dropdown",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			if(Germany.isDisplayed())
-				Reporting.updateTestReport("Europian country Germany was present in the country dropdown",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else
-				Reporting.updateTestReport("Europian country Germany was not present in the country dropdown",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			if(Canada.isDisplayed())
-				Reporting.updateTestReport("North American country Canada was present in the country dropdown",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else
-				Reporting.updateTestReport("North American country Canada was not present in the country dropdown",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			if(New_Zealand.isDisplayed())
-				Reporting.updateTestReport("Oceanian country New Zealand was present in the country dropdown",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else
-				Reporting.updateTestReport("Oceanian country New Zealand was not present in the country dropdown",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			if(Colombia.isDisplayed())
-				Reporting.updateTestReport("South American country Colombia was present in the country dropdown",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else
-				Reporting.updateTestReport("South American country Colombia was present in the country dropdown",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			//Total 6 countries are present in the datasheet
+			
+			String[] countries=countryList.split("|");
+			System.out.println(countries);
+			for(int i=0;i<countries.length;i++) {
+				try {
+					String xpathOfCountry="//option[contains(text(),'"+countries[i]+"')]";
+					if(driver.findElement(By.xpath(xpathOfCountry)).isDisplayed())
+						Reporting.updateTestReport(countries[i]+" was present in the country dropdown",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(countries[i]+" was not present in the country dropdown",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Global country list was not present in the country drop down ",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}
 			
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("Global country list was not present in the country drop down ",
+			Reporting.updateTestReport("Global country list couldn't be validated ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -1648,8 +1619,9 @@ public class app_WileyPLUS_Repo {
 	public void enterInstitutionNameInOnboardingCreateAccount(WebDriver driver,String institution) throws IOException {
 		try {
 			OnboardingCreateAccountInstitution.sendKeys(institution);
-			OnboardingCreateAccountInstitution.sendKeys(Keys.ARROW_DOWN);
-			OnboardingCreateAccountInstitution.sendKeys(Keys.ENTER);
+			Actions at = new Actions(driver);
+			at.sendKeys(Keys.PAGE_DOWN).build().perform();
+			at.sendKeys(Keys.ENTER).build().perform();
 			Reporting.updateTestReport("Institution: "+OnboardingCreateAccountInstitution.getAttribute("value")+" was entered in onboarding create account page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}

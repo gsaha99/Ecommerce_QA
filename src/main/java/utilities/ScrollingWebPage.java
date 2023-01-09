@@ -16,6 +16,8 @@ public class ScrollingWebPage {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(" + xcord + "," + ycord + ")");
+			Reporting.updateTestReport("The page was scrolled down", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.INFO);
 		} catch (Exception e) {
 			Reporting.updateTestReport("Unable to Scroll Down", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.WARNING);
@@ -26,6 +28,8 @@ public class ScrollingWebPage {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(" + xcord + "," + ycord + ")");
+			Reporting.updateTestReport("The page was scrolled up", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.INFO);
 		} catch (Exception e) {
 			Reporting.updateTestReport("Unable to Scroll Up", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.WARNING);

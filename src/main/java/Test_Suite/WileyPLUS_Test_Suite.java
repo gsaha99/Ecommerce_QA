@@ -601,7 +601,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				WileyPLUS.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC13", "WileyPLUS_Test_Data", "Password"));
 				WileyPLUS.clickOnSaveAndContinueButton();
 				WileyPLUS.checkIfUserInShippingStep();
-				WileyPLUS.checkGlobalCountryList();
+				WileyPLUS.checkGlobalCountryList(driver,excelOperation.getTestData("TC13", "WileyPLUS_Test_Data", "Shipping_Country"));
 				WileyPLUS.WileyLogOut();
 			}
 			catch(Exception e) {
@@ -631,7 +631,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				WileyPLUS.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC14", "WileyPLUS_Test_Data", "Password"));
 				WileyPLUS.clickOnSaveAndContinueButton();
 				WileyPLUS.checkIfUserInBillingStep();
-				WileyPLUS.checkGlobalCountryList();
+				WileyPLUS.checkGlobalCountryList(driver,excelOperation.getTestData("TC14", "WileyPLUS_Test_Data", "Bill_Country"));
 				WileyPLUS.WileyLogOut();
 			}
 			catch(Exception e) {
@@ -969,11 +969,12 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			try {
 				Reporting.test = Reporting.extent.createTest("TC19_Validate_Continue_Shopping_Link");
 				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-				driver.get(WileyPLUS.wileyURLConcatenation("TC19", "WileyPLUS_Test_Data", "URL"));
+				driver.get(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "URL"));
 				driver.navigate().refresh();
 				WileyPLUS.clickOnCreateAccountLinkOnboarding();
 				WileyPLUS.enterFirstNameInOnboardingCreateAccount(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "First_Name"));
-				WileyPLUS.enterLastNameInOnboardingCreateAccount(excelOperation.getTestData("TC19", "WilePLUS_Test_Data", "Last_Name"));
+				Thread.sleep(3000);
+				WileyPLUS.enterLastNameInOnboardingCreateAccount(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Last_Name"));
 				String emailId=WileyPLUS.enterEmailIdInOnboardingCreateAccount();
 				WileyPLUS.enterInstitutionNameInOnboardingCreateAccount(driver, excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Institution"));
 				WileyPLUS.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Password"));

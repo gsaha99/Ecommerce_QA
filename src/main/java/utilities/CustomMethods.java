@@ -124,6 +124,10 @@ public class CustomMethods {
 					Reporting.updateTestReport(shippingChargeInMail+" : shown as shipping in Order Confirmation mail was not same as Shipping charge in Order Confirmation page: "+shipping,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			else {
+				Reporting.updateTestReport("Shipping was not applicable for this order as it is a digital order",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+			}
 
 			//Validation of Order Total
 			if(total.contentEquals(orderTotalInMail)) 
@@ -163,14 +167,12 @@ public class CustomMethods {
 			String orderTotalInMail=driver.findElement(By.xpath("//td[contains(text(),'Total:')]/following-sibling::td")).getText();
 			String taxInMail=driver.findElement(By.xpath("//td[contains(text(),'Tax:')]/following-sibling::td")).getText();
 			//Validation of tax
-			if(!tax.contentEquals(" ")) {
-				if(tax.contentEquals(taxInMail))
-					Reporting.updateTestReport(taxInMail+" : shown as shipping in Order Confirmation mail was same as Shipping charge in Order Confirmation page: "+tax,
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				else
-					Reporting.updateTestReport(taxInMail+" : shown as shipping in Order Confirmation mail was not same as Shipping charge in Order Confirmation page: "+tax,
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
+			if(tax.contentEquals(taxInMail))
+				Reporting.updateTestReport(taxInMail+" : shown as Tax in Order Confirmation mail was same as tax in Order Confirmation page: "+tax,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport(taxInMail+" : shown as Tax in Order Confirmation mail was not same as tax in Order Confirmation page: "+tax,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 			//Validation of Order Total
 			if(total.contentEquals(orderTotalInMail)) 

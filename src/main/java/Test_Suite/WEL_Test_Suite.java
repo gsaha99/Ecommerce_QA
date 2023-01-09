@@ -209,7 +209,7 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.EnterCity(excelOperation.getTestData("TC03", "WEL_Test_Data", "Bill_City/ Province"));
 			WEL.EnterPhoneNumber(excelOperation.getTestData("TC03", "WEL_Test_Data", "Bill_Phone_Number"));
 			Thread.sleep(2000);
-			ScrollingWebPage.PageScrolldown(driver, 0, -300);
+			ScrollingWebPage.PageScrolldown(driver, 0, -300,SS_path);
 			WEL.ClickOnBackTOCart();
 			WEL.ClickOnRemoveOnCartPage();
 		} catch (Exception e) {
@@ -253,7 +253,7 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.EnterexistingUserName(excelOperation.getTestData("TC05", "WEL_Test_Data", "Email_Address"));
 			WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC05", "WEL_Test_Data", "Password"));
 			WEL.ClickonLoginAndContinue();
-			ScrollingWebPage.PageScrolldown(driver, 0, -300);
+			ScrollingWebPage.PageScrolldown(driver, 0, -300,SS_path);
 			WEL.ClickOnBackTOCart();
 			WEL.ClickOnRemoveOnCartPage();
 			WEL.ClickAccountCartPage();
@@ -540,7 +540,7 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.EnterPassword(excelOperation.getTestData("TC02", "WEL_Test_Data", "Password"));
 			WEL.ClickonAgreementCheckBox();
 			WEL.ClickingOnSaveAndContinue();
-			ScrollingWebPage.PageScrollUp(driver, 0, -300);
+			ScrollingWebPage.PageScrollUp(driver, 0, -300,SS_path);
 			WEL.ClickOnBackTOCart();
 			WEL.ClickOnRemoveOnCartPage();
 		} catch (Exception e) {
@@ -562,11 +562,11 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.ClickonCPAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonExploreCourseCMAProduct();
-			ScrollingWebPage.PageScrolldown(driver, 0, 800);
+			ScrollingWebPage.PageScrolldown(driver, 0, 800,SS_path);
 			// ScrollingWebPage.PageDown(driver);
 			Thread.sleep(1000);
 			WEL.ClickonViewCourseForCPAProduct();
-			ScrollingWebPage.PageScrolldown(driver, 0, 400);
+			ScrollingWebPage.PageScrolldown(driver, 0, 400,SS_path);
 //			ScrollingWebPage.PageDown(driver);
 			Thread.sleep(1000);
 			WEL.ClickOnCPAAddProduct();
@@ -652,12 +652,12 @@ public class WEL_Test_Suite extends DriverModule {
 			Thread.sleep(2000);
 			WEL.ClickonExploreCourseCMAProduct();
 			// JS.executeScript("window.scrollBy(0,800)");
-			ScrollingWebPage.PageScrolldown(driver, 0, 800);
+			ScrollingWebPage.PageScrolldown(driver, 0, 800,SS_path);
 			// ScrollingWebPage.PageDown(driver);
 			Thread.sleep(1000);
 			WEL.ClickonViewCourseForCPAProduct();
 			// JS.executeScript("window.scrollBy(0,400)");
-			ScrollingWebPage.PageScrolldown(driver, 0, 400);
+			ScrollingWebPage.PageScrolldown(driver, 0, 400,SS_path);
 //			ScrollingWebPage.PageDown(driver);
 			Thread.sleep(1000);
 			WEL.ClickOnCPAAddProduct();
@@ -729,7 +729,7 @@ public class WEL_Test_Suite extends DriverModule {
 			String orderTotal = WEL.fetchOrderTotal();
 			excelOperation.updateTestData("TC15", "WEL_Test_Data", "Order_Total", orderTotal);
 			Thread.sleep(2000);
-			ScrollingWebPage.PageScrollUp(driver, 0, -300);
+			ScrollingWebPage.PageScrollUp(driver, 0, -300,SS_path);
 			Thread.sleep(2000);
 			WEL.ClickOnWELIconOrderConfirmationPage();
 			Thread.sleep(2000);
@@ -781,10 +781,10 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.ClickonCPAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonExploreCourseCMAProduct();
-			ScrollingWebPage.PageScrolldown(driver, 0, 800);
+			ScrollingWebPage.PageScrolldown(driver, 0, 800,SS_path);
 			Thread.sleep(1000);
 			WEL.ClickonViewCourseForCPAProduct();
-			ScrollingWebPage.PageScrolldown(driver, 0, 400);
+			ScrollingWebPage.PageScrolldown(driver, 0, 400,SS_path);
 			Thread.sleep(1000);
 			WEL.ClickOnCPAAddProduct();
 			WEL.ClickWELIconCheckoutPage();
@@ -844,7 +844,7 @@ public class WEL_Test_Suite extends DriverModule {
 			String orderTotal = WEL.fetchOrderTotal();
 			excelOperation.updateTestData("TC16", "WEL_Test_Data", "Order_Total", orderTotal);
 			Thread.sleep(2000);
-			ScrollingWebPage.PageScrollUp(driver, 0, -300);
+			ScrollingWebPage.PageScrollUp(driver, 0, -300,SS_path);
 			Thread.sleep(2000);
 			WEL.ClickOnWELIconOrderConfirmationPage();
 			Thread.sleep(2000);
@@ -952,7 +952,7 @@ public class WEL_Test_Suite extends DriverModule {
 			String orderTotal = WEL.fetchOrderTotal();
 			excelOperation.updateTestData("TC20", "WEL_Test_Data", "Order_Total", orderTotal);
 			Thread.sleep(2000);
-			ScrollingWebPage.PageScrollUp(driver, 0, -300);
+			ScrollingWebPage.PageScrollUp(driver, 0, -300,SS_path);
 			Thread.sleep(2000);
 			WEL.ClickOnWELIconOrderConfirmationPage();
 			Thread.sleep(2000);
@@ -984,7 +984,7 @@ public class WEL_Test_Suite extends DriverModule {
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
-			ScrollingWebPage.PageScrolldown(driver,0,600);
+			ScrollingWebPage.PageScrolldown(driver,0,600,SS_path);
 			// ScrollingWebPage.PageDown(driver);
 			WEL.ClickonCPAProduct();
 			Thread.sleep(1000);
@@ -1020,7 +1020,7 @@ public class WEL_Test_Suite extends DriverModule {
 
 			WEL.FreeTrailWELIcon();
 			Thread.sleep(1000);
-			ScrollingWebPage.PageScrolldown(driver,0,600);
+			ScrollingWebPage.PageScrolldown(driver,0,600,SS_path);
 			// ScrollingWebPage.PageDown(driver);
 			WEL.ClickonCMAProduct();
 			WEL.ClickOnFreeTrail();
@@ -1056,7 +1056,7 @@ public class WEL_Test_Suite extends DriverModule {
 
 			WEL.FreeTrailWELIcon();
 			Thread.sleep(1000);
-			ScrollingWebPage.PageScrolldown(driver,0,400);
+			ScrollingWebPage.PageScrolldown(driver,0,400,SS_path);
 			// ScrollingWebPage.PageDown(driver);
 			WEL.ClickonCFAProduct();
 			WEL.ClickOnFreeTrail();
@@ -1103,7 +1103,7 @@ public class WEL_Test_Suite extends DriverModule {
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
-			ScrollingWebPage.PageScrolldown(driver,0,600);
+			ScrollingWebPage.PageScrolldown(driver,0,600,SS_path);
 			// ScrollingWebPage.PageDown(driver);
 			WEL.ClickonCPAProduct();
 			Thread.sleep(1000);
@@ -1147,14 +1147,14 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.FreeTrailSignInButton();
 			try {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-				ScrollingWebPage.PageScrollUp(driver, 0, -300);	
+				ScrollingWebPage.PageScrollUp(driver, 0, -300,SS_path);	
 			}catch(Exception e) {
 				Reporting.updateTestReport("The help button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			WEL.FreeTrailWELIcon();
 			Thread.sleep(1000);
-			ScrollingWebPage.PageScrolldown(driver,0,600);
+			ScrollingWebPage.PageScrolldown(driver,0,600,SS_path);
 			WEL.ClickonCMAProduct();
 			WEL.ClickOnFreeTrail();
 			WEL.FreeTrailCountry(excelOperation.getTestData("TC22", "WEL_Test_Data", "Sh_Country"));
@@ -1182,7 +1182,7 @@ public class WEL_Test_Suite extends DriverModule {
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
-			ScrollingWebPage.PageScrolldown(driver,0,700);
+			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 			// ScrollingWebPage.PageDown(driver);
 			WEL.ClickOnCIAProduct();
 			Thread.sleep(1000);
@@ -1229,19 +1229,19 @@ public class WEL_Test_Suite extends DriverModule {
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
-			ScrollingWebPage.PageScrolldown(driver,0,600);
+			ScrollingWebPage.PageScrolldown(driver,0,600,SS_path);
 			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonCMAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonExploreCourseCMAProduct();
 			Thread.sleep(3000);
-			ScrollingWebPage.PageScrolldown(driver,0,300);
+			ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonViewCourseForCMAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonCMAeBook();
 			Thread.sleep(2000);
-			ScrollingWebPage.PageScrolldown(driver,0,400);
+			ScrollingWebPage.PageScrolldown(driver,0,400,SS_path);
 			ScrollingWebPage.PageDown(driver, SS_path);
 			Thread.sleep(1000);
 			WEL.ClickonCMAAddToCart();
@@ -1288,7 +1288,7 @@ public class WEL_Test_Suite extends DriverModule {
 			String orderTotal = WEL.fetchOrderTotal();
 			excelOperation.updateTestData("TC16", "WEL_Test_Data", "Order_Total", orderTotal);
 			Thread.sleep(2000);
-			ScrollingWebPage.PageScrollUp(driver, 0, -300);	
+			ScrollingWebPage.PageScrollUp(driver, 0, -300,SS_path);	
 			Thread.sleep(2000);
 			WEL.ClickOnWELIconOrderConfirmationPage();
 			Thread.sleep(2000);
@@ -1383,7 +1383,7 @@ public class WEL_Test_Suite extends DriverModule {
 			else
 				Reporting.updateTestReport("Failed to Shipping method", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
-			ScrollingWebPage.PageScrollUp(driver, 0, -300);
+			ScrollingWebPage.PageScrollUp(driver, 0, -300,SS_path);
 			WEL.ClickOnBackTOCart();
 			WEL.ClickOnRemoveOnCartPage();
 			WEL.ClickAccountCartPage();
@@ -1469,7 +1469,7 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.enterCVV_Number(excelOperation.getTestData("TC15", "WEL_Test_Data", "CVV"));
 			driver.switchTo().defaultContent();
 			WEL.SaveAndContinueCheckOut();
-			ScrollingWebPage.PageScrollUp(driver, 0, -300);
+			ScrollingWebPage.PageScrollUp(driver, 0, -300,SS_path);
 			WEL.ClickOnBackTOCart();
 			WEL.ClickOnRemoveOnCartPage();
 
@@ -1538,7 +1538,7 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.ShipSaveAndContinueButton();
 			try {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-				ScrollingWebPage.PageScrolldown(driver, 0, 500);
+				ScrollingWebPage.PageScrolldown(driver, 0, 500,SS_path);
 			} catch (Exception e) {
 				Reporting.updateTestReport("The help button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
