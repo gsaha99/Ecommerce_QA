@@ -737,6 +737,281 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			}
 		}
 		
+		/*
+		 * @Date: 6/1/23
+		 * @Description: Checks if global saved address is displayed when WileyPLUS product is present in cart
+		 */
+		@Test
+		public void TC16_Check_Global_Saved_Billing_Address() throws IOException{
+			try {
+				Reporting.test = Reporting.extent.createTest("TC16_Check_Global_Saved_Billing_Address");
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+				driver.get(WileyPLUS.wileyURLConcatenation("TC16", "WileyPLUS_Test_Data", "URL"));
+				driver.navigate().refresh();
+				WileyPLUS.checkIfUserIsOnCartPage(driver);
+				WileyPLUS.checkBrandNameWileyPLUS();
+				WileyPLUS.clickOnProceedToCheckoutButton();
+				String email=WileyPLUS.enterEmailIdInCreateAccountForm();
+				WileyPLUS.clickOnCreateAccountButton();
+				WileyPLUS.confirmEmailIdInCreateAccountForm(email);
+				WileyPLUS.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Password"));
+				WileyPLUS.clickOnSaveAndContinueButton();
+				WileyPLUS.checkIfUserInBillingStep();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+				WileyPLUS.enterCardHolderName(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "First_Name"));
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+				WileyPLUS.enterCardNumber(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Card_Number"));
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+				WileyPLUS.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Expiry_Month"));
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+				WileyPLUS.selectExpirationYearFromDropDown(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Expiry_Year"));
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+				WileyPLUS.enterCVV_Number(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "CVV"));
+				driver.switchTo().defaultContent();			
+				WileyPLUS.enterFirstName(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "First_Name"));
+				WileyPLUS.enterLastName(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Last_Name"));
+				WileyPLUS.selectCountry(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Country"));
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
+				WileyPLUS.enterAddressLine1Billing(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Address_line1"));
+				WileyPLUS.enterZipBilling(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Zip_Code"));
+				WileyPLUS.enterPhoneNumberBilling(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Phone_Number"));
+				WileyPLUS.clickOnSaveAndContinueButton();
+				try {
+				if(WileyPLUS.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+				{WileyPLUS.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+				}}
+				catch(Exception e) {}
+				WileyPLUS.clickOnPlaceOrderButton();
+				String orderconfirmation = driver.getTitle();
+				if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+					ScrollingWebPage.PageScrolldown(driver,0,300);
+					String orderId = WileyPLUS.fetchOrderId();
+					excelOperation.updateTestData("TC16", "WileyPLUS_Test_Data", "Order_Id", orderId);
+					excelOperation.updateTestData("TC16", "WileyPLUS_Test_Data", "Email_Id", email);
+					ScrollingWebPage.PageScrolldown(driver,0,500);
+					String ordertotal = WileyPLUS.fetchOrderTotal();
+					String taxamount = WileyPLUS.fetchTaxAmount();
+					excelOperation.updateTestData("TC16", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
+					excelOperation.updateTestData("TC16", "WileyPLUS_Test_Data", "Tax", taxamount);					
+					driver.get(WileyPLUS.wileyURLConcatenation("TC16", "WileyPLUS_Test_Data", "URL"));
+					driver.navigate().refresh();
+					WileyPLUS.checkIfUserIsOnCartPage(driver);
+					WileyPLUS.checkBrandNameWileyPLUS();
+					WileyPLUS.clickOnProceedToCheckoutButton();
+					WileyPLUS.checkIfUserInBillingStep();
+					ScrollingWebPage.PageScrolldown(driver,0,300);
+					String xpathOfGlobalSavedAddress="//*[contains(text(),' "
+					+excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Address_line1")+
+					"')]/following-sibling::div[contains(text(),'"+excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Country")+"')]";
+					
+					System.out.println(xpathOfGlobalSavedAddress);
+					WileyPLUS.checkGlobalSavedAddress(driver, xpathOfGlobalSavedAddress);
+				}			
+				
+				 else {
+					Reporting.updateTestReport("Order was not placed and saved global address couldn't be validated", CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
+				WileyPLUS.WileyLogOut();
+			}
+			catch(Exception e) {
+				WileyPLUS.wileyLogOutException();
+				System.out.println(e.getMessage());
+				Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Date: 6/1/23
+		 * @Description: Checks if global saved shipping address is displayed when WileyPLUS product is present in cart
+		 */
+		@Test
+		public void TC17_Check_Global_Saved_Shipping_Address() throws IOException{
+			try {
+				Reporting.test = Reporting.extent.createTest("TC17_Check_Global_Saved_Shipping_Address");
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+				driver.get(WileyPLUS.wileyURLConcatenation("TC17", "WileyPLUS_Test_Data", "URL"));
+				driver.navigate().refresh();
+				WileyPLUS.checkIfUserIsOnCartPage(driver);
+				WileyPLUS.checkBrandNameWileyPLUS();
+				WileyPLUS.clickOnProceedToCheckoutButton();
+				String email=WileyPLUS.enterEmailIdInCreateAccountForm();
+				WileyPLUS.clickOnCreateAccountButton();
+				WileyPLUS.confirmEmailIdInCreateAccountForm(email);
+				WileyPLUS.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Password"));
+				WileyPLUS.clickOnSaveAndContinueButton();
+				WileyPLUS.enterFirstName(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "First_Name"));
+				WileyPLUS.enterLastName(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Last_Name"));
+				WileyPLUS.selectCountry(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_Country"));
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+				WileyPLUS.enterAddressLine1Shipping(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_Address_line1"));
+				WileyPLUS.enterShippingZIPCode(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_Zip_Code"));
+				WileyPLUS.enterShippingCity(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_City"));
+				WileyPLUS.enterState(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_State"));
+				WileyPLUS.enterPhoneNumberShipping(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_Phone_Number"));
+				WileyPLUS.clickOnSaveAndContinueButton();
+				try {
+				if(WileyPLUS.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+					WileyPLUS.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+				catch(Exception e) {
+				}
+				WileyPLUS.checkIfUserInBillingStep();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+				WileyPLUS.enterCardHolderName(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "First_Name"));
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+				WileyPLUS.enterCardNumber(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Card_Number"));
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+				WileyPLUS.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Expiry_Month"));
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+				WileyPLUS.selectExpirationYearFromDropDown(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Expiry_Year"));
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+				WileyPLUS.enterCVV_Number(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "CVV"));
+				driver.switchTo().defaultContent();			
+				WileyPLUS.clickOnSaveAndContinueButton();
+				WileyPLUS.clickOnPlaceOrderButton();
+				String orderconfirmation = driver.getTitle();
+				if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+					ScrollingWebPage.PageScrolldown(driver,0,300);
+					String orderId = WileyPLUS.fetchOrderId();
+					excelOperation.updateTestData("TC17", "WileyPLUS_Test_Data", "Order_Id", orderId);
+					excelOperation.updateTestData("TC17", "WileyPLUS_Test_Data", "Email_Id", email);
+					ScrollingWebPage.PageScrolldown(driver,0,500);
+					String ordertotal = WileyPLUS.fetchOrderTotal();
+					String taxamount = WileyPLUS.fetchTaxAmount();
+					excelOperation.updateTestData("TC17", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
+					excelOperation.updateTestData("TC17", "WileyPLUS_Test_Data", "Tax", taxamount);					
+					driver.get(WileyPLUS.wileyURLConcatenation("TC17", "WileyPLUS_Test_Data", "URL"));
+					driver.navigate().refresh();
+					WileyPLUS.checkIfUserIsOnCartPage(driver);
+					WileyPLUS.checkBrandNameWileyPLUS();
+					WileyPLUS.clickOnProceedToCheckoutButton();
+					WileyPLUS.checkIfUserInShippingStep();
+					String xpathOfGlobalSavedAddress="//*[contains(text(),' "
+					+excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_Address_line1")+
+					"')]/following-sibling::div[contains(text(),'"+excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Shipping_Country")+"')]";		
+					System.out.println(xpathOfGlobalSavedAddress);
+					WileyPLUS.checkGlobalSavedAddress(driver, xpathOfGlobalSavedAddress);
+				}			
+				
+				 else {
+					Reporting.updateTestReport("Order was not placed and saved global address couldn't be validated", CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
+				WileyPLUS.WileyLogOut();
+			}
+			catch(Exception e) {
+				WileyPLUS.wileyLogOutException();
+				System.out.println(e.getMessage());
+				Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Date: 6/1/23
+		 * @Description: Validates that the ISBN is not present in the WileyPLUS PDP
+		 */
+		@Test
+		public void TC18_Check_ISBN_Not_Preset_In_WileyPLUS_PDP() throws IOException{
+			try {
+				Reporting.test = Reporting.extent.createTest("TC18_Check_ISBN_Not_Preset_In_WileyPLUS_PDP");
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+				driver.get(WileyPLUS.wileyURLConcatenation("TC18", "WileyPLUS_Test_Data", "URL"));
+				driver.navigate().refresh();
+				WileyPLUS.clickOnHomePage();
+				try {
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing, Education and Research')]")));
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC18", "WileyPLUS_Test_Data", "SearchBox_Text"));
+				WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
+				WileyPLUS.clickOnSRP_WileyProduct();
+				if(WileyPLUS.checkWileyPLUSTabInPDP()){
+					WileyPLUS.clickOnWileyPLUSTabPDP();
+				}
+				else {
+					Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				if(!WileyPLUS.checkISBN_InPDP(driver,excelOperation.getTestData("TC18", "WileyPLUS_Test_Data", "SearchBox_Text"))) {
+					Reporting.updateTestReport("Searched WileyPLUS ISBN was not present in the WileyPLUS PDP",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				else
+					Reporting.updateTestReport("Searched WileyPLUS ISBN was present in the WileyPLUS PDP",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			catch(Exception e) {
+				WileyPLUS.wileyLogOutException();
+				System.out.println(e.getMessage());
+				Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Date: 6/1/23
+		 * @Description: Validates the Continue shopping link functionality
+		 */
+		@Test
+		public void TC19_Validate_Continue_Shopping_Link() throws IOException{
+			try {
+				Reporting.test = Reporting.extent.createTest("TC19_Validate_Continue_Shopping_Link");
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+				driver.get(WileyPLUS.wileyURLConcatenation("TC19", "WileyPLUS_Test_Data", "URL"));
+				driver.navigate().refresh();
+				WileyPLUS.clickOnCreateAccountLinkOnboarding();
+				WileyPLUS.enterFirstNameInOnboardingCreateAccount(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "First_Name"));
+				WileyPLUS.enterLastNameInOnboardingCreateAccount(excelOperation.getTestData("TC19", "WilePLUS_Test_Data", "Last_Name"));
+				String emailId=WileyPLUS.enterEmailIdInOnboardingCreateAccount();
+				WileyPLUS.enterInstitutionNameInOnboardingCreateAccount(driver, excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Institution"));
+				WileyPLUS.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Password"));
+				WileyPLUS.clickOnOnboardingCreateAccountCheckbox();
+				WileyPLUS.clickOnCreateAccountButton();
+				WileyPLUS.clickOnHomePage();
+				try {
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing, Education and Research')]")));
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "SearchBox_Text"));
+				WileyPLUS.clickOnSRP_WileyProduct();
+				WileyPLUS.clickOnAddToCartButton();
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'View Cart')]")));
+				WileyPLUS.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700);
+				WileyPLUS.clickOnContinueShoppingButton();
+				try {
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing, Education and Research')]")));
+					Reporting.updateTestReport("Wiley Storefront homepage was opened after clicking on continue shopping button",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Wiley Storefront homepage was not opened after clicking on continue shopping button and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				
+			}
+			catch(Exception e) {
+				WileyPLUS.wileyLogOutException();
+				System.out.println(e.getMessage());
+				Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+			}
+		}
+		
 		
 	}
 

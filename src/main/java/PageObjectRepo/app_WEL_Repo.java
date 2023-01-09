@@ -35,6 +35,18 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']//span[contains(text(),'$40')]")
 	WebElement UkShipMethod;
 
+	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']//span[contains(text(),'$40')]")
+	WebElement SingaporeShipMethod;
+
+	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']//span[contains(text(),'$40')]")
+	WebElement IndiaShipMethod;
+
+	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']//span[contains(text(),'$5')]")
+	WebElement CanadaShipMethod;
+
+	@FindBy(xpath = "//div[@class='deliveryMethodMainExceptFirstDiv']//span[contains(text(),'$12')]")
+	WebElement CanadaShipMethod2;
+
 	@FindBy(xpath = "(//img[@class='js-responsive-image'])[1]")
 	WebElement WELIconOrderConfirmationPage;
 
@@ -124,6 +136,15 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//div[@class='product-detail-page']//div[@class='container-fluid banner-container product-detail-banner mt-4']//button")
 	WebElement CIAAddToCart;
+
+	@FindBy(xpath = "//div[@id='Ultimate_CPA Review Course 2022 (Mentorship & Tutoring Bundle)']//form//button")
+	WebElement CPAAddToCart;
+
+	@FindBy(xpath = "((//div[@class='col-xs-12 col-sm-6 package-selection-left-col'])[2]//form//label)[2]")
+	WebElement CIAeBook;
+
+	@FindBy(xpath = "//div[@class='col-xs-12 col-sm-6 package-selection-left-col'])[2]//form//label)[1])")
+	WebElement CIAPrint;
 
 	@FindBy(xpath = "//div[@class='helpButton']")
 	WebElement HelpButton;
@@ -343,6 +364,9 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//button[@id='paymentBilling']")
 	WebElement SaveAndContinueOnCheckOutPage;
 
+	@FindBy(xpath = "//label[@id='sameAsBillingLabel']")
+	WebElement ShippingBillingSameAddress;
+
 	@FindBy(xpath = "(//button[@id='placeOrder'])[1]")
 	WebElement PlaceOrder;
 
@@ -433,6 +457,20 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport(
 					"Failed to click on ShipSaveAndContinue with the error message " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
+	public void ShipAndBillAddressSection() throws IOException {
+		try {
+			// ShippingBillingSameAddress.clear();
+			ShippingBillingSameAddress.click();
+			Reporting.updateTestReport("ShipAndBillingAddress Checkbox Unchecked successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Uncheck ShipAndBillingAddress Checkbox with the error message "
+					+ e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
 	}
@@ -994,7 +1032,7 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport("State " + state + " has been selected successfully by user",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
-			Reporting.updateTestReport("User failed to select country " + e.getClass().toString(),
+			Reporting.updateTestReport("User failed to select State " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -1411,6 +1449,44 @@ public class app_WEL_Repo {
 		}
 	}
 
+	public void ClickOnCPAAddProduct() throws IOException {
+		try {
+
+			CPAAddToCart.click();
+			Reporting.updateTestReport("Add To Cart was selected successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on Add To Cart with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
+	public void ClickOnCIAeBook() throws IOException {
+		try {
+			CIAeBook.click();
+			Reporting.updateTestReport("CIAeBook was selected successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on CIAeBook with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
+	public void ClickOnCIAPrint() throws IOException {
+		try {
+			CIAPrint.click();
+			Reporting.updateTestReport("CIAPrint Product was selected successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on CIAPrint with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
 	public void ClickOnCAIAAddProduct() throws IOException {
 		try {
 
@@ -1796,6 +1872,58 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport("The Shipping method Displayed successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return ukmethod;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Shipping method " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	public String ShippingMethodForSingapore() throws IOException {
+		try {
+			String Singaporemethod = SingaporeShipMethod.getText();
+			Reporting.updateTestReport("The Shipping method Displayed successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return Singaporemethod;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Shipping method " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	public String ShippingMethodForIndia() throws IOException {
+		try {
+			String IndiaShpmethod = IndiaShipMethod.getText();
+			Reporting.updateTestReport("The Shipping method Displayed successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return IndiaShpmethod;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Shipping method " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	public String ShippingMethodOneForCanada() throws IOException {
+		try {
+			String Canadamethod = CanadaShipMethod.getText();
+			Reporting.updateTestReport("The Shipping method Displayed successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return Canadamethod;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Shipping method " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	public String ShippingMethodTwoForCanada() throws IOException {
+		try {
+			String Canadamethod2 = CanadaShipMethod2.getText();
+			Reporting.updateTestReport("The Shipping method Displayed successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return Canadamethod2;
 		} catch (Exception e) {
 			Reporting.updateTestReport("Failed to Shipping method " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);

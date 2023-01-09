@@ -1,92 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="15" passed="15" failed="0" skipped="0">
+<testng-results ignored="22" total="23" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-01-03T17:49:06 IST" name="Default suite" finished-at="2023-01-03T17:54:29 IST" duration-ms="322568">
+  <suite started-at="2023-01-09T12:16:14 IST" name="Default suite" finished-at="2023-01-09T12:17:10 IST" duration-ms="55622">
     <groups>
     </groups>
-    <test started-at="2023-01-03T17:49:06 IST" name="Default test" finished-at="2023-01-03T17:54:29 IST" duration-ms="322568">
-      <class name="Test_Suite.Wiley_dot_com_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:49:06 IST" name="initiate" finished-at="2023-01-03T17:49:18 IST" duration-ms="11733" status="PASS">
+    <test started-at="2023-01-09T12:16:14 IST" name="Default test" finished-at="2023-01-09T12:17:10 IST" duration-ms="55622">
+      <class name="Test_Suite.WEL_Test_Suite">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.WEL_Test_Suite@72cc7e6f]" started-at="2023-01-09T12:16:14 IST" name="initiate" finished-at="2023-01-09T12:16:22 IST" duration-ms="7152" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@6e00837f]]>
+                <![CDATA[org.testng.TestRunner@69aabcb0]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:49:18 IST" name="launchBrowser" finished-at="2023-01-03T17:49:18 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="249" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.WEL_Test_Suite@72cc7e6f]" started-at="2023-01-09T12:16:22 IST" name="initializeRepo" finished-at="2023-01-09T12:16:22 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="83" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- launchBrowser -->
-        <test-method signature="TC01_MicroSites()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:49:18 IST" name="TC01_MicroSites" finished-at="2023-01-03T17:49:44 IST" duration-ms="25435" status="PASS">
+        </test-method> <!-- initializeRepo -->
+        <test-method signature="TC12_QunatityRestriction_ForPhysicalProduct()[pri:0, instance:Test_Suite.WEL_Test_Suite@72cc7e6f]" started-at="2023-01-09T12:16:22 IST" name="TC12_QunatityRestriction_ForPhysicalProduct" finished-at="2023-01-09T12:17:06 IST" duration-ms="44749" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC01_MicroSites -->
-        <test-method signature="TC02_ProductDetailsPage()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:49:44 IST" name="TC02_ProductDetailsPage" finished-at="2023-01-03T17:50:05 IST" duration-ms="20899" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC02_ProductDetailsPage -->
-        <test-method signature="TC03_SiteFooter()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:50:05 IST" name="TC03_SiteFooter" finished-at="2023-01-03T17:50:20 IST" duration-ms="15062" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC03_SiteFooter -->
-        <test-method signature="TC04_404_Errorpage()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:50:20 IST" name="TC04_404_Errorpage" finished-at="2023-01-03T17:50:33 IST" duration-ms="13563" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC04_404_Errorpage -->
-        <test-method signature="TC05_AboutUsPage()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:50:33 IST" name="TC05_AboutUsPage" finished-at="2023-01-03T17:50:52 IST" duration-ms="18869" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC05_AboutUsPage -->
-        <test-method signature="TC06_SiteMap()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:50:52 IST" name="TC06_SiteMap" finished-at="2023-01-03T17:51:06 IST" duration-ms="14324" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC06_SiteMap -->
-        <test-method signature="TC07_ProductListPage()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:51:06 IST" name="TC07_ProductListPage" finished-at="2023-01-03T17:51:30 IST" duration-ms="23032" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC07_ProductListPage -->
-        <test-method signature="TC08_HomePage()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:51:30 IST" name="TC08_HomePage" finished-at="2023-01-03T17:51:42 IST" duration-ms="12688" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC08_HomePage -->
-        <test-method signature="TC09_SiteHeader()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:51:42 IST" name="TC09_SiteHeader" finished-at="2023-01-03T17:51:56 IST" duration-ms="13309" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC09_SiteHeader -->
-        <test-method signature="TC10_SearchResultEmptyPage()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:51:56 IST" name="TC10_SearchResultEmptyPage" finished-at="2023-01-03T17:52:17 IST" duration-ms="21089" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC10_SearchResultEmptyPage -->
-        <test-method signature="TC11_Add_To_PopUp()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:52:17 IST" name="TC11_Add_To_PopUp" finished-at="2023-01-03T17:52:35 IST" duration-ms="18631" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC11_Add_To_PopUp -->
-        <test-method signature="TC12_Content_Search_ResultPage()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:52:35 IST" name="TC12_Content_Search_ResultPage" finished-at="2023-01-03T17:53:09 IST" duration-ms="33928" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC12_Content_Search_ResultPage -->
-        <test-method signature="TC13_Category_LandingPage()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:53:09 IST" name="TC13_Category_LandingPage" finished-at="2023-01-03T17:53:31 IST" duration-ms="22231" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC13_Category_LandingPage -->
-        <test-method signature="TC14_SearchBox()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:53:31 IST" name="TC14_SearchBox" finished-at="2023-01-03T17:54:02 IST" duration-ms="30416" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC14_SearchBox -->
-        <test-method signature="TC15_Product_Search_Results_Page()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:54:02 IST" name="TC15_Product_Search_Results_Page" finished-at="2023-01-03T17:54:27 IST" duration-ms="25012" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC15_Product_Search_Results_Page -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.Wiley_dot_com_Test_Suite@75437611]" started-at="2023-01-03T17:54:27 IST" name="CloseBrowser" finished-at="2023-01-03T17:54:29 IST" duration-ms="1921" status="PASS">
+        </test-method> <!-- TC12_QunatityRestriction_ForPhysicalProduct -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.WEL_Test_Suite@72cc7e6f]" started-at="2023-01-09T12:17:06 IST" name="CloseBrowser" finished-at="2023-01-09T12:17:10 IST" duration-ms="3553" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
-      </class> <!-- Test_Suite.Wiley_dot_com_Test_Suite -->
+      </class> <!-- Test_Suite.WEL_Test_Suite -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
@@ -145,6 +146,38 @@ public class app_WileyPLUS_Repo {
 	WebElement ItemTitleOrderReview;
 	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel']")
 	WebElement ItemTitleInConfirmationPage;
+	@FindBy(id="line1")
+	WebElement ShippingAddressLine1;	
+	@FindBy(id="phone")
+	WebElement ShippingPhoneNumber;	
+	@FindBy(xpath="(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
+	WebElement UseSelectedShippingAddressButtonAddressDoctorPopUp;
+	@FindBy(xpath = "(//input[@id='postcode'])[1]")
+	WebElement ShippingZIPCode;
+	@FindBy(xpath = "(//input[@id='townCity'])[1]")
+	WebElement ShippingCity;
+	@FindBy(xpath = "(//input[@id='address.region'])[1]")
+	WebElement SelectStateDropDown;
+	@FindBy(xpath = "//button[contains(text(),'View Cart')]")
+	WebElement ViewCartButton;
+	@FindBy(xpath="(//button[@id='continue-shopping-button'])[2]")
+	WebElement ContinueShoppingButton;
+	@FindBy(xpath="//a[contains(text(),' Create a new account')]")
+	WebElement CreateAccountLinkOnboarding;
+	@FindBy(id="fname")
+	WebElement OnboardingCreateAccountFirstName;
+	@FindBy(id="lname")
+	WebElement OnboardingCreateAccountLastName;
+	@FindBy(id="email")
+	WebElement OnboardingCreateAccountEmailId;
+	@FindBy(xpath="//label[contains(text(),'Institution')]/following-sibling::div/input")
+	WebElement OnboardingCreateAccountInstitution;
+	@FindBy(id="filled-adornment-password")
+	WebElement OnboardingCreateAccountPassword;
+	@FindBy(xpath="//input[@type='checkbox']")
+	WebElement OnboardingCreateAccountCheckbox;
+	@FindBy(xpath="//span[contains(text(),'Create Account')]")
+	WebElement OnboardingCreateAccountButton;
 	
 	
 	//Description: Concatenates the url with username, password and the env
@@ -1358,6 +1391,318 @@ public class app_WileyPLUS_Repo {
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Course name was not displayed on the Order Confirmation page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 6/1/23
+	 * @Description: Checks if global addresses are getting displayed as a saved address or not
+	 */
+	public void checkGlobalSavedAddress(WebDriver driver, String xpathOfGloablADddress) throws IOException {
+		try {
+			driver.findElement(By.xpath(xpathOfGloablADddress));
+			Reporting.updateTestReport("Global saved address was getting displayed", 
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Global saved address couldn't be validated",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 6/1/23
+	 * @Description: Clears the Address line 1 field if anything is present and then Enters the new value in the shipping address form
+	 */
+	public void enterAddressLine1Shipping(String line1) throws IOException{
+		try {
+		    ShippingAddressLine1.clear();
+		    ShippingAddressLine1.sendKeys(line1);
+			Reporting.updateTestReport("Address line 1: "+line1+" was entered",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Address line 1 couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	
+	/*
+	 * @Date: 6/1/23
+	 * @Description: Clears the Phone number if anything is present and then Enters the new value in the shipping address form
+	 */
+	public void enterPhoneNumberShipping(String phone) throws IOException{
+		try {
+			ShippingPhoneNumber.clear();
+			ShippingPhoneNumber.sendKeys(phone);
+			Reporting.updateTestReport("Phone number: "+phone+" was entered",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Phone number couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	
+	/*
+	 * @Description: Clicks on the Use Selected Address Button in Address Doctor PopUp
+	 * @Date: 6/1/23
+	 */
+	public void clickOnUseSelectedShippingAddressButtonAddressDoctor() throws IOException{
+		try {
+			UseSelectedShippingAddressButtonAddressDoctorPopUp.click();
+			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp was clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 6/1/23
+	 * @Description : Postal code updating in shipping page.
+	 */
+	public void enterShippingZIPCode(String shippingZIPCode) throws IOException {
+		try {
+			ShippingZIPCode.sendKeys(shippingZIPCode);
+			Reporting.updateTestReport("ShippingAddress: " + shippingZIPCode + " was entered successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"ShippingAddress was not entered with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Date: 6/1/23
+	 * @Description : Entering the City in Shipping page.
+	 */
+	public void enterShippingCity(String shippingCity) throws IOException {
+		try {
+			ShippingCity.clear();
+			ShippingCity.sendKeys(shippingCity);
+			Reporting.updateTestReport("ShippingCity: " + shippingCity + " was entered successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("ShippingCity was not entered with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Date: 6/1/23
+	 * @Description :Selecting country from Dropdpwn in Shipping Page
+	 */
+	public void enterState(String state) throws IOException {
+		try {
+			
+			
+			SelectStateDropDown.clear();
+			SelectStateDropDown.sendKeys(state);
+			SelectStateDropDown.sendKeys(Keys.ENTER);
+			Reporting.updateTestReport("State: "+state+" has been selected successfully by user",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("User failed to select State " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Description: Returns the Shipping address doctor pop up button 
+	 * @Date: 6/1/23
+	 */
+	public WebElement returnUseSelectedShippingAddressButtonAddressDoctorPopUp() {
+		return UseSelectedShippingAddressButtonAddressDoctorPopUp;
+	}
+	
+	/*
+	 * @Date: 6/1/23
+	 * @Description: Checks if the ISBN is present in PDP or not is present or not
+	 */
+	public boolean checkISBN_InPDP(WebDriver driver,String ISBN) throws IOException{
+		try {
+			String xpathIsbn="//*[contains(text(),'"+ISBN+"')]";
+			if(driver.findElement(By.xpath(xpathIsbn)).isDisplayed())
+				return true;
+			else
+				return false;
+		}
+		catch(Exception e) {
+			return false;
+		}
+	}
+	
+	/*
+	 * @Description: Clicks on the Add to cart button in the pdp page
+	 * @Date: 06/01/23
+	 */
+	public void clickOnAddToCartButton() throws IOException{
+		try {
+			AddToCartButton.click();
+			Reporting.updateTestReport("Add To Cart Button was clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Add To Cart couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+		}
+	}
+	/*
+	 * @Description: Clicks on the View Cart button in the pop up
+	 * @Date: 06/01/23
+	 */
+	public void clickOnViewCartButton() throws IOException{
+		try {
+			
+			ViewCartButton.click();
+			Reporting.updateTestReport("View Cart Button was clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("View Cart Button couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Description: Clicks on the Continue Shopping Button in the cart page
+	 * @Date: 06/01/23
+	 */
+	public void clickOnContinueShoppingButton() throws IOException{
+		try {
+			ContinueShoppingButton.click();
+			Reporting.updateTestReport("Continue Shopping Button was clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Continue Shopping Button couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Description: Clicks on the Onboarding Create Account Link 
+	 * @Date: 06/01/23
+	 */
+	public void clickOnCreateAccountLinkOnboarding() throws IOException{
+		try {
+			CreateAccountLinkOnboarding.click();
+			Reporting.updateTestReport("Onboarding Create Account Link was clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Onboarding Create Account Link couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 6/1/23
+	 * @Description: Enters First name in onboarding create account page
+	 */
+	public void enterFirstNameInOnboardingCreateAccount(String firstName) throws IOException {
+		try {
+			OnboardingCreateAccountFirstName.sendKeys(firstName);
+			Reporting.updateTestReport("First name: "+firstName+" was entered in onboarding create account page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("First name couldn't be entered in onboarding create account page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 6/1/23
+	 * @Description: Enters Last name in onboarding create account page
+	 */
+	public void enterLastNameInOnboardingCreateAccount(String lastName) throws IOException {
+		try {
+			OnboardingCreateAccountLastName.sendKeys(lastName);
+			Reporting.updateTestReport("Last name: "+lastName+" was entered in onboarding create account page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Last name couldn't be entered in onboarding create account page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 6/1/23
+	 * @Description: Enters Email Id in onboarding create account page
+	 */
+	public String enterEmailIdInOnboardingCreateAccount() throws IOException {
+		try {
+			String dateTime= new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+			String emailId="onboardinguser"+dateTime+"@yopmail.com";
+			OnboardingCreateAccountEmailId.sendKeys(emailId);
+			Reporting.updateTestReport("Email Id: "+emailId+" was entered in onboarding create account page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return emailId;
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Email Id couldn't be entered in onboarding create account page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Date: 6/1/23
+	 * @Description: Enters Institution name in onboarding create account page
+	 */
+	public void enterInstitutionNameInOnboardingCreateAccount(WebDriver driver,String institution) throws IOException {
+		try {
+			OnboardingCreateAccountInstitution.sendKeys(institution);
+			OnboardingCreateAccountInstitution.sendKeys(Keys.ARROW_DOWN);
+			OnboardingCreateAccountInstitution.sendKeys(Keys.ENTER);
+			Reporting.updateTestReport("Institution: "+OnboardingCreateAccountInstitution.getAttribute("value")+" was entered in onboarding create account page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Institution couldn't be entered in onboarding create account page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 6/1/23
+	 * @Description: Enters password in onboarding create account page
+	 */
+	public void enterPasswordInOnboardingCreateAccount(String password) throws IOException {
+		try {
+			OnboardingCreateAccountPassword.sendKeys(password);
+			Reporting.updateTestReport("Password: "+password+" was entered in onboarding create account page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Password couldn't be entered in onboarding create account page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 6/1/23
+	 * @Description: Clicks on the privacy policy checkbox on onboarding create account page
+	 */
+	public void clickOnOnboardingCreateAccountCheckbox() throws IOException{
+		try {
+			OnboardingCreateAccountCheckbox.click();
+			Reporting.updateTestReport("Privacy policy checkbox was clicked in onboarding create account page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Privacy policy checkbox couldn't be clicked in onboarding create account page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 6/1/23
+	 * @Description: Clicks on the Onboarding Create Account Button on onboarding create account page
+	 */
+	public void clickOnOnboardingCreateAccountButton() throws IOException{
+		try {
+			OnboardingCreateAccountButton.click();
+			Reporting.updateTestReport("Create Account Button was clicked in onboarding create account page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Create Account Button couldn't be clicked in onboarding create account page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
