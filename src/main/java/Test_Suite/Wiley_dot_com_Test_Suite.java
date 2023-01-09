@@ -55,7 +55,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			else
 				Reporting.updateTestReport("Failed to Load the microsites page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			ScrollingWebPage.PageScrolldown(driver,0,19000);
+			ScrollingWebPage.PageScrolldown(driver,0,19000,SS_path);
 
 		} catch (Exception e) {
 			wiley.WileyLogOut();
@@ -81,7 +81,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			wiley.checkPublishingServicesLinkInCartPageHeader();
 			wiley.checkProfessionalDevelopmentLinkInCartPageHeader();
 			wiley.checkEducationResourcesoncartPage();
-			ScrollingWebPage.PageScrolldown(driver,0,29000);
+			ScrollingWebPage.PageScrolldown(driver,0,29000,SS_path);
 			wiley.checkSiteMapononpdppage();
 			wiley.checkRighrtAndPermissonsononpdppage();
 			wiley.checkTermsofuseonpdptpage();
@@ -106,7 +106,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC03_SiteFooter");
 			driver.get(wiley.wileyURLConcatenation("TC03", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
-			ScrollingWebPage.PageScrolldown(driver,0,19000);
+			ScrollingWebPage.PageScrolldown(driver,0,19000,SS_path);
 			wiley.checkSiteMaponfooter();
 			wiley.checkPrivacypolicyOnFooter();
 			wiley.checkTermsofuseOnFooter();
@@ -159,7 +159,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC05_About Us Page");
 			driver.get(wiley.wileyURLConcatenation("TC05", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
-			ScrollingWebPage.PageScrolldown(driver,0,29000);
+			ScrollingWebPage.PageScrolldown(driver,0,29000,SS_path);
 			wiley.AboutWileyPage();
 			String aboutuspagetitle = driver.getTitle();
 			if (aboutuspagetitle.equals("About Wiley | Over 200 Years of Unlocking Human Potential"))
@@ -189,7 +189,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 			driver.get(wiley.wileyURLConcatenation("TC06", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
-			ScrollingWebPage.PageScrolldown(driver,0,30000);
+			ScrollingWebPage.PageScrolldown(driver,0,30000,SS_path);
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='/sitemap']")));
 			//wiley.checkSiteMapononpdppage();
 			wiley.clickonsitemap();
@@ -370,7 +370,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			wiley.Entertextonsearcbar(excelOperation.getTestData("TC12", "WILEY_Dot_Com_Test_Data", "SearchBox_Text"));
 			wiley.SearchingFortheProduct();
 			wiley.ClickOnContentSearchOnPDPPage();
-			ScrollingWebPage.PageScrolldown(driver,0,1700);
+			ScrollingWebPage.PageScrolldown(driver,0,1700,SS_path);
 		} catch (Exception e) {
 			wiley.WileyLogOut();
 			System.out.println(e.getMessage());
@@ -391,7 +391,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC13", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.ShopLinkHeaderCLPPage();
-			ScrollingWebPage.PageScrolldown(driver,0,300);
+			ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 			wiley.checkFeaturedProductsOnCLPPage();
 			wiley.ViewAllOnCLPPage();
 		} catch (Exception e) {
