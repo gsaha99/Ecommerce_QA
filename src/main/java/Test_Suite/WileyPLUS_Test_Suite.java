@@ -407,6 +407,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					Double singleTermPrice=Double.valueOf(WileyPLUS.fetchSingleTermAccessPrice());
 					int calculatedPercentage=(int)Math.round(((2*singleTermPrice-multiTermPrice)/(2*singleTermPrice))*100);
 					String calculatedValue=String.valueOf(calculatedPercentage);
+					
 					if(calculatedValue.equalsIgnoreCase(multiTermPercentage))
 						Reporting.updateTestReport("The calculated percentage value: "+calculatedValue+" was same as the value shown in Multiple Term page: "+multiTermPercentage,
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);

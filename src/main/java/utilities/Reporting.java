@@ -96,9 +96,13 @@ public class Reporting {
 				test.log(Status.PASS,ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
 							
 				break;
+				
+			case INFO :
+				test.log(Status.INFO, ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
+				break;
 
 			case WARNING :
-				test.log(Status.WARNING, MarkupHelper.createLabel(ObjectName,ExtentColor.ORANGE ));
+				test.log(Status.WARNING,ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
 				break;
 
 			case ERROR :
