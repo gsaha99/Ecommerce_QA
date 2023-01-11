@@ -35,6 +35,12 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']//span[contains(text(),'$40')]")
 	WebElement UkShipMethod;
 
+	@FindBy(xpath = "(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
+	WebElement UseSelectedShippingAddressButtonAddressDoctorPopUp;
+
+	@FindBy(xpath = "(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
+	WebElement UseSelectedBillingAddressButtonAddressDoctorPopUp;
+
 	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']//span[contains(text(),'$40')]")
 	WebElement SingaporeShipMethod;
 
@@ -124,6 +130,12 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//a[contains(text(),'ACCOUNT')]")
 	WebElement AccountText;
+
+	@FindBy(xpath = "(//div[@id='newAddressBtnDiv']/button[@id='addNewAddressButton'])")
+	WebElement EnterNewAddressButton;
+
+	@FindBy(xpath = "(//div[@id='newAddressBtnDiv']/button[@id='addNewBillingAddressButton'])")
+	WebElement EnterNewAddressButtonOnBillPage;
 
 	@FindBy(xpath = "//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[3]")
 	WebElement CIAProduct;
@@ -375,6 +387,9 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "(//div[@class='col-md-5 col-6 noPadding orderReviewDetailsValue'])[2]")
 	WebElement OrderTax;
+	
+	@FindBy(xpath = "//div[@class='col-md-5 col-6 noPadding orderReviewDetailsValue']")
+	WebElement TaxAmount;
 
 	@FindBy(xpath = "//div[@class='col-md-5 col-6 noPadding orderReviewTotalPrice']")
 	WebElement OrderTotal;
@@ -1640,6 +1655,24 @@ public class app_WEL_Repo {
 		}
 	}
 
+	
+	
+	
+	public String fetchTaxValue() throws IOException {
+		try {
+			String totalTax = TaxAmount.getText();
+			Reporting.updateTestReport("Total Tax: " + totalTax + " was fetched",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return totalTax;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Total Tax couldn't fetched", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	
+	
 	public String fetchOrderTotal() throws IOException {
 		try {
 			String orderTotal = OrderTotal.getText();
@@ -1996,4 +2029,59 @@ public class app_WEL_Repo {
 		}
 	}
 
+	public void ClickOnEnterNewAddressButtonOnShippingPage() throws IOException {
+		try {
+			EnterNewAddressButton.click();
+			Reporting.updateTestReport("Edit button clicked successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Edit button " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
+	public void ClickOnEnterNewAddressButtonOnBillingPage() throws IOException {
+		try {
+			EnterNewAddressButtonOnBillPage.click();
+			Reporting.updateTestReport("Edit button clicked successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Edit button " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
+	public void clickOnUseSelectedShippingAddressButtonAddressDoctor() throws IOException {
+		try {
+			UseSelectedShippingAddressButtonAddressDoctorPopUp.click();
+			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp was clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void clickOnUseSelectedBillingAddressButtonAddressDoctor() throws IOException {
+		try {
+			UseSelectedBillingAddressButtonAddressDoctorPopUp.click();
+			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp was clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public WebElement returnUseSelectedShippingAddressButtonAddressDoctorPopUp() {
+		return UseSelectedShippingAddressButtonAddressDoctorPopUp;
+	}
+
+	public WebElement returnUseSelectedBillingAddressButtonAddressDoctorPopUp() {
+		return UseSelectedBillingAddressButtonAddressDoctorPopUp;
+	}
 }
