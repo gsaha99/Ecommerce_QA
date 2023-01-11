@@ -1024,12 +1024,48 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				WileyPLUS.enterLastNameInOnboardingCreateAccount(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Last_Name"));
 				String emailId=WileyPLUS.enterEmailIdInOnboardingCreateAccount();
 				WileyPLUS.enterInstitutionNameInOnboardingCreateAccount(driver, excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Institution"));
-				WileyPLUS.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Password"));
+				Thread.sleep(2000);
+				WileyPLUS.enterPasswordInOnboarding(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Password"));
 				WileyPLUS.clickOnOnboardingCreateAccountCheckbox();
-				WileyPLUS.clickOnCreateAccountButton();
+				WileyPLUS.clickOnOnboardingCreateAccountButton();
+				try {
+					wait.until(ExpectedConditions.presenceOfElementLocated(
+							By.xpath("//title[contains(text(),'Check Your Email')]")));
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Create account form could not be submitted and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				driver.get("https://yopmail.com/");
+				WileyPLUS.enterEmailIdInYopmail(emailId);
+				WileyPLUS.clickOnCheckInboxButton();
+				driver.switchTo().frame("ifmail");
+				WileyPLUS.clickOnFinishRegistrationLinkInMail();
+				driver.switchTo().defaultContent();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				java.util.Iterator<String> iterator = allWindowHandles.iterator();
+				String yopmailHandle = iterator.next();
+				String ChildWindow=iterator.next();
+				driver.switchTo().window(yopmailHandle);
+				driver.close();
+				driver.switchTo().window(ChildWindow);
+				WileyPLUS.enterEmailIdInOnboardingLogin(emailId);
+				WileyPLUS.enterPasswordInOnboarding(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Password"));
+				WileyPLUS.clickOnOnboardingLoginButton();
+				try {
+					wait.until(ExpectedConditions.presenceOfElementLocated(
+							By.xpath("//title[contains(text(),'My Account')]")));
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("User couldn't login and was not on my account page"
+							+ " and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				WileyPLUS.clickOnOnboardingAddCourseButton();
 				WileyPLUS.clickOnHomePage();
 				try {
-					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing, Education and Research')]")));
+					wait.until(ExpectedConditions.presenceOfElementLocated(
+							By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing, Education and Research')]")));
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
@@ -1038,7 +1074,15 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "SearchBox_Text"));
 				WileyPLUS.clickOnSRP_WileyProduct();
 				WileyPLUS.clickOnAddToCartButton();
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'View Cart')]")));
+				try {
+					wait.until(ExpectedConditions.
+							elementToBeClickable
+							(By.xpath("//button[contains(text(),'View Cart')]")));
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
 				WileyPLUS.clickOnViewCartButton();
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				WileyPLUS.clickOnContinueShoppingButton();

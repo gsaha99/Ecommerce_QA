@@ -151,15 +151,21 @@ public class app_WileyPLUS_Repo {
 	@FindBy(id="lname")
 	WebElement OnboardingCreateAccountLastName;
 	@FindBy(id="email")
-	WebElement OnboardingCreateAccountEmailId;
+	WebElement OnboardingEmailId;
 	@FindBy(xpath="//label[contains(text(),'Institution')]/following-sibling::div/input")
 	WebElement OnboardingCreateAccountInstitution;
 	@FindBy(id="filled-adornment-password")
-	WebElement OnboardingCreateAccountPassword;
+	WebElement OnboardingPassword;
 	@FindBy(xpath="//input[@type='checkbox']")
 	WebElement OnboardingCreateAccountCheckbox;
 	@FindBy(xpath="//span[contains(text(),'Create Account')]")
 	WebElement OnboardingCreateAccountButton;
+	@FindBy(xpath="//a[contains(text(),'Log in to finish registration')]")
+	WebElement FinishRegistrationLinkInMail;
+	@FindBy(xpath="//span[contains(text(),'Log in')]")
+	WebElement OnboardingLoginButton;
+	@FindBy(xpath="//span[contains(text(),'add course')]")
+	WebElement OnboardingAddCourseButton;
 	
 	
 	//Description: Concatenates the url with username, password and the env
@@ -1599,7 +1605,7 @@ public class app_WileyPLUS_Repo {
 		try {
 			String dateTime= new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
 			String emailId="onboardinguser"+dateTime+"@yopmail.com";
-			OnboardingCreateAccountEmailId.sendKeys(emailId);
+			OnboardingEmailId.sendKeys(emailId);
 			Reporting.updateTestReport("Email Id: "+emailId+" was entered in onboarding create account page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return emailId;
@@ -1618,6 +1624,7 @@ public class app_WileyPLUS_Repo {
 	public void enterInstitutionNameInOnboardingCreateAccount(WebDriver driver,String institution) throws IOException {
 		try {
 			OnboardingCreateAccountInstitution.sendKeys(institution);
+			Thread.sleep(3000);
 			Actions at = new Actions(driver);
 			at.sendKeys(Keys.PAGE_DOWN).build().perform();
 			at.sendKeys(Keys.ENTER).build().perform();
@@ -1634,14 +1641,14 @@ public class app_WileyPLUS_Repo {
 	 * @Date: 6/1/23
 	 * @Description: Enters password in onboarding create account page
 	 */
-	public void enterPasswordInOnboardingCreateAccount(String password) throws IOException {
+	public void enterPasswordInOnboarding(String password) throws IOException {
 		try {
-			OnboardingCreateAccountPassword.sendKeys(password);
-			Reporting.updateTestReport("Password: "+password+" was entered in onboarding create account page",
+			OnboardingPassword.sendKeys(password);
+			Reporting.updateTestReport("Password: "+password+" was entered in onboarding page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("Password couldn't be entered in onboarding create account page",
+			Reporting.updateTestReport("Password couldn't be entered in onboarding page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -1674,6 +1681,73 @@ public class app_WileyPLUS_Repo {
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Create Account Button couldn't be clicked in onboarding create account page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 10/01/23
+	 * @Description: Clicks on Finish registration link in Onboarding registration mail
+	 */
+	public void clickOnFinishRegistrationLinkInMail() throws IOException{
+		try {
+			FinishRegistrationLinkInMail.click();
+			Reporting.updateTestReport("Finish registration link was clicked"
+					+ " in the onboarding registration mail",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Finish registration link couldn't be clicked"
+					+ " in the onboarding registration mail",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 10/1/23
+	 * @Description: Enters Email Id in onboarding login page
+	 */
+	public void enterEmailIdInOnboardingLogin(String emailId) throws IOException {
+		try {
+			OnboardingEmailId.sendKeys(emailId);
+			Reporting.updateTestReport("Email Id: "+emailId+" was entered in onboarding Login page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Email Id couldn't be entered in onboarding Login page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			
+		}
+	}
+	
+	/*
+	 * @Date: 6/1/23
+	 * @Description: Clicks on the Onboarding Login Button on onboarding login page
+	 */
+	public void clickOnOnboardingLoginButton() throws IOException{
+		try {
+			OnboardingLoginButton.click();
+			Reporting.updateTestReport("Login Button was clicked in onboarding Login page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Login Button couldn't be clicked in onboarding Login page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 6/1/23
+	 * @Description: Clicks on the Onboarding Add course Button on onboarding my account page
+	 */
+	public void clickOnOnboardingAddCourseButton() throws IOException{
+		try {
+			OnboardingAddCourseButton.click();
+			Reporting.updateTestReport("Add Course Button was clicked in onboarding my account page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Add Course Button couldn't be clicked in onboarding my account page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
