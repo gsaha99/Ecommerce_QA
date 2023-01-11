@@ -66,96 +66,99 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String email=wiley.enterEmailIdInCreateAccountForm();
+				wiley.clickOnCreateAccountButton();
+				wiley.confirmEmailIdInCreateAccountForm(email);
+				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Password"));
+				wiley.clickOnSaveAndContinueButton();			
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wiley.enterCardHolderName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+					wiley.enterCardNumber(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+					wiley.enterCVV_Number(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "CVV"));
+					driver.switchTo().defaultContent();			
+					wiley.enterFirstName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					wiley.enterLastName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+					wiley.selectCountry(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
+					try{
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
+						wiley.enterAddressLine1Billing(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
+						wiley.enterZipBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
+						//wiley.enterCityBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_City"));
+						//wiley.enterState(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_State"));
+						//wiley.selectUState();
+						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
+						wiley.clickOnSaveAndContinueButton();
+						try {
+						if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						{wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+						}}
+						catch(Exception e) {
+							Reporting.updateTestReport("Adress doctor pop up did not appear",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+						}
+						wiley.clickOnPlaceOrderButton();
+						if(wiley.checkIfUserIsInOrderConfirmation()) Reporting.updateTestReport("User is in Order Confirmation page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else Reporting.updateTestReport("User was not in Order Confirmation page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+						String orderID=wiley.fetchOrderId();
+						excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Order_Id", orderID);
+						excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+						excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+						ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+						String tax=wiley.fetchTaxAmount();
+						String orderTotal=wiley.fetchOrderTotal();
+						
+						excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Tax", tax);
+						excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Order_Total", orderTotal);
+						driver.get(excelOperation.getTestData("Yopmail_URL",
+								"Generic_Dataset", "Data"));
+						wiley.enterEmailIdInYopmail(email);
+						wiley.clickOnCheckInboxButton();
+						if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+							Reporting.updateTestReport("Order Confirmation mail was received",
+			                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CustomMethods.validateOrderConfirmationMailContent("Wiley",driver,SS_path,tax," ",orderTotal);
+						}
+						else {
+							Reporting.updateTestReport("Order Confirmation mail was not received",
+			                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+						
+						wiley.WileyLogOut();
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Billing address line 1 was not clickable"
+								+ " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
+					}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Cardholder name ield in Card information"
+							+ " section was not clickable and caused timeout exception"
+							, CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			String email=wiley.enterEmailIdInCreateAccountForm();
-			wiley.clickOnCreateAccountButton();
-			wiley.confirmEmailIdInCreateAccountForm(email);
-			wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Password"));
-			wiley.clickOnSaveAndContinueButton();			
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-			wiley.enterCardNumber(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();			
-			wiley.enterFirstName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Billing address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Billing(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
-			wiley.enterZipBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
-			//wiley.enterCityBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_City"));
-			//wiley.enterState(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_State"));
-			//wiley.selectUState();
-			wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
-			wiley.clickOnSaveAndContinueButton();
-			try {
-			if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-			{wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-			}}
-			catch(Exception e) {}
-			wiley.clickOnPlaceOrderButton();
-			if(wiley.checkIfUserIsInOrderConfirmation()) Reporting.updateTestReport("User is in Order Confirmation page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else Reporting.updateTestReport("User was not in Order Confirmation page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-			String orderID=wiley.fetchOrderId();
-			excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Order_Id", orderID);
-			excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
-			excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
-			ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-			String tax=wiley.fetchTaxAmount();
-			String orderTotal=wiley.fetchOrderTotal();
-			
-			excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Tax", tax);
-			excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Order_Total", orderTotal);
-			driver.get("https://yopmail.com/en/");
-
-			wiley.enterEmailIdInYopmail(email);
-			wiley.clickOnCheckInboxButton();
-			if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
-				Reporting.updateTestReport("Order Confirmation mail was received",
-                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				CustomMethods.validateOrderConfirmationMailContent("Wiley",driver,SS_path,tax," ",orderTotal);
-			}
-			else {
-				Reporting.updateTestReport("Order Confirmation mail was not received",
-                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			
-			wiley.WileyLogOut();
 			
 		}
 		catch(Exception e){
@@ -184,110 +187,109 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();	
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String email=excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Email_Id");
+				wiley.enterExistingWileyUserMailID(email);
+				wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Password"));
+				wiley.clickOnLogInAndContinueButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				driver.switchTo().frame(0);
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wiley.enterCardHolderName(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.className("gw-proxy-number")));		
+					wiley.enterCardNumber(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.className("gw-proxy-securityCode")));
+					wiley.enterCVV_Number(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "CVV"));
+					driver.switchTo().defaultContent();
+					wiley.clickOnEnterNewAddress();
+					wiley.enterFirstName(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					wiley.enterLastName(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+					wiley.selectCountry(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
+					Thread.sleep(3000);
+					try{
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
+						wiley.enterAddressLine1Billing(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
+						wiley.enterZipBilling(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
+						//wiley.enterCityBilling(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_City"));
+						//wiley.enterState(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_State"));
+//						wiley.SelectState(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data","Bill_State"));
+						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
+						try {
+							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+							}
+						catch(Exception e) {
+							Reporting.updateTestReport("Adress doctor pop up did not appear",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+						}
+						wiley.clickOnSaveAndContinueButton();
+						String title = driver.getTitle();
+						if (title.equalsIgnoreCase("Secure Checkout | Wiley")) {
+							Reporting.updateTestReport("user was on Secure Checkout Page",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							wiley.clickOnPlaceOrderButton();
+							String orderconfirmation = driver.getTitle();
+							if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+								ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+								String orderId = wiley.fetchOrderId();
+								excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+								excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+								ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+								String ordertotal = wiley.fetchOrderTotal();
+								String taxamount = wiley.fetchTaxAmount();
+								System.out.println("The Order Id is is " + orderId);
+								excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+								excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
+								
+							}						
+							 else {
+								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+										StatusDetails.FAIL);
+							}
+							wiley.WileyLogOut();
+						} else {
+							Reporting.updateTestReport("user was not on Secure Checkout Page",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}          
+					
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Billing address line 1 was not clickable"
+								+ " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
+					}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Cardholder name ield in Card information"
+							+ " section was not clickable and caused timeout exception"
+							, CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.clickOnViewCartButton();	
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			String email=excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Email_Id");
-			wiley.enterExistingWileyUserMailID(email);
-			wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Password"));
-			wiley.clickOnLogInAndContinueButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			driver.switchTo().frame(0);
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.className("gw-proxy-number")));		
-			wiley.enterCardNumber(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.className("gw-proxy-securityCode")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			wiley.clickOnEnterNewAddress();
-			wiley.enterFirstName(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
-			Thread.sleep(3000);
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Billing address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Billing(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
-			wiley.enterZipBilling(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
-			//wiley.enterCityBilling(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_City"));
-			//wiley.enterState(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_State"));
-//			wiley.SelectState(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data","Bill_State"));
-			wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
-			try {
-				if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				{wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-				}}
-				catch(Exception e) {}
-			wiley.clickOnSaveAndContinueButton();
-			String title = driver.getTitle();
-			if (title.equalsIgnoreCase("Secure Checkout | Wiley")) {
-				Reporting.updateTestReport("user was on Security Checkout Page",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			} else {
-				Reporting.updateTestReport("user was not on Security Checkout Page",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			}
-			wiley.clickOnPlaceOrderButton();
-			String orderconfirmation = driver.getTitle();
-			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-				ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-				String orderId = wiley.fetchOrderId();
-				excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-				excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
-				ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-				String ordertotal = wiley.fetchOrderTotal();
-				String taxamount = wiley.fetchTaxAmount();
-				System.out.println("The Order Id is is " + orderId);
-				excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-				excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-				
-			}
-			
-			
-				
-			 else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.WileyLogOut();
-			
-           
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			wiley.wileyLogOutException();
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 
 		}
-		wiley.logOut();
 	}
 	
 	@Test
@@ -303,103 +305,104 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String emailID = wiley.enterEmailIdInCreateAccountForm();
+				wiley.clickOnCreateAccountButton();
+				wiley.confirmEmailIdInCreateAccountForm(emailID);
+				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Password"));
+				wiley.clickOnSaveAndContinueButton();
+				wiley.enterFirstName(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "First_Name"));
+				wiley.enterLastName(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+				wiley.selectCountry(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
+				try{
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+					wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
+					wiley.enterShippingZIPCode(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
+					wiley.enterShippingCity(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
+					wiley.enterState(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
+					wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
+					
+					wiley.selectShippingMethod();
+					wiley.clickOnSaveAndContinueButton();
+					try {
+					if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+					wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+					catch(Exception e) {
+						Reporting.updateTestReport("Adress doctor pop up did not appear",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+					}
+					driver.switchTo().frame(0);
+					try {
+						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wiley.enterCardHolderName(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "First_Name"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));			
+						wiley.enterCardNumber(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
+						wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+						wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
+						wiley.enterCVV_Number(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "CVV"));
+						driver.switchTo().defaultContent();
+						wiley.clickOnSaveAndContinueButton();
+						wiley.clickOnPlaceOrderButton();
+						String orderconfirmation = driver.getTitle();
+						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+							ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+							String orderId = wiley.fetchOrderId();
+							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
+							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+							String ordertotal = wiley.fetchOrderTotal();
+							String taxamount = wiley.fetchTaxAmount();
+							String scharge=wiley.fetchShippingCharge();
+							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
+							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
+							driver.get("https://yopmail.com/en/");
+
+							wiley.enterEmailIdInYopmail(emailID);
+							wiley.clickOnCheckInboxButton();
+							if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+								Reporting.updateTestReport("Order Confirmation mail was received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								CustomMethods.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxamount,scharge,ordertotal);
+							}
+							else {
+								Reporting.updateTestReport("Order Confirmation mail was not received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}				
+						}			
+							
+						 else {
+							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+						wiley.WileyLogOut();
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Cardholder name ield in Card information"
+								+ " section was not clickable and caused timeout exception"
+								, CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
+					}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
+							+ " and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			String emailID = wiley.enterEmailIdInCreateAccountForm();
-			wiley.clickOnCreateAccountButton();
-			wiley.confirmEmailIdInCreateAccountForm(emailID);
-			wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Password"));
-			wiley.clickOnSaveAndContinueButton();
-			wiley.enterFirstName(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
-			wiley.enterShippingZIPCode(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
-			wiley.enterShippingCity(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
-			wiley.enterState(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
-			wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
-			
-			wiley.selectShippingMethod();
-			wiley.clickOnSaveAndContinueButton();
-			try {
-			if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-			wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-			catch(Exception e) {
-			}
-			driver.switchTo().frame(0);
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-			
-			wiley.enterCardNumber(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			wiley.clickOnSaveAndContinueButton();
-			wiley.clickOnPlaceOrderButton();
-			String orderconfirmation = driver.getTitle();
-			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-				ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-				String orderId = wiley.fetchOrderId();
-				excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-				excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
-				ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-				String ordertotal = wiley.fetchOrderTotal();
-				String taxamount = wiley.fetchTaxAmount();
-				String scharge=wiley.fetchShippingCharge();
-				excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-				excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-				excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-				driver.get("https://yopmail.com/en/");
-
-				wiley.enterEmailIdInYopmail(emailID);
-				wiley.clickOnCheckInboxButton();
-				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
-					Reporting.updateTestReport("Order Confirmation mail was received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					CustomMethods.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxamount,scharge,ordertotal);
-				}
-				else {
-					Reporting.updateTestReport("Order Confirmation mail was not received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}				
-			}			
-				
-			 else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.WileyLogOut();
 		}
 
 		catch (Exception e) {
@@ -426,102 +429,100 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String email=wiley.enterEmailIdInCreateAccountForm();
+				wiley.clickOnContinueAsGuestButton();
+				wiley.enterFirstName(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "First_Name"));
+				wiley.enterLastName(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+				wiley.selectCountry(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
+				try{
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+					wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
+					wiley.enterShippingZIPCode(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
+					wiley.enterShippingCity(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
+					wiley.enterState(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
+					wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
+					wiley.clickOnSaveAndContinueButton();
+					try {
+						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+					catch(Exception e) {
+						Reporting.updateTestReport("Adress doctor pop up did not appear",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+					}
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+					try {
+						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wiley.enterCardHolderName(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "First_Name"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+						wiley.enterCardNumber(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+						wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+						wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+						wiley.enterCVV_Number(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "CVV"));
+						driver.switchTo().defaultContent();
+						wiley.clickOnSaveAndContinueButton();
+						wiley.clickOnPlaceOrderButton();
+						String orderconfirmation = driver.getTitle();
+						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+							ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+							String orderId = wiley.fetchOrderId();
+							excelOperation.updateTestData("TC04", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+							excelOperation.updateTestData("TC04", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+							String ordertotal = wiley.fetchOrderTotal();
+							String taxamount = wiley.fetchTaxAmount();
+							String scharge=wiley.fetchShippingCharge();
+							excelOperation.updateTestData("TC04", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+							excelOperation.updateTestData("TC04", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
+							excelOperation.updateTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
+							driver.get("https://yopmail.com/en/");
+
+							wiley.enterEmailIdInYopmail(email);
+							wiley.clickOnCheckInboxButton();
+							if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+								Reporting.updateTestReport("Order Confirmation mail was received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								CustomMethods.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxamount,scharge,ordertotal);
+							}
+							else {
+								Reporting.updateTestReport("Order Confirmation mail was not received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+							
+						}				
+						 else {
+							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+						wiley.WileyLogOut();
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Cardholder name ield in Card information"
+								+ " section was not clickable and caused timeout exception"
+								, CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
+					}			
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
+							+ " and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			String email=wiley.enterEmailIdInCreateAccountForm();
-			wiley.clickOnContinueAsGuestButton();
-			wiley.enterFirstName(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
-			wiley.enterShippingZIPCode(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
-			wiley.enterShippingCity(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
-			wiley.enterState(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
-			wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
-			wiley.clickOnSaveAndContinueButton();
-			try {
-				if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-				catch(Exception e) {
-				}
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-			wiley.enterCardNumber(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			wiley.clickOnSaveAndContinueButton();
-			wiley.clickOnPlaceOrderButton();
-			String orderconfirmation = driver.getTitle();
-			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-				ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-				String orderId = wiley.fetchOrderId();
-				excelOperation.updateTestData("TC04", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-				excelOperation.updateTestData("TC04", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
-				ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-				String ordertotal = wiley.fetchOrderTotal();
-				String taxamount = wiley.fetchTaxAmount();
-				String scharge=wiley.fetchShippingCharge();
-				excelOperation.updateTestData("TC04", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-				excelOperation.updateTestData("TC04", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-				excelOperation.updateTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-				driver.get("https://yopmail.com/en/");
-
-				wiley.enterEmailIdInYopmail(email);
-				wiley.clickOnCheckInboxButton();
-				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
-					Reporting.updateTestReport("Order Confirmation mail was received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					CustomMethods.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxamount,scharge,ordertotal);
-				}
-				else {
-					Reporting.updateTestReport("Order Confirmation mail was not received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
-				
-			}
-			
-			
-				
-			 else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.WileyLogOut();
-			
-			
 		}
 		catch(Exception e){
 			wiley.wileyLogOutException();
@@ -547,74 +548,71 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				wiley.selectQuantityDropDown(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Quantity"));
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String emailID=excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Email_Id");
+				wiley.enterExistingWileyUserMailID(emailID);
+				wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Password"));
+				wiley.clickOnLogInAndContinueButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				wiley.selectUSEOptionForExistingAddress();
+				ScrollingWebPage.PageScrolldown(driver,0,600,SS_path);
+				Thread.sleep(2000);
+				wiley.clickOnSaveAndContinueButton();
+				driver.switchTo().frame(driver.findElement(By.className("gw-proxy-nameOnCard"))); // Thread.sleep(2000);
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wiley.enterCardHolderName(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.className("gw-proxy-number")));
+					wiley.enterCardNumber(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.className("gw-proxy-securityCode")));
+					wiley.enterCVV_Number(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "CVV"));
+					driver.switchTo().defaultContent();
+					wiley.clickOnSaveAndContinueButton();
+					wiley.clickOnPlaceOrderButton();
+					String orderconfirmation = driver.getTitle();
+					if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+						ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+						String orderId = wiley.fetchOrderId();
+						excelOperation.updateTestData("TC05", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+						excelOperation.updateTestData("TC05", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
+						ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+						String ordertotal = wiley.fetchOrderTotal();
+						String taxamount = wiley.fetchTaxAmount();
+						String scharge=wiley.fetchShippingCharge();
+						excelOperation.updateTestData("TC05", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+						excelOperation.updateTestData("TC05", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
+						excelOperation.updateTestData("TC05", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
+						
+					}				
+					 else {
+						Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
+					}
+					wiley.WileyLogOut();
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Cardholder name ield in Card information"
+							+ " section was not clickable and caused timeout exception"
+							, CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.clickOnViewCartButton();
-			wiley.selectQuantityDropDown(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Quantity"));
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			String emailID=excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Email_Id");
-			wiley.enterExistingWileyUserMailID(emailID);
-			wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Password"));
-			wiley.clickOnLogInAndContinueButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			wiley.selectUSEOptionForExistingAddress();
-			ScrollingWebPage.PageScrolldown(driver,0,600,SS_path);
-			Thread.sleep(2000);
-			wiley.clickOnSaveAndContinueButton();
-			driver.switchTo().frame(driver.findElement(By.className("gw-proxy-nameOnCard"))); // Thread.sleep(2000);
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.className("gw-proxy-number")));
-			wiley.enterCardNumber(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.className("gw-proxy-securityCode")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			wiley.clickOnSaveAndContinueButton();
-			wiley.clickOnPlaceOrderButton();
-			String orderconfirmation = driver.getTitle();
-			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-				ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-				String orderId = wiley.fetchOrderId();
-				excelOperation.updateTestData("TC05", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-				excelOperation.updateTestData("TC05", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
-				ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-				String ordertotal = wiley.fetchOrderTotal();
-				String taxamount = wiley.fetchTaxAmount();
-				String scharge=wiley.fetchShippingCharge();
-				excelOperation.updateTestData("TC05", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-				excelOperation.updateTestData("TC05", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-				excelOperation.updateTestData("TC05", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-				
-			}
-			
-			
-				
-			 else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.WileyLogOut();
 		} catch (Exception e) {
 			wiley.wileyLogOutException();
 			System.out.println(e.getMessage());
@@ -636,88 +634,85 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.searchDataInSearchBar(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "ISBN"));
-			wiley.clickOnSRP_WileyProduct();
-//			wiley.selectHeaderCountryDropDown("Un");
-			wiley.clickOnAddToCartButton();
-			try {
-				wait.until(ExpectedConditions.
-						elementToBeClickable
-						(By.xpath("//button[contains(text(),'View Cart')]")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			String emailID=excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "Email_Id");
-			wiley.enterExistingWileyUserMailID(emailID);
-			wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "Password"));
-			wiley.clickOnLogInAndContinueButton();
-			wiley.selectQuantityDropDown(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "Quantity"));
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			wiley.selectUSEOptionForExistingAddress();
-			Thread.sleep(1000);
-			wiley.clickOnSaveAndContinueButton();
-			driver.switchTo().frame(0);
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-			
-			wiley.enterCardNumber(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			wiley.clickOnSaveAndContinueButton();
-			wiley.clickOnPlaceOrderButton();
-			String orderconfirmation = driver.getTitle();
-			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-				ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-				String orderId = wiley.fetchOrderId();
-				excelOperation.updateTestData("TC06", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-				excelOperation.updateTestData("TC06", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
-				ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-				String ordertotal = wiley.fetchOrderTotal();
-				String taxamount = wiley.fetchTaxAmount();
-				String scharge=wiley.fetchShippingCharge();
-				excelOperation.updateTestData("TC06", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-				excelOperation.updateTestData("TC06", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-				excelOperation.updateTestData("TC06", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-				
-			}			
-			 else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.WileyLogOut();
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.searchDataInSearchBar(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "ISBN"));
+				wiley.clickOnSRP_WileyProduct();
+				wiley.clickOnAddToCartButton();
+				try {
+					wait.until(ExpectedConditions.
+							elementToBeClickable
+							(By.xpath("//button[contains(text(),'View Cart')]")));
+					wiley.clickOnViewCartButton();
+					ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+					wiley.clickOnProceedToCheckoutButton();
+					String emailID=excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "Email_Id");
+					wiley.enterExistingWileyUserMailID(emailID);
+					wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "Password"));
+					wiley.clickOnLogInAndContinueButton();
+					wiley.selectQuantityDropDown(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "Quantity"));
+					ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+					wiley.clickOnProceedToCheckoutButton();
+					wiley.selectUSEOptionForExistingAddress();
+					Thread.sleep(1000);
+					wiley.clickOnSaveAndContinueButton();
+					driver.switchTo().frame(0);
+					try {
+						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wiley.enterCardHolderName(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "First_Name"));
+						driver.switchTo().defaultContent();				
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));				
+						wiley.enterCardNumber(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
+						wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+						wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
+						wiley.enterCVV_Number(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "CVV"));
+						driver.switchTo().defaultContent();
+						wiley.clickOnSaveAndContinueButton();
+						wiley.clickOnPlaceOrderButton();
+						String orderconfirmation = driver.getTitle();
+						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+							ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+							String orderId = wiley.fetchOrderId();
+							excelOperation.updateTestData("TC06", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+							excelOperation.updateTestData("TC06", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
+							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+							String ordertotal = wiley.fetchOrderTotal();
+							String taxamount = wiley.fetchTaxAmount();
+							String scharge=wiley.fetchShippingCharge();
+							excelOperation.updateTestData("TC06", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+							excelOperation.updateTestData("TC06", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
+							excelOperation.updateTestData("TC06", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
+							
+						}			
+						 else {
+							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+						wiley.WileyLogOut();
 
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Cardholder name ield in Card information"
+								+ " section was not clickable and caused timeout exception"
+								, CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
+					}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 		}
 
 		catch (Exception e) {
@@ -744,119 +739,119 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.clickOnViewCartButton();
-			wiley.searchDataInSearchBar(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "ISBN"));
-			//Wiley.clickOnSearchIcon();
-			wiley.clickOnSRP_WileyProduct();
-			wiley.clickOnAddToCartButton();
-			try {
-				wait.until(ExpectedConditions.
-						elementToBeClickable
-						(By.xpath("//button[contains(text(),'View Cart')]")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			//Create Account 
-			String email=wiley.enterEmailIdInCreateAccountForm();
-			wiley.clickOnCreateAccountButton();
-			wiley.confirmEmailIdInCreateAccountForm(email);
-			wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Password"));
-			wiley.clickOnSaveAndContinueButton();
-			//Shipping section
-			wiley.enterFirstName(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
-			wiley.enterShippingZIPCode(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
-			wiley.enterShippingCity(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
-			wiley.enterState(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
-			wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
-			wiley.clickOnSaveAndContinueButton();
-			try {
-				if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-				catch(Exception e) {
-				}
-			//Billing section
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-			wiley.enterCardNumber(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			wiley.clickOnSaveAndContinueButton();
-			wiley.clickOnPlaceOrderButton();
-			String orderconfirmation = driver.getTitle();
-			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-				ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-				String orderId = wiley.fetchOrderId();
-				excelOperation.updateTestData("TC07", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-				excelOperation.updateTestData("TC07", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
-				ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-				String ordertotal = wiley.fetchOrderTotal();
-				String taxamount = wiley.fetchTaxAmount();
-				String scharge=wiley.fetchShippingCharge();
-				excelOperation.updateTestData("TC07", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-				excelOperation.updateTestData("TC07", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-				excelOperation.updateTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-				driver.get("https://yopmail.com/en/");
+				wiley.clickOnViewCartButton();
+				wiley.searchDataInSearchBar(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "ISBN"));
+				//Wiley.clickOnSearchIcon();
+				wiley.clickOnSRP_WileyProduct();
+				wiley.clickOnAddToCartButton();
+				try {
+					wait.until(ExpectedConditions.
+							elementToBeClickable
+							(By.xpath("//button[contains(text(),'View Cart')]")));
+					wiley.clickOnViewCartButton();
+					ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+					wiley.clickOnProceedToCheckoutButton();
+					//Create Account 
+					String email=wiley.enterEmailIdInCreateAccountForm();
+					wiley.clickOnCreateAccountButton();
+					wiley.confirmEmailIdInCreateAccountForm(email);
+					wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Password"));
+					wiley.clickOnSaveAndContinueButton();
+					//Shipping section
+					wiley.enterFirstName(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					wiley.enterLastName(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+					wiley.selectCountry(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
+					try{
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+						wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
+						wiley.enterShippingZIPCode(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
+						wiley.enterShippingCity(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
+						wiley.enterState(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
+						wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
+						wiley.clickOnSaveAndContinueButton();
+						try {
+							if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						catch(Exception e) {
+							Reporting.updateTestReport("Adress doctor pop up did not appear",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+						}
+						//Billing section
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+						try {
+							wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+							wiley.enterCardHolderName(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "First_Name"));
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+							wiley.enterCardNumber(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+							wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+							wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+							wiley.enterCVV_Number(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "CVV"));
+							driver.switchTo().defaultContent();
+							wiley.clickOnSaveAndContinueButton();
+							wiley.clickOnPlaceOrderButton();
+							String orderconfirmation = driver.getTitle();
+							if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+								ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+								String orderId = wiley.fetchOrderId();
+								excelOperation.updateTestData("TC07", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+								excelOperation.updateTestData("TC07", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+								ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+								String ordertotal = wiley.fetchOrderTotal();
+								String taxamount = wiley.fetchTaxAmount();
+								String scharge=wiley.fetchShippingCharge();
+								excelOperation.updateTestData("TC07", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+								excelOperation.updateTestData("TC07", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
+								excelOperation.updateTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
+								driver.get("https://yopmail.com/en/");
 
-				wiley.enterEmailIdInYopmail(email);
-				wiley.clickOnCheckInboxButton();
-				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
-					Reporting.updateTestReport("Order Confirmation mail was received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					
+								wiley.enterEmailIdInYopmail(email);
+								wiley.clickOnCheckInboxButton();
+								if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									Reporting.updateTestReport("Order Confirmation mail was received",
+					                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									
+								}
+								else {
+									Reporting.updateTestReport("Order Confirmation mail was not received",
+					                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+								
+							}				
+							 else {
+								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+										StatusDetails.FAIL);
+							}
+							wiley.WileyLogOut();
+						}
+						catch(Exception e) {
+							Reporting.updateTestReport("Cardholder name field in Card information"
+									+ " section was not clickable and caused timeout exception"
+									, CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Shipping Address line 1 was not clickable"
+								+ " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
 				}
-				else {
-					Reporting.updateTestReport("Order Confirmation mail was not received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				catch(Exception e) {
+					Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
-				
-			}				
-			 else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
 			}
-			wiley.WileyLogOut();
-			
-			
+			catch(Exception e) {
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}			
 		}
 		catch(Exception e){
 			wiley.wileyLogOutException();
@@ -882,114 +877,116 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.clickOnViewCartButton();
-			wiley.searchDataInSearchBar(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "ISBN"));
-			//Wiley.clickOnSearchIcon();
-			wiley.clickOnSRP_WileyProduct();
-			wiley.clickOnPrintTab();
-			wiley.clickOnAddToCartButton();
-			try {
-				wait.until(ExpectedConditions.
-						elementToBeClickable
-						(By.xpath("//button[contains(text(),'View Cart')]")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			//Guest
-			String email=wiley.enterEmailIdInCreateAccountForm();
-			wiley.clickOnContinueAsGuestButton();
-			wiley.enterFirstName(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
-			wiley.enterShippingZIPCode(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
-			wiley.enterShippingCity(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
-			wiley.enterState(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
-			wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
-			wiley.clickOnSaveAndContinueButton();
-			try {
-				if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-				catch(Exception e) {
-				}
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-			wiley.enterCardNumber(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			wiley.clickOnSaveAndContinueButton();
-			wiley.clickOnPlaceOrderButton();
-			String orderconfirmation = driver.getTitle();
-			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-				ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-				String orderId = wiley.fetchOrderId();
-				excelOperation.updateTestData("TC08", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-				excelOperation.updateTestData("TC08", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
-				ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-				String ordertotal = wiley.fetchOrderTotal();
-				String taxamount = wiley.fetchTaxAmount();
-				String scharge=wiley.fetchShippingCharge();
-				excelOperation.updateTestData("TC08", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-				excelOperation.updateTestData("TC08", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-				excelOperation.updateTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-				driver.get("https://yopmail.com/en/");
+				wiley.clickOnViewCartButton();
+				wiley.searchDataInSearchBar(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "ISBN"));
+				//Wiley.clickOnSearchIcon();
+				wiley.clickOnSRP_WileyProduct();
+				wiley.clickOnPrintTab();
+				wiley.clickOnAddToCartButton();
+				try {
+					wait.until(ExpectedConditions.
+							elementToBeClickable
+							(By.xpath("//button[contains(text(),'View Cart')]")));
+					wiley.clickOnViewCartButton();
+					ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+					wiley.clickOnProceedToCheckoutButton();
+					//Guest
+					String email=wiley.enterEmailIdInCreateAccountForm();
+					wiley.clickOnContinueAsGuestButton();
+					wiley.enterFirstName(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					wiley.enterLastName(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+					wiley.selectCountry(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
+					try{
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+						wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
+						wiley.enterShippingZIPCode(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
+						wiley.enterShippingCity(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
+						wiley.enterState(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
+						wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
+						wiley.clickOnSaveAndContinueButton();
+						try {
+							if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						catch(Exception e) {
+							Reporting.updateTestReport("Adress doctor pop up did not appear",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+						}
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+						try {
+							wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+							wiley.enterCardHolderName(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "First_Name"));
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+							wiley.enterCardNumber(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+							wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+							wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+							wiley.enterCVV_Number(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "CVV"));
+							driver.switchTo().defaultContent();
+							wiley.clickOnSaveAndContinueButton();
+							wiley.clickOnPlaceOrderButton();
+							String orderconfirmation = driver.getTitle();
+							if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+								ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+								String orderId = wiley.fetchOrderId();
+								excelOperation.updateTestData("TC08", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+								excelOperation.updateTestData("TC08", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+								ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+								String ordertotal = wiley.fetchOrderTotal();
+								String taxamount = wiley.fetchTaxAmount();
+								String scharge=wiley.fetchShippingCharge();
+								excelOperation.updateTestData("TC08", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+								excelOperation.updateTestData("TC08", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
+								excelOperation.updateTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
+								driver.get("https://yopmail.com/en/");
 
-				wiley.enterEmailIdInYopmail(email);
-				wiley.clickOnCheckInboxButton();
-				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
-					Reporting.updateTestReport("Order Confirmation mail was received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					//validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
+								wiley.enterEmailIdInYopmail(email);
+								wiley.clickOnCheckInboxButton();
+								if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									Reporting.updateTestReport("Order Confirmation mail was received",
+					                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									//validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
+								}
+								else {
+									Reporting.updateTestReport("Order Confirmation mail was not received",
+					                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+								
+							}
+							else {
+								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+										StatusDetails.FAIL);
+							}
+							wiley.WileyLogOut();
+					
+						}
+						catch(Exception e) {
+							Reporting.updateTestReport("Cardholder name ield in Card information"
+									+ " section was not clickable and caused timeout exception"
+									, CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}	
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Shipping Address line 1 was not clickable"
+								+ " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}	
 				}
-				else {
-					Reporting.updateTestReport("Order Confirmation mail was not received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				catch(Exception e) {
+					Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
-				
 			}
-			else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
+			catch(Exception e) {
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.WileyLogOut();
-			
 			
 		}
 		catch(Exception e) {
@@ -1012,104 +1009,107 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String emailID = wiley.enterEmailIdInCreateAccountForm();
+				wiley.clickOnCreateAccountButton();
+				wiley.confirmEmailIdInCreateAccountForm(emailID);
+				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Password"));
+				wiley.clickOnSaveAndContinueButton();
+				wiley.selectSchoolInfo(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "School_State"),excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "School_Name"));
+				wiley.clickOnSaveAndContinueButton();
+				driver.switchTo().frame(0);
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wiley.enterCardHolderName(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
+					
+					wiley.enterCardNumber(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
+					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
+					wiley.enterCVV_Number(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "CVV"));
+					driver.switchTo().defaultContent();
+					wiley.enterFirstName(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					wiley.enterLastName(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+					wiley.selectCountry(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
+					try{
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
+						wiley.enterAddressLine1Billing(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
+						wiley.enterZipBilling(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
+						//wiley.enterCityBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_City"));
+						//wiley.enterState(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_State"));
+						//wiley.selectUState();
+						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
+						wiley.clickOnSaveAndContinueButton();
+						try {
+						if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+						}
+						catch(Exception e) {
+							Reporting.updateTestReport("Adress doctor pop up did not appear",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+						}
+						wiley.clickOnPlaceOrderButton();
+						String orderconfirmation = driver.getTitle();
+						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+							ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+							String orderId = wiley.fetchOrderId();
+							excelOperation.updateTestData("TC09", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+							excelOperation.updateTestData("TC09", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
+							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+							String ordertotal = wiley.fetchOrderTotal();
+							String taxamount = wiley.fetchTaxAmount();
+							excelOperation.updateTestData("TC09", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+							excelOperation.updateTestData("TC09", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
+							
+							/*driver.get("https://yopmail.com/en/");
+
+							wiley.enterEmailIdInYopmail(emailID);
+							wiley.clickOnCheckInboxButton();
+							if(checkIfOrderConfirmationMailReceived()) {
+								Reporting.updateTestReport("Order Confirmation mail was received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
+							}
+							else {
+								Reporting.updateTestReport("Order Confirmation mail was not received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}*/
+							
+						}		
+							
+						 else {
+							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+						wiley.WileyLogOut();
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Billing address line 1 was not clickable"
+								+ " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
+					}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Cardholder name ield in Card information"
+							+ " section was not clickable and caused timeout exception"
+							, CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			String emailID = wiley.enterEmailIdInCreateAccountForm();
-			wiley.clickOnCreateAccountButton();
-			wiley.confirmEmailIdInCreateAccountForm(emailID);
-			wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Password"));
-			wiley.clickOnSaveAndContinueButton();
-			wiley.selectSchoolInfo(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "School_State"),excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "School_Name"));
-			wiley.clickOnSaveAndContinueButton();
-			driver.switchTo().frame(0);
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-			
-			wiley.enterCardNumber(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			wiley.enterFirstName(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Billing address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Billing(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
-			wiley.enterZipBilling(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
-			//wiley.enterCityBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_City"));
-			//wiley.enterState(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_State"));
-			//wiley.selectUState();
-			wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
-			wiley.clickOnSaveAndContinueButton();
-			try {
-			if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-			{wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-			}}
-			catch(Exception e) {}
-			wiley.clickOnPlaceOrderButton();
-			String orderconfirmation = driver.getTitle();
-			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-				ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-				String orderId = wiley.fetchOrderId();
-				excelOperation.updateTestData("TC09", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-				excelOperation.updateTestData("TC09", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
-				ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-				String ordertotal = wiley.fetchOrderTotal();
-				String taxamount = wiley.fetchTaxAmount();
-				excelOperation.updateTestData("TC09", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-				excelOperation.updateTestData("TC09", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-				
-				/*driver.get("https://yopmail.com/en/");
-
-				wiley.enterEmailIdInYopmail(emailID);
-				wiley.clickOnCheckInboxButton();
-				if(checkIfOrderConfirmationMailReceived()) {
-					Reporting.updateTestReport("Order Confirmation mail was received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
-				}
-				else {
-					Reporting.updateTestReport("Order Confirmation mail was not received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}*/
-				
-			}		
-				
-			 else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.WileyLogOut();
 
 		}
 
@@ -1138,102 +1138,104 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String email=wiley.enterEmailIdInCreateAccountForm();
+				wiley.clickOnCreateAccountButton();
+				wiley.confirmEmailIdInCreateAccountForm(email);
+				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Password"));
+				wiley.clickOnSaveAndContinueButton();
+				wiley.enterFirstName(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "First_Name"));
+				wiley.enterLastName(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+				wiley.selectCountry(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
+				try{
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+					wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
+					wiley.enterShippingZIPCode(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
+					wiley.enterShippingCity(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
+					wiley.enterState(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
+					wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));		
+					wiley.selectShippingMethod();
+					wiley.clickOnSaveAndContinueButton();
+					try {
+						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+					catch(Exception e) {
+						Reporting.updateTestReport("Adress doctor pop up did not appear",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+					}
+					driver.switchTo().frame(0);
+					try {
+						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wiley.enterCardHolderName(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "First_Name"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
+						wiley.enterCardNumber(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
+						wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+						wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
+						wiley.enterCVV_Number(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "CVV"));
+						driver.switchTo().defaultContent();
+						wiley.clickOnSaveAndContinueButton();
+						wiley.clickOnPlaceOrderButton();
+						String orderconfirmation = driver.getTitle();
+						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+							ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+							String orderId = wiley.fetchOrderId();
+							excelOperation.updateTestData("TC10", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+							excelOperation.updateTestData("TC10", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+							String ordertotal = wiley.fetchOrderTotal();
+							String taxamount = wiley.fetchTaxAmount();
+							String scharge=wiley.fetchShippingCharge();
+							excelOperation.updateTestData("TC10", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+							excelOperation.updateTestData("TC10", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
+							excelOperation.updateTestData("TC10", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
+							/*driver.get("https://yopmail.com/en/");
+
+							wiley.enterEmailIdInYopmail(email);
+							wiley.clickOnCheckInboxButton();
+							if(checkIfOrderConfirmationMailReceived()) {
+								Reporting.updateTestReport("Order Confirmation mail was received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
+							}
+							else {
+								Reporting.updateTestReport("Order Confirmation mail was not received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}*/
+							
+						}		
+							
+						 else {
+							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+						wiley.WileyLogOut();
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Cardholder name ield in Card information"
+								+ " section was not clickable and caused timeout exception"
+								, CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
+					}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
+							+ " and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			String email=wiley.enterEmailIdInCreateAccountForm();
-			wiley.clickOnCreateAccountButton();
-			wiley.confirmEmailIdInCreateAccountForm(email);
-			wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Password"));
-			wiley.clickOnSaveAndContinueButton();
-			wiley.enterFirstName(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
-			wiley.enterShippingZIPCode(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
-			wiley.enterShippingCity(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
-			wiley.enterState(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
-			wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));		
-			wiley.selectShippingMethod();
-			wiley.clickOnSaveAndContinueButton();
-			try {
-				if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-				catch(Exception e) {
-				}
-			driver.switchTo().frame(0);
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-			wiley.enterCardNumber(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			wiley.clickOnSaveAndContinueButton();
-			wiley.clickOnPlaceOrderButton();
-			String orderconfirmation = driver.getTitle();
-			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-				ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-				String orderId = wiley.fetchOrderId();
-				excelOperation.updateTestData("TC10", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-				excelOperation.updateTestData("TC10", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
-				ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-				String ordertotal = wiley.fetchOrderTotal();
-				String taxamount = wiley.fetchTaxAmount();
-				String scharge=wiley.fetchShippingCharge();
-				excelOperation.updateTestData("TC10", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-				excelOperation.updateTestData("TC10", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-				excelOperation.updateTestData("TC10", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-				/*driver.get("https://yopmail.com/en/");
-
-				wiley.enterEmailIdInYopmail(email);
-				wiley.clickOnCheckInboxButton();
-				if(checkIfOrderConfirmationMailReceived()) {
-					Reporting.updateTestReport("Order Confirmation mail was received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
-				}
-				else {
-					Reporting.updateTestReport("Order Confirmation mail was not received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}*/
-				
-			}		
-				
-			 else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.WileyLogOut();
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -1259,142 +1261,147 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String email=wiley.enterEmailIdInCreateAccountForm();
+				wiley.clickOnCreateAccountButton();
+				wiley.confirmEmailIdInCreateAccountForm(email);
+				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Password"));
+				wiley.clickOnSaveAndContinueButton();
+				wiley.enterFirstName(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "First_Name"));
+				wiley.enterLastName(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+				wiley.selectCountry(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
+				try{
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+					wiley.enterAddressLine1Shipping(
+							excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
+					wiley.enterShippingZIPCode(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
+					wiley.enterShippingCity(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
+					wiley.enterState(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
+					wiley.enterPhoneNumberShipping(
+							excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
+					wiley.clickOnSaveAndContinueButton();
+					try {
+						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+					catch(Exception e) {
+						Reporting.updateTestReport("Adress doctor pop up did not appear",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+					}
+					driver.switchTo().frame(0);
+					try {
+						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wiley.enterCardHolderName(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "First_Name"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
+						wiley.enterCardNumber(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
+						wiley.selectExpirationMonthFromDropDown(
+								excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+						wiley.selectExpirationYearFromDropDown(
+								excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
+						wiley.enterCVV_Number(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "CVV"));
+						driver.switchTo().defaultContent();
+						driver.findElement(By.xpath("//label[@id='sameAsBillingLabel']")).click();
+						wiley.enterFirstName(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "First_Name"));
+						wiley.enterLastName(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+						wiley.selectCountry(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
+						try{
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
+							wiley.enterAddressLine1Billing(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
+							try{
+								wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='postalCode']")));
+								wiley.enterZipBilling(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
+								try{
+									wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='city']")));
+									wiley.enterCityBilling(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Bill_City"));
+									wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
+									wiley.clickOnSaveAndContinueButton();
+									try {
+										if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+										wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+										}
+									catch(Exception e) {
+										Reporting.updateTestReport("Adress doctor pop up did not appear",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+									}
+									wiley.clickOnPlaceOrderButton();
+									String orderconfirmation = driver.getTitle();
+									if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+										ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+										String orderId = wiley.fetchOrderId();
+										excelOperation.updateTestData("TC11", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+										excelOperation.updateTestData("TC11", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+										ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+										String ordertotal = wiley.fetchOrderTotal();
+										String taxamount = wiley.fetchTaxAmount();
+										String scharge=wiley.fetchShippingCharge();
+										excelOperation.updateTestData("TC11", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+										excelOperation.updateTestData("TC11", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
+										excelOperation.updateTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
+										/*driver.get("https://yopmail.com/en/");
+
+										wiley.enterEmailIdInYopmail(email);
+										wiley.clickOnCheckInboxButton();
+										if(checkIfOrderConfirmationMailReceived()) {
+											Reporting.updateTestReport("Order Confirmation mail was received",
+							                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
+										}
+										else {
+											Reporting.updateTestReport("Order Confirmation mail was not received",
+							                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										}*/
+										
+									}				
+									 else {
+										Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+												StatusDetails.FAIL);
+									}
+									wiley.WileyLogOut();
+								}
+								catch(Exception e) {
+									Reporting.updateTestReport("Billing City was not clickable"
+											+ " and caused timeout exception",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+							}
+							catch(Exception e) {
+								Reporting.updateTestReport("Billing zip code was not clickable"
+										+ " and caused timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+						}
+						catch(Exception e) {
+							Reporting.updateTestReport("Billing address line 1 was not clickable"
+									+ " and caused timeout exception",
+									CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Cardholder name ield in Card information"
+								+ " section was not clickable and caused timeout exception"
+								, CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
+					}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
+							+ " and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			String email=wiley.enterEmailIdInCreateAccountForm();
-			wiley.clickOnCreateAccountButton();
-			wiley.confirmEmailIdInCreateAccountForm(email);
-			wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Password"));
-			wiley.clickOnSaveAndContinueButton();
-			wiley.enterFirstName(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Shipping(
-					excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
-			wiley.enterShippingZIPCode(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
-			wiley.enterShippingCity(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
-			wiley.enterState(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
-			wiley.enterPhoneNumberShipping(
-					excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
-			wiley.clickOnSaveAndContinueButton();
-			try {
-				if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-				catch(Exception e) {
-				}
-			driver.switchTo().frame(0);
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-			wiley.enterCardNumber(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(
-					excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(
-					excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			driver.findElement(By.xpath("//label[@id='sameAsBillingLabel']")).click();
-			wiley.enterFirstName(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Billing address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Billing(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='postalCode']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Billing zip code was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.enterZipBilling(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='city']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Billing City was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.enterCityBilling(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Bill_City"));
-			wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
-			wiley.clickOnSaveAndContinueButton();
-			try {
-				if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				{wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-				}}
-				catch(Exception e) {}
-			wiley.clickOnPlaceOrderButton();
-			String orderconfirmation = driver.getTitle();
-			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-				ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-				String orderId = wiley.fetchOrderId();
-				excelOperation.updateTestData("TC11", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-				excelOperation.updateTestData("TC11", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
-				ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-				String ordertotal = wiley.fetchOrderTotal();
-				String taxamount = wiley.fetchTaxAmount();
-				String scharge=wiley.fetchShippingCharge();
-				excelOperation.updateTestData("TC11", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-				excelOperation.updateTestData("TC11", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-				excelOperation.updateTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-				/*driver.get("https://yopmail.com/en/");
-
-				wiley.enterEmailIdInYopmail(email);
-				wiley.clickOnCheckInboxButton();
-				if(checkIfOrderConfirmationMailReceived()) {
-					Reporting.updateTestReport("Order Confirmation mail was received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
-				}
-				else {
-					Reporting.updateTestReport("Order Confirmation mail was not received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}*/
-				
-			}				
-			 else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.WileyLogOut();
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -1422,114 +1429,117 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,400,SS_path);
+				wiley.clickOnPromotionCodelink();
+				wiley.enterPromoCode(excelOperation.getTestData("WILEY_PROMO_ADD", "Generic_Dataset", "Data"));
+				wiley.ApplyPromo();
+				ScrollingWebPage.PageScrolldown(driver,0,900,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String email=wiley.enterEmailIdInCreateAccountForm();
+				wiley.clickOnCreateAccountButton();
+				wiley.confirmEmailIdInCreateAccountForm(email);
+				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Password"));
+				wiley.clickOnSaveAndContinueButton();
+				wiley.enterFirstName(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "First_Name"));
+				wiley.enterLastName(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+				wiley.selectCountry(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
+				try{
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+					wiley.enterAddressLine1Shipping(
+							excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
+					wiley.enterShippingZIPCode(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
+					wiley.enterShippingCity(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
+					wiley.enterState(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
+					wiley.enterPhoneNumberShipping(
+							excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
+					wiley.clickOnSaveAndContinueButton();
+					try {
+						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+					catch(Exception e) {
+						Reporting.updateTestReport("Adress doctor pop up did not appear",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+					}
+					driver.switchTo().frame(0);
+					try {
+						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wiley.enterCardHolderName(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "First_Name"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
+						wiley.enterCardNumber(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
+						wiley.selectExpirationMonthFromDropDown(
+								excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+						wiley.selectExpirationYearFromDropDown(
+								excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
+						wiley.enterCVV_Number(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "CVV"));
+						driver.switchTo().defaultContent();
+						// Thread.sleep(3000);
+						wiley.clickOnSaveAndContinueButton();
+						
+						wiley.clickOnPlaceOrderButton();
+						String orderconfirmation = driver.getTitle();
+						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+							ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+							String orderId = wiley.fetchOrderId();
+							excelOperation.updateTestData("TC12", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+							excelOperation.updateTestData("TC12", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+							String ordertotal = wiley.fetchOrderTotal();
+							String taxamount = wiley.fetchTaxAmount();
+							String scharge=wiley.fetchShippingCharge();
+							excelOperation.updateTestData("TC12", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+							excelOperation.updateTestData("TC12", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
+							excelOperation.updateTestData("TC12", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
+							/*driver.get("https://yopmail.com/en/");
+
+							wiley.enterEmailIdInYopmail(email);
+							wiley.clickOnCheckInboxButton();
+							if(checkIfOrderConfirmationMailReceived()) {
+								Reporting.updateTestReport("Order Confirmation mail was received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
+							}
+							else {
+								Reporting.updateTestReport("Order Confirmation mail was not received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}*/
+							
+						}				
+						 else {
+							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+						wiley.WileyLogOut();
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Cardholder name ield in Card information"
+								+ " section was not clickable and caused timeout exception"
+								, CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
+					}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
+							+ " and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,400,SS_path);
-			wiley.clickOnPromotionCodelink();
-			wiley.enterPromoCode(excelOperation.getTestData("WILEY_PROMO_ADD", "Generic_Dataset", "Data"));
-			wiley.ApplyPromo();
-			ScrollingWebPage.PageScrolldown(driver,0,900,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			String email=wiley.enterEmailIdInCreateAccountForm();
-			wiley.clickOnCreateAccountButton();
-			wiley.confirmEmailIdInCreateAccountForm(email);
-			wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Password"));
-			wiley.clickOnSaveAndContinueButton();
-			wiley.enterFirstName(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Shipping(
-					excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
-			wiley.enterShippingZIPCode(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
-			wiley.enterShippingCity(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
-			wiley.enterState(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
-			wiley.enterPhoneNumberShipping(
-					excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
-			wiley.clickOnSaveAndContinueButton();
-			try {
-				if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-				catch(Exception e) {
-				}
-			driver.switchTo().frame(0);
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-			wiley.enterCardNumber(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(
-					excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(
-					excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			// Thread.sleep(3000);
-			wiley.clickOnSaveAndContinueButton();
-			
-			wiley.clickOnPlaceOrderButton();
-			String orderconfirmation = driver.getTitle();
-			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-				ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-				String orderId = wiley.fetchOrderId();
-				excelOperation.updateTestData("TC12", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-				excelOperation.updateTestData("TC12", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
-				ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-				String ordertotal = wiley.fetchOrderTotal();
-				String taxamount = wiley.fetchTaxAmount();
-				String scharge=wiley.fetchShippingCharge();
-				excelOperation.updateTestData("TC12", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-				excelOperation.updateTestData("TC12", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-				excelOperation.updateTestData("TC12", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-				/*driver.get("https://yopmail.com/en/");
-
-				wiley.enterEmailIdInYopmail(email);
-				wiley.clickOnCheckInboxButton();
-				if(checkIfOrderConfirmationMailReceived()) {
-					Reporting.updateTestReport("Order Confirmation mail was received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
-				}
-				else {
-					Reporting.updateTestReport("Order Confirmation mail was not received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}*/
-				
-			}				
-			 else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.WileyLogOut();
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			wiley.wileyLogOutException();
+			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 
 	}
@@ -1552,105 +1562,107 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String email=wiley.enterEmailIdInCreateAccountForm();
+				wiley.clickOnCreateAccountButton();
+				wiley.confirmEmailIdInCreateAccountForm(email);
+				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Password"));
+				wiley.clickOnSaveAndContinueButton();
+				wiley.selectingSchoolInfo();
+				wiley.clickOnSaveAndContinueButton();
+				driver.switchTo().frame(0);
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wiley.enterCardHolderName(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
+					wiley.enterCardNumber(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
+					wiley.selectExpirationMonthFromDropDown(
+							excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+					wiley.selectExpirationYearFromDropDown(
+							excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
+					wiley.enterCVV_Number(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "CVV"));
+					driver.switchTo().defaultContent();
+					wiley.enterFirstName(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					wiley.enterLastName(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+					wiley.selectCountry(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
+					try{
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
+						wiley.enterAddressLine1Billing(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
+						wiley.enterZipBilling(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
+						//wiley.enterCityBilling(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Bill_City"));
+						//wiley.enterState(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Bill_State"));
+						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
+
+						wiley.clickOnSaveAndContinueButton();
+						try {
+							if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						catch(Exception e) {
+							Reporting.updateTestReport("Adress doctor pop up did not appear",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+						}
+						//wiley.clickOnRentalTermsCheckbox();
+						wiley.clickOnPlaceOrderButton();
+						String orderconfirmation = driver.getTitle();
+						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+							ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+							String orderId = wiley.fetchOrderId();
+							excelOperation.updateTestData("TC13", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+							excelOperation.updateTestData("TC13", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+							String ordertotal = wiley.fetchOrderTotal();
+							String taxamount = wiley.fetchTaxAmount();
+							excelOperation.updateTestData("TC13", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+							excelOperation.updateTestData("TC13", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
+							/*driver.get("https://yopmail.com/en/");
+
+							wiley.enterEmailIdInYopmail(email);
+							wiley.clickOnCheckInboxButton();
+							if(checkIfOrderConfirmationMailReceived()) {
+								Reporting.updateTestReport("Order Confirmation mail was received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								validateOrderConfirmationMailContent(taxamount," ",ordertotal);
+							}
+							else {
+								Reporting.updateTestReport("Order Confirmation mail was not received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}*/
+							
+							
+						}				
+						 else {
+							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+						wiley.WileyLogOut();
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Billing address line 1 was not clickable"
+								+ " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
+					}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Cardholder name ield in Card information"
+							+ " section was not clickable and caused timeout exception"
+							, CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			String email=wiley.enterEmailIdInCreateAccountForm();
-			wiley.clickOnCreateAccountButton();
-			wiley.confirmEmailIdInCreateAccountForm(email);
-			wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Password"));
-			wiley.clickOnSaveAndContinueButton();
-			wiley.selectingSchoolInfo();
-			wiley.clickOnSaveAndContinueButton();
-			driver.switchTo().frame(0);
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-			wiley.enterCardNumber(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(
-					excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(
-					excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			wiley.enterFirstName(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Billing address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Billing(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
-			wiley.enterZipBilling(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
-			//wiley.enterCityBilling(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Bill_City"));
-			//wiley.enterState(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Bill_State"));
-			wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
-
-			wiley.clickOnSaveAndContinueButton();
-			try {
-				if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-				catch(Exception e) {
-				}
-			//wiley.clickOnRentalTermsCheckbox();
-			wiley.clickOnPlaceOrderButton();
-			String orderconfirmation = driver.getTitle();
-			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-				ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-				String orderId = wiley.fetchOrderId();
-				excelOperation.updateTestData("TC13", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-				excelOperation.updateTestData("TC13", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
-				ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-				String ordertotal = wiley.fetchOrderTotal();
-				String taxamount = wiley.fetchTaxAmount();
-				excelOperation.updateTestData("TC13", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-				excelOperation.updateTestData("TC13", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-				/*driver.get("https://yopmail.com/en/");
-
-				wiley.enterEmailIdInYopmail(email);
-				wiley.clickOnCheckInboxButton();
-				if(checkIfOrderConfirmationMailReceived()) {
-					Reporting.updateTestReport("Order Confirmation mail was received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					validateOrderConfirmationMailContent(taxamount," ",ordertotal);
-				}
-				else {
-					Reporting.updateTestReport("Order Confirmation mail was not received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}*/
-				
-				
-			}				
-			 else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.WileyLogOut();
 
 		} catch (Exception e) {
 			wiley.wileyLogOutException();
@@ -1676,106 +1688,108 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String emailID = wiley.enterEmailIdInCreateAccountForm();
+				wiley.clickOnCreateAccountButton();
+				wiley.confirmEmailIdInCreateAccountForm(emailID);
+				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Password"));
+				wiley.clickOnSaveAndContinueButton();
+				wiley.enterFirstName(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "First_Name"));
+				wiley.enterLastName(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+				wiley.selectCountry(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
+				try{
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+					wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
+					wiley.enterShippingZIPCode(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
+					wiley.enterShippingCity(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
+					wiley.enterState(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
+					wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
+					wiley.selectShippingMethod();
+					wiley.clickOnSaveAndContinueButton();
+					try {
+						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+					catch(Exception e) {
+						Reporting.updateTestReport("Adress doctor pop up did not appear",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+					}
+					wiley.selectSchoolInfo(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "School_State"),excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "School_Name"));
+					Thread.sleep(1000);
+					wiley.clickOnSaveAndContinueButton();
+					driver.switchTo().frame(0);
+					try {
+						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wiley.enterCardHolderName(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "First_Name"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
+						
+						wiley.enterCardNumber(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
+						wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+						wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
+						wiley.enterCVV_Number(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "CVV"));
+						driver.switchTo().defaultContent();
+						wiley.clickOnSaveAndContinueButton();
+						wiley.clickOnRentalTermsCheckbox();
+						wiley.clickOnPlaceOrderButton();
+						String orderconfirmation = driver.getTitle();
+						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+							ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+							String orderId = wiley.fetchOrderId();
+							excelOperation.updateTestData("TC14", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+							excelOperation.updateTestData("TC14", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
+							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+							String ordertotal = wiley.fetchOrderTotal();
+							String taxamount = wiley.fetchTaxAmount();
+							String scharge=wiley.fetchShippingCharge();
+							excelOperation.updateTestData("TC14", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+							excelOperation.updateTestData("TC14", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
+							excelOperation.updateTestData("TC14", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
+							/*driver.get("https://yopmail.com/en/");
+
+							wiley.enterEmailIdInYopmail(emailID);
+							wiley.clickOnCheckInboxButton();
+							if(checkIfOrderConfirmationMailReceived()) {
+								Reporting.updateTestReport("Order Confirmation mail was received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
+							}
+							else {
+								Reporting.updateTestReport("Order Confirmation mail was not received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}*/
+							
+						}				
+						 else {
+							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+						wiley.WileyLogOut();
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Cardholder name ield in Card information"
+								+ " section was not clickable and caused timeout exception"
+								, CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
+					}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
+							+ " and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			String emailID = wiley.enterEmailIdInCreateAccountForm();
-			wiley.clickOnCreateAccountButton();
-			wiley.confirmEmailIdInCreateAccountForm(emailID);
-			wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Password"));
-			wiley.clickOnSaveAndContinueButton();
-			wiley.enterFirstName(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
-			wiley.enterShippingZIPCode(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
-			wiley.enterShippingCity(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
-			wiley.enterState(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
-			wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
-			wiley.selectShippingMethod();
-			wiley.clickOnSaveAndContinueButton();
-			try {
-				if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-				catch(Exception e) {
-				}
-			wiley.selectSchoolInfo(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "School_State"),excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "School_Name"));
-			Thread.sleep(1000);
-			wiley.clickOnSaveAndContinueButton();
-			driver.switchTo().frame(0);
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-			
-			wiley.enterCardNumber(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			wiley.clickOnSaveAndContinueButton();
-			wiley.clickOnRentalTermsCheckbox();
-			wiley.clickOnPlaceOrderButton();
-			String orderconfirmation = driver.getTitle();
-			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-				ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-				String orderId = wiley.fetchOrderId();
-				excelOperation.updateTestData("TC14", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-				excelOperation.updateTestData("TC14", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
-				ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-				String ordertotal = wiley.fetchOrderTotal();
-				String taxamount = wiley.fetchTaxAmount();
-				String scharge=wiley.fetchShippingCharge();
-				excelOperation.updateTestData("TC14", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-				excelOperation.updateTestData("TC14", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-				excelOperation.updateTestData("TC14", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-				/*driver.get("https://yopmail.com/en/");
-
-				wiley.enterEmailIdInYopmail(emailID);
-				wiley.clickOnCheckInboxButton();
-				if(checkIfOrderConfirmationMailReceived()) {
-					Reporting.updateTestReport("Order Confirmation mail was received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
-				}
-				else {
-					Reporting.updateTestReport("Order Confirmation mail was not received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}*/
-				
-			}				
-			 else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.WileyLogOut();
 
 		}
 		catch(Exception e){
@@ -1802,102 +1816,105 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String email=wiley.enterEmailIdInCreateAccountForm();
+				wiley.clickOnCreateAccountButton();
+				wiley.confirmEmailIdInCreateAccountForm(email);
+				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Password"));
+				wiley.clickOnSaveAndContinueButton();
+				wiley.selectSchoolInfo(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "School_State"),excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "School_Name"));
+				wiley.clickOnSaveAndContinueButton();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wiley.enterCardHolderName(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+					wiley.enterCardNumber(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+					wiley.enterCVV_Number(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "CVV"));
+					driver.switchTo().defaultContent();
+					wiley.enterFirstName(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					wiley.enterLastName(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+					wiley.selectCountry(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
+					try{
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
+						wiley.enterAddressLine1Billing(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
+						
+						wiley.enterZipBilling(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
+						//wiley.enterCityBilling(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_City"));
+						//wiley.enterState(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_State"));
+						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
+					    wiley.clickOnSaveAndContinueButton();
+					    try {
+							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+							}
+					    catch(Exception e) {
+							Reporting.updateTestReport("Adress doctor pop up did not appear",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+						}
+						wiley.clickOnPlaceOrderButton();
+						String orderconfirmation = driver.getTitle();
+						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+							ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+							String orderId = wiley.fetchOrderId();
+							excelOperation.updateTestData("TC15", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+							excelOperation.updateTestData("TC15", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+							String ordertotal = wiley.fetchOrderTotal();
+							String taxamount = wiley.fetchTaxAmount();
+							excelOperation.updateTestData("TC15", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+							excelOperation.updateTestData("TC15", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
+							/*driver.get("https://yopmail.com/en/");
+
+							wiley.enterEmailIdInYopmail(email);
+							wiley.clickOnCheckInboxButton();
+							if(checkIfOrderConfirmationMailReceived()) {
+								Reporting.updateTestReport("Order Confirmation mail was received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								validateOrderConfirmationMailContent(taxamount," ",ordertotal);
+							}
+							else {
+								Reporting.updateTestReport("Order Confirmation mail was not received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}*/
+							
+							
+						}				
+						 else {
+							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+						wiley.WileyLogOut();
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Billing address line 1 was not clickable"
+								+ " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
+					}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Cardholder name ield in Card information"
+							+ " section was not clickable and caused timeout exception"
+							, CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			String email=wiley.enterEmailIdInCreateAccountForm();
-			wiley.clickOnCreateAccountButton();
-			wiley.confirmEmailIdInCreateAccountForm(email);
-			wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Password"));
-			wiley.clickOnSaveAndContinueButton();
-			wiley.selectSchoolInfo(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "School_State"),excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "School_Name"));
-			wiley.clickOnSaveAndContinueButton();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-			wiley.enterCardNumber(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			wiley.enterFirstName(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Billing address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Billing(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
-			
-			wiley.enterZipBilling(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
-			//wiley.enterCityBilling(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_City"));
-			//wiley.enterState(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_State"));
-			wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
-		    wiley.clickOnSaveAndContinueButton();
-		    try {
-				if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				{wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-				}}
-				catch(Exception e) {}
-			wiley.clickOnPlaceOrderButton();
-			String orderconfirmation = driver.getTitle();
-			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-				ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-				String orderId = wiley.fetchOrderId();
-				excelOperation.updateTestData("TC15", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-				excelOperation.updateTestData("TC15", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
-				ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-				String ordertotal = wiley.fetchOrderTotal();
-				String taxamount = wiley.fetchTaxAmount();
-				excelOperation.updateTestData("TC15", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-				excelOperation.updateTestData("TC15", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-				/*driver.get("https://yopmail.com/en/");
-
-				wiley.enterEmailIdInYopmail(email);
-				wiley.clickOnCheckInboxButton();
-				if(checkIfOrderConfirmationMailReceived()) {
-					Reporting.updateTestReport("Order Confirmation mail was received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					validateOrderConfirmationMailContent(taxamount," ",ordertotal);
-				}
-				else {
-					Reporting.updateTestReport("Order Confirmation mail was not received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}*/
-				
-				
-			}				
-			 else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.WileyLogOut();
 		}
 		catch(Exception e){
 			wiley.wileyLogOutException();
@@ -1922,104 +1939,106 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String emailID = wiley.enterEmailIdInCreateAccountForm();
+				wiley.clickOnCreateAccountButton();
+				wiley.confirmEmailIdInCreateAccountForm(emailID);
+				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Password"));
+				wiley.clickOnSaveAndContinueButton();
+				wiley.enterFirstName(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "First_Name"));
+				wiley.enterLastName(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+				wiley.selectCountry(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
+				try{
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+					wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
+					wiley.enterShippingZIPCode(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
+					wiley.enterShippingCity(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
+					wiley.enterState(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
+					wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
+					wiley.selectShippingMethod();
+					wiley.clickOnSaveAndContinueButton();
+					try {
+						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+					catch(Exception e) {
+						Reporting.updateTestReport("Adress doctor pop up did not appear",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+					}
+					wiley.selectSchoolInfo(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "School_State"),excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "School_Name"));
+					wiley.clickOnSaveAndContinueButton();
+					driver.switchTo().frame(0);
+					try {
+						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wiley.enterCardHolderName(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "First_Name"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
+						wiley.enterCardNumber(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
+						wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+						wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
+						wiley.enterCVV_Number(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "CVV"));
+						driver.switchTo().defaultContent();
+						wiley.clickOnSaveAndContinueButton();
+						wiley.clickOnRentalTermsCheckbox();
+						wiley.clickOnPlaceOrderButton();
+						String orderconfirmation = driver.getTitle();
+						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+							ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+							String orderId = wiley.fetchOrderId();
+							excelOperation.updateTestData("TC16", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+							excelOperation.updateTestData("TC16", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
+							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+							String ordertotal = wiley.fetchOrderTotal();
+							String taxamount = wiley.fetchTaxAmount();
+							String scharge=wiley.fetchShippingCharge();
+							excelOperation.updateTestData("TC16", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+							excelOperation.updateTestData("TC16", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
+							excelOperation.updateTestData("TC16", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
+							/*driver.get("https://yopmail.com/en/");
+
+							wiley.enterEmailIdInYopmail(emailID);
+							wiley.clickOnCheckInboxButton();
+							if(checkIfOrderConfirmationMailReceived()) {
+								Reporting.updateTestReport("Order Confirmation mail was received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
+							}
+							else {
+								Reporting.updateTestReport("Order Confirmation mail was not received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}*/
+							
+						}				
+						 else {
+							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+						wiley.WileyLogOut();
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
+							+ " and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Cardholder name ield in Card information"
+							+ " section was not clickable and caused timeout exception"
+							, CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			String emailID = wiley.enterEmailIdInCreateAccountForm();
-			wiley.clickOnCreateAccountButton();
-			wiley.confirmEmailIdInCreateAccountForm(emailID);
-			wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Password"));
-			wiley.clickOnSaveAndContinueButton();
-			wiley.enterFirstName(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
-			wiley.enterShippingZIPCode(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
-			wiley.enterShippingCity(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
-			wiley.enterState(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
-			wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
-			wiley.selectShippingMethod();
-			wiley.clickOnSaveAndContinueButton();
-			try {
-				if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-				catch(Exception e) {
-				}
-			wiley.selectSchoolInfo(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "School_State"),excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "School_Name"));
-			wiley.clickOnSaveAndContinueButton();
-			driver.switchTo().frame(0);
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-			wiley.enterCardNumber(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			wiley.clickOnSaveAndContinueButton();
-			wiley.clickOnRentalTermsCheckbox();
-			wiley.clickOnPlaceOrderButton();
-			String orderconfirmation = driver.getTitle();
-			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-				ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-				String orderId = wiley.fetchOrderId();
-				excelOperation.updateTestData("TC16", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-				excelOperation.updateTestData("TC16", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
-				ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-				String ordertotal = wiley.fetchOrderTotal();
-				String taxamount = wiley.fetchTaxAmount();
-				String scharge=wiley.fetchShippingCharge();
-				excelOperation.updateTestData("TC16", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-				excelOperation.updateTestData("TC16", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-				excelOperation.updateTestData("TC16", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-				/*driver.get("https://yopmail.com/en/");
-
-				wiley.enterEmailIdInYopmail(emailID);
-				wiley.clickOnCheckInboxButton();
-				if(checkIfOrderConfirmationMailReceived()) {
-					Reporting.updateTestReport("Order Confirmation mail was received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
-				}
-				else {
-					Reporting.updateTestReport("Order Confirmation mail was not received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}*/
-				
-			}				
-			 else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.WileyLogOut();
 
 		}
 		catch(Exception e){
@@ -2046,107 +2065,109 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,400,SS_path);
+				wiley.clickOnPromotionCodelink();
+				wiley.enterPromoCode(excelOperation.getTestData("WILEY_PROMO_SDP66", "Generic_Dataset", "Data"));
+				wiley.ApplyPromo();
+				ScrollingWebPage.PageScrolldown(driver,0,900,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String emailID = wiley.enterEmailIdInCreateAccountForm();
+				wiley.clickOnCreateAccountButton();
+				wiley.confirmEmailIdInCreateAccountForm(emailID);
+				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Password"));
+				wiley.clickOnSaveAndContinueButton();
+				wiley.enterFirstName(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "First_Name"));
+				wiley.enterLastName(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+				wiley.selectCountry(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
+				try{
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+					wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
+					wiley.enterShippingZIPCode(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
+					wiley.enterShippingCity(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
+					wiley.enterState(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
+					wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
+					wiley.selectShippingMethod();
+					wiley.clickOnSaveAndContinueButton();
+					try {
+						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+					catch(Exception e) {
+						Reporting.updateTestReport("Adress doctor pop up did not appear",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+					}
+					driver.switchTo().frame(0);
+					try {
+						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wiley.enterCardHolderName(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "First_Name"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
+						wiley.enterCardNumber(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
+						wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+						wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
+						wiley.enterCVV_Number(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "CVV"));
+						driver.switchTo().defaultContent();
+						wiley.clickOnSaveAndContinueButton();
+						wiley.clickOnPlaceOrderButton();
+						String orderconfirmation = driver.getTitle();
+						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+							ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+							String orderId = wiley.fetchOrderId();
+							excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+							excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
+							excelOperation.updateTestData("TC33", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
+							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+							String ordertotal = wiley.fetchOrderTotal();
+							String taxamount = wiley.fetchTaxAmount();
+							String scharge=wiley.fetchShippingCharge();
+							excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+							excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
+							excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
+							/*driver.get("https://yopmail.com/en/");
+
+							wiley.enterEmailIdInYopmail(emailID);
+							wiley.clickOnCheckInboxButton();
+							if(checkIfOrderConfirmationMailReceived()) {
+								Reporting.updateTestReport("Order Confirmation mail was received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
+							}
+							else {
+								Reporting.updateTestReport("Order Confirmation mail was not received",
+				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}*/
+							
+							
+						}				
+						 else {
+							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+						wiley.WileyLogOut();
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
+							+ " and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Cardholder name ield in Card information"
+							+ " section was not clickable and caused timeout exception"
+							, CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,400,SS_path);
-			wiley.clickOnPromotionCodelink();
-			wiley.enterPromoCode(excelOperation.getTestData("WILEY_PROMO_SDP66", "Generic_Dataset", "Data"));
-			wiley.ApplyPromo();
-			ScrollingWebPage.PageScrolldown(driver,0,900,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			String emailID = wiley.enterEmailIdInCreateAccountForm();
-			wiley.clickOnCreateAccountButton();
-			wiley.confirmEmailIdInCreateAccountForm(emailID);
-			wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Password"));
-			wiley.clickOnSaveAndContinueButton();
-			wiley.enterFirstName(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
-			wiley.enterShippingZIPCode(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
-			wiley.enterShippingCity(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
-			wiley.enterState(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
-			wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
-			wiley.selectShippingMethod();
-			wiley.clickOnSaveAndContinueButton();
-			try {
-				if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-				catch(Exception e) {
-				}
-			driver.switchTo().frame(0);
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-			wiley.enterCardNumber(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			wiley.clickOnSaveAndContinueButton();
-			wiley.clickOnPlaceOrderButton();
-			String orderconfirmation = driver.getTitle();
-			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-				ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-				String orderId = wiley.fetchOrderId();
-				excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-				excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
-				excelOperation.updateTestData("TC33", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
-				ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-				String ordertotal = wiley.fetchOrderTotal();
-				String taxamount = wiley.fetchTaxAmount();
-				String scharge=wiley.fetchShippingCharge();
-				excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-				excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-				excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-				/*driver.get("https://yopmail.com/en/");
-
-				wiley.enterEmailIdInYopmail(emailID);
-				wiley.clickOnCheckInboxButton();
-				if(checkIfOrderConfirmationMailReceived()) {
-					Reporting.updateTestReport("Order Confirmation mail was received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
-				}
-				else {
-					Reporting.updateTestReport("Order Confirmation mail was not received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}*/
-				
-				
-			}				
-			 else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.WileyLogOut();
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -2171,137 +2192,139 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,400,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String email=wiley.enterEmailIdInCreateAccountForm();
+				wiley.clickOnCreateAccountButton();
+				wiley.confirmEmailIdInCreateAccountForm(email);
+				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Password"));
+				wiley.clickOnSaveAndContinueButton();
+				
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wiley.enterCardHolderName(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+					wiley.enterCardNumber(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+					driver.switchTo().defaultContent();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+					wiley.enterCVV_Number(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "CVV"));
+					driver.switchTo().defaultContent();			
+					wiley.enterFirstName(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					wiley.enterLastName(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+					wiley.selectCountry(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
+					Thread.sleep(3000);
+					try{
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
+						wiley.enterAddressLine1Billing(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
+						wiley.enterZipBilling(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
+						Thread.sleep(2000);
+						wiley.enterCityBilling(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Bill_City"));
+						//wiley.enterState(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Bill_State"));
+						//wiley.selectUState();
+						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
+						Thread.sleep(3000);
+						wiley.clickOnSaveAndContinueButton();
+						try {
+							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+							}
+						catch(Exception e) {
+							Reporting.updateTestReport("Adress doctor pop up did not appear",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+						}
+						String tax1=wiley.fetchTaxInOrderReview();
+						System.out.println(tax1);
+						wiley.clickOnEditButtonInBilling();			
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));			
+						try {
+							wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+							wiley.enterCardHolderName(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "First_Name"));
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+							wiley.enterCardNumber(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Card_Number"));
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+							wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+							wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+							driver.switchTo().defaultContent();
+							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+							wiley.enterCVV_Number(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "CVV"));
+							driver.switchTo().defaultContent();			
+							wiley.enterFirstName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "First_Name"));
+							wiley.enterLastName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+							wiley.selectCountry(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
+							Thread.sleep(3000);
+							try{
+								wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
+								wiley.enterAddressLine1Billing(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
+								wiley.enterZipBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
+								//wiley.enterCityBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_City"));
+								//wiley.enterState(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_State"));
+								
+								wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
+								Thread.sleep(1000);
+								wiley.clickOnSaveAndContinueButton();
+								try {
+									if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+									wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+									}
+								catch(Exception e) {
+									Reporting.updateTestReport("Adress doctor pop up did not appear",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+								}
+								String tax2=wiley.fetchTaxInOrderReview();
+								System.out.println(tax2);
+								if(!tax1.contentEquals(tax2))
+									Reporting.updateTestReport("Tax value for first address: "+tax1+" was recalculated for second address with new value: "+tax2,
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("Both the tax values were equal for two different billing addresses",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								wiley.WileyLogOut();
+							}
+							catch(Exception e) {
+								Reporting.updateTestReport("Billing address line 1 was not clickable"
+										+ " and caused timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path),
+										StatusDetails.FAIL);
+							}
+						}
+						catch(Exception e) {
+							Reporting.updateTestReport("Cardholder name ield in Card information"
+									+ " section was not clickable and caused timeout exception"
+									, CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Billing address line 1 was not clickable"
+								+ " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
+					}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Cardholder name field in Card information"
+							+ " section was not clickable and caused timeout exception"
+							, CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.clickOnViewCartButton();
-			ScrollingWebPage.PageScrolldown(driver,0,400,SS_path);
-			wiley.clickOnProceedToCheckoutButton();
-			String email=wiley.enterEmailIdInCreateAccountForm();
-			wiley.clickOnCreateAccountButton();
-			wiley.confirmEmailIdInCreateAccountForm(email);
-			wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Password"));
-			wiley.clickOnSaveAndContinueButton();
-			
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-			wiley.enterCardNumber(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();			
-			wiley.enterFirstName(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
-			Thread.sleep(3000);
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Billing address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Billing(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
-			wiley.enterZipBilling(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
-			Thread.sleep(2000);
-			wiley.enterCityBilling(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Bill_City"));
-			//wiley.enterState(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Bill_State"));
-			//wiley.selectUState();
-			wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
-			Thread.sleep(3000);
-			wiley.clickOnSaveAndContinueButton();
-			try {
-				if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				{wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-				}}
-				catch(Exception e) {}
-			String tax1=wiley.fetchTaxInOrderReview();
-			System.out.println(tax1);
-			wiley.clickOnEditButtonInBilling();			
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));			
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Cardholder name ield in Card information"
-						+ " section was not clickable and caused timeout exception"
-						, CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterCardHolderName(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-			wiley.enterCardNumber(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();
-			
-			
-			wiley.enterFirstName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "First_Name"));
-			wiley.enterLastName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-			wiley.selectCountry(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
-			Thread.sleep(3000);
-			try{
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Billing address line 1 was not clickable"
-						+ " and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-			wiley.enterAddressLine1Billing(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
-			wiley.enterZipBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
-			//wiley.enterCityBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_City"));
-			//wiley.enterState(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_State"));
-			
-			wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
-			Thread.sleep(1000);
-			wiley.clickOnSaveAndContinueButton();
-			try {
-				if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				{wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-				}}
-				catch(Exception e) {}
-			String tax2=wiley.fetchTaxInOrderReview();
-			System.out.println(tax2);
-			if(!tax1.contentEquals(tax2))
-				Reporting.updateTestReport("Tax value for first address: "+tax1+" was recalculated for second address with new value: "+tax2,
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else
-				Reporting.updateTestReport("Both the tax values were equal for two different billing addresses",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			wiley.WileyLogOut();
-				
-			
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -2360,8 +2383,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			try {
 				if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
 				wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-				catch(Exception e) {
-				}
+			catch(Exception e) {
+				Reporting.updateTestReport("Adress doctor pop up did not appear",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+			}
 			if(wiley.checkIfCountryRestrictrionModalIsDisplayed())
 				Reporting.updateTestReport("Country Restriction modal functionality validated successfully", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.PASS);
@@ -2428,8 +2453,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			try {
 				if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
 				wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-				catch(Exception e) {
-				}
+			catch(Exception e) {
+				Reporting.updateTestReport("Adress doctor pop up did not appear",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+			}
 			driver.switchTo().frame(0);
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
@@ -2586,7 +2613,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 	
 	/*
 	 * @Author: Anindita
-	 * @Description: Validates the tax for new user didgital product
+	 * @Description: Validates the tax for new user digital product
 	 * @Date: 8/11/22
 	 */
 	@Test
@@ -2665,9 +2692,12 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			wiley.clickOnSaveAndContinueButton();
 			try {
 				if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				{wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-				}}
-				catch(Exception e) {}
+					wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+				}
+			catch(Exception e) {
+				Reporting.updateTestReport("Adress doctor pop up did not appear",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+			}
 			wiley.clickOnPlaceOrderButton();
 			String orderconfirmation = driver.getTitle();
 			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -2787,9 +2817,12 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			wiley.clickOnSaveAndContinueButton();
 			try {
 				if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				{wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-				}}
-				catch(Exception e) {}
+				wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+				}
+			catch(Exception e) {
+				Reporting.updateTestReport("Adress doctor pop up did not appear",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+			}
 			wiley.clickOnPlaceOrderButton();
 			String orderconfirmation = driver.getTitle();
 			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -3050,7 +3083,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 	}
 	/*
 	 * @Author: Anindita
-	 * @Description: Verfies the zero dollar flow
+	 * @Description: Verifies the zero dollar flow
 	 * @Date: 14/11/22
 	 */
 	@Test
@@ -3103,9 +3136,12 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			wiley.clickOnSaveAndContinueButton();
 			try {
 				if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-				{wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-				}}
-				catch(Exception e) {}
+				wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+				}
+			catch(Exception e) {
+				Reporting.updateTestReport("Adress doctor pop up did not appear",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+			}
 			wiley.clickOnPlaceOrderButton();
 			String orderconfirmation = driver.getTitle();
 			if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -3222,8 +3258,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			try {
 				if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
 				wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-				catch(Exception e) {
-				}
+			catch(Exception e) {
+				Reporting.updateTestReport("Adress doctor pop up did not appear",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+			}
 			driver.switchTo().frame(0);
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
