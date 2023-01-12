@@ -742,8 +742,8 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 							String taxamount = WileyPLUS.fetchTaxAmount();
 							excelOperation.updateTestData("TC15", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC15", "WileyPLUS_Test_Data", "Tax", taxamount);
-							driver.get("https://yopmail.com/en/");
-
+							driver.get(excelOperation.getTestData("Yopmail_URL",
+									"Generic_Dataset", "Data"));
 							WileyPLUS.enterEmailIdInYopmail(email);
 							WileyPLUS.clickOnCheckInboxButton();
 							if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {

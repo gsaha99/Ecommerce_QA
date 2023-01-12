@@ -365,8 +365,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
 							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-							driver.get("https://yopmail.com/en/");
-
+							driver.get(excelOperation.getTestData("Yopmail_URL",
+									"Generic_Dataset", "Data"));
 							wiley.enterEmailIdInYopmail(emailID);
 							wiley.clickOnCheckInboxButton();
 							if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
@@ -484,8 +484,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							excelOperation.updateTestData("TC04", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC04", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
 							excelOperation.updateTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-							driver.get("https://yopmail.com/en/");
-
+							driver.get(excelOperation.getTestData("Yopmail_URL",
+									"Generic_Dataset", "Data"));
 							wiley.enterEmailIdInYopmail(email);
 							wiley.clickOnCheckInboxButton();
 							if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
@@ -809,8 +809,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								excelOperation.updateTestData("TC07", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 								excelOperation.updateTestData("TC07", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
 								excelOperation.updateTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-								driver.get("https://yopmail.com/en/");
-
+								driver.get(excelOperation.getTestData("Yopmail_URL",
+										"Generic_Dataset", "Data"));
 								wiley.enterEmailIdInYopmail(email);
 								wiley.clickOnCheckInboxButton();
 								if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
@@ -943,8 +943,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								excelOperation.updateTestData("TC08", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 								excelOperation.updateTestData("TC08", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
 								excelOperation.updateTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-								driver.get("https://yopmail.com/en/");
-
+								driver.get(excelOperation.getTestData("Yopmail_URL",
+										"Generic_Dataset", "Data"));
 								wiley.enterEmailIdInYopmail(email);
 								wiley.clickOnCheckInboxButton();
 								if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
@@ -1070,7 +1070,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							excelOperation.updateTestData("TC09", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC09", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
 							
-							/*driver.get("https://yopmail.com/en/");
+							/*driver.get(excelOperation.getTestData("Yopmail_URL",
+							"Generic_Dataset", "Data"));
 
 							wiley.enterEmailIdInYopmail(emailID);
 							wiley.clickOnCheckInboxButton();
@@ -3355,8 +3356,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.entersEmailIdForRecievingResetPasswordMail(excelOperation.getTestData("TC33", "WILEY_NA_Cart_Test_Data", "Email_Id"));
 				wiley.clickOnSubmitButtonForRecievingResetPasswordMail();
 				if(wiley.checkIfResetPasswordInstructionsIsPresent()) {
-					driver.get("https://yopmail.com/en/");
-
+					driver.get(excelOperation.getTestData("Yopmail_URL",
+							"Generic_Dataset", "Data"));
 					wiley.enterEmailIdInYopmail(excelOperation.getTestData("TC33", "WILEY_NA_Cart_Test_Data", "Email_Id"));
 					wiley.clickOnCheckInboxButton();
 

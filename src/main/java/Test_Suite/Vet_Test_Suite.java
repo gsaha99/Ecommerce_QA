@@ -112,7 +112,8 @@ public class Vet_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC01", "VET_Test_Data", "Total", total);
 				excelOperation.updateTestData("TC01", "VET_Test_Data", "Email_Id", email);
 				VET.logOut(driver);
-				driver.get("https://yopmail.com/en/");
+				driver.get(excelOperation.getTestData("Yopmail_URL",
+						"Generic_Dataset", "Data"));
 				VET.enterEmailIdInYopmail(email);
 				VET.clickOnArrowButton();
 				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
@@ -303,7 +304,8 @@ public class Vet_Test_Suite extends DriverModule {
 			VET.RetriveLoginInfo(excelOperation.getTestData("TC06", "VET_Test_Data", "Email_Id"));
 			VET.clickOnSubmit();
 			VET.AlertMessage();
-			driver.get("https://yopmail.com/en/");
+			driver.get(excelOperation.getTestData("Yopmail_URL",
+					"Generic_Dataset", "Data"));
 			VET.enteryopmail(excelOperation.getTestData("TC06", "VET_Test_Data","Email_Id"));
 			VET.clickonbutton();
 
@@ -416,7 +418,8 @@ public class Vet_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC07", "VET_Test_Data", "Total", total);
 				excelOperation.updateTestData("TC07", "VET_Test_Data", "Email_Id", email);
 				VET.logOut(driver);
-				driver.get("https://yopmail.com/en/");
+				driver.get(excelOperation.getTestData("Yopmail_URL",
+						"Generic_Dataset", "Data"));
 				VET.enterEmailIdInYopmail(email);
 				VET.clickOnArrowButton();
 				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
@@ -569,7 +572,8 @@ public class Vet_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC11", "VET_Test_Data", "Total", total);
 				excelOperation.updateTestData("TC11", "VET_Test_Data", "Email_Id", email);
 				VET.logOut(driver);
-				driver.get("https://yopmail.com/en/");
+				driver.get(excelOperation.getTestData("Yopmail_URL",
+						"Generic_Dataset", "Data"));
 				VET.enterEmailIdInYopmail(email);
 				VET.clickOnArrowButton();
 				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {

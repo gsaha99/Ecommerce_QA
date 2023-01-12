@@ -125,7 +125,8 @@ public class AGS_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC11", "AGS_Test_Data", "Email_Id", email);
 				excelOperation.updateTestData("TC12", "AGS_Test_Data", "Email_Id", email);
 				AGS.logOut(driver);
-				driver.get("https://yopmail.com/en/");
+				driver.get(excelOperation.getTestData("Yopmail_URL",
+						"Generic_Dataset", "Data"));
 				AGS.enterEmailIdInYopmail(email);
 				AGS.clickOnArrowButton();
 				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
@@ -234,7 +235,8 @@ public class AGS_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC02", "AGS_Test_Data", "Total", total);
 				excelOperation.updateTestData("TC02", "AGS_Test_Data", "Email_Id", email);
 				AGS.logOut(driver);
-				driver.get("https://yopmail.com/en/");
+				driver.get(excelOperation.getTestData("Yopmail_URL",
+						"Generic_Dataset", "Data"));
 				AGS.enterEmailIdInYopmail(email);
 				AGS.clickOnArrowButton();
 				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
@@ -365,7 +367,8 @@ public class AGS_Test_Suite extends DriverModule {
 			AGS.enterEmailIdToGetResetPasswordMail(excelOperation.getTestData("TC05", "AGS_Test_Data", "Email_Id"));
 			AGS.clickOnSubmit();
 			AGS.checkAlertMessage();
-			driver.get("https://yopmail.com/en/");
+			driver.get(excelOperation.getTestData("Yopmail_URL",
+					"Generic_Dataset", "Data"));
 			AGS.enterEmailIdInYopmail(excelOperation.getTestData("TC05", "AGS_Test_Data","Email_Id"));
 			AGS.clickOnArrowButton();
 
@@ -567,7 +570,8 @@ public class AGS_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC07", "AGS_Test_Data", "Email_Id", email);
 				excelOperation.updateTestData("TC14", "AGS_Test_Data", "Email_Id", email);
 				AGS.logOut(driver);
-				driver.get("https://yopmail.com/en/");
+				driver.get(excelOperation.getTestData("Yopmail_URL",
+						"Generic_Dataset", "Data"));
 				AGS.enterEmailIdInYopmail(email);
 				AGS.clickOnArrowButton();
 				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
@@ -676,7 +680,8 @@ public class AGS_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC08", "AGS_Test_Data", "Email_Id", email);
 				excelOperation.updateTestData("TC13", "AGS_Test_Data", "Email_Id", email);
 				AGS.logOut(driver);
-				driver.get("https://yopmail.com/en/");
+				driver.get(excelOperation.getTestData("Yopmail_URL",
+						"Generic_Dataset", "Data"));
 				AGS.enterEmailIdInYopmail(email);
 				AGS.clickOnArrowButton();
 				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
@@ -880,7 +885,8 @@ public class AGS_Test_Suite extends DriverModule {
 					excelOperation.updateTestData("TC10", "AGS_Test_Data", "Total", total);
 					excelOperation.updateTestData("TC10", "AGS_Test_Data", "Email_Id", email);
 					AGS.logOut(driver);
-					driver.get("https://yopmail.com/en/");
+					driver.get(excelOperation.getTestData("Yopmail_URL",
+							"Generic_Dataset", "Data"));
 					AGS.enterEmailIdInYopmail(email);
 					AGS.clickOnArrowButton();
 					if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {

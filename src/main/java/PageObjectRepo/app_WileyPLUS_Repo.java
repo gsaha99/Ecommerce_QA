@@ -2,6 +2,7 @@ package PageObjectRepo;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 
 import org.openqa.selenium.By;
@@ -10,7 +11,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import Test_Suite.WileyPLUS_Test_Suite;
 import utilities.CaptureScreenshot;
@@ -921,16 +924,28 @@ public class app_WileyPLUS_Repo {
 	 */
 	public void checkGlobalCountryList(WebDriver driver,String countryList) throws IOException{
 		try {
-			SelectCountryDropDown.click();
 			//Total 6 countries are present in the datasheet
 			String[] countries=countryList.split(",");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			for(String country:countries) {
 				try {
 					String xpathOfCountry="//option[contains(text(),'"+country+"')]";
-					if(driver.findElement(By.xpath(xpathOfCountry)).isDisplayed())
-						
-						Reporting.updateTestReport(country+" was present in the country dropdown",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					if(driver.findElement(By.xpath(xpathOfCountry)).isDisplayed()) {
+						try 
+						{
+							Select countryDropDown = new Select(SelectCountryDropDown);
+							countryDropDown.selectByVisibleText(country);
+						    /*WebElement selectedOption = countryDropDown.getFirstSelectedOption();
+							wait.until(ExpectedConditions.textToBePresentInElement(selectedOption, country));*/
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+							Reporting.updateTestReport(country+" was present in the country dropdown and was selected",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						}
+						catch(Exception e){
+							Reporting.updateTestReport(country+" was present in the country dropdown"
+									+ " but couldn't be selected", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					}
 					else
 						Reporting.updateTestReport(country+" was not present in the country dropdown",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
