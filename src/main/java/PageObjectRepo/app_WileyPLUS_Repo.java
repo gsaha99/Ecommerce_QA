@@ -928,6 +928,7 @@ public class app_WileyPLUS_Repo {
 				try {
 					String xpathOfCountry="//option[contains(text(),'"+country+"')]";
 					if(driver.findElement(By.xpath(xpathOfCountry)).isDisplayed())
+						
 						Reporting.updateTestReport(country+" was present in the country dropdown",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					else
