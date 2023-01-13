@@ -892,7 +892,7 @@ public class Vet_Test_Suite extends DriverModule {
 			VET.enterExistingUserId(excelOperation.getTestData("TC16", "VET_Test_Data", "Email_Id"));
 			VET.enterExistingUserPassword(excelOperation.getTestData("TC16", "VET_Test_Data", "Previous_Password"));
 			VET.clickOnLoginButton();
-			VET.clickOnMangeSubscription();
+			VET.clickOnManageSubscription();
 
 			if (driver.getPageSource().contains("on"))
 
