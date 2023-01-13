@@ -49,7 +49,7 @@ public class app_VET_Repo {
 	WebElement ExistingUserId;
 	@FindBy(name="j_password")
 	WebElement ExistingUserPassword;
-	@FindBy(xpath="//*[@id=\"loginForm\"]/div[2]/div/button")
+	@FindBy(xpath="//*[@id='loginForm']/div[2]/div/button")
 	WebElement LoginButton;
 	@FindBy(xpath="//span[text()='Change Password']")
 	WebElement ChangePassword;
@@ -105,7 +105,7 @@ public class app_VET_Repo {
 	WebElement MyAccountText;
 	@FindBy(xpath="//span[text()='Change Password']")
 	WebElement ChangePasswordText;
-	@FindBy(xpath="//*[@id=\"root\"]/div/div[1]/div[2]/div[2]/form/button")
+	@FindBy(xpath="//*[@id='root']/div/div[1]/div[2]/div[2]/form/button")
 	WebElement GetStarted;
 	@FindBy(xpath="//span[text()='Edit Payment']")
 	WebElement EditPayment;
@@ -201,14 +201,8 @@ public class app_VET_Repo {
 	WebElement Confirm_Password;
 	@FindBy(xpath = "//button[contains(text(),'Create Account')]")
 	WebElement CreateAccount_Button;
-	@FindBy(id = "addressFirstName")
-	WebElement Billing_FirstName;
-	@FindBy(xpath = "//input[@id='addressSurname']")
-	WebElement Billing_LastName;
 	@FindBy(id = "address.country")
 	WebElement CountryDropDown1;
-	@FindBy(id = "addressLine1")
-	WebElement BillingAddress1;
 	@FindBy(id = "addressTownCity")
 	WebElement BillingCity;
 	@FindBy(id = "addressRegion")

@@ -2,8 +2,6 @@ package PageObjectRepo;
 
 import Test_Suite.WEL_Test_Suite;
 import utilities.CaptureScreenshot;
-import utilities.DriverModule;
-
 import java.io.IOException;
 import java.sql.Driver;
 import java.text.SimpleDateFormat;
@@ -402,6 +400,12 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//button[@class='button form-button welCheckoutBtn submitWelForm width100']")
 	WebElement FreeTrailSubbmit;
+	
+	@FindBy(xpath = "//input[@id='townCity']")
+	WebElement IndiaCity;
+	
+	@FindBy(xpath = "//input[@id='address.region']")
+	WebElement IndiaState;
 
 	public void EnterUserNameOnLoginPage(String UserName) throws IOException {
 		try {
@@ -635,7 +639,7 @@ public class app_WEL_Repo {
 
 	public boolean CheckAccountTextAftreLogin() throws IOException {
 		try {
-			String username = AccountText.getText();
+			AccountText.getText();
 			if (AccountText.isDisplayed())
 				return true;
 			else
@@ -2084,4 +2088,31 @@ public class app_WEL_Repo {
 	public WebElement returnUseSelectedBillingAddressButtonAddressDoctorPopUp() {
 		return UseSelectedBillingAddressButtonAddressDoctorPopUp;
 	}
+	
+	public void ShipTownIndiaCity(String City) throws IOException {
+		try {
+			IndiaCity.sendKeys(City);
+			Reporting.updateTestReport("City: " + City + " was entered successfully in the City section",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("City was not entered with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	
+	public void enterState(String ShipInd) throws IOException {
+		try {
+			IndiaState.clear();
+			IndiaState.sendKeys(ShipInd);
+			IndiaState.sendKeys(Keys.ENTER);
+
+			Reporting.updateTestReport("State " + ShipInd + " has been selected successfully by user",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("User failed to select State " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
 }

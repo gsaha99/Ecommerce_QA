@@ -6,8 +6,6 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -992,7 +990,7 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.ClickOnFreeTrail();
 			WEL.FreeTrailFirstName(excelOperation.getTestData("TC21", "WEL_Test_Data", "First_Name"));
 			WEL.FreeTrailLastName(excelOperation.getTestData("TC21", "WEL_Test_Data", "Last_Name"));
-			String cpauser = WEL.EnterFreeTrailNewtUser();
+			WEL.EnterFreeTrailNewtUser();
 			ScrollingWebPage.PageScrolldown(driver,0,200,SS_path);
 			// ScrollingWebPage.PageDown(driver);
 			WEL.FreeTrailCountry(excelOperation.getTestData("TC21", "WEL_Test_Data", "Sh_Country"));
@@ -1027,7 +1025,7 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.ClickOnFreeTrail();
 			WEL.FreeTrailFirstName(excelOperation.getTestData("TC21", "WEL_Test_Data", "First_Name"));
 			WEL.FreeTrailLastName(excelOperation.getTestData("TC21", "WEL_Test_Data", "Last_Name"));
-			String cmauser = WEL.EnterFreeTrailNewtUser();
+			WEL.EnterFreeTrailNewtUser();
 			ScrollingWebPage.PageScrolldown(driver,0,200,SS_path);
 			// ScrollingWebPage.PageDown(driver);
 			WEL.FreeTrailCountry(excelOperation.getTestData("TC21", "WEL_Test_Data", "Sh_Country"));
@@ -1045,7 +1043,7 @@ public class WEL_Test_Suite extends DriverModule {
 			// ScrollingWebPage.PageDown(driver);
 			WEL.FreeTrailSignUpCheckBox();
 			WEL.FreeTrailSignInButton();
-			String cmaftextmessage = WEL.FreeTrailCPAText();
+		    WEL.FreeTrailCPAText();
 			Thread.sleep(2000);
 			if (cpaftextmessage.equals("You’re almost set!"))
 				Reporting.updateTestReport(
@@ -1063,7 +1061,7 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.ClickOnFreeTrail();
 			WEL.FreeTrailFirstName(excelOperation.getTestData("TC21", "WEL_Test_Data", "First_Name"));
 			WEL.FreeTrailLastName(excelOperation.getTestData("TC21", "WEL_Test_Data", "Last_Name"));
-			String cfauser = WEL.EnterFreeTrailNewtUser();
+			WEL.EnterFreeTrailNewtUser();
 			ScrollingWebPage.PageScrolldown(driver,0,200,SS_path);
 			// ScrollingWebPage.PageDown(driver);
 			WEL.FreeTrailCountry(excelOperation.getTestData("TC21", "WEL_Test_Data", "Sh_Country"));
@@ -1080,7 +1078,7 @@ public class WEL_Test_Suite extends DriverModule {
 			// ScrollingWebPage.PageDown(driver);
 			WEL.FreeTrailSignUpCheckBox();
 			WEL.FreeTrailSignInButton();
-			String cfaftextmessage = WEL.FreeTrailCPAText();
+			WEL.FreeTrailCPAText();
 			Thread.sleep(2000);
 			if (cpaftextmessage.equals("You’re almost set!"))
 				Reporting.updateTestReport(
@@ -1190,7 +1188,7 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.ClickOnCIAFreeTrail();
 			WEL.FreeTrailFirstName(excelOperation.getTestData("TC23", "WEL_Test_Data", "First_Name"));
 			WEL.FreeTrailLastName(excelOperation.getTestData("TC23", "WEL_Test_Data", "Last_Name"));
-			String ciauser = WEL.EnterFreeTrailNewtUser();
+			WEL.EnterFreeTrailNewtUser();
 			ScrollingWebPage.PageScrolldown(driver,0,200,SS_path);
 			// ScrollingWebPage.PageDown(driver);
 			WEL.FreeTrailCountry(excelOperation.getTestData("TC23", "WEL_Test_Data", "Sh_Country"));
@@ -1609,6 +1607,8 @@ public class WEL_Test_Suite extends DriverModule {
 			} catch (Exception e) {
 			}
 		} catch (Exception e) {
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
 		WEL.ClickOnBackTOCart();
@@ -1681,6 +1681,8 @@ public class WEL_Test_Suite extends DriverModule {
 			}
 
 		} catch (Exception e) {
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
 		WEL.ClickOnBackTOCart();
@@ -1693,7 +1695,6 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC30_PlaceOrder_UsingSavedBillingAddress_ForExistingUser() throws IOException {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			JavascriptExecutor JS = (JavascriptExecutor) driver;
 			Reporting.test = Reporting.extent.createTest("TC30_PlaceOrder_UsingSavedBillingAddress_ForExistingUser");
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -1757,23 +1758,382 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.ClickonSignOut();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
 		} catch (Exception e) {
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
+	
+	@Test
+	public void TC50_PlaceOrder_CanadaAddress() throws IOException {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			Reporting.test = Reporting.extent.createTest("TC50_PlaceOrder_CanadaAddress");
+			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.navigate().refresh();
+			Thread.sleep(1000);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			WEL.ClickOnCIAProduct();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'SHOP')]")));
+			WEL.ClickOnShopCourseForCIAProduct();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath("//div[@class='comparison-table-title-container header-sticky']//div[2]/a")));
+			ScrollingWebPage.PageDown(driver, SS_path);
+			WEL.ClickOnViewCourseForCIAProduct();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
+			ScrollingWebPage.PageDown(driver, SS_path);
+			WEL.ClickOnCIAAddProduct();
+			WEL.ClickonCheckOutOnCartPage();
+			WEL.EnterexistingUserName(excelOperation.getTestData("TC16", "WEL_Test_Data", "Email_Address"));
+			WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC16", "WEL_Test_Data", "Password"));
+			WEL.ClickonLoginAndContinue();
+			WEL.ClickonCheckOutOnCartPage();
+			WEL.ClickonCheckOutOnCartPage();
+			WEL.ClickOnEnterNewAddressButtonOnShippingPage();
+			WEL.GuestFirstName(excelOperation.getTestData("TC50", "WEL_Test_Data", "Guest_Fname"));
+			WEL.GuestLastName(excelOperation.getTestData("TC50", "WEL_Test_Data", "Guest_Lname"));
+			WEL.selectShipCountry(excelOperation.getTestData("TC50", "WEL_Test_Data", "Sh_Country"));
+			Thread.sleep(2000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='line1']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			WEL.ShipAddressLineOne(excelOperation.getTestData("TC50", "WEL_Test_Data", "Sh_Address_line1"));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			WEL.ShipPostCode(excelOperation.getTestData("TC50", "WEL_Test_Data", "Sh_Zip_Code"));
+			/*
+			 * WEL.ShipTownIndiaCity(excelOperation.getTestData("TC50", "WEL_Test_Data",
+			 * "Sh_City/ Province"));
+			 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+			 * "//input[@id='address.region']")));
+			 * WEL.ShipState(excelOperation.getTestData("TC50", "WEL_Test_Data",
+			 * "Sh_State"));
+			 */WEL.ShipPhoneNumber(excelOperation.getTestData("TC50", "WEL_Test_Data", "Sh_Phone_Number"));
+			WEL.ClickingOnSaveAndContinue();
+			try {
+				if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed())
+					WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+			} catch (Exception e) {
+
+			}
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+			WEL.enterCardHolderName(excelOperation.getTestData("TC30", "WEL_Test_Data", "Guest_Fname"));
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+			WEL.enterCardNumber(excelOperation.getTestData("TC30", "WEL_Test_Data", "Card_Number"));
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+			WEL.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC30", "WEL_Test_Data", "Expiry_Month"));
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+			WEL.selectExpirationYearFromDropDown(excelOperation.getTestData("TC30", "WEL_Test_Data", "Expiry_Year"));
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+			WEL.enterCVV_Number(excelOperation.getTestData("TC30", "WEL_Test_Data", "CVV"));
+			driver.switchTo().defaultContent();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			WEL.SaveAndContinueCheckOut();
+			WEL.clickOnPlaceOrderButton();
+			String orderID = WEL.fetchOrderId();
+			ScrollingWebPage.PageScrolldown(driver, 0, 800,SS_path);
+			excelOperation.updateTestData("TC50", "WEL_Test_Data", "Order_Id", orderID);
+			String tax = WEL.fetchTaxValue();
+			excelOperation.updateTestData("TC50", "WEL_Test_Data", "Tax", tax);
+			String orderTotal = WEL.fetchOrderTotal();
+			excelOperation.updateTestData("TC50", "WEL_Test_Data", "Order_Total", orderTotal);
+			Thread.sleep(2000);
+			ScrollingWebPage.PageScrollUp(driver, 0, -300,SS_path);
+			Thread.sleep(2000);
+			WEL.ClickOnWELIconOrderConfirmationPage();
+			Thread.sleep(2000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			WEL.ClickOnAccountIconFromOrderConfirmationPage();
+			WEL.ClickonSignOut();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
 	}
 
 	@Test
-	public void TC28_StudentVerification_ForDigitalCartof_USANDNonUS() throws IOException {
+	public void TC51_PlaceOrder_IndiaAddress() throws IOException {
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			JavascriptExecutor JS = (JavascriptExecutor) driver;
-			Reporting.test = Reporting.extent.createTest("TC28_StudentVerification_ForDigitalCartof_USANDNonUS");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+			Reporting.test = Reporting.extent.createTest("TC51_PlaceOrder_IndiaAddress");
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
-			ScrollingWebPage.PageDown(driver,SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			WEL.ClickOnCIAProduct();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'SHOP')]")));
+			WEL.ClickOnShopCourseForCIAProduct();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath("//div[@class='comparison-table-title-container header-sticky']//div[2]/a")));
+			ScrollingWebPage.PageDown(driver, SS_path);
+			WEL.ClickOnViewCourseForCIAProduct();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
+			ScrollingWebPage.PageDown(driver, SS_path);
+			WEL.ClickOnCIAAddProduct();
+			WEL.ClickonCheckOutOnCartPage();
+			WEL.EnterexistingUserName(excelOperation.getTestData("TC51", "WEL_Test_Data", "Email_Address"));
+			WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC51", "WEL_Test_Data", "Password"));
+			WEL.ClickonLoginAndContinue();
+			WEL.ClickonCheckOutOnCartPage();
+			WEL.ClickonCheckOutOnCartPage();
+			WEL.ClickOnEnterNewAddressButtonOnShippingPage();
+			WEL.GuestFirstName(excelOperation.getTestData("TC51", "WEL_Test_Data", "Guest_Fname"));
+			WEL.GuestLastName(excelOperation.getTestData("TC51", "WEL_Test_Data", "Guest_Lname"));
+			WEL.selectShipCountry(excelOperation.getTestData("TC51", "WEL_Test_Data", "Sh_Country"));
+			Thread.sleep(3000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='line1']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			WEL.ShipAddressLineOne(excelOperation.getTestData("TC51", "WEL_Test_Data", "Sh_Address_line1"));
+			WEL.ShipPostCode(excelOperation.getTestData("TC51", "WEL_Test_Data", "Sh_Zip_Code"));
+			// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='city']")));
+			WEL.ShipTownIndiaCity(excelOperation.getTestData("TC51", "WEL_Test_Data", "Sh_City/ Province"));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='address.region']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			WEL.enterState(excelOperation.getTestData("TC51", "WEL_Test_Data", "Sh_State"));
+			WEL.ShipPhoneNumber(excelOperation.getTestData("TC51", "WEL_Test_Data", "Sh_Phone_Number"));
+			WEL.ClickingOnSaveAndContinue();
+			try {
+				if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed())
+					WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+			} catch (Exception e) {
+			}
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+			WEL.enterCardHolderName(excelOperation.getTestData("TC51", "WEL_Test_Data", "Guest_Fname"));
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+			WEL.enterCardNumber(excelOperation.getTestData("TC51", "WEL_Test_Data", "Card_Number"));
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+			WEL.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC51", "WEL_Test_Data", "Expiry_Month"));
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+			WEL.selectExpirationYearFromDropDown(excelOperation.getTestData("TC51", "WEL_Test_Data", "Expiry_Year"));
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+			WEL.enterCVV_Number(excelOperation.getTestData("TC51", "WEL_Test_Data", "CVV"));
+			driver.switchTo().defaultContent();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			WEL.SaveAndContinueCheckOut();
+			WEL.clickOnPlaceOrderButton();
+			String orderID = WEL.fetchOrderId();
+			ScrollingWebPage.PageScrolldown(driver, 0, 800,SS_path);
+			excelOperation.updateTestData("TC51", "WEL_Test_Data", "Order_Id", orderID);
+			String tax = WEL.fetchTaxValue();
+			excelOperation.updateTestData("TC51", "WEL_Test_Data", "Tax", tax);
+			String orderTotal = WEL.fetchOrderTotal();
+			excelOperation.updateTestData("TC51", "WEL_Test_Data", "Order_Total", orderTotal);
+			Thread.sleep(2000);
+			ScrollingWebPage.PageScrollUp(driver, 0, -300,SS_path);
+			Thread.sleep(2000);
+			WEL.ClickOnWELIconOrderConfirmationPage();
+			Thread.sleep(2000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			WEL.ClickOnAccountIconFromOrderConfirmationPage();
+			WEL.ClickonSignOut();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
 
 		} catch (Exception e) {
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
+
+	}
+
+	@Test
+	public void TC52_PlaceOrder_ChinaAddress() throws IOException {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+			Reporting.test = Reporting.extent.createTest("TC52_PlaceOrder_ChinaAddress");
+			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.navigate().refresh();
+			Thread.sleep(1000);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			WEL.ClickOnCIAProduct();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'SHOP')]")));
+			WEL.ClickOnShopCourseForCIAProduct();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath("//div[@class='comparison-table-title-container header-sticky']//div[2]/a")));
+			ScrollingWebPage.PageDown(driver, SS_path);
+			WEL.ClickOnViewCourseForCIAProduct();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
+			ScrollingWebPage.PageDown(driver, SS_path);
+			WEL.ClickOnCIAAddProduct();
+			WEL.ClickonCheckOutOnCartPage();
+			WEL.EnterexistingUserName(excelOperation.getTestData("TC52", "WEL_Test_Data", "Email_Address"));
+			WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC52", "WEL_Test_Data", "Password"));
+			WEL.ClickonLoginAndContinue();
+			WEL.ClickonCheckOutOnCartPage();
+			WEL.ClickonCheckOutOnCartPage();
+			WEL.ClickOnEnterNewAddressButtonOnShippingPage();
+			WEL.GuestFirstName(excelOperation.getTestData("TC52", "WEL_Test_Data", "Guest_Fname"));
+			WEL.GuestLastName(excelOperation.getTestData("TC52", "WEL_Test_Data", "Guest_Lname"));
+			WEL.selectShipCountry(excelOperation.getTestData("TC52", "WEL_Test_Data", "Sh_Country"));
+			Thread.sleep(3000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='line1']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			WEL.ShipAddressLineOne(excelOperation.getTestData("TC52", "WEL_Test_Data", "Sh_Address_line1"));
+			WEL.ShipPostCode(excelOperation.getTestData("TC52", "WEL_Test_Data", "Sh_Zip_Code"));
+			// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='city']")));
+			WEL.ShipTownIndiaCity(excelOperation.getTestData("TC52", "WEL_Test_Data", "Sh_City/ Province"));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='address.region']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			WEL.enterState(excelOperation.getTestData("TC52", "WEL_Test_Data", "Sh_State"));
+			WEL.ShipPhoneNumber(excelOperation.getTestData("TC52", "WEL_Test_Data", "Sh_Phone_Number"));
+			WEL.ClickingOnSaveAndContinue();
+			try {
+				if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed())
+					WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+			} catch (Exception e) {
+				Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+			WEL.enterCardHolderName(excelOperation.getTestData("TC52", "WEL_Test_Data", "Guest_Fname"));
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+			WEL.enterCardNumber(excelOperation.getTestData("TC52", "WEL_Test_Data", "Card_Number"));
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+			WEL.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC52", "WEL_Test_Data", "Expiry_Month"));
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+			WEL.selectExpirationYearFromDropDown(excelOperation.getTestData("TC52", "WEL_Test_Data", "Expiry_Year"));
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+			WEL.enterCVV_Number(excelOperation.getTestData("TC52", "WEL_Test_Data", "CVV"));
+			driver.switchTo().defaultContent();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			WEL.SaveAndContinueCheckOut();
+			WEL.clickOnPlaceOrderButton();
+			String orderID = WEL.fetchOrderId();
+			ScrollingWebPage.PageScrolldown(driver, 0, 800,SS_path);
+			excelOperation.updateTestData("TC52", "WEL_Test_Data", "Order_Id", orderID);
+			String tax = WEL.fetchTaxValue();
+			excelOperation.updateTestData("TC52", "WEL_Test_Data", "Tax", tax);
+			String orderTotal = WEL.fetchOrderTotal();
+			excelOperation.updateTestData("TC52", "WEL_Test_Data", "Order_Total", orderTotal);
+			Thread.sleep(2000);
+			ScrollingWebPage.PageScrollUp(driver, 0, -300,SS_path);
+			Thread.sleep(2000);
+			WEL.ClickOnWELIconOrderConfirmationPage();
+			Thread.sleep(2000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			WEL.ClickOnAccountIconFromOrderConfirmationPage();
+			WEL.ClickonSignOut();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+
+	@Test
+	public void TC53_PlaceOrder_JapanAddress() throws IOException {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+			Reporting.test = Reporting.extent.createTest("TC53_PlaceOrder_JapanAddress");
+			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.navigate().refresh();
+			Thread.sleep(1000);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			WEL.ClickOnCIAProduct();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'SHOP')]")));
+			WEL.ClickOnShopCourseForCIAProduct();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath("//div[@class='comparison-table-title-container header-sticky']//div[2]/a")));
+			ScrollingWebPage.PageDown(driver, SS_path);
+			WEL.ClickOnViewCourseForCIAProduct();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
+			ScrollingWebPage.PageDown(driver, SS_path);
+			WEL.ClickOnCIAAddProduct();
+			WEL.ClickonCheckOutOnCartPage();
+			WEL.EnterexistingUserName(excelOperation.getTestData("TC53", "WEL_Test_Data", "Email_Address"));
+			WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC53", "WEL_Test_Data", "Password"));
+			WEL.ClickonLoginAndContinue();
+			WEL.ClickonCheckOutOnCartPage();
+			WEL.ClickonCheckOutOnCartPage();
+			WEL.ClickOnEnterNewAddressButtonOnShippingPage();
+			WEL.GuestFirstName(excelOperation.getTestData("TC53", "WEL_Test_Data", "Guest_Fname"));
+			WEL.GuestLastName(excelOperation.getTestData("TC53", "WEL_Test_Data", "Guest_Lname"));
+			WEL.selectShipCountry(excelOperation.getTestData("TC53", "WEL_Test_Data", "Sh_Country"));
+			Thread.sleep(3000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='line1']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			WEL.ShipAddressLineOne(excelOperation.getTestData("TC53", "WEL_Test_Data", "Sh_Address_line1"));
+			WEL.ShipPostCode(excelOperation.getTestData("TC53", "WEL_Test_Data", "Sh_Zip_Code"));
+			// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='city']")));
+			WEL.ShipTownIndiaCity(excelOperation.getTestData("TC53", "WEL_Test_Data", "Sh_City/ Province"));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='address.region']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			WEL.enterState(excelOperation.getTestData("TC53", "WEL_Test_Data", "Sh_State"));
+			WEL.ShipPhoneNumber(excelOperation.getTestData("TC53", "WEL_Test_Data", "Sh_Phone_Number"));
+			WEL.ClickingOnSaveAndContinue();
+			try {
+				if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed())
+					WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+			} catch (Exception e) {
+				Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+			WEL.enterCardHolderName(excelOperation.getTestData("TC53", "WEL_Test_Data", "Guest_Fname"));
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+			WEL.enterCardNumber(excelOperation.getTestData("TC53", "WEL_Test_Data", "Card_Number"));
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+			WEL.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC53", "WEL_Test_Data", "Expiry_Month"));
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+			WEL.selectExpirationYearFromDropDown(excelOperation.getTestData("TC53", "WEL_Test_Data", "Expiry_Year"));
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+			WEL.enterCVV_Number(excelOperation.getTestData("TC53", "WEL_Test_Data", "CVV"));
+			driver.switchTo().defaultContent();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			WEL.SaveAndContinueCheckOut();
+			WEL.clickOnPlaceOrderButton();
+			String orderID = WEL.fetchOrderId();
+			ScrollingWebPage.PageScrolldown(driver, 0, 800, SS_path);
+			excelOperation.updateTestData("TC53", "WEL_Test_Data", "Order_Id", orderID);
+			String tax = WEL.fetchTaxValue();
+			excelOperation.updateTestData("TC53", "WEL_Test_Data", "Tax", tax);
+			String orderTotal = WEL.fetchOrderTotal();
+			excelOperation.updateTestData("TC53", "WEL_Test_Data", "Order_Total", orderTotal);
+			Thread.sleep(2000);
+			ScrollingWebPage.PageScrollUp(driver, 0, -300, SS_path);
+			Thread.sleep(2000);
+			WEL.ClickOnWELIconOrderConfirmationPage();
+			Thread.sleep(2000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+			WEL.ClickOnAccountIconFromOrderConfirmationPage();
+			WEL.ClickonSignOut();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
 	}
 }

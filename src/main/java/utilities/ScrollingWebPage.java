@@ -7,7 +7,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 
-import Test_Suite.WEL_Test_Suite;
+
 
 public class ScrollingWebPage {
 	
