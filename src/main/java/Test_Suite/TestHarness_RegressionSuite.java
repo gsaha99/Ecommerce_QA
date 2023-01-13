@@ -1082,18 +1082,18 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Token Authorise Response')]")));
 			
 			driver.findElement(By.xpath("//h2[contains(text(),'Token Authorise Response')]")).click();
-			String returnMessage = THarness.Http_Tokenise_FetchReturnMessage();
-			if(returnMessage.compareTo("SUCCESS")==0) {
+			//String returnMessage = THarness.Http_Tokenise_FetchReturnMessage();
+			if(THarness.Http_Tokenise_FetchReturnMessage().compareTo("SUCCESS")==0) {
 				
-				Reporting.updateTestReport("Return message is: " + returnMessage,
+				Reporting.updateTestReport("Return message is: " + THarness.Http_Tokenise_FetchReturnMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			}
 			else 
 			{
-				Reporting.updateTestReport("Return message is not: " + returnMessage,
+				Reporting.updateTestReport("Return message is not: " + THarness.Http_Tokenise_FetchReturnMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			excelOperation.updateTestData("TC14", "TestHarness_Test_Data", "Return_Message", returnMessage);
+			excelOperation.updateTestData("TC14", "TestHarness_Test_Data", "Return_Message", THarness.Http_Tokenise_FetchReturnMessage());
 			String returnCode = THarness.Http_Tokenise_FetchReturnCode();
 			if(returnCode.compareTo("0")==0) {
 				
