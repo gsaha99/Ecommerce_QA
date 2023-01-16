@@ -1,156 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="32" passed="32" failed="0" skipped="0">
+<testng-results ignored="31" total="32" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-01-09T16:32:10 IST" name="Default suite" finished-at="2023-01-09T16:40:23 IST" duration-ms="492512">
+  <suite started-at="2023-01-16T17:56:54 IST" name="Default suite" finished-at="2023-01-16T17:57:20 IST" duration-ms="25865">
     <groups>
     </groups>
-    <test started-at="2023-01-09T16:32:10 IST" name="Default test" finished-at="2023-01-09T16:40:23 IST" duration-ms="492512">
+    <test started-at="2023-01-16T17:56:54 IST" name="Default test" finished-at="2023-01-16T17:57:20 IST" duration-ms="25865">
       <class name="Test_Suite.TestHarness_RegressionSuite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:32:10 IST" name="initiate" finished-at="2023-01-09T16:32:16 IST" duration-ms="6131" status="PASS">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@273444fe]" started-at="2023-01-16T17:56:54 IST" name="initiate" finished-at="2023-01-16T17:57:00 IST" duration-ms="5649" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@631a5d11]]>
+                <![CDATA[org.testng.TestRunner@34d9df9f]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:32:16 IST" name="initializeRepo" finished-at="2023-01-09T16:32:16 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="68" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@273444fe]" started-at="2023-01-16T17:57:00 IST" name="initializeRepo" finished-at="2023-01-16T17:57:00 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="73" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeRepo -->
-        <test-method signature="TC01_HTTP_Probe()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:32:16 IST" name="TC01_HTTP_Probe" finished-at="2023-01-09T16:32:21 IST" duration-ms="4556" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC01_HTTP_Probe -->
-        <test-method signature="TC02_HTTP_Tokenise_Request_Response()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:32:21 IST" name="TC02_HTTP_Tokenise_Request_Response" finished-at="2023-01-09T16:32:50 IST" duration-ms="29064" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC02_HTTP_Tokenise_Request_Response -->
-        <test-method signature="TC03_HTTP_Tokenise_IFrame()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:32:50 IST" name="TC03_HTTP_Tokenise_IFrame" finished-at="2023-01-09T16:32:57 IST" duration-ms="7008" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC03_HTTP_Tokenise_IFrame -->
-        <test-method signature="TC04_HTTP_Tokenise_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:32:57 IST" name="TC04_HTTP_Tokenise_ES_Stripe_Validation" finished-at="2023-01-09T16:33:19 IST" duration-ms="21793" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC04_HTTP_Tokenise_ES_Stripe_Validation -->
-        <test-method signature="TC05_HTTP_Tokenise_Error_Message()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:33:19 IST" name="TC05_HTTP_Tokenise_Error_Message" finished-at="2023-01-09T16:33:40 IST" duration-ms="20940" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC05_HTTP_Tokenise_Error_Message -->
-        <test-method signature="TC06_HTTP_Validate_Request_Response()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:33:40 IST" name="TC06_HTTP_Validate_Request_Response" finished-at="2023-01-09T16:34:01 IST" duration-ms="21290" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC06_HTTP_Validate_Request_Response -->
-        <test-method signature="TC07_HTTP_Validate_IFrame()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:34:01 IST" name="TC07_HTTP_Validate_IFrame" finished-at="2023-01-09T16:34:06 IST" duration-ms="5234" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC07_HTTP_Validate_IFrame -->
-        <test-method signature="TC08_HTTP_Validate_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:34:06 IST" name="TC08_HTTP_Validate_ES_Stripe_Validation" finished-at="2023-01-09T16:34:28 IST" duration-ms="22083" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC08_HTTP_Validate_ES_Stripe_Validation -->
-        <test-method signature="TC09_HTTP_Validate_Error_Message()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:34:28 IST" name="TC09_HTTP_Validate_Error_Message" finished-at="2023-01-09T16:34:49 IST" duration-ms="20458" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC09_HTTP_Validate_Error_Message -->
-        <test-method signature="TC10_HTTP_Authorise_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:34:49 IST" name="TC10_HTTP_Authorise_ES_Stripe_Validation" finished-at="2023-01-09T16:35:12 IST" duration-ms="22887" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC10_HTTP_Authorise_ES_Stripe_Validation -->
-        <test-method signature="TC11_HTTP_Authorise_Error_Message()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:35:12 IST" name="TC11_HTTP_Authorise_Error_Message" finished-at="2023-01-09T16:35:19 IST" duration-ms="6868" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC11_HTTP_Authorise_Error_Message -->
-        <test-method signature="TC12_HTTP_AuthSettle_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:35:19 IST" name="TC12_HTTP_AuthSettle_ES_Stripe_Validation" finished-at="2023-01-09T16:35:41 IST" duration-ms="22439" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC12_HTTP_AuthSettle_ES_Stripe_Validation -->
-        <test-method signature="TC13_HTTP_AuthSettle_Error_Message()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:35:41 IST" name="TC13_HTTP_AuthSettle_Error_Message" finished-at="2023-01-09T16:35:48 IST" duration-ms="7171" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC13_HTTP_AuthSettle_Error_Message -->
-        <test-method signature="TC14_HTTP_TokenAuth_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:35:48 IST" name="TC14_HTTP_TokenAuth_ES_Stripe_Validation" finished-at="2023-01-09T16:36:05 IST" duration-ms="16696" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC14_HTTP_TokenAuth_ES_Stripe_Validation -->
-        <test-method signature="TC15_HTTP_Validate_for_Token_Auth_Error_Message()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:36:05 IST" name="TC15_HTTP_Validate_for_Token_Auth_Error_Message" finished-at="2023-01-09T16:36:25 IST" duration-ms="19779" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC15_HTTP_Validate_for_Token_Auth_Error_Message -->
-        <test-method signature="TC16_HTTP_TokenSettle_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:36:25 IST" name="TC16_HTTP_TokenSettle_ES_Stripe_Validation" finished-at="2023-01-09T16:36:42 IST" duration-ms="16980" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC16_HTTP_TokenSettle_ES_Stripe_Validation -->
-        <test-method signature="TC17_HTTP_Validate_for_Token_Settle_Error_Message()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:36:42 IST" name="TC17_HTTP_Validate_for_Token_Settle_Error_Message" finished-at="2023-01-09T16:36:58 IST" duration-ms="16045" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC17_HTTP_Validate_for_Token_Settle_Error_Message -->
-        <test-method signature="TC18_HTTP_TokenAuthSettle_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:36:58 IST" name="TC18_HTTP_TokenAuthSettle_ES_Stripe_Validation" finished-at="2023-01-09T16:37:13 IST" duration-ms="15690" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC18_HTTP_TokenAuthSettle_ES_Stripe_Validation -->
-        <test-method signature="TC19_HTTP_Validate_for_Token_Auth_Settle_Error_Message()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:37:13 IST" name="TC19_HTTP_Validate_for_Token_Auth_Settle_Error_Message" finished-at="2023-01-09T16:37:27 IST" duration-ms="14079" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC19_HTTP_Validate_for_Token_Auth_Settle_Error_Message -->
-        <test-method signature="TC20_HTTP_VoidAuth_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:37:27 IST" name="TC20_HTTP_VoidAuth_ES_Stripe_Validation" finished-at="2023-01-09T16:37:43 IST" duration-ms="15502" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC20_HTTP_VoidAuth_ES_Stripe_Validation -->
-        <test-method signature="TC21_HTTP_Validate_for_Void_Auth_Error_Message()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:37:43 IST" name="TC21_HTTP_Validate_for_Void_Auth_Error_Message" finished-at="2023-01-09T16:37:58 IST" duration-ms="15060" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC21_HTTP_Validate_for_Void_Auth_Error_Message -->
-        <test-method signature="TC22_SOAP_Probe_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:37:58 IST" name="TC22_SOAP_Probe_ES_Stripe_Validation" finished-at="2023-01-09T16:38:01 IST" duration-ms="3253" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC22_SOAP_Probe_ES_Stripe_Validation -->
-        <test-method signature="TC23_SOAP_Probe_Error_Message_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:38:01 IST" name="TC23_SOAP_Probe_Error_Message_Validation" finished-at="2023-01-09T16:38:05 IST" duration-ms="3221" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC23_SOAP_Probe_Error_Message_Validation -->
-        <test-method signature="TC24_SOAP_TokenAuth_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:38:05 IST" name="TC24_SOAP_TokenAuth_ES_Stripe_Validation" finished-at="2023-01-09T16:38:18 IST" duration-ms="13578" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC24_SOAP_TokenAuth_ES_Stripe_Validation -->
-        <test-method signature="TC25_SOAP_TokenAuth_Error_Message_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:38:18 IST" name="TC25_SOAP_TokenAuth_Error_Message_Validation" finished-at="2023-01-09T16:38:31 IST" duration-ms="12482" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC25_SOAP_TokenAuth_Error_Message_Validation -->
-        <test-method signature="TC26_SOAP_TokenSettle_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:38:31 IST" name="TC26_SOAP_TokenSettle_ES_Stripe_Validation" finished-at="2023-01-09T16:38:45 IST" duration-ms="14379" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC26_SOAP_TokenSettle_ES_Stripe_Validation -->
-        <test-method signature="TC27_SOAP_TokenSettle_Error_Message_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:38:45 IST" name="TC27_SOAP_TokenSettle_Error_Message_Validation" finished-at="2023-01-09T16:38:59 IST" duration-ms="13683" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC27_SOAP_TokenSettle_Error_Message_Validation -->
-        <test-method signature="TC28_SOAP_TokenAuthSettle_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:38:59 IST" name="TC28_SOAP_TokenAuthSettle_ES_Stripe_Validation" finished-at="2023-01-09T16:39:14 IST" duration-ms="15723" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC28_SOAP_TokenAuthSettle_ES_Stripe_Validation -->
-        <test-method signature="TC29_SOAP_TokenAuthSettle_Error_Message()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:39:14 IST" name="TC29_SOAP_TokenAuthSettle_Error_Message" finished-at="2023-01-09T16:39:20 IST" duration-ms="6091" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC29_SOAP_TokenAuthSettle_Error_Message -->
-        <test-method signature="TC30_SOAP_TokenRefund_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:39:20 IST" name="TC30_SOAP_TokenRefund_ES_Stripe_Validation" finished-at="2023-01-09T16:39:35 IST" duration-ms="14074" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC30_SOAP_TokenRefund_ES_Stripe_Validation -->
-        <test-method signature="TC31_SOAP_VoidAuth_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:39:35 IST" name="TC31_SOAP_VoidAuth_ES_Stripe_Validation" finished-at="2023-01-09T16:40:13 IST" duration-ms="38828" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC31_SOAP_VoidAuth_ES_Stripe_Validation -->
-        <test-method signature="TC32_SOAP_VoidAuth_Error_Message()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:40:13 IST" name="TC32_SOAP_VoidAuth_Error_Message" finished-at="2023-01-09T16:40:20 IST" duration-ms="6858" status="PASS">
+        <test-method signature="TC32_SOAP_VoidAuth_Error_Message()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@273444fe]" started-at="2023-01-16T17:57:00 IST" name="TC32_SOAP_VoidAuth_Error_Message" finished-at="2023-01-16T17:57:18 IST" duration-ms="18013" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TC32_SOAP_VoidAuth_Error_Message -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5032714f]" started-at="2023-01-09T16:40:20 IST" name="CloseBrowser" finished-at="2023-01-09T16:40:23 IST" duration-ms="2229" status="PASS">
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@273444fe]" started-at="2023-01-16T17:57:18 IST" name="CloseBrowser" finished-at="2023-01-16T17:57:20 IST" duration-ms="2050" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
