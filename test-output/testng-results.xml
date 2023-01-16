@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="18" total="19" passed="1" failed="0" skipped="0">
+<testng-results ignored="14" total="15" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-01-12T16:43:56 IST" name="Default suite" finished-at="2023-01-12T16:45:05 IST" duration-ms="68676">
+  <suite started-at="2023-01-16T12:18:33 IST" name="Default suite" finished-at="2023-01-16T12:22:24 IST" duration-ms="231402">
     <groups>
     </groups>
-    <test started-at="2023-01-12T16:43:56 IST" name="Default test" finished-at="2023-01-12T16:45:05 IST" duration-ms="68676">
-      <class name="Test_Suite.WileyPLUS_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@2d901eb0]" started-at="2023-01-12T16:43:56 IST" name="initiate" finished-at="2023-01-12T16:44:02 IST" duration-ms="5944" status="PASS">
+    <test started-at="2023-01-16T12:18:33 IST" name="Default test" finished-at="2023-01-16T12:22:24 IST" duration-ms="231402">
+      <class name="Test_Suite.AGS_Test_Suite">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.AGS_Test_Suite@28261e8e]" started-at="2023-01-16T12:18:33 IST" name="initiate" finished-at="2023-01-16T12:18:41 IST" duration-ms="8260" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@5627cb29]]>
+                <![CDATA[org.testng.TestRunner@44fb6ebd]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@2d901eb0]" started-at="2023-01-12T16:44:02 IST" name="launchBrowser" finished-at="2023-01-12T16:44:02 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="60" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.AGS_Test_Suite@28261e8e]" started-at="2023-01-16T12:18:41 IST" name="initializeRepo" finished-at="2023-01-16T12:18:41 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="70" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- launchBrowser -->
-        <test-method signature="TC13_Global_Country_List_In_Shipping()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@2d901eb0]" started-at="2023-01-12T16:44:02 IST" name="TC13_Global_Country_List_In_Shipping" finished-at="2023-01-12T16:45:03 IST" duration-ms="61148" status="PASS">
+        </test-method> <!-- initializeRepo -->
+        <test-method signature="TC08_Place_Order_With_Discount_Code()[pri:0, instance:Test_Suite.AGS_Test_Suite@28261e8e]" started-at="2023-01-16T12:18:41 IST" name="TC08_Place_Order_With_Discount_Code" finished-at="2023-01-16T12:22:22 IST" duration-ms="221294" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC13_Global_Country_List_In_Shipping -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@2d901eb0]" started-at="2023-01-12T16:45:03 IST" name="CloseBrowser" finished-at="2023-01-12T16:45:05 IST" duration-ms="1461" status="PASS">
+        </test-method> <!-- TC08_Place_Order_With_Discount_Code -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.AGS_Test_Suite@28261e8e]" started-at="2023-01-16T12:22:22 IST" name="CloseBrowser" finished-at="2023-01-16T12:22:24 IST" duration-ms="1708" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
-      </class> <!-- Test_Suite.WileyPLUS_Test_Suite -->
+      </class> <!-- Test_Suite.AGS_Test_Suite -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
