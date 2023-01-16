@@ -13,7 +13,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import PageObjectRepo.app_WileyPLUS_Repo;
 import utilities.CaptureScreenshot;
-import utilities.CustomMethods;
+import utilities.OrderConfirmationMail;
 import utilities.DriverModule;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
@@ -740,10 +740,10 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 									"Generic_Dataset", "Data"));
 							WileyPLUS.enterEmailIdInYopmail(email);
 							WileyPLUS.clickOnCheckInboxButton();
-							if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+							if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								CustomMethods.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxamount," ",ordertotal);
+								OrderConfirmationMail.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxamount," ",ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",

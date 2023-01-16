@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 
 import PageObjectRepo.app_Wiley_Repo;
 import utilities.CaptureScreenshot;
-import utilities.CustomMethods;
+import utilities.OrderConfirmationMail;
 import utilities.DriverModule;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
@@ -129,10 +129,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								"Generic_Dataset", "Data"));
 						wiley.enterEmailIdInYopmail(email);
 						wiley.clickOnCheckInboxButton();
-						if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+						if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 							Reporting.updateTestReport("Order Confirmation mail was received",
 			                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							CustomMethods.validateOrderConfirmationMailContent("Wiley",driver,SS_path,tax," ",orderTotal);
+							OrderConfirmationMail.validateOrderConfirmationMailContent("Wiley",driver,SS_path,tax," ",orderTotal);
 						}
 						else {
 							Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -369,10 +369,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									"Generic_Dataset", "Data"));
 							wiley.enterEmailIdInYopmail(emailID);
 							wiley.clickOnCheckInboxButton();
-							if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+							if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
 				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								CustomMethods.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxamount,scharge,ordertotal);
+								OrderConfirmationMail.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxamount,scharge,ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -488,10 +488,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									"Generic_Dataset", "Data"));
 							wiley.enterEmailIdInYopmail(email);
 							wiley.clickOnCheckInboxButton();
-							if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+							if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
 				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								CustomMethods.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxamount,scharge,ordertotal);
+								OrderConfirmationMail.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxamount,scharge,ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -813,7 +813,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 										"Generic_Dataset", "Data"));
 								wiley.enterEmailIdInYopmail(email);
 								wiley.clickOnCheckInboxButton();
-								if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+								if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 									Reporting.updateTestReport("Order Confirmation mail was received",
 					                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 									
@@ -947,7 +947,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 										"Generic_Dataset", "Data"));
 								wiley.enterEmailIdInYopmail(email);
 								wiley.clickOnCheckInboxButton();
-								if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+								if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 									Reporting.updateTestReport("Order Confirmation mail was received",
 					                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 									//validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);

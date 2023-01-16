@@ -19,7 +19,6 @@ import utilities.StatusDetails;
 
 public class app_Riskified_Repo {
 	AGS_Test_Suite AGS_Test;
-	public String SS_path=AGS_Test.SS_path;
 	@FindBy(xpath = "//input[@placeholder='Email']")
 	WebElement RiskifiedUserId;
 	@FindBy(xpath = "//input[@placeholder='Password']")
@@ -43,7 +42,7 @@ public class app_Riskified_Repo {
 	 * @Description: Enters Riskified User id in login page
 	 * 
 	 */
-	public void enterRiskifiedUserId(String email) throws IOException {
+	public void enterRiskifiedUserId(String email,String SS_path) throws IOException {
 		try {
 			RiskifiedUserId.sendKeys(email);
 			Reporting.updateTestReport("Riskified User id : " + email + " was entered successfully",
@@ -58,7 +57,7 @@ public class app_Riskified_Repo {
 	 * @Description: Enters Riskified Password in login page
 	 * 
 	 */
-	public void enterRiskifiedPassword(String password) throws IOException {
+	public void enterRiskifiedPassword(String password,String SS_path) throws IOException {
 		try {
 
 			RiskifiedPassword.sendKeys(password);
@@ -74,7 +73,7 @@ public class app_Riskified_Repo {
 	 * @Description: Clicks on the submit button in the Riskified login page in login page
 	 * 
 	 */
-	public void clickOnRiskifiedSignInButton() throws IOException {
+	public void clickOnRiskifiedSignInButton(String SS_path) throws IOException {
 		try {
 			RiskifiedSignInButton.click();
 			Reporting.updateTestReport("Sign in button was clicked successfully",
@@ -90,7 +89,7 @@ public class app_Riskified_Repo {
 	 * @Description: Searches the order id in Riskified
 	 * 
 	 */
-	public void searchOrderIdInRiskified(String orderId) throws IOException {
+	public void searchOrderIdInRiskified(String orderId,String SS_path) throws IOException {
 		try {
 			RiskifiedOrderIdSearchField.sendKeys(orderId);
 			RiskifiedOrderIdSearchField.sendKeys(Keys.ENTER);
@@ -107,7 +106,7 @@ public class app_Riskified_Repo {
 	 * @Description: Selects the AGS Storefront from Riskified to search order id
 	 * @Date: 20/12/22
 	 */
-	public void selectAGSFromDropdown() throws IOException{
+	public void selectAGSFromDropdown(String SS_path) throws IOException{
 		try {
 			SelectedDropdown.click();
 			AGSFromDropdown.click();
@@ -125,7 +124,7 @@ public class app_Riskified_Repo {
 	 * @Description: Checks if the Order is present in riskified or not
 	 * 
 	 */
-	public int checkIfOrderIdIsPresentInRiskified(WebDriver driver) throws IOException {
+	public int checkIfOrderIdIsPresentInRiskified(WebDriver driver,String SS_path) throws IOException {
 		try {
 			int timeOut=30;
 			int flag=0;
@@ -159,7 +158,7 @@ public class app_Riskified_Repo {
 	 * @Description: Checks if the Order is declined in riskified or not
 	 * 
 	 */
-	public void checkIfOrderIdIsDeclinedInRiskified(WebDriver driver) throws IOException {
+	public void checkIfOrderIdIsDeclinedInRiskified(WebDriver driver,String SS_path) throws IOException {
 		try {
 			int timeOut=30;
 			int flag=0;
@@ -196,7 +195,7 @@ public class app_Riskified_Repo {
 	 * @Description: Selects the AGS Storefront from Riskified to search order id
 	 * @Date: 2/1/23
 	 */
-	public void selectVETFromDropdown() throws IOException{
+	public void selectVETFromDropdown(String SS_path) throws IOException{
 		try {
 			SelectedDropdown.click();
 			VETFromDropdown.click();

@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class CustomMethods {
+public class OrderConfirmationMail {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if order confirmation mail was received

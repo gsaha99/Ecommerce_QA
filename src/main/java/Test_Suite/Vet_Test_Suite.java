@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -22,7 +23,7 @@ import PageObjectRepo.app_Hybris_BO_Repo;
 import PageObjectRepo.app_Riskified_Repo;
 import PageObjectRepo.app_VET_Repo;
 import utilities.CaptureScreenshot;
-import utilities.CustomMethods;
+import utilities.OrderConfirmationMail;
 import utilities.DriverModule;
 import utilities.PaymentGateway;
 import utilities.Reporting;
@@ -46,7 +47,7 @@ public class Vet_Test_Suite extends DriverModule {
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
 	public static String EmailConfirmationText="//button/div[contains(text(),'Order Confirmation')]";
-	
+
 
 	@BeforeTest
 	public void initializeRepo() {
@@ -56,7 +57,7 @@ public class Vet_Test_Suite extends DriverModule {
 		RiskifiedRepo = PageFactory.initElements(driver, app_Riskified_Repo.class);
 
 	}
-	
+
 	/*
 	 * Author : Arun 
 	 * Description : New User Registration with placing Order
@@ -66,73 +67,73 @@ public class Vet_Test_Suite extends DriverModule {
 		try {
 
 			Reporting.test = Reporting.extent.createTest("TC01_Anonymous_User_Registration");
+			WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("TC01", "VET_Test_Data", "URL"));
 			VET.clickOnGetStarted();
-			Thread.sleep(1000);
-			VET.clickOnContinueButton();
-			VET.enterFirstName(excelOperation.getTestData("TC01", "VET_Test_Data", "First_Name"));
-			Thread.sleep(1000);
-			VET.enterLastName(excelOperation.getTestData("TC01", "VET_Test_Data", "Last_Name"));
-			Thread.sleep(1000);
-			String email=VET.enterEmailId();
-			Thread.sleep(1000);
-			VET.enterPassword(excelOperation.getTestData("TC01", "VET_Test_Data", "Password"));
-			VET.clickCreateAccountButton();
-			VET.enterBillingFirstName(excelOperation.getTestData("TC01", "VET_Test_Data", "First_Name"));
-			VET.enterBillingLastName(excelOperation.getTestData("TC01", "VET_Test_Data", "Last_Name"));
-			VET.selectCountry(excelOperation.getTestData("TC01", "VET_Test_Data", "Country"));
-			VET.enterAddressLine1(excelOperation.getTestData("TC01", "VET_Test_Data", "Address_line1"));
-			VET.enterCity(excelOperation.getTestData("TC01", "VET_Test_Data", "City"));
-			VET.enterState(excelOperation.getTestData("TC01", "VET_Test_Data", "State"));
-			VET.enterZip(excelOperation.getTestData("TC01", "VET_Test_Data", "Zip_Code"));
-			VET.enterPhoneNumber(excelOperation.getTestData("TC01", "VET_Test_Data", "Phone_Number"));
-			VET.checkBoxBilling();
-			VET.continueToCardDetailsPage();
-			
-			String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
-            System.out.println(payment_gateway);
-            if (payment_gateway.contains("WPG")) {
-				/* WPG Code */
-				PaymentGateway.paymentWPG_VET(driver, VET, "TC01", SS_path);
-			} else {
-				/** WPS Code **/
-				PaymentGateway.paymentWPS_VET(driver, VET, "TC01", SS_path);
-			}
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
-
-			String OrderConfirmationPage = driver.getTitle().trim();
-			if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | VET online Site")) {
-				String orderID = VET.fetchOrderId();
-				String tax = VET.fetchTax();
-				String total = VET.fetchTotal();
-				excelOperation.updateTestData("TC01", "VET_Test_Data", "Order_Id", orderID);
-				excelOperation.updateTestData("TC01", "VET_Test_Data", "Tax", tax);
-				excelOperation.updateTestData("TC01", "VET_Test_Data", "Total", total);
-				excelOperation.updateTestData("TC01", "VET_Test_Data", "Email_Id", email);
-				VET.logOut(driver);
-				driver.get(excelOperation.getTestData("Yopmail_URL",
-						"Generic_Dataset", "Data"));
-				VET.enterEmailIdInYopmail(email);
-				VET.clickOnArrowButton();
-				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
-					Reporting.updateTestReport("Order Confirmation mail was received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					CustomMethods.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[contains(text(),'Continue')])[2]")));
+				VET.clickOnContinueButton();
+				VET.enterFirstName(excelOperation.getTestData("TC01", "VET_Test_Data", "First_Name"));
+				VET.enterLastName(excelOperation.getTestData("TC01", "VET_Test_Data", "Last_Name"));
+				String email=VET.enterEmailId();
+				VET.enterPassword(excelOperation.getTestData("TC01", "VET_Test_Data", "Password"));
+				VET.clickCreateAccountButton();
+				VET.enterBillingFirstName(excelOperation.getTestData("TC01", "VET_Test_Data", "First_Name"));
+				VET.enterBillingLastName(excelOperation.getTestData("TC01", "VET_Test_Data", "Last_Name"));
+				VET.selectCountry(excelOperation.getTestData("TC01", "VET_Test_Data", "Country"));
+				VET.enterAddressLine1(excelOperation.getTestData("TC01", "VET_Test_Data", "Address_line1"));
+				VET.enterCity(excelOperation.getTestData("TC01", "VET_Test_Data", "City"));
+				VET.enterState(excelOperation.getTestData("TC01", "VET_Test_Data", "State"));
+				VET.enterZip(excelOperation.getTestData("TC01", "VET_Test_Data", "Zip_Code"));
+				VET.enterPhoneNumber(excelOperation.getTestData("TC01", "VET_Test_Data", "Phone_Number"));
+				VET.checkBoxBilling();
+				VET.continueToCardDetailsPage();		
+				String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
+				if (payment_gateway.contains("WPG")) {
+					/* WPG Code */
+					PaymentGateway.paymentWPG_VET(driver, VET, "TC01", SS_path);
+				} else {
+					/** WPS Code **/
+					PaymentGateway.paymentWPS_VET(driver, VET, "TC01", SS_path);
 				}
-				else {
-					Reporting.updateTestReport("Order Confirmation mail was not received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					
-				}
-			}
+				try {
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed."
+							+ " A confirmation email')]")));
+					String orderID = VET.fetchOrderId();
+					String tax = VET.fetchTax();
+					String total = VET.fetchTotal();
+					excelOperation.updateTestData("TC01", "VET_Test_Data", "Order_Id", orderID);
+					excelOperation.updateTestData("TC01", "VET_Test_Data", "Tax", tax);
+					excelOperation.updateTestData("TC01", "VET_Test_Data", "Total", total);
+					excelOperation.updateTestData("TC01", "VET_Test_Data", "Email_Id", email);
+					VET.logOut(driver);
+					driver.get(excelOperation.getTestData("Yopmail_URL",
+							"Generic_Dataset", "Data"));
+					VET.enterEmailIdInYopmail(email);
+					VET.clickOnArrowButton();
+					if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+						Reporting.updateTestReport("Order Confirmation mail was received",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						OrderConfirmationMail.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
+					}
+					else {
+						Reporting.updateTestReport("Order Confirmation mail was not received",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
-			else
-				{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+					}
+				}
+
+				catch(Exception e)
+				{Reporting.updateTestReport("Order was not placed and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
-			    VET.logOut(driver);}
-			
+				VET.logOut(driver);}
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Continue button on cart page was not clickable"
+						+ " and caused timeout excepion", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
@@ -140,22 +141,19 @@ public class Vet_Test_Suite extends DriverModule {
 
 	}
 
-    /*
-     * @Author: Anindita
-     * @Description: Creates a new account (Standalone registration)
-     */
+	/*
+	 * @Author: Anindita
+	 * @Description: Creates a new account (Standalone registration)
+	 */
 	@Test
 	public void TC02_Create_Account() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC02_Create_Account");
 			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
-			String first = excelOperation.getTestData("TC02", "VET_Test_Data", "First_Name");
-			String last = excelOperation.getTestData("TC02", "VET_Test_Data", "Last_Name");
-			String password = excelOperation.getTestData("TC02", "VET_Test_Data", "Password");
-			VET.enterFirstName(first);
-			VET.enterLastName(last);
+			VET.enterFirstName(excelOperation.getTestData("TC02", "VET_Test_Data", "First_Name"));
+			VET.enterLastName(excelOperation.getTestData("TC02", "VET_Test_Data", "Last_Name"));
 			String emailId = VET.enterEmailId();
-			VET.enterPassword(password);
+			VET.enterPassword(excelOperation.getTestData("TC02", "VET_Test_Data", "Password"));
 			VET.clickCreateAccountButton();
 			excelOperation.updateTestData("TC05", "VET_Test_Data", "Email_Id", emailId);
 			String expectedUrl = "https://vetqa.wiley.com/my-account/update-profile/";
@@ -194,7 +192,7 @@ public class Vet_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * Author : Arun 
 	 * Description : Placing an order with Existing User
@@ -202,7 +200,6 @@ public class Vet_Test_Suite extends DriverModule {
 	@Test
 	public void TC04_Login_During_Checkout() throws IOException {
 		try {
-
 			Reporting.test = Reporting.extent.createTest("TC04_Login_During_Checkout");
 			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("TC04", "VET_Test_Data", "URL"));
@@ -222,21 +219,20 @@ public class Vet_Test_Suite extends DriverModule {
 			VET.enterPhoneNumber(excelOperation.getTestData("TC04", "VET_Test_Data", "Phone_Number"));
 			VET.checkBoxBilling();
 			VET.continueToCardDetailsPage();
-			
+
 			String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
-            System.out.println(payment_gateway);
-            if (payment_gateway.contains("WPG")) {
+			System.out.println(payment_gateway);
+			if (payment_gateway.contains("WPG")) {
 				/* WPG Code */
 				PaymentGateway.paymentWPG_VET(driver, VET, "TC04", SS_path);
 			} else {
 				/** WPS Code **/
 				PaymentGateway.paymentWPS_VET(driver, VET, "TC04", SS_path);
 			}
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
-
-			String OrderConfirmationPage = driver.getTitle().trim();
-			if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | VET online Site")) {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			try {
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed."
+						+ " A confirmation email')]")));
 				String orderID = VET.fetchOrderId();
 				String tax = VET.fetchTax();
 				String total = VET.fetchTotal();
@@ -246,22 +242,23 @@ public class Vet_Test_Suite extends DriverModule {
 				VET.logOut(driver);
 			}
 
-			else
-				{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			    VET.logOut(driver);}
+			catch(Exception e)
+			{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			VET.logOut(driver);}
 		}
 
 		catch (Exception e) {
 			// TODO: handle exception
-			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
 
-   /*
-    * @Author: Anindita
-    * @Description: 
-    */
+	/*
+	 * @Author: Anindita
+	 * @Description: 
+	 */
 	@Test
 	public void TC05_Reset_Password_My_Account() throws IOException {
 		try {
@@ -308,8 +305,6 @@ public class Vet_Test_Suite extends DriverModule {
 					"Generic_Dataset", "Data"));
 			VET.enteryopmail(excelOperation.getTestData("TC06", "VET_Test_Data","Email_Id"));
 			VET.clickonbutton();
-
-
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 			int timeOutSeconds=60;
 			int flag=0;
@@ -339,34 +334,44 @@ public class Vet_Test_Suite extends DriverModule {
 
 			if(flag==1)
 			{driver.switchTo().frame("ifmail");
-			Thread.sleep(5000);
-	        VET.clickOnResetPasswordLink();
-			Set<String> allWindowHandles = driver.getWindowHandles();
-			java.util.Iterator<String> iterator = allWindowHandles.iterator();
-			String yopmailHandle = iterator.next();
-			String ChildWindow=iterator.next();
-			driver.switchTo().window(ChildWindow);
-			VET.ResetPwd(excelOperation.getTestData("TC06", "VET_Test_Data", "New_Password"));
-			VET.ResetConfirmPassword(excelOperation.getTestData("TC06", "VET_Test_Data", "Confirm_Password"));
-			VET.ResetPassSubmit();
-			VET.PasswordResetSuccess();
-			driver.switchTo().window(yopmailHandle);
-			driver.close();
-			driver.switchTo().window(ChildWindow);
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(
+						driver.findElement(By.xpath("(//main[@class='yscrollbar']"
+								+ "/div/div/div/table/tbody/tr/td/center/table/tbody/tr/td)[2]/p[3]/"
+								+ "a[contains(text(),'Click here to change your password')]"))));
+				VET.clickOnResetPasswordLink();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				java.util.Iterator<String> iterator = allWindowHandles.iterator();
+				String yopmailHandle = iterator.next();
+				String ChildWindow=iterator.next();
+				driver.switchTo().window(ChildWindow);
+				VET.ResetPwd(excelOperation.getTestData("TC06", "VET_Test_Data", "New_Password"));
+				VET.ResetConfirmPassword(excelOperation.getTestData("TC06", "VET_Test_Data", "Confirm_Password"));
+				VET.ResetPassSubmit();
+				VET.PasswordResetSuccess();
+				driver.switchTo().window(yopmailHandle);
+				driver.close();
+				driver.switchTo().window(ChildWindow);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Rest password link was not cliackable in the mail", 
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 			}
 			else {
 				Reporting.updateTestReport("No reset password mail was recieved in yopmail inbox", 
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+		}
 
-		} catch (Exception e) {
+		catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
-		
+
 
 	}
-	
+
 	/*
 	 * Author : Arun 
 	 * Description : This flow is verify the tax on the order
@@ -395,21 +400,19 @@ public class Vet_Test_Suite extends DriverModule {
 			VET.enterPhoneNumber(excelOperation.getTestData("TC07", "VET_Test_Data", "Phone_Number"));
 			VET.checkBoxBilling();
 			VET.continueToCardDetailsPage();
-
 			String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
-            System.out.println(payment_gateway);
-            if (payment_gateway.contains("WPG")) {
+			System.out.println(payment_gateway);
+			if (payment_gateway.contains("WPG")) {
 				/* WPG Code */
 				PaymentGateway.paymentWPG_VET(driver, VET, "TC07", SS_path);
 			} else {
 				/** WPS Code **/
 				PaymentGateway.paymentWPS_VET(driver, VET, "TC07", SS_path);
 			}
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
-
-			String OrderConfirmationPage = driver.getTitle().trim();
-			if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | VET online Site")) {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			try {
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed."
+						+ " A confirmation email')]")));
 				String orderID = VET.fetchOrderId();
 				String tax = VET.fetchTax();
 				String total = VET.fetchTotal();
@@ -422,25 +425,25 @@ public class Vet_Test_Suite extends DriverModule {
 						"Generic_Dataset", "Data"));
 				VET.enterEmailIdInYopmail(email);
 				VET.clickOnArrowButton();
-				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+				if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 					Reporting.updateTestReport("Order Confirmation mail was received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					CustomMethods.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					OrderConfirmationMail.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
 				}
 				else {
 					Reporting.updateTestReport("Order Confirmation mail was not received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
 				}
 			}
 
-			else
-				{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			    VET.logOut(driver);}
+			catch(Exception e)
+			{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			VET.logOut(driver);}
 		} catch (Exception e) {
-			// TODO: handle exception
-			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 
 	}
@@ -469,9 +472,9 @@ public class Vet_Test_Suite extends DriverModule {
 
 		}
 	}
-	*/
-	
-	 //Backoofice related testcases have been made out of scope and will be tested manually
+	 */
+
+	//Backoofice related testcases have been made out of scope and will be tested manually
 	/*
 	 * Author : Arun 
 	 * Description : This flow is using  for refund the amount to customer.
@@ -510,7 +513,7 @@ public class Vet_Test_Suite extends DriverModule {
 			VET.enterYOPUserMailID(excelOperation.getTestData("TC10", "VET_Test_Data", "Email_Id"));
 			VET.clickOnRefreshButton();
 			Thread.sleep(2000);	
-			
+
 		}
 
 		catch (Exception e) {
@@ -521,7 +524,7 @@ public class Vet_Test_Suite extends DriverModule {
 
 	}*/
 
-	
+
 	@Test
 	public void TC11_Place_Order_With_Promo_Code() throws IOException {
 		try {
@@ -530,68 +533,72 @@ public class Vet_Test_Suite extends DriverModule {
 			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("TC11", "VET_Test_Data", "URL"));
 			VET.addSubscriptionToCart();
-			wait.until(ExpectedConditions.visibilityOf(VET.returnDiscountCodeField()));
-			VET.addPromoToCart(excelOperation.getTestData("Partial _Coupon_Code", "Generic_Dataset", "Data"));
-			VET.continueToCheckout();
+			try {
+				wait.until(ExpectedConditions.visibilityOf(VET.returnDiscountCodeField()));
+				VET.addPromoToCart(excelOperation.getTestData("Partial _Coupon_Code", "Generic_Dataset", "Data"));
+				VET.continueToCheckout();
+				VET.enterFirstName(excelOperation.getTestData("TC11", "VET_Test_Data", "First_Name"));
+				VET.enterLastName(excelOperation.getTestData("TC11", "VET_Test_Data", "Last_Name"));
+				String email = VET.enterEmailId();
+				VET.enterPassword(excelOperation.getTestData("TC02", "VET_Test_Data", "Password"));
+				VET.clickCreateAccountButton();
+				VET.enterBillingFirstName(excelOperation.getTestData("TC11", "VET_Test_Data", "First_Name"));
+				VET.enterBillingLastName(excelOperation.getTestData("TC11", "VET_Test_Data", "Last_Name"));
+				VET.selectCountry(excelOperation.getTestData("TC11", "VET_Test_Data", "Country"));
+				VET.enterAddressLine1(excelOperation.getTestData("TC11", "VET_Test_Data", "Address_line1"));
+				VET.enterCity(excelOperation.getTestData("TC11", "VET_Test_Data", "City"));
+				VET.enterState(excelOperation.getTestData("TC11", "VET_Test_Data", "State"));
+				VET.enterZip(excelOperation.getTestData("TC11", "VET_Test_Data", "Zip_Code"));
+				VET.enterPhoneNumber(excelOperation.getTestData("TC11", "VET_Test_Data", "Phone_Number"));
+				VET.checkBoxBilling();
+				VET.continueToCardDetailsPage();
 
-			VET.enterFirstName(excelOperation.getTestData("TC11", "VET_Test_Data", "First_Name"));
-			VET.enterLastName(excelOperation.getTestData("TC11", "VET_Test_Data", "Last_Name"));
-			String email = VET.enterEmailId();
-
-			VET.enterPassword(excelOperation.getTestData("TC02", "VET_Test_Data", "Password"));
-			VET.clickCreateAccountButton();
-			VET.enterBillingFirstName(excelOperation.getTestData("TC11", "VET_Test_Data", "First_Name"));
-			VET.enterBillingLastName(excelOperation.getTestData("TC11", "VET_Test_Data", "Last_Name"));
-			VET.selectCountry(excelOperation.getTestData("TC11", "VET_Test_Data", "Country"));
-			VET.enterAddressLine1(excelOperation.getTestData("TC11", "VET_Test_Data", "Address_line1"));
-			VET.enterCity(excelOperation.getTestData("TC11", "VET_Test_Data", "City"));
-			VET.enterState(excelOperation.getTestData("TC11", "VET_Test_Data", "State"));
-			VET.enterZip(excelOperation.getTestData("TC11", "VET_Test_Data", "Zip_Code"));
-			VET.enterPhoneNumber(excelOperation.getTestData("TC11", "VET_Test_Data", "Phone_Number"));
-			VET.checkBoxBilling();
-			VET.continueToCardDetailsPage();
-			
-			String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
-            System.out.println(payment_gateway);
-            if (payment_gateway.contains("WPG")) {
-				/* WPG Code */
-				PaymentGateway.paymentWPG_VET(driver, VET, "TC11", SS_path);
-			} else {
-				/** WPS Code **/
-				PaymentGateway.paymentWPS_VET(driver, VET, "TC11", SS_path);
-			}
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
-
-			String OrderConfirmationPage = driver.getTitle().trim();
-			if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | VET online Site")) {
-				String orderID = VET.fetchOrderId();
-				String tax = VET.fetchTax();
-				String total = VET.fetchTotal();
-				excelOperation.updateTestData("TC11", "VET_Test_Data", "Order_Id", orderID);
-				excelOperation.updateTestData("TC11", "VET_Test_Data", "Tax", tax);
-				excelOperation.updateTestData("TC11", "VET_Test_Data", "Total", total);
-				excelOperation.updateTestData("TC11", "VET_Test_Data", "Email_Id", email);
-				VET.logOut(driver);
-				driver.get(excelOperation.getTestData("Yopmail_URL",
-						"Generic_Dataset", "Data"));
-				VET.enterEmailIdInYopmail(email);
-				VET.clickOnArrowButton();
-				if(CustomMethods.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
-					Reporting.updateTestReport("Order Confirmation mail was received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					CustomMethods.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
+				String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
+				System.out.println(payment_gateway);
+				if (payment_gateway.contains("WPG")) {
+					/* WPG Code */
+					PaymentGateway.paymentWPG_VET(driver, VET, "TC11", SS_path);
+				} else {
+					/** WPS Code **/
+					PaymentGateway.paymentWPS_VET(driver, VET, "TC11", SS_path);
 				}
-				else {
-					Reporting.updateTestReport("Order Confirmation mail was not received",
-	                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					
-				}
-			}
+				try {
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed."
+							+ " A confirmation email')]")));
+					String orderID = VET.fetchOrderId();
+					String tax = VET.fetchTax();
+					String total = VET.fetchTotal();
+					excelOperation.updateTestData("TC11", "VET_Test_Data", "Order_Id", orderID);
+					excelOperation.updateTestData("TC11", "VET_Test_Data", "Tax", tax);
+					excelOperation.updateTestData("TC11", "VET_Test_Data", "Total", total);
+					excelOperation.updateTestData("TC11", "VET_Test_Data", "Email_Id", email);
+					VET.logOut(driver);
+					driver.get(excelOperation.getTestData("Yopmail_URL",
+							"Generic_Dataset", "Data"));
+					VET.enterEmailIdInYopmail(email);
+					VET.clickOnArrowButton();
+					if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+						Reporting.updateTestReport("Order Confirmation mail was received",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						OrderConfirmationMail.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
+					}
+					else {
+						Reporting.updateTestReport("Order Confirmation mail was not received",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
-			else
+					}
+				}
+
+				catch(Exception e)
 				{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
-			    VET.logOut(driver);}
+				VET.logOut(driver);}
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Discount code field was"
+						+ " not displayed and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
+						StatusDetails.FAIL);
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
@@ -615,7 +622,6 @@ public class Vet_Test_Suite extends DriverModule {
 			VET.enterExistingUserPassword(excelOperation.getTestData("TC12", "VET_Test_Data", "Password"));
 			VET.clickOnLoginButton();
 			VET.continueToCheckout();
-			// Thread.sleep(5000);// Explicit Wait
 			VET.enterBillingFirstName(excelOperation.getTestData("TC12", "VET_Test_Data", "First_Name"));
 			VET.enterBillingLastName(excelOperation.getTestData("TC12", "VET_Test_Data", "Last_Name"));
 			VET.selectCountry(excelOperation.getTestData("TC12", "VET_Test_Data", "Country"));
@@ -626,21 +632,19 @@ public class Vet_Test_Suite extends DriverModule {
 			VET.enterPhoneNumber(excelOperation.getTestData("TC12", "VET_Test_Data", "Phone_Number"));
 			VET.checkBoxBilling();
 			VET.continueToCardDetailsPage();
-			
 			String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
-            System.out.println(payment_gateway);
-            if (payment_gateway.contains("WPG")) {
+			System.out.println(payment_gateway);
+			if (payment_gateway.contains("WPG")) {
 				/* WPG Code */
 				PaymentGateway.paymentWPG_VET(driver, VET, "TC12", SS_path);
 			} else {
 				/** WPS Code **/
 				PaymentGateway.paymentWPS_VET(driver, VET, "TC12", SS_path);
 			}
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
-
-			String OrderConfirmationPage = driver.getTitle().trim();
-			if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | VET online Site")) {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			try {
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed."
+						+ " A confirmation email')]"))); 
 				String orderID = VET.fetchOrderId();
 				String tax = VET.fetchTax();
 				String total = VET.fetchTotal();
@@ -650,19 +654,19 @@ public class Vet_Test_Suite extends DriverModule {
 				VET.logOut(driver);
 			}
 
-			else
-				{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			    VET.logOut(driver);}
+			catch(Exception e)
+			{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			VET.logOut(driver);}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 
 	}
-	
-	 //Backoofice related testcases have been made out of scope and will be tested manually
-	
+
+	//Backoofice related testcases have been made out of scope and will be tested manually
+
 	/*@Test
 	public void TC13_Renew_Subscription() throws IOException {
 		try {
@@ -715,7 +719,7 @@ public class Vet_Test_Suite extends DriverModule {
 			HybrisBO.runCronJob();
 			Thread.sleep(2000);
 			HybrisBO.clickOnLogOutButton();	
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
@@ -735,7 +739,7 @@ public class Vet_Test_Suite extends DriverModule {
 			VET.clickOnEditPayment();
 			VET.isEditPaymentPage();
 			VET.clickOnUpdateCreditCardButton();
-			
+
 			String str = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
             System.out.println(str);
             if (str.contains("WPG")) {
@@ -766,7 +770,7 @@ public class Vet_Test_Suite extends DriverModule {
                 driver.switchTo().parentFrame();
                 VET.paymentDetailsSubmit();
                 driver.switchTo().defaultContent();
-			
+
             }
 			VET.isUpdatedCardLogoDisplayed();
 			VET.logOut();
@@ -822,7 +826,7 @@ public class Vet_Test_Suite extends DriverModule {
 		}
 	}*/
 
-    //Backoofice related testcases have been made out of scope and will be tested manually
+	//Backoofice related testcases have been made out of scope and will be tested manually
 	/*
 	 * @Author: Vishnu Description: This is to verify the Order in Backoffice and
 	 * Validating the Order
@@ -846,40 +850,64 @@ public class Vet_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC15", "VET_Test_Data", "Order_Id", orderId);
 				Reporting.updateTestReport("Order was placed successfully with Order Id: " + orderId,
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				VET.logOut(driver);
+				driver.get(excelOperation.getTestData("Backoffice_URL", "Generic_Dataset", "Data"));
+				HybrisBO.enterHybrisBOUserName(excelOperation.getTestData("Backoffice_Admin_User_ID", "Generic_Dataset", "Data"));
+				HybrisBO.enterHybrisBOPassword(excelOperation.getTestData("Backoffice_Admin_Password", "Generic_Dataset", "Data"));
+				HybrisBO.clickOnHybrisBOLoginButton();
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@class='yw-explorerTree-filterTextbox yw-filter-textbox y-general-textinput z-textbox']")));
+					HybrisBO.OrderSearchInBo();
+					HybrisBO.ClickOnOrders();
+					try {
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='z-div']/span[contains(text(),'No items')]")));
+						HybrisBO.EnterorderId(excelOperation.getTestData("TC15", "VET_Test_Data", "Order_Id"));
+						HybrisBO.OrderSearch();
+						try {
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='yw-listview-pagingcontainer z-div']/span[contains(text(),'1 items')]")));
+							HybrisBO.ClickonOrderId();
+							WebDriverWait wait4 = new WebDriverWait(driver, Duration.ofSeconds(60));
+							try {
+								wait4.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='z-div']/span[contains(text(), 'Auto Vet')]")));
+								excelOperation.updateTestData("TC15", "VET_Test_Data", "Order_Status", HybrisBO.OrderStatus());
+								Reporting.updateTestReport("Order Id and Status of the Order is " + HybrisBO.OrderStatus(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								HybrisBO.clickOnLogOutButton();
+							}
+							catch(Exception e) {
+								Reporting.updateTestReport("Order details was not displayed"
+										+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
+										StatusDetails.FAIL);
+							}
+						}
+						catch(Exception e) {
+							Reporting.updateTestReport("Searched Order Id was not clickable"
+									+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Order Id search field was not clickable"
+								+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
+					}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Orders could not be searched in the left pane"
+							+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 			} else {
 				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
-			VET.logOut(driver);
-			driver.get(excelOperation.getTestData("Backoffice_URL", "Generic_Dataset", "Data"));
-			HybrisBO.enterHybrisBOUserName(excelOperation.getTestData("Backoffice_Admin_User_ID", "Generic_Dataset", "Data"));
-			HybrisBO.enterHybrisBOPassword(excelOperation.getTestData("Backoffice_Admin_Password", "Generic_Dataset", "Data"));
-			HybrisBO.clickOnHybrisBOLoginButton();
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='yw-explorerTree-filterTextbox yw-filter-textbox y-general-textinput z-textbox']")));
-			HybrisBO.OrderSearchInBo();
-			HybrisBO.ClickOnOrders();
-			// Thread.sleep(5000);// Explicit wait
-			WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(30));
-			wait2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='z-div']/span[contains(text(),'No items')]")));
-			HybrisBO.EnterorderId(excelOperation.getTestData("TC15", "VET_Test_Data", "Order_Id"));
-			HybrisBO.OrderSearch();
-			WebDriverWait wait3 = new WebDriverWait(driver, Duration.ofSeconds(30));
-			wait3.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='yw-listview-pagingcontainer z-div']/span[contains(text(),'1 items')]")));
-			HybrisBO.ClickonOrderId();
-			String os = HybrisBO.OrderStatus();
-			WebDriverWait wait4 = new WebDriverWait(driver, Duration.ofSeconds(60));
-			wait4.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='z-div']/span[contains(text(), 'Auto Vet')]")));
-			excelOperation.updateTestData("TC15", "VET_Test_Data", "Order_Status", os);
-			Reporting.updateTestReport("Order Id and Status of the Order is " + os,CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			HybrisBO.clickOnLogOutButton();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 			HybrisBO.clickOnLogOutButton();	
 		}
 	}
-	
+
 	/*
 	 * Author : Arun 
 	 * Description : This flow is to verify if the Auto-toggle button is on or off in the Manage subscription.
@@ -931,16 +959,16 @@ public class Vet_Test_Suite extends DriverModule {
 			String email=VET.enterEmailId();
 			VET.enterPassword(excelOperation.getTestData("TC18", "VET_Test_Data", "Password"));
 			VET.clickCreateAccountButton();
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
-			String OrderConfirmationPage = driver.getTitle().trim();
-			if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | VET online Site")) {
+			try {
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed."
+						+ " A confirmation email')]")));
 				String orderID = VET.fetchOrderId();
 				String total = VET.fetchTotal();
 				excelOperation.updateTestData("TC18", "VET_Test_Data", "Order_Id", orderID);
 				excelOperation.updateTestData("TC18", "VET_Test_Data", "Total", total);
 				excelOperation.updateTestData("TC18", "VET_Test_Data", "Email_Id", email);
 			}
-           else {
+			catch(Exception e) {
 				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
@@ -952,8 +980,8 @@ public class Vet_Test_Suite extends DriverModule {
 		}
 
 	}
-	
-	
+
+
 	/*
 	 * Author : Arun 
 	 * Description : This flow using for editing the profile from my account page.
@@ -964,7 +992,6 @@ public class Vet_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC19_Edit_Profile_from_my_account_page");
 			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
 			VET.enterExistingUserId(excelOperation.getTestData("TC19", "VET_Test_Data", "Email_Id"));
-			Thread.sleep(1000);
 			VET.enterExistingUserPassword(excelOperation.getTestData("TC19", "VET_Test_Data", "Previous_Password"));
 			VET.clickOnLoginButton();
 			VET.editProfileLastName(excelOperation.getTestData("TC19", "VET_Test_Data", "Last_Name"));
@@ -980,7 +1007,6 @@ public class Vet_Test_Suite extends DriverModule {
 			VET.logOut(driver);
 
 		} catch (Exception e) {
-			// TODO: handle exception
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 
@@ -999,16 +1025,22 @@ public class Vet_Test_Suite extends DriverModule {
 			VET.isEditPaymentPage();
 			VET.selectCountry(excelOperation.getTestData("TC20", "VET_Test_Data", "Country"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='addressLine1']")));
-			Thread.sleep(1000);
-			VET.enterAddressLine1(excelOperation.getTestData("TC20", "VET_Test_Data", "Address_line1"));
-			VET.enterCity(excelOperation.getTestData("TC20", "VET_Test_Data", "City"));
-			VET.enterState(excelOperation.getTestData("TC20", "VET_Test_Data", "State"));
-			VET.enterZip(excelOperation.getTestData("TC20", "VET_Test_Data", "Zip_Code"));
-			VET.enterPhoneNumber(excelOperation.getTestData("TC20", "VET_Test_Data", "Phone_Number"));
-			VET.clickOnBillingSaveButton();
-			VET.checkIfAlertBoxDisplayedOnBillingAddressPage();
-			VET.logOut(driver);
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='addressLine1']")));
+				VET.enterAddressLine1(excelOperation.getTestData("TC20", "VET_Test_Data", "Address_line1"));
+				VET.enterCity(excelOperation.getTestData("TC20", "VET_Test_Data", "City"));
+				VET.enterState(excelOperation.getTestData("TC20", "VET_Test_Data", "State"));
+				VET.enterZip(excelOperation.getTestData("TC20", "VET_Test_Data", "Zip_Code"));
+				VET.enterPhoneNumber(excelOperation.getTestData("TC20", "VET_Test_Data", "Phone_Number"));
+				VET.clickOnBillingSaveButton();
+				VET.checkIfAlertBoxDisplayedOnBillingAddressPage();
+				VET.logOut(driver);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Address line 1 field was not clickable"
+						+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
+						StatusDetails.FAIL);
+			}
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -1022,6 +1054,7 @@ public class Vet_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC08_Eloqua_validation");
 			driver.get(excelOperation.getTestData("Eloqua_URL", "Generic_Dataset", "Data"));
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(30));
 			Eloqua.enterEloquaSiteName(excelOperation.getTestData("Eloqua_Site_Name", "Generic_Dataset", "Data"));
 			Eloqua.enterEloquaUserName(excelOperation.getTestData("Eloqua_User_ID", "Generic_Dataset", "Data"));
 			Eloqua.enterEloquaPassword(excelOperation.getTestData("Eloqua_Password", "Generic_Dataset", "Data"));
@@ -1031,41 +1064,48 @@ public class Vet_Test_Suite extends DriverModule {
 			Eloqua.clickOnEloquaCustomObject();
 			Eloqua.clickOnCustomObjectOnHovering();
 			driver.switchTo().frame("fullPageFrame");
-			Thread.sleep(3000);
-			Eloqua.searchEloquaOnlinePurchase();
-			driver.switchTo().frame("EditFrame");
-			driver.findElement(By.xpath("//td[@class='ResultCell ListTableCell']/span[@title='Global Hybris Online Purchases']")).click();
-			Thread.sleep(3000);
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame("fullPageFrame");
-			driver.switchTo().frame("EditFrame");
-			Eloqua.clickOnCustomObjectOnlinePurchase();
-			Eloqua.clickOnSearchOnlinePurchase();
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame("dialogiframe");
-			driver.switchTo().frame(0);
-			Eloqua.selectHybrisOrderIdInEloqua();
-			Eloqua.enterHybrisOrderIdInEloqua(excelOperation.getTestData("TC08", "VET_Test_Data", "Order_Id"));
-			Eloqua.clickOnSearchOrderInEloqua();
-			if(driver.findElement(By.xpath("//iframe[@id='frameAction']")).isDisplayed()){
-			driver.switchTo().frame("frameAction");
-			WebElement record = driver.findElement(By.xpath("//span[text()='Total Records: 1']"));
-			if (record.isDisplayed()) {
-				Reporting.updateTestReport("Order is present in Eloqua ", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.PASS);
-			} else {
-				Reporting.updateTestReport("Order is not present in Eloqua ", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}}
-			else {
-				Reporting.updateTestReport("Order is not present in Eloqua ", CaptureScreenshot.getScreenshot(SS_path),
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//form[@name='QuickSearchForm']/input[@id='FormName948']")));
+				Eloqua.searchEloquaOnlinePurchase();
+				driver.switchTo().frame("EditFrame");
+				driver.findElement(By.xpath("//td[@class='ResultCell ListTableCell']/span[@title='Global Hybris Online Purchases']")).click();
+				Thread.sleep(3000);
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame("fullPageFrame");
+				driver.switchTo().frame("EditFrame");
+				Eloqua.clickOnCustomObjectOnlinePurchase();
+				Eloqua.clickOnSearchOnlinePurchase();
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame("dialogiframe");
+				driver.switchTo().frame(0);
+				Eloqua.selectHybrisOrderIdInEloqua();
+				Eloqua.enterHybrisOrderIdInEloqua(excelOperation.getTestData("TC08", "VET_Test_Data", "Order_Id"));
+				Eloqua.clickOnSearchOrderInEloqua();
+				if(driver.findElement(By.xpath("//iframe[@id='frameAction']")).isDisplayed()){
+					driver.switchTo().frame("frameAction");
+					WebElement record = driver.findElement(By.xpath("//span[text()='Total Records: 1']"));
+					if (record.isDisplayed()) {
+						Reporting.updateTestReport("Order is present in Eloqua ", CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.PASS);
+					} else {
+						Reporting.updateTestReport("Order is not present in Eloqua ", CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
+					}}
+				else {
+					Reporting.updateTestReport("Order is not present in Eloqua ", CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
+				Eloqua.EloquaOrderEditObject();
+				driver.get("https://www.google.com/");
+				String windowHandle = driver.getWindowHandle();
+				driver.switchTo().alert().accept();
+				driver.switchTo().window(windowHandle);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Quick search box in eloqua was not clickable"
+						+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
-			Eloqua.EloquaOrderEditObject();
-			driver.get("https://www.google.com/");
-			String windowHandle = driver.getWindowHandle();
-			driver.switchTo().alert().accept();
-			driver.switchTo().window(windowHandle);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -1107,7 +1147,7 @@ public class Vet_Test_Suite extends DriverModule {
 		}
 	}
 	//Backoffice related scenarios have been made out of scope
-// This test case was created to check if subscription was created or not
+	// This test case was created to check if subscription was created or not
 	/*@Test
 	public void TC21_Check_If_Subscription_Is_Created() throws IOException {
 		try {
@@ -1167,8 +1207,8 @@ public class Vet_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC04", "VET_Test_Data", "Email_Id", emailId);
 				excelOperation.updateTestData("TC06", "VET_Test_Data", "Email_Id", emailId);
 				excelOperation.updateTestData("TC12", "VET_Test_Data", "Email_Id", emailId);
-				
-				
+
+
 			} else {
 				Reporting.updateTestReport("Data couldn't be entered", CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 			}
@@ -1177,61 +1217,67 @@ public class Vet_Test_Suite extends DriverModule {
 			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("TC01", "VET_Test_Data", "URL"));
 			VET.addSubscriptionToCart();
-			wait.until(ExpectedConditions.visibilityOf(VET.returnDiscountCodeField()));
-			VET.continueToCheckout();
-			VET.enterFirstName(excelOperation.getTestData("TC01", "VET_Test_Data", "First_Name"));
-			VET.enterLastName(excelOperation.getTestData("TC01", "VET_Test_Data", "Last_Name"));
-			String emailIdVet = VET.enterEmailId();
-			VET.enterPassword(excelOperation.getTestData("TC01", "VET_Test_Data", "Password"));
-			VET.clickCreateAccountButton();
-			VET.enterBillingFirstName(excelOperation.getTestData("TC01", "VET_Test_Data", "First_Name"));
-			VET.enterBillingLastName(excelOperation.getTestData("TC01", "VET_Test_Data", "Last_Name"));
-			VET.selectCountry(excelOperation.getTestData("TC01", "VET_Test_Data", "Country"));
-			VET.enterAddressLine1(excelOperation.getTestData("TC01", "VET_Test_Data", "Address_line1"));
-			VET.enterCity(excelOperation.getTestData("TC01", "VET_Test_Data", "City"));
-			VET.enterState(excelOperation.getTestData("TC01", "VET_Test_Data", "State"));
-			VET.enterZip(excelOperation.getTestData("TC01", "VET_Test_Data", "Zip_Code"));
-			VET.enterPhoneNumber(excelOperation.getTestData("TC01", "VET_Test_Data", "Phone_Number"));
-			VET.checkBoxBilling();
-			VET.continueToCardDetailsPage();
-			String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
-            System.out.println(payment_gateway);
-            if (payment_gateway.contains("WPG")) {
-				/* WPG Code */
-				PaymentGateway.paymentWPG_VET(driver, VET, "TC01", SS_path);
-			} else {
-				/** WPS Code **/
-				PaymentGateway.paymentWPS_VET(driver, VET, "TC01", SS_path);
-			}
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
+			try {
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'My Cart')]")));
+				VET.continueToCheckout();
+				VET.enterFirstName(excelOperation.getTestData("TC01", "VET_Test_Data", "First_Name"));
+				VET.enterLastName(excelOperation.getTestData("TC01", "VET_Test_Data", "Last_Name"));
+				String emailIdVet = VET.enterEmailId();
+				VET.enterPassword(excelOperation.getTestData("TC01", "VET_Test_Data", "Password"));
+				VET.clickCreateAccountButton();
+				VET.enterBillingFirstName(excelOperation.getTestData("TC01", "VET_Test_Data", "First_Name"));
+				VET.enterBillingLastName(excelOperation.getTestData("TC01", "VET_Test_Data", "Last_Name"));
+				VET.selectCountry(excelOperation.getTestData("TC01", "VET_Test_Data", "Country"));
+				VET.enterAddressLine1(excelOperation.getTestData("TC01", "VET_Test_Data", "Address_line1"));
+				VET.enterCity(excelOperation.getTestData("TC01", "VET_Test_Data", "City"));
+				VET.enterState(excelOperation.getTestData("TC01", "VET_Test_Data", "State"));
+				VET.enterZip(excelOperation.getTestData("TC01", "VET_Test_Data", "Zip_Code"));
+				VET.enterPhoneNumber(excelOperation.getTestData("TC01", "VET_Test_Data", "Phone_Number"));
+				VET.checkBoxBilling();
+				VET.continueToCardDetailsPage();
+				String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
+				System.out.println(payment_gateway);
+				if (payment_gateway.contains("WPG")) {
+					/* WPG Code */
+					PaymentGateway.paymentWPG_VET(driver, VET, "TC01", SS_path);
+				} else {
+					/** WPS Code **/
+					PaymentGateway.paymentWPS_VET(driver, VET, "TC01", SS_path);
+				}
+				try {
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed."
+							+ " A confirmation email')]")));
+					VET.fetchOrderId();
+					VET.fetchTax();
+					VET.fetchTotal();
+					excelOperation.updateTestData("TC09", "VET_Test_Data", "Email_Id", emailIdVet);
+					excelOperation.updateTestData("TC17", "VET_Test_Data", "Email_Id", emailIdVet);
+					excelOperation.updateTestData("TC19", "VET_Test_Data", "Email_Id", emailIdVet);
+					excelOperation.updateTestData("TC20", "VET_Test_Data", "Email_Id", emailIdVet);
+					VET.logOut(driver);
+				}
 
-			String OrderConfirmationPage = driver.getTitle().trim();
-			if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | VET online Site")) {
-				String orderID = VET.fetchOrderId();
-				String tax = VET.fetchTax();
-				String total = VET.fetchTotal();
-				excelOperation.updateTestData("TC09", "VET_Test_Data", "Email_Id", emailIdVet);
-				excelOperation.updateTestData("TC17", "VET_Test_Data", "Email_Id", emailIdVet);
-				excelOperation.updateTestData("TC19", "VET_Test_Data", "Email_Id", emailIdVet);
-				excelOperation.updateTestData("TC20", "VET_Test_Data", "Email_Id", emailIdVet);
-				VET.logOut(driver);
-			}
-
-			else
+				catch(Exception e)
 				{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
-			    VET.logOut(driver);
-			    }
+				VET.logOut(driver);
+				}
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("User was not on cart page and caused timeout exception"
+						+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
+						StatusDetails.FAIL);
+			}
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
 
 
-	
+
+
 	/*
 	 * @Date: 2/1/23
 	 * @Description: Places an order with last name "RiskifiedDenie" which results in riskified declined  order
@@ -1244,95 +1290,110 @@ public class Vet_Test_Suite extends DriverModule {
 			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("TC21", "VET_Test_Data", "URL"));
 			VET.clickOnGetStarted();
-			VET.clickOnContinueButton();
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'My Cart')]")));
 				System.out.println("Cart page came");
+				VET.clickOnContinueButton();
+				try {
+					wait.until(ExpectedConditions
+							.presenceOfElementLocated(By.xpath("//h1[contains(text(),'Create an Account or Login')]")));
+					VET.enterFirstName(excelOperation.getTestData("TC21", "VET_Test_Data", "First_Name"));
+					VET.enterLastName(excelOperation.getTestData("TC21", "VET_Test_Data", "Last_Name"));
+					String email = VET.enterEmailId();
+					VET.enterPassword(excelOperation.getTestData("TC21", "VET_Test_Data", "Password"));
+					VET.clickCreateAccountButton();
+					try {
+						wait.until(ExpectedConditions
+								.presenceOfElementLocated(By.xpath("//div[contains(text(),'Billing Address')]")));
+						VET.enterBillingFirstName(excelOperation.getTestData("TC21", "VET_Test_Data", "First_Name"));
+						VET.enterBillingLastName(excelOperation.getTestData("TC21", "VET_Test_Data", "Last_Name"));
+						VET.selectCountry(excelOperation.getTestData("TC21", "VET_Test_Data", "Country"));
+						try {
+							wait.until(ExpectedConditions.elementToBeClickable(By.id("addressLine1")));
+							VET.enterAddressLine1(excelOperation.getTestData("TC21", "VET_Test_Data", "Address_line1"));
+							VET.enterCity(excelOperation.getTestData("TC21", "VET_Test_Data", "City"));	
+							try {
+								wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(text(), 'State')]")));
+								VET.enterState(excelOperation.getTestData("TC21", "VET_Test_Data", "State"));
+							}
+							catch(Exception e){
+								Reporting.updateTestReport(
+										"State field was not present for this country: "+
+												excelOperation.getTestData("TC15", "AGS_Test_Data", "Country"),
+												CaptureScreenshot.getScreenshot(SS_path),StatusDetails.INFO);
+							}
+
+							VET.enterZip(excelOperation.getTestData("TC21", "VET_Test_Data", "Zip_Code"));
+							VET.enterPhoneNumber(excelOperation.getTestData("TC21", "VET_Test_Data", "Phone_Number"));
+							VET.checkBoxBilling();
+							VET.continueToCardDetailsPage();
+							String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
+							System.out.println(payment_gateway);
+							if (payment_gateway.contains("WPG")) {
+
+								PaymentGateway.paymentWPG_VET(driver, VET, "TC21", SS_path);
+							} else {
+
+								PaymentGateway.paymentWPS_VET(driver, VET, "TC21", SS_path);
+							}
+
+							try {
+								wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed."
+										+ " A confirmation email')]")));
+								String orderID = VET.fetchOrderId();
+								String tax = VET.fetchTax();
+								String total = VET.fetchTotal();
+								excelOperation.updateTestData("TC21", "VET_Test_Data", "Order_Id", orderID);
+								excelOperation.updateTestData("TC21", "VET_Test_Data", "Tax", tax);
+								excelOperation.updateTestData("TC21", "VET_Test_Data", "Total", total);
+								excelOperation.updateTestData("TC21", "VET_Test_Data", "Email_Id", email);
+								VET.logOut(driver);
+								driver.get(excelOperation.getTestData("Riskified_URL", "Generic_Dataset", "Data"));
+								RiskifiedRepo.enterRiskifiedUserId(excelOperation.getTestData("Riskified_User_ID", "Generic_Dataset", "Data"),SS_path);
+								RiskifiedRepo.enterRiskifiedPassword(excelOperation.getTestData("Riskified_Password", "Generic_Dataset", "Data"),SS_path);
+								RiskifiedRepo.clickOnRiskifiedSignInButton(SS_path);
+								try {
+									wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Account Settings')]")));
+									RiskifiedRepo.selectVETFromDropdown(SS_path);
+									try {
+										wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Vet Consult - Wiley')]")));
+										RiskifiedRepo.searchOrderIdInRiskified(excelOperation.getTestData("TC21", "VET_Test_Data", "Order_Id"),SS_path);
+										RiskifiedRepo.checkIfOrderIdIsPresentInRiskified(driver,SS_path);
+										RiskifiedRepo.checkIfOrderIdIsDeclinedInRiskified(driver,SS_path);
+									}
+									catch(Exception e){
+										Reporting.updateTestReport("VET order search page of Riskified couldn't be loaded and caused timeout exception ", CaptureScreenshot.getScreenshot(SS_path),
+												StatusDetails.FAIL);
+									}
+								}
+								catch(Exception e) {
+									Reporting.updateTestReport("User was not in Riskified homepage"
+											+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
+											StatusDetails.FAIL);
+								}
+							}
+
+							catch(Exception e) {
+								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+										StatusDetails.FAIL);}	
+						}
+						catch(Exception e) {
+							Reporting.updateTestReport("Address line 1 field was not clickable"
+									+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Billing address page was not loaded and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Create Account / Login page was not loaded and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
 			} catch (Exception e) {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			VET.clickOnContinueButton();
-			try {
-				wait.until(ExpectedConditions
-						.presenceOfElementLocated(By.xpath("//h1[contains(text(),'Create an Account or Login')]")));
-			} catch (Exception e) {
-				Reporting.updateTestReport("Create Account / Login page was not loaded and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			VET.enterFirstName(excelOperation.getTestData("TC21", "VET_Test_Data", "First_Name"));
-			VET.enterLastName(excelOperation.getTestData("TC21", "VET_Test_Data", "Last_Name"));
-			String email = VET.enterEmailId();
-			VET.enterPassword(excelOperation.getTestData("TC21", "VET_Test_Data", "Password"));
-			VET.clickCreateAccountButton();
-			try {
-				wait.until(ExpectedConditions
-						.presenceOfElementLocated(By.xpath("//div[contains(text(),'Billing Address')]")));
-			} catch (Exception e) {
-				Reporting.updateTestReport("Billing address page was not loaded and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			VET.enterBillingFirstName(excelOperation.getTestData("TC21", "VET_Test_Data", "First_Name"));
-			VET.enterBillingLastName(excelOperation.getTestData("TC21", "VET_Test_Data", "Last_Name"));
-			VET.selectCountry(excelOperation.getTestData("TC21", "VET_Test_Data", "Country"));
-			wait.until(ExpectedConditions.elementToBeClickable(By.id("addressLine1")));
-			VET.enterAddressLine1(excelOperation.getTestData("TC21", "VET_Test_Data", "Address_line1"));
-			VET.enterCity(excelOperation.getTestData("TC21", "VET_Test_Data", "City"));
-			try {
-				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(text(), 'State')]")));
-				VET.enterState(excelOperation.getTestData("TC21", "VET_Test_Data", "State"));
-			}
-			catch(Exception e){
-				System.out.println("State field was not present for this country: "+excelOperation.getTestData("TC15", "AGS_Test_Data", "Country"));
-			}
-			
-			VET.enterZip(excelOperation.getTestData("TC21", "VET_Test_Data", "Zip_Code"));
-			VET.enterPhoneNumber(excelOperation.getTestData("TC21", "VET_Test_Data", "Phone_Number"));
-			VET.checkBoxBilling();
-			VET.continueToCardDetailsPage();
-			String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
-			System.out.println(payment_gateway);
-			if (payment_gateway.contains("WPG")) {
-				
-				PaymentGateway.paymentWPG_VET(driver, VET, "TC21", SS_path);
-			} else {
-				
-				PaymentGateway.paymentWPS_VET(driver, VET, "TC21", SS_path);
-			}
-			
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
-
-			String OrderConfirmationPage = driver.getTitle().trim();
-			if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | VET online Site")) {
-				String orderID = VET.fetchOrderId();
-				String tax = VET.fetchTax();
-				String total = VET.fetchTotal();
-				excelOperation.updateTestData("TC21", "VET_Test_Data", "Order_Id", orderID);
-				excelOperation.updateTestData("TC21", "VET_Test_Data", "Tax", tax);
-				excelOperation.updateTestData("TC21", "VET_Test_Data", "Total", total);
-				excelOperation.updateTestData("TC21", "VET_Test_Data", "Email_Id", email);
-				VET.logOut(driver);
-				driver.get(excelOperation.getTestData("Riskified_URL", "Generic_Dataset", "Data"));
-				RiskifiedRepo.enterRiskifiedUserId(excelOperation.getTestData("Riskified_User_ID", "Generic_Dataset", "Data"));
-				RiskifiedRepo.enterRiskifiedPassword(excelOperation.getTestData("Riskified_Password", "Generic_Dataset", "Data"));
-				RiskifiedRepo.clickOnRiskifiedSignInButton();
-				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Account Settings')]")));
-				RiskifiedRepo.selectVETFromDropdown();
-				try {
-					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Vet Consult - Wiley')]")));
-					RiskifiedRepo.searchOrderIdInRiskified(excelOperation.getTestData("TC21", "VET_Test_Data", "Order_Id"));
-				}
-				catch(Exception e){
-					Reporting.updateTestReport("AGS order search page of Riskified couldn't be loaded and caused timeout exception ", CaptureScreenshot.getScreenshot(SS_path),
-							StatusDetails.FAIL);
-				}
-				RiskifiedRepo.checkIfOrderIdIsPresentInRiskified(driver);
-				RiskifiedRepo.checkIfOrderIdIsDeclinedInRiskified(driver);
-			}
-
-			else
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);				
+			}		
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -1342,8 +1403,8 @@ public class Vet_Test_Suite extends DriverModule {
 
 		}
 	}
-	
 
 
-	
+
+
 }
