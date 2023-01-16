@@ -1108,30 +1108,19 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			
 			ScrollingWebPage.PageDown(driver,SS_path);
 			
-            String merchantResponse = THarness.Http_Auth_FetchMerchantResponse();
-			excelOperation.updateTestData("TC14", "TestHarness_Test_Data", "merchantResponse", merchantResponse);
-			
-            String merchantReference = THarness.Http_Auth_FetchMerchantReference();
-			excelOperation.updateTestData("TC14", "TestHarness_Test_Data", "merchantReference", merchantReference);
+			excelOperation.updateTestData("TC14", "TestHarness_Test_Data", "merchantResponse", THarness.Http_Auth_FetchMerchantResponse());
+			excelOperation.updateTestData("TC14", "TestHarness_Test_Data", "merchantReference", THarness.Http_Auth_FetchMerchantReference());
 			
 			ScrollingWebPage.PageDown(driver,SS_path);
 			
-            String authCode = THarness.SOAP_TokenAuthSettle_FetchAuthCode();
-			excelOperation.updateTestData("TC14", "TestHarness_Test_Data", "Res_auth_Code", authCode);
-			
-            String acquirerID = THarness.SOAP_TokenAuthSettle_FetchAcquirerID();
-			excelOperation.updateTestData("TC14", "TestHarness_Test_Data", "acquirerID", acquirerID);
-			
-            String acquirerName = THarness.SOAP_TokenAuthSettle_FetchAcquirerName();
-			excelOperation.updateTestData("TC14", "TestHarness_Test_Data", "acquirerName", acquirerName);
+			excelOperation.updateTestData("TC14", "TestHarness_Test_Data", "Res_auth_Code", THarness.SOAP_TokenAuthSettle_FetchAuthCode());
+			excelOperation.updateTestData("TC14", "TestHarness_Test_Data", "acquirerID", THarness.SOAP_TokenAuthSettle_FetchAcquirerID());
+			excelOperation.updateTestData("TC14", "TestHarness_Test_Data", "acquirerName", THarness.SOAP_TokenAuthSettle_FetchAcquirerName());
 			
 			ScrollingWebPage.PageDown(driver,SS_path);
 			
-            String maskedCardNumber = THarness.SOAP_TokenAuthSettle_FetchMaskedCardNumber();
-			excelOperation.updateTestData("TC14", "TestHarness_Test_Data", "maskedCardNumber", maskedCardNumber);
-			
-            String cardExpiry = THarness.SOAP_TokenAuthSettle_FetchCardExpiry();
-			excelOperation.updateTestData("TC14", "TestHarness_Test_Data", "cardExpiry", cardExpiry);
+			excelOperation.updateTestData("TC14", "TestHarness_Test_Data", "maskedCardNumber", THarness.SOAP_TokenAuthSettle_FetchMaskedCardNumber());
+			excelOperation.updateTestData("TC14", "TestHarness_Test_Data", "cardExpiry", THarness.SOAP_TokenAuthSettle_FetchCardExpiry());
 		}
 		
 		catch (Exception e) 
