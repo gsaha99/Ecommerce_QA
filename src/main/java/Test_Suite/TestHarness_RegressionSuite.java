@@ -1007,36 +1007,36 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Authorise & Settle Response')]")));
 			
-			String actualReturnMessage = THarness.Http_Tokenise_FetchReturnMessage();
+			
 			String expectedReturnMessage = excelOperation.getTestData("TC13", "Error_Message", "Return_Message");
-			if(actualReturnMessage.compareTo(expectedReturnMessage)==0) {
+			if(THarness.Http_Tokenise_FetchReturnMessage().compareTo(expectedReturnMessage)==0) {
 				
-				Reporting.updateTestReport("Return message is: " + actualReturnMessage,
+				Reporting.updateTestReport("Return message is: " + THarness.Http_Tokenise_FetchReturnMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			}
 			else 
 			{
-				Reporting.updateTestReport("Return message is not: " + actualReturnMessage,
+				Reporting.updateTestReport("Return message is not: " + THarness.Http_Tokenise_FetchReturnMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			excelOperation.updateTestData("TC13", "TestHarness_Test_Data", "Return_Message", actualReturnMessage);
-			String actualReturnCode = THarness.Http_Tokenise_FetchReturnCode();
+			excelOperation.updateTestData("TC13", "TestHarness_Test_Data", "Return_Message", THarness.Http_Tokenise_FetchReturnMessage());
+			
 			String expectedReturnCode = excelOperation.getTestData("TC13", "Error_Message", "Return_Code");
-			if(actualReturnCode.compareTo(expectedReturnCode)==0) {
+			if(THarness.Http_Tokenise_FetchReturnCode().compareTo(expectedReturnCode)==0) {
 				
-				Reporting.updateTestReport("Return code is: " + actualReturnCode,
+				Reporting.updateTestReport("Return code is: " + THarness.Http_Tokenise_FetchReturnCode(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			}
 			else 
 			{
-				Reporting.updateTestReport("Return code is not: " + actualReturnCode,
+				Reporting.updateTestReport("Return code is not: " + THarness.Http_Tokenise_FetchReturnCode(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			excelOperation.updateTestData("TC13", "TestHarness_Test_Data", "Return_Code", actualReturnCode);
-			String operation = THarness.Http_Tokenise_FetchOperation();
-			excelOperation.updateTestData("TC13", "TestHarness_Test_Data", "Operation", operation);
-			String transID = THarness.Http_Tokenise_FetchTransID();
-			excelOperation.updateTestData("TC13", "TestHarness_Test_Data", "transID", transID);
+			excelOperation.updateTestData("TC13", "TestHarness_Test_Data", "Return_Code", THarness.Http_Tokenise_FetchReturnCode());
+			
+			excelOperation.updateTestData("TC13", "TestHarness_Test_Data", "Operation", THarness.Http_Tokenise_FetchOperation());
+			
+			excelOperation.updateTestData("TC13", "TestHarness_Test_Data", "transID", THarness.Http_Tokenise_FetchTransID());
 			
 		} 
 		catch (Exception e) 
