@@ -1704,55 +1704,57 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			THarness.SOAP_VoidAuth_EnterAuthCode(excelOperation.getTestData("TC21", "TestHarness_Test_Data", "Auth_Code"));
 			THarness.Http_Tokenise_ClickContinue();
 			
-		    WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
-			pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Void Authorise Response')]")));
+			try {
 			
-			driver.findElement(By.xpath("//h2[contains(text(),'Void Authorise Response')]")).click();
-			
-	        String expectedReturnMessage = excelOperation.getTestData("TC21", "Error_Message", "Return_Message");
-	            
-		    if(THarness.Http_Tokenise_FetchReturnMessage().compareTo(expectedReturnMessage)==0) 
-		    {
-				
-				Reporting.updateTestReport("Return message is: " + THarness.Http_Tokenise_FetchReturnMessage(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		           WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
+			       pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Void Authorise Response')]")));
+			       driver.findElement(By.xpath("//h2[contains(text(),'Void Authorise Response')]")).click();
+			       String actualReturnMessage = THarness.Http_Tokenise_FetchReturnMessage();
+				   String expectedReturnMessage = excelOperation.getTestData("TC21", "Error_Message", "Return_Message");
+				   if(actualReturnMessage.compareTo(expectedReturnMessage)==0) 
+						      {
+							
+							        Reporting.updateTestReport("Return message is: " + actualReturnMessage,
+									         CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						      }
+			       else 
+						      {
+							        Reporting.updateTestReport("Return message is not: " + expectedReturnMessage,
+									         CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						      }
+				   excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "Return_Message", actualReturnMessage);
+				   String actualReturnCode = THarness.Http_Tokenise_FetchReturnCode();
+				   String expectedReturnCode = excelOperation.getTestData("TC21", "Error_Message", "Return_Code");
+				   if(actualReturnCode.compareTo(expectedReturnCode)==0) 
+						      {				
+							        Reporting.updateTestReport("Return code is: " + actualReturnCode,
+									     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						      }
+				   else 
+						      {
+							        Reporting.updateTestReport("Return code is not: " + expectedReturnCode,
+									       CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						      }
+				   excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "Return_Code", actualReturnCode);
+			       excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "Operation", THarness.Http_Tokenise_FetchOperation());
+			       excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "transID", THarness.Http_Tokenise_FetchTransID());
+			       ScrollingWebPage.PageDown(driver,SS_path);
+			       excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "merchantResponse", THarness.Http_Auth_FetchMerchantResponse());
+			       excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "merchantReference", THarness.Http_Auth_FetchMerchantReference());
+			       ScrollingWebPage.PageDown(driver,SS_path);
+			       excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "Res_auth_Code", THarness.SOAP_TokenAuthSettle_FetchAuthCode());
+			       excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "acquirerID", THarness.SOAP_TokenAuthSettle_FetchAcquirerID());
+			       excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "acquirerName", THarness.SOAP_TokenAuthSettle_FetchAcquirerName());
+			       ScrollingWebPage.PageDown(driver,SS_path);
+			       excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "maskedCardNumber", THarness.SOAP_TokenAuthSettle_FetchMaskedCardNumber());
+			       excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "cardExpiry", THarness.SOAP_TokenAuthSettle_FetchCardExpiry());
 			}
-			else 
-			{
-				Reporting.updateTestReport("Return message is not: " + THarness.Http_Tokenise_FetchReturnMessage(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "Return_Message", THarness.Http_Tokenise_FetchReturnMessage());
-			String expectedReturnCode = excelOperation.getTestData("TC21", "Error_Message", "Return_Code");
-			if(THarness.Http_Tokenise_FetchReturnCode().compareTo(expectedReturnCode)==0) {
-				
-				Reporting.updateTestReport("Return code is: " + THarness.Http_Tokenise_FetchReturnCode(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			}
-			else 
-			{
-				Reporting.updateTestReport("Return code is not: " + THarness.Http_Tokenise_FetchReturnCode(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "Return_Code", THarness.Http_Tokenise_FetchReturnCode());
-			excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "Operation", THarness.Http_Tokenise_FetchOperation());
-			excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "transID", THarness.Http_Tokenise_FetchTransID());
-			
-			ScrollingWebPage.PageDown(driver,SS_path);
-			
-			excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "merchantResponse", THarness.Http_Auth_FetchMerchantResponse());
-			excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "merchantReference", THarness.Http_Auth_FetchMerchantReference());
-			
-			ScrollingWebPage.PageDown(driver,SS_path);
-			
-			excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "Res_auth_Code", THarness.SOAP_TokenAuthSettle_FetchAuthCode());
-			excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "acquirerID", THarness.SOAP_TokenAuthSettle_FetchAcquirerID());
-			excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "acquirerName", THarness.SOAP_TokenAuthSettle_FetchAcquirerName());
-			
-			ScrollingWebPage.PageDown(driver,SS_path);
-			
-			excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "maskedCardNumber", THarness.SOAP_TokenAuthSettle_FetchMaskedCardNumber());
-			excelOperation.updateTestData("TC21", "TestHarness_Test_Data", "cardExpiry", THarness.SOAP_TokenAuthSettle_FetchCardExpiry());
+			catch (Exception e) 
+		       {
+			        System.out.println("Response page is not displayed after 50 seconds" + e.getMessage());
+			        Reporting.updateTestReport("Response page is not displayed after 50 seconds" + e.getMessage(),
+					        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		       }
 		} 
 		catch (Exception e) 
 		{
