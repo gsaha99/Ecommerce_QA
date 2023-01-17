@@ -2,35 +2,35 @@
 <testng-results ignored="31" total="32" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-01-16T17:56:54 IST" name="Default suite" finished-at="2023-01-16T17:57:20 IST" duration-ms="25865">
+  <suite started-at="2023-01-17T12:18:27 IST" name="WPS_Regression" finished-at="2023-01-17T12:19:16 IST" duration-ms="49339">
     <groups>
     </groups>
-    <test started-at="2023-01-16T17:56:54 IST" name="Default test" finished-at="2023-01-16T17:57:20 IST" duration-ms="25865">
+    <test started-at="2023-01-17T12:18:27 IST" name="Test_Suite" finished-at="2023-01-17T12:19:16 IST" duration-ms="49339">
       <class name="Test_Suite.TestHarness_RegressionSuite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@273444fe]" started-at="2023-01-16T17:56:54 IST" name="initiate" finished-at="2023-01-16T17:57:00 IST" duration-ms="5649" status="PASS">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@57a78e3]" started-at="2023-01-17T12:18:27 IST" name="initiate" finished-at="2023-01-17T12:18:36 IST" duration-ms="9255" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@34d9df9f]]>
+                <![CDATA[org.testng.TestRunner@74b97416]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@273444fe]" started-at="2023-01-16T17:57:00 IST" name="initializeRepo" finished-at="2023-01-16T17:57:00 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="73" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@57a78e3]" started-at="2023-01-17T12:18:36 IST" name="initializeRepo" finished-at="2023-01-17T12:18:36 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="62" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeRepo -->
-        <test-method signature="TC32_SOAP_VoidAuth_Error_Message()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@273444fe]" started-at="2023-01-16T17:57:00 IST" name="TC32_SOAP_VoidAuth_Error_Message" finished-at="2023-01-16T17:57:18 IST" duration-ms="18013" status="PASS">
+        <test-method signature="TC02_HTTP_Tokenise_Request_Response()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@57a78e3]" started-at="2023-01-17T12:18:36 IST" name="TC02_HTTP_Tokenise_Request_Response" finished-at="2023-01-17T12:19:14 IST" duration-ms="37716" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC32_SOAP_VoidAuth_Error_Message -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@273444fe]" started-at="2023-01-16T17:57:18 IST" name="CloseBrowser" finished-at="2023-01-16T17:57:20 IST" duration-ms="2050" status="PASS">
+        </test-method> <!-- TC02_HTTP_Tokenise_Request_Response -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@57a78e3]" started-at="2023-01-17T12:19:14 IST" name="CloseBrowser" finished-at="2023-01-17T12:19:16 IST" duration-ms="2066" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
       </class> <!-- Test_Suite.TestHarness_RegressionSuite -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- Test_Suite -->
+  </suite> <!-- WPS_Regression -->
 </testng-results>
