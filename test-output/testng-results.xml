@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="31" total="32" passed="1" failed="0" skipped="0">
+<testng-results ignored="28" total="32" passed="4" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-01-17T12:18:27 IST" name="WPS_Regression" finished-at="2023-01-17T12:19:16 IST" duration-ms="49339">
+  <suite started-at="2023-01-18T17:50:08 IST" name="WPS_Regression" finished-at="2023-01-18T17:51:45 IST" duration-ms="97087">
     <groups>
     </groups>
-    <test started-at="2023-01-17T12:18:27 IST" name="Test_Suite" finished-at="2023-01-17T12:19:16 IST" duration-ms="49339">
+    <test started-at="2023-01-18T17:50:08 IST" name="Test_Suite" finished-at="2023-01-18T17:51:45 IST" duration-ms="97087">
       <class name="Test_Suite.TestHarness_RegressionSuite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@57a78e3]" started-at="2023-01-17T12:18:27 IST" name="initiate" finished-at="2023-01-17T12:18:36 IST" duration-ms="9255" status="PASS">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@57a78e3]" started-at="2023-01-18T17:50:08 IST" name="initiate" finished-at="2023-01-18T17:50:13 IST" duration-ms="4756" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@74b97416]]>
+                <![CDATA[org.testng.TestRunner@4db45d]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@57a78e3]" started-at="2023-01-17T12:18:36 IST" name="initializeRepo" finished-at="2023-01-17T12:18:36 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="62" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@57a78e3]" started-at="2023-01-18T17:50:13 IST" name="initializeRepo" finished-at="2023-01-18T17:50:13 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="59" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeRepo -->
-        <test-method signature="TC02_HTTP_Tokenise_Request_Response()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@57a78e3]" started-at="2023-01-17T12:18:36 IST" name="TC02_HTTP_Tokenise_Request_Response" finished-at="2023-01-17T12:19:14 IST" duration-ms="37716" status="PASS">
+        <test-method signature="TC10_HTTP_Authorise_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@57a78e3]" started-at="2023-01-18T17:50:13 IST" name="TC10_HTTP_Authorise_ES_Stripe_Validation" finished-at="2023-01-18T17:50:49 IST" duration-ms="36729" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC02_HTTP_Tokenise_Request_Response -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@57a78e3]" started-at="2023-01-17T12:19:14 IST" name="CloseBrowser" finished-at="2023-01-17T12:19:16 IST" duration-ms="2066" status="PASS">
+        </test-method> <!-- TC10_HTTP_Authorise_ES_Stripe_Validation -->
+        <test-method signature="TC14_HTTP_TokenAuth_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@57a78e3]" started-at="2023-01-18T17:50:49 IST" name="TC14_HTTP_TokenAuth_ES_Stripe_Validation" finished-at="2023-01-18T17:51:08 IST" duration-ms="18571" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC14_HTTP_TokenAuth_ES_Stripe_Validation -->
+        <test-method signature="TC20_HTTP_VoidAuth_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@57a78e3]" started-at="2023-01-18T17:51:08 IST" name="TC20_HTTP_VoidAuth_ES_Stripe_Validation" finished-at="2023-01-18T17:51:25 IST" duration-ms="17146" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC20_HTTP_VoidAuth_ES_Stripe_Validation -->
+        <test-method signature="TC21_HTTP_Validate_for_Void_Auth_Error_Message()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@57a78e3]" started-at="2023-01-18T17:51:25 IST" name="TC21_HTTP_Validate_for_Void_Auth_Error_Message" finished-at="2023-01-18T17:51:42 IST" duration-ms="17047" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC21_HTTP_Validate_for_Void_Auth_Error_Message -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@57a78e3]" started-at="2023-01-18T17:51:42 IST" name="CloseBrowser" finished-at="2023-01-18T17:51:45 IST" duration-ms="2688" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->

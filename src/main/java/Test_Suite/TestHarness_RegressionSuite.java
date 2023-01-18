@@ -789,15 +789,16 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			        excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "Operation", THarness.Http_Tokenise_FetchOperation());
 			        excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "transID", THarness.Http_Tokenise_FetchTransID());
 			        ScrollingWebPage.PageDown(driver,SS_path);
-			        excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "merchantResponse", THarness.Http_Tokenise_FetchMerchantResponse());
-			        excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "merchantReference", THarness.Http_Tokenise_FetchMerchantReference());
+			        excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "merchantResponse", THarness.Http_Auth_FetchMerchantResponse());
+			        excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "merchantReference", THarness.Http_Auth_FetchMerchantReference());
 		            ScrollingWebPage.PageDown(driver,SS_path);
-			        excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "Token", THarness.Http_Tokenise_FetchToken());
-			        excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "acquirerID", THarness.Http_Tokenise_FetchAcquirerID());
-			        excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "acquirerName", THarness.Http_Tokenise_FetchAcquirerName());
+			        excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "Token", THarness.Http_Auth_FetchToken());
+			        excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "Res_auth_Code", THarness.Http_Auth_FetchAuthCode());
+			        excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "acquirerID", THarness.Http_Auth_FetchAcquirerID());
+			        excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "acquirerName", THarness.Http_Auth_FetchAcquirerName());
 			        ScrollingWebPage.PageDown(driver,SS_path);
-                    excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "maskedCardNumber", THarness.Http_Tokenise_FetchMaskedCardNumber());
-			        excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "cardExpiry", THarness.Http_Tokenise_FetchCardExpiry());
+                    excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "maskedCardNumber", THarness.Http_Auth_FetchMaskedCardNumber());
+			        excelOperation.updateTestData("TC10", "TestHarness_Test_Data", "cardExpiry", THarness.Http_Auth_FetchCardExpiry());
 			}
 			catch (Exception e) 
 		       {
@@ -914,7 +915,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			THarness.Http_Tokenise_EnterClientDescription(excelOperation.getTestData("TC12", "TestHarness_Test_Data", "Description"));
 			THarness.Http_Authorise_EnterValue(excelOperation.getTestData("TC12", "TestHarness_Test_Data", "Value"));
 			THarness.Http_Authorise_EnterCurrency(excelOperation.getTestData("TC12", "TestHarness_Test_Data", "Currency_Code"));
-			THarness.Http_Tokenise_SelectRegion();
+			THarness.Http_Authorise_SelectRegion();
 			THarness.Http_Tokenise_EnterAddress(excelOperation.getTestData("TC12", "TestHarness_Test_Data", "Address"));
 			THarness.Http_Tokenise_EnterPostalCode(excelOperation.getTestData("TC12", "TestHarness_Test_Data", "Zip_Code"));
 			THarness.Http_Tokenise_EnterCountryCode(excelOperation.getTestData("TC12", "TestHarness_Test_Data", "Country_Code"));
@@ -962,15 +963,16 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "Operation", THarness.Http_Tokenise_FetchOperation());
 			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "transID", THarness.Http_Tokenise_FetchTransID());
 			       ScrollingWebPage.PageDown(driver,SS_path);
-			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "merchantResponse", THarness.Http_Tokenise_FetchMerchantResponse());
-			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "merchantReference", THarness.Http_Tokenise_FetchMerchantReference());
+			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "merchantResponse", THarness.Http_Auth_FetchMerchantResponse());
+			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "merchantReference", THarness.Http_Auth_FetchMerchantReference());
 			       ScrollingWebPage.PageDown(driver,SS_path);
-			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "Token", THarness.Http_Tokenise_FetchToken());
-			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "acquirerID", THarness.Http_Tokenise_FetchAcquirerID());
-			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "acquirerName", THarness.Http_Tokenise_FetchAcquirerName());
+			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "Token", THarness.Http_Auth_FetchToken());
+			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "Res_auth_Code", THarness.Http_Auth_FetchAuthCode());
+			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "acquirerID", THarness.Http_Auth_FetchAcquirerID());
+			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "acquirerName", THarness.Http_Auth_FetchAcquirerName());
 			       ScrollingWebPage.PageDown(driver,SS_path);
-                   excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "maskedCardNumber", THarness.Http_Tokenise_FetchMaskedCardNumber());
-			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "cardExpiry", THarness.Http_Tokenise_FetchCardExpiry());
+                   excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "maskedCardNumber", THarness.Http_Auth_FetchMaskedCardNumber());
+			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "cardExpiry", THarness.Http_Auth_FetchCardExpiry());
 			}
 			catch (Exception e) 
 		       {

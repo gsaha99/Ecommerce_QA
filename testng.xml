@@ -6,7 +6,10 @@
 <class name="Test_Suite.TestHarness_RegressionSuite">
 <methods>
 
-<include name="TC02.*" />
+<include name="TC10.*" />
+<include name="TC14.*" />
+<include name="TC20.*" />
+<include name="TC21.*" />
 
 
 
