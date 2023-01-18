@@ -34,7 +34,7 @@ public class DriverModule {
 			
 			String testSuiteName=context.getCurrentXmlTest().getClasses().stream()
 		               .findFirst().get().getName().substring(11);
-			System.setProperty("webdriver.chrome.driver", ".\\driver\\chromedriver.exe");
+			//System.setProperty("webdriver.chrome.driver", ".\\driver\\chromedriver.exe");
 
 			//configure options parameter to Chrome driver
 			ChromeOptions options = new ChromeOptions();
