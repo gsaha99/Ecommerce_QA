@@ -1244,22 +1244,22 @@ public class WEL_Test_Suite extends DriverModule {
 	@Test
 	public void TC25_ShippingMethodfor_USUKAustralia_CanadaIndiaSingapore() throws IOException {
 		try {
-			JavascriptExecutor JS = (JavascriptExecutor) driver;
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			Reporting.test = Reporting.extent.createTest("TC25_ShippingMethodfor_USUKAustralia_CanadaIndiaSingapore");
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
-			JS.executeScript("window.scrollBy(0,600)");
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonCMAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonExploreCourseCMAProduct();
 			Thread.sleep(3000);
-			JS.executeScript("window.scrollBy(0,300)");
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonViewCourseForCMAProduct();
 			Thread.sleep(2000);
 			WEL.ClickonCMAPrinteBook();
 			Thread.sleep(2000);
-			JS.executeScript("window.scrollBy(0,400)");
+			ScrollingWebPage.PageDown(driver, SS_path);
 			Thread.sleep(1000);
 			WEL.ClickonCMAAddToCart();
 			WEL.ClickonCheckOutOnCartPage();
@@ -1268,33 +1268,84 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.ClickonLoginAndContinue();
 			WEL.ClickonCheckOutOnCartPage();
 			WEL.ClickonCheckOutOnCartPage();
-			JS.executeScript("window.scrollBy(0,300)");
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickOnAddNewAddressButton();
-			WEL.GuestFirstName(excelOperation.getTestData("TC25", "WEL_Test_Data", "Guest_Fname"));
-			WEL.GuestLastName(excelOperation.getTestData("TC25", "WEL_Test_Data", "Guest_Lname"));
-			WEL.selectShipCountry(excelOperation.getTestData("TC25", "WEL_Test_Data", "Sh_Country1"));
-			String UKShipmethod = WEL.ShippingMethodForUK();
-			System.out.println(UKShipmethod);
-			Thread.sleep(2000);
-			if (UKShipmethod.equals("$40.00"))
-				Reporting.updateTestReport("The Shipping method for UK is $40",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else
-				Reporting.updateTestReport("Failed to Shipping method", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			WEL.selectShipCountry(excelOperation.getTestData("TC25", "WEL_Test_Data", "Sh_Country2"));
-			String AusShipmethod = WEL.ShippingMethodForUK();
-			System.out.println(AusShipmethod);
-			Thread.sleep(2000);
-			if (AusShipmethod.equals("$40.00"))
-				Reporting.updateTestReport("The Shipping method for Australia is $40",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else
-				Reporting.updateTestReport("Failed to Shipping method", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
+			String countries = excelOperation.getTestData("TC25", "WEL_Test_Data", "Shipping_Countries");
+			//String country1 = countries.substring(0, 13);
+			String words[] = countries.split(",");
+			
+			for (int i = 0; i < words.length; i++) {
+				
+				WEL.selectShipCountry(words[i]);
+				
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+				//ScrollingWebPage.PageScrolldown(driver, 0,140, SS_path);
+				ScrollingWebPage.PageDown(driver, SS_path);
+				WEL.ShippingMethodForUK();
 
+			}
+
+			// WEL.selectShipCountry();
+			/*
+			 * String reversedString = ""; for (int i = 0; i < words.length; i++) { if (i ==
+			 * words.length) reversedString = words[i] + reversedString; else reversedString
+			 * = " " + words[i] + reversedString; System.out.println(reversedString);
+			 * WEL.selectShipCountries(reversedString); }
+			 * System.out.print("Reversed string : " + reversedString);
+			 * 
+			 * WEL.selectShipCountry(excelOperation.getTestData("TC25", "WEL_Test_Data",
+			 * "Sh_Country1")); String UKShipmethod = WEL.ShippingMethodForUK();
+			 * System.out.println(UKShipmethod); Thread.sleep(2000); if
+			 * (UKShipmethod.equals("$40.00"))
+			 * Reporting.updateTestReport("The Shipping method for UK is $40",
+			 * CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS); else
+			 * Reporting.updateTestReport("Failed to Shipping method",
+			 * CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			 * WEL.selectShipCountry(excelOperation.getTestData("TC25", "WEL_Test_Data",
+			 * "Sh_Country2")); String AusShipmethod = WEL.ShippingMethodForUK();
+			 * System.out.println(AusShipmethod); Thread.sleep(2000); if
+			 * (AusShipmethod.equals("$40.00"))
+			 * Reporting.updateTestReport("The Shipping method for Australia is $40",
+			 * CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS); else
+			 * Reporting.updateTestReport("Failed to Shipping method",
+			 * CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			 * WEL.selectShipCountry(excelOperation.getTestData("TC25", "WEL_Test_Data",
+			 * "Sh_Country3")); String canadaone = WEL.ShippingMethodOneForCanada(); if
+			 * (canadaone.equals("$5.00"))
+			 * Reporting.updateTestReport("The Shipping method for Canada is $5.00",
+			 * CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS); else
+			 * Reporting.updateTestReport("Failed to Shipping method",
+			 * CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL); String
+			 * canadatwo = WEL.ShippingMethodTwoForCanada(); if (canadatwo.equals("$12.00"))
+			 * Reporting.updateTestReport("The Shipping method for Canada is $12.00",
+			 * CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS); else
+			 * Reporting.updateTestReport("Failed to Shipping method",
+			 * CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			 * WEL.selectShipCountry(excelOperation.getTestData("TC25", "WEL_Test_Data",
+			 * "Sh_Country4")); String SingaporeShipmethod =
+			 * WEL.ShippingMethodForSingapore(); Thread.sleep(2000); if
+			 * (SingaporeShipmethod.equals("$40.00"))
+			 * Reporting.updateTestReport("The Shipping method for Singapore is $40",
+			 * CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS); else
+			 * Reporting.updateTestReport("Failed to Shipping method",
+			 * CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			 * 
+			 * WEL.selectShipCountry(excelOperation.getTestData("TC25", "WEL_Test_Data",
+			 * "Sh_Country5")); String IndiaShipmethod = WEL.ShippingMethodForIndia();
+			 * Thread.sleep(2000); if (IndiaShipmethod.equals("$40.00"))
+			 * Reporting.updateTestReport("The Shipping method for India is $40",
+			 * CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS); else
+			 * Reporting.updateTestReport("Failed to Shipping method",
+			 * CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			 * ScrollingWebPage.PageScrollUp(driver, 0, -300, SS_path);
+			 * 
+			 */ /*
+				 * WEL.ClickOnBackTOCart(); WEL.ClickOnRemoveOnCartPage();
+				 * WEL.ClickAccountCartPage(); WEL.ClickonSignOut();
+				 */
 		} catch (Exception e) {
-
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 

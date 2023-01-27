@@ -2,8 +2,6 @@ package PageObjectRepo;
 
 import Test_Suite.WEL_Test_Suite;
 import utilities.CaptureScreenshot;
-import utilities.DriverModule;
-
 import java.io.IOException;
 import java.sql.Driver;
 import java.text.SimpleDateFormat;
@@ -32,8 +30,26 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//a[@class='icon-color nav-login']")
 	WebElement StandaloneLogin;
 
-	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']//span[contains(text(),'$40')]")
+	@FindBy(xpath = "//div[@class='checkout-delivery-list checkoutDeliveryMethodList']")
 	WebElement UkShipMethod;
+
+	@FindBy(xpath = "(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
+	WebElement UseSelectedShippingAddressButtonAddressDoctorPopUp;
+
+	@FindBy(xpath = "(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
+	WebElement UseSelectedBillingAddressButtonAddressDoctorPopUp;
+
+	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']//span[contains(text(),'$40')]")
+	WebElement SingaporeShipMethod;
+
+	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']//span[contains(text(),'$40')]")
+	WebElement IndiaShipMethod;
+
+	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']//span[contains(text(),'$5')]")
+	WebElement CanadaShipMethod;
+
+	@FindBy(xpath = "//div[@class='deliveryMethodMainExceptFirstDiv']//span[contains(text(),'$12')]")
+	WebElement CanadaShipMethod2;
 
 	@FindBy(xpath = "(//img[@class='js-responsive-image'])[1]")
 	WebElement WELIconOrderConfirmationPage;
@@ -113,6 +129,12 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//a[contains(text(),'ACCOUNT')]")
 	WebElement AccountText;
 
+	@FindBy(xpath = "(//div[@id='newAddressBtnDiv']/button[@id='addNewAddressButton'])")
+	WebElement EnterNewAddressButton;
+
+	@FindBy(xpath = "(//div[@id='newAddressBtnDiv']/button[@id='addNewBillingAddressButton'])")
+	WebElement EnterNewAddressButtonOnBillPage;
+
 	@FindBy(xpath = "//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[3]")
 	WebElement CIAProduct;
 
@@ -124,6 +146,15 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//div[@class='product-detail-page']//div[@class='container-fluid banner-container product-detail-banner mt-4']//button")
 	WebElement CIAAddToCart;
+
+	@FindBy(xpath = "//div[@id='Ultimate_CPA Review Course 2022 (Mentorship & Tutoring Bundle)']//form//button")
+	WebElement CPAAddToCart;
+
+	@FindBy(xpath = "((//div[@class='col-xs-12 col-sm-6 package-selection-left-col'])[2]//form//label)[2]")
+	WebElement CIAeBook;
+
+	@FindBy(xpath = "//div[@class='col-xs-12 col-sm-6 package-selection-left-col'])[2]//form//label)[1])")
+	WebElement CIAPrint;
 
 	@FindBy(xpath = "//div[@class='helpButton']")
 	WebElement HelpButton;
@@ -343,6 +374,9 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//button[@id='paymentBilling']")
 	WebElement SaveAndContinueOnCheckOutPage;
 
+	@FindBy(xpath = "//label[@id='sameAsBillingLabel']")
+	WebElement ShippingBillingSameAddress;
+
 	@FindBy(xpath = "(//button[@id='placeOrder'])[1]")
 	WebElement PlaceOrder;
 
@@ -351,6 +385,9 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "(//div[@class='col-md-5 col-6 noPadding orderReviewDetailsValue'])[2]")
 	WebElement OrderTax;
+	
+	@FindBy(xpath = "//div[@class='col-md-5 col-6 noPadding orderReviewDetailsValue']")
+	WebElement TaxAmount;
 
 	@FindBy(xpath = "//div[@class='col-md-5 col-6 noPadding orderReviewTotalPrice']")
 	WebElement OrderTotal;
@@ -363,6 +400,12 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//button[@class='button form-button welCheckoutBtn submitWelForm width100']")
 	WebElement FreeTrailSubbmit;
+	
+	@FindBy(xpath = "//input[@id='townCity']")
+	WebElement IndiaCity;
+	
+	@FindBy(xpath = "//input[@id='address.region']")
+	WebElement IndiaState;
 
 	public void EnterUserNameOnLoginPage(String UserName) throws IOException {
 		try {
@@ -433,6 +476,20 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport(
 					"Failed to click on ShipSaveAndContinue with the error message " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
+	public void ShipAndBillAddressSection() throws IOException {
+		try {
+			// ShippingBillingSameAddress.clear();
+			ShippingBillingSameAddress.click();
+			Reporting.updateTestReport("ShipAndBillingAddress Checkbox Unchecked successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Uncheck ShipAndBillingAddress Checkbox with the error message "
+					+ e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
 	}
@@ -582,7 +639,7 @@ public class app_WEL_Repo {
 
 	public boolean CheckAccountTextAftreLogin() throws IOException {
 		try {
-			String username = AccountText.getText();
+			AccountText.getText();
 			if (AccountText.isDisplayed())
 				return true;
 			else
@@ -959,8 +1016,21 @@ public class app_WEL_Repo {
 
 		}
 	}
-
+	
 	public void selectCountry(String country) throws IOException {
+		try {
+
+			Select selCountry = new Select(SelectCountryDropDown);
+			selCountry.selectByVisibleText(country);
+			Reporting.updateTestReport("County " + country + " has been selected successfully by user",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("User failed to select country " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void selectBillCountry(String country) throws IOException {
 		try {
 
 			Select selCountry = new Select(SelectCountryDropDown);
@@ -975,9 +1045,10 @@ public class app_WEL_Repo {
 
 	public void selectShipCountry(String country) throws IOException {
 		try {
-
+			
 			Select scountry = new Select(ShipCountry);
 			scountry.selectByVisibleText(country);
+			Thread.sleep(2000);
 			Reporting.updateTestReport("County " + country + " has been selected successfully by user",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
@@ -986,6 +1057,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	
+	
+	
+	
+	
 	public void ShipState(String shipstate) throws IOException {
 		try {
 
@@ -994,7 +1070,7 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport("State " + state + " has been selected successfully by user",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
-			Reporting.updateTestReport("User failed to select country " + e.getClass().toString(),
+			Reporting.updateTestReport("User failed to select State " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -1411,6 +1487,44 @@ public class app_WEL_Repo {
 		}
 	}
 
+	public void ClickOnCPAAddProduct() throws IOException {
+		try {
+
+			CPAAddToCart.click();
+			Reporting.updateTestReport("Add To Cart was selected successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on Add To Cart with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
+	public void ClickOnCIAeBook() throws IOException {
+		try {
+			CIAeBook.click();
+			Reporting.updateTestReport("CIAeBook was selected successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on CIAeBook with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
+	public void ClickOnCIAPrint() throws IOException {
+		try {
+			CIAPrint.click();
+			Reporting.updateTestReport("CIAPrint Product was selected successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on CIAPrint with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
 	public void ClickOnCAIAAddProduct() throws IOException {
 		try {
 
@@ -1564,6 +1678,24 @@ public class app_WEL_Repo {
 		}
 	}
 
+	
+	
+	
+	public String fetchTaxValue() throws IOException {
+		try {
+			String totalTax = TaxAmount.getText();
+			Reporting.updateTestReport("Total Tax: " + totalTax + " was fetched",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return totalTax;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Total Tax couldn't fetched", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	
+	
 	public String fetchOrderTotal() throws IOException {
 		try {
 			String orderTotal = OrderTotal.getText();
@@ -1803,6 +1935,58 @@ public class app_WEL_Repo {
 		}
 	}
 
+	public String ShippingMethodForSingapore() throws IOException {
+		try {
+			String Singaporemethod = SingaporeShipMethod.getText();
+			Reporting.updateTestReport("The Shipping method Displayed successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return Singaporemethod;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Shipping method " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	public String ShippingMethodForIndia() throws IOException {
+		try {
+			String IndiaShpmethod = IndiaShipMethod.getText();
+			Reporting.updateTestReport("The Shipping method Displayed successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return IndiaShpmethod;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Shipping method " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	public String ShippingMethodOneForCanada() throws IOException {
+		try {
+			String Canadamethod = CanadaShipMethod.getText();
+			Reporting.updateTestReport("The Shipping method Displayed successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return Canadamethod;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Shipping method " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	public String ShippingMethodTwoForCanada() throws IOException {
+		try {
+			String Canadamethod2 = CanadaShipMethod2.getText();
+			Reporting.updateTestReport("The Shipping method Displayed successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return Canadamethod2;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Shipping method " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
 	public void FreeTraiModelPopUpLoginButton() throws IOException {
 		try {
 			FreeTrailModelPopUpLogin.click();
@@ -1865,6 +2049,88 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport("Failed to click on Account Icon link " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
+		}
+	}
+
+	public void ClickOnEnterNewAddressButtonOnShippingPage() throws IOException {
+		try {
+			EnterNewAddressButton.click();
+			Reporting.updateTestReport("Edit button clicked successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Edit button " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
+	public void ClickOnEnterNewAddressButtonOnBillingPage() throws IOException {
+		try {
+			EnterNewAddressButtonOnBillPage.click();
+			Reporting.updateTestReport("Edit button clicked successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Edit button " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
+	public void clickOnUseSelectedShippingAddressButtonAddressDoctor() throws IOException {
+		try {
+			UseSelectedShippingAddressButtonAddressDoctorPopUp.click();
+			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp was clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void clickOnUseSelectedBillingAddressButtonAddressDoctor() throws IOException {
+		try {
+			UseSelectedBillingAddressButtonAddressDoctorPopUp.click();
+			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp was clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public WebElement returnUseSelectedShippingAddressButtonAddressDoctorPopUp() {
+		return UseSelectedShippingAddressButtonAddressDoctorPopUp;
+	}
+
+	public WebElement returnUseSelectedBillingAddressButtonAddressDoctorPopUp() {
+		return UseSelectedBillingAddressButtonAddressDoctorPopUp;
+	}
+	
+	public void ShipTownIndiaCity(String City) throws IOException {
+		try {
+			IndiaCity.sendKeys(City);
+			Reporting.updateTestReport("City: " + City + " was entered successfully in the City section",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("City was not entered with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	
+	public void enterState(String ShipInd) throws IOException {
+		try {
+			IndiaState.clear();
+			IndiaState.sendKeys(ShipInd);
+			IndiaState.sendKeys(Keys.ENTER);
+
+			Reporting.updateTestReport("State " + ShipInd + " has been selected successfully by user",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("User failed to select State " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 

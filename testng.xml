@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="PPE_Regression">
-  <test thread-count="5" name="Wiley_Test_Suite">
-    
-    
-    <classes>
-      <class name="Test_Suite.AGS_Test_Suite">
-      <methods>
-        
-        <include name="TC01_Anonymous_User_Registration" />
-        <include name="TC03_Standalone_Registration_and_Login" />
-        <include name="TC04_Reset_Password_My_Account" />
-        <include name="TC07_Verify_tax_Non_US_Address" />
-        <include name="TC09_Place_Order_With_Existing_User" />
-        
-        
-        
-        </methods>
-      </class>
-    </classes>
-  </test> <!-- Test_Regression -->
+<suite name="PPE_Regression" >
+
+ <test name="PPE Regression-Chrome">
+	<parameter name="browser" value="Chrome"/>
+	<classes>
+	<!-- class name="Test_Suite.AGS_Test_Suite"/-->
+	<class name="Test_Suite.Wiley_dot_com_Test_Suite"/>	
+	</classes>
+</test>
 </suite> <!-- PPE Regression -->
+

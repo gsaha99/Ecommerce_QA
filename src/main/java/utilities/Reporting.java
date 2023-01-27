@@ -1,15 +1,11 @@
 package utilities;
 
 import java.io.File;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
+import org.apache.commons.lang3.SystemUtils;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
@@ -53,29 +49,44 @@ public class Reporting {
 
 	}
 	 
-	public static void summaryReportdesign(String filename)
+	public static void summaryReportdesign(String filename,String BrowserName,String BrowserVersion,String OS_Name) 
 	{
 		
-		String SummaryReportPath=CreateTodayReportFolder();
-		//new added code ends on 21/06/22
-		report = new ExtentSparkReporter(SummaryReportPath+"\\"+filename+".html"); //modified line of code on 21/06/22
+		try {
+			String SummaryReportPath=CreateTodayReportFolder();
+			//new added code ends on 21/06/22
+			report = new ExtentSparkReporter(SummaryReportPath+"\\"+filename+".html"); //modified line of code on 21/06/22
 
-		//initialize ExtentReports and attach the HtmlReporter
-		extent = new ExtentReports();
-		extent.attachReporter(report);
+			
+			String Hostname = SystemUtils.getHostName();
+			String Username = SystemUtils.getUserName();
+			String OS_Version = SystemUtils.OS_VERSION.toString();			
+			String Java_Version=SystemUtils.JAVA_VERSION.toString();
+							
+			//initialize ExtentReports and attach the HtmlReporter
+			extent = new ExtentReports();
+			extent.attachReporter(report);
 
+			extent.setSystemInfo("OS", OS_Name);
+			extent.setSystemInfo("OS Version", OS_Version);
+			extent.setSystemInfo("HostName", Hostname);
+			extent.setSystemInfo("IP Address", InetAddress.getByName(Hostname).getHostAddress());
+			extent.setSystemInfo("UserName", Username);
+			extent.setSystemInfo("Browser", BrowserName);
+			extent.setSystemInfo("Browser Version", BrowserVersion);
+			extent.setSystemInfo("JAVA Version", Java_Version);
 
-		extent.setSystemInfo("OS", "Windows10");	 
-		extent.setSystemInfo("username", "Gourab Saha");
-		extent.setSystemInfo("Browser", "Chrome");
+			//configuration items to change the look and feel
+			//add content, manage tests etc
 
-		//configuration items to change the look and feel
-		//add content, manage tests etc
-
-		report.config().setDocumentTitle("Automation Report");
-		report.config().setReportName("PPE Automation Report");
-		report.config().setTheme(Theme.STANDARD);
-		report.config().setTimeStampFormat("EEEE, MMMM dd, yyyy, hh:mm a '('zzz')'");	
+			report.config().setDocumentTitle("Automation Report");
+			report.config().setReportName("PPE Automation Report");
+			report.config().setTheme(Theme.STANDARD);
+			report.config().setTimeStampFormat("EEEE, MMMM dd, yyyy, hh:mm a '('zzz')'");
+			
+		} catch (Exception e) {
+			System.out.println("Unexcepted exception in Summary Report design Method"+ " "+e.getMessage());
+		}	
 
 	}
 

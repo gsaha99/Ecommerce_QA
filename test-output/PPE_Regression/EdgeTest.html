@@ -1,0 +1,490 @@
+<html>
+<head>
+<title>TestNG:  EdgeTest</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>EdgeTest</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>82/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Thu Jan 26 00:00:36 IST 2023</td>
+</tr>
+<tr><td>Total time:</td><td>5064 seconds (5064186 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC17_Auto_Renew_Toggle_validation()'><b>TC17_Auto_Renew_Toggle_validation</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>11</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC08_Mixed_Product_No_Stock_Guest_User()'><b>TC08_Mixed_Product_No_Stock_Guest_User</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>112</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC28_Cart_Update_from_Digital_to_Phygital()'><b>TC28_Cart_Update_from_Digital_to_Phygital</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>110</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC08_Eloqua_validation()'><b>TC08_Eloqua_validation</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>71</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.WileyPLUS_Test_Suite.TC03_EGRIP_Search_For_WileyPLUS()'><b>TC03_EGRIP_Search_For_WileyPLUS</b><br>Test class: Test_Suite.WileyPLUS_Test_Suite</td>
+<td></td>
+<td>42</td>
+<td>Test_Suite.WileyPLUS_Test_Suite@5c7933ad</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC11_Place_Order_With_Promo_Code()'><b>TC11_Place_Order_With_Promo_Code</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>58</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_dot_com_Test_Suite.TC11_Add_To_PopUp()'><b>TC11_Add_To_PopUp</b><br>Test class: Test_Suite.Wiley_dot_com_Test_Suite</td>
+<td></td>
+<td>18</td>
+<td>Test_Suite.Wiley_dot_com_Test_Suite@38467116</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC15_eBundle_product_purchase()'><b>TC15_eBundle_product_purchase</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>97</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_dot_com_Test_Suite.TC02_ProductDetailsPage()'><b>TC02_ProductDetailsPage</b><br>Test class: Test_Suite.Wiley_dot_com_Test_Suite</td>
+<td></td>
+<td>12</td>
+<td>Test_Suite.Wiley_dot_com_Test_Suite@38467116</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC06_ResetPasswordFromLoginPage()'><b>TC06_ResetPasswordFromLoginPage</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>24</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC05_Physical_productpurchase_ForExistingUser()'><b>TC05_Physical_productpurchase_ForExistingUser</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>86</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC27_Validate_AEM_Header_Footer()'><b>TC27_Validate_AEM_Header_Footer</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>17</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.WileyPLUS_Test_Suite.TC06_Format_Facet_WileyPLUS()'><b>TC06_Format_Facet_WileyPLUS</b><br>Test class: Test_Suite.WileyPLUS_Test_Suite</td>
+<td></td>
+<td>42</td>
+<td>Test_Suite.WileyPLUS_Test_Suite@5c7933ad</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC25_Searching_by_Keyword_Rguroo()'><b>TC25_Searching_by_Keyword_Rguroo</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>15</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC21_Riskified_Declined_Order()'><b>TC21_Riskified_Declined_Order</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>270</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_dot_com_Test_Suite.TC09_SiteHeader()'><b>TC09_SiteHeader</b><br>Test class: Test_Suite.Wiley_dot_com_Test_Suite</td>
+<td></td>
+<td>16</td>
+<td>Test_Suite.Wiley_dot_com_Test_Suite@38467116</td></tr>
+<tr>
+<td title='Test_Suite.WileyPLUS_Test_Suite.TC14_Global_Country_List_In_Billing()'><b>TC14_Global_Country_List_In_Billing</b><br>Test class: Test_Suite.WileyPLUS_Test_Suite</td>
+<td></td>
+<td>58</td>
+<td>Test_Suite.WileyPLUS_Test_Suite@5c7933ad</td></tr>
+<tr>
+<td title='Test_Suite.WileyPLUS_Test_Suite.TC04_Bundle_Search_For_WileyPLUS()'><b>TC04_Bundle_Search_For_WileyPLUS</b><br>Test class: Test_Suite.WileyPLUS_Test_Suite</td>
+<td></td>
+<td>43</td>
+<td>Test_Suite.WileyPLUS_Test_Suite@5c7933ad</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_dot_com_Test_Suite.TC05_AboutUsPage()'><b>TC05_AboutUsPage</b><br>Test class: Test_Suite.Wiley_dot_com_Test_Suite</td>
+<td></td>
+<td>20</td>
+<td>Test_Suite.Wiley_dot_com_Test_Suite@38467116</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC03_Physical_productpurchase_ForNewUser()'><b>TC03_Physical_productpurchase_ForNewUser</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>110</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_dot_com_Test_Suite.TC12_Content_Search_ResultPage()'><b>TC12_Content_Search_ResultPage</b><br>Test class: Test_Suite.Wiley_dot_com_Test_Suite</td>
+<td></td>
+<td>28</td>
+<td>Test_Suite.Wiley_dot_com_Test_Suite@38467116</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC02_Create_Account()'><b>TC02_Create_Account</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>10</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC11_Shipping_And_BillingAddresses_different()'><b>TC11_Shipping_And_BillingAddresses_different</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>102</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.WileyPLUS_Test_Suite.TC11_New_Tab_Opened_After_Clicking_Login_To_WileyPLUS_Button()'><b>TC11_New_Tab_Opened_After_Clicking_Login_To_WileyPLUS_Button</b><br>Test class: Test_Suite.WileyPLUS_Test_Suite</td>
+<td></td>
+<td>44</td>
+<td>Test_Suite.WileyPLUS_Test_Suite@5c7933ad</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC07_Verify_Tax()'><b>TC07_Verify_Tax</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>54</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC16_Manage_Subscription()'><b>TC16_Manage_Subscription</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>10</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC34_Verify_VETCONSULT_Purchase_Option_on_PDPpage()'><b>TC34_Verify_VETCONSULT_Purchase_Option_on_PDPpage</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>43</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC30_Cart_Merge_Functionality()'><b>TC30_Cart_Merge_Functionality</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>97</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC16_Higher_Education_Physical_product_purchase()'><b>TC16_Higher_Education_Physical_product_purchase</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>103</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.WileyPLUS_Test_Suite.TC10_WileyPLUS_Set_To_MultiTerm_Default()'><b>TC10_WileyPLUS_Set_To_MultiTerm_Default</b><br>Test class: Test_Suite.WileyPLUS_Test_Suite</td>
+<td></td>
+<td>42</td>
+<td>Test_Suite.WileyPLUS_Test_Suite@5c7933ad</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC10_Shipping_And_BillingAddresses_Same()'><b>TC10_Shipping_And_BillingAddresses_Same</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>91</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC32_Preorder_Backorder_Flow_With_Print_Pdf_Page()'><b>TC32_Preorder_Backorder_Flow_With_Print_Pdf_Page</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>162</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC12_PlaceOrderwithNonUSAddress()'><b>TC12_PlaceOrderwithNonUSAddress</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>175</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_dot_com_Test_Suite.TC14_SearchBox()'><b>TC14_SearchBox</b><br>Test class: Test_Suite.Wiley_dot_com_Test_Suite</td>
+<td></td>
+<td>25</td>
+<td>Test_Suite.Wiley_dot_com_Test_Suite@38467116</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC09_Higher_Education_Digitalproductpurchase_ForNewUser()'><b>TC09_Higher_Education_Digitalproductpurchase_ForNewUser</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>91</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC18_ZeroOrder()'><b>TC18_ZeroOrder</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>20</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC31_Zero_Dollar_Flow_For_Digital_Product()'><b>TC31_Zero_Dollar_Flow_For_Digital_Product</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>95</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_dot_com_Test_Suite.TC10_SearchResultEmptyPage()'><b>TC10_SearchResultEmptyPage</b><br>Test class: Test_Suite.Wiley_dot_com_Test_Suite</td>
+<td></td>
+<td>16</td>
+<td>Test_Suite.Wiley_dot_com_Test_Suite@38467116</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC20_Edit_Billing_address_in_my_account()'><b>TC20_Edit_Billing_address_in_my_account</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>19</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC02_Digital_productpurchase_ForExistingUser()'><b>TC02_Digital_productpurchase_ForExistingUser</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>98</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC13_eBook_Rental_product_Purchase()'><b>TC13_eBook_Rental_product_Purchase</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>77</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_dot_com_Test_Suite.TC04_404_Errorpage()'><b>TC04_404_Errorpage</b><br>Test class: Test_Suite.Wiley_dot_com_Test_Suite</td>
+<td></td>
+<td>7</td>
+<td>Test_Suite.Wiley_dot_com_Test_Suite@38467116</td></tr>
+<tr>
+<td title='Test_Suite.WileyPLUS_Test_Suite.TC09_PDP_UI_For_WileyPLUS()'><b>TC09_PDP_UI_For_WileyPLUS</b><br>Test class: Test_Suite.WileyPLUS_Test_Suite</td>
+<td></td>
+<td>52</td>
+<td>Test_Suite.WileyPLUS_Test_Suite@5c7933ad</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC14_Textbook_Rental_product_purchase()'><b>TC14_Textbook_Rental_product_purchase</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>98</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.WileyPLUS_Test_Suite.TC13_Global_Country_List_In_Shipping()'><b>TC13_Global_Country_List_In_Shipping</b><br>Test class: Test_Suite.WileyPLUS_Test_Suite</td>
+<td></td>
+<td>60</td>
+<td>Test_Suite.WileyPLUS_Test_Suite@5c7933ad</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC06_Mixed_productpurchase_ForExistingUser()'><b>TC06_Mixed_productpurchase_ForExistingUser</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>109</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC29_Cart_Page_UI_Validation()'><b>TC29_Cart_Page_UI_Validation</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>31</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC07_Mixed_Product_Some_Stock_New_User()'><b>TC07_Mixed_Product_Some_Stock_New_User</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>131</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC05_Reset_Password_My_Account()'><b>TC05_Reset_Password_My_Account</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>15</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.WileyPLUS_Test_Suite.TC15_Course_Details_During_WileyPLUS_Checkout()'><b>TC15_Course_Details_During_WileyPLUS_Checkout</b><br>Test class: Test_Suite.WileyPLUS_Test_Suite</td>
+<td></td>
+<td>112</td>
+<td>Test_Suite.WileyPLUS_Test_Suite@5c7933ad</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC22_New_User_Tax_for_Digital_product()'><b>TC22_New_User_Tax_for_Digital_product</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>98</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.Data_Preparation()'><b>Data_Preparation</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>52</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC33_Forgot_Password_Functionality()'><b>TC33_Forgot_Password_Functionality</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>75</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_dot_com_Test_Suite.TC13_Category_LandingPage()'><b>TC13_Category_LandingPage</b><br>Test class: Test_Suite.Wiley_dot_com_Test_Suite</td>
+<td></td>
+<td>16</td>
+<td>Test_Suite.Wiley_dot_com_Test_Suite@38467116</td></tr>
+<tr>
+<td title='Test_Suite.WileyPLUS_Test_Suite.TC07_Verify_Additional_UI_Adjustments_WileyPLUS_PDP()'><b>TC07_Verify_Additional_UI_Adjustments_WileyPLUS_PDP</b><br>Test class: Test_Suite.WileyPLUS_Test_Suite</td>
+<td></td>
+<td>64</td>
+<td>Test_Suite.WileyPLUS_Test_Suite@5c7933ad</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC04_Physical_Product_Purchase_Guest_User()'><b>TC04_Physical_Product_Purchase_Guest_User</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>108</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC21_Existing_user_tax_for_physical_product()'><b>TC21_Existing_user_tax_for_physical_product</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>91</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC01_Anonymous_User_Registration()'><b>TC01_Anonymous_User_Registration</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>57</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_dot_com_Test_Suite.TC01_MicroSites()'><b>TC01_MicroSites</b><br>Test class: Test_Suite.Wiley_dot_com_Test_Suite</td>
+<td></td>
+<td>11</td>
+<td>Test_Suite.Wiley_dot_com_Test_Suite@38467116</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC19_Edit_Profile_from_my_account_page()'><b>TC19_Edit_Profile_from_my_account_page</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>14</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.WileyPLUS_Test_Suite.TC02_PLP_For_WileyPLUS()'><b>TC02_PLP_For_WileyPLUS</b><br>Test class: Test_Suite.WileyPLUS_Test_Suite</td>
+<td></td>
+<td>50</td>
+<td>Test_Suite.WileyPLUS_Test_Suite@5c7933ad</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_dot_com_Test_Suite.TC03_SiteFooter()'><b>TC03_SiteFooter</b><br>Test class: Test_Suite.Wiley_dot_com_Test_Suite</td>
+<td></td>
+<td>12</td>
+<td>Test_Suite.Wiley_dot_com_Test_Suite@38467116</td></tr>
+<tr>
+<td title='Test_Suite.WileyPLUS_Test_Suite.TC05_Check_If_URL_Not_Truncated_For_WileyPLUS()'><b>TC05_Check_If_URL_Not_Truncated_For_WileyPLUS</b><br>Test class: Test_Suite.WileyPLUS_Test_Suite</td>
+<td></td>
+<td>42</td>
+<td>Test_Suite.WileyPLUS_Test_Suite@5c7933ad</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_dot_com_Test_Suite.TC08_HomePage()'><b>TC08_HomePage</b><br>Test class: Test_Suite.Wiley_dot_com_Test_Suite</td>
+<td></td>
+<td>10</td>
+<td>Test_Suite.Wiley_dot_com_Test_Suite@38467116</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC17_Purchase_with_Coupon_Discount()'><b>TC17_Purchase_with_Coupon_Discount</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>100</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC19_Country_Restriction_Validation()'><b>TC19_Country_Restriction_Validation</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>60</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_dot_com_Test_Suite.TC15_Product_Search_Results_Page()'><b>TC15_Product_Search_Results_Page</b><br>Test class: Test_Suite.Wiley_dot_com_Test_Suite</td>
+<td></td>
+<td>19</td>
+<td>Test_Suite.Wiley_dot_com_Test_Suite@38467116</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_dot_com_Test_Suite.TC06_SiteMap()'><b>TC06_SiteMap</b><br>Test class: Test_Suite.Wiley_dot_com_Test_Suite</td>
+<td></td>
+<td>13</td>
+<td>Test_Suite.Wiley_dot_com_Test_Suite@38467116</td></tr>
+<tr>
+<td title='Test_Suite.WileyPLUS_Test_Suite.TC08_Validate_Percentage_In_Multiple_Term()'><b>TC08_Validate_Percentage_In_Multiple_Term</b><br>Test class: Test_Suite.WileyPLUS_Test_Suite</td>
+<td></td>
+<td>42</td>
+<td>Test_Suite.WileyPLUS_Test_Suite@5c7933ad</td></tr>
+<tr>
+<td title='Test_Suite.WileyPLUS_Test_Suite.TC12_Add_WileyPLUS_Product_To_Cart()'><b>TC12_Add_WileyPLUS_Product_To_Cart</b><br>Test class: Test_Suite.WileyPLUS_Test_Suite</td>
+<td></td>
+<td>29</td>
+<td>Test_Suite.WileyPLUS_Test_Suite@5c7933ad</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC24_Verify_Shipping_Methods_for_POD_Products()'><b>TC24_Verify_Shipping_Methods_for_POD_Products</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>61</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC04_Login_During_Checkout()'><b>TC04_Login_During_Checkout</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>38</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.WileyPLUS_Test_Suite.TC01_SRP_For_WileyPLUS()'><b>TC01_SRP_For_WileyPLUS</b><br>Test class: Test_Suite.WileyPLUS_Test_Suite</td>
+<td></td>
+<td>37</td>
+<td>Test_Suite.WileyPLUS_Test_Suite@5c7933ad</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC18_Tax_Recalculation()'><b>TC18_Tax_Recalculation</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>121</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC26_Login_Page_Validation()'><b>TC26_Login_Page_Validation</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>99</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC12_Product_having_ADD_Promotion()'><b>TC12_Product_having_ADD_Promotion</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>100</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC15_ValidationOrdersinBO()'><b>TC15_ValidationOrdersinBO</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>35</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC01_Digital_Product_Purchase_New_User()'><b>TC01_Digital_Product_Purchase_New_User</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>100</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_dot_com_Test_Suite.TC07_ProductListPage()'><b>TC07_ProductListPage</b><br>Test class: Test_Suite.Wiley_dot_com_Test_Suite</td>
+<td></td>
+<td>17</td>
+<td>Test_Suite.Wiley_dot_com_Test_Suite@38467116</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC20_New_user_tax_for_physical_product()'><b>TC20_New_user_tax_for_physical_product</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>100</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC23_Existing_User_Tax_for_Digital_Product()'><b>TC23_Existing_User_Tax_for_Digital_Product</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
+<td></td>
+<td>93</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@5b7a7f33</td></tr>
+<tr>
+<td title='Test_Suite.Vet_Test_Suite.TC03_StandaloneLogin()'><b>TC03_StandaloneLogin</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td></td>
+<td>8</td>
+<td>Test_Suite.Vet_Test_Suite@5fb759d6</td></tr>
+</table><p>
+</body>
+</html>

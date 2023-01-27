@@ -62,6 +62,7 @@ public class Vet_Test_Suite extends DriverModule {
 		try {
 
 			Reporting.test = Reporting.extent.createTest("TC01_Anonymous_User_Registration");
+			
 			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("TC01", "VET_Test_Data", "URL"));
 			VET.clickOnGetStarted();
