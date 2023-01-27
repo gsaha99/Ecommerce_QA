@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.Set;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -1050,6 +1051,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			try {
 				Reporting.test = Reporting.extent.createTest("TC19_Validate_Continue_Shopping_Link");
 				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+				driver.get(WileyPLUS.wileyURLConcatenation("TC01", "WileyPLUS_Test_Data", "URL"));
 				driver.get(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "URL"));
 				driver.navigate().refresh();
 				WileyPLUS.clickOnCreateAccountLinkOnboarding();
@@ -1069,55 +1071,135 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 							"Generic_Dataset", "Data"));
 					WileyPLUS.enterEmailIdInYopmail(emailId);
 					WileyPLUS.clickOnCheckInboxButton();
-					driver.switchTo().frame("ifmail");
-					WileyPLUS.clickOnFinishRegistrationLinkInMail();
-					driver.switchTo().defaultContent();
-					Set<String> allWindowHandles = driver.getWindowHandles();
-					java.util.Iterator<String> iterator = allWindowHandles.iterator();
-					String yopmailHandle = iterator.next();
-					String ChildWindow=iterator.next();
-					driver.switchTo().window(yopmailHandle);
-					driver.close();
-					driver.switchTo().window(ChildWindow);
+					WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(2));
+					int timeOutSeconds=10;
+					int flag=0;
+					WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
+					WebElement element2 = null;
+					/* The purpose of this loop is to wait for maximum of 60 seconds */
+					for (int i = 0; i < timeOutSeconds / 5; i++) {
+
+						try {
+							driver.switchTo().frame("ifinbox");
+							element2=wait1.until(ExpectedConditions.visibilityOfElementLocated(
+									By.xpath("//div[contains(text(),'Welcome to Wiley')]")));
+
+							if(element2.isDisplayed()==true)
+							{
+								flag=1;
+								element2.click();
+								driver.switchTo().defaultContent();
+								break;
+							}
+
+						} catch (Exception e) {
+							driver.switchTo().defaultContent();        
+							element1.click();
+						}
+					}
+					if(flag==1) {
+						driver.switchTo().frame("ifmail");
+						WileyPLUS.clickOnFinishRegistrationLinkInMail();
+						driver.switchTo().defaultContent();
+						Set<String> allWindowHandles = driver.getWindowHandles();
+						java.util.Iterator<String> iterator = allWindowHandles.iterator();
+						String yopmailHandle = iterator.next();
+						String ChildWindow=iterator.next();
+						driver.switchTo().window(yopmailHandle);
+						driver.close();
+						driver.switchTo().window(ChildWindow);
+					}
+					else {
+						Reporting.updateTestReport("No finish registration mail  was recieved in yopmail inbox", 
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
 					WileyPLUS.enterEmailIdInOnboardingLogin(emailId);
 					WileyPLUS.enterPasswordInOnboarding(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Password"));
 					WileyPLUS.clickOnOnboardingLoginButton();
 					try {
-						wait.until(ExpectedConditions.presenceOfElementLocated(
-								By.xpath("//title[contains(text(),'My Account')]")));
+						wait.until(ExpectedConditions.elementToBeClickable(
+								By.xpath("//span[contains(text(),'add course')]")));
+					    Thread.sleep(2000);
 						WileyPLUS.clickOnOnboardingAddCourseButton();
+						WileyPLUS.enterCourseSectionId("B84272");
+						WileyPLUS.clickOnContinueButtonInOnboarding();
 						try {
-							WileyPLUS.clickOnHomePage();
 							wait.until(ExpectedConditions.presenceOfElementLocated(
-									By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
-											+ " Education and Research')]")));
-							WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "SearchBox_Text"));
-							WileyPLUS.clickOnSRP_WileyProduct();
-							WileyPLUS.clickOnAddToCartButton();
+									By.xpath("//h2[contains(text(),'Join your course')]")));
+							WileyPLUS.clickOnSingleTermRadioButtonInJoinCourse();
+							WileyPLUS.clickOnContinueButtonInOnboarding();
+							WileyPLUS.clickOnFirstPurchaseOption();
+							WileyPLUS.clickOnContinueToCheckoutButton();
 							try {
 								wait.until(ExpectedConditions.
-										elementToBeClickable
-										(By.xpath("//button[contains(text(),'View Cart')]")));
-								WileyPLUS.clickOnViewCartButton();
-								ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+										presenceOfElementLocated
+										(By.xpath("//p[contains(text(),' Your Cart')]")));
+								WileyPLUS.checkIfUserIsOnCartPage(driver);
 								WileyPLUS.clickOnContinueShoppingButton();
 								try {
-									wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing, Education and Research')]")));
-									Reporting.updateTestReport("Wiley Storefront homepage was opened after clicking on continue shopping button",
+									wait.until(ExpectedConditions.presenceOfElementLocated(
+											By.xpath("//input[@id='courseID']")));
+									Reporting.updateTestReport("After clicking on continue shopping button"
+											+ " user was in Add course page when the last added product was WileyPLUS",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									driver.get(WileyPLUS.wileyURLConcatenation("TC01", "WileyPLUS_Test_Data", "URL"));
+									driver.navigate().refresh();								
+									try {
+										WileyPLUS.clickOnHomePage();
+										wait.until(ExpectedConditions.presenceOfElementLocated(
+												By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
+														+ " Education and Research')]")));
+										WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC19",
+												"WileyPLUS_Test_Data", "SearchBox_Text"));
+										WileyPLUS.clickOnSRP_WileyProduct();
+										WileyPLUS.clickOnAddToCartButton();
+										try {
+											wait.until(ExpectedConditions.
+													elementToBeClickable
+													(By.xpath("//button[contains(text(),'View Cart')]")));
+											WileyPLUS.clickOnViewCartButton();
+											ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+											WileyPLUS.clickOnContinueShoppingButton();
+											try {
+												wait.until(ExpectedConditions.presenceOfElementLocated(
+														By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing, Education and Research')]")));
+												wait.until(ExpectedConditions.visibilityOfElementLocated(
+														By.xpath("//a[@href='/']/img[@class='brand-logo']")));
+												Reporting.updateTestReport("Wiley Storefront homepage was opened after clicking on continue shopping button"
+														+ " when the last added product was wiley.com",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											}
+											catch(Exception e) {
+												Reporting.updateTestReport("Wiley Storefront homepage was not opened after clicking on continue shopping button"
+														+ " when the last added product was wiley.com and caused timeout exception",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											}
+										}
+										catch(Exception e) {
+											Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										}
+									}
+									catch(Exception e) {
+										Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
 								}
-								catch(Exception e) {
-									Reporting.updateTestReport("Wiley Storefront homepage was not opened after clicking on continue shopping button and caused timeout exception",
+								catch(Exception e){
+									Reporting.updateTestReport("After clicking on continue shopping button"
+											+ " user was not in Add course page when the last added product was WileyPLUS "
+											+ "and caused timeout exception",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 							}
-							catch(Exception e) {
-								Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+							catch(Exception e){
+								Reporting.updateTestReport("User was not on cart page and caused timeout exception",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 						}
-						catch(Exception e) {
-							Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
+						catch(Exception e){
+							Reporting.updateTestReport("User couldn't add course and was not on Join Course page"
+									+ " and caused timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					}
@@ -1136,7 +1218,220 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			catch(Exception e) {
 				WileyPLUS.wileyLogOutException();
 				System.out.println(e.getMessage());
-				Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+				Reporting.updateTestReport("Exception occured: "+e.getClass().toString(),
+						CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Date: 27/01/23
+		 * @Description: Places one order in CAD Currency from WileyPLUS Frontend
+		 */
+		@Test
+		public void TC20_Place_WileyPLUS_CAD_Order_From_Frontend() throws IOException{
+			try {
+				Reporting.test = Reporting.extent.createTest("TC20_Place_WileyPLUS_CAD_Order_From_Frontend");
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+				driver.get(WileyPLUS.wileyURLConcatenation("TC01", "WileyPLUS_Test_Data", "URL"));
+				driver.get(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "URL"));
+				driver.navigate().refresh();
+				WileyPLUS.clickOnCreateAccountLinkOnboarding();
+				WileyPLUS.enterFirstNameInOnboardingCreateAccount(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "First_Name"));
+				Thread.sleep(3000);
+				WileyPLUS.enterLastNameInOnboardingCreateAccount(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Last_Name"));
+				String emailId=WileyPLUS.enterEmailIdInOnboardingCreateAccount();
+				WileyPLUS.enterInstitutionNameInOnboardingCreateAccount(driver, excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Institution"));
+				Thread.sleep(2000);
+				WileyPLUS.enterPasswordInOnboarding(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Password"));
+				WileyPLUS.clickOnOnboardingCreateAccountCheckbox();
+				WileyPLUS.clickOnOnboardingCreateAccountButton();
+				try {
+					wait.until(ExpectedConditions.presenceOfElementLocated(
+							By.xpath("//title[contains(text(),'Check Your Email')]")));
+					driver.get(excelOperation.getTestData("Yopmail_URL",
+							"Generic_Dataset", "Data"));
+					WileyPLUS.enterEmailIdInYopmail(emailId);
+					WileyPLUS.clickOnCheckInboxButton();
+					WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(2));
+					int timeOutSeconds=10;
+					int flag=0;
+					WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
+					WebElement element2 = null;
+					/* The purpose of this loop is to wait for maximum of 60 seconds */
+					for (int i = 0; i < timeOutSeconds / 5; i++) {
+
+						try {
+							driver.switchTo().frame("ifinbox");
+							element2=wait1.until(ExpectedConditions.visibilityOfElementLocated(
+									By.xpath("//div[contains(text(),'Welcome to Wiley')]")));
+
+							if(element2.isDisplayed()==true)
+							{
+								flag=1;
+								element2.click();
+								driver.switchTo().defaultContent();
+								break;
+							}
+
+						} catch (Exception e) {
+							driver.switchTo().defaultContent();        
+							element1.click();
+						}
+					}
+					if(flag==1) {
+						driver.switchTo().frame("ifmail");
+						WileyPLUS.clickOnFinishRegistrationLinkInMail();
+						driver.switchTo().defaultContent();
+						Set<String> allWindowHandles = driver.getWindowHandles();
+						java.util.Iterator<String> iterator = allWindowHandles.iterator();
+						String yopmailHandle = iterator.next();
+						String ChildWindow=iterator.next();
+						driver.switchTo().window(yopmailHandle);
+						driver.close();
+						driver.switchTo().window(ChildWindow);
+					}
+					else {
+						Reporting.updateTestReport("No finish registration mail  was recieved in yopmail inbox", 
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+					WileyPLUS.enterEmailIdInOnboardingLogin(emailId);
+					WileyPLUS.enterPasswordInOnboarding(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Password"));
+					WileyPLUS.clickOnOnboardingLoginButton();
+					try {
+						wait.until(ExpectedConditions.elementToBeClickable(
+								By.xpath("//span[contains(text(),'add course')]")));
+					    Thread.sleep(2000);
+						WileyPLUS.clickOnOnboardingAddCourseButton();
+						WileyPLUS.enterCourseSectionId("A03598");
+						WileyPLUS.clickOnContinueButtonInOnboarding();
+						try {
+							wait.until(ExpectedConditions.presenceOfElementLocated(
+									By.xpath("//h2[contains(text(),'Join your course')]")));
+							WileyPLUS.clickOnSingleTermRadioButtonInJoinCourse();
+							WileyPLUS.clickOnContinueButtonInOnboarding();
+							WileyPLUS.clickOnFirstPurchaseOption();
+							WileyPLUS.clickOnContinueToCheckoutButton();
+							try {
+								wait.until(ExpectedConditions.
+										presenceOfElementLocated
+										(By.xpath("//p[contains(text(),' Your Cart')]")));
+								WileyPLUS.checkIfUserIsOnCartPage(driver);
+								ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+								WileyPLUS.clickOnProceedToCheckoutButton();
+								WileyPLUS.checkIfUserInBillingStep();
+								driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+								try {
+									wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+									WileyPLUS.enterCardHolderName(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "First_Name"));
+									driver.switchTo().defaultContent();
+									driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+									WileyPLUS.enterCardNumber(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Card_Number"));
+									driver.switchTo().defaultContent();
+									driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+									WileyPLUS.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Expiry_Month"));
+									driver.switchTo().defaultContent();
+									driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+									WileyPLUS.selectExpirationYearFromDropDown(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Expiry_Year"));
+									driver.switchTo().defaultContent();
+									driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+									WileyPLUS.enterCVV_Number(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "CVV"));
+									driver.switchTo().defaultContent();			
+									WileyPLUS.enterFirstName(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "First_Name"));
+									WileyPLUS.enterLastName(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Last_Name"));
+									WileyPLUS.selectCountry(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Bill_Country"));
+									try{
+										wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
+										WileyPLUS.enterAddressLine1Billing(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Bill_Address_line1"));
+										WileyPLUS.enterZipBilling(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Bill_Zip_Code"));
+										//wiley.enterCityBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_City"));
+										//wiley.enterState(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_State"));
+										//wiley.selectUState();
+										WileyPLUS.enterPhoneNumberBilling(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Bill_Phone_Number"));
+										WileyPLUS.clickOnSaveAndContinueButton();
+										try {
+											if(WileyPLUS.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+												WileyPLUS.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+											}
+										catch(Exception e) {
+											Reporting.updateTestReport("Adress doctor pop up did not appear",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+										}
+										WileyPLUS.clickOnPlaceOrderButton();
+										String orderconfirmation = driver.getTitle();
+										if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+											ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+											String orderId = WileyPLUS.fetchOrderId();
+											excelOperation.updateTestData("TC20", "WileyPLUS_Test_Data", "Order_Id", orderId);
+											excelOperation.updateTestData("TC20", "WileyPLUS_Test_Data", "Email_Id", emailId);
+											ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+											String ordertotal = WileyPLUS.fetchOrderTotal();
+											String taxamount = WileyPLUS.fetchTaxAmount();
+											excelOperation.updateTestData("TC20", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
+											excelOperation.updateTestData("TC20", "WileyPLUS_Test_Data", "Tax", taxamount);
+											driver.get(excelOperation.getTestData("Yopmail_URL",
+													"Generic_Dataset", "Data"));
+											WileyPLUS.enterEmailIdInYopmail(emailId);
+											WileyPLUS.clickOnCheckInboxButton();
+											if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+												ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
+												Reporting.updateTestReport("Order Confirmation mail was received",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+												//OrderConfirmationMail.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxamount," ",ordertotal);
+											}
+											else {
+												Reporting.updateTestReport("Order Confirmation mail was not received",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											}				
+										}			
+
+										else {
+											Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+													StatusDetails.FAIL);
+										}
+										WileyPLUS.WileyLogOut();
+
+									}
+									catch(Exception e) {
+										Reporting.updateTestReport("Billing address line 1 was not clickable"
+												+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path),
+												StatusDetails.FAIL);
+									}
+								}
+								catch(Exception e) {
+									Reporting.updateTestReport("Cardholder name field in Card information"
+											+ " section was not clickable and caused timeout exception"
+											, CaptureScreenshot.getScreenshot(SS_path),
+											StatusDetails.FAIL);
+								}
+							}
+							catch(Exception e){
+								Reporting.updateTestReport("User was not on cart page and caused timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+						}
+						catch(Exception e){
+							Reporting.updateTestReport("User couldn't add course and was not on Join Course page"
+									+ " and caused timeout exception",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("User couldn't login and was not on my account page"
+								+ " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Create account form could not be submitted and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}
+			catch(Exception e) {
+				WileyPLUS.wileyLogOutException();
+				System.out.println(e.getMessage());
+				Reporting.updateTestReport("Exception occured: "+e.getClass().toString(),
+						CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 			}
 		}
 		

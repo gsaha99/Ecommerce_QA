@@ -169,6 +169,16 @@ public class app_WileyPLUS_Repo {
 	WebElement OnboardingLoginButton;
 	@FindBy(xpath="//span[contains(text(),'add course')]")
 	WebElement OnboardingAddCourseButton;
+	@FindBy(id="courseID")
+	WebElement CourseSectionId;
+	@FindBy(xpath="//button/span[contains(text(),'Continue')]")
+	WebElement ContinueButtonInOnboarding;
+	@FindBy(xpath="//p[contains(text(),'Purchase access for a single term')]")
+	WebElement SingleTermRadioButtonInJoinCourse;
+	@FindBy(xpath="(//input[@name='purchaseOption'])[1]")
+	WebElement FirstPurchaseOption;
+	@FindBy(xpath="(//span[contains(text(),'continue to checkout')])[1]")
+	WebElement ContinueToCheckoutInOnboarding;
 	
 	
 	//Description: Concatenates the url with username, password and the env
@@ -1767,4 +1777,86 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
+	/*
+	 * @Date: 27/1/23
+	 * @DEscription: Enters course section id in the add course page
+	 */
+	public void enterCourseSectionId(String courseId) throws IOException{
+		try {
+			CourseSectionId.sendKeys(courseId);
+			Reporting.updateTestReport(courseId+" was entered as Course Section Id",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport(courseId+" coudn't be entered as Course Section Id",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 27/1/23
+	 * @Description: Clicks on continue button on add course page
+	 */
+	public void clickOnContinueButtonInOnboarding() throws IOException{
+		try {
+			ContinueButtonInOnboarding.click();
+			Reporting.updateTestReport("Continue Button was clicked in onboarding Add Course /Join Course page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Continue Button couldn't be clicked in onboarding Add Course /Join Course page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 27/1/23
+	 * @Description: Clicks on Single Term Radio Button In Join Course page
+	 */
+	public void clickOnSingleTermRadioButtonInJoinCourse() throws IOException{
+		try {
+			SingleTermRadioButtonInJoinCourse.click();
+			Reporting.updateTestReport("Single Term Radio Button was clicked in onboarding Join Course page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Single Term Radio Button couldn't be clicked in onboarding Join Course page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 27/1/23
+	 * @Description: Clicks on First purchase option in Purchase options page
+	 */
+	public void clickOnFirstPurchaseOption() throws IOException{
+		try {
+			FirstPurchaseOption.click();
+			Reporting.updateTestReport("First purchase option was selected in onboarding  Purchase options page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("First purchase option couldn't be selected in onboarding  Purchase options page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 27/1/23
+	 * @Description: Clicks on Continue to checkout button in Purchase options page
+	 */
+	public void clickOnContinueToCheckoutButton() throws IOException{
+		try {
+			ContinueToCheckoutInOnboarding.click();
+			Reporting.updateTestReport("Continue to checkout button was clicked in onboarding  Purchase options page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Continue to checkout button couldn't be clicked in onboarding  Purchase options page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	
 }

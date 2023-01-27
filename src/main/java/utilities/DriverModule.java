@@ -10,6 +10,10 @@ import javax.naming.Context;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.manager.SeleniumManager;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
@@ -34,13 +38,23 @@ public class DriverModule {
 			
 			String testSuiteName=context.getCurrentXmlTest().getClasses().stream()
 		               .findFirst().get().getName().substring(11);
-			
-			//System.setProperty("webdriver.chrome.driver", ".\\driver\\chromedriver.exe");
+						
+			//System.setProperty("webdriver.chrome.driver", ".\\driver\\chromedriver.ee");
 
-			//configure options parameter to Chrome driver			
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--incognito");		      		      	
-			driver = new ChromeDriver(options);
+			//configure options parameter to Chrome driver	
+//			String cpath=SeleniumManager.getInstance().getDriverPath("chromedriver");
+//			System.out.println(cpath);
+//			ChromeOptions options = new ChromeOptions();
+//			options.addArguments("--incognito");		      		      	
+//			driver = new ChromeDriver(options);
+			
+			FirefoxOptions options = new FirefoxOptions();
+			options.addArguments("-private");
+			driver = new FirefoxDriver(options);
+			String cpath=SeleniumManager.getInstance().getDriverPath("geckodriver");
+			System.out.println(cpath);
+			
+//			driver=new EdgeDriver();
 
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
