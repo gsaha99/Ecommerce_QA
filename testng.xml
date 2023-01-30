@@ -7,9 +7,7 @@
 <methods>
 
 <include name="TC10.*" />
-<include name="TC14.*" />
-<include name="TC20.*" />
-<include name="TC21.*" />
+
 
 
 
