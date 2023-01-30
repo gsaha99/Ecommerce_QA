@@ -474,6 +474,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
 
 
 

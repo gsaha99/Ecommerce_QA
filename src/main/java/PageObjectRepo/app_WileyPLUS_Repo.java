@@ -175,10 +175,21 @@ public class app_WileyPLUS_Repo {
 	WebElement ContinueButtonInOnboarding;
 	@FindBy(xpath="//p[contains(text(),'Purchase access for a single term')]")
 	WebElement SingleTermRadioButtonInJoinCourse;
+	@FindBy(xpath="//p[contains(text(),'Purchase access for multiple terms')]")
+	WebElement MultiTermRadioButtonInJoinCourse;
 	@FindBy(xpath="(//input[@name='purchaseOption'])[1]")
 	WebElement FirstPurchaseOption;
+	@FindBy(xpath="//label[@data-testid='loose-leaf__option']/span/span/input")
+	WebElement LooseLeafBundlePurchaseOption;
 	@FindBy(xpath="(//span[contains(text(),'continue to checkout')])[1]")
 	WebElement ContinueToCheckoutInOnboarding;
+	@FindBy(id="customPopupMainBody")
+	WebElement ModalPopUp;
+	@FindBy(id="wileyCartCurrencyContinueBtn")
+	WebElement ModalPopUpContinueButton;
+	@FindBy(xpath="(//span[contains(text(),'Go Back')])[2]")
+	WebElement ModalPopUpGoBackButton;
+	
 	
 	
 	//Description: Concatenates the url with username, password and the env
@@ -1856,6 +1867,46 @@ public class app_WileyPLUS_Repo {
 			Reporting.updateTestReport("Continue to checkout button couldn't be clicked in onboarding  Purchase options page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
+	}
+	
+	/*
+	 * @Date: 30/1/23
+	 * @Description: Clicks on Multi Term Radio Button In Join Course page
+	 */
+	public void clickOnMultiTermRadioButtonInJoinCourse() throws IOException{
+		try {
+			MultiTermRadioButtonInJoinCourse.click();
+			Reporting.updateTestReport("Multi Term Radio Button was clicked in onboarding Join Course page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Multi Term Radio Button couldn't be clicked in onboarding Join Course page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 30/1/23
+	 * @Description: Clicks on Loose leaf purchase option in Purchase options page
+	 */
+	public void clickOnLooseLeafPurchaseOption() throws IOException{
+		try {
+			LooseLeafBundlePurchaseOption.click();
+			Reporting.updateTestReport("Loose Leaf Bundle purchase option was selected in onboarding  Purchase options page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Loose Leaf Bundle purchase option couldn't be selected in onboarding  Purchase options page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 30/1/23
+	 * @Description: Returns the modal pop up element
+	 */
+	public WebElement getModalPopUp(){
+		return ModalPopUp;
 	}
 	
 	

@@ -30,8 +30,11 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//a[@class='icon-color nav-login']")
 	WebElement StandaloneLogin;
 
-	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']//span[contains(text(),'$40')]")
-	WebElement UkShipMethod;
+	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']/label")
+	WebElement ShipMethod;
+	
+	@FindBy(xpath="//div[@class='deliveryMethodMainFirstDiv']/label[@class='deliveryModeLabel']/span")
+	WebElement ShipValue;
 
 	@FindBy(xpath = "(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
 	WebElement UseSelectedShippingAddressButtonAddressDoctorPopUp;
@@ -406,6 +409,33 @@ public class app_WEL_Repo {
 	
 	@FindBy(xpath = "//input[@id='address.region']")
 	WebElement IndiaState;
+	
+	@FindBy(xpath = "//div[@class='welCheckoutBtnDiv multiPaymentPaypalBtn']/button")
+	WebElement ProccedtoPaypal;
+
+	@FindBy(xpath = "//div[@class='welCheckoutBtnDiv multiPaymentPaypalCreditBtn']/button")
+	WebElement ProceedtoPaypalCredit;
+
+	@FindBy(xpath = "//input[@name='login_email']")
+	WebElement PaypalUsername;
+
+	@FindBy(xpath = "//div[@class='actions']/button[@name='btnNext']")
+	WebElement NextButtonOnPaypalPage;
+
+	@FindBy(xpath = "//input[@name='login_password']")
+	WebElement Paypalpassword;
+
+	@FindBy(xpath = "//div[@class='actions']/button[@name='btnLogin']")
+	WebElement PaypalLoginButton;
+
+	@FindBy(xpath = "//div[@class='CheckoutButton_buttonWrapper_2VloF']/button")
+	WebElement PaypalReviewOrderbutton;
+	
+	@FindBy(xpath = "//div[@id='billingMultiPaymentOptionValues']/ul/li[3]/a/span[@class='billingPaymentMultiNavTitle']")
+	WebElement Paypalpayment;
+
+	@FindBy(xpath = "//div[@id='billingMultiPaymentOptionValues']/ul/li[4]/a/span")
+	WebElement PaypalCredit;
 
 	public void EnterUserNameOnLoginPage(String UserName) throws IOException {
 		try {
@@ -1017,7 +1047,7 @@ public class app_WEL_Repo {
 		}
 	}
 
-	public void selectCountry(String country) throws IOException {
+	public void selectBillCountry(String country) throws IOException {
 		try {
 
 			Select selCountry = new Select(SelectCountryDropDown);
@@ -1043,6 +1073,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	
+	
+	
+	
+	
 	public void ShipState(String shipstate) throws IOException {
 		try {
 
@@ -1903,18 +1938,20 @@ public class app_WEL_Repo {
 		}
 	}
 
-	public String ShippingMethodForUK() throws IOException {
+	public void ShippingMethodValidation() throws IOException {
 		try {
-			String ukmethod = UkShipMethod.getText();
-			Reporting.updateTestReport("The Shipping method Displayed successfully",
+			ShipMethod.click();
+			Reporting.updateTestReport("The Shipping method: "+ShipMethod.getText().split("-")[0]+" was displayed successfully"
+					+ " with shipping charge: "+ShipValue.getText(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			return ukmethod;
+			
 		} catch (Exception e) {
 			Reporting.updateTestReport("Failed to Shipping method " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			return "";
+			
 		}
 	}
+	
 
 	public String ShippingMethodForSingapore() throws IOException {
 		try {
@@ -2111,6 +2148,110 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("User failed to select State " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	public void SelectPayPalOption() throws IOException {
+		try {
+			Paypalpayment.click();
+			Reporting.updateTestReport("PayPal Options has been selected successfully by user",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("User failed to select Paypal Option " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void SelectPayPalCreditOption() throws IOException {
+		try {
+			PaypalCredit.click();
+			Reporting.updateTestReport("PayPalCredit Options has been selected successfully by user",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("User failed to select PaypalCredit Option " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void ClickOnProceedToPayPal() throws IOException {
+		try {
+			ProccedtoPaypal.click();
+			Reporting.updateTestReport("Procced to Paypal button has been selected successfully by user",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("User failed to click on Proceed to Paypal button " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void ClickOnProceedToPayPalCredit() throws IOException {
+		try {
+			ProceedtoPaypalCredit.click();
+			Reporting.updateTestReport("Procced to Paypal button has been selected successfully by user",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("User failed to click on Proceed to Paypal button " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void EnterPayPalUserName(String paypalusername) throws IOException {
+		try {
+			PaypalUsername.sendKeys(paypalusername);
+			;
+			Reporting.updateTestReport("Paypal email" + paypalusername + "was entered successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to enter the paypal username " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void ClickOnNextButtonPayPalLoginPage() throws IOException {
+		try {
+			NextButtonOnPaypalPage.click();
+			;
+			Reporting.updateTestReport("Next button clicked successfully on Paypal Page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on Next button Paypal Page" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void EnterPayPalPassword(String paypalpassword) throws IOException {
+		try {
+			Paypalpassword.sendKeys(paypalpassword);
+			;
+			Reporting.updateTestReport("Paypal email" + paypalpassword + "was entered successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to enter the paypal username " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void ClickOnPaypalLogin() throws IOException {
+		try {
+			PaypalLoginButton.click();
+			;
+			;
+			Reporting.updateTestReport("Paypal Login button  was Clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on Paypal login button " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void ClickOnPaypalReviewOrder() throws IOException {
+		try {
+			PaypalReviewOrderbutton.click();
+			Reporting.updateTestReport("Continue to Review Order  was Clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on Continue to Review Order button " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
