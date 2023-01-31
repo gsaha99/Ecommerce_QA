@@ -189,6 +189,10 @@ public class app_WileyPLUS_Repo {
 	WebElement ModalPopUpContinueButton;
 	@FindBy(xpath="(//span[contains(text(),'Go Back')])[2]")
 	WebElement ModalPopUpGoBackButton;
+	@FindBy(xpath="(//div[@class='productPriceLabel']/span)[1]")
+	WebElement FirstProductsPrice;
+	@FindBy(xpath="(//div[@class='productPriceLabel']/span)[2]")
+	WebElement SecondProductsPrice;
 	
 	
 	
@@ -1907,6 +1911,68 @@ public class app_WileyPLUS_Repo {
 	 */
 	public WebElement getModalPopUp(){
 		return ModalPopUp;
+	}
+	
+	/*
+	 * @Date: 30/1/23
+	 * @Description: Clicks on Continue button on currency change modal pop up
+	 */
+	public void clickOnContinueButtonOnModalPopUp() throws IOException{
+		try {
+			ModalPopUpContinueButton.click();
+			Reporting.updateTestReport("Continue button on currency change modal pop up was clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Continue button on currency change modal pop up couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 30/1/23
+	 * @Description: Clicks on Go Back button on currency change modal pop up
+	 */
+	public void clickOnGoBackButtonOnModalPopUp() throws IOException{
+		try {
+			ModalPopUpGoBackButton.click();
+			Reporting.updateTestReport("Go Back button on currency change modal pop up was clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Go Back button on currency change modal pop up couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Description: Fetches the first product's price
+	 */
+	public void getFirstProductsPrice() throws IOException{
+		try {
+			Reporting.updateTestReport("First product's price was displayed as: "+FirstProductsPrice.getText(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("First product's price couldn't be displayed",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Description: Fetches the second product's price
+	 */
+	public void getSecondProductsPrice() throws IOException{
+		try {
+			Reporting.updateTestReport("Second product's price was displayed as: "+SecondProductsPrice.getText(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Second product's price couldn't be displayed",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
 	}
 	
 	

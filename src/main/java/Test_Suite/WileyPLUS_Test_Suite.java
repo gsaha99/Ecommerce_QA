@@ -1758,6 +1758,101 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 										wait.until(ExpectedConditions.visibilityOf(WileyPLUS.getModalPopUp()));
 										Reporting.updateTestReport("Currency change modal pop up was displayed successfully", 
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										Thread.sleep(1000);
+										WileyPLUS.clickOnContinueButtonOnModalPopUp();
+										try {
+											wait.until(ExpectedConditions.
+													presenceOfElementLocated
+													(By.xpath("//p[contains(text(),' Your Cart')]")));
+											try {
+												wait.until(ExpectedConditions.presenceOfElementLocated(
+														By.xpath("//div[contains(text(),'USD')]")));
+												Reporting.updateTestReport("Cart was merged successfully in USD", 
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+												WileyPLUS.getFirstProductsPrice();
+												WileyPLUS.getSecondProductsPrice();
+												driver.get(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "URL"));
+												try {
+													wait.until(ExpectedConditions.elementToBeClickable(
+															By.xpath("//span[contains(text(),'add course')]")));
+													Thread.sleep(2000);
+													WileyPLUS.clickOnOnboardingAddCourseButton();
+													WileyPLUS.enterCourseSectionId("A03598");
+													WileyPLUS.clickOnContinueButtonInOnboarding();
+													try {
+														wait.until(ExpectedConditions.presenceOfElementLocated(
+																By.xpath("//h2[contains(text(),'Join your course')]")));
+														WileyPLUS.clickOnSingleTermRadioButtonInJoinCourse();
+														WileyPLUS.clickOnContinueButtonInOnboarding();
+														WileyPLUS.clickOnFirstPurchaseOption();
+														WileyPLUS.clickOnContinueToCheckoutButton();
+														try {
+															wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
+																	(By.id("add-to-cart-error-dialog")));
+															driver.findElement(By.xpath("//span[contains(text(),'View Cart')]")).click();
+															try {
+																wait.until(ExpectedConditions.visibilityOf(WileyPLUS.getModalPopUp()));
+																Reporting.updateTestReport("Currency change modal pop up was displayed successfully", 
+																		CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+																Thread.sleep(1000);
+																WileyPLUS.clickOnContinueButtonOnModalPopUp();
+																try {
+																	wait.until(ExpectedConditions.
+																			presenceOfElementLocated
+																			(By.xpath("//p[contains(text(),' Your Cart')]")));
+																	try {
+																		wait.until(ExpectedConditions.presenceOfElementLocated(
+																				By.xpath("//div[contains(text(),'CAD')]")));
+																		Reporting.updateTestReport("Cart was merged successfully in CAD", 
+																				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+																		WileyPLUS.getFirstProductsPrice();
+																		WileyPLUS.getSecondProductsPrice();
+																	}
+																	catch(Exception e){
+																		Reporting.updateTestReport("Cart was not merged in CAD", 
+																				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+																	}
+																}
+																catch(Exception e){
+																	Reporting.updateTestReport("User was not on cart page and caused timeout exception",
+																			CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+																}
+															}
+															catch(Exception e) {
+																Reporting.updateTestReport("Currency change modal pop up was not displayed ", 
+																		CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+															}
+															
+														}
+														catch(Exception e) {
+															Reporting.updateTestReport("The cart error dialog box didn't appear"
+																	+ " and caused timeout exception",
+																	CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+														}
+													}
+													catch(Exception e){
+														Reporting.updateTestReport("User couldn't add course and was not on Join Course page"
+																+ " and caused timeout exception",
+																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													}
+												}
+												catch(Exception e) {
+													Reporting.updateTestReport("User was not on my account page"
+															+ " and caused timeout exception",
+															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												}
+												
+											}
+											catch(Exception e){
+												Reporting.updateTestReport("Cart was not merged in USD", 
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											}
+											
+										}
+										catch(Exception e){
+											Reporting.updateTestReport("User was not on cart page and caused timeout exception",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										}
 										
 									}
 									catch(Exception e) {
