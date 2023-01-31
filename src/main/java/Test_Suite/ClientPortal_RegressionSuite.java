@@ -59,13 +59,12 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
 			CPortal.WPSAdmin_LogIN_ClickNext();
 			CPortal.WPSAdmin_ClickHome();
-			Thread.sleep(5000);
 			CPortal.WPSAdmin_ClickNewClientApp();
-			Thread.sleep(5000);
+			//Thread.sleep(2000);
 			CPortal.WPSAdmin_ClickRegisterNewUser();
-			Thread.sleep(5000);
+			//Thread.sleep(2000);
 			CPortal.WPSAdmin_ClickMyWorklist();
-			Thread.sleep(5000);
+			//Thread.sleep(2000);
 			String actualUserName = driver.findElement(By.xpath("//div[@class='userNameCircle']")).getText();
 		    String expectedUserName = excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "Initial");
 		    if(actualUserName.compareTo(expectedUserName)==0) 
@@ -80,8 +79,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		      }
 		    
+		    CPortal.WPSAdmin_ClickTransactionSearch();
 		    CPortal.WPSAdmin_ClickLogOut();
-		    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("loginHeader")));
 			
 		}
 		catch (Exception e) 

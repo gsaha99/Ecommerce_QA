@@ -1,10 +1,15 @@
 package PageObjectRepo;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.util.ArrayList;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import Test_Suite.ClientPortal_RegressionSuite;
 import utilities.CaptureScreenshot;
@@ -41,6 +46,9 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	@FindBy(xpath = "//a[contains(text(),'My Worklist')]")
 	WebElement ClickMyWorklist;
+	
+	@FindBy(xpath = "//a[contains(text(),'Transaction Search')]")
+	WebElement ClickTransactionSearch;
 	
 	@FindBy(xpath = "//*[local-name()='svg' and @class='fa-icon']/*[local-name()='path']")
     WebElement ClickLogOut;
@@ -98,6 +106,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	public void WPSAdmin_ClickHome() throws IOException {
 		try {
 			ClickHome.click();
+			Thread.sleep(2000);
 			Reporting.updateTestReport("Home is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
@@ -113,6 +122,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	public void WPSAdmin_ClickNewClientApp() throws IOException {
 		try {
 			ClickNewClientApp.click();
+			Thread.sleep(2000);
 			Reporting.updateTestReport("New Client Application is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
@@ -128,6 +138,8 @@ public class app_ClientPortal_Repo extends DriverModule {
 	public void WPSAdmin_ClickRegisterNewUser() throws IOException {
 		try {
 			ClickRegisterNewUser.click();
+			Thread.sleep(2000);
+			
 			Reporting.updateTestReport("Register New User is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
@@ -137,16 +149,41 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	/* 
 	 * Author : Jayanta
-	 * Description : Method to click Register New User for WPS Admin
+	 * Description : Method to click My Worklist for WPS Admin
 	 */
 	
 	public void WPSAdmin_ClickMyWorklist() throws IOException {
 		try {
 			ClickMyWorklist.click();
+			Thread.sleep(2000);
 			Reporting.updateTestReport("My Worklist is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("My Worklist is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to click Transaction Search for WPS Admin
+	 */
+	
+	public void WPSAdmin_ClickTransactionSearch() throws IOException {
+		try {
+			ClickTransactionSearch.click();
+			Thread.sleep(5000);
+			ArrayList<String> newTb = new ArrayList<String>(driver.getWindowHandles());
+		    //switch to new tab
+		    driver.switchTo().window(newTb.get(1));
+		    System.out.println("Page title of new tab: " + driver.getTitle());
+		    Reporting.updateTestReport("Transaction Search is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		    //switch to parent window
+		    driver.switchTo().window(newTb.get(0));
+		    System.out.println("Page title of parent window: " + driver.getTitle());
+		    
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Transaction Search is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 	
@@ -159,8 +196,9 @@ public class app_ClientPortal_Repo extends DriverModule {
 		try {
 		
 			Actions act = new Actions(driver);
-		    act.moveToElement(ClickLogOut).
-		    click().build().perform();
+		    act.moveToElement(ClickLogOut).click().build().perform();
+		    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("loginHeader")));
 			Reporting.updateTestReport("Log out is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
