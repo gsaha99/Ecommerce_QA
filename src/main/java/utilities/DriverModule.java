@@ -74,6 +74,12 @@ public class DriverModule {
 				//set path to chromedriver.exe
 				
 				driver = new ChromeDriver();
+				
+				//configure options parameter to Chrome driver
+				ChromeOptions options = new ChromeOptions();
+				options.addArguments("--incognito");		      		      	
+				driver = new ChromeDriver(options);
+				
 				driver.manage().window().maximize();
 				driver.manage().deleteAllCookies();
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);	
