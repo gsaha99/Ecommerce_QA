@@ -48,13 +48,14 @@ public class DriverModule {
 //			options.addArguments("--incognito");		      		      	
 //			driver = new ChromeDriver(options);
 			
-			FirefoxOptions options = new FirefoxOptions();
-			options.addArguments("-private");
-			driver = new FirefoxDriver(options);
-			String cpath=SeleniumManager.getInstance().getDriverPath("geckodriver");
-			System.out.println(cpath);
+//			FirefoxOptions options = new FirefoxOptions();
+//			options.addArguments("-private");
+//			driver = new FirefoxDriver(options);
+//			String cpath=SeleniumManager.getInstance().getDriverPath("geckodriver");
+//			System.out.println(cpath);
 			
-//			driver=new EdgeDriver();
+			driver=new EdgeDriver();
+			driver.manage().deleteAllCookies();
 
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();

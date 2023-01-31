@@ -1,72 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="21" total="22" passed="1" failed="0" skipped="0">
+<testng-results ignored="36" total="37" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-01-31T12:27:53 IST" name="Default suite" finished-at="2023-01-31T12:29:34 IST" duration-ms="100644">
+  <suite started-at="2023-01-31T20:42:13 IST" name="Default suite" finished-at="2023-01-31T20:43:35 IST" duration-ms="81876">
     <groups>
     </groups>
-    <test started-at="2023-01-31T12:27:53 IST" name="Default test" finished-at="2023-01-31T12:29:34 IST" duration-ms="100644">
-      <class name="Test_Suite.WileyPLUS_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@48bb62]" started-at="2023-01-31T12:27:53 IST" name="initiate" finished-at="2023-01-31T12:28:00 IST" duration-ms="6369" status="PASS">
+    <test started-at="2023-01-31T20:42:13 IST" name="Default test" finished-at="2023-01-31T20:43:35 IST" duration-ms="81876">
+      <class name="Test_Suite.WEL_Test_Suite">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.WEL_Test_Suite@1750fbeb]" started-at="2023-01-31T20:42:13 IST" name="initiate" finished-at="2023-01-31T20:42:20 IST" duration-ms="6657" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@159ac15f]]>
+                <![CDATA[org.testng.TestRunner@19ae2ee5]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@48bb62]" started-at="2023-01-31T12:28:00 IST" name="launchBrowser" finished-at="2023-01-31T12:28:00 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="59" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.WEL_Test_Suite@1750fbeb]" started-at="2023-01-31T20:42:20 IST" name="initializeRepo" finished-at="2023-01-31T20:42:20 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="81" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- launchBrowser -->
-        <test-method signature="TC22_Merge_Cart_Functionality()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@48bb62]" started-at="2023-01-31T12:28:00 IST" name="TC22_Merge_Cart_Functionality" finished-at="2023-01-31T12:29:32 IST" duration-ms="92363" status="PASS">
+        </test-method> <!-- initializeRepo -->
+        <test-method signature="TC75_Check_Add_To_Cart_Functionality_for_Heads_Up_Validation()[pri:0, instance:Test_Suite.WEL_Test_Suite@1750fbeb]" started-at="2023-01-31T20:42:20 IST" name="TC75_Check_Add_To_Cart_Functionality_for_Heads_Up_Validation" finished-at="2023-01-31T20:43:32 IST" duration-ms="72633" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC22_Merge_Cart_Functionality -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@48bb62]" started-at="2023-01-31T12:29:32 IST" name="CloseBrowser" finished-at="2023-01-31T12:29:34 IST" duration-ms="1787" status="FAIL">
-          <exception class="org.openqa.selenium.NoSuchSessionException">
-            <message>
-              <![CDATA[Tried to run command without establishing a connection
-Build info: version: '4.6.0', revision: '79f1c02ae20'
-System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.5'
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Command: [26cc60a2-fd96-4821-85f5-feb4ee584cb4, quit {}]
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 108.0, moz:accessibilityChecks: false, moz:buildID: 20221208122842, moz:debuggerAddress: 127.0.0.1:28821, moz:geckodriverVersion: 0.32.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 11208, moz:profile: C:\Users\arakshit\AppData\L..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://127.0.0.1:28821/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
-Session ID: 26cc60a2-fd96-4821-85f5-feb4ee584cb4]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchSessionException: Tried to run command without establishing a connection
-Build info: version: '4.6.0', revision: '79f1c02ae20'
-System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.5'
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Command: [26cc60a2-fd96-4821-85f5-feb4ee584cb4, quit {}]
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 108.0, moz:accessibilityChecks: false, moz:buildID: 20221208122842, moz:debuggerAddress: 127.0.0.1:28821, moz:geckodriverVersion: 0.32.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 11208, moz:profile: C:\Users\arakshit\AppData\L..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://127.0.0.1:28821/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
-Session ID: 26cc60a2-fd96-4821-85f5-feb4ee584cb4
-at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
-at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
-at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:167)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.lambda$execute$1(DriverCommandExecutor.java:105)
-at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-at java.base/java.lang.Thread.run(Thread.java:833)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
+        </test-method> <!-- TC75_Check_Add_To_Cart_Functionality_for_Heads_Up_Validation -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.WEL_Test_Suite@1750fbeb]" started-at="2023-01-31T20:43:32 IST" name="CloseBrowser" finished-at="2023-01-31T20:43:35 IST" duration-ms="2405" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
-      </class> <!-- Test_Suite.WileyPLUS_Test_Suite -->
+      </class> <!-- Test_Suite.WEL_Test_Suite -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

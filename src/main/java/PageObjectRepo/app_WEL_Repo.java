@@ -436,7 +436,49 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//div[@id='billingMultiPaymentOptionValues']/ul/li[4]/a/span")
 	WebElement PaypalCredit;
+	
+	@FindBy(xpath="//i[contains(text(),'(We cannot ship to PO boxes)')]")
+	WebElement DontShipToPOBox;
+	
+	@FindBy(xpath="//div[@class='cart']")
+	WebElement CartIconOnMyAccount;
+	
+	@FindBy(xpath="(//img[@title='Wiley EL'])[1]")
+	WebElement WELHomePageLogoOnCartPage;
 
+	@FindBy(xpath="//button[contains(text(),'ADD TO CART')]")
+	WebElement AddToCartButtonOnPDP;
+		
+	@FindBy(id="recommendTitle")
+	WebElement RecommendationTitle;
+	
+	@FindBy(xpath="//div[@class='recommendIndividualProductSummary']")
+	WebElement ProductSummaryOnRecommendationTitle;
+	
+	@FindBy(xpath="//span[contains(text(),'Add to Cart')]")
+	WebElement AddToCartButtonOnRecommendationTitle;
+	
+	@FindBy(xpath="//a[contains(text(),'View Product')]")
+	WebElement ViewProductLinkOnRecommendationTitle;
+	
+	@FindBy(xpath="(//a[@class='cart-link'])[2]")
+	WebElement CartIconOnPDP;
+	
+	@FindBy(xpath="//a[@class='subscription-title-link']")
+	WebElement ProductLinkOnCartPage;
+	
+	@FindBy(xpath="//label[@for='eBook0']")
+	WebElement EBookButtonPDP;
+	
+	@FindBy(xpath="(//p[@class='modal-notice'])[2]")
+	WebElement ErrorModal;
+	
+	@FindBy(xpath="//button[contains(text(),'KEEP SHOPPING')]")
+	WebElement KeepShoppingButtonOnErrorModal;
+	
+	@FindBy(xpath="//p[contains(text(),'PACKAGE')]")
+	WebElement PackageButtonOnCIAPDP;
+	
 	public void EnterUserNameOnLoginPage(String UserName) throws IOException {
 		try {
 			username.sendKeys(UserName);
@@ -2255,5 +2297,296 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Author: Anindita
+	 * @Decription: Checks if "Don't ship to PO Box" message is present or not
+	 */
+	public void checkDontShipToPOBoxMessage() throws IOException{
+		try {
+			Reporting.updateTestReport(DontShipToPOBox.getText() +" : this message was displayed in the shipping section",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Don't ship to PO Box : this message was displayed in the shipping section",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Author: Anindita
+	 * @Description: Clicks on the cart Icon on my account page
+	 */
+	public void clickOnCartIconOnMyAccountPage() throws IOException{
+		try {
+			CartIconOnMyAccount.click();
+			Reporting.updateTestReport("The cart icon on the my account page was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The cart icon on the my account page couldn't be clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Author: Anindita
+	 * @Description: Clicks on the WEL HomePage Logo On CartPage
+	 */
+	public void clickOnWELHomePageLogoOnCartPage() throws IOException{
+		try {
+			WELHomePageLogoOnCartPage.click();
+			Reporting.updateTestReport("The WEL HomePage Logo On Cart Page was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The WEL HomePage Logo On Cart Page couldn't be clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Author: Anindita
+	 * @Description: Clicks on the Add To Cart Button On PDP
+	 */
+	public void clickOnAddToCartButtonOnPDP() throws IOException{
+		try {
+			AddToCartButtonOnPDP.click();
+			Reporting.updateTestReport("The Add To Cart Button On PDP was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The Add To Cart Button On PDP couldn't be clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 
+	/*
+	 * @Date: 31/01/23
+	 * @Author: Anindita
+	 * @Description: Checks Recommendation Title on cart page
+	 */
+	public void checkRecommendationTitle() throws IOException{
+		try {
+			if(RecommendationTitle.isDisplayed())
+				Reporting.updateTestReport("Recommendation Title was present on cart page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport("Recommendation Title was not present on cart page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Recommendation Title was not present on cart page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Author: Anindita
+	 * @Description: Checks Recommendation Title Summary line on cart page
+	 */
+	public void getCartUpsellsSummaryLine() throws IOException{
+		try {
+			if(ProductSummaryOnRecommendationTitle.isDisplayed())
+				Reporting.updateTestReport("Recommendation Title was present on cart page with a summary line: "+
+						ProductSummaryOnRecommendationTitle.getText(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport("Recommendation Title Summary line was not present on cart page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Recommendation Title Summary line was not present on cart page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Author: Anindita
+	 * @Description: Checks the Add to cart button on Recommendation Title on cart page
+	 */
+	public void checkAddToCartButtonOnRecommendationTitle() throws IOException{
+		try {
+			if(AddToCartButtonOnRecommendationTitle.isDisplayed())
+				Reporting.updateTestReport("Add to cart button on Recommendation Title was present on cart page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport("Add to cart button on Recommendation Title was not present on cart page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Add to cart button on Recommendation Title was not present on cart page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Author: Anindita
+	 * @Description: Checks the View Product link on Recommendation Title on cart page
+	 */
+	public void checkViewProductLinkOnRecommendationTitle() throws IOException{
+		try {
+			if(ViewProductLinkOnRecommendationTitle.isDisplayed())
+				Reporting.updateTestReport("View Product link on Recommendation Title was present on cart page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport("View Product link on Recommendation Title was not present on cart page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("View Product link on Recommendation Title was not present on cart page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Author: Anindita
+	 * @Description: Clicks on the View Product Link On Recommendation Title
+	 */
+	public void clickOnViewProductLinkOnRecommendationTitle() throws IOException{
+		try {
+			ViewProductLinkOnRecommendationTitle.click();
+			Reporting.updateTestReport("The View Product Link On Recommendation Title was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The View Product Link On Recommendation Title couldn't be clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Author: Anindita
+	 * @Description: Clicks on the Add to cart button On Recommendation Title
+	 */
+	public void clickOnAddToCartButtonOnRecommendationTitle() throws IOException{
+		try {
+			AddToCartButtonOnRecommendationTitle.click();
+			Reporting.updateTestReport("The Add to cart button On Recommendation Title was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The Add to cart button On Recommendation Title couldn't be clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Author: Anindita
+	 * @Description: Clicks on the The Cart icon on PDP
+	 */
+	public void clickOnCartIconOnPDP() throws IOException{
+		try {
+			CartIconOnPDP.click();
+			Reporting.updateTestReport("The Cart icon on PDP was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The The Cart icon on PDP couldn't be clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Author: Anindita
+	 * @Description: Clicks on Product link on cart page
+	 */
+	public void clickOnProductLinkOnCartPage() throws IOException{
+		try {
+			ProductLinkOnCartPage.click();
+			Reporting.updateTestReport("The Product link on cart page was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The Product link on cart page couldn't be clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Author: Anindita
+	 * @Description: Clicks on the EBook button on PDP
+	 */
+	public void clickOnEBookButtonPDP() throws IOException{
+		try {
+			EBookButtonPDP.click();
+			Reporting.updateTestReport("The EBook button on PDP was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The EBook button on PDP couldn't be clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Author: Anindita
+	 * @Description: Checks the Error Modal after trying to add multiple quantity digital product
+	 */
+	public void checkErrorModal() throws IOException{
+		try {
+			if(ErrorModal.isDisplayed())
+				Reporting.updateTestReport("Error Modal appeared after trying to add multiple quantity digital product",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport("Error Modal didn't appear after trying to add multiple quantity digital product",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Error Modal didn't appear after trying to add multiple quantity digital product",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Author: Anindita
+	 * @Description: Clicks on the Keep Shopping Button On Error Modal
+	 */
+	public void clickOnKeepShoppingButtonOnErrorModal() throws IOException{
+		try {
+			KeepShoppingButtonOnErrorModal.click();
+			Reporting.updateTestReport("The Keep Shopping Button On Error Modal was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The Keep Shopping Button On Error Modal couldn't be clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 31/01/23
+	 * @Author: Anindita
+	 * @Description: Clicks on the Package Button On CIA PDP
+	 */
+	public void clickOnPackageButtonOnCIAPDP() throws IOException{
+		try {
+			PackageButtonOnCIAPDP.click();
+			Reporting.updateTestReport("The Package Button On CIA PDP was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The Package Button On CIA PDP couldn't be clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
 }
