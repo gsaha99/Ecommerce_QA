@@ -315,7 +315,7 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//input[@id='city']")
 	WebElement BillCity;
 
-	@FindBy(xpath = "//input[@id='city']")
+	@FindBy(xpath = "//input[@id='townCity']")
 	WebElement TownCity;
 
 	@FindBy(xpath = "//input[@id='phoneNumber']")
@@ -505,6 +505,19 @@ public class app_WEL_Repo {
 	
 	@FindBy(xpath = "//div[@class='form-group']//input[@id='inputPartnerSearch']")
 	WebElement PartnerInputSearch;
+	
+	@FindBy(xpath="//div[@class='row taxCalculationDetails orderReviewRightPanel']/"
+			+ "div[@class='col-6 noPadding price orderDetailCommonVal']")
+	WebElement TaxInOrderSummaryTab;
+	
+	@FindBy(xpath="//a[@href='/checkout/multi/payment-method/add/']/span[@class='stepEdit']")
+	WebElement PaymentDetailsEditIcon;
+	
+	@FindBy(xpath="//a[@href='/checkout/multi/delivery-address/add/']/span[@class='stepEdit']")
+	WebElement ShippingDetailsEditIcon;
+	
+	@FindBy(xpath="//label[contains(text(),'Part 1')]")
+	WebElement Part1InCIAPDP;
 
 	
 	public void EnterUserNameOnLoginPage(String UserName) throws IOException {
@@ -1095,6 +1108,8 @@ public class app_WEL_Repo {
 
 	public void GuestFirstName(String GNAME) throws IOException {
 		try {
+			GuestFirstName.clear();
+			Thread.sleep(1000);
 			GuestFirstName.sendKeys(GNAME);
 			Reporting.updateTestReport("First: " + GNAME + " was entered successfully in the First Name section",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1107,6 +1122,8 @@ public class app_WEL_Repo {
 
 	public void GuestLastName(String GLNAME) throws IOException {
 		try {
+			GuestLastName.clear();
+			Thread.sleep(1000);
 			GuestLastName.sendKeys(GLNAME);
 			Reporting.updateTestReport("Last: " + GLNAME + " was entered successfully in LastName section",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1176,6 +1193,8 @@ public class app_WEL_Repo {
 
 	public void ShipAddressLineOne(String ALineOne) throws IOException {
 		try {
+			ShipAddressLineOne.clear();
+			Thread.sleep(1000);
 			ShipAddressLineOne.sendKeys(ALineOne);
 			Reporting.updateTestReport(
 					"AddressLine1: " + ALineOne + " was entered successfully in the AddressLine1 section",
@@ -1189,6 +1208,8 @@ public class app_WEL_Repo {
 
 	public void EnterCity(String City) throws IOException {
 		try {
+			BillCity.clear();
+			Thread.sleep(1000);
 			BillCity.sendKeys(City);
 			Reporting.updateTestReport("City: " + City + " was entered successfully in the City section",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1201,6 +1222,8 @@ public class app_WEL_Repo {
 
 	public void ShipTownCity(String City) throws IOException {
 		try {
+			TownCity.clear();
+			Thread.sleep(1000);
 			TownCity.sendKeys(City);
 			Reporting.updateTestReport("City: " + City + " was entered successfully in the City section",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1225,6 +1248,8 @@ public class app_WEL_Repo {
 
 	public void ShipPostCode(String postalCode) throws IOException {
 		try {
+			ShipPostcode.clear();
+			Thread.sleep(1000);
 			ShipPostcode.sendKeys(postalCode);
 			Reporting.updateTestReport("postalcode: " + postalCode + " was entered successfully in the ZipCode section",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1237,6 +1262,7 @@ public class app_WEL_Repo {
 
 	public void EnterPhoneNumber(String pohnenumber) throws IOException {
 		try {
+			BillPhoneNumber.clear();
 			BillPhoneNumber.sendKeys(pohnenumber);
 			Reporting.updateTestReport(
 					"PhoneNumber: " + pohnenumber + " was entered successfully in the PhoneNumber section",
@@ -1250,6 +1276,8 @@ public class app_WEL_Repo {
 
 	public void ShipPhoneNumber(String pohnenumber) throws IOException {
 		try {
+			ShipPhoneNumber.clear();
+			Thread.sleep(1000);
 			ShipPhoneNumber.sendKeys(pohnenumber);
 			Reporting.updateTestReport(
 					"PhoneNumber: " + pohnenumber + " was entered successfully in the PhoneNumber section",
@@ -2742,6 +2770,75 @@ public class app_WEL_Repo {
 					"Failed to enter the universityname with error message " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
+		}
+	}
+	
+	/*
+	 * @Date: 01/02/23
+	 * @Author: Anindita
+	 * @Description: Fetches the tax from order summary tab
+	 */
+	public String fetchTaxInOrderSummaryTab() throws IOException{
+		try {
+			Reporting.updateTestReport("Tax with value: "+TaxInOrderSummaryTab.getText()+" was displayed in the order summary tab",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return TaxInOrderSummaryTab.getText();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Tax couldn't be displayed in the order summary tab",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Date: 01/02/23
+	 * @Author: Anindita
+	 * @Description: Clicks on Payment Details Edit Icon
+	 */
+	public void clickOnPaymentDetailsEditIcon() throws IOException{
+		try {
+			PaymentDetailsEditIcon.click();
+			Reporting.updateTestReport("The Payment Details Edit Icon was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The Payment Details Edit Icon couldn't be clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 01/02/23
+	 * @Author: Anindita
+	 * @Description: Clicks on Shipping Details Edit Icon
+	 */
+	public void clickOnShippingDetailsEditIcon() throws IOException{
+		try {
+			ShippingDetailsEditIcon.click();
+			Reporting.updateTestReport("The Shipping Details Edit Icon was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The Shipping Details Edit Icon couldn't be clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 01/02/23
+	 * @Author: Anindita
+	 * @Description: Clicks on Part1 button In CIA PDP
+	 */
+	public void clickOnPart1InCIAPDP() throws IOException{
+		try {
+			Part1InCIAPDP.click();
+			Reporting.updateTestReport("The Part1 button In CIA PDP was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The Part1 button In CIA PDP couldn't be clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 	
