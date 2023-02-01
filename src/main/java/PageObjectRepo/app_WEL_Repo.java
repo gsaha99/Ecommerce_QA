@@ -479,6 +479,34 @@ public class app_WEL_Repo {
 	@FindBy(xpath="//p[contains(text(),'PACKAGE')]")
 	WebElement PackageButtonOnCIAPDP;
 	
+	@FindBy(xpath = "//div[@class='row pageMainContainer no-margin']//div[@class='checkout-steps']/a[1]")
+	WebElement StudentVerification;
+	
+	@FindBy(xpath = "(//div[@id='shippingSavedAddressShowBtn'])[1]")
+	WebElement showmore;
+	
+	@FindBy(xpath = "//div[@id='savedAddressDiv_6']//div[@id='savedAddressButtonsDiv']/button[1]")
+	WebElement USEbuttonForExistingAddress;
+	
+	@FindBy(xpath = "//div[@class='step-head checkoutCompletedStep']//div[@class='edit']/a")
+	WebElement EditIcononShippingPage;
+	
+	@FindBy(xpath = "(//div[@class='row navitem-div-medium navitem-div'])[2]//a")
+	WebElement Productdropdown;
+	
+	@FindBy(xpath = "//div[@class='col dropdown-item product-dropdown-desktop-item item1']//li[2]/a")
+	WebElement CPATestBank;
+
+	@FindBy(xpath = "//div[@class='package-selection-container platinum-package']//div[2]//button")
+	WebElement CPATestBankAddToCart;
+	
+	@FindBy(xpath = "//div[@class='partner-detail partner-list-container']//div[@class='col-xs-12 col-sm-6 package-selection-col']//button")
+	WebElement PartnerProductAddToCartButton;
+	
+	@FindBy(xpath = "//div[@class='form-group']//input[@id='inputPartnerSearch']")
+	WebElement PartnerInputSearch;
+
+	
 	public void EnterUserNameOnLoginPage(String UserName) throws IOException {
 		try {
 			username.sendKeys(UserName);
@@ -2586,6 +2614,134 @@ public class app_WEL_Repo {
 		catch(Exception e) {
 			Reporting.updateTestReport("The Package Button On CIA PDP couldn't be clicked ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	public void VerificationOfStudentForUS() throws IOException {
+		try {
+
+			String studentmessage = StudentVerification.getText();
+			Reporting.updateTestReport("The message: " + studentmessage + " Displayed successfully for US Address",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to the message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	
+	public void ClickOnShowMoreShippingAddress() throws IOException {
+		try {
+
+			showmore.click();
+			Reporting.updateTestReport("The show mote clcicked successfully on Shipping Page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on show more on Shipping page" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	
+	public void ClickOnUseButtonForExistingShippingAddress() throws IOException {
+		try {
+
+			USEbuttonForExistingAddress.click();
+			Reporting.updateTestReport("The use button was clcicked successfully on Shipping Page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Use Icon on Shipping page" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	
+	public void VerificationOfStudentForNonUS() throws IOException {
+		try {
+
+			String studentmessage = StudentVerification.getText();
+			Reporting.updateTestReport("The message: " + studentmessage + " Displayed successfully for NON US Address",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to the message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
+	public void ClickOnEditIcononShippingPage() throws IOException {
+		try {
+
+			EditIcononShippingPage.click();
+			Reporting.updateTestReport("The edit Icon was clcicked successfully on Shipping Page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on edit Icon on Shipping page" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	
+	public void ClickOnProductdropdown() throws IOException {
+		try {
+			Productdropdown.click();
+			Reporting.updateTestReport("Product dropdown  was Clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on product drowndown " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	public void ClickOnCPATestBank() throws IOException {
+		try {
+			CPATestBank.click();
+			Reporting.updateTestReport("CPA Test Bank product selected successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to select CPA Test Bank" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void ClickOnAddToCartCPATestBank() throws IOException {
+		try {
+			CPATestBankAddToCart.click();
+			Reporting.updateTestReport("Add TO Cart was clicked successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on Add To Cart" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void ClickOnAddToCartUniversityProduct() throws IOException {
+		try {
+			PartnerProductAddToCartButton.click();
+			Reporting.updateTestReport("Add TO Cart was clickedc successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on Add To Cart" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	public void EnterUniversityName(String universityname) throws IOException {
+		try {
+			PartnerInputSearch.sendKeys(universityname);
+			PartnerInputSearch.sendKeys(Keys.ENTER);
+			Reporting.updateTestReport("Universityname Name was enter successfully on Partner Input Page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to enter the universityname with error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
 		}
 	}
 	
