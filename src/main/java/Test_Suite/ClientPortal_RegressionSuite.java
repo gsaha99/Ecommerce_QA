@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
-import java.util.UUID;
+import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
@@ -197,10 +197,13 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_SelectSOAP();
 			CPortal.WPSAdmin_SelectBusinessUnit();
-			String uuid = UUID.randomUUID().toString();
+			String uuid = Integer.toString(((new Random().nextInt(10))+1));
 			CPortal.WPSAdmin_Enter_ClientApp_Name("TestAuto_"+uuid);
 			CPortal.WPSAdmin_Enter_ClientApp_ShortName("TA"+uuid);
 			CPortal.WPSAdmin_SelectUserID();
+			
+			//From here it is not working in automation
+			
 			CPortal.WPSAdmin_ClickPaymentMethod();
 			CPortal.WPSAdmin_Click_DebitCard();
 			CPortal.WPSAdmin_Click_Add();

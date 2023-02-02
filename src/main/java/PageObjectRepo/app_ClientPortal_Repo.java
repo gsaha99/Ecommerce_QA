@@ -290,6 +290,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	public void WPSAdmin_Enter_ClientApp_ShortName(String shortname) throws IOException {
 		try {
 			enterClientAppShortName.sendKeys(shortname);
+			Thread.sleep(2000);
 			Reporting.updateTestReport("App Short Name " +shortname+ " Entered successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
