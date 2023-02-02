@@ -19,7 +19,7 @@ public class OrderConfirmationMail {
 	public static boolean checkIfOrderConfirmationMailReceived(WebDriver driver, String SS_path, String expectedElementXapth) throws IOException{
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-			int timeOutSeconds=60;
+			int timeOutSeconds=90;
 			int flag=0;
 			WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
 			WebElement element2 = null;
@@ -69,6 +69,8 @@ public class OrderConfirmationMail {
 				validateOrderConfirmationMailContentAGS_VET(driver,SS_path,tax,total);
 			else if(storeFront.equalsIgnoreCase("Wiley"))
 				validateOrderConfirmationMailContentWiley(driver,SS_path,tax,shipping,total);
+			else if(storeFront.equalsIgnoreCase("WEL"))
+				validateOrderConfirmationMailContentWEL(driver,SS_path,tax,shipping,total);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Order Confirmation email validation method couldn't be called: "+e.getMessage(),
@@ -173,6 +175,54 @@ public class OrderConfirmationMail {
 			else
 				Reporting.updateTestReport(taxInMail+" : shown as Tax in Order Confirmation mail was not same as tax in Order Confirmation page: "+tax,
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+			//Validation of Order Total
+			if(total.contentEquals(orderTotalInMail)) 
+				Reporting.updateTestReport(orderTotalInMail+" : shown as Order total in Order Confirmation mail was same as tax in Order Confirmation page: "+total,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport(orderTotalInMail+" : shown as Order total in Order Confirmation mail was not same as total in Order Confirmation page: "+total,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);			
+			driver.switchTo().defaultContent();
+
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Order total and tax validation couldn't be done: "+e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Description: Fetches the mail content of Order Confirmation mail, order total, tax and shipping
+	 * @Date: 20/12/22
+	 */
+
+	public static void validateOrderConfirmationMailContentWEL(WebDriver driver,String SS_path,String tax,String shipping, String total) throws IOException {
+		try {
+			driver.switchTo().frame("ifmail");
+			String orderTotalInMail=driver.findElement(By.xpath("//td[contains(text(),'Total:')]/following-sibling::td")).getText();
+			String taxInMail=driver.findElement(By.xpath("//td[contains(text(),'Tax:')]/following-sibling::td")).getText();
+			String shippingInMail=driver.findElement(By.xpath("//td[contains(text(),'Shipping:')]/following-sibling::td")).getText();
+			//Validation of tax
+			if(tax.contentEquals(taxInMail))
+				Reporting.updateTestReport(taxInMail+" : shown as Tax in Order Confirmation mail was same as tax in Order Confirmation page: "+tax,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport(taxInMail+" : shown as Tax in Order Confirmation mail was not same as tax in Order Confirmation page: "+tax,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			
+			//Validation of shipping
+			if(!shipping.equalsIgnoreCase("")) {
+				if(shippingInMail.contentEquals(shipping))
+					Reporting.updateTestReport(shippingInMail+" : shown as Shipping charge in Order Confirmation mail was same as shipping charge in Order Confirmation page: "+shipping,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(shippingInMail+" : shown as Shipping charge in Order Confirmation mail was not same as Shipping charge in Order Confirmation page: "+shipping,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			else
+				Reporting.updateTestReport("Shipping charge is not applicable for this order",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 
 			//Validation of Order Total
 			if(total.contentEquals(orderTotalInMail)) 

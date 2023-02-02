@@ -3,14 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Test_Suite.WileyPLUS_Test_Suite">
+      <class name="Test_Suite.WEL_Test_Suite">
         <methods>
+          <include name="initializeRepo"/>
           <include name="initiate"/>
           <include name="CloseBrowser"/>
-          <include name="TC22_Merge_Cart_Functionality"/>
-          <include name="launchBrowser"/>
+          <include name="TC79_Email_Format_Validation"/>
         </methods>
-      </class> <!-- Test_Suite.WileyPLUS_Test_Suite -->
+      </class> <!-- Test_Suite.WEL_Test_Suite -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

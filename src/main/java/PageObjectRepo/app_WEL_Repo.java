@@ -32,7 +32,7 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']/label")
 	WebElement ShipMethod;
-	
+
 	@FindBy(xpath="//div[@class='deliveryMethodMainFirstDiv']/label[@class='deliveryModeLabel']/span")
 	WebElement ShipValue;
 
@@ -388,12 +388,15 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "(//div[@class='col-md-5 col-6 noPadding orderReviewDetailsValue'])[2]")
 	WebElement OrderTax;
-	
-	@FindBy(xpath = "//div[@class='col-md-5 col-6 noPadding orderReviewDetailsValue']")
+
+	@FindBy(xpath = "//div[contains(text(),'Taxes')]/following-sibling::div")
 	WebElement TaxAmount;
 
 	@FindBy(xpath = "//div[@class='col-md-5 col-6 noPadding orderReviewTotalPrice']")
 	WebElement OrderTotal;
+
+	@FindBy(xpath = "(//div[contains(text(),'Shipping')])[2]/following-sibling::div")
+	WebElement ShippingChargeInOrderConfirmation;
 
 	@FindBy(xpath = "(//button[@class='useThisAddressBtn'])[1]")
 	WebElement UseButton;
@@ -403,13 +406,13 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//button[@class='button form-button welCheckoutBtn submitWelForm width100']")
 	WebElement FreeTrailSubbmit;
-	
+
 	@FindBy(xpath = "//input[@id='townCity']")
 	WebElement IndiaCity;
-	
+
 	@FindBy(xpath = "//input[@id='address.region']")
 	WebElement IndiaState;
-	
+
 	@FindBy(xpath = "//div[@class='welCheckoutBtnDiv multiPaymentPaypalBtn']/button")
 	WebElement ProccedtoPaypal;
 
@@ -430,95 +433,95 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//div[@class='CheckoutButton_buttonWrapper_2VloF']/button")
 	WebElement PaypalReviewOrderbutton;
-	
+
 	@FindBy(xpath = "//div[@id='billingMultiPaymentOptionValues']/ul/li[3]/a/span[@class='billingPaymentMultiNavTitle']")
 	WebElement Paypalpayment;
 
 	@FindBy(xpath = "//div[@id='billingMultiPaymentOptionValues']/ul/li[4]/a/span")
 	WebElement PaypalCredit;
-	
+
 	@FindBy(xpath="//i[contains(text(),'(We cannot ship to PO boxes)')]")
 	WebElement DontShipToPOBox;
-	
+
 	@FindBy(xpath="//div[@class='cart']")
 	WebElement CartIconOnMyAccount;
-	
+
 	@FindBy(xpath="(//img[@title='Wiley EL'])[1]")
 	WebElement WELHomePageLogoOnCartPage;
 
 	@FindBy(xpath="//button[contains(text(),'ADD TO CART')]")
 	WebElement AddToCartButtonOnPDP;
-		
+
 	@FindBy(id="recommendTitle")
 	WebElement RecommendationTitle;
-	
+
 	@FindBy(xpath="//div[@class='recommendIndividualProductSummary']")
 	WebElement ProductSummaryOnRecommendationTitle;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Add to Cart')]")
 	WebElement AddToCartButtonOnRecommendationTitle;
-	
+
 	@FindBy(xpath="//a[contains(text(),'View Product')]")
 	WebElement ViewProductLinkOnRecommendationTitle;
-	
+
 	@FindBy(xpath="(//a[@class='cart-link'])[2]")
 	WebElement CartIconOnPDP;
-	
+
 	@FindBy(xpath="//a[@class='subscription-title-link']")
 	WebElement ProductLinkOnCartPage;
-	
+
 	@FindBy(xpath="//label[@for='eBook0']")
 	WebElement EBookButtonPDP;
-	
+
 	@FindBy(xpath="(//p[@class='modal-notice'])[2]")
 	WebElement ErrorModal;
-	
+
 	@FindBy(xpath="//button[contains(text(),'KEEP SHOPPING')]")
 	WebElement KeepShoppingButtonOnErrorModal;
-	
+
 	@FindBy(xpath="//p[contains(text(),'PACKAGE')]")
 	WebElement PackageButtonOnCIAPDP;
-	
+
 	@FindBy(xpath = "//div[@class='row pageMainContainer no-margin']//div[@class='checkout-steps']/a[1]")
 	WebElement StudentVerification;
-	
+
 	@FindBy(xpath = "(//div[@id='shippingSavedAddressShowBtn'])[1]")
 	WebElement showmore;
-	
+
 	@FindBy(xpath = "//div[@id='savedAddressDiv_6']//div[@id='savedAddressButtonsDiv']/button[1]")
 	WebElement USEbuttonForExistingAddress;
-	
+
 	@FindBy(xpath = "//div[@class='step-head checkoutCompletedStep']//div[@class='edit']/a")
 	WebElement EditIcononShippingPage;
-	
+
 	@FindBy(xpath = "(//div[@class='row navitem-div-medium navitem-div'])[2]//a")
 	WebElement Productdropdown;
-	
+
 	@FindBy(xpath = "//div[@class='col dropdown-item product-dropdown-desktop-item item1']//li[2]/a")
 	WebElement CPATestBank;
 
 	@FindBy(xpath = "//div[@class='package-selection-container platinum-package']//div[2]//button")
 	WebElement CPATestBankAddToCart;
-	
+
 	@FindBy(xpath = "//div[@class='partner-detail partner-list-container']//div[@class='col-xs-12 col-sm-6 package-selection-col']//button")
 	WebElement PartnerProductAddToCartButton;
-	
+
 	@FindBy(xpath = "//div[@class='form-group']//input[@id='inputPartnerSearch']")
 	WebElement PartnerInputSearch;
-	
+
 	@FindBy(xpath="//div[@class='row taxCalculationDetails orderReviewRightPanel']/"
 			+ "div[@class='col-6 noPadding price orderDetailCommonVal']")
 	WebElement TaxInOrderSummaryTab;
-	
+
 	@FindBy(xpath="//a[@href='/checkout/multi/payment-method/add/']/span[@class='stepEdit']")
 	WebElement PaymentDetailsEditIcon;
-	
+
 	@FindBy(xpath="//a[@href='/checkout/multi/delivery-address/add/']/span[@class='stepEdit']")
 	WebElement ShippingDetailsEditIcon;
-	
+
 	@FindBy(xpath="//label[contains(text(),'Part 1')]")
 	WebElement Part1InCIAPDP;
-	
+
 	@FindBy(xpath = "//div[@class='navbar-collapse']/ul/li[3]/a")
 	WebElement ActiavteCodeIcon;
 
@@ -530,17 +533,47 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "(//div[@id='standaloneLoginMainDiv']//a)[1]")
 	WebElement CreateAccountForPin;
-	
+
 	@FindBy(xpath = "//form[@id='loginForm']/div[4]/button")
 	WebElement PINLoginButton;
-	
+
 	@FindBy(xpath = "//div[@class='container product-categories-container']//div[2]//dd/a[contains(text(),'CPA')]")
 	WebElement DeanDortonCPAProduct;
-	
+
 	@FindBy(xpath = "(//div[@class='col']//button)[2]")
 	WebElement DeanDortonAddToCart;
 
+	@FindBy(xpath = "//input[@placeholder='Enter your inbox here']")
+	WebElement EnterEmailIdInYopmail;
+
+	@FindBy(xpath = "//button[@title='Check Inbox @yopmail.com']")
+	WebElement clickOnCheckInboxButton;
+
+	@FindBy(xpath="//th[contains(text(),'Quantity')]")
+	WebElement QuantityInEmailHeader;
+
+	@FindBy(xpath="//th[contains(text(),'Price')]")
+	WebElement PriceInEmailHeader;
+
+	@FindBy(xpath="//th[contains(text(),'Order')]/strong")
+	WebElement OrderIdEmailHeader;
+
+	@FindBy(xpath="//th[contains(text(),'Total')]")
+	WebElement TotalInEmailHeader;
+
+	@FindBy(xpath="(//b[contains(text(),'Ship to:')]//parent::div/following-sibling::div)[2]")
+	WebElement AddressLine1ShippingInMail;
+
+	@FindBy(xpath="(//b[contains(text(),'Ship to:')]//parent::div/following-sibling::div)[4]")
+	WebElement CityStateShippingInMail;
+
+	@FindBy(xpath="//b[contains(text(),'Card No.')]//parent::div/following-sibling::div")
+	WebElement CardNumberLastFourDigitInMail;
 	
+	@FindBy(xpath="//div[contains(text(),'Next Day Shipping - ')]")
+	WebElement NextDayShipping;
+
+
 	public void EnterUserNameOnLoginPage(String UserName) throws IOException {
 		try {
 			username.sendKeys(UserName);
@@ -1181,11 +1214,11 @@ public class app_WEL_Repo {
 		}
 	}
 
-	
-	
-	
-	
-	
+
+
+
+
+
 	public void ShipState(String shipstate) throws IOException {
 		try {
 
@@ -1813,9 +1846,9 @@ public class app_WEL_Repo {
 		}
 	}
 
-	
-	
-	
+
+
+
 	public String fetchTaxValue() throws IOException {
 		try {
 			String totalTax = TaxAmount.getText();
@@ -1829,8 +1862,8 @@ public class app_WEL_Repo {
 		}
 	}
 
-	
-	
+
+
 	public String fetchOrderTotal() throws IOException {
 		try {
 			String orderTotal = OrderTotal.getText();
@@ -2063,14 +2096,14 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport("The Shipping method: "+ShipMethod.getText().split("-")[0]+" was displayed successfully"
 					+ " with shipping charge: "+ShipValue.getText(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			
+
 		} catch (Exception e) {
 			Reporting.updateTestReport("Failed to Shipping method " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			
+
 		}
 	}
-	
+
 
 	public String ShippingMethodForSingapore() throws IOException {
 		try {
@@ -2244,7 +2277,7 @@ public class app_WEL_Repo {
 	public WebElement returnUseSelectedBillingAddressButtonAddressDoctorPopUp() {
 		return UseSelectedBillingAddressButtonAddressDoctorPopUp;
 	}
-	
+
 	public void ShipTownIndiaCity(String City) throws IOException {
 		try {
 			IndiaCity.sendKeys(City);
@@ -2256,7 +2289,7 @@ public class app_WEL_Repo {
 
 		}
 	}
-	
+
 	public void enterState(String ShipInd) throws IOException {
 		try {
 			IndiaState.clear();
@@ -2270,7 +2303,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	public void SelectPayPalOption() throws IOException {
 		try {
 			Paypalpayment.click();
@@ -2374,7 +2407,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 31/01/23
 	 * @Author: Anindita
@@ -2390,7 +2423,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 31/01/23
 	 * @Author: Anindita
@@ -2407,7 +2440,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 31/01/23
 	 * @Author: Anindita
@@ -2424,7 +2457,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 31/01/23
 	 * @Author: Anindita
@@ -2451,18 +2484,18 @@ public class app_WEL_Repo {
 		try {
 			if(RecommendationTitle.isDisplayed())
 				Reporting.updateTestReport("Recommendation Title was present on cart page",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else
 				Reporting.updateTestReport("Recommendation Title was not present on cart page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Recommendation Title was not present on cart page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 31/01/23
 	 * @Author: Anindita
@@ -2473,7 +2506,7 @@ public class app_WEL_Repo {
 			if(ProductSummaryOnRecommendationTitle.isDisplayed())
 				Reporting.updateTestReport("Recommendation Title was present on cart page with a summary line: "+
 						ProductSummaryOnRecommendationTitle.getText(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else
 				Reporting.updateTestReport("Recommendation Title Summary line was not present on cart page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -2483,7 +2516,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 31/01/23
 	 * @Author: Anindita
@@ -2493,18 +2526,18 @@ public class app_WEL_Repo {
 		try {
 			if(AddToCartButtonOnRecommendationTitle.isDisplayed())
 				Reporting.updateTestReport("Add to cart button on Recommendation Title was present on cart page",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else
 				Reporting.updateTestReport("Add to cart button on Recommendation Title was not present on cart page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Add to cart button on Recommendation Title was not present on cart page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 31/01/23
 	 * @Author: Anindita
@@ -2514,18 +2547,18 @@ public class app_WEL_Repo {
 		try {
 			if(ViewProductLinkOnRecommendationTitle.isDisplayed())
 				Reporting.updateTestReport("View Product link on Recommendation Title was present on cart page",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else
 				Reporting.updateTestReport("View Product link on Recommendation Title was not present on cart page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("View Product link on Recommendation Title was not present on cart page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 31/01/23
 	 * @Author: Anindita
@@ -2542,7 +2575,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 31/01/23
 	 * @Author: Anindita
@@ -2559,7 +2592,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 31/01/23
 	 * @Author: Anindita
@@ -2576,7 +2609,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 31/01/23
 	 * @Author: Anindita
@@ -2593,7 +2626,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 31/01/23
 	 * @Author: Anindita
@@ -2610,7 +2643,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 31/01/23
 	 * @Author: Anindita
@@ -2620,18 +2653,18 @@ public class app_WEL_Repo {
 		try {
 			if(ErrorModal.isDisplayed())
 				Reporting.updateTestReport("Error Modal appeared after trying to add multiple quantity digital product",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else
 				Reporting.updateTestReport("Error Modal didn't appear after trying to add multiple quantity digital product",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Error Modal didn't appear after trying to add multiple quantity digital product",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 31/01/23
 	 * @Author: Anindita
@@ -2648,7 +2681,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 31/01/23
 	 * @Author: Anindita
@@ -2665,7 +2698,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	public void VerificationOfStudentForUS() throws IOException {
 		try {
 
@@ -2679,7 +2712,7 @@ public class app_WEL_Repo {
 
 		}
 	}
-	
+
 	public void ClickOnShowMoreShippingAddress() throws IOException {
 		try {
 
@@ -2693,7 +2726,7 @@ public class app_WEL_Repo {
 
 		}
 	}
-	
+
 	public void ClickOnUseButtonForExistingShippingAddress() throws IOException {
 		try {
 
@@ -2707,7 +2740,7 @@ public class app_WEL_Repo {
 
 		}
 	}
-	
+
 	public void VerificationOfStudentForNonUS() throws IOException {
 		try {
 
@@ -2735,7 +2768,7 @@ public class app_WEL_Repo {
 
 		}
 	}
-	
+
 	public void ClickOnProductdropdown() throws IOException {
 		try {
 			Productdropdown.click();
@@ -2746,7 +2779,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	public void ClickOnCPATestBank() throws IOException {
 		try {
 			CPATestBank.click();
@@ -2779,7 +2812,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	public void EnterUniversityName(String universityname) throws IOException {
 		try {
 			PartnerInputSearch.sendKeys(universityname);
@@ -2793,7 +2826,7 @@ public class app_WEL_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Date: 01/02/23
 	 * @Author: Anindita
@@ -2811,7 +2844,7 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Date: 01/02/23
 	 * @Author: Anindita
@@ -2828,7 +2861,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 01/02/23
 	 * @Author: Anindita
@@ -2845,7 +2878,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 01/02/23
 	 * @Author: Anindita
@@ -2862,7 +2895,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	public void ClickOnActiacteCodeIcon() throws IOException {
 		try {
 			ActiavteCodeIcon.click();
@@ -2950,7 +2983,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	public void ClickOnAddToCartForDeanDortonProduct() throws IOException {
 		try {
 			DeanDortonAddToCart.click();
@@ -2961,5 +2994,244 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+
+	/*
+	 * @Author: Anindita
+	 * @Description: Enters the email id in Yopmail
+	 * @Date: 02/01/23
+	 */
+	public void enterEmailIdInYopmail(String username) throws IOException {
+		try {
+			EnterEmailIdInYopmail.sendKeys(username);
+			Reporting.updateTestReport("Email entered : " + username + " was entered successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to enter Email Id", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		}
+
+	}
+
+	/*
+	 * @Author: Anindita
+	 * @Description: Clicks on check inbox in yopmail after entering user id
+	 *@Date: 02/01/23
+	 */
+	public void clickOnCheckInboxButton() throws IOException{
+		try {
+			clickOnCheckInboxButton.click();
+			Reporting.updateTestReport("Arrow button clicked successfully ", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Failed to click on arrowbutton", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Author: Anindita
+	 * @Description: Fetches the shipping charge from Orderv Confirmation page
+	 *@Date: 02/01/23
+	 */
+	public String fetchShippingChargeInOrderConfirmation() throws IOException {
+		try {
+			String shippingChargeInOrderConfirmation = ShippingChargeInOrderConfirmation.getText();
+			Reporting.updateTestReport("Shipping charge: " + shippingChargeInOrderConfirmation + " was fetched",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return shippingChargeInOrderConfirmation;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Shipping charge from the order confirmation page couldn't fetched",
+					CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	/*
+	 * @Author: Anindita
+	 * @Date: 2/2/23
+	 * @Description: Validates the order confirmation mail header elements
+	 */
+	public void checkMailHeaderElements() throws IOException{
+		try {
+			try {
+				if(QuantityInEmailHeader.isDisplayed())
+					Reporting.updateTestReport("Quantity was present in the header in email",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Quantity was not present in the header in email",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Quantity was not present in the header in email",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+
+			try {
+				if(PriceInEmailHeader.isDisplayed())
+					Reporting.updateTestReport("Price was present in the header in email",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Price was not present in the header in email",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Price was not present in the header in email",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+				if(TotalInEmailHeader.isDisplayed())
+					Reporting.updateTestReport("Total was present in the header in email",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Total was not present in the header in email",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Total was not present in the header in email",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Some of the header element"
+					+ " was not present in the header in email",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Author: Anindita
+	 * @Date: 2/2/23
+	 * @Description: Validates the order id in order confirmation mail
+	 */
+	public void validateOrderIdInMail(String orderId) throws IOException{
+		try {
+			if(OrderIdEmailHeader.getText().substring(1).equalsIgnoreCase(orderId))
+				Reporting.updateTestReport(orderId+" was present in the header in email which is same as order confirmation page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport(OrderIdEmailHeader.getText().substring(1)+" was  present in the header in email"
+						+ "which is not same as Order Id: "+orderId+" order confirmation page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Order Id "
+					+ " was not present in the header in email",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 	
+	/*
+	 * @Author: Anindita
+	 * @Date: 2/2/23
+	 * @Description: Validates the shipping address line 1 in order confirmation mail
+	 */
+	public void validateShippingAddressLine1InMail(String line1) throws IOException{
+		try {
+			if(AddressLine1ShippingInMail.getText().equalsIgnoreCase(line1))
+				Reporting.updateTestReport(line1+" was present in the header in email which is same as Address line 1 order confirmation page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport(AddressLine1ShippingInMail.getText().substring(1)+" was  present in the header in email"
+						+ "which is not same as Address line 1: "+line1+" order confirmation page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Address line 1 "
+					+ " was not present in the header in email",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Date: 2/2/23
+	 * @Description: Validates the shipping address City and zip code in order confirmation mail
+	 */
+	public void validateShippingCityZipCodeInMail(String city, String zipCode) throws IOException{
+		try {
+			String cityInMail=CityStateShippingInMail.getText().split(",")[0];
+			String zipInMail=CityStateShippingInMail.getText().split(",")[1].split(" ")[1];
+			if(cityInMail.equalsIgnoreCase(city))
+				Reporting.updateTestReport(cityInMail+" was present in the header in email which is same as City in order confirmation page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport(cityInMail+" was  present in the header in email"
+						+ "which is not same as City: "+city+" in order confirmation page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			
+			if(zipInMail.equalsIgnoreCase(zipCode))
+				Reporting.updateTestReport(zipInMail+" was present in the header in email which is same as zip Code in order confirmation page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport(zipInMail+" was  present in the header in email"
+						+ "which is not same as zip Code: "+zipCode+" in order confirmation page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("City and zip code "
+					+ " was not present in email body",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Date: 2/2/23
+	 * @Description: Validates the shipping address City and zip code in order confirmation mail
+	 */
+	public void validateCardNumberInMail(String number) throws IOException{
+		try {
+			if(CardNumberLastFourDigitInMail.getText().equalsIgnoreCase(number.substring(number.length() - 4)))
+				Reporting.updateTestReport(number.substring(number.length() - 4)+
+				" was present in the header in email which is same as last four digit in order confirmation page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport(CardNumberLastFourDigitInMail.getText()+" was present in email"
+						+ "which is not same as Card number entered: "+number.substring(number.length() - 4),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Card number "
+					+ " was not present in email body",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Selects the next day shipping method
+	 *@Date: 02/02/23
+	 */
+	public void selectNextDayShipping() throws IOException{
+		try {
+			NextDayShipping.click();
+			Reporting.updateTestReport("Next day shipping method was selected successfully ", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Next day shipping method couldn't be selected", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+		}
+	}
+	
+	public void ClickOnCFAAddProduct() throws IOException {
+		try {
+
+			CIAAddToCart.click();
+			Reporting.updateTestReport("Add To Cart was selected successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on Add To Cart with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
 }
