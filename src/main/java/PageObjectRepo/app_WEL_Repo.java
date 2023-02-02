@@ -518,6 +518,27 @@ public class app_WEL_Repo {
 	
 	@FindBy(xpath="//label[contains(text(),'Part 1')]")
 	WebElement Part1InCIAPDP;
+	
+	@FindBy(xpath = "//div[@class='navbar-collapse']/ul/li[3]/a")
+	WebElement ActiavteCodeIcon;
+
+	@FindBy(xpath = "//input[@id='pin']")
+	WebElement PinInput;
+
+	@FindBy(xpath = "//div[@class='pinActivationBodyMainDiv']//button")
+	WebElement ActivateButton;
+
+	@FindBy(xpath = "(//div[@id='standaloneLoginMainDiv']//a)[1]")
+	WebElement CreateAccountForPin;
+	
+	@FindBy(xpath = "//form[@id='loginForm']/div[4]/button")
+	WebElement PINLoginButton;
+	
+	@FindBy(xpath = "//div[@class='container product-categories-container']//div[2]//dd/a[contains(text(),'CPA')]")
+	WebElement DeanDortonCPAProduct;
+	
+	@FindBy(xpath = "(//div[@class='col']//button)[2]")
+	WebElement DeanDortonAddToCart;
 
 	
 	public void EnterUserNameOnLoginPage(String UserName) throws IOException {
@@ -2838,6 +2859,105 @@ public class app_WEL_Repo {
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("The Part1 button In CIA PDP couldn't be clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	public void ClickOnActiacteCodeIcon() throws IOException {
+		try {
+			ActiavteCodeIcon.click();
+			Reporting.updateTestReport("ActivateCode Icon was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on ActivateCode" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void EnterPinOnInputField(String pin) throws IOException {
+		try {
+			PinInput.sendKeys(pin);
+			Reporting.updateTestReport("PIN was entered successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to enter the PIN" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void ClickOnActivateButton() throws IOException {
+		try {
+			ActivateButton.click();
+			Reporting.updateTestReport("Activate  button was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on Activate button" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void ClickOnPINLoginButton() throws IOException {
+		try {
+			PINLoginButton.click();
+			Reporting.updateTestReport("Login  button was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on Login button" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void ClickOnCreateNewAccountForPIN() throws IOException {
+		try {
+			CreateAccountForPin.click();
+			Reporting.updateTestReport("CreateNewAccount Link was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click CreateNewAccount Link" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void ClickOnDeanDortonCPAProduct() throws IOException {
+		try {
+			DeanDortonCPAProduct.click();
+			Reporting.updateTestReport("DeanDorton CPA product was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on  DeanDorton CPA product" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void EntePINUserName(String username) throws IOException {
+		try {
+			LoginUser.sendKeys(username);
+			Reporting.updateTestReport("UserName was entered successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to enter the UserName" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void EntePINPassword(String password) throws IOException {
+		try {
+			LoginPassword.sendKeys(password);
+			Reporting.updateTestReport("Password was entered successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to enter the UserName" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	public void ClickOnAddToCartForDeanDortonProduct() throws IOException {
+		try {
+			DeanDortonAddToCart.click();
+			Reporting.updateTestReport("Add TO Cart was clicked successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on Add To Cart" + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
