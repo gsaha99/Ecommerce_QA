@@ -207,15 +207,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickPaymentMethod();
 			CPortal.WPSAdmin_Click_DebitCard();
 			CPortal.WPSAdmin_Click_Add();
-			/*try {
-		    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'TestAuto'+uuid application has been added successfully')]")));
-			}
-			catch (Exception e) 
-			{
-				System.out.println("Element not found due to timeout" + e.getMessage());
-				Reporting.updateTestReport("Probe Operation Failed" + e.getMessage(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}*/
+			
 		}
 		catch (Exception e) 
 		{
