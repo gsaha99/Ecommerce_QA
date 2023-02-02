@@ -56,7 +56,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			catch (Exception e) 
 			{
 				System.out.println("Element not found due to timeout" + e.getMessage());
-				Reporting.updateTestReport("Probe Operation Failed" + e.getMessage(),
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			try {
@@ -66,7 +66,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			catch (Exception e) 
 			{
 				System.out.println("Element not found due to timeout" + e.getMessage());
-				Reporting.updateTestReport("Probe Operation Failed" + e.getMessage(),
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			try {
@@ -76,7 +76,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			catch (Exception e) 
 			{
 				System.out.println("Element not found due to timeout" + e.getMessage());
-				Reporting.updateTestReport("Probe Operation Failed" + e.getMessage(),
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			try {
@@ -86,7 +86,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			catch (Exception e) 
 			{
 				System.out.println("Element not found due to timeout" + e.getMessage());
-				Reporting.updateTestReport("Probe Operation Failed" + e.getMessage(),
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			try {
@@ -96,7 +96,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			catch (Exception e) 
 			{
 				System.out.println("Element not found due to timeout" + e.getMessage());
-				Reporting.updateTestReport("Probe Operation Failed" + e.getMessage(),
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			CPortal.WPSAdmin_ClickHome();
@@ -124,7 +124,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		catch (Exception e) 
 		{
 			System.out.println("Client Portal Log In with WPS Admin Role Failed" + e.getMessage());
-			Reporting.updateTestReport("Probe Operation Failed" + e.getMessage(),
+			Reporting.updateTestReport("Client Portal Log In with WPS Admin Role Failed" + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -151,7 +151,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			catch (Exception e) 
 			{
 				System.out.println("Element not found due to timeout" + e.getMessage());
-				Reporting.updateTestReport("Probe Operation Failed" + e.getMessage(),
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			try {
@@ -161,7 +161,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			catch (Exception e) 
 			{
 				System.out.println("Element not found due to timeout" + e.getMessage());
-				Reporting.updateTestReport("Probe Operation Failed" + e.getMessage(),
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			try {
@@ -171,7 +171,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			catch (Exception e) 
 			{
 				System.out.println("Element not found due to timeout" + e.getMessage());
-				Reporting.updateTestReport("Probe Operation Failed" + e.getMessage(),
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			try {
@@ -181,7 +181,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			catch (Exception e) 
 			{
 				System.out.println("Element not found due to timeout" + e.getMessage());
-				Reporting.updateTestReport("Probe Operation Failed" + e.getMessage(),
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			try {
@@ -191,7 +191,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			catch (Exception e) 
 			{
 				System.out.println("Element not found due to timeout" + e.getMessage());
-				Reporting.updateTestReport("Probe Operation Failed" + e.getMessage(),
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			CPortal.WPSAdmin_ClickNewClientApp();
@@ -220,7 +220,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		catch (Exception e) 
 		{
 			System.out.println("Adding new client app with WPS Admin Role Failed" + e.getMessage());
-			Reporting.updateTestReport("Probe Operation Failed" + e.getMessage(),
+			Reporting.updateTestReport("Adding new client app with WPS Admin Role Failed" + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
