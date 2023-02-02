@@ -2880,11 +2880,13 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 		}
 	}
 
@@ -3008,12 +3010,13 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			
+			driver.manage().deleteAllCookies();
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 		}
 	}
 
@@ -3045,7 +3048,7 @@ public class WEL_Test_Suite extends DriverModule {
 						wait.until(ExpectedConditions.elementToBeClickable
 								(By.xpath("(//a[contains(text(),'Product Tour')])[1]")));
 						Reporting.updateTestReport("User was on the PDP after clicking on View Product link and",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						WEL.clickOnCartIconOnPDP();
 						try {
 							wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -3092,12 +3095,13 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			
+			driver.manage().deleteAllCookies();
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 		}
 	}
 
@@ -3203,12 +3207,13 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			
+			driver.manage().deleteAllCookies();
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 		}
 	}
 
@@ -4112,12 +4117,13 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			
+			driver.manage().deleteAllCookies();
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 		}
 	}
 
@@ -4295,12 +4301,13 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			
+			driver.manage().deleteAllCookies();
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 		}
 	}
 
@@ -4446,11 +4453,13 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 			
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 
 		}
 	}
@@ -4710,11 +4719,13 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 		}
 	}
 	
@@ -5432,9 +5443,12 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 
 		}
 	}
@@ -5605,10 +5619,12 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 
 		}
 	}
@@ -5708,12 +5724,13 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			
+			driver.manage().deleteAllCookies();
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 		}
 	}
 	
@@ -5914,12 +5931,13 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			
+			driver.manage().deleteAllCookies();
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 		}
 	}
 	

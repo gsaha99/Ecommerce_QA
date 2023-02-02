@@ -1276,6 +1276,7 @@ public class app_WEL_Repo {
 
 	public void ShipTownCity(String City) throws IOException {
 		try {
+			Thread.sleep(1000);
 			TownCity.clear();
 			Thread.sleep(1000);
 			TownCity.sendKeys(City);

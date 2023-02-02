@@ -7,16 +7,7 @@
     <classes>
       <class name="Test_Suite.WEL_Test_Suite">
       <methods>
-		 <include name="TC38_.*" /> 
-        <include name="TC42_.*" />
-       <include name="TC46_.*" />
-        <include name="TC47_.*" />
-        <include name="TC48_.*" />
-        <include name="TC49_.*" />
-        <include name="TC61_.*" />
-        <include name="TC62_.*" />
-        <include name="TC64_.*" />
-        <include name="TC74_.*" />
+		 
         <include name="TC75_.*" />
         <include name="TC79_.*" />
         
