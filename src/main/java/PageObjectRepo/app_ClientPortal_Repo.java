@@ -88,6 +88,23 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	/* 
 	 * Author : Jayanta
+	 * Description : Object repo for Client portal WPS Admin to register new user
+	 */
+	
+	@FindBy(name="firstName")
+    WebElement enterFirstName;
+	
+	@FindBy(name="lastName")
+    WebElement enterLastName;
+	
+	@FindBy(name="ssoId")
+    WebElement enterSSOID;
+	
+	@FindBy(xpath = "//option[@value='WPS_Admin']")
+    WebElement selectRole;
+	
+	/* 
+	 * Author : Jayanta
 	 * Description : Method to enter email address in Sign In for Client portal
 	 */
 	
@@ -359,6 +376,36 @@ public class app_ClientPortal_Repo extends DriverModule {
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Add button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to enter first name in RegisterNew User screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_Enter_First_Name(String fname) throws IOException {
+		try {
+			enterFirstName.sendKeys(fname);
+			Reporting.updateTestReport("First Name " +fname+ " Entered successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("First Name is not Entered : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to enter last name in RegisterNew User screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_Enter_Last_Name(String lname) throws IOException {
+		try {
+			enterLastName.sendKeys(lname);
+			Reporting.updateTestReport("Last Name " +lname+ " Entered successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Last Name is not Entered : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 	
