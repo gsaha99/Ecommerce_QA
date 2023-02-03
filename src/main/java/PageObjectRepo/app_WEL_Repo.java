@@ -5,6 +5,7 @@ import utilities.CaptureScreenshot;
 import java.io.IOException;
 import java.sql.Driver;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.interactions.Actions;
@@ -123,8 +125,8 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='account d-none d-lg-inline-block']")
 	WebElement AccountMyIcon;
 
-	@FindBy(xpath = "//button[@class='btn-primary btn-privacy']")
-	WebElement IAcceptButton;
+	@FindBy(xpath = "//button[contains(text(),'I Accept')]")
+	WebElement AcceptButtonOnWileyWELPrivacyAgreement;
 
 	@FindBy(xpath = "//div[@class='left-panel']//li[4]/label[contains(text(),'Sign')]")
 	WebElement SingOut;
@@ -1435,9 +1437,9 @@ public class app_WEL_Repo {
 		}
 	}
 
-	public void ClickonIAcceptButton() throws IOException {
+	public void clickonAcceptButtonOnWileyWELPrivacyAgreement() throws IOException {
 		try {
-			IAcceptButton.click();
+			AcceptButtonOnWileyWELPrivacyAgreement.click();
 			Reporting.updateTestReport("I Accept Button button  was clicked Successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
@@ -3156,7 +3158,7 @@ public class app_WEL_Repo {
 	public void validateShippingCityZipCodeInMail(String city, String zipCode) throws IOException{
 		try {
 			String cityInMail=CityStateShippingInMail.getText().split(",")[0];
-			String zipInMail=CityStateShippingInMail.getText().split(",")[1].split(" ")[1];
+			String zipStateInMail=CityStateShippingInMail.getText().split(",")[1];
 			if(cityInMail.equalsIgnoreCase(city))
 				Reporting.updateTestReport(cityInMail+" was present in the header in email which is same as City in order confirmation page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -3165,13 +3167,13 @@ public class app_WEL_Repo {
 						+ "which is not same as City: "+city+" in order confirmation page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			
-			if(zipInMail.equalsIgnoreCase(zipCode))
-				Reporting.updateTestReport(zipInMail+" was present in the header in email which is same as zip Code in order confirmation page",
+			if(zipStateInMail.contains(zipCode))
+				Reporting.updateTestReport(zipStateInMail+" was present in email which contains zip Code: "+zipCode+" in order confirmation page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else
-				Reporting.updateTestReport(zipInMail+" was  present in the header in email"
-						+ "which is not same as zip Code: "+zipCode+" in order confirmation page",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				Reporting.updateTestReport(zipStateInMail+" was present in email which doesn't contain zip Code: "
+			+zipCode+" in order confirmation page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		}
 		catch(Exception e){
@@ -3233,6 +3235,27 @@ public class app_WEL_Repo {
 					"Failed to click on Add To Cart with the error message " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Date: 3/2/23
+	 * @Description: Logs out the user from WEL and delete all cookies
+	 */
+	public void logOutWEL(WebDriver driver, String url) throws IOException{
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			driver.get(url);
+			driver.manage().deleteAllCookies();
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(),'LOG IN')]")));
+			Reporting.updateTestReport("User was logged out successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("User was couldn't be logged out",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 }

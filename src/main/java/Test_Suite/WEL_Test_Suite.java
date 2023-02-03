@@ -75,33 +75,18 @@ public class WEL_Test_Suite extends DriverModule {
 					Reporting.updateTestReport("Failed display the Account Link",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				excelOperation.updateTestData("TC01", "WEL_Test_Data", "Email_Address", email);
-				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@aria-label='account']")));
-					WEL.ClickonAccountIcon();
-					try {
-						wait.until(ExpectedConditions
-								.elementToBeClickable(By.xpath("//button[@class='btn-primary btn-privacy']")));
-						WEL.ClickonIAcceptButton();
-						WEL.ClickonSignOut();
-					} catch (Exception e) {
-						Reporting.updateTestReport(
-								"Privacy agreement accept button was not clickable and caused timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
-				} catch (Exception e) {
-					Reporting.updateTestReport(
-							"Account button was not clickable on homepage and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+
 			} catch (Exception e) {
 				Reporting.updateTestReport("Help button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
-			WEL.ClickonSignOut();
+
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 
 	}
@@ -115,20 +100,37 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC04_LoginFor_NewlyRegisteredUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC04_LoginFor_NewlyRegisterUser");
-			Thread.sleep(1000);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			WEL.ClickingOnLoginButton();
 			WEL.EnterUserNameOnLoginPage(excelOperation.getTestData("TC01", "WEL_Test_Data", "Email_Address"));
 			WEL.EnterPasswordOnLoginPage(excelOperation.getTestData("TC01", "WEL_Test_Data", "Password"));
 			WEL.ClickonLoginButton();
-			// WEL.ClickonAccountIcon();
-			Thread.sleep(1000);
-			// WEL.ClickonIAcceptButton();
-			WEL.ClickonSignOut();
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'I Accept')]")));
+				Reporting.updateTestReport("Wiley & WEL Privacy Agreement banner was displayed",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+				WEL.clickonAcceptButtonOnWileyWELPrivacyAgreement();
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Wiley & WEL Privacy Agreement banner was not displayed",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+			}
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(),'ACCOUNT')]")));
+				Reporting.updateTestReport("Account Link is appearing after successful Login",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Failed display the Account Link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 
 	}
@@ -159,11 +161,13 @@ public class WEL_Test_Suite extends DriverModule {
 			else
 				Reporting.updateTestReport("Failed to display the Forgot Password instructions",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 
 		catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 
 	}
@@ -218,9 +222,11 @@ public class WEL_Test_Suite extends DriverModule {
 			ScrollingWebPage.PageScrolldown(driver, 0, -300, SS_path);
 			WEL.ClickOnBackTOCart();
 			WEL.ClickOnRemoveOnCartPage();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 
 	}
@@ -264,10 +270,11 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.ClickOnRemoveOnCartPage();
 			WEL.ClickAccountCartPage();
 			Thread.sleep(1000);
-			WEL.ClickonSignOut();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 
 	}
@@ -316,6 +323,7 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			WEL.ClickCartIconOnForgotPasswordPage();
 			WEL.ClickOnRemoveOnCartPage();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -359,9 +367,11 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.EnterDiscountCode(excelOperation.getTestData("TC09", "WEL_Test_Data", "PromoCode"));
 			WEL.ClickOnDiscountApplyButton();
 			WEL.ClickOnRemoveOnCartPage();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 
 	}
@@ -395,9 +405,11 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.EnterDiscountCode(excelOperation.getTestData("TC10", "WEL_Test_Data", "PromoCode"));
 			WEL.ClickOnDiscountApplyButton();
 			WEL.ClickOnRemoveOnCartPage();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 
 	}
@@ -406,14 +418,32 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC11_AddToCartFor_LoggedInUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC11_AddToCartFor_LoggedInUser");
-			Thread.sleep(1000);
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
-			Thread.sleep(1000);
 			WEL.ClickingOnLoginButton();
 			WEL.EnterUserNameOnLoginPage(excelOperation.getTestData("TC01", "WEL_Test_Data", "Email_Address"));
 			WEL.EnterPasswordOnLoginPage(excelOperation.getTestData("TC01", "WEL_Test_Data", "Password"));
 			WEL.ClickonLoginButton();
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'I Accept')]")));
+				Reporting.updateTestReport("Wiley & WEL Privacy Agreement banner was displayed",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+				WEL.clickonAcceptButtonOnWileyWELPrivacyAgreement();
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Wiley & WEL Privacy Agreement banner was not displayed",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+			}
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(),'ACCOUNT')]")));
+				Reporting.updateTestReport("Account Link is appearing after successful Login",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Failed display the Account Link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 			WEL.ClickWELIconHomePage();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -436,13 +466,11 @@ public class WEL_Test_Suite extends DriverModule {
 			Thread.sleep(2000);
 			WEL.ClickOnRemoveOnCartPage();
 			Thread.sleep(1000);
-			WEL.ClickWELIconCheckoutPage();
-			Thread.sleep(1000);
-			WEL.ClickonAccountIcon();
-			WEL.ClickonSignOut();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 
 	}
@@ -494,9 +522,11 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("CIA Product link was not visible on homepage and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -548,9 +578,11 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -580,9 +612,11 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.EnterExtraDiscountCode(excelOperation.getTestData("TC14", "WEL_Test_Data", "PromoCode"));
 			WEL.ClickOnDiscountApplyButton();
 			WEL.ClickOnRemoveOnCartPage();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 	}
@@ -620,12 +654,11 @@ public class WEL_Test_Suite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			Thread.sleep(2000);
 			WEL.ClickOnCPAAddProduct();
-
-			WEL.ClickOnRemoveOnCartPage();
-			WEL.ClickOnRemoveOnCartPage();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -731,35 +764,16 @@ public class WEL_Test_Suite extends DriverModule {
 				String orderTotal = WEL.fetchOrderTotal();
 				excelOperation.updateTestData("TC15", "WEL_Test_Data", "Order_Total", orderTotal);
 				Thread.sleep(2000);
-				ScrollingWebPage.PageScrollUp(driver, 0, -300, SS_path);
-				Thread.sleep(2000);
-				WEL.ClickOnWELIconOrderConfirmationPage();
-				Thread.sleep(2000);
-				try {
-					wait.until(ExpectedConditions
-							.elementToBeClickable(driver.findElement(By.xpath("//a[contains(text(),'ACCOUNT')]"))));
-					WEL.ClickOnAccountIconFromOrderConfirmationPage();
-					WEL.ClickonSignOut();
-					try {
-						wait.until(
-								ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-					} catch (Exception e) {
-						Reporting.updateTestReport("Help button was not visible and caused timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
-				} catch (Exception e) {
-					Reporting.updateTestReport(
-							"The Account button in order confirmation page was not clickable and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
 			} catch (Exception e) {
 				Reporting.updateTestReport(
 						"The name field in card information step was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -849,36 +863,17 @@ public class WEL_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC16", "WEL_Test_Data", "Tax", tax);
 				String orderTotal = WEL.fetchOrderTotal();
 				excelOperation.updateTestData("TC16", "WEL_Test_Data", "Order_Total", orderTotal);
-				Thread.sleep(2000);
-				ScrollingWebPage.PageScrollUp(driver, 0, -300, SS_path);
-				Thread.sleep(2000);
-				WEL.ClickOnWELIconOrderConfirmationPage();
-				Thread.sleep(2000);
-				try {
-					wait.until(ExpectedConditions
-							.elementToBeClickable(driver.findElement(By.xpath("//a[contains(text(),'ACCOUNT')]"))));
-					WEL.ClickOnAccountIconFromOrderConfirmationPage();
-					WEL.ClickonSignOut();
-					try {
-						wait.until(
-								ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-					} catch (Exception e) {
-						Reporting.updateTestReport("Help button was not visible and caused timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
-				} catch (Exception e) {
-					Reporting.updateTestReport(
-							"The Account button in order confirmation page was not clickable and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+
 			} catch (Exception e) {
 				Reporting.updateTestReport(
 						"The name field in card information step was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -960,36 +955,17 @@ public class WEL_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC20", "WEL_Test_Data", "Tax", tax);
 				String orderTotal = WEL.fetchOrderTotal();
 				excelOperation.updateTestData("TC20", "WEL_Test_Data", "Order_Total", orderTotal);
-				Thread.sleep(2000);
-				ScrollingWebPage.PageScrollUp(driver, 0, -300, SS_path);
-				Thread.sleep(2000);
-				WEL.ClickOnWELIconOrderConfirmationPage();
-				Thread.sleep(2000);
-				try {
-					wait.until(ExpectedConditions
-							.elementToBeClickable(driver.findElement(By.xpath("//a[contains(text(),'ACCOUNT')]"))));
-					WEL.ClickOnAccountIconFromOrderConfirmationPage();
-					WEL.ClickonSignOut();
-					try {
-						wait.until(
-								ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-					} catch (Exception e) {
-						Reporting.updateTestReport("Help button was not visible and caused timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
-				} catch (Exception e) {
-					Reporting.updateTestReport(
-							"The Account button in order confirmation page was not clickable and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+				
 			} catch (Exception e) {
 				Reporting.updateTestReport(
 						"The name field in card information step was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -1104,10 +1080,12 @@ public class WEL_Test_Suite extends DriverModule {
 			else
 				Reporting.updateTestReport("Failed to Load the CFA FreeTail Page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -1185,9 +1163,11 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("The help button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -1231,9 +1211,11 @@ public class WEL_Test_Suite extends DriverModule {
 			else
 				Reporting.updateTestReport("Failed to Load the CPA FreeTail Page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -1300,20 +1282,17 @@ public class WEL_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC16", "WEL_Test_Data", "Tax", tax);
 				String orderTotal = WEL.fetchOrderTotal();
 				excelOperation.updateTestData("TC16", "WEL_Test_Data", "Order_Total", orderTotal);
-				Thread.sleep(2000);
-				ScrollingWebPage.PageScrollUp(driver, 0, -300, SS_path);
-				Thread.sleep(2000);
-				WEL.ClickOnWELIconOrderConfirmationPage();
-				Thread.sleep(2000);
-				WEL.ClickOnAccountIconFromOrderConfirmationPage();
+				
 			} catch (Exception e) {
 				Reporting.updateTestReport(
 						"The name field in card information step was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -1367,12 +1346,14 @@ public class WEL_Test_Suite extends DriverModule {
 					Reporting.updateTestReport(word+" was not present in the country dropdown",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 
 		catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -1456,10 +1437,12 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -1546,10 +1529,12 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 	}
@@ -1622,9 +1607,11 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 	}
@@ -1695,8 +1682,7 @@ public class WEL_Test_Suite extends DriverModule {
 					}
 					WEL.ClickOnBackTOCart();
 					WEL.ClickOnRemoveOnCartPage();
-					WEL.ClickAccountCartPage();
-					WEL.ClickonSignOut();
+					
 				} catch (Exception e) {
 					Reporting.updateTestReport("Help button was not visible and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -1706,10 +1692,12 @@ public class WEL_Test_Suite extends DriverModule {
 						"The name field in card information step was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 	}
@@ -1774,27 +1762,7 @@ public class WEL_Test_Suite extends DriverModule {
 					excelOperation.updateTestData("TC30", "WEL_Test_Data", "Tax", tax);
 					String orderTotal = WEL.fetchOrderTotal();
 					excelOperation.updateTestData("TC30", "WEL_Test_Data", "Order_Total", orderTotal);
-					Thread.sleep(2000);
-					ScrollingWebPage.PageScrollUp(driver, 0, -300, SS_path);
-					Thread.sleep(2000);
-					WEL.ClickOnWELIconOrderConfirmationPage();
-					Thread.sleep(2000);
-					try {
-						wait.until(
-								ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-						WEL.ClickOnAccountIconFromOrderConfirmationPage();
-						WEL.ClickonSignOut();
-						try {
-							wait.until(ExpectedConditions
-									.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-						} catch (Exception e) {
-							Reporting.updateTestReport("Help button was not visible and caused timeout exception",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						}
-					} catch (Exception e) {
-						Reporting.updateTestReport("Help button was not visible and caused timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
+					
 				} catch (Exception e) {
 					Reporting.updateTestReport("Help button was not visible and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -1914,30 +1882,7 @@ public class WEL_Test_Suite extends DriverModule {
 											 String orderTotal = WEL.fetchOrderTotal();
 											 excelOperation.updateTestData("TC50", "WEL_Test_Data", "Order_Total",
 													 orderTotal);
-											 Thread.sleep(2000);
-											 ScrollingWebPage.PageScrollUp(driver, 0, -300, SS_path);
-											 Thread.sleep(2000);
-											 WEL.ClickOnWELIconOrderConfirmationPage();
-											 Thread.sleep(2000);
-											 try {
-												 wait.until(ExpectedConditions.visibilityOfElementLocated(
-														 By.xpath("//div[@class='helpButton']")));
-												 WEL.ClickOnAccountIconFromOrderConfirmationPage();
-												 WEL.ClickonSignOut();
-												 try {
-													 wait.until(ExpectedConditions.visibilityOfElementLocated(
-															 By.xpath("//div[@class='helpButton']")));
-												 } catch (Exception e) {
-													 Reporting.updateTestReport(
-															 "Help button was not visible and caused timeout exception",
-															 CaptureScreenshot.getScreenshot(SS_path),
-															 StatusDetails.FAIL);
-												 }
-											 } catch (Exception e) {
-												 Reporting.updateTestReport(
-														 "Help button was not visible and caused timeout exception",
-														 CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-											 }
+											
 										 } catch (Exception e) {
 											 Reporting.updateTestReport(
 													 "Help button was not visible and caused timeout exception",
@@ -1976,9 +1921,11 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 	}
@@ -2081,30 +2028,7 @@ public class WEL_Test_Suite extends DriverModule {
 											String orderTotal = WEL.fetchOrderTotal();
 											excelOperation.updateTestData("TC51", "WEL_Test_Data", "Order_Total",
 													orderTotal);
-											Thread.sleep(2000);
-											ScrollingWebPage.PageScrollUp(driver, 0, -300, SS_path);
-											Thread.sleep(2000);
-											WEL.ClickOnWELIconOrderConfirmationPage();
-											Thread.sleep(2000);
-											try {
-												wait.until(ExpectedConditions.visibilityOfElementLocated(
-														By.xpath("//div[@class='helpButton']")));
-												WEL.ClickOnAccountIconFromOrderConfirmationPage();
-												WEL.ClickonSignOut();
-												try {
-													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("//div[@class='helpButton']")));
-												} catch (Exception e) {
-													Reporting.updateTestReport(
-															"Help button was not visible and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
-												}
-											} catch (Exception e) {
-												Reporting.updateTestReport(
-														"Help button was not visible and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-											}
+											
 										} catch (Exception e) {
 											Reporting.updateTestReport(
 													"Help button was not visible and caused timeout exception",
@@ -2142,10 +2066,12 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 
@@ -2251,30 +2177,6 @@ public class WEL_Test_Suite extends DriverModule {
 											String orderTotal = WEL.fetchOrderTotal();
 											excelOperation.updateTestData("TC52", "WEL_Test_Data", "Order_Total",
 													orderTotal);
-											Thread.sleep(2000);
-											ScrollingWebPage.PageScrollUp(driver, 0, -300, SS_path);
-											Thread.sleep(2000);
-											WEL.ClickOnWELIconOrderConfirmationPage();
-											Thread.sleep(2000);
-											try {
-												wait.until(ExpectedConditions.visibilityOfElementLocated(
-														By.xpath("//div[@class='helpButton']")));
-												WEL.ClickOnAccountIconFromOrderConfirmationPage();
-												WEL.ClickonSignOut();
-												try {
-													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("//div[@class='helpButton']")));
-												} catch (Exception e) {
-													Reporting.updateTestReport(
-															"Help button was not visible and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
-												}
-											} catch (Exception e) {
-												Reporting.updateTestReport(
-														"Help button was not visible and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-											}
 										} catch (Exception e) {
 											Reporting.updateTestReport(
 													"Help button was not visible and caused timeout exception",
@@ -2312,10 +2214,12 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 
 	}
@@ -2419,30 +2323,6 @@ public class WEL_Test_Suite extends DriverModule {
 											String orderTotal = WEL.fetchOrderTotal();
 											excelOperation.updateTestData("TC53", "WEL_Test_Data", "Order_Total",
 													orderTotal);
-											Thread.sleep(2000);
-											ScrollingWebPage.PageScrollUp(driver, 0, -300, SS_path);
-											Thread.sleep(2000);
-											WEL.ClickOnWELIconOrderConfirmationPage();
-											Thread.sleep(2000);
-											try {
-												wait.until(ExpectedConditions.visibilityOfElementLocated(
-														By.xpath("//div[@class='helpButton']")));
-												WEL.ClickOnAccountIconFromOrderConfirmationPage();
-												WEL.ClickonSignOut();
-												try {
-													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("//div[@class='helpButton']")));
-												} catch (Exception e) {
-													Reporting.updateTestReport(
-															"Help button was not visible and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
-												}
-											} catch (Exception e) {
-												Reporting.updateTestReport(
-														"Help button was not visible and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-											}
 										} catch (Exception e) {
 											Reporting.updateTestReport(
 													"Help button was not visible and caused timeout exception",
@@ -2480,10 +2360,12 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 
 	}
@@ -2571,36 +2453,12 @@ public class WEL_Test_Suite extends DriverModule {
 			excelOperation.updateTestData("TC34", "WEL_Test_Data", "Tax", tax);
 			String orderTotal = WEL.fetchOrderTotal();
 			excelOperation.updateTestData("TC34", "WEL_Test_Data", "Order_Total", orderTotal);
-			ScrollingWebPage.PageScrollUp(driver, 0, -410, SS_path);
-			try {
-				wait.until(ExpectedConditions
-						.elementToBeClickable(By.xpath("(//a/img[@class='js-responsive-image'])[1]")));
-				WEL.ClickOnWELIconOrderConfirmationPage();
-				try {
-					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-					WEL.ClickonAccountIcon();
-					try {
-						wait.until(ExpectedConditions
-								.elementToBeClickable(By.xpath("//button[@class='btn-primary btn-privacy']")));
-						WEL.ClickonIAcceptButton();
-						WEL.ClickonSignOut();
-					} catch (Exception e) {
-						Reporting.updateTestReport(
-								"Privacy agreement accept button was not clickable and caused timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
-				} catch (Exception e) {
-					Reporting.updateTestReport("Help button was not visible and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
-			} catch (Exception e) {
-				Reporting.updateTestReport("WEL Icon was not clickable and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -2689,37 +2547,12 @@ public class WEL_Test_Suite extends DriverModule {
 			excelOperation.updateTestData("TC35", "WEL_Test_Data", "Tax", tax);
 			String orderTotal = WEL.fetchOrderTotal();
 			excelOperation.updateTestData("TC35", "WEL_Test_Data", "Order_Total", orderTotal);
-			ScrollingWebPage.PageScrollUp(driver, 0, -800, SS_path);
-			try {
-				wait.until(ExpectedConditions
-						.elementToBeClickable(By.xpath("(//a/img[@class='js-responsive-image'])[1]")));
-				WEL.ClickOnWELIconOrderConfirmationPage();
-			} catch (Exception e) {
-				Reporting.updateTestReport("WEL Icon was not clickable and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-
-			try {
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-				WEL.ClickonAccountIcon();
-				try {
-					wait.until(ExpectedConditions.elementToBeClickable(
-							By.xpath("//div[@class='left-panel']//li[4]/label[contains(text(),'Sign')]")));
-					// WEL.ClickonIAcceptButton();
-					WEL.ClickonSignOut();
-				} catch (Exception e) {
-					Reporting.updateTestReport(
-							"Privacy agreement accept button was not clickable and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
-			} catch (Exception e) {
-				Reporting.updateTestReport("Help button was not visible and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -2784,37 +2617,12 @@ public class WEL_Test_Suite extends DriverModule {
 			excelOperation.updateTestData("TC34", "WEL_Test_Data", "Tax", tax);
 			String orderTotal = WEL.fetchOrderTotal();
 			excelOperation.updateTestData("TC34", "WEL_Test_Data", "Order_Total", orderTotal);
-			ScrollingWebPage.PageScrollUp(driver, 0, -500, SS_path);
-			try {
-				wait.until(ExpectedConditions
-						.elementToBeClickable(By.xpath("(//a/img[@class='js-responsive-image'])[1]")));
-			} catch (Exception e) {
-				Reporting.updateTestReport("WEL Icon was not clickable and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			WEL.ClickOnWELIconOrderConfirmationPage();
-			// Thread.sleep(2000);
-			try {
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-				WEL.ClickonAccountIcon();
-				try {
-					wait.until(ExpectedConditions.elementToBeClickable(
-							By.xpath("//div[@class='left-panel']//li[4]/label[contains(text(),'Sign')]")));
-					// WEL.ClickonIAcceptButton();
-					WEL.ClickonSignOut();
-				} catch (Exception e) {
-					Reporting.updateTestReport(
-							"Privacy agreement accept button was not clickable and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
-			} catch (Exception e) {
-				Reporting.updateTestReport("Help button was not visible and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} 
 		catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -2858,7 +2666,6 @@ public class WEL_Test_Suite extends DriverModule {
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
 							WEL.checkDontShipToPOBoxMessage();
-							driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 						}
 						catch (Exception e) {
 							Reporting.updateTestReport("Addressline1 is not appearing and caused timeout exception",
@@ -2879,14 +2686,12 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -2969,7 +2774,6 @@ public class WEL_Test_Suite extends DriverModule {
 											Reporting.updateTestReport("wel-cart-total-items cookie was present with value: "+
 													driver.manage().getCookieNamed("wel-cart-total-items").getValue()+" iinstead of 1",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 									}
 									catch(Exception e) {
 										Reporting.updateTestReport("wel-cart-total-items cookie was not present",
@@ -3009,14 +2813,12 @@ public class WEL_Test_Suite extends DriverModule {
 						+ "it caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -3094,14 +2896,12 @@ public class WEL_Test_Suite extends DriverModule {
 						"Add to cart button on PDP was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -3166,7 +2966,6 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"The other variant of CIA was added to cart without any exception",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 									}
 									catch(Exception e) {
 										Reporting.updateTestReport("User was not on cart page and"
@@ -3206,14 +3005,12 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -3299,34 +3096,7 @@ public class WEL_Test_Suite extends DriverModule {
 							}
 							WEL.ShipSaveAndContinueButton();
 							WEL.VerificationOfStudentForNonUS();
-							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("(//img[@class='js-responsive-image'])[1]")));
-							} catch (Exception e) {
-								Reporting.updateTestReport("WEL Icon was not clickable and caused timeout exception",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
-
-							WEL.ClickOnWELIconOrderConfirmationPage();
-							// Thread.sleep(2000);
-							try {
-								wait.until(ExpectedConditions
-										.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-								WEL.ClickonAccountIcon();
-								try {
-									wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-											"//div[@class='left-panel']//li[4]/label[contains(text(),'Sign')]")));
-									// WEL.ClickonIAcceptButton();
-									WEL.ClickonSignOut();
-								} catch (Exception e) {
-									Reporting.updateTestReport(
-											"Privacy agreement accept button was not clickable and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
-							} catch (Exception e) {
-								Reporting.updateTestReport("Help button was not visible and caused timeout exception",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
+							
 						} catch (Exception e) {
 							Reporting.updateTestReport("CIA producy is not displayed and caused timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -3343,9 +3113,11 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Failed to click on Add To Cart caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 
 	}
@@ -3431,34 +3203,7 @@ public class WEL_Test_Suite extends DriverModule {
 							}
 							WEL.ShipSaveAndContinueButton();
 							WEL.VerificationOfStudentForNonUS();
-							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("(//img[@class='js-responsive-image'])[1]")));
-							} catch (Exception e) {
-								Reporting.updateTestReport("WEL Icon was not clickable and caused timeout exception",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
-
-							WEL.ClickOnWELIconOrderConfirmationPage();
-							// Thread.sleep(2000);
-							try {
-								wait.until(ExpectedConditions
-										.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-								WEL.ClickonAccountIcon();
-								try {
-									wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-											"//div[@class='left-panel']//li[4]/label[contains(text(),'Sign')]")));
-									// WEL.ClickonIAcceptButton();
-									WEL.ClickonSignOut();
-								} catch (Exception e) {
-									Reporting.updateTestReport(
-											"Privacy agreement accept button was not clickable and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
-							} catch (Exception e) {
-								Reporting.updateTestReport("Help button was not visible and caused timeout exception",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
+							
 						} catch (Exception e) {
 							Reporting.updateTestReport("CIA producy is not displayed and caused timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -3475,9 +3220,11 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Failed to click on Add To Cart caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 
 	}
@@ -3572,35 +3319,6 @@ public class WEL_Test_Suite extends DriverModule {
 							excelOperation.updateTestData("TC72", "WEL_Test_Data", "Tax", tax);
 							String orderTotal = WEL.fetchOrderTotal();
 							excelOperation.updateTestData("TC72", "WEL_Test_Data", "Order_Total", orderTotal);
-
-							ScrollingWebPage.PageScrollUp(driver, 0, -800, SS_path);
-							try {
-								wait.until(ExpectedConditions.invisibilityOfElementLocated(
-										By.xpath("(//a/img[@class='js-responsive-image'])[1]")));
-
-							} catch (Exception e) {
-								Reporting.updateTestReport("WEL Icon was not clickable and caused timeout exception",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
-							WEL.ClickOnWELIconOrderConfirmationPage();
-							try {
-								wait.until(ExpectedConditions
-										.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-								WEL.ClickonAccountIcon();
-								try {
-									wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-											"//div[@class='left-panel']//li[4]/label[contains(text(),'Sign')]")));
-									// WEL.ClickonIAcceptButton();
-									WEL.ClickonSignOut();
-								} catch (Exception e) {
-									Reporting.updateTestReport(
-											"Privacy agreement accept button was not clickable and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
-							} catch (Exception e) {
-								Reporting.updateTestReport("Help button was not visible and caused timeout exception",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
 						} catch (Exception e) {
 							Reporting.updateTestReport("CPA Product was not visible and caused timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -3618,10 +3336,12 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Failed to click on Add To Cart caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -3716,34 +3436,7 @@ public class WEL_Test_Suite extends DriverModule {
 							excelOperation.updateTestData("TC71", "WEL_Test_Data", "Tax", tax);
 							String orderTotal = WEL.fetchOrderTotal();
 							excelOperation.updateTestData("TC71", "WEL_Test_Data", "Order_Total", orderTotal);
-							ScrollingWebPage.PageScrollUp(driver, 0, -800, SS_path);
-							try {
-								wait.until(ExpectedConditions.invisibilityOfElementLocated(
-										By.xpath("(//a/img[@class='js-responsive-image'])[1]")));
-
-							} catch (Exception e) {
-								Reporting.updateTestReport("WEL Icon was not clickable and caused timeout exception",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
-							WEL.ClickOnWELIconOrderConfirmationPage();
-							try {
-								wait.until(ExpectedConditions
-										.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-								WEL.ClickonAccountIcon();
-								try {
-									wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-											"//div[@class='left-panel']//li[4]/label[contains(text(),'Sign')]")));
-									WEL.ClickonIAcceptButton();
-									WEL.ClickonSignOut();
-								} catch (Exception e) {
-									Reporting.updateTestReport(
-											"Privacy agreement accept button was not clickable and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
-							} catch (Exception e) {
-								Reporting.updateTestReport("Help button was not visible and caused timeout exception",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
+							
 						} catch (Exception e) {
 							Reporting.updateTestReport("CPA Product was not visible and caused timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -3761,10 +3454,12 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Failed to click on Add To Cart caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -3852,37 +3547,7 @@ public class WEL_Test_Suite extends DriverModule {
 									excelOperation.updateTestData("TC44", "WEL_Test_Data", "Tax", tax);
 									String orderTotal = WEL.fetchOrderTotal();
 									excelOperation.updateTestData("TC44", "WEL_Test_Data", "Order_Total", orderTotal);
-									ScrollingWebPage.PageScrollUp(driver, 0, -800, SS_path);
-									try {
-										wait.until(ExpectedConditions.invisibilityOfElementLocated(
-												By.xpath("(//a/img[@class='js-responsive-image'])[1]")));
-										WEL.ClickOnWELIconOrderConfirmationPage();
-
-										try {
-											wait.until(ExpectedConditions.visibilityOfElementLocated(
-													By.xpath("//div[@class='helpButton']")));
-											WEL.ClickonAccountIcon();
-											try {
-												wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-														"//div[@class='left-panel']//li[4]/label[contains(text(),'Sign')]")));
-												// WEL.ClickonIAcceptButton();
-												WEL.ClickonSignOut();
-
-											} catch (Exception e) {
-												Reporting.updateTestReport(
-														"Help button was not visible and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-											}
-										} catch (Exception e) {
-											Reporting.updateTestReport(
-													"WEL Icon was not clickable and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
-									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Privacy agreement accept button was not clickable and caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									}
+									
 
 								} catch (Exception e) {
 									Reporting.updateTestReport(
@@ -3910,9 +3575,11 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Failed to click on Edit New Address button due to timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 
 	}
@@ -4068,8 +3735,8 @@ public class WEL_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"The tax was recalculated from "+tax1+" to "+tax2+" after editing the shipping address",
 															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-												driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 												
+
 											}
 											catch (Exception e) {
 												Reporting.updateTestReport(
@@ -4116,14 +3783,12 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -4256,8 +3921,8 @@ public class WEL_Test_Suite extends DriverModule {
 											Reporting.updateTestReport(
 													"The tax was recalculated from "+tax1+" to "+tax2+" after editing the Billing address",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 										
+
 									}
 									catch (Exception e) {
 										Reporting.updateTestReport(
@@ -4300,14 +3965,12 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -4414,8 +4077,7 @@ public class WEL_Test_Suite extends DriverModule {
 										String orderTotal = WEL.fetchOrderTotal();
 										excelOperation.updateTestData("TC49", "WEL_Test_Data", "Order_Total",
 												orderTotal);
-										driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-										
+
 
 									} catch (Exception e) {
 										Reporting.updateTestReport(
@@ -4452,18 +4114,16 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
-			
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 	}
-	
+
 	/*
 	 * @Date: 01/02/23
 	 * @Description: Navigating to and fro between the shipping and billing section multiple times
@@ -4552,7 +4212,7 @@ public class WEL_Test_Suite extends DriverModule {
 									WEL.SaveAndContinueCheckOut();
 									wait.until(ExpectedConditions.visibilityOfElementLocated(
 											By.xpath("//div[@class='row taxCalculationDetails orderReviewRightPanel']/"
-			+ "div[@class='col-6 noPadding price orderDetailCommonVal']")));
+													+ "div[@class='col-6 noPadding price orderDetailCommonVal']")));
 									WEL.clickOnShippingDetailsEditIcon();
 									WEL.GuestFirstName(excelOperation.getTestData("TC38", "WEL_Test_Data", "Guest_Fname"));
 									WEL.GuestLastName(excelOperation.getTestData("TC38", "WEL_Test_Data", "Guest_Lname"));
@@ -4603,7 +4263,7 @@ public class WEL_Test_Suite extends DriverModule {
 												WEL.SaveAndContinueCheckOut();
 												wait.until(ExpectedConditions.visibilityOfElementLocated(
 														By.xpath("//div[@class='row taxCalculationDetails orderReviewRightPanel']/"
-						+ "div[@class='col-6 noPadding price orderDetailCommonVal']")));
+																+ "div[@class='col-6 noPadding price orderDetailCommonVal']")));
 												WEL.clickOnShippingDetailsEditIcon();
 												WEL.GuestFirstName(excelOperation.getTestData("TC38", "WEL_Test_Data", "Guest_Fname"));
 												WEL.GuestLastName(excelOperation.getTestData("TC38", "WEL_Test_Data", "Guest_Lname"));
@@ -4718,17 +4378,15 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
-	
+
 	@Test
 	public void TC37_PlaceOrder_withPaypalCredit_OptionForNewUser() throws IOException {
 		try {
@@ -4815,30 +4473,7 @@ public class WEL_Test_Suite extends DriverModule {
 										String orderTotal = WEL.fetchOrderTotal();
 										excelOperation.updateTestData("TC37", "WEL_Test_Data", "Order_Total",
 												orderTotal);
-										ScrollingWebPage.PageScrollUp(driver, 0, -500, SS_path);
 
-										try {
-											wait.until(ExpectedConditions.elementToBeClickable(
-													By.xpath("(//a/img[@class='js-responsive-image'])[1]")));
-										} catch (Exception e) {
-											Reporting.updateTestReport(
-													"WEL Icon was not clickable and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
-										WEL.ClickOnWELIconOrderConfirmationPage(); // Thread.sleep(2000); try {
-										wait.until(ExpectedConditions
-												.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-										WEL.ClickonAccountIcon();
-										try {
-											wait.until(ExpectedConditions.elementToBeClickable(
-													By.xpath("//button[@class='btn-primary btn-privacy']")));
-											WEL.ClickonIAcceptButton();
-											WEL.ClickonSignOut();
-										} catch (Exception e) {
-											Reporting.updateTestReport(
-													"Privacy agreement accept button was not clickable and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
 									} catch (Exception e) {
 										Reporting.updateTestReport(
 												"Failed to click on CMA Product due to timeout exception",
@@ -4876,9 +4511,11 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -4959,29 +4596,19 @@ public class WEL_Test_Suite extends DriverModule {
 						WEL.ClickonTermsCheckBox();
 						WEL.ClickingOnCreateAccoutButton();
 
-						try {
-							wait.until(ExpectedConditions
-									.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-							WEL.ClickonAccountIcon();
-							try {
-								wait.until(ExpectedConditions.elementToBeClickable(
-										By.xpath("//div[@class='left-panel']//li[4]/label[contains(text(),'Sign')]")));
-								// WEL.ClickonIAcceptButton();
-								WEL.ClickonSignOut();
-							} catch (Exception e) {
-								Reporting.updateTestReport(
-										"Privacy agreement accept button was not clickable and caused timeout exception",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
+						if (WEL.CheckAccountTextAftreLogin())
+							Reporting.updateTestReport("Account Link is appearing after successful Login",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Failed display the Account Link",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						excelOperation.updateTestData("TC01", "WEL_Test_Data", "Email_Address", email);	
 
 						} catch (Exception e) {
 							Reporting.updateTestReport("Activate button was not clickable and caused timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
-					} catch (Exception e) {
-						Reporting.updateTestReport("Help button was not visible and caused timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
+					
 				} catch (Exception e) {
 					Reporting.updateTestReport(
 							"FirstName Filed is not visible on create Account form caused timeout exception",
@@ -4992,9 +4619,11 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Create Account button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 	}
@@ -5059,24 +4688,24 @@ public class WEL_Test_Suite extends DriverModule {
 									} catch (Exception e) {
 									}
 									driver.switchTo()
-											.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+									.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 										WEL.enterCardHolderName(
 												excelOperation.getTestData("TC73", "WEL_Test_Data", "Guest_Fname"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-												.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 										WEL.enterCardNumber(
 												excelOperation.getTestData("TC73", "WEL_Test_Data", "Card_Number"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-												.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 										WEL.selectExpirationMonthFromDropDown(
 												excelOperation.getTestData("TC73", "WEL_Test_Data", "Expiry_Month"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-												.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
 										WEL.selectExpirationYearFromDropDown(
 												excelOperation.getTestData("TC73", "WEL_Test_Data", "Expiry_Year"));
 										driver.switchTo().defaultContent();
@@ -5097,30 +4726,6 @@ public class WEL_Test_Suite extends DriverModule {
 											String orderTotal = WEL.fetchOrderTotal();
 											excelOperation.updateTestData("TC73", "WEL_Test_Data", "Order_Total",
 													orderTotal);
-											Thread.sleep(2000);
-											ScrollingWebPage.PageScrollUp(driver, 0, -300, SS_path);
-											Thread.sleep(2000);
-											WEL.ClickOnWELIconOrderConfirmationPage();
-											Thread.sleep(2000);
-											try {
-												wait.until(ExpectedConditions.visibilityOfElementLocated(
-														By.xpath("//div[@class='helpButton']")));
-												WEL.ClickOnAccountIconFromOrderConfirmationPage();
-												WEL.ClickonSignOut();
-												try {
-													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("//div[@class='helpButton']")));
-												} catch (Exception e) {
-													Reporting.updateTestReport(
-															"Help button was not visible and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
-												}
-											} catch (Exception e) {
-												Reporting.updateTestReport(
-														"Help button was not visible and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-											}
 										} catch (Exception e) {
 											Reporting.updateTestReport(
 													"Help button was not visible and caused timeout exception",
@@ -5158,10 +4763,12 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 
@@ -5288,7 +4895,7 @@ public class WEL_Test_Suite extends DriverModule {
 
 		}
 	}
-	
+
 	/*
 	 * @Date: 02/02/23
 	 * @Author: Anindita
@@ -5390,7 +4997,7 @@ public class WEL_Test_Suite extends DriverModule {
 										String orderTotal = WEL.fetchOrderTotal();
 										excelOperation.updateTestData("TC62", "WEL_Test_Data", "Order_Total",
 												orderTotal);
-										driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+										WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 										driver.get(excelOperation.getTestData("Yopmail_URL",
 												"Generic_Dataset", "Data"));
 										WEL.enterEmailIdInYopmail(emailId);
@@ -5442,17 +5049,15 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 	}
-	
+
 	/*
 	 * @Date: 02/02/23
 	 * @Author: Anindita
@@ -5495,19 +5100,19 @@ public class WEL_Test_Suite extends DriverModule {
 						Thread.sleep(2000);
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
-								WEL.ShipAddressLineOne(
-										excelOperation.getTestData("TC79", "WEL_Test_Data", "Sh_Address_line1"));
-								WEL.ShipPostCode(excelOperation.getTestData("TC79", "WEL_Test_Data", "Sh_Zip_Code"));
-								// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='city']")));
-								//WEL.ShipTownIndiaCity(
-								//excelOperation.getTestData("TC47", "WEL_Test_Data", "Sh_City/ Province");
-								try {
-									wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='townCity']")));
-									WEL.ShipTownCity(
-											excelOperation.getTestData("TC79", "WEL_Test_Data", "Sh_City/ Province"));
-									WEL.ShipPhoneNumber(
-											excelOperation.getTestData("TC79", "WEL_Test_Data", "Sh_Phone_Number"));
-									WEL.ClickSaveAndContinueOnShippinInfoPage();
+							WEL.ShipAddressLineOne(
+									excelOperation.getTestData("TC79", "WEL_Test_Data", "Sh_Address_line1"));
+							WEL.ShipPostCode(excelOperation.getTestData("TC79", "WEL_Test_Data", "Sh_Zip_Code"));
+							// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='city']")));
+							//WEL.ShipTownIndiaCity(
+							//excelOperation.getTestData("TC47", "WEL_Test_Data", "Sh_City/ Province");
+							try {
+								wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='townCity']")));
+								WEL.ShipTownCity(
+										excelOperation.getTestData("TC79", "WEL_Test_Data", "Sh_City/ Province"));
+								WEL.ShipPhoneNumber(
+										excelOperation.getTestData("TC79", "WEL_Test_Data", "Sh_Phone_Number"));
+								WEL.ClickSaveAndContinueOnShippinInfoPage();
 								try {
 									if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
 											.isDisplayed())
@@ -5556,7 +5161,7 @@ public class WEL_Test_Suite extends DriverModule {
 										String orderTotal = WEL.fetchOrderTotal();
 										excelOperation.updateTestData("TC79", "WEL_Test_Data", "Order_Total",
 												orderTotal);
-										driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+										WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 										driver.get(excelOperation.getTestData("Yopmail_URL",
 												"Generic_Dataset", "Data"));
 										WEL.enterEmailIdInYopmail(emailId);
@@ -5576,7 +5181,7 @@ public class WEL_Test_Suite extends DriverModule {
 													, excelOperation.getTestData("TC79", "WEL_Test_Data", "Sh_Zip_Code"));
 											WEL.validateCardNumberInMail(excelOperation.getTestData("TC79", "WEL_Test_Data", "Card_Number"));
 											driver.switchTo().defaultContent();
-											
+
 										}
 										else {
 											Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -5618,17 +5223,15 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 	}
-	
+
 	/*
 	 * @Date: 2/2/23
 	 * @Author: Anindita
@@ -5701,15 +5304,16 @@ public class WEL_Test_Suite extends DriverModule {
 						String orderTotal = WEL.fetchOrderTotal();
 						excelOperation.updateTestData("TC42", "WEL_Test_Data", "Order_Total",
 								orderTotal);
-						
-						driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+
+						excelOperation.updateTestData("TC61", "WEL_Test_Data", "Email_Address",
+								email);
 
 					} catch (Exception e) {
 						Reporting.updateTestReport(
 								"Help button was not visible and caused timeout exception",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
-					
+
 				}
 				catch (Exception e) {
 					Reporting.updateTestReport(
@@ -5723,17 +5327,15 @@ public class WEL_Test_Suite extends DriverModule {
 						"Billing address line 1 was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
-	
+
 	/*
 	 * @Date: 02/02/23
 	 * @Description: Validates that if user comes back and changes the shipping method,
@@ -5787,7 +5389,7 @@ public class WEL_Test_Suite extends DriverModule {
 										.visibilityOfElementLocated(By.xpath("//input[@id='address.region']")));
 								WEL.ShipPhoneNumber(
 										excelOperation.getTestData("TC46", "WEL_Test_Data", "Sh_Phone_Number"));
-								
+
 								WEL.ClickSaveAndContinueOnShippinInfoPage();
 								try {
 									if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
@@ -5882,8 +5484,8 @@ public class WEL_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"The tax was recalculated from "+tax1+" to "+tax2+" after editing the shipping address",
 															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-												driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 												
+
 											}
 											catch (Exception e) {
 												Reporting.updateTestReport(
@@ -5930,17 +5532,15 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Shop button was not visible and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			driver.manage().deleteAllCookies();
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
-	
+
 	@Test
 	public void TC17_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForNewUser()
 			throws IOException {
@@ -6065,45 +5665,45 @@ public class WEL_Test_Suite extends DriverModule {
 																			Reporting.updateTestReport(
 																					"Failed to click Address on Address SUggestion due to timeout exception",
 																					CaptureScreenshot
-																							.getScreenshot(SS_path),
+																					.getScreenshot(SS_path),
 																					StatusDetails.FAIL);
 																		}
 																		try {
 																			driver.switchTo()
-																					.frame(driver.findElement(By.xpath(
-																							".//iframe[@title='cardholder name']")));
+																			.frame(driver.findElement(By.xpath(
+																					".//iframe[@title='cardholder name']")));
 																			WEL.enterCardHolderName(
 																					excelOperation.getTestData("TC17",
 																							"WEL_Test_Data",
 																							"Guest_Fname"));
 																			driver.switchTo().defaultContent();
 																			driver.switchTo()
-																					.frame(driver.findElement(By.xpath(
-																							".//iframe[@title='card number']")));
+																			.frame(driver.findElement(By.xpath(
+																					".//iframe[@title='card number']")));
 																			WEL.enterCardNumber(
 																					excelOperation.getTestData("TC17",
 																							"WEL_Test_Data",
 																							"Card_Number"));
 																			driver.switchTo().defaultContent();
 																			driver.switchTo()
-																					.frame(driver.findElement(By.xpath(
-																							".//iframe[@title='expiryMonth']")));
+																			.frame(driver.findElement(By.xpath(
+																					".//iframe[@title='expiryMonth']")));
 																			WEL.selectExpirationMonthFromDropDown(
 																					excelOperation.getTestData("TC17",
 																							"WEL_Test_Data",
 																							"Expiry_Month"));
 																			driver.switchTo().defaultContent();
 																			driver.switchTo()
-																					.frame(driver.findElement(By.xpath(
-																							".//iframe[@title='expiryYear']")));
+																			.frame(driver.findElement(By.xpath(
+																					".//iframe[@title='expiryYear']")));
 																			WEL.selectExpirationYearFromDropDown(
 																					excelOperation.getTestData("TC17",
 																							"WEL_Test_Data",
 																							"Expiry_Year"));
 																			driver.switchTo().defaultContent();
 																			driver.switchTo()
-																					.frame(driver.findElement(By.xpath(
-																							".//iframe[@title='securityCode']")));
+																			.frame(driver.findElement(By.xpath(
+																					".//iframe[@title='securityCode']")));
 																			WEL.enterCVV_Number(
 																					excelOperation.getTestData("TC17",
 																							"WEL_Test_Data", "CVV"));
@@ -6113,7 +5713,7 @@ public class WEL_Test_Suite extends DriverModule {
 																			Reporting.updateTestReport(
 																					"Card details was not entered due to timeout exception",
 																					CaptureScreenshot
-																							.getScreenshot(SS_path),
+																					.getScreenshot(SS_path),
 																					StatusDetails.FAIL);
 
 																		}
@@ -6132,44 +5732,8 @@ public class WEL_Test_Suite extends DriverModule {
 																				"WEL_Test_Data", "Order_Total",
 																				orderTotal);
 
-																		ScrollingWebPage.PageScrollUp(driver, 0, -800,
-																				SS_path);
-																		try {
-																			WEL.ClickOnWELIconOrderConfirmationPage();
-																		} catch (Exception e) {
-																			Reporting.updateTestReport(
-																					"Help button was not visible and caused timeout exception",
-																					CaptureScreenshot
-																							.getScreenshot(SS_path),
-																					StatusDetails.FAIL);
-																		}
-																		try {
-																			wait.until(ExpectedConditions
-																					.visibilityOfElementLocated(By
-																							.xpath("//div[@class='helpButton']")));
-																			WEL.ClickonAccountIcon();
-
-																			try {
-																				wait.until(ExpectedConditions
-																						.visibilityOfElementLocated(By
-																								.xpath("//div[@class='helpButton']")));
-																				WEL.ClickonIAcceptButton();
-																				WEL.ClickonSignOut();
-																			} catch (Exception e) {
-																				Reporting.updateTestReport(
-																						"Help button was not visible and caused timeout exception",
-																						CaptureScreenshot
-																								.getScreenshot(SS_path),
-																						StatusDetails.FAIL);
-																			}
-																		} catch (Exception e) {
-																			Reporting.updateTestReport(
-																					"Help button was not visible and caused timeout exception",
-																					CaptureScreenshot
-																							.getScreenshot(SS_path),
-																					StatusDetails.FAIL);
-																		}
-
+																		
+																		
 																	} catch (Exception e) {
 																		Reporting.updateTestReport(
 																				"Failed to click on Explore CMA Product due to timeout exception",
@@ -6254,11 +5818,13 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (
 
-		Exception e) {
+				Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 
@@ -6362,7 +5928,7 @@ public class WEL_Test_Suite extends DriverModule {
 																		WEL.EnterPasswordLoginPage(
 																				excelOperation.getTestData("TC73",
 																						"WEL_Test_Data", "Password"));
-																		
+
 																		WEL.ClickonLoginAndContinue();
 																		WEL.GuestFirstName(excelOperation.getTestData(
 																				"TC18", "WEL_Test_Data",
@@ -6399,45 +5965,45 @@ public class WEL_Test_Suite extends DriverModule {
 																			Reporting.updateTestReport(
 																					"Failed to click Address on Address SUggestion due to timeout exception",
 																					CaptureScreenshot
-																							.getScreenshot(SS_path),
+																					.getScreenshot(SS_path),
 																					StatusDetails.FAIL);
 																		}
 																		try {
 																			driver.switchTo()
-																					.frame(driver.findElement(By.xpath(
-																							".//iframe[@title='cardholder name']")));
+																			.frame(driver.findElement(By.xpath(
+																					".//iframe[@title='cardholder name']")));
 																			WEL.enterCardHolderName(
 																					excelOperation.getTestData("TC18",
 																							"WEL_Test_Data",
 																							"Guest_Fname"));
 																			driver.switchTo().defaultContent();
 																			driver.switchTo()
-																					.frame(driver.findElement(By.xpath(
-																							".//iframe[@title='card number']")));
+																			.frame(driver.findElement(By.xpath(
+																					".//iframe[@title='card number']")));
 																			WEL.enterCardNumber(
 																					excelOperation.getTestData("TC18",
 																							"WEL_Test_Data",
 																							"Card_Number"));
 																			driver.switchTo().defaultContent();
 																			driver.switchTo()
-																					.frame(driver.findElement(By.xpath(
-																							".//iframe[@title='expiryMonth']")));
+																			.frame(driver.findElement(By.xpath(
+																					".//iframe[@title='expiryMonth']")));
 																			WEL.selectExpirationMonthFromDropDown(
 																					excelOperation.getTestData("TC18",
 																							"WEL_Test_Data",
 																							"Expiry_Month"));
 																			driver.switchTo().defaultContent();
 																			driver.switchTo()
-																					.frame(driver.findElement(By.xpath(
-																							".//iframe[@title='expiryYear']")));
+																			.frame(driver.findElement(By.xpath(
+																					".//iframe[@title='expiryYear']")));
 																			WEL.selectExpirationYearFromDropDown(
 																					excelOperation.getTestData("TC18",
 																							"WEL_Test_Data",
 																							"Expiry_Year"));
 																			driver.switchTo().defaultContent();
 																			driver.switchTo()
-																					.frame(driver.findElement(By.xpath(
-																							".//iframe[@title='securityCode']")));
+																			.frame(driver.findElement(By.xpath(
+																					".//iframe[@title='securityCode']")));
 																			WEL.enterCVV_Number(
 																					excelOperation.getTestData("TC18",
 																							"WEL_Test_Data", "CVV"));
@@ -6447,7 +6013,7 @@ public class WEL_Test_Suite extends DriverModule {
 																			Reporting.updateTestReport(
 																					"Card details was not entered due to timeout exception",
 																					CaptureScreenshot
-																							.getScreenshot(SS_path),
+																					.getScreenshot(SS_path),
 																					StatusDetails.FAIL);
 
 																		}
@@ -6466,42 +6032,7 @@ public class WEL_Test_Suite extends DriverModule {
 																				"WEL_Test_Data", "Order_Total",
 																				orderTotal);
 
-																		ScrollingWebPage.PageScrollUp(driver, 0, -800,
-																				SS_path);
-																		try {
-																			WEL.ClickOnWELIconOrderConfirmationPage();
-																		} catch (Exception e) {
-																			Reporting.updateTestReport(
-																					"Help button was not visible and caused timeout exception",
-																					CaptureScreenshot
-																							.getScreenshot(SS_path),
-																					StatusDetails.FAIL);
-																		}
-																		try {
-																			wait.until(ExpectedConditions
-																					.visibilityOfElementLocated(By
-																							.xpath("//div[@class='helpButton']")));
-																			WEL.ClickOnAccountIconFromOrderConfirmationPage();
-
-																			try {
-																				wait.until(ExpectedConditions
-																						.visibilityOfElementLocated(By
-																								.xpath("//div[@class='helpButton']")));
-																				WEL.ClickonSignOut();
-																			} catch (Exception e) {
-																				Reporting.updateTestReport(
-																						"Help button was not visible and caused timeout exception",
-																						CaptureScreenshot
-																								.getScreenshot(SS_path),
-																						StatusDetails.FAIL);
-																			}
-																		} catch (Exception e) {
-																			Reporting.updateTestReport(
-																					"Help button was not visible and caused timeout exception",
-																					CaptureScreenshot
-																							.getScreenshot(SS_path),
-																					StatusDetails.FAIL);
-																		}
+																		
 
 																	} catch (Exception e) {
 																		Reporting.updateTestReport(
@@ -6587,16 +6118,18 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (
 
-		Exception e) {
+				Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 
 	}
-	
-	
+
+
 
 }
