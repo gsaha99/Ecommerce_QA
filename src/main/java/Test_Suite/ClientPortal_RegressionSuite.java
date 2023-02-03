@@ -291,7 +291,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
 			CPortal.WPSAdmin_SelectRole();
 			CPortal.WPSAdmin_ClickRegister();*/
-			String ssoid=dbConnect.DB_Select("wps_access_qa","user","sso_id");
+			String ssoid=dbConnect.DB_Select("wps_access_qa","user","sso_id","user_id");
 			System.out.println(ssoid);
 			/*if(ssoid.compareTo(SSOID)==0)
 		       {
