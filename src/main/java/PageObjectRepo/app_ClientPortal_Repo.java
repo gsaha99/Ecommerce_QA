@@ -78,13 +78,16 @@ public class app_ClientPortal_Repo extends DriverModule {
 	@FindBy(xpath = "//option[@value='690']")
     WebElement selectUserID;
 	
-	@FindBy(xpath = "//span[contains(text(),'Card Payment')]")
+	/*@FindBy(xpath = "//span[contains(text(),'Card Payment')]")
    	WebElement ClickPaymentMethod;
 	
 	@FindBy(name="Debit/Credit Card")
-    WebElement selectDebitCard;
+    WebElement selectDebitCard;*/
 	
-	@FindBy(xpath = "//button[contains(text(),'Add')]")
+	@FindBy(xpath="//div[@id='payments']/div[@class='accordion-item']/div[@class='accordion-content ']/label[@class='checkboxContainer ']/input[@id='Debit/Credit Card']")
+	WebElement selectDebitCard;
+	
+	@FindBy(xpath = "//button[@type='submit' and @class='btn blue-btn']")
 	WebElement ClickAdd;
 	
 	/* 
@@ -336,7 +339,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	/* 
 	 * Author : Jayanta
 	 * Description : Method to click payment method as card payment in add new client app screen for WPS Admin
-	 */
+	 
 	
 	public void WPSAdmin_ClickPaymentMethod() throws IOException {
 		try {
@@ -358,6 +361,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	public void WPSAdmin_Click_DebitCard() throws IOException {
 		try {
 		    act.moveToElement(selectDebitCard).click().build().perform();
+			//selectDebitCard.click();
 		    Thread.sleep(2000);
 			Reporting.updateTestReport("Debit/Credit card is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
@@ -373,7 +377,8 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	public void WPSAdmin_Click_Add() throws IOException {
 		try {
-		    act.moveToElement(ClickAdd).click().build().perform();
+		    //act.moveToElement(ClickAdd).click().build().perform();
+			ClickAdd.click();
 		    Thread.sleep(5000);
 			Reporting.updateTestReport("Add button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}

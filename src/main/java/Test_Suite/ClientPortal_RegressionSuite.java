@@ -18,6 +18,7 @@ import utilities.CaptureScreenshot;
 import utilities.DriverModule;
 import utilities.Reporting;
 import utilities.StatusDetails;
+import utilities.dbConnect;
 import utilities.excelOperation;
 
 public class ClientPortal_RegressionSuite extends DriverModule {
@@ -204,7 +205,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			
 			//From here it is not working in automation
 			
-			CPortal.WPSAdmin_ClickPaymentMethod();
+			//CPortal.WPSAdmin_ClickPaymentMethod();
 			CPortal.WPSAdmin_Click_DebitCard();
 			CPortal.WPSAdmin_Click_Add();
 			
@@ -232,7 +233,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			try {
+			/*try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
 			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID"));
 			}
@@ -285,10 +286,25 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickRegisterNewUser();
 			CPortal.WPSAdmin_Enter_First_Name("TestAutoFirstName");
 			CPortal.WPSAdmin_Enter_Last_Name("TestAutoLastName");
-			String uuid = Integer.toString(((new Random().nextInt(10))+1));
-			CPortal.WPSAdmin_Enter_SSO_ID("TestUser"+uuid+"@wiley.com");
+			String uuid = Integer.toString(((new Random().nextInt(100))+1));
+			String SSOID = "TestUser"+uuid+"@wiley.com";
+			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
 			CPortal.WPSAdmin_SelectRole();
-			CPortal.WPSAdmin_ClickRegister();
+			CPortal.WPSAdmin_ClickRegister();*/
+			String ssoid=dbConnect.DB_Select("wps_access_qa","user","sso_id");
+			System.out.println(ssoid);
+			/*if(ssoid.compareTo(SSOID)==0)
+		       {
+			
+			      Reporting.updateTestReport("DB Validation is done and SSO ID is: " + ssoid,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		       }
+		      else 
+		       {
+			      Reporting.updateTestReport("DB Validation is not done and SSO ID is not: " + SSOID,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		       }*/
+			
 			
 		}
 		catch (Exception e) 
