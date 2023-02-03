@@ -12,7 +12,7 @@ public class dbConnect {
 	public static String DB_Select(String DBName,String TableName,String ColumnName) throws InstantiationException, IllegalAccessException
     
 	{
-        String connectionUrl = "jdbc:mysql://wps.c7hepfyiogmn.us-east1.rds.amazonaws.com:3306/"+DBName;
+        String connectionUrl = "jdbc:mysql://wps.c7hepfyiogmn.us-east-1.rds.amazonaws.com:3306/"+DBName;
         System.out.println(connectionUrl);
         String property = "";
         try {
@@ -23,16 +23,16 @@ public class dbConnect {
             Statement stmt= con.createStatement();
             String SQL = "SELECT * FROM "+DBName+"."+TableName+" order by desc limit 1";
             System.out.println(SQL);
-            ResultSet rs=null;
-            rs = stmt.executeQuery(SQL);
+            ResultSet rs = stmt.executeQuery(SQL);
+            
     
             // Iterate through the data in the result set and display it.
-         while (rs.next()) 
-              {
-        	    System.out.println(rs.getString("sso_id"));
+        /* while (rs.next()) 
+              {*/
+        	    System.out.println(rs.getString(2));
 			    //property = rs.getString(ColumnName);
            //System.out.println(rs.getInt("status_id") + " " + rs.getString("status"));
-              }
+              //}
           rs.close();
 		  con.close();
             }
