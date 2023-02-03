@@ -283,16 +283,18 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			CPortal.WPSAdmin_ClickRegisterNewUser();
+			CPortal.WPSAdmin_Enter_First_Name("TestAutoFirstName");
+			CPortal.WPSAdmin_Enter_Last_Name("TestAutoLastName");
 			String uuid = Integer.toString(((new Random().nextInt(10))+1));
-			CPortal.WPSAdmin_Enter_First_Name(uuid);
-			
-			
+			CPortal.WPSAdmin_Enter_SSO_ID("TestUser"+uuid+"@wiley.com");
+			CPortal.WPSAdmin_SelectRole();
+			CPortal.WPSAdmin_ClickRegister();
 			
 		}
 		catch (Exception e) 
 		{
-			System.out.println("Adding new client app with WPS Admin Role Failed" + e.getMessage());
-			Reporting.updateTestReport("Adding new client app with WPS Admin Role Failed" + e.getMessage(),
+			System.out.println("Register new user with WPS Admin Role Failed" + e.getMessage());
+			Reporting.updateTestReport("Register new user with WPS Admin Role Failed" + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}

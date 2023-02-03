@@ -21,6 +21,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	public String SS_path=ClientPortal_RegressionSuite.SS_path;
 	Actions act = new Actions(driver);
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	
 	/* 
 	 * Author : Jayanta
@@ -102,6 +103,9 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	@FindBy(xpath = "//option[@value='WPS_Admin']")
     WebElement selectRole;
+	
+	@FindBy(xpath = "//button[@type='submit' and @class='btn blue-btn']")
+	WebElement ClickRegister;
 	
 	/* 
 	 * Author : Jayanta
@@ -245,7 +249,6 @@ public class app_ClientPortal_Repo extends DriverModule {
 	public void WPSAdmin_ClickLogOut() throws IOException {
 		try {
 		    act.moveToElement(ClickLogOut).click().build().perform();
-		    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("loginHeader")));
 			Reporting.updateTestReport("Log out is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
@@ -406,6 +409,52 @@ public class app_ClientPortal_Repo extends DriverModule {
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Last Name is not Entered : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to enter sso id in RegisterNew User screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_Enter_SSO_ID(String sso) throws IOException {
+		try {
+			enterSSOID.sendKeys(sso);
+			Reporting.updateTestReport("SSO ID " +sso+ " Entered successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("SSO ID is not Entered : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author - Jayanta 
+	 * Description : Method to select Role as WPS Admin in Register New User screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_SelectRole() throws IOException {
+		try {
+			selectRole.click();
+			Reporting.updateTestReport("Role is selected successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Role is not selected : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to click Register Button in Register New User screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_ClickRegister() throws IOException {
+		try {
+			ClickRegister.click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'User has been registered successfully')]")));
+			Reporting.updateTestReport("Register button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Register button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 	
