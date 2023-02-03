@@ -30,7 +30,7 @@ public class dbConnect {
          while (rs.next()) 
               {
         	    System.out.println(rs.getString(ColumnName1));
-			    //property = rs.getString(ColumnName);
+			    property = rs.getString(ColumnName1);
            //System.out.println(rs.getInt("status_id") + " " + rs.getString("status"));
               }
           //rs.close();

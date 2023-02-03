@@ -60,7 +60,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	 * Description : Object repo for Client portal WPS Admin to add new client app
 	 */
 	
-	@FindBy(xpath = "//option[@value='SOAP']")
+	@FindBy(xpath = "//option[@value='HTTP']")
     WebElement selectSOAP;
 	
 	@FindBy(xpath = "//option[@value='HTTP']")

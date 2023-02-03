@@ -233,7 +233,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			/*try {
+			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
 			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID"));
 			}
@@ -290,10 +290,10 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			String SSOID = "TestUser"+uuid+"@wiley.com";
 			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
 			CPortal.WPSAdmin_SelectRole();
-			CPortal.WPSAdmin_ClickRegister();*/
+			CPortal.WPSAdmin_ClickRegister();
 			String ssoid=dbConnect.DB_Select("wps_access_qa","user","sso_id","user_id");
 			System.out.println(ssoid);
-			/*if(ssoid.compareTo(SSOID)==0)
+			if(ssoid.compareTo(SSOID)==0)
 		       {
 			
 			      Reporting.updateTestReport("DB Validation is done and SSO ID is: " + ssoid,
@@ -303,7 +303,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		       {
 			      Reporting.updateTestReport("DB Validation is not done and SSO ID is not: " + SSOID,
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		       }*/
+		       }
 			
 			
 		}
