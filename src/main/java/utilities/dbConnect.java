@@ -27,13 +27,13 @@ public class dbConnect {
             
     
             // Iterate through the data in the result set and display it.
-        /* while (rs.next()) 
-              {*/
-        	    System.out.println(rs.getString(2));
+         while (rs.next()) 
+              {
+        	    System.out.println(rs.getString(ColumnName1));
 			    //property = rs.getString(ColumnName);
            //System.out.println(rs.getInt("status_id") + " " + rs.getString("status"));
-              //}
-          rs.close();
+              }
+          //rs.close();
 		  con.close();
             }
 
