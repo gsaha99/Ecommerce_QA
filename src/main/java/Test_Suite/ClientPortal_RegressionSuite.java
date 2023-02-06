@@ -206,6 +206,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			//From here it is not working in automation
 			
 			//CPortal.WPSAdmin_ClickPaymentMethod();
+			driver.findElement(By.xpath("//div[@id='payments']/div[@class='accordion-item']/div[@class='accordion-content ']/label[@class='checkboxContainer ']/input[@id='Debit/Credit Card']")).click();
 			CPortal.WPSAdmin_Click_DebitCard();
 			CPortal.WPSAdmin_Click_Add();
 			
