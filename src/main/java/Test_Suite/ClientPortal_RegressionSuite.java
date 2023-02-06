@@ -17,6 +17,7 @@ import PageObjectRepo.app_ClientPortal_Repo;
 import utilities.CaptureScreenshot;
 import utilities.DriverModule;
 import utilities.Reporting;
+import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
 import utilities.dbConnect;
 import utilities.excelOperation;
@@ -199,14 +200,19 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_SelectSOAP();
 			CPortal.WPSAdmin_SelectBusinessUnit();
 			String uuid = Integer.toString(((new Random().nextInt(10))+1));
+			ScrollingWebPage.PageDown(driver, SS_path);
 			CPortal.WPSAdmin_Enter_ClientApp_Name("TestAuto_"+uuid);
 			CPortal.WPSAdmin_Enter_ClientApp_ShortName("TA"+uuid);
 			CPortal.WPSAdmin_SelectUserID();
 			
 			//From here it is not working in automation
 			
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageScrolldown(driver, 0, 600);
 			//CPortal.WPSAdmin_ClickPaymentMethod();
-			driver.findElement(By.xpath("//div[@id='payments']/div[@class='accordion-item']/div[@class='accordion-content ']/label[@class='checkboxContainer ']/input[@id='Debit/Credit Card']")).click();
+			//driver.findElement(By.xpath("//div[@id='payments']/div[@class='accordion-item']/div[@class='accordion-content ']/label[@class='checkboxContainer ']/input[@id='Debit/Credit Card']")).click();
+			CPortal.WPSAdmin_ClickPaymentMethod();
 			CPortal.WPSAdmin_Click_DebitCard();
 			CPortal.WPSAdmin_Click_Add();
 			

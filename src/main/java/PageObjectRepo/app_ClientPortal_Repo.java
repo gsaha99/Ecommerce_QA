@@ -60,7 +60,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	 * Description : Object repo for Client portal WPS Admin to add new client app
 	 */
 	
-	@FindBy(xpath = "//option[@value='HTTP']")
+	@FindBy(xpath = "//option[@value='SOAP']")
     WebElement selectSOAP;
 	
 	@FindBy(xpath = "//option[@value='HTTP']")
@@ -78,14 +78,14 @@ public class app_ClientPortal_Repo extends DriverModule {
 	@FindBy(xpath = "//option[@value='690']")
     WebElement selectUserID;
 	
-	/*@FindBy(xpath = "//span[contains(text(),'Card Payment')]")
+	@FindBy(xpath = "//span[contains(text(),'Card Payment')]")
    	WebElement ClickPaymentMethod;
 	
 	@FindBy(name="Debit/Credit Card")
-    WebElement selectDebitCard;*/
+    WebElement selectDebitCard;
 	
-	@FindBy(xpath="//div[@id='payments']/div[@class='accordion-item']/div[@class='accordion-content ']/label[@class='checkboxContainer ']/input[@id='Debit/Credit Card']")
-	WebElement selectDebitCard;
+	/*@FindBy(xpath="//div[@id='payments']/div[@class='accordion-item']/div[@class='accordion-content ']/label[@class='checkboxContainer ']/input[@id='Debit/Credit Card']")
+	WebElement selectDebitCard;*/
 	
 	@FindBy(xpath = "//button[@type='submit' and @class='btn blue-btn']")
 	WebElement ClickAdd;
@@ -336,9 +336,9 @@ public class app_ClientPortal_Repo extends DriverModule {
 		}
 	}
 	
-	/* 
-	 * Author : Jayanta
-	 * Description : Method to click payment method as card payment in add new client app screen for WPS Admin
+	
+	 // Author : Jayanta
+	 // Description : Method to click payment method as card payment in add new client app screen for WPS Admin
 	 
 	
 	public void WPSAdmin_ClickPaymentMethod() throws IOException {
