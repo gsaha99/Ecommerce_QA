@@ -240,6 +240,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC05_UserLoginDuring_Checkout() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC05_UserLoginDuring_Checkout");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45));
 			Thread.sleep(1000);
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -269,6 +270,17 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.ClickOnBackTOCart();
 			WEL.ClickOnRemoveOnCartPage();
 			WEL.ClickAccountCartPage();
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'I Accept')]")));
+				Reporting.updateTestReport("Wiley & WEL Privacy Agreement banner was displayed",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+				WEL.clickonAcceptButtonOnWileyWELPrivacyAgreement();
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Wiley & WEL Privacy Agreement banner was not displayed",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+			}
+			WEL.ClickonSignOut();
 			Thread.sleep(1000);
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {

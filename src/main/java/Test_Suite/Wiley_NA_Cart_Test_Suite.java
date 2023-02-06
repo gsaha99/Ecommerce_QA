@@ -35,19 +35,19 @@ import java.util.Set;
 
 public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 	app_Wiley_Repo wiley;
-	
+
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
 	public static String EmailConfirmationText="//button/div[contains(text(),'Your Order with Wiley')]";
-	
+
 	@BeforeTest
 	public void launchBrowser() {
 		wiley = PageFactory.initElements(driver, app_Wiley_Repo.class);
-		
+
 	}
-	
-	
-	
+
+
+
 	/*
 	 * @Author: Anindita
 	 * @Description: This test case is about placing an order with Digital product with new user
@@ -57,7 +57,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 	public void TC01_Digital_Product_Purchase_New_User() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC01_Digital_Product_Purchase_New_User");
-			
+
 			driver.get(wiley.wileyURLConcatenation("TC01", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.clickOnAddToCartButton();
@@ -104,9 +104,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 						wiley.clickOnSaveAndContinueButton();
 						try {
-						if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-						{wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-						}}
+							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							{wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+							}}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -122,7 +122,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 						String tax=wiley.fetchTaxAmount();
 						String orderTotal=wiley.fetchOrderTotal();
-						
+
 						excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Tax", tax);
 						excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Order_Total", orderTotal);
 						driver.get(excelOperation.getTestData("Yopmail_URL",
@@ -131,14 +131,14 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.clickOnCheckInboxButton();
 						if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 							Reporting.updateTestReport("Order Confirmation mail was received",
-			                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							OrderConfirmationMail.validateOrderConfirmationMailContent("Wiley",driver,SS_path,tax," ",orderTotal);
 						}
 						else {
 							Reporting.updateTestReport("Order Confirmation mail was not received",
-			                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
-						
+
 						wiley.WileyLogOut();
 					}
 					catch(Exception e) {
@@ -159,7 +159,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			
+
 		}
 		catch(Exception e){
 			wiley.wileyLogOutException();
@@ -168,7 +168,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		}
 	}
 
-	
+
 	/*
 	 * @Author: Vishnu 
 	 * @Description: This is verify to placing an order for digital product for the
@@ -179,7 +179,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC02_Digital_productpurchase_ForExistingUser");
 			driver.get(wiley.wileyURLConcatenation("TC02", "WILEY_NA_Cart_Test_Data", "URL"));
-		
+
 			driver.navigate().refresh();
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -224,12 +224,12 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterZipBilling(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
 						//wiley.enterCityBilling(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_City"));
 						//wiley.enterState(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_State"));
-//						wiley.SelectState(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data","Bill_State"));
+						//						wiley.SelectState(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data","Bill_State"));
 						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 						try {
 							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-							}
+								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -252,9 +252,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								System.out.println("The Order Id is is " + orderId);
 								excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 								excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-								
+
 							}						
-							 else {
+							else {
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
 							}
@@ -263,7 +263,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("user was not on Secure Checkout Page",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}          
-					
+
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -291,12 +291,12 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 		}
 	}
-	
+
 	@Test
 	public void TC03_Physical_productpurchase_ForNewUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC03_Physical_productpurchase_ForNewUser");
-			
+
 			driver.get(wiley.wileyURLConcatenation("TC03", "WILEY_NA_Cart_Test_Data", "URL"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.navigate().refresh();
@@ -323,12 +323,12 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.enterShippingCity(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
 					wiley.enterState(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
 					wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
-					
+
 					wiley.selectShippingMethod();
 					wiley.clickOnSaveAndContinueButton();
 					try {
-					if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-					wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -371,16 +371,16 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							wiley.clickOnCheckInboxButton();
 							if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								OrderConfirmationMail.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxamount,scharge,ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}				
 						}			
-							
-						 else {
+
+						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
@@ -411,7 +411,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: This test case is about placing an order with Physical product with guest user
@@ -447,7 +447,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -490,16 +490,16 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							wiley.clickOnCheckInboxButton();
 							if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								OrderConfirmationMail.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxamount,scharge,ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
-							
+
 						}				
-						 else {
+						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
@@ -517,7 +517,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							+ " and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
-				
+
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
@@ -530,7 +530,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Vishnu 
 	 * @Description: This is verify to placing an order for Physical product for the
@@ -594,9 +594,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						excelOperation.updateTestData("TC05", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 						excelOperation.updateTestData("TC05", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
 						excelOperation.updateTestData("TC05", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-						
+
 					}				
-					 else {
+					else {
 						Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
@@ -688,9 +688,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							excelOperation.updateTestData("TC06", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC06", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
 							excelOperation.updateTestData("TC06", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-							
+
 						}			
-						 else {
+						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
@@ -721,7 +721,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: This test case is about placing an order with mixed cart with some stock available new user
@@ -771,7 +771,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.clickOnSaveAndContinueButton();
 						try {
 							if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+								wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -815,16 +815,16 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								wiley.clickOnCheckInboxButton();
 								if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 									Reporting.updateTestReport("Order Confirmation mail was received",
-					                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-									
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
 								}
 								else {
 									Reporting.updateTestReport("Order Confirmation mail was not received",
-					                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
-								
+
 							}				
-							 else {
+							else {
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
 							}
@@ -858,8 +858,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
-		
-		
+
+
 	}
 	/*
 	 * @Author: Anindita
@@ -906,7 +906,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.clickOnSaveAndContinueButton();
 						try {
 							if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+								wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -949,21 +949,21 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								wiley.clickOnCheckInboxButton();
 								if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 									Reporting.updateTestReport("Order Confirmation mail was received",
-					                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 									//validateOrderConfirmationMailContent(taxamount,scharge,ordertotal);
 								}
 								else {
 									Reporting.updateTestReport("Order Confirmation mail was not received",
-					                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
-								
+
 							}
 							else {
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
 							}
 							wiley.WileyLogOut();
-					
+
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -987,14 +987,14 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			
+
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
-		
+
 	}
 
 	@Test // Higher Education Digital product purchase (Arun)
@@ -1025,7 +1025,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.enterCardHolderName(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					driver.switchTo().defaultContent();
 					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-					
+
 					wiley.enterCardNumber(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Card_Number"));
 					driver.switchTo().defaultContent();
 					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
@@ -1050,8 +1050,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 						wiley.clickOnSaveAndContinueButton();
 						try {
-						if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-						wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -1069,7 +1069,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							String taxamount = wiley.fetchTaxAmount();
 							excelOperation.updateTestData("TC09", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC09", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-							
+
 							/*driver.get(excelOperation.getTestData("Yopmail_URL",
 							"Generic_Dataset", "Data"));
 
@@ -1084,10 +1084,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
 				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}*/
-							
+
 						}		
-							
-						 else {
+
+						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
@@ -1161,7 +1161,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -1211,10 +1211,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
 				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}*/
-							
+
 						}		
-							
-						 else {
+
+						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
@@ -1285,7 +1285,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -1326,8 +1326,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									wiley.clickOnSaveAndContinueButton();
 									try {
 										if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-										wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-										}
+											wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+									}
 									catch(Exception e) {
 										Reporting.updateTestReport("Adress doctor pop up did not appear",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -1359,9 +1359,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 											Reporting.updateTestReport("Order Confirmation mail was not received",
 							                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}*/
-										
+
 									}				
-									 else {
+									else {
 										Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 												StatusDetails.FAIL);
 									}
@@ -1457,7 +1457,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -1483,7 +1483,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						driver.switchTo().defaultContent();
 						// Thread.sleep(3000);
 						wiley.clickOnSaveAndContinueButton();
-						
+
 						wiley.clickOnPlaceOrderButton();
 						String orderconfirmation = driver.getTitle();
 						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -1511,9 +1511,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
 				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}*/
-							
+
 						}				
-						 else {
+						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
@@ -1606,7 +1606,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.clickOnSaveAndContinueButton();
 						try {
 							if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+								wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -1637,10 +1637,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
 				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}*/
-							
-							
+
+
 						}				
-						 else {
+						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
@@ -1671,7 +1671,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Placing an order with Textbook rental product
@@ -1711,7 +1711,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -1725,7 +1725,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterCardHolderName(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "First_Name"));
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-						
+
 						wiley.enterCardNumber(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Card_Number"));
 						driver.switchTo().defaultContent();
 						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
@@ -1766,9 +1766,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
 				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}*/
-							
+
 						}				
-						 else {
+						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
@@ -1799,7 +1799,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Placing an order with eBundle product (Using RGuroo)
@@ -1850,17 +1850,17 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					try{
 						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
 						wiley.enterAddressLine1Billing(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
-						
+
 						wiley.enterZipBilling(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
 						//wiley.enterCityBilling(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_City"));
 						//wiley.enterState(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_State"));
 						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
-					    wiley.clickOnSaveAndContinueButton();
-					    try {
+						wiley.clickOnSaveAndContinueButton();
+						try {
 							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-							}
-					    catch(Exception e) {
+								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+						}
+						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 						}
@@ -1889,10 +1889,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
 				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}*/
-							
-							
+
+
 						}				
-						 else {
+						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
@@ -1962,7 +1962,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -2015,19 +2015,19 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
 				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}*/
-							
+
 						}				
-						 else {
+						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
 						wiley.WileyLogOut();
-				}
-				catch(Exception e) {
-					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-							+ " and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Shipping Address line 1 was not clickable"
+								+ " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -2048,7 +2048,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Place an order with coupon code (SDP66)
@@ -2092,7 +2092,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -2143,20 +2143,20 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
 				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}*/
-							
-							
+
+
 						}				
-						 else {
+						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
 						wiley.WileyLogOut();
-				}
-				catch(Exception e) {
-					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-							+ " and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Shipping Address line 1 was not clickable"
+								+ " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -2201,7 +2201,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.confirmEmailIdInCreateAccountForm(email);
 				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Password"));
 				wiley.clickOnSaveAndContinueButton();
-				
+
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
@@ -2236,8 +2236,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.clickOnSaveAndContinueButton();
 						try {
 							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-							}
+								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -2272,14 +2272,14 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								wiley.enterZipBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
 								//wiley.enterCityBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_City"));
 								//wiley.enterState(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_State"));
-								
+
 								wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 								Thread.sleep(1000);
 								wiley.clickOnSaveAndContinueButton();
 								try {
 									if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-									wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-									}
+										wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+								}
 								catch(Exception e) {
 									Reporting.updateTestReport("Adress doctor pop up did not appear",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -2333,7 +2333,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the country restriction functionality for physical products with restricted shipping address
@@ -2367,12 +2367,12 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC19", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
 					wiley.enterShippingZIPCode(excelOperation.getTestData("TC19", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
 					wiley.enterShippingCity(excelOperation.getTestData("TC19", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
-					
+
 					wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC19", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -2400,7 +2400,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the tax for new user physical product
@@ -2436,12 +2436,12 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.enterShippingCity(excelOperation.getTestData("TC20", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
 					wiley.enterState(excelOperation.getTestData("TC20", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
 					wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC20", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
-					
+
 					wiley.selectShippingMethod();
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -2491,10 +2491,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
 				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}*/
-							
-							
+
+
 						}				
-						 else {
+						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
@@ -2524,7 +2524,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Validates the tax for existing user physical product
@@ -2584,9 +2584,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						excelOperation.updateTestData("TC21", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 						excelOperation.updateTestData("TC21", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
 						excelOperation.updateTestData("TC21", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", scharge);
-						
+
 					}				
-					 else {
+					else {
 						Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
@@ -2610,7 +2610,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Validates the tax for new user digital product
@@ -2621,7 +2621,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC22_New_User_Tax_for_Digital_product");
 			driver.get(wiley.wileyURLConcatenation("TC22", "WILEY_NA_Cart_Test_Data", "URL"));
-			
+
 			driver.navigate().refresh();
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -2666,13 +2666,13 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterCityBilling(excelOperation.getTestData("TC22", "WILEY_NA_Cart_Test_Data", "Bill_City"));
 						//Commenting this line as this is not applicable for India
 						//wiley.enterState(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_State"));
-					
+
 						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC22", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 						wiley.clickOnSaveAndContinueButton();
 						try {
 							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
 								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-							}
+						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -2702,10 +2702,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
 				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}*/
-							
-							
+
+
 						}				
-						 else {
+						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
@@ -2717,7 +2717,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
-					
+
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -2737,7 +2737,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Validates the tax for an existing user digital product
@@ -2796,8 +2796,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.clickOnSaveAndContinueButton();
 						try {
 							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-							}
+								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -2814,10 +2814,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							String taxamount = wiley.fetchTaxAmount();
 							excelOperation.updateTestData("TC23", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC23", "WILEY_NA_Cart_Test_Data", "Tax", taxamount);
-							
-							
+
+
 						}				
-						 else {
+						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
@@ -2850,7 +2850,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Verify the Shipping options for POD and Physical products on Cart Page
@@ -2883,7 +2883,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			
+
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -2891,7 +2891,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Validates if products are coming in search result after searching with the word "rguroo"
@@ -2900,7 +2900,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 	@Test
 	public void TC25_Searching_by_Keyword_Rguroo() throws IOException{
 		try {
-			
+
 			Reporting.test = Reporting.extent.createTest("TC25_Searching_by_Keyword_Rguroo");
 			driver.get(wiley.wileyURLConcatenation("TC25", "WILEY_NA_Cart_Test_Data", "URL"));
 			wiley.searchDataInSearchBar("rguroo");
@@ -2912,7 +2912,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Turns a digital cart to phygital cart which results in difference in checkout steps
@@ -2974,7 +2974,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Validates the UI of Cart page
@@ -2983,7 +2983,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 	@Test
 	public void TC29_Cart_Page_UI_Validation() throws IOException{
 		try {
-			
+
 			Reporting.test = Reporting.extent.createTest("TC29_Cart_Page_UI_Validation");
 			driver.get(wiley.wileyURLConcatenation("TC29", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -3008,7 +3008,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			
+
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -3016,7 +3016,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Validating the cart merge functionality( old cart and new cart getting merged)
@@ -3119,8 +3119,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-						wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-						}
+							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -3135,9 +3135,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						excelOperation.updateTestData("TC33", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
 						ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 						String ordertotal = wiley.fetchOrderTotal();
-						
+
 						excelOperation.updateTestData("TC31", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-						
+
 						/*driver.get("https://yopmail.com/en/");
 
 						wiley.enterEmailIdInYopmail(email);
@@ -3151,11 +3151,11 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order Confirmation mail was not received",
 			                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}*/
-						
-						
-						
+
+
+
 					}				
-					 else {
+					else {
 						Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
@@ -3172,7 +3172,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			
+
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -3236,12 +3236,12 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.enterShippingCity(excelOperation.getTestData("TC32", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
 					wiley.enterState(excelOperation.getTestData("TC32", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
 					wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC32", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
-					
+
 					wiley.selectShippingMethod();
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -3294,11 +3294,11 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
 				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}*/
-						
-							
-							
+
+
+
 						}				
-						 else {
+						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
@@ -3310,7 +3310,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								, CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
-					
+
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
@@ -3329,17 +3329,17 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Validates the reset password functionality 
 	 * @Date: 15/11/22
 	 */
-	
+
 	@Test
 	public void TC33_Forgot_Password_Functionality() throws IOException{
 		try {
-			
+
 			Reporting.test = Reporting.extent.createTest("TC33_Forgot_Password_Functionality");
 			driver.get(wiley.wileyURLConcatenation("TC33", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -3414,7 +3414,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						else 
 							Reporting.updateTestReport("User was not on the cart apge and the login was not successfull with new password", 
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						
+
 						driver.switchTo().window(yopmailHandle);
 						driver.close();
 						driver.switchTo().window(ChildWindow);
@@ -3431,164 +3431,299 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 
-			
+
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-	}
+		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
-	
-		
-		/*
-		 * @Author: Anindita
-		 * @Description: Validates the login page functionalities (Error message)
-		 * @Date: 17/11/22
-		 */
-		@Test
-		public void TC26_Login_Page_Validation() throws IOException{
+
+
+
+	/*
+	 * @Author: Anindita
+	 * @Description: Validates the login page functionalities (Error message)
+	 * @Date: 17/11/22
+	 */
+	@Test
+	public void TC26_Login_Page_Validation() throws IOException{
+		try {
+			Reporting.test = Reporting.extent.createTest("TC26_Login_Page_Validation");
+			driver.get(wiley.wileyURLConcatenation("TC26", "WILEY_NA_Cart_Test_Data", "URL"));
+			driver.navigate().refresh();
+			wiley.clickOnAddToCartButton();
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
-				Reporting.test = Reporting.extent.createTest("TC26_Login_Page_Validation");
-				driver.get(wiley.wileyURLConcatenation("TC26", "WILEY_NA_Cart_Test_Data", "URL"));
-				driver.navigate().refresh();
+				wait.until(ExpectedConditions.
+						elementToBeClickable
+						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				if(wiley.checkIfGuestCheckoutButtonIsPresent()) Reporting.updateTestReport("Guest checkout button is present in login page when only normal physical product is present in cart",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else Reporting.updateTestReport("Guest checkout button is not present in login page when only normal physical product is present in cart",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				wiley.clickOnCartIcon();
+				wiley.searchDataInSearchBar(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "ISBN"));
+				wiley.clickOnSRP_WileyProduct();
 				wiley.clickOnAddToCartButton();
-				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-				try {
-					wait.until(ExpectedConditions.
-							elementToBeClickable
-							(By.xpath("//button[contains(text(),'View Cart')]")));
-					wiley.clickOnViewCartButton();
-					ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-					wiley.clickOnProceedToCheckoutButton();
-					if(wiley.checkIfGuestCheckoutButtonIsPresent()) Reporting.updateTestReport("Guest checkout button is present in login page when only normal physical product is present in cart",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					else Reporting.updateTestReport("Guest checkout button is not present in login page when only normal physical product is present in cart",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					wiley.clickOnCartIcon();
-					wiley.searchDataInSearchBar(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "ISBN"));
-					wiley.clickOnSRP_WileyProduct();
-					wiley.clickOnAddToCartButton();
-					wiley.clickOnViewCartButton();
-					ScrollingWebPage.PageScrolldown(driver,0,900,SS_path);
-					wiley.clickOnProceedToCheckoutButton();
-					if(!wiley.checkIfGuestCheckoutButtonIsPresent()) Reporting.updateTestReport("Guest checkout button was not present in login page when digital product is present in cart",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					else Reporting.updateTestReport("Guest checkout button is present in login page when digital product is present in cart",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					wiley.enterEmailIdInCreateAccountFormNotAutoGenerated(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "Email_Id"));
-					wiley.clickOnCreateAccountButton();
-					wiley.checkErrorMessageAfterEnteringExistingUserInCreateAccount();
-					wiley.enterExistingWileyUserMailID(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "Email_Id"));
-					wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "Password"));
-					wiley.clickOnLogInAndContinueButton();
-					wiley.checkErrorMessageAfterEnteringWrongPassword();
-					wiley.WileyLogOut();
-					driver.manage().deleteAllCookies();
-				}
-				catch(Exception e) {
-					Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
-				
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,900,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				if(!wiley.checkIfGuestCheckoutButtonIsPresent()) Reporting.updateTestReport("Guest checkout button was not present in login page when digital product is present in cart",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else Reporting.updateTestReport("Guest checkout button is present in login page when digital product is present in cart",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				wiley.enterEmailIdInCreateAccountFormNotAutoGenerated(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "Email_Id"));
+				wiley.clickOnCreateAccountButton();
+				wiley.checkErrorMessageAfterEnteringExistingUserInCreateAccount();
+				wiley.enterExistingWileyUserMailID(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "Email_Id"));
+				wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "Password"));
+				wiley.clickOnLogInAndContinueButton();
+				wiley.checkErrorMessageAfterEnteringWrongPassword();
+				wiley.WileyLogOut();
+				driver.manage().deleteAllCookies();
 			}
 			catch(Exception e) {
-				wiley.wileyLogOutException();
-				System.out.println(e.getMessage());
-				Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+
 		}
-		
-		/*
-		 * Author: Anindita
-		 * @Description: Validates the AEM Header Footer
-		 * @Date: 17/11/22
-		 */
-		@Test
-		public void TC27_Validate_AEM_Header_Footer() throws IOException {
-			try {
-				Reporting.test = Reporting.extent.createTest("TC27_Validate_AEM_Header_Footer");
-				driver.get(wiley.wileyURLConcatenation("TC27", "WILEY_NA_Cart_Test_Data", "URL"));
-				wiley.checkShopLinkInHomePageHeader();
-				wiley.checkResearchLibrariesLinkInHomePageHeader();
-				wiley.checkPublishingServicesLinkInHomePageHeader();
-				wiley.checkProfessionalDevelopmentLinkInHomePageHeader();
-				wiley.checkCartIconHomePage();
-				wiley.checkSiteMaponfooter();
-				wiley.checkPrivacypolicyOnFooter();
-				wiley.checkTermsofuseOnFooter();
-				wiley.checkRighrtAndPermissonsOnFooter();
-			}
-			catch(Exception e) {
-				wiley.wileyLogOutException();
-				System.out.println(e.getMessage());
-				Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
+		catch(Exception e) {
+			wiley.wileyLogOutException();
+			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
-		
-		/*
-		 * @Author: Vishnu
-		 * 
-		 * @Description: Validates VETCONSULT_Purchase_Option_on_PDPpage
-		 * 
-		 * @Date: 23/11/22
-		 */
-		@Test
-		public void TC34_Verify_VETCONSULT_Purchase_Option_on_PDPpage() throws IOException {
-			try {
-				Reporting.test = Reporting.extent.createTest("TC34_Verify_VETCONSULT_Purchase_Option_on_PDPpage");
-				driver.get(wiley.wileyURLConcatenation("TC34", "WILEY_NA_Cart_Test_Data", "URL"));
-				driver.navigate().refresh();
-				wiley.Entertextonsearcbar(excelOperation.getTestData("TC34", "WILEY_NA_Cart_Test_Data", "SearchBox_Text"));
-				wiley.clickOnFormatFacet();
-				if(wiley.checkVetConsultInFormatFacet()) {
-					wiley.clickOnVetConsultInFormatFacet();
-					wiley.VetCosultPurchaseOption();
-					wiley.ClikingOnVETSoultIconOnPDPPage();
-					String mainWindowHandle = driver.getWindowHandle();
-					Set<String> allWindowHandles = driver.getWindowHandles();
-					java.util.Iterator<String> iterator = allWindowHandles.iterator();
-					while (iterator.hasNext()) {
-						String ChildWindow = iterator.next();
-						if (!mainWindowHandle.equalsIgnoreCase(ChildWindow)) {
-							driver.switchTo().window(ChildWindow);
-							String titleofvetpage = driver.getTitle();
-							if (titleofvetpage.equals("VetConsult"))
+	}
 
-								Reporting.updateTestReport("VET Consult Page is displayed",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+	/*
+	 * Author: Anindita
+	 * @Description: Validates the AEM Header Footer
+	 * @Date: 17/11/22
+	 */
+	@Test
+	public void TC27_Validate_AEM_Header_Footer() throws IOException {
+		try {
+			Reporting.test = Reporting.extent.createTest("TC27_Validate_AEM_Header_Footer");
+			driver.get(wiley.wileyURLConcatenation("TC27", "WILEY_NA_Cart_Test_Data", "URL"));
+			wiley.checkShopLinkInHomePageHeader();
+			wiley.checkResearchLibrariesLinkInHomePageHeader();
+			wiley.checkPublishingServicesLinkInHomePageHeader();
+			wiley.checkProfessionalDevelopmentLinkInHomePageHeader();
+			wiley.checkCartIconHomePage();
+			wiley.checkSiteMaponfooter();
+			wiley.checkPrivacypolicyOnFooter();
+			wiley.checkTermsofuseOnFooter();
+			wiley.checkRighrtAndPermissonsOnFooter();
+		}
+		catch(Exception e) {
+			wiley.wileyLogOutException();
+			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 
-							else
-								Reporting.updateTestReport("Failed to Load Vet Consult page",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: Validates VETCONSULT_Purchase_Option_on_PDPpage
+	 * 
+	 * @Date: 23/11/22
+	 */
+	@Test
+	public void TC34_Verify_VETCONSULT_Purchase_Option_on_PDPpage() throws IOException {
+		try {
+			Reporting.test = Reporting.extent.createTest("TC34_Verify_VETCONSULT_Purchase_Option_on_PDPpage");
+			driver.get(wiley.wileyURLConcatenation("TC34", "WILEY_NA_Cart_Test_Data", "URL"));
+			driver.navigate().refresh();
+			wiley.Entertextonsearcbar(excelOperation.getTestData("TC34", "WILEY_NA_Cart_Test_Data", "SearchBox_Text"));
+			wiley.clickOnFormatFacet();
+			if(wiley.checkVetConsultInFormatFacet()) {
+				wiley.clickOnVetConsultInFormatFacet();
+				wiley.checkPriceInSRPForVetConsult();
+				wiley.VetCosultPurchaseOption();
+				wiley.checkPriceInPDPForVetConsult();
+				wiley.ClikingOnVETSoultIconOnPDPPage();
+				String mainWindowHandle = driver.getWindowHandle();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				java.util.Iterator<String> iterator = allWindowHandles.iterator();
+				while (iterator.hasNext()) {
+					String ChildWindow = iterator.next();
+					if (!mainWindowHandle.equalsIgnoreCase(ChildWindow)) {
+						driver.switchTo().window(ChildWindow);
+						String titleofvetpage = driver.getTitle();
+						if (titleofvetpage.equals("VetConsult"))
 
-						}
+							Reporting.updateTestReport("VET Consult Page is displayed",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+						else
+							Reporting.updateTestReport("Failed to Load Vet Consult page",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
 					}
 				}
-				else
-					Reporting.updateTestReport("VET Consult was not present under format",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			else
+				Reporting.updateTestReport("VET Consult was not present under format",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
-			} catch (Exception e) {
-				wiley.wileyLogOutException();
-				System.out.println(e.getMessage());
-				Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		} catch (Exception e) {
+			wiley.wileyLogOutException();
+			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Date: 6/1/23
+	 * @Author: Anindita
+	 * @Description: Validates if it is redirecting to secure.wiley.com link after clicking 
+	 * on Request Digital Evaluation copy link for certain regions
+	 */
+	@Test
+	public void TC35_EMEA_Catalog_Updates() throws IOException{
+		try {
+			Reporting.test = Reporting.extent.createTest("TC35_EMEA_Catalog_Updates");
+			String[] regions=excelOperation.getTestData("TC35", "WILEY_NA_Cart_Test_Data", "URL").split(",");
+			for (String region:regions) {
+				driver.get(wiley.wileyURLConcatenationwithRegions(region,
+						excelOperation.getTestData("TC35", "WILEY_NA_Cart_Test_Data", "ISBN")));
+				driver.navigate().refresh();
+				wiley.clickOnRequestDigitalEvaluationCopyLink();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				java.util.Iterator<String> iterator = allWindowHandles.iterator();
+				String compCopyWindow = iterator.next();
+				String ChildWindow=iterator.next();
+				driver.switchTo().window(compCopyWindow);
+				driver.close();
+				driver.switchTo().window(ChildWindow);
+				if(driver.getCurrentUrl().contains(excelOperation.getTestData("TC35", "WILEY_NA_Cart_Test_Data", "Expected_Result")) && 
+						driver.getCurrentUrl().contains(excelOperation.getTestData("TC35", "WILEY_NA_Cart_Test_Data", "ISBN")))
+					Reporting.updateTestReport("User was redirected to : "+driver.getCurrentUrl()+" successfully, for "
+							+region+" region.", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("User was redirected to : "+driver.getCurrentUrl()+", for "
+							+region+" region.", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 		}
-		
-		
-		
-		
-		
+		catch(Exception e) {
+			wiley.wileyLogOutException();
+			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 
-	
+	/*
+	 * @Date: 6/1/23
+	 * @Author: Anindita
+	 * @Description: Validates if it is redirecting to new Onboarding link after clicking 
+	 * on Request Digital Evaluation copy link for US and CA regions
+	 */
+	@Test
+	public void TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP() throws IOException{
+		try {
+			Reporting.test = Reporting.extent.createTest("TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			String[] regions=excelOperation.getTestData("TC36", "WILEY_NA_Cart_Test_Data", "URL").split(",");
+			String[] products=excelOperation.getTestData("TC36", "WILEY_NA_Cart_Test_Data", "ISBN").split(",");
+			for (String region:regions) {
+				for(String product:products) {
+					driver.get(wiley.wileyURLConcatenationwithRegions(region,
+							product));
+					driver.navigate().refresh();
+					wiley.clickOnPrintTab();
+					try {
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(),'Request Digital Evaluation Copy')]")));
+						if(wiley.fetchHyperlinkForRequestDigitalEvaluationCopy()
+								.equalsIgnoreCase(excelOperation.getTestData("TC36", "WILEY_NA_Cart_Test_Data", "Expected_Result").split(",")[0]
+										+product))
+							Reporting.updateTestReport("The hyperlink was: "+
+									excelOperation.getTestData("TC36", "WILEY_NA_Cart_Test_Data", "Expected_URL")+product+", for "
+									+region+" region as expected.", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("The hyperlink was not as expoected",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						wiley.clickOnRequestDigitalEvaluationCopyLink();
+						Set<String> allWindowHandles = driver.getWindowHandles();
+						java.util.Iterator<String> iterator = allWindowHandles.iterator();
+						String compCopyWindow = iterator.next();
+						String ChildWindow=iterator.next();
+						driver.switchTo().window(compCopyWindow);
+						driver.close();
+						driver.switchTo().window(ChildWindow);
+						if(driver.getCurrentUrl().equalsIgnoreCase(excelOperation.getTestData("TC36", "WILEY_NA_Cart_Test_Data", "Expected_Result")
+								.split(",")[1]+product.substring(product.length()-13)))
+							Reporting.updateTestReport("User was redirected to : "+driver.getCurrentUrl()+" successfully, for "
+									+region+" region.", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("User was redirected to : "+driver.getCurrentUrl()+", for "
+									+region+" region.", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Request Digital Evaluation Copy link was not clickable"
+								+ "and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				}
+			}
+		}
+		catch(Exception e) {
+			wiley.wileyLogOutException();
+			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Author: Anindita
+	 * @Date: 6/1/23
+	 * @Description: Validates the updated hover text for E-Books in Product details page
+	 */
+	@Test
+	public void TC37_Generic_info_hover_text_EBook_PDP() throws IOException{
+		try {
+			Reporting.test = Reporting.extent.createTest("TC37_Generic_info_hover_text_EBook_PDP");
+			String[] regions=excelOperation.getTestData("TC37", "WILEY_NA_Cart_Test_Data", "URL").split(",");
+			String[] products=excelOperation.getTestData("TC37", "WILEY_NA_Cart_Test_Data", "ISBN").split(",");
+			for(String region:regions) {
+				for(String product:products) {
+					driver.get(wiley.wileyURLConcatenationwithRegions(region,product));
+					driver.navigate().refresh();
+					if(wiley.fetchGenericHoverInfo(driver).
+							equalsIgnoreCase(excelOperation.getTestData("TC37", "WILEY_NA_Cart_Test_Data", "Expected_Result").trim()))
+						Reporting.updateTestReport("Correct text was present in generic info for eBook",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport("Correct text was not present in generic info for eBook"
+					+wiley.fetchGenericHoverInfo(driver).length()+" "+
+								excelOperation.getTestData("TC37", "WILEY_NA_Cart_Test_Data", "Expected_Result").trim().length(),
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					
+					
+				}
+			}
+			
+		}
+		catch(Exception e) {
+			wiley.wileyLogOutException();
+			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
 }

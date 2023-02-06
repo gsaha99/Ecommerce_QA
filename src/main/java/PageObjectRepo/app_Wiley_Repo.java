@@ -11,6 +11,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -39,7 +40,7 @@ public class app_Wiley_Repo {
 	@FindBy(xpath = "(//span[contains(text(),'Proceed to Checkout')])[2]")
 	WebElement ProceedToCheckoutButton;
 
-	
+
 
 
 
@@ -51,9 +52,9 @@ public class app_Wiley_Repo {
 	@FindBy(xpath = "//select[@id='address.country']")
 	WebElement SelectCountryDropDown;
 
-	
 
-	
+
+
 
 	@FindBy(xpath = "(//input[@id='postcode'])[1]")
 	WebElement ShippingZIPCode;
@@ -84,7 +85,7 @@ public class app_Wiley_Repo {
 	@FindBy(xpath = "//button[@id='placeOrder']")
 	WebElement Place_OrderButton;
 
-	
+
 
 	@FindBy(xpath = "(//div[@class='products-list']//section//div//a//img)//following::div//h3//a")
 	WebElement SRP_WileyProduct;
@@ -102,7 +103,7 @@ public class app_Wiley_Repo {
 	@FindBy(xpath = "//select[@class='cartItemBookQty']")
 	WebElement QuantityDropDown;
 
-	
+
 
 	@FindBy(xpath = "(//span[contains(text(),'Use')])[2]")
 	WebElement USEOptionForExistingAddress;
@@ -110,32 +111,32 @@ public class app_Wiley_Repo {
 	@FindBy(xpath = "((//div[contains(text(),'Total')])//following::div)[1]")
 	WebElement OrderTotalAmount;
 
-	
-	
-	
-	
+
+
+
+
 	@FindBy(xpath = "//button[@id='yesBtn']")
 	WebElement YesBtnForSchoolInfo;
-	
+
 	@FindBy(xpath = "//select[@id='region']")
 	WebElement StateDropDownForSchoolInfo;
-	
-	
+
+
 	@FindBy(xpath = "//select[@id='school']")
 	WebElement SchoolDropDown;
-	
+
 	/*
 	 * @Author:Vishnu
 	 */
-	
+
 	@FindBy(xpath = "//a[@href='/en-us/Job+Ready+Java-p-00099153']")
 	WebElement jobreadyjava;
-		
+
 	@FindBy(xpath = "//input[@id='number']")
 	WebElement CardNumber;
 
 
-	
+
 	/*
 	 * @FindBy(xpath = "//button[@id='placeOrder']") WebElement placeorder;
 	 */
@@ -143,11 +144,11 @@ public class app_Wiley_Repo {
 	WebElement EnterNewAddress;
 	@FindBy(xpath = "(//div[@class='orderConfirmationLabelVal textTransCap marginTop10'])[2]")
 	WebElement OrderId;
-	
-	
+
+
 	@FindBy(xpath = "(((//div[contains(text(),'Shipping')])[2])//following::div)[1]")
 	WebElement Shippingcharge;
-	
+
 	@FindBy(xpath = "(//input[@name='purchasedProduct'])[1]")
 	WebElement EbookRental;
 
@@ -159,22 +160,22 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath = "(//span[@class='typeOfProductSpan'])[4]")
 	WebElement SelectingTextbookRental;
-	
+
 	@FindBy(xpath = "//span[@id='promoCodeLink']")
 	WebElement PromoCodeLink;
 
 	@FindBy(xpath = "//input[@id='js-voucher-code-text']")
 	WebElement EnterPromoCode;
-	
+
 	@FindBy(xpath = "//span[@class='cartDiscountBtnText']")
 	WebElement ApplyPromoButton;
-	
+
 
 
 	// Footer Page
 	@FindBy(xpath = "//span[contains(text(),'Site M')]")
 	WebElement SiteMap;
-	
+
 
 
 	@FindBy(xpath = "//span[contains(text(),'Rights & Permissions')]")
@@ -199,16 +200,16 @@ public class app_Wiley_Repo {
 	WebElement EducationalResources;
 	@FindBy(xpath = "//input[@id='searchbar']")
 	WebElement SearchbarHomepage;
-	
+
 	@FindBy(xpath = "(//a[@href='/about'])[2]")
 	WebElement AboutWiley;
-	
+
 	@FindBy(xpath = "//a[contains(text(),'PRODUCTS')]")
 	WebElement PlpProducts;
 
 	@FindBy(xpath = "//a[contains(text(),'CONTENT')]")
 	WebElement PlpContectText;
-	
+
 	@FindBy(xpath="(//div[@class='facet-list facets-panel-list js-facet-list '])[3]//span[@class='facet-text']")
 	WebElement Facettext;
 
@@ -216,7 +217,7 @@ public class app_Wiley_Repo {
 	WebElement VetConsultText;
 	@FindBy(xpath = "//span[@class='glyphicon glyphicon-chevron-right']")
 	WebElement ClickingOnVetSoultIcon;
-	
+
 	@FindBy(xpath = "(//a[contains(text(),'Shop')])[2]")
 	WebElement ShopLinkCLPPage;
 
@@ -234,22 +235,22 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath = "//div[@class='content cke-content']/h1[contains(text(),'Page')]")
 	WebElement PagenotFoundErrortext;
-	
+
 	@FindBy(xpath = "//a[@href='/']/img[@class='brand-logo']")
 	WebElement HomePageLogo;
-	
+
 	@FindBy(xpath = "//a[@class='see-all-results']")
 	WebElement SearchAllResults;
-	
-   //Anindita
-	
+
+	//Anindita
+
 	@FindBy(xpath = "//input[@id='searchbar']")
 	WebElement HomePageSearchBar;
 	@FindBy(xpath = "//input[@id='search-bar']")
 	WebElement CartPageSearchBar;
 	@FindBy(xpath = "//i[@class='wl-search-bar__icon']")
 	WebElement SearchBarIconHomePage;
-	
+
 	@FindBy(xpath="//button[text()='Add to cart']")
 	WebElement AddToCartButton;
 	@FindBy(xpath="//div[@class='productButtonGroupName' and text()='Print']")
@@ -271,26 +272,26 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath="//input[@id='nameOnCard']")
 	WebElement CardHolderName;
-	
-	
-	
+
+
+
 	@FindBy(xpath="//input[@id='firstName']")
 	WebElement AddressFirstName;
 	@FindBy(xpath="//input[@id='lastName']")
 	WebElement AddressLastName;
-	
-	
+
+
 	@FindBy(xpath="//input[@id='street1']")
 	WebElement BillingAddressLine1;
 	@FindBy(xpath="//input[@id='city']")
 	WebElement CityBilling;
-	
+
 
 	@FindBy(xpath="//input[@id='postalCode']")
 	WebElement BillingZipCode;
 	@FindBy(xpath="//input[@id='phoneNumber']")
 	WebElement BillingPhoneNumber;
-	
+
 	@FindBy(xpath="(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
 	WebElement UseSelectedBillingAddressButtonAddressDoctorPopUp;
 	/*
@@ -298,186 +299,198 @@ public class app_Wiley_Repo {
 	 */
 	@FindBy(xpath="//span[text()='Thank you for your Order']")
 	WebElement ThankYouText;
-	
+
 	@FindBy(xpath="(//div[contains(text(),'Taxes')]//following::div)[1] ")
 	WebElement TotalTax;
 	@FindBy(xpath="//button[@class='btn btn-basic checkout-as-guest-btn width488 wileyCommonBtn guestCreateAccountBtn submitWelForm']")
 	WebElement ContinueAsGuestButton;
 	@FindBy(xpath="//input[@id='line1']")
 	WebElement ShippingAddressLine1;
-	
-	
+
+
 	@FindBy(xpath="//input[@id='phone']")
 	WebElement ShippingPhoneNumber;
-	
+
 	@FindBy(xpath="(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
 	WebElement UseSelectedShippingAddressButtonAddressDoctorPopUp;
-	
+
 	@FindBy(xpath="//label[@id='termsCondsCheckbox']")
 	WebElement TermsAndConditionCheckBox;
-	
+
 	@FindBy(xpath="(//div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[2]")
 	WebElement TaxInOrderReview;
-	
+
 	@FindBy(xpath="(//span[@class='glyphicon glyphicon-pencil editIcon'])[2]")
 	WebElement EditButtonInBilling;
-	
+
 	@FindBy(xpath="//div[@class='modal-content']")
 	WebElement CountryRestrictionModal;
-	
+
 	@FindBy(xpath="(//span[@id='deliveryMethodMessage'])[2]/div/h5")
 	WebElement PODMessage;
-	
+
 	@FindBy(xpath="//div[@class='applied-facets']/div[@class='facets-panel-item']/span[text()='RGuroo']")
 	WebElement RGurooFacet;
-	
+
 	@FindBy(xpath="//div[@id='billingMultiPaymentTitle']")
 	WebElement PaymentMethodText;
-	
+
 	@FindBy(xpath="//a[@id='shoppingCartIcon']")
 	WebElement ShoppingCartIconUAT3;
-	
+
 	@FindBy(xpath="//h5[@id='shippingAddressTitle']/span[text()='Shipping Address']")
 	WebElement ShippingStepText;
-	
+
 	@FindBy(xpath="//ul[@class='menu']/li[@class='nav-btn']/a[text()='Shop ']")
 	WebElement ShopLinkInCartPageHeader;
-	
+
 	@FindBy(xpath="//ul[@class='menu']/li[@class='nav-btn']/a[text()='Research Libraries ']")
 	WebElement ResearchLibrariesLinkInCartPageHeader;
-	
+
 	@FindBy(xpath="//ul[@class='menu']/li[@class='nav-btn']/a[text()='Publishing Services ']")
 	WebElement PublishingServicesLinkInCartPageHeader;
-	
+
 	@FindBy(xpath="//ul[@class='menu']/li[@class='nav-btn']/a[text()='Professional Development ']")
 	WebElement ProfessionalDevelopmentLinkInCartPageHeader;
-	
+
 	@FindBy(xpath="//div[@class='cart header-icon']")
 	WebElement CartIcon;
-	
+
 	@FindBy(xpath="//span[@id='cart-total-badge']")
 	WebElement CartItemQuantity;
-	
+
 	@FindBy(xpath="//ul[@id='breadcrumbStyle']")
 	WebElement BreadCrumbCartPage;
-	
+
 	@FindBy(xpath="//div/i[text()='Shipping and Tax will be calculated during checkout']")
 	WebElement TextInOrderSummaryTab;
-	
+
 	@FindBy(xpath="//span[text()='We require an address on file to create your account and place your order']")
 	WebElement TextInZeroDollarFlow;
-	
+
 	@FindBy(xpath="(//span[text()='Next Available Date: '])[1]")
 	WebElement NextAvailabilityDateForPreorderProductInCartPage;
-	
+
 	@FindBy(xpath="(//span[text()='Next Available Date: '])[2]")
 	WebElement NextAvailabilityDateForBackorderProductInCartPage;
-	
+
 	@FindBy(xpath="(//div[@class='outOfStockErrMsgDesc'])[1]")
 	WebElement PreOrderNotificationMessageInCartPage;
-	
+
 	@FindBy(xpath="(//div[@class='outOfStockErrMsgDesc'])[2]")
 	WebElement BackOrderNotificationMessageInCartPage;
-	
+
 	@FindBy(xpath="(//div[text()='Next Available Date: '])[1]/following-sibling::div")
 	WebElement PreOrderNextAvailabilityDateOrderReview;
-	
+
 	@FindBy(xpath="(//div[text()='Next Available Date: '])[2]/following-sibling::div")
 	WebElement BackOrderNextAvailabilityDateOrderReview;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Pre-order. ')]")
 	WebElement PreOrderBlueTextInOrderConfirmation;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Back-order. ')]")
 	WebElement BackOrderBlueTextInOrderConfirmation;
-	
+
 	@FindBy(xpath="//span[text()='Pre-order. ']/ancestor::div[@class='col-md-9 col-xs-12 noPadding orderReviewDetailsLabel']")
 	WebElement PreOrderDateTextOrderConfirmation;
-	
+
 	@FindBy(xpath="//span[text()='Back-order. ']/ancestor::div[@class='col-md-9 col-xs-12 noPadding orderReviewDetailsLabel']")
 	WebElement BackOrderDateTextOrderConfirmation;
-	
+
 	@FindBy(xpath="//a[@class='icon-print']/span[@class='glyphicon glyphicon-print']")
 	WebElement PrintRecieptIconInOrderConfirmation;
-	
+
 	@FindBy(xpath="(//a[@id='loginForgotPasswordLink'])[2]")
 	WebElement ForgotPasswordLink;
-	
+
 	@FindBy(xpath="//input[@id='login.email']")
 	WebElement EmailIdFieldInForgotPassword;
-	
+
 	@FindBy(xpath="//button[@id='wiley-forgotPasswordSubmitBtn']")
 	WebElement SubmitButtonInForgotPassword;
-	
+
 	@FindBy(xpath="//h2[text()='Password reset instructions have been sent to your e-mail address. Please contact customer support if you require additional assistance.']")
 	WebElement ResetPasswordInstructions;
-	
+
 	@FindBy(xpath = "//input[@placeholder='Enter your inbox here']")
 	WebElement EnterEmailIdInYopmail;
-	
+
 	@FindBy(xpath = "//button[@title='Check Inbox @yopmail.com']")
 	WebElement clickOnCheckInboxButton;
-	
+
 	@FindBy(xpath="//div[@class='guestCreateAccountBtnDiv']/button/span[text()='Continue as Guest']")
 	WebElement GuestCheckoutButton;
-	
+
 	@FindBy(xpath="//span[text()='! An account already exists for this email address. Please log in.']")
 	WebElement ErrorMessageAfterEnteringExistingUserInCreateAccount;
-	
+
 	@FindBy(xpath="//form[@id='loginForm']/div[@class='form-cell has-error errorMessage']")
 	WebElement ErrorMessageAfterEnteringWrongPassword;
-	
+
 	@FindBy(xpath="//a/span[text()='Shop']")
 	WebElement ShopLinkInHomePageHeader;
-	
+
 	@FindBy(xpath="//a/span[text()='Research Libraries']")
 	WebElement ResearchLibrariesLinkInHomePageHeader;
-	
+
 	@FindBy(xpath="//a/span[text()='Publishing Services']")
 	WebElement PublishingServicesLinkInHomePageHeader;
-	
+
 	@FindBy(xpath="//a/span[text()='Professional Development']")
 	WebElement ProfessionalDevelopmentLinkInHomePageHeader;
-	
+
 	@FindBy(xpath="//a/i[@class='wl-util-nav__icon  wl-icon-cart']")
 	WebElement CartIconHomePage;
-	
+
 	@FindBy(xpath="//input[@id='updatePwd.pwd']")
 	WebElement NewPasswordFieldInResetPasswordPage;
-	
+
 	@FindBy(xpath="//input[@id='updatePwd.checkPwd']")
 	WebElement ConfirmPasswordFieldInResetPasswordPage;
-	
+
 	@FindBy(xpath="//button/span[text()='Submit']")
 	WebElement SubmitButtonInResetPasswordPage;
-	
+
 	@FindBy(xpath="//h3[contains(text(),'FORMAT')]")
 	WebElement FormatFacet;
-	
+
 	@FindBy(xpath="//span[contains(text(),'VetConsult')]")
 	WebElement VetConsultUnderFormatFacet;
-	
+
 	@FindBy(xpath="//h3[contains(text(),'SUBJECT')]")
 	WebElement SubjectFacet;
-	
+
 	@FindBy(xpath="//h3[contains(text(),'COURSE')]")
 	WebElement CourseFacet;
-	
+
 	@FindBy(xpath="//h3[contains(text(),'AUTHOR')]")
 	WebElement AuthorFacet;
-	
+
 	@FindBy(xpath="//h3[contains(text(),'PUBLISHED DATE')]")
 	WebElement PublishedDateFacet;
-	
+
 	@FindBy(xpath="//h3[contains(text(),'BRANDS')]")
 	WebElement BrandsFacet;
-	
+
 	@FindBy(xpath="//h3[contains(text(),'SERIES')]")
 	WebElement SeriesFacet;
-	
+
 	@FindBy(xpath="(//span[@class='search-highlight'])[1]")
 	WebElement HighlightedSearchedTerm;
+
+	@FindBy(xpath="//div[@class='wileyProductPriceFormate']")
+	WebElement PriceInSRP;
 	
+	@FindBy(xpath="//span[@class='item-price item-price-value']")
+	WebElement PriceInPDP;
+	
+	@FindBy(xpath="//a[contains(text(),'Request Digital Evaluation Copy')]")
+	WebElement RequestDigitalEvaluationCopyLink;
+	
+	@FindBy(xpath="//i[@aria-label='Purchase option description']")
+	WebElement GenericHoverInfo;
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters a data in search bar
@@ -528,7 +541,7 @@ public class app_Wiley_Repo {
 	 */
 	public void clickOnViewCartButton() throws IOException{
 		try {
-			
+
 			ViewCartButton.click();
 			Reporting.updateTestReport("View Cart Button was clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
@@ -567,7 +580,7 @@ public class app_Wiley_Repo {
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Email Id was not entered with the error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			
+
 		}
 	}
 	/*
@@ -582,11 +595,11 @@ public class app_Wiley_Repo {
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Password couldn't be entered with the error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			
+
 		}
 	}
-	
-	
+
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clears the Address line 1 field if anything is present and then Enters the new value in the billing address form
@@ -615,8 +628,8 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("City couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
-	
+
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clears the Zip code field if anything is present then Enters the value in the billing address form
@@ -685,12 +698,12 @@ public class app_Wiley_Repo {
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Error thrown while checking text in order confirmation",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
-		    return false;
+			return false;
 		}
-		
+
 	}
-	
-	
+
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the Order Total
@@ -727,16 +740,16 @@ public class app_Wiley_Repo {
 	 */
 	public void enterAddressLine1Shipping(String line1) throws IOException{
 		try {
-		    ShippingAddressLine1.clear();
-		    ShippingAddressLine1.sendKeys(line1);
+			ShippingAddressLine1.clear();
+			ShippingAddressLine1.sendKeys(line1);
 			Reporting.updateTestReport("Address line 1: "+line1+" was entered",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Address line 1 couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
-	
+
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clears the Phone number if anything is present and then Enters the new value in the shipping address form
@@ -751,8 +764,8 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Phone number couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
-	
+
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the Use Selected Address Button in Address Doctor PopUp
@@ -767,7 +780,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Logs out the user from wiley.com
@@ -782,7 +795,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Couldn't logout",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 
 	/*
 	 * @Author: Arun
@@ -803,7 +816,7 @@ public class app_Wiley_Repo {
 
 	}
 
-	
+
 
 
 	/*
@@ -824,7 +837,7 @@ public class app_Wiley_Repo {
 
 	}
 
-	
+
 	/*
 	 * @Author: Arun
 	 * 
@@ -851,7 +864,7 @@ public class app_Wiley_Repo {
 	 */
 	public void selectCountry(String country) throws IOException {
 		try {
-			
+
 			Select selExpirationMonth = new Select(SelectCountryDropDown);
 			selExpirationMonth.selectByVisibleText(country);
 			Reporting.updateTestReport("Country has been selected successfully by user",
@@ -862,9 +875,9 @@ public class app_Wiley_Repo {
 		}
 	}
 
-	
 
-	
+
+
 
 	/*
 	 * Author : Arun 
@@ -904,8 +917,8 @@ public class app_Wiley_Repo {
 	 */
 	public void enterState(String state) throws IOException {
 		try {
-			
-			
+
+
 			SelectStateDropDown.clear();
 			SelectStateDropDown.sendKeys(state);
 			SelectStateDropDown.sendKeys(Keys.ENTER);
@@ -917,7 +930,7 @@ public class app_Wiley_Repo {
 		}
 	}
 
-	
+
 
 	/*
 	 * Author : Arun 
@@ -951,7 +964,7 @@ public class app_Wiley_Repo {
 		}
 	}
 
-	
+
 
 	/*
 	 * Author : Arun 
@@ -1000,7 +1013,7 @@ public class app_Wiley_Repo {
 		}
 	}
 
-	
+
 
 
 	/*
@@ -1021,7 +1034,7 @@ public class app_Wiley_Repo {
 
 	}
 
-	
+
 
 	/*
 	 * @Author: Arun
@@ -1108,8 +1121,8 @@ public class app_Wiley_Repo {
 	}
 
 
-	
-	
+
+
 	/*
 	 * Author : Arun Description :
 	 * description : THis Method using for TaxAmount Fetching From Order Confirmation page
@@ -1125,9 +1138,9 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
-	
-	
+
+
+
 	/*
 	 * Author : Arun 
 	 * Description : Select School_Info During the checkout Flow 
@@ -1142,15 +1155,15 @@ public class app_Wiley_Repo {
 			Thread.sleep(2000);
 			Select selectSchoolName= new Select(SchoolDropDown);
 			selectSchoolName.selectByVisibleText(school_name);
-			
+
 			Reporting.updateTestReport("State has been selected successfully by user",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("User failed to select State " + e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
 
-	
+
+
 
 
 	/*
@@ -1169,7 +1182,7 @@ public class app_Wiley_Repo {
 		}
 	}
 
-	
+
 
 	/*
 	 * @Author:Vishnu 
@@ -1206,9 +1219,9 @@ public class app_Wiley_Repo {
 
 
 	/*
-     * @Author:Vishnu
-     * @Description:This method is used to enter the NewAddress
-     */
+	 * @Author:Vishnu
+	 * @Description:This method is used to enter the NewAddress
+	 */
 	public void clickOnEnterNewAddress() throws IOException {
 		try {
 			EnterNewAddress.click();
@@ -1222,9 +1235,9 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-     * @Author:Vishnu
-     * @Description:This method is used fetching the OrderId
-     */
+	 * @Author:Vishnu
+	 * @Description:This method is used fetching the OrderId
+	 */
 	public String fetchOrderId() throws IOException {
 		try {
 			String id = OrderId.getText();
@@ -1240,9 +1253,9 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-     * @Author:Vishnu
-     * @Description:This method is used performing the operation for user logout
-     */
+	 * @Author:Vishnu
+	 * @Description:This method is used performing the operation for user logout
+	 */
 	public void logOut() throws IOException {
 		try {
 			WebDriver driver = DriverModule.getWebDriver();
@@ -1255,13 +1268,13 @@ public class app_Wiley_Repo {
 		}
 	}
 
-	
-	
+
+
 
 	/*
-     * @Author:Vishnu
-     * @Description: This method is to return the ShippingCharge
-     */
+	 * @Author:Vishnu
+	 * @Description: This method is to return the ShippingCharge
+	 */
 	public String fetchShippingCharge() throws IOException {
 		try {
 			String shpcharge = Shippingcharge.getText();
@@ -1277,7 +1290,7 @@ public class app_Wiley_Repo {
 		return "";
 	}
 
-	 
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Returns the Billing address doctor pop up button 
@@ -1308,7 +1321,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Print tab couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	public void ebookRentalProduct() throws IOException {
 		try {
 			EbookRental.click();
@@ -1321,7 +1334,7 @@ public class app_Wiley_Repo {
 		}
 
 	}
-	
+
 	public void clickOnPromotionCodelink() throws IOException {
 		try {
 			PromoCodeLink.click();
@@ -1356,7 +1369,7 @@ public class app_Wiley_Repo {
 					StatusDetails.FAIL);
 		}
 	}
-	
+
 	public void selectingSchoolInfo() throws IOException {
 		try {
 			SchoolInfo.click();
@@ -1368,7 +1381,7 @@ public class app_Wiley_Repo {
 
 		}
 	}
-	
+
 	public void SelectingTextBoolRental() throws IOException{
 		try {
 			SelectingTextbookRental.click();
@@ -1378,8 +1391,8 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Failed to select the textbook Rental product", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.FAIL);
 		}
-	
-}
+
+	}
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the rentalk terms and conditions checkbox
@@ -1412,10 +1425,10 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Tax couldn't be fetched in order review step ", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.FAIL);
 			return "";
-			
+
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the edit button in billing section
@@ -1432,7 +1445,7 @@ public class app_Wiley_Repo {
 					StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * 
 	 * @Author:Anindita
@@ -1457,7 +1470,7 @@ public class app_Wiley_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks and fetches the message in shipping methods for POD Products
@@ -1469,7 +1482,7 @@ public class app_Wiley_Repo {
 				String text=PODMessage.getText();
 				Reporting.updateTestReport("Shipping method related message was displayed: "+text, CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.PASS);
-				
+
 			}
 			else Reporting.updateTestReport("Shipping method related message was not displayed: ", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.FAIL);
@@ -1479,7 +1492,7 @@ public class app_Wiley_Repo {
 					StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if RGuroo has been applied in facet
@@ -1497,7 +1510,7 @@ public class app_Wiley_Repo {
 					StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks whether user is on payment page
@@ -1512,10 +1525,10 @@ public class app_Wiley_Repo {
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("User is not in payment page", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			
+
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the cart icon so that user gets redirected to cart page
@@ -1546,7 +1559,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("User is not in shipping step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Shop link is present in cart page
@@ -1563,7 +1576,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Shop Link In Cart Page Header is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Research Libraries link is present in cart page
@@ -1580,7 +1593,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Research Libraries Link In Cart Page Header is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Publishing Services link is present in cart page
@@ -1597,7 +1610,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Publishing Services Link In Cart Page Header is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Publishing Services link is present in cart page
@@ -1614,7 +1627,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Professional Development Link In Cart Page Header is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if CartIcon link is present in cart page
@@ -1631,7 +1644,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("CartIcon Link In Cart Page Header is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Cart Item Quantity is present in cart page
@@ -1640,7 +1653,7 @@ public class app_Wiley_Repo {
 	public String checkCartItemQuantity() throws IOException{
 		try {
 			if(CartItemQuantity.isDisplayed()) 
-				{Reporting.updateTestReport("Cart Item Quantity: "+ CartItemQuantity.getText()+" In Cart Page Header is present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			{Reporting.updateTestReport("Cart Item Quantity: "+ CartItemQuantity.getText()+" In Cart Page Header is present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return CartItemQuantity.getText();}
 			else {
 				Reporting.updateTestReport("Cart Item Quantity In Cart Page Header is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -1651,9 +1664,9 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Cart Item Quantity In Cart Page Header is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return "";
 		}
-		
+
 	}
-	
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if BreadCrumb is present in cart page
@@ -1665,16 +1678,16 @@ public class app_Wiley_Repo {
 				Reporting.updateTestReport("BreadCrumb In Cart Page Header is present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				return true;}
 			else 
-				{Reporting.updateTestReport("BreadCrumb In Cart Page Header is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				return false;}
-				
+			{Reporting.updateTestReport("BreadCrumb In Cart Page Header is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return false;}
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("BreadCrumb In Cart Page Header is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Text In Order Summary Tab In Cart Page
@@ -1691,7 +1704,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Text In Order Summary Tab In Cart Page is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Concatenates the parts of URL (devmonkey part, storerfront url with env and the rest of the part specific to some products)
@@ -1704,14 +1717,14 @@ public class app_Wiley_Repo {
 			String pdp=excelOperation.getTestData(testCaseNumber, sheetName,field);
 			//Reporting.updateTestReport("Concatenated url was returned as: "+userNamePassword+envURL+pdp, CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return "https://"+userNamePassword+"@"+envURL+"/"+pdp;
-			
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Concatenated url was returned", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the address information related text is present or not for zero dollar flow
@@ -1727,7 +1740,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Text related to address information step was not present for zero dollar flow", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the next availability date for first added pre-order product in cart page
@@ -1737,12 +1750,12 @@ public class app_Wiley_Repo {
 		try {
 			if(NextAvailabilityDateForPreorderProductInCartPage.isDisplayed()) 
 				Reporting.updateTestReport("Nextavailability date was present for pre-order product", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				//Reporting.updateTestReport("Next Availibility date is present for pre-order product as: "+driver.findElement(By.xpath("(//span[@class='cart-item-info-val'])[2]")).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			//Reporting.updateTestReport("Next Availibility date is present for pre-order product as: "+driver.findElement(By.xpath("(//span[@class='cart-item-info-val'])[2]")).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("NextAvailibilityDate was not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
-		
+
 	}
 	/*
 	 * @Author: Anindita
@@ -1753,14 +1766,14 @@ public class app_Wiley_Repo {
 		try {
 			if(NextAvailabilityDateForBackorderProductInCartPage.isDisplayed()) 
 				Reporting.updateTestReport("Nextavailability date was present for backorder product", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				//Reporting.updateTestReport("Next Availibility date is present for back-order product as: "+driver.findElement(By.xpath("(//span[@class='cart-item-info-val'])[4]")).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			//Reporting.updateTestReport("Next Availibility date is present for back-order product as: "+driver.findElement(By.xpath("(//span[@class='cart-item-info-val'])[4]")).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("NextAvailibilityDate was not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
-		
+
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the notification message for first added pre-order product in cart page
@@ -1774,9 +1787,9 @@ public class app_Wiley_Repo {
 		catch(Exception e) {
 			Reporting.updateTestReport("notification message was not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
-		
+
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the notification message for first added back-order product in cart page
@@ -1790,9 +1803,9 @@ public class app_Wiley_Repo {
 		catch(Exception e) {
 			Reporting.updateTestReport("notification message was not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
-		
+
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the next availability date for second added pre-order product in Order review page
@@ -1802,14 +1815,14 @@ public class app_Wiley_Repo {
 		try {
 			if(PreOrderNextAvailabilityDateOrderReview.isDisplayed()) 
 				Reporting.updateTestReport("Nextavailability date was present for preorder product"+PreOrderNextAvailabilityDateOrderReview.getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				//Reporting.updateTestReport("Next Availibility date is present for back-order product as: "+driver.findElement(By.xpath("(//span[@class='cart-item-info-val'])[4]")).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			//Reporting.updateTestReport("Next Availibility date is present for back-order product as: "+driver.findElement(By.xpath("(//span[@class='cart-item-info-val'])[4]")).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("NextAvailibilityDate was not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
-		
+
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the next availability date for second added back-order product in Order review page
@@ -1819,14 +1832,14 @@ public class app_Wiley_Repo {
 		try {
 			if(BackOrderNextAvailabilityDateOrderReview.isDisplayed()) 
 				Reporting.updateTestReport("Nextavailability date was present for backorder product"+BackOrderNextAvailabilityDateOrderReview.getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				//Reporting.updateTestReport("Next Availibility date is present for back-order product as: "+driver.findElement(By.xpath("(//span[@class='cart-item-info-val'])[4]")).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			//Reporting.updateTestReport("Next Availibility date is present for back-order product as: "+driver.findElement(By.xpath("(//span[@class='cart-item-info-val'])[4]")).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("NextAvailibilityDate was not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
-		
+
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the blue pre-order text and the date for second added back-order product in Order review page
@@ -1836,16 +1849,16 @@ public class app_Wiley_Repo {
 		try {
 			if(PreOrderBlueTextInOrderConfirmation.isDisplayed()) {
 				Reporting.updateTestReport("Blue preorder text was present for backorder product", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			    Reporting.updateTestReport("The complete line with next availability date is: "+PreOrderDateTextOrderConfirmation.getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				Reporting.updateTestReport("The complete line with next availability date is: "+PreOrderDateTextOrderConfirmation.getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			}
-		
-			}
+
+		}
 		catch(Exception e) {
 			Reporting.updateTestReport("The complete line with next availability date was not present in order confirmation page", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
-		
+
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the blue back-order text and the date for second added back-order product in Order review page
@@ -1855,16 +1868,16 @@ public class app_Wiley_Repo {
 		try {
 			if(BackOrderBlueTextInOrderConfirmation.isDisplayed()) {
 				Reporting.updateTestReport("Blue backorder text was present for backorder product", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			    Reporting.updateTestReport("The complete line with next availability date is: "+BackOrderDateTextOrderConfirmation.getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				Reporting.updateTestReport("The complete line with next availability date is: "+BackOrderDateTextOrderConfirmation.getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			}
-		
-			}
+
+		}
 		catch(Exception e) {
 			Reporting.updateTestReport("The complete line with next availability date was not present in order confirmation page", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
-		
+
 	}
-	
+
 	/*
 	 * Author:Anindita
 	 * @Description: Checks on the print receipt link in order confirmation page
@@ -1874,7 +1887,7 @@ public class app_Wiley_Repo {
 		try {
 			if(PrintRecieptIconInOrderConfirmation.isDisplayed()) 
 			{
-				
+
 				Reporting.updateTestReport("The print reciept icon was present in the order confirmation page", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			}
 			else Reporting.updateTestReport("The print reciept icon was not present in the order confirmation page", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -1883,7 +1896,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("The print reciept icon was not present in the order confirmation page", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on forgot password link in the login checkout page
@@ -1898,7 +1911,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("forgot password link couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path) , StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters one existing user id in for receiving the reset password mail
@@ -1913,7 +1926,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Mail id couldn't be entered for recieving reset password mail", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 
 	/*
 	 * @Author: Anindita
@@ -1929,7 +1942,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Submit button couldn't be clicked for recieving reset password mail", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the password reset instructions get displayed or not
@@ -1949,7 +1962,7 @@ public class app_Wiley_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters the email id in Yopmail
@@ -1966,7 +1979,7 @@ public class app_Wiley_Repo {
 		}
 
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on check inbox in yopmail after entering user id
@@ -1983,7 +1996,7 @@ public class app_Wiley_Repo {
 					StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author:Vishnu
 	 * 
@@ -2016,22 +2029,22 @@ public class app_Wiley_Repo {
 
 	public void checkSiteMaponfooter() throws IOException {
 		try {
-			
+
 			if (SiteMap.isDisplayed()) 
-				
+
 				Reporting.updateTestReport("sitemaps in footer is present",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			
+
 			else 
 				Reporting.updateTestReport("sitemaps in footer is not present",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			
+
 		} catch (Exception e) {
 			Reporting.updateTestReport("sitemaps in footer is not present",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author:Vishnu
 	 * 
@@ -2043,8 +2056,8 @@ public class app_Wiley_Repo {
 		try {
 			SitemapPdpPage.click();
 			Reporting.updateTestReport("sitemaps link is clicked successfully",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
 		} catch (Exception e) {
 			Reporting.updateTestReport("Failed to click on sitemaps link",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -2052,7 +2065,7 @@ public class app_Wiley_Repo {
 	}
 
 
-	
+
 
 	/*
 	 * @Author:Vishnu
@@ -2104,7 +2117,7 @@ public class app_Wiley_Repo {
 	 * 
 	 * @Date: 15/11/22
 	 */
-	
+
 	public void checkRighrtAndPermissonsononpdppage() throws IOException {
 		try {
 			if (PermissionsonPdpPage.isDisplayed())
@@ -2199,7 +2212,7 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Vishnu
 	 * 
@@ -2218,7 +2231,7 @@ public class app_Wiley_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Logs out the user from wiley.com inside the exception block
@@ -2227,13 +2240,13 @@ public class app_Wiley_Repo {
 		try {
 			WebDriver driver=DriverModule.getWebDriver();
 			driver.get(excelOperation.getTestData("WILEY_LogOut_URL", "Generic_Dataset", "Data"));
-			
+
 		}
 		catch(Exception e) {
-		    System.out.println("Log out was unsuccessful in exception"+e.getMessage());
+			System.out.println("Log out was unsuccessful in exception"+e.getMessage());
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the Guest checkout button is present or not
@@ -2242,11 +2255,11 @@ public class app_Wiley_Repo {
 	public boolean checkIfGuestCheckoutButtonIsPresent() throws IOException{
 		try {
 			if(GuestCheckoutButton.isDisplayed()) {
-				
+
 				return true;
 			}
 			else {
-				
+
 				return false;
 			}
 		}
@@ -2254,7 +2267,7 @@ public class app_Wiley_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the cart icon in header
@@ -2269,7 +2282,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Cart Icon was not clicked ", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters the email id in Create account form (It is not auto generating mail id)
@@ -2277,17 +2290,17 @@ public class app_Wiley_Repo {
 	 */
 	public void enterEmailIdInCreateAccountFormNotAutoGenerated(String emailId) throws IOException {
 		try {
-			
+
 			EmailIdInCreateAccount.sendKeys(emailId);
 			Reporting.updateTestReport("Email Id: "+emailId+" was entered successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			
+
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Email Id was not entered with the error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			
+
 		}
 	}
-	
+
 	/*
 	 * Author: Anindita
 	 * @Description: Validates the error message after entering an existing user in create account form
@@ -2297,17 +2310,17 @@ public class app_Wiley_Repo {
 		try {
 			if (ErrorMessageAfterEnteringExistingUserInCreateAccount.isDisplayed())
 				Reporting.updateTestReport("Error message was displayed after entering existing user in  create account form",
-                                   CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else
 				Reporting.updateTestReport("Error message was not displayed after entering existing user in  create account form",
-                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Error message was not displayed after entering existing user in  create account form",
-                    CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * Author: Anindita
 	 * @Description: Validates the error message after entering an wrong password for one user in login form
@@ -2317,17 +2330,17 @@ public class app_Wiley_Repo {
 		try {
 			if (ErrorMessageAfterEnteringWrongPassword.isDisplayed())
 				Reporting.updateTestReport("Error message was displayed after entering wrong password in  login form",
-                                   CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else
 				Reporting.updateTestReport("Error message was not displayed after entering wrong password in  login form",
-                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Error message was not displayed after entering wrong password in  login form",
-                    CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Shop link is present in Home page
@@ -2344,7 +2357,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Shop Link In Home Page Header is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Research Libraries link is present in home page
@@ -2361,7 +2374,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Research Libraries Link In Home Page Header is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Publishing Services link is present in home page
@@ -2378,7 +2391,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Publishing Services Link In Home Page Header is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Publishing Services link is present in Home page
@@ -2395,7 +2408,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Professional Development Link In Home Page Header is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if CartIcon link is present in Home page
@@ -2412,7 +2425,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("CartIcon Link In Home Page Header is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * Author: Anindita
 	 * @Description: Enters the new password in reset password page
@@ -2429,7 +2442,7 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * Author: Anindita
 	 * @Description: Confirms the  password in reset password page
@@ -2446,7 +2459,7 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * Author: Anindita
 	 * @Description: Enters the new password in reset password page
@@ -2463,7 +2476,7 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Vishnu
 	 * 
@@ -2482,7 +2495,7 @@ public class app_Wiley_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author:Vishnu
 	 * 
@@ -2491,7 +2504,7 @@ public class app_Wiley_Repo {
 
 	public String PlpProductText() throws IOException {
 		try {
-			
+
 			String plpproducts = PlpProducts.getText();
 			Reporting.updateTestReport("Products landing page was successfully loaded",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -2521,7 +2534,7 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author:Vishnu
 	 * 
@@ -2560,7 +2573,7 @@ public class app_Wiley_Repo {
 		}
 	}
 
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the format facet
@@ -2577,7 +2590,7 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if VetConsult is present under format facet
@@ -2602,7 +2615,7 @@ public class app_Wiley_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the VetConsult format under facet
@@ -2619,7 +2632,7 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if after searching a term, in the search result, the product names are highlighted with the searched term
@@ -2627,8 +2640,8 @@ public class app_Wiley_Repo {
 	 */
 	public Boolean checkProductsWithHighlightedSearchedTerm(String text) throws IOException{
 		try {
-			
-			
+
+
 			if(HighlightedSearchedTerm.isDisplayed()) {
 				Reporting.updateTestReport("Products With Highlighted Searched Term was present",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -2646,7 +2659,7 @@ public class app_Wiley_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if Subject is present under  facet
@@ -2671,7 +2684,7 @@ public class app_Wiley_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if Course is present under  facet
@@ -2696,7 +2709,7 @@ public class app_Wiley_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if Author is present under  facet
@@ -2721,7 +2734,7 @@ public class app_Wiley_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if Format is present under  facet
@@ -2746,7 +2759,7 @@ public class app_Wiley_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if PublishedDate is present under  facet
@@ -2771,7 +2784,7 @@ public class app_Wiley_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if Brands is present under  facet
@@ -2796,7 +2809,7 @@ public class app_Wiley_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if Series is present under  facet
@@ -2821,7 +2834,7 @@ public class app_Wiley_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Vishnu
 	 * 
@@ -2839,7 +2852,7 @@ public class app_Wiley_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author:Vishnu
 	 * 
@@ -2858,7 +2871,7 @@ public class app_Wiley_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author:Vishnu
 	 * 
@@ -2877,8 +2890,8 @@ public class app_Wiley_Repo {
 
 		}
 	}
-	
-	
+
+
 	/*
 	 * @Author:Vishnu
 	 * 
@@ -2899,8 +2912,8 @@ public class app_Wiley_Repo {
 
 		}
 
-	
-}
+
+	}
 	/*
 	 * @Author:Vishnu
 	 * 
@@ -2918,7 +2931,7 @@ public class app_Wiley_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author:Vishnu
 	 * 
@@ -2938,7 +2951,7 @@ public class app_Wiley_Repo {
 		}
 
 	}
-	
+
 	/*
 	 * @Author: Vishnu
 	 * 
@@ -2955,7 +2968,7 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author:Vishnu
 	 * 
@@ -2974,7 +2987,7 @@ public class app_Wiley_Repo {
 		}
 
 	}
-	
+
 	/*
 	 * @Author:Vishnu
 	 * 
@@ -2994,6 +3007,128 @@ public class app_Wiley_Repo {
 
 	}
 
+	/*
+	 * @Date: 6/2/23
+	 * @Author: Anindita
+	 * @Description: Validates that the price for vetconsult standalone is not present in SRP
+	 */
+	public void checkPriceInSRPForVetConsult() throws IOException{
+		try {
+
+			String price=PriceInSRP.getText();
+			if(price.equalsIgnoreCase(""))
+				Reporting.updateTestReport("Price for VetConsult standalone product was not present in SRP as expected",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport("Price for VetConsult standalone product was present in SRP: "+price,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Price for VetConsult standalone product was not present in SRP as expected",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+	}
+	
+	/*
+	 * @Date: 6/2/23
+	 * @Author: Anindita
+	 * @Description: Validates that the price for vetconsult standalone is not present in PDP
+	 */
+	public void checkPriceInPDPForVetConsult() throws IOException{
+		try {
+
+			String price=PriceInPDP.getText();
+			if(price.equalsIgnoreCase(""))
+				Reporting.updateTestReport("Price for VetConsult standalone product was not present in PDP as expected",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport("Price for VetConsult standalone product was present in PDP: "+price,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Price for VetConsult standalone product was not present in PDP as expected",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Concatenates the parts of URL (devmonkey part, storerfront url with env and the rest of the part specific to regions)
+	 * @Date: 10/11/22
+	 */
+	public String wileyURLConcatenationwithRegions(String region, String pdpURL) throws IOException{
+		try {
+			String userNamePassword=excelOperation.getTestData("WILEY_Username_Password", "Generic_Dataset", "Data");
+			String envURL="uat.store.wiley.com/en-"+region;
+			Reporting.updateTestReport("Concatenated url was returned as: "+
+					"https://"+userNamePassword+"@"+envURL+"/"+pdpURL, CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return "https://"+userNamePassword+"@"+envURL+"/"+pdpURL;
+
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Concatenated url couldn't be returned", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Date: 6/2/23
+	 * @Description: Clicks on the the Request digital evaluation copy link
+	 */
+	public void clickOnRequestDigitalEvaluationCopyLink() throws IOException{
+		try {
+			RequestDigitalEvaluationCopyLink.click();
+			Reporting.updateTestReport("Request digital evaluation copy link was successfully clicked in PDP",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Request digital evaluation copy link couldn't be clicked in PDP",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Date:6/2/23
+	 * @Description: Returns the hyperlink for the Request Digital Evaluation copy
+	 */
+	public String fetchHyperlinkForRequestDigitalEvaluationCopy() throws IOException{
+		try {
+			String hyperlink=RequestDigitalEvaluationCopyLink.getAttribute("href");
+			Reporting.updateTestReport("Request digital evaluation copy hyperlink was returned successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return hyperlink;
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Request digital evaluation copy hyperlink couldn't be fetched",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Date:6/2/23
+	 * @Author: Anindita
+	 * @Description: Returns the text shown in the first point upon hovering the generic info for E-Book
+	 */
+	public String fetchGenericHoverInfo(WebDriver driver) throws IOException{
+		try {
+			Actions action = new Actions(driver);
+			action.moveToElement(GenericHoverInfo).perform();
+			Thread.sleep(2000);
+			String A=GenericHoverInfo.getAttribute("data-content").split("<ul>")[1];
+			String B=A.split("<li>")[1].trim();
+			Reporting.updateTestReport("The first line of generic hover info: "+B+" was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return B;
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The first line of generic hover info couldn't be returned"+e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
 
 }
 

@@ -8,8 +8,8 @@
       <class name="Test_Suite.WEL_Test_Suite">
       <methods>
 		 
-        <include name="TC75_.*" />
-        <include name="TC79_.*" />
+        <include name="TC05_.*" />
+        <include name="TC06_.*" />
         
         
         
