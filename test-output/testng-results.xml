@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="36" total="37" passed="1" failed="0" skipped="0">
+<testng-results ignored="62" total="63" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-02-06T20:41:49 IST" name="Default suite" finished-at="2023-02-06T20:43:10 IST" duration-ms="80507">
+  <suite started-at="2023-02-07T19:28:05 IST" name="Default suite" finished-at="2023-02-07T19:32:11 IST" duration-ms="245887">
     <groups>
     </groups>
-    <test started-at="2023-02-06T20:41:49 IST" name="Default test" finished-at="2023-02-06T20:43:10 IST" duration-ms="80507">
-      <class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@5b247367]" started-at="2023-02-06T20:41:49 IST" name="initiate" finished-at="2023-02-06T20:41:58 IST" duration-ms="8014" status="PASS">
+    <test started-at="2023-02-07T19:28:05 IST" name="Default test" finished-at="2023-02-07T19:32:11 IST" duration-ms="245887">
+      <class name="Test_Suite.WEL_Test_Suite">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.WEL_Test_Suite@1033576a]" started-at="2023-02-07T19:28:05 IST" name="initiate" finished-at="2023-02-07T19:28:11 IST" duration-ms="5880" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@1e00bfe2]]>
+                <![CDATA[org.testng.TestRunner@4d4c1ba9]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@5b247367]" started-at="2023-02-06T20:41:58 IST" name="launchBrowser" finished-at="2023-02-06T20:41:58 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="82" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.WEL_Test_Suite@1033576a]" started-at="2023-02-07T19:28:11 IST" name="initializeRepo" finished-at="2023-02-07T19:28:11 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="70" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- launchBrowser -->
-        <test-method signature="TC37_Generic_info_hover_text_EBook_PDP()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@5b247367]" started-at="2023-02-06T20:41:58 IST" name="TC37_Generic_info_hover_text_EBook_PDP" finished-at="2023-02-06T20:43:07 IST" duration-ms="69292" status="PASS">
+        </test-method> <!-- initializeRepo -->
+        <test-method signature="TC22_PlaceOrder_CPACMACFA_FreeTrailFor_ExistingUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@1033576a]" started-at="2023-02-07T19:28:11 IST" name="TC22_PlaceOrder_CPACMACFA_FreeTrailFor_ExistingUser" finished-at="2023-02-07T19:32:09 IST" duration-ms="238190" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC37_Generic_info_hover_text_EBook_PDP -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@5b247367]" started-at="2023-02-06T20:43:07 IST" name="CloseBrowser" finished-at="2023-02-06T20:43:10 IST" duration-ms="2989" status="PASS">
+        </test-method> <!-- TC22_PlaceOrder_CPACMACFA_FreeTrailFor_ExistingUser -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.WEL_Test_Suite@1033576a]" started-at="2023-02-07T19:32:09 IST" name="CloseBrowser" finished-at="2023-02-07T19:32:11 IST" duration-ms="1685" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
-      </class> <!-- Test_Suite.Wiley_NA_Cart_Test_Suite -->
+      </class> <!-- Test_Suite.WEL_Test_Suite -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

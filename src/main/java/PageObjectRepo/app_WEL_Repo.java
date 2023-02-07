@@ -230,7 +230,7 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//div[@class='container-fluid course-pkg-background']//div[@class='card-footer bg-transparent course-pkg-cards-footer'])[2]//button")
 	WebElement CFAViewCourse;
 
-	@FindBy(xpath = "//div[@class='comparison-table-title-container header-sticky']//div[2]/a")
+	@FindBy(xpath = "//a[@href='/cfa/products/level-2/']/button")
 	WebElement CFAViewCoursePage;
 
 	@FindBy(xpath = "(//div[@class='btn-group btn-group-toggle'])/label[2]")
@@ -574,6 +574,33 @@ public class app_WEL_Repo {
 	
 	@FindBy(xpath="//div[contains(text(),'Next Day Shipping - ')]")
 	WebElement NextDayShipping;
+	
+	@FindBy(xpath = "(//div[@class='col dropdown-item product-dropdown-desktop-item item2']/ul/li/a)[1]")
+	WebElement CPASupplements;
+	
+	@FindBy(xpath="(//div[@class='col dropdown-item product-dropdown-desktop-item item3 break-spaces undefined']/ul/li/a)[1]")
+	WebElement CFASupplements;
+	
+	@FindBy(xpath="(//div[@class='col dropdown-item product-dropdown-desktop-item item1']/ul/li/a)[1]")
+	WebElement CMASupplements;
+	
+	@FindBy(xpath="(//div[@class='col-xs-12 col-sm-4 supplements-cards'])[2]/div/a")
+	WebElement CPASuppelementProduct;
+	
+	@FindBy(xpath="(//div[@class='col-xs-12 col-sm-4 supplements-cards'])[1]/div/a")
+	WebElement CMASupplementProduct;
+	
+	@FindBy(xpath="(//div[@class='col-xs-12 col-sm-4 supplements-cards']/div/a)[1]")
+	WebElement CFASupplementProduct;
+	
+	@FindBy(xpath="//button[contains(text(),'ADD')]")
+	WebElement SupplementAddToCart;
+	
+	@FindBy(xpath="(//div[@class='col-6 noPadding price orderDetailCommonVal'])[2]")
+	WebElement ShippingCharge;
+	
+	@FindBy(xpath="(//div[@class='sc-AxjAm bcMPWx my-accounts-header']//ul/li)[3]")
+	WebElement ActivatePIN;
 
 
 	public void EnterUserNameOnLoginPage(String UserName) throws IOException {
@@ -3258,4 +3285,202 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
+	public void ClickOnViewSupplementsforCPA() throws IOException {
+		try {
+			CPASupplements.click();
+			Reporting.updateTestReport("View All CPA Supplements  was Clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on View All CPA Supplements option " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	public void ClickOnViewSupplementsforCMA() throws IOException {
+		try {
+			CMASupplements.click();
+			Reporting.updateTestReport("View All CMA Supplements  was Clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on View All CMA Supplements option " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	
+	public void ClickOnViewSupplementsforCFA() throws IOException {
+		try {
+			CFASupplements.click();
+			Reporting.updateTestReport("View All CFA Supplements  was Clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on View All CFA Supplements option " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	
+	public void ClickOnSupplementsProductforCPA() throws IOException {
+		try {
+			CPASuppelementProduct.click();
+			Reporting.updateTestReport("Supplement product was Clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on Supplement product " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	public void ClickOnSupplementsProductforCMA() throws IOException {
+		try {
+			CMASupplementProduct.click();
+			Reporting.updateTestReport("Supplement product was Clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on Supplement product " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	
+	public void ClickOnSupplementsProductforCFA() throws IOException {
+		try {
+			CMASupplementProduct.click();
+			Reporting.updateTestReport("Supplement product was Clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on Supplement product " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	
+	public void ClickOnAddToCartForSupplement() throws IOException {
+		try {
+			SupplementAddToCart.click();
+			Reporting.updateTestReport("Add To Cart  was Clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on Add TO Cart " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	public void ClickOnCMAFreeTrail() throws IOException {
+		try {
+			CPAFreeTrail.click();
+			Reporting.updateTestReport("CMA Free-trail was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click Save And Continue button " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	public void ClickOnCFAFreeTrail() throws IOException {
+		try {
+			CPAFreeTrail.click();
+			Reporting.updateTestReport("CFA Free-trail was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click Save And Continue button " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	public String FreeTrialFirstName() throws IOException {
+		try {
+
+			String cpaftext = FreeTrailFname.getText();
+			Reporting.updateTestReport("First Name filed is appeard successfully on  Free Trail from",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return cpaftext;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to appear the FirstName field " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	public String FreeTrailLastName() throws IOException {
+		try {
+
+			String cpaftext = FreeTrailLname.getText();
+			Reporting.updateTestReport("Last Name filed is appeard successfully on S Free Trail from",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return cpaftext;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to appear the LastName field " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	public String FreeTrailEmail() throws IOException {
+		try {
+
+			String cpaftext = FreeTrailEmail.getText();
+			Reporting.updateTestReport("Email filed is appeard successfully on Free Trail from",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return cpaftext;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to appear the Email field " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	
+	public String FreeTrailPassword() throws IOException {
+		try {
+
+			String cpaftext = FreeTrailPassword.getText();
+			Reporting.updateTestReport("Password filed is appeard successfully on Free Trail from",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return cpaftext;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to appear the Password field " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+
+	
+	public void ClickOnActiactePIN() throws IOException {
+		try {
+			ActivatePIN.click();
+			Reporting.updateTestReport("ActivatePIN Icon was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on ActivateCode" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public String ShippingChargeForMultipleProducts() throws IOException {
+		try {
+			String ShipCharge = ShippingCharge.getText();
+			System.out.println(ShipCharge);
+			Reporting.updateTestReport("Shipping Charge: " + ShipCharge + " was successfully fetched",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return ShipCharge;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Order id was not fetched with error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	
+
+	
+	
+
+	
+	
+
+	
+
 }
