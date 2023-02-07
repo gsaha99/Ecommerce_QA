@@ -52,7 +52,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	@FindBy(xpath = "//a[contains(text(),'Transaction Search')]")
 	WebElement ClickTransactionSearch;
 	
-	@FindBy(xpath = "//*[local-name()='svg' and @class='fa-icon']/*[local-name()='path']")
+	@FindBy(xpath = "//*[local-name()='svg' and @class='fa-icon' and @stroke-linecap='round']/*[local-name()='path']")
     WebElement ClickLogOut;
 	
 	/* 
@@ -106,6 +106,17 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	@FindBy(xpath = "//button[@type='submit' and @class='btn blue-btn']")
 	WebElement ClickRegister;
+	
+	/* 
+	 * Author : Jayanta
+	 * Description : Object repo for Client portal WPS Admin home page filter
+	 */
+	
+	@FindBy(xpath="//th[contains(text(),'Name')]/div/div/input")
+    WebElement enterHomeName;
+	
+	@FindBy(xpath="//div[@class='more-less-content']")
+    WebElement fetchHomeName;
 	
 	/* 
 	 * Author : Jayanta
@@ -274,6 +285,21 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	/* 
 	 * Author - Jayanta 
+	 * Description : Method to select app type as HTTP in add new client app screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_SelectHTTP() throws IOException {
+		try {
+			selectHTTP.click();
+			Reporting.updateTestReport("HTTP is selected successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("HTTP is not selected : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author - Jayanta 
 	 * Description : Method to select Business Unit as APL in add new client app screen for WPS Admin
 	 */
 	
@@ -358,7 +384,6 @@ public class app_ClientPortal_Repo extends DriverModule {
 	public void WPSAdmin_Click_DebitCard() throws IOException {
 		try {
 		    act.moveToElement(selectDebitCard).click().build().perform();
-			//selectDebitCard.click();
 		    Thread.sleep(2000);
 			Reporting.updateTestReport("Debit/Credit card is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
@@ -374,8 +399,9 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	public void WPSAdmin_Click_Add() throws IOException {
 		try {
-		    //act.moveToElement(ClickAdd).click().build().perform();
 			ClickAdd.click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'application has been added successfully')]")));
+		    driver.findElement(By.xpath("//span[contains(text(),'application has been added successfully')]")).click();
 		    Thread.sleep(5000);
 			Reporting.updateTestReport("Add button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
@@ -459,6 +485,39 @@ public class app_ClientPortal_Repo extends DriverModule {
 			Reporting.updateTestReport("Register button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to enter name in Client App Home screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_Enter_ClientApp_HomeName(String name) throws IOException {
+		try {
+			enterHomeName.sendKeys(name);
+			Reporting.updateTestReport("Name " +name+ " Entered successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Name is not Entered : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author - Jayanta 
+	 * Description : Method to fetch name in Client App Home screen for WPS Admin
+	 */
+	
+	public String WPSAdmin_Fetch_ClientApp_HomeName() throws IOException{
+	      try {
+				String name=fetchHomeName.getText();
+				System.out.println(name);
+				Reporting.updateTestReport("Name is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return name;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Name is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "";
+			   }
+		}
 	
 
 }

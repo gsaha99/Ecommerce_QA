@@ -31,9 +31,7 @@ public class dbConnect {
               {
         	    System.out.println(rs.getString(ColumnName1));
 			    property = rs.getString(ColumnName1);
-           //System.out.println(rs.getInt("status_id") + " " + rs.getString("status"));
               }
-          //rs.close();
 		  con.close();
             }
 

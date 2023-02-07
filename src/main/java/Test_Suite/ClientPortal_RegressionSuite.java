@@ -136,7 +136,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
      * @Description: Validation of New Client App add for WPS Admin
      */
 	@Test
-	public void TC03_AddNewClientApp_WPSAdmin() throws IOException
+	public void TC02_AddNewClientApp_WPSAdmin() throws IOException
 	{
 		
 		try {
@@ -199,8 +199,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_SelectSOAP();
 			CPortal.WPSAdmin_SelectBusinessUnit();
-			String uuid = Integer.toString(((new Random().nextInt(10))+1));
-			ScrollingWebPage.PageDown(driver, SS_path);
+			String uuid = Integer.toString(((new Random().nextInt(100))+1));
 			String ClientAppName="TestAuto_"+uuid;
 			CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
 			CPortal.WPSAdmin_Enter_ClientApp_ShortName("TA"+uuid);
@@ -211,7 +210,32 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickPaymentMethod();
 			CPortal.WPSAdmin_Click_DebitCard();
 			CPortal.WPSAdmin_Click_Add();
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Tokenise')]")));
+			String clientappname=dbConnect.DB_Select("wps_client_app_qa","client_app","name","client_app_id");
+			System.out.println(clientappname);
+			if(clientappname.compareTo(ClientAppName)==0)
+		       {
+			
+			      Reporting.updateTestReport("DB Validation is done and Client App Name is: " + clientappname,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		       }
+		      else 
+		       {
+			      Reporting.updateTestReport("DB Validation is not done and Client App Name is not: " + ClientAppName,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		       }
+			CPortal.WPSAdmin_Enter_ClientApp_HomeName(clientappname);
+			String FetchName=CPortal.WPSAdmin_Fetch_ClientApp_HomeName();
+			if(ClientAppName.compareTo(FetchName)==0) 
+		      {
+			
+			      Reporting.updateTestReport("Filtering is working",
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		      }
+		     else 
+		      {
+			      Reporting.updateTestReport("Filtering is working",
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		      }
 			
 		}
 		catch (Exception e) 
@@ -227,7 +251,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
      * @Description: Validation of Register a New User for WPS Admin
      */
 	@Test
-	public void TC04_RegisterNewUser_WPSAdmin() throws IOException
+	public void TC03_RegisterNewUser_WPSAdmin() throws IOException
 	{
 		
 		try {
