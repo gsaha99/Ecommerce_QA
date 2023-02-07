@@ -120,6 +120,17 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	/* 
 	 * Author : Jayanta
+	 * Description : Object repo for Client portal WPS Admin edit client app page
+	 */
+	
+	@FindBy(xpath = "//*[local-name()='svg' and @class='fa-icon2' and @viewBox='0 0 512 512']/*[local-name()='path']")
+    WebElement ClickEditIcon;
+	
+	@FindBy(xpath = "//button[@type='submit' and @class='btn blue-btn']")
+	WebElement ClickSave;
+	
+	/* 
+	 * Author : Jayanta
 	 * Description : Method to enter email address in Sign In for Client portal
 	 */
 	
@@ -519,6 +530,58 @@ public class app_ClientPortal_Repo extends DriverModule {
 			   }
 		}
 	
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to click edit icon for WPS Admin in home screen
+	 */
+	
+	public void WPSAdmin_ClickEditIcon() throws IOException {
+		try {
+		    act.moveToElement(ClickEditIcon).click().build().perform();
+		    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1[contains(text(),'Edit Client Application')]")));
+			Reporting.updateTestReport("Edit Icon is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Edit Icon is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+
+	/* 
+	 * Author - Jayanta 
+	 * Description : Method to fetch name in Client App edit screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_ClientApp_EditName() throws IOException{
+	      try {
+				String EditName=enterClientAppName.getText();
+				System.out.println(EditName);
+				String NewName=EditName+"_Edit";
+				enterClientAppName.sendKeys(NewName);
+				Reporting.updateTestReport("Name is edited successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Name is not edited successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			   }
+		}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description :  Method to click save button in edit client app screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_Click_Save() throws IOException {
+		try {
+			ClickSave.click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Your changes have been saved successfully')]")));
+		    driver.findElement(By.xpath("//span[contains(text(),'Your changes have been saved successfully')]")).click();
+		    Thread.sleep(5000);
+			Reporting.updateTestReport("Save button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Save button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 	
 	
 	/* 
