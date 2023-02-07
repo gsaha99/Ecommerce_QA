@@ -436,10 +436,25 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		      }
 			CPortal.WPSAdmin_ClickEditIcon();
+			String NewClientAppName=ClientAppName+"_Edit";
+			System.out.println(NewClientAppName);
 			CPortal.WPSAdmin_ClientApp_EditName();
 			ScrollingWebPage.PageDown(driver, SS_path);
 			ScrollingWebPage.PageDown(driver, SS_path);
 			CPortal.WPSAdmin_Click_Save();
+			String clientappname=dbConnect.DB_Select("wps_client_app_qa","client_app","name","client_app_id");
+			System.out.println(clientappname);
+			if(clientappname.compareTo(NewClientAppName)==0)
+		       {
+			
+			      Reporting.updateTestReport("DB Validation is done and Client App Name is: " + clientappname,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		       }
+		      else 
+		       {
+			      Reporting.updateTestReport("DB Validation is not done and Client App Name is not: " + NewClientAppName,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		       }
 			
 		}
 		catch (Exception e) 

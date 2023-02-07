@@ -554,14 +554,17 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	public void WPSAdmin_ClientApp_EditName() throws IOException{
 	      try {
-				String EditName=enterClientAppName.getText();
-				System.out.println(EditName);
-				String NewName=EditName+"_Edit";
-				enterClientAppName.sendKeys(NewName);
+				/*String EditName=enterClientAppName.getAttribute(SS_path);
+				System.out.println("Old Name: "+EditName);
+				String NewName=EditName + "_Edit";
+				System.out.println(NewName);*/
+				enterClientAppName.sendKeys("_Edit");
 				Reporting.updateTestReport("Name is edited successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				//return NewName;
 			    }
 			catch(Exception e) {
 				Reporting.updateTestReport("Name is not edited successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				//return "";
 			   }
 		}
 	
