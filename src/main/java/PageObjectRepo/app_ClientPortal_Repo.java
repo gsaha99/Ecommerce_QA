@@ -84,9 +84,6 @@ public class app_ClientPortal_Repo extends DriverModule {
 	@FindBy(name="Debit/Credit Card")
     WebElement selectDebitCard;
 	
-	/*@FindBy(xpath="//div[@id='payments']/div[@class='accordion-item']/div[@class='accordion-content ']/label[@class='checkboxContainer ']/input[@id='Debit/Credit Card']")
-	WebElement selectDebitCard;*/
-	
 	@FindBy(xpath = "//button[@type='submit' and @class='btn blue-btn']")
 	WebElement ClickAdd;
 	
