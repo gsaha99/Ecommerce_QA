@@ -470,7 +470,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
-			CPortal.WPSSupport_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID"));
+			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID"));
 			}
 			catch (Exception e) 
 			{
@@ -480,7 +480,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			}
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
-			CPortal.WPSSupport_LogIN_ClickNext();
+			CPortal.WPSAdmin_LogIN_ClickNext();
 			}
 			catch (Exception e) 
 			{
@@ -490,7 +490,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			}
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0118")));
-			CPortal.WPSSupport_LogIN_EnterPWD(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD"));
+			CPortal.WPSAdmin_LogIN_EnterPWD(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD"));
 			}
 			catch (Exception e) 
 			{
@@ -500,7 +500,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			}
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
-			CPortal.WPSSupport_LogIN_ClickNext();
+			CPortal.WPSAdmin_LogIN_ClickNext();
 			}
 			catch (Exception e) 
 			{
@@ -510,7 +510,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			}
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
-			CPortal.WPSSupport_LogIN_ClickNext();
+			CPortal.WPSAdmin_LogIN_ClickNext();
 			}
 			catch (Exception e) 
 			{
@@ -518,10 +518,10 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			CPortal.WPSSupport_ClickHome();
-			CPortal.WPSSupport_ClickNewClientApp();
-			CPortal.WPSSupport_ClickRegisterNewUser();
-			CPortal.WPSSupport_ClickMyWorklist();
+			CPortal.WPSAdmin_ClickHome();
+			CPortal.WPSAdmin_ClickNewClientApp();
+			CPortal.WPSAdmin_ClickRegisterNewUser();
+			CPortal.WPSAdmin_ClickMyWorklist();
 			String actualUserName = driver.findElement(By.xpath("//div[@class='userNameCircle']")).getText();
 		    String expectedUserName = excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "Initial");
 		    if(actualUserName.compareTo(expectedUserName)==0) 
@@ -536,14 +536,14 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		      }
 		    
-		    CPortal.WPSSupport_ClickTransactionSearch();
-		    CPortal.WPSSupport_ClickLogOut();
+		    CPortal.WPSAdmin_ClickTransactionSearch();
+		    CPortal.WPSAdmin_ClickLogOut();
 			
 		}
 		catch (Exception e) 
 		{
-			System.out.println("Client Portal Log In with WPS Admin Role Failed" + e.getMessage());
-			Reporting.updateTestReport("Client Portal Log In with WPS Admin Role Failed" + e.getMessage(),
+			System.out.println("Client Portal Log In with WPS Support Role Failed" + e.getMessage());
+			Reporting.updateTestReport("Client Portal Log In with WPS Support Role Failed" + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
