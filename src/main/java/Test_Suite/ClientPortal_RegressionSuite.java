@@ -342,6 +342,104 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
+	/*
+     * @Author: Varisa
+     * @Description: Validation of login functionality for WPS Support
+     */
+	@Test
+	public void TC10_Login_WPSSupport() throws IOException
+	{
+		
+		try {
+			Reporting.test = Reporting.extent.createTest("TC10_Client Portal: "
+					+ "Validate that the user should be able to see the user name on top right corner,"
+					+ " WPS Support user contains the Home,Create New Application, Register new User, My Work List,"
+					+ "Transaction search  options  on header of the page,"
+					+ " user should be able to logout from the application on top right corner there is a down arrow"
+					+ "on click of that Logout is visible.");
+			
+			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
+			CPortal.WPSSupport_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSSupport_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0118")));
+			CPortal.WPSSupport_LogIN_EnterPWD(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSSupport_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSSupport_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			CPortal.WPSSupport_ClickHome();
+			CPortal.WPSSupport_ClickNewClientApp();
+			CPortal.WPSSupport_ClickRegisterNewUser();
+			CPortal.WPSSupport_ClickMyWorklist();
+			String actualUserName = driver.findElement(By.xpath("//div[@class='userNameCircle']")).getText();
+		    String expectedUserName = excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "Initial");
+		    if(actualUserName.compareTo(expectedUserName)==0) 
+		      {
+			
+			      Reporting.updateTestReport("User Name is: " + actualUserName,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		      }
+		     else 
+		      {
+			      Reporting.updateTestReport("User Name is not: " + expectedUserName,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		      }
+		    
+		    CPortal.WPSSupport_ClickTransactionSearch();
+		    CPortal.WPSSupport_ClickLogOut();
+			
+		}
+		catch (Exception e) 
+		{
+			System.out.println("Client Portal Log In with WPS Admin Role Failed" + e.getMessage());
+			Reporting.updateTestReport("Client Portal Log In with WPS Admin Role Failed" + e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 
 
 }

@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="2" total="3" passed="1" failed="0" skipped="0">
+<testng-results ignored="3" total="4" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-02-07T13:57:31 IST" name="Default suite" finished-at="2023-02-07T13:58:12 IST" duration-ms="40618">
+  <suite started-at="2023-02-07T14:20:45 IST" name="Default suite" finished-at="2023-02-07T14:21:30 IST" duration-ms="44911">
     <groups>
     </groups>
-    <test started-at="2023-02-07T13:57:31 IST" name="Default test" finished-at="2023-02-07T13:58:12 IST" duration-ms="40618">
+    <test started-at="2023-02-07T14:20:45 IST" name="Default test" finished-at="2023-02-07T14:21:30 IST" duration-ms="44911">
       <class name="Test_Suite.ClientPortal_RegressionSuite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@18271936]" started-at="2023-02-07T13:57:31 IST" name="initiate" finished-at="2023-02-07T13:57:37 IST" duration-ms="5921" status="PASS">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@3ba987b8]" started-at="2023-02-07T14:20:45 IST" name="initiate" finished-at="2023-02-07T14:20:56 IST" duration-ms="10414" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@56b1e527]]>
+                <![CDATA[org.testng.TestRunner@1625789b]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@18271936]" started-at="2023-02-07T13:57:37 IST" name="initializeRepo" finished-at="2023-02-07T13:57:37 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="40" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@3ba987b8]" started-at="2023-02-07T14:20:56 IST" name="initializeRepo" finished-at="2023-02-07T14:20:56 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="47" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeRepo -->
-        <test-method signature="TC02_AddNewClientApp_WPSAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@18271936]" started-at="2023-02-07T13:57:37 IST" name="TC02_AddNewClientApp_WPSAdmin" finished-at="2023-02-07T13:58:10 IST" duration-ms="33010" status="PASS">
+        <test-method signature="TC10_Login_WPSSupport()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@3ba987b8]" started-at="2023-02-07T14:20:56 IST" name="TC10_Login_WPSSupport" finished-at="2023-02-07T14:21:28 IST" duration-ms="32428" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC02_AddNewClientApp_WPSAdmin -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@18271936]" started-at="2023-02-07T13:58:10 IST" name="CloseBrowser" finished-at="2023-02-07T13:58:12 IST" duration-ms="1572" status="PASS">
+        </test-method> <!-- TC10_Login_WPSSupport -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@3ba987b8]" started-at="2023-02-07T14:21:28 IST" name="CloseBrowser" finished-at="2023-02-07T14:21:30 IST" duration-ms="1857" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
