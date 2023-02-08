@@ -732,7 +732,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickPaymentMethod();
 			CPortal.WPSAdmin_Click_DebitCard();
 			//ScrollingWebPage.PageScrolldown(driver, 0, 600);
-			CPortal.WPSAdmin_ClickRegister();
+			CPortal.WPSSuppport_Click_Register();
 			String clientappname=dbConnect.DB_Select("wps_client_app_qa","client_app","name","client_app_id");
 			System.out.println(clientappname);
 			if(clientappname.compareTo(ClientAppName)==0)
@@ -746,7 +746,56 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			      Reporting.updateTestReport("DB Validation is not done and Client App Name is not: " + ClientAppName,
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		       }
-			/*CPortal.WPSAdmin_Enter_ClientApp_HomeName(clientappname);
+			/*
+			 * *Author :Jayanta
+			 * *Description : Logout from current role and relog in with WPS Admin role
+			 */
+			CPortal.WPSAdmin_ClickLogOut();
+			CPortal.WPSAdmin_ClickLogOutImage();
+			CPortal.WPSAdmin_ClickLogIN();
+			CPortal.WPSAdmin_ClickAnotherUserAccount();
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
+			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0118")));
+			CPortal.WPSAdmin_LogIN_EnterPWD(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			CPortal.WPSAdmin_ClickMyWorklist();
+			CPortal.WPSAdmin_Enter_ClientApp_HomeName(clientappname);
 			String FetchName=CPortal.WPSAdmin_Fetch_ClientApp_HomeName();
 			if(ClientAppName.compareTo(FetchName)==0) 
 		      {
@@ -758,7 +807,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		      {
 			      Reporting.updateTestReport("Filtering is not working",
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		      }*/
+		      }
+		
 			
 		}
 		catch (Exception e) 

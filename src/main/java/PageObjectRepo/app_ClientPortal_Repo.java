@@ -55,6 +55,15 @@ public class app_ClientPortal_Repo extends DriverModule {
 	@FindBy(xpath = "//*[local-name()='svg' and @class='fa-icon' and @stroke-linecap='round']/*[local-name()='path']")
     WebElement ClickLogOut;
 	
+	@FindBy(xpath = "//img[@class='tile-img']")
+	WebElement ClickLogOutImage;
+	
+	@FindBy(xpath = "//button[@type='button' and @class='btn blue-btn']")
+	WebElement ClickLogIn;
+	
+	@FindBy(xpath = "//div[@id='otherTileText']")
+	WebElement ClickAnotherUserAccount;
+	
 	/* 
 	 * Author : Jayanta
 	 * Description : Object repo for Client portal WPS Admin to add new client app
@@ -287,10 +296,60 @@ public class app_ClientPortal_Repo extends DriverModule {
 		try {
 		    act.moveToElement(ClickLogOut).click().build().perform();
 		    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("loginHeader")));
+		    Thread.sleep(2000);
 			Reporting.updateTestReport("Log out is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Log out is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to click log out Image for WPS Admin
+	 */
+	
+	public void WPSAdmin_ClickLogOutImage() throws IOException {
+		try {
+			ClickLogOutImage.click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'You have been logged out from WPS Client Portal. Please login to continue.')]")));
+			Thread.sleep(2000);
+			Reporting.updateTestReport("Log out Image is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Log out Image is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to click logIN for WPS Admin
+	 */
+	
+	public void WPSAdmin_ClickLogIN() throws IOException {
+		try {
+			ClickLogIn.click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@role='heading']")));
+			Thread.sleep(2000);
+			Reporting.updateTestReport("LogIN button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("LogIN button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to click Use Another account for WPS Admin
+	 */
+	
+	public void WPSAdmin_ClickAnotherUserAccount() throws IOException {
+		try {
+			ClickAnotherUserAccount.click();
+			Reporting.updateTestReport("Use Another account is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Use Another account is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 	
@@ -665,10 +724,9 @@ public class app_ClientPortal_Repo extends DriverModule {
 	public void WPSSuppport_Click_Register() throws IOException {
 		try {
 			ClickRegister.click();
-			/*wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'application has been submitted for registration. Approval pending.')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'application has been submitted for registration. Approval pending.')]")));
 		    driver.findElement(By.xpath("//span[contains(text(),'application has been submitted for registration. Approval pending.')]")).click();
-		    */
-		    Thread.sleep(2000);
+		    Thread.sleep(5000);
 			Reporting.updateTestReport("Register button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
