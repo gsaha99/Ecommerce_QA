@@ -87,6 +87,12 @@ public class app_ClientPortal_Repo extends DriverModule {
 	@FindBy(xpath = "//button[@type='submit' and @class='btn blue-btn']")
 	WebElement ClickAdd;
 	
+	@FindBy(name="template")
+    WebElement enterTemplate;
+	
+	@FindBy(name="targetUrl")
+    WebElement entertargetUrl;
+	
 	/* 
 	 * Author : Jayanta
 	 * Description : Object repo for Client portal WPS Admin to register new user
@@ -413,6 +419,38 @@ public class app_ClientPortal_Repo extends DriverModule {
 	}
 	
 	/* 
+	 * Author : Varisa
+	 * Description : Method to enter Template in Add New Client App screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_Enter_Template(String Template) throws IOException {
+		try {
+			enterTemplate.sendKeys(Template);
+			Thread.sleep(2000);
+			Reporting.updateTestReport("Template Entered successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Template is not Entered : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Varisa
+	 * Description : Method to enter TargetURL in Add New Client App screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_Enter_TargetURL(String TargetURL) throws IOException {
+		try {
+			entertargetUrl.sendKeys(TargetURL);
+			Thread.sleep(2000);
+			Reporting.updateTestReport("TargetURL Entered successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("TargetURL is not Entered : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
 	 * Author : Jayanta
 	 * Description :  Method to click add button in add new client app screen for WPS Admin
 	 */
@@ -616,6 +654,25 @@ public class app_ClientPortal_Repo extends DriverModule {
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Footer is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Varisa
+	 * Description :  Method to click Register button in Register new client app screen for WPS Support
+	 */
+	
+	public void WPSSuppport_Click_Register() throws IOException {
+		try {
+			ClickRegister.click();
+			/*wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'application has been submitted for registration. Approval pending.')]")));
+		    driver.findElement(By.xpath("//span[contains(text(),'application has been submitted for registration. Approval pending.')]")).click();
+		    */
+		    Thread.sleep(2000);
+			Reporting.updateTestReport("Register button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Register button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 	

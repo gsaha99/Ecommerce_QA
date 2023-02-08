@@ -646,6 +646,128 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
+	/*
+     * @Author: Varisa
+     * @Description: Validation of New Client App add for WPS Support
+     */
+	@Test
+	public void TC16_RegisterNewClientApp_WPSSupport() throws IOException
+	{
+		
+		try {
+			Reporting.test = Reporting.extent.createTest("TC16_Client Portal: "
+					+ "Verify whether system allows user to register a new client app by entering values in all the mandatory fields and also verify below," 
+					+ "system should display the entry in Client_app table when client_admin register a new client app using client portal," 
+					+ "system should navigate user back to the Home Screen when user enter values in all the mandatory fields and click on Register Button," 
+					+ "whether system navigate user back to the Home Screen with confirmation message - Client Application has been registered successfully!."
+
+					);
+			
+			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
+			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0118")));
+			CPortal.WPSAdmin_LogIN_EnterPWD(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			CPortal.WPSAdmin_ClickNewClientApp();
+			CPortal.WPSAdmin_SelectHTTP();
+			CPortal.WPSAdmin_SelectBusinessUnit();
+			String uuid = Integer.toString(((new Random().nextInt(100))+1));
+			String ClientAppName="WPSSupportTestAuto_"+uuid;
+			CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
+			CPortal.WPSAdmin_Enter_ClientApp_ShortName("WPSSTA"+uuid);
+			CPortal.WPSAdmin_SelectUserID();
+			CPortal.WPSAdmin_Enter_Template(excelOperation.getTestData("Template", "Generic_Dataset", "Data"));
+			CPortal.WPSAdmin_Enter_TargetURL(excelOperation.getTestData("Target URL", "Generic_Dataset", "Data"));
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageScrolldown(driver, 0, 600);
+			CPortal.WPSAdmin_ClickPaymentMethod();
+			CPortal.WPSAdmin_Click_DebitCard();
+			//ScrollingWebPage.PageScrolldown(driver, 0, 600);
+			CPortal.WPSAdmin_ClickRegister();
+			String clientappname=dbConnect.DB_Select("wps_client_app_qa","client_app","name","client_app_id");
+			System.out.println(clientappname);
+			if(clientappname.compareTo(ClientAppName)==0)
+		       {
+			
+			      Reporting.updateTestReport("DB Validation is done and Client App Name is: " + clientappname,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		       }
+		      else 
+		       {
+			      Reporting.updateTestReport("DB Validation is not done and Client App Name is not: " + ClientAppName,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		       }
+			/*CPortal.WPSAdmin_Enter_ClientApp_HomeName(clientappname);
+			String FetchName=CPortal.WPSAdmin_Fetch_ClientApp_HomeName();
+			if(ClientAppName.compareTo(FetchName)==0) 
+		      {
+			
+			      Reporting.updateTestReport("Filtering is working",
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		      }
+		     else 
+		      {
+			      Reporting.updateTestReport("Filtering is not working",
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		      }*/
+			
+		}
+		catch (Exception e) 
+		{
+			System.out.println("Register new client app with WPS Support Role Failed" + e.getMessage());
+			Reporting.updateTestReport("Register new client app with WPS Support Role Failed" + e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 
 
 }
