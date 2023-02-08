@@ -38,7 +38,9 @@ public class dbConnect {
         // Handle any errors that may have occurred.
           catch (SQLException | ClassNotFoundException e) 
                   {
-                     e.getMessage();
+        	         Reporting.updateTestReport("Exception occured: " + e.getMessage(),
+						         "", StatusDetails.WARNING);
+			         System.out.println(e.getMessage());
                   }
         return columnValue;
 	}
