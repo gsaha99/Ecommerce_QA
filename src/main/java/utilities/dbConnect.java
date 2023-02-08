@@ -14,11 +14,11 @@ public class dbConnect {
 	{
         String connectionUrl = "jdbc:mysql://wps.c7hepfyiogmn.us-east-1.rds.amazonaws.com:3306/"+DBName;
         System.out.println(connectionUrl);
-        String property = "";
+        String columnValue = "";
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String userid = excelOperation.getTestData("DBQAUserID", "Generic_Dataset", "Data");
+        	String userid = excelOperation.getTestData("DBQAUserID", "Generic_Dataset", "Data");
             String pwd = excelOperation.getTestData("DBQAPassword", "Generic_Dataset", "Data");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(connectionUrl,userid,pwd);
             Statement stmt= con.createStatement();
             String SQL = "SELECT * FROM "+DBName+"."+TableName+" order by "+ColumnName2+" desc limit 1";
@@ -30,7 +30,7 @@ public class dbConnect {
          while (rs.next()) 
               {
         	    System.out.println(rs.getString(ColumnName1));
-			    property = rs.getString(ColumnName1);
+        	    columnValue = rs.getString(ColumnName1);
               }
 		  con.close();
             }
@@ -40,7 +40,7 @@ public class dbConnect {
                   {
                      e.getMessage();
                   }
-        return property;
+        return columnValue;
 	}
 
 }

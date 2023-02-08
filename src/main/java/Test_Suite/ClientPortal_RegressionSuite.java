@@ -140,7 +140,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 	{
 		
 		try {
-			Reporting.test = Reporting.extent.createTest("TC03_Client Portal: "
+			Reporting.test = Reporting.extent.createTest("TC02_Client Portal: "
 					+ "Verify whether WPS admin is able to create New Client Application"
 					);
 			
@@ -255,7 +255,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 	{
 		
 		try {
-			Reporting.test = Reporting.extent.createTest("TC04_Client Portal: "
+			Reporting.test = Reporting.extent.createTest("TC03_Client Portal: "
 					+ "Verify whether WPS admin able to Register New User"
 					);
 			
@@ -461,6 +461,90 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		{
 			System.out.println("Edit client app with WPS Admin Role Failed" + e.getMessage());
 			Reporting.updateTestReport("Edit client app with WPS Admin Role Failed" + e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	 /*
+     * @Author: Jayanta
+     * @Description: Validation of footer for WPS Admin
+     */
+	@Test
+	public void TC09_Footer_WPSAdmin() throws IOException
+	{
+		
+		try {
+			Reporting.test = Reporting.extent.createTest("TC09_Client Portal: "
+					+ "Verify whether system display Footer as \"\"Copyright Â© 2000-2021 by John Wiley & Sons, Inc., or related companies. All rights reserved.\","
+					+ " in all the screens of Client portal and Verify whether System allow user to navigate,"
+					+ "to the separate tab when user clicks on \"\"Copyright Â© 2000-2021\" hyper link on footer.");
+			
+			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
+			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0118")));
+			CPortal.WPSAdmin_LogIN_EnterPWD(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			CPortal.WPSAdmin_ClickHome();
+			CPortal.WPSAdmin_ClickFooter();
+			CPortal.WPSAdmin_ClickNewClientApp();
+			CPortal.WPSAdmin_ClickFooter();
+			CPortal.WPSAdmin_ClickRegisterNewUser();
+			CPortal.WPSAdmin_ClickFooter();
+			CPortal.WPSAdmin_ClickMyWorklist();
+			CPortal.WPSAdmin_ClickFooter();
+			
+		}
+		catch (Exception e) 
+		{
+			System.out.println("Footer click with WPS Admin Role Failed" + e.getMessage());
+			Reporting.updateTestReport("Footer click with WPS Admin Role Failed" + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}

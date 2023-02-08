@@ -131,6 +131,14 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	/* 
 	 * Author : Jayanta
+	 * Description : Object repo for footer in every page of Client portal for WPS Admin 
+	 */
+	
+	@FindBy(xpath = "//a[contains(text(),'Copyright © 2000-2023')]")
+	WebElement ClickFooter;
+	
+	/* 
+	 * Author : Jayanta
 	 * Description : Method to enter email address in Sign In for Client portal
 	 */
 	
@@ -253,6 +261,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 		    driver.switchTo().window(newTb.get(1));
 		    System.out.println("Page title of new tab: " + driver.getTitle());
 		    Reporting.updateTestReport("Transaction Search is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		    
 		    //switch to parent window
 		    driver.switchTo().window(newTb.get(0));
 		    System.out.println("Page title of parent window: " + driver.getTitle());
@@ -583,6 +592,30 @@ public class app_ClientPortal_Repo extends DriverModule {
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Save button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to click Footer for WPS Admin
+	 */
+	
+	public void WPSAdmin_ClickFooter() throws IOException {
+		try {
+			ClickFooter.click();
+			Thread.sleep(5000);
+			ArrayList<String> newTb = new ArrayList<String>(driver.getWindowHandles());
+		    //switch to new tab
+		    driver.switchTo().window(newTb.get(1));
+		    System.out.println("Page title of new tab: " + driver.getTitle());
+		    Reporting.updateTestReport("Footer is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		    driver.close();
+		    //switch to parent window
+		    driver.switchTo().window(newTb.get(0));
+		    System.out.println("Page title of parent window: " + driver.getTitle());
+		    
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Footer is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 	
