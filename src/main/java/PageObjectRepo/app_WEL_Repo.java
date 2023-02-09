@@ -230,7 +230,7 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//div[@class='container-fluid course-pkg-background']//div[@class='card-footer bg-transparent course-pkg-cards-footer'])[2]//button")
 	WebElement CFAViewCourse;
 
-	@FindBy(xpath = "//a[@href='/cfa/products/level-2/']/button")
+	@FindBy(xpath = "(//a[@href='/cfa/products/level-2/platinum-cfa-course/'])[3]")
 	WebElement CFAViewCoursePage;
 
 	@FindBy(xpath = "(//div[@class='btn-group btn-group-toggle'])/label[2]")
@@ -435,6 +435,9 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//div[@class='CheckoutButton_buttonWrapper_2VloF']/button")
 	WebElement PaypalReviewOrderbutton;
+	
+	@FindBy(xpath="(//div[@class='ppvx_radio___2-9-22'])[2]//label")
+	WebElement PaypalCreditRadioButton;
 
 	@FindBy(xpath = "//div[@id='billingMultiPaymentOptionValues']/ul/li[3]/a/span[@class='billingPaymentMultiNavTitle']")
 	WebElement Paypalpayment;
@@ -2434,6 +2437,18 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("Failed to click on Continue to Review Order button " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	
+	public void ClickOnPaypalCreditRadioButton() throws IOException {
+		try {
+			PaypalCreditRadioButton.click();
+			Reporting.updateTestReport("Radiot button was Clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click Radio button " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}

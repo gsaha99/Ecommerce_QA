@@ -1,36 +1,152 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="62" total="63" passed="1" failed="0" skipped="0">
+<testng-results ignored="36" total="66" passed="30" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-02-07T19:28:05 IST" name="Default suite" finished-at="2023-02-07T19:32:11 IST" duration-ms="245887">
+  <suite started-at="2023-02-07T20:57:06 IST" name="PPE_Regression" finished-at="2023-02-07T22:01:19 IST" duration-ms="3852947">
     <groups>
     </groups>
-    <test started-at="2023-02-07T19:28:05 IST" name="Default test" finished-at="2023-02-07T19:32:11 IST" duration-ms="245887">
+    <test started-at="2023-02-07T20:57:06 IST" name="Wiley_Test_Suite" finished-at="2023-02-07T22:01:19 IST" duration-ms="3852947">
       <class name="Test_Suite.WEL_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.WEL_Test_Suite@1033576a]" started-at="2023-02-07T19:28:05 IST" name="initiate" finished-at="2023-02-07T19:28:11 IST" duration-ms="5880" status="PASS">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T20:57:06 IST" name="initiate" finished-at="2023-02-07T20:57:19 IST" duration-ms="13713" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@4d4c1ba9]]>
+                <![CDATA[org.testng.TestRunner@588e107d]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.WEL_Test_Suite@1033576a]" started-at="2023-02-07T19:28:11 IST" name="initializeRepo" finished-at="2023-02-07T19:28:11 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="70" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T20:57:19 IST" name="initializeRepo" finished-at="2023-02-07T20:57:19 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="85" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeRepo -->
-        <test-method signature="TC22_PlaceOrder_CPACMACFA_FreeTrailFor_ExistingUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@1033576a]" started-at="2023-02-07T19:28:11 IST" name="TC22_PlaceOrder_CPACMACFA_FreeTrailFor_ExistingUser" finished-at="2023-02-07T19:32:09 IST" duration-ms="238190" status="PASS">
+        <test-method signature="TC15_PlaceOrder_CMACPACFA_DigitalProducts_ForNewUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T20:57:20 IST" name="TC15_PlaceOrder_CMACPACFA_DigitalProducts_ForNewUser" finished-at="2023-02-07T21:03:29 IST" duration-ms="369710" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC15_PlaceOrder_CMACPACFA_DigitalProducts_ForNewUser -->
+        <test-method signature="TC17_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForNewUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:03:29 IST" name="TC17_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForNewUser" finished-at="2023-02-07T21:06:08 IST" duration-ms="158327" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC17_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForNewUser -->
+        <test-method signature="TC18_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForExistingUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:06:08 IST" name="TC18_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForExistingUser" finished-at="2023-02-07T21:08:52 IST" duration-ms="164721" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC18_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForExistingUser -->
+        <test-method signature="TC22_PlaceOrder_CPACMACFA_FreeTrailFor_ExistingUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:08:52 IST" name="TC22_PlaceOrder_CPACMACFA_FreeTrailFor_ExistingUser" finished-at="2023-02-07T21:10:52 IST" duration-ms="119584" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TC22_PlaceOrder_CPACMACFA_FreeTrailFor_ExistingUser -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.WEL_Test_Suite@1033576a]" started-at="2023-02-07T19:32:09 IST" name="CloseBrowser" finished-at="2023-02-07T19:32:11 IST" duration-ms="1685" status="PASS">
+        <test-method signature="TC24_PlaceOrder_UsingSavedShippingAddress_ForExistingUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:10:52 IST" name="TC24_PlaceOrder_UsingSavedShippingAddress_ForExistingUser" finished-at="2023-02-07T21:13:39 IST" duration-ms="166810" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC24_PlaceOrder_UsingSavedShippingAddress_ForExistingUser -->
+        <test-method signature="TC28_StudentVerification_ForDigitalCartofUSANDNonUS()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:13:39 IST" name="TC28_StudentVerification_ForDigitalCartofUSANDNonUS" finished-at="2023-02-07T21:15:53 IST" duration-ms="134363" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC28_StudentVerification_ForDigitalCartofUSANDNonUS -->
+        <test-method signature="TC29_StudentVerification_ForPhisicalCartofUSANDNonUS()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:15:53 IST" name="TC29_StudentVerification_ForPhisicalCartofUSANDNonUS" finished-at="2023-02-07T21:17:43 IST" duration-ms="110219" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC29_StudentVerification_ForPhisicalCartofUSANDNonUS -->
+        <test-method signature="TC30_PlaceOrder_UsingSavedBillingAddress_ForExistingUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:17:43 IST" name="TC30_PlaceOrder_UsingSavedBillingAddress_ForExistingUser" finished-at="2023-02-07T21:19:40 IST" duration-ms="116982" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC30_PlaceOrder_UsingSavedBillingAddress_ForExistingUser -->
+        <test-method signature="TC32_ShippingAndBilling_AddressDifferentfor_NewUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:19:40 IST" name="TC32_ShippingAndBilling_AddressDifferentfor_NewUser" finished-at="2023-02-07T21:21:05 IST" duration-ms="84578" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC32_ShippingAndBilling_AddressDifferentfor_NewUser -->
+        <test-method signature="TC34_PlaceOrder_withPaypalPayment_OptionForNewUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:21:05 IST" name="TC34_PlaceOrder_withPaypalPayment_OptionForNewUser" finished-at="2023-02-07T21:24:08 IST" duration-ms="183419" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC34_PlaceOrder_withPaypalPayment_OptionForNewUser -->
+        <test-method signature="TC35_PlaceOrder_withPaypalPayment_OptionForExistingUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:24:08 IST" name="TC35_PlaceOrder_withPaypalPayment_OptionForExistingUser" finished-at="2023-02-07T21:26:55 IST" duration-ms="166719" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC35_PlaceOrder_withPaypalPayment_OptionForExistingUser -->
+        <test-method signature="TC36_PlaceOrder_withPaypalCredit_OptionForExistingUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:26:55 IST" name="TC36_PlaceOrder_withPaypalCredit_OptionForExistingUser" finished-at="2023-02-07T21:30:16 IST" duration-ms="200836" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC36_PlaceOrder_withPaypalCredit_OptionForExistingUser -->
+        <test-method signature="TC37_PlaceOrder_withPaypalCredit_OptionForNewUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:30:16 IST" name="TC37_PlaceOrder_withPaypalCredit_OptionForNewUser" finished-at="2023-02-07T21:33:02 IST" duration-ms="166410" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC37_PlaceOrder_withPaypalCredit_OptionForNewUser -->
+        <test-method signature="TC38_Multiple_To_And_Fro_Navigation_Between_Shipping_And_Billing()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:33:02 IST" name="TC38_Multiple_To_And_Fro_Navigation_Between_Shipping_And_Billing" finished-at="2023-02-07T21:36:03 IST" duration-ms="180356" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC38_Multiple_To_And_Fro_Navigation_Between_Shipping_And_Billing -->
+        <test-method signature="TC39_PlaceOrderin_PINFlow_ForNewUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:36:03 IST" name="TC39_PlaceOrderin_PINFlow_ForNewUser" finished-at="2023-02-07T21:37:26 IST" duration-ms="82981" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC39_PlaceOrderin_PINFlow_ForNewUser -->
+        <test-method signature="TC40_PlaceOrderin_PINFlow_ForExistingUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:37:26 IST" name="TC40_PlaceOrderin_PINFlow_ForExistingUser" finished-at="2023-02-07T21:39:14 IST" duration-ms="108036" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC40_PlaceOrderin_PINFlow_ForExistingUser -->
+        <test-method signature="TC43_PlaceOrderwith_PartnerProduct_Having100Percent_Discount()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:39:14 IST" name="TC43_PlaceOrderwith_PartnerProduct_Having100Percent_Discount" finished-at="2023-02-07T21:39:14 IST" duration-ms="274" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC43_PlaceOrderwith_PartnerProduct_Having100Percent_Discount -->
+        <test-method signature="TC44_PlaceOrderFor_UniversityPartner_Product()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:39:14 IST" name="TC44_PlaceOrderFor_UniversityPartner_Product" finished-at="2023-02-07T21:39:23 IST" duration-ms="9049" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC44_PlaceOrderFor_UniversityPartner_Product -->
+        <test-method signature="TC51_PlaceOrder_IndiaAddress()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:39:23 IST" name="TC51_PlaceOrder_IndiaAddress" finished-at="2023-02-07T21:41:03 IST" duration-ms="100304" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC51_PlaceOrder_IndiaAddress -->
+        <test-method signature="TC52_PlaceOrder_ChinaAddress()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:41:03 IST" name="TC52_PlaceOrder_ChinaAddress" finished-at="2023-02-07T21:42:41 IST" duration-ms="97822" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC52_PlaceOrder_ChinaAddress -->
+        <test-method signature="TC53_PlaceOrder_JapanAddress()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:42:41 IST" name="TC53_PlaceOrder_JapanAddress" finished-at="2023-02-07T21:44:45 IST" duration-ms="124289" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC53_PlaceOrder_JapanAddress -->
+        <test-method signature="TC61_Validate_Cookie_Management()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:44:45 IST" name="TC61_Validate_Cookie_Management" finished-at="2023-02-07T21:45:47 IST" duration-ms="61652" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC61_Validate_Cookie_Management -->
+        <test-method signature="TC69_PlaceNewUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:45:47 IST" name="TC69_PlaceNewUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax" finished-at="2023-02-07T21:47:18 IST" duration-ms="90385" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC69_PlaceNewUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax -->
+        <test-method signature="TC70_PlaceExistingUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:47:18 IST" name="TC70_PlaceExistingUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax" finished-at="2023-02-07T21:48:48 IST" duration-ms="90805" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC70_PlaceExistingUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax -->
+        <test-method signature="TC71_PlaceNewUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:48:48 IST" name="TC71_PlaceNewUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax" finished-at="2023-02-07T21:50:30 IST" duration-ms="101219" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC71_PlaceNewUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax -->
+        <test-method signature="TC72_PlaceExistingUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:50:30 IST" name="TC72_PlaceExistingUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax" finished-at="2023-02-07T21:52:01 IST" duration-ms="91233" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC72_PlaceExistingUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax -->
+        <test-method signature="TC73_ValidateTaxin_IndiaForPhysicalOrder()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:52:01 IST" name="TC73_ValidateTaxin_IndiaForPhysicalOrder" finished-at="2023-02-07T21:54:05 IST" duration-ms="123932" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC73_ValidateTaxin_IndiaForPhysicalOrder -->
+        <test-method signature="TC79_Email_Format_Validation()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:54:05 IST" name="TC79_Email_Format_Validation" finished-at="2023-02-07T21:58:44 IST" duration-ms="279477" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC79_Email_Format_Validation -->
+        <test-method signature="TC80_Activatethe_PIN_Without_StartDate_AndEndDate_ForNewUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T21:58:44 IST" name="TC80_Activatethe_PIN_Without_StartDate_AndEndDate_ForNewUser" finished-at="2023-02-07T22:00:10 IST" duration-ms="85462" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC80_Activatethe_PIN_Without_StartDate_AndEndDate_ForNewUser -->
+        <test-method signature="TC81_Activatethe_PIN_Without_StartDate_AndEndDate_ForExistingUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T22:00:10 IST" name="TC81_Activatethe_PIN_Without_StartDate_AndEndDate_ForExistingUser" finished-at="2023-02-07T22:01:14 IST" duration-ms="64314" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC81_Activatethe_PIN_Without_StartDate_AndEndDate_ForExistingUser -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-07T22:01:14 IST" name="CloseBrowser" finished-at="2023-02-07T22:01:19 IST" duration-ms="4543" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
       </class> <!-- Test_Suite.WEL_Test_Suite -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- Wiley_Test_Suite -->
+  </suite> <!-- PPE_Regression -->
 </testng-results>
