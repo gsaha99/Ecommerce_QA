@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Random;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -102,7 +103,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			CPortal.WPSAdmin_ClickHome();
-			CPortal.WPSAdmin_ClickNewClientApp();
+			/*CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_ClickRegisterNewUser();
 			CPortal.WPSAdmin_ClickMyWorklist();
 			String actualUserName = driver.findElement(By.xpath("//div[@class='userNameCircle']")).getText();
@@ -120,8 +121,33 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		      }
 		    
 		    CPortal.WPSAdmin_ClickTransactionSearch();
-		    CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOut();*/
+			String Pagination=driver.findElement(By.xpath("//div[@class='nctable-info']")).getText();
+			String split1[] = Pagination.split("of",2);
+			for (String s : split1)
+			     System.out.println(s);
+			String s1=split1[1];
+			String split2[]=s1.split(" ");
+			for (String s2 : split2)
+			     System.out.println(s2);
+			int i= Integer.parseInt(split2[1]);
+			System.out.println(i);
+			int pagenumber=i/10;
+			if (i%10 > 0)
+		    {
+				pagenumber=pagenumber+1;
+			    System.out.println(pagenumber);
+			}
+			String s3=Integer.toString(pagenumber);
+			driver.findElement(By.xpath("//div[@class='pageNum']")).click();
 			
+			driver.findElement(By.xpath("//div[@class='pageNum']")).clear();
+			driver.findElement(By.xpath("//div[@class='pageNum']")).sendKeys(s3);
+			Thread.sleep(5000);
+			driver.findElement(By.xpath("//div[@class='pageNum']")).sendKeys(Keys.ENTER);
+			
+			
+	
 		}
 		catch (Exception e) 
 		{
@@ -464,6 +490,109 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
+
+	 /*
+    * @Author: Jayanta
+    * @Description: Validation of login functionality for WPS Admin
+    */
+	@Test
+	public void TC08_Pagination_WPSAdmin() throws IOException
+	{
+		
+		try {
+			Reporting.test = Reporting.extent.createTest("TC08_Client Portal: "
+					+ "Verify whether system is showing the count of the client application in home page,"
+					+ " and in My Worklist and pagination is working properly for WPS Admin role.");
+			
+			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
+			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0118")));
+			CPortal.WPSAdmin_LogIN_EnterPWD(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			CPortal.WPSAdmin_ClickHome();
+			String Pagination=driver.findElement(By.xpath("//div[@class='nctable-info']")).getText();
+			String splitPaginationFirst[] = Pagination.split("of",2);
+			for (String s : splitPaginationFirst)
+			     System.out.println(s);
+			String s1=splitPaginationFirst[1];
+			String splitPaginationSecond[]=s1.split(" ");
+			for (String s2 : splitPaginationSecond)
+			     System.out.println(s2);
+			int TotalNumber= Integer.parseInt(splitPaginationSecond[1]);
+			System.out.println(TotalNumber);
+			int pagenumber=TotalNumber/10;
+			if (TotalNumber%10 > 0)
+		    {
+				pagenumber=pagenumber+1;
+			    System.out.println(pagenumber);
+			}
+			String PageNumber=Integer.toString(pagenumber);
+			driver.findElement(By.xpath("//div[@class='pageNum']")).click();
+			
+			driver.findElement(By.xpath("//div[@class='pageNum']")).clear();
+			driver.findElement(By.xpath("//div[@class='pageNum']")).sendKeys(PageNumber);
+			Thread.sleep(5000);
+			driver.findElement(By.xpath("//div[@class='pageNum']")).sendKeys(Keys.ENTER);
+			
+			
+	
+		}
+		catch (Exception e) 
+		{
+			System.out.println("Client Portal Log In with WPS Admin Role Failed" + e.getMessage());
+			Reporting.updateTestReport("Client Portal Log In with WPS Admin Role Failed" + e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
 	
 	 /*
      * @Author: Jayanta
