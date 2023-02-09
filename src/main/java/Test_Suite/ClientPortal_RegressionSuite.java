@@ -8,6 +8,8 @@ import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -138,15 +140,11 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 				pagenumber=pagenumber+1;
 			    System.out.println(pagenumber);
 			}
-			String s3=Integer.toString(pagenumber);
-			driver.findElement(By.xpath("//div[@class='pageNum']")).click();
 			
-			driver.findElement(By.xpath("//div[@class='pageNum']")).clear();
-			driver.findElement(By.xpath("//div[@class='pageNum']")).sendKeys(s3);
-			Thread.sleep(5000);
-			driver.findElement(By.xpath("//div[@class='pageNum']")).sendKeys(Keys.ENTER);
-			
-			
+			driver.findElement(By.xpath("//input[@type='text']")).click();
+			driver.findElement(By.xpath("//input[@type='text']")).clear();
+			driver.findElement(By.xpath("//input[@type='text']")).sendKeys(Integer.toString(pagenumber));
+		
 	
 		}
 		catch (Exception e) 
