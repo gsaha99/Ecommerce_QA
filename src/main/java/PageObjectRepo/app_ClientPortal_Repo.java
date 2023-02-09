@@ -134,6 +134,13 @@ public class app_ClientPortal_Repo extends DriverModule {
 	@FindBy(xpath="//div[@class='more-less-content']")
     WebElement fetchHomeName;
 	
+	@FindBy(xpath="(//div[@class='nxtbutton']/button)[1]")
+    WebElement ClickNextPagination;
+	
+	@FindBy(xpath="(//div[@class='prevbutton']/button)[2]")
+	WebElement ClickPrevPagination;
+	
+	
 	/* 
 	 * Author : Jayanta
 	 * Description : Object repo for Client portal WPS Admin edit client app page
@@ -732,6 +739,64 @@ public class app_ClientPortal_Repo extends DriverModule {
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Register button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author - Jayanta 
+	 * Description : Method to check pagination in Client portal home screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_CheckPagination() throws IOException {
+		try {
+			String Pagination=driver.findElement(By.xpath("//div[@class='nctable-info']")).getText();
+			String splitPaginationFirst[] = Pagination.split("of",2);
+			for (String s : splitPaginationFirst)
+			     System.out.println(s);
+			String s1=splitPaginationFirst[1];
+			String splitPaginationSecond[]=s1.split(" ");
+			for (String s2 : splitPaginationSecond)
+			     System.out.println(s2);
+			int TotalNumber= Integer.parseInt(splitPaginationSecond[1]);
+			System.out.println(TotalNumber);
+			int pagenumber=TotalNumber/10;
+			if (TotalNumber%10 > 0)
+		    {
+				pagenumber=pagenumber+1;
+			    System.out.println(pagenumber);
+			}
+			else
+			{
+				Reporting.updateTestReport("Pagination is working but no records are found ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			driver.findElement(By.xpath("//input[@type='text']")).click();
+			driver.findElement(By.xpath("//input[@type='text']")).clear();
+			driver.findElement(By.xpath("//input[@type='text']")).sendKeys(Integer.toString(pagenumber));
+			//act.moveToElement(ClickNextPagination).click().build().perform();
+			if (ClickNextPagination.isEnabled())
+			Reporting.updateTestReport("Pagination is not working ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			else
+				Reporting.updateTestReport("Pagination is working: ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			act.moveToElement(ClickPrevPagination).click().build().perform();
+			String currentPage = driver.findElement(By.xpath("//div[@class='pageNum']/input")).getAttribute("value");
+			System.out.println(currentPage);
+			int actualcurrentpgnumber=Integer.parseInt(currentPage);
+			System.out.println(actualcurrentpgnumber);
+			int expectedcurrentpgnumber=pagenumber-1;
+			if (actualcurrentpgnumber==expectedcurrentpgnumber)
+			{
+				Reporting.updateTestReport("Pagination is working and previous button is clicked ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);	
+			}
+			else
+			{
+				Reporting.updateTestReport("Pagination is not working and previous button is not clicked ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+				
+				
+			
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Pagination is not working: "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 	

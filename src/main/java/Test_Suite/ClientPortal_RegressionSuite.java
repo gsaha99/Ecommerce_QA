@@ -105,7 +105,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			CPortal.WPSAdmin_ClickHome();
-			/*CPortal.WPSAdmin_ClickNewClientApp();
+			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_ClickRegisterNewUser();
 			CPortal.WPSAdmin_ClickMyWorklist();
 			String actualUserName = driver.findElement(By.xpath("//div[@class='userNameCircle']")).getText();
@@ -123,28 +123,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		      }
 		    
 		    CPortal.WPSAdmin_ClickTransactionSearch();
-		    CPortal.WPSAdmin_ClickLogOut();*/
-			String Pagination=driver.findElement(By.xpath("//div[@class='nctable-info']")).getText();
-			String split1[] = Pagination.split("of",2);
-			for (String s : split1)
-			     System.out.println(s);
-			String s1=split1[1];
-			String split2[]=s1.split(" ");
-			for (String s2 : split2)
-			     System.out.println(s2);
-			int i= Integer.parseInt(split2[1]);
-			System.out.println(i);
-			int pagenumber=i/10;
-			if (i%10 > 0)
-		    {
-				pagenumber=pagenumber+1;
-			    System.out.println(pagenumber);
-			}
+		    CPortal.WPSAdmin_ClickLogOut();
 			
-			driver.findElement(By.xpath("//input[@type='text']")).click();
-			driver.findElement(By.xpath("//input[@type='text']")).clear();
-			driver.findElement(By.xpath("//input[@type='text']")).sendKeys(Integer.toString(pagenumber));
-		
 	
 		}
 		catch (Exception e) 
@@ -556,32 +536,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			CPortal.WPSAdmin_ClickHome();
-			String Pagination=driver.findElement(By.xpath("//div[@class='nctable-info']")).getText();
-			String splitPaginationFirst[] = Pagination.split("of",2);
-			for (String s : splitPaginationFirst)
-			     System.out.println(s);
-			String s1=splitPaginationFirst[1];
-			String splitPaginationSecond[]=s1.split(" ");
-			for (String s2 : splitPaginationSecond)
-			     System.out.println(s2);
-			int TotalNumber= Integer.parseInt(splitPaginationSecond[1]);
-			System.out.println(TotalNumber);
-			int pagenumber=TotalNumber/10;
-			if (TotalNumber%10 > 0)
-		    {
-				pagenumber=pagenumber+1;
-			    System.out.println(pagenumber);
-			}
-			String PageNumber=Integer.toString(pagenumber);
-			driver.findElement(By.xpath("//div[@class='pageNum']")).click();
+			CPortal.WPSAdmin_CheckPagination();
 			
-			driver.findElement(By.xpath("//div[@class='pageNum']")).clear();
-			driver.findElement(By.xpath("//div[@class='pageNum']")).sendKeys(PageNumber);
-			Thread.sleep(5000);
-			driver.findElement(By.xpath("//div[@class='pageNum']")).sendKeys(Keys.ENTER);
-			
-			
-	
 		}
 		catch (Exception e) 
 		{
