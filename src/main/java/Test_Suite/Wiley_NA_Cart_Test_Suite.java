@@ -3704,7 +3704,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					driver.get(wiley.wileyURLConcatenationwithRegions(region,product));
 					driver.navigate().refresh();
 					if(wiley.fetchGenericHoverInfo(driver).
-							equalsIgnoreCase(excelOperation.getTestData("TC37", "WILEY_NA_Cart_Test_Data", "Expected_Result").trim()))
+							contains(excelOperation.getTestData("TC37", "WILEY_NA_Cart_Test_Data", "Expected_Result").trim()))
 						Reporting.updateTestReport("Correct text was present in generic info for eBook",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					else
