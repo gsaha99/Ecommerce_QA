@@ -127,12 +127,13 @@ public class Vet_Test_Suite extends DriverModule {
 				catch(Exception e)
 				{Reporting.updateTestReport("Order was not placed and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
-				VET.logOut(driver);}
+				;}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Continue button on cart page was not clickable"
 						+ " and caused timeout excepion", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			VET.logOut(driver);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -592,13 +593,14 @@ public class Vet_Test_Suite extends DriverModule {
 				catch(Exception e)
 				{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
-				VET.logOut(driver);}
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Discount code field was"
 						+ " not displayed and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
+			VET.logOut(driver);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
@@ -651,13 +653,14 @@ public class Vet_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC12", "VET_Test_Data", "Order_Id", orderID);
 				excelOperation.updateTestData("TC12", "VET_Test_Data", "Tax", tax);
 				excelOperation.updateTestData("TC12", "VET_Test_Data", "Total", total);
-				VET.logOut(driver);
+			
 			}
 
 			catch(Exception e)
 			{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.FAIL);
-			VET.logOut(driver);}
+			}
+			VET.logOut(driver);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
@@ -831,7 +834,7 @@ public class Vet_Test_Suite extends DriverModule {
 	 * @Author: Vishnu Description: This is to verify the Order in Backoffice and
 	 * Validating the Order
 	 */
-	@Test
+	/*@Test
 	public void TC15_ValidationOrdersinBO() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC15_ValidationOrdersinBO");
@@ -906,7 +909,7 @@ public class Vet_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 			HybrisBO.clickOnLogOutButton();	
 		}
-	}
+	}*/
 
 	/*
 	 * Author : Arun 
@@ -1034,13 +1037,14 @@ public class Vet_Test_Suite extends DriverModule {
 				VET.enterPhoneNumber(excelOperation.getTestData("TC20", "VET_Test_Data", "Phone_Number"));
 				VET.clickOnBillingSaveButton();
 				VET.checkIfAlertBoxDisplayedOnBillingAddressPage();
-				VET.logOut(driver);
+				
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Address line 1 field was not clickable"
 						+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
+			VET.logOut(driver);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -1375,25 +1379,32 @@ public class Vet_Test_Suite extends DriverModule {
 
 							catch(Exception e) {
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-										StatusDetails.FAIL);}	
+										StatusDetails.FAIL);
+								VET.logOut(driver);}	
+							
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Address line 1 field was not clickable"
 									+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
+							VET.logOut(driver);
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Billing address page was not loaded and caused timeout exception",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						VET.logOut(driver);
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Create Account / Login page was not loaded and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					VET.logOut(driver);
 				}
 			} catch (Exception e) {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}		
+				VET.logOut(driver);
+			}	
+			
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());

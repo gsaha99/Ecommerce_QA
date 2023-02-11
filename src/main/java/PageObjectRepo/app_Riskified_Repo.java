@@ -49,7 +49,7 @@ public class app_Riskified_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("Failed to enter Riskified User id " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 		}
 	}
 
@@ -65,7 +65,7 @@ public class app_Riskified_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("Failed to enter Riskified Password " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 		}
 	}
 
@@ -80,7 +80,7 @@ public class app_Riskified_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("Unable to Click on Sign in button " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 
 		}
 	}

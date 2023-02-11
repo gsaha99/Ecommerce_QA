@@ -53,10 +53,11 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC01", "WileyPLUS_Test_Data", "SearchBox_Text"));
 				WileyPLUS.checkPublicationDateInSRP_PLP();
 				WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
+				String price=WileyPLUS.checkPriceInSRP_PLP();
 				WileyPLUS.clickOnSRP_WileyProduct();
 				try {
 					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='product-add-to-cart']")));
-					if(WileyPLUS.checkPriceInSRP_PLP().equalsIgnoreCase(WileyPLUS.checkPriceInPDP()))
+					if(price.equalsIgnoreCase(WileyPLUS.checkPriceInPDP()))
 						Reporting.updateTestReport("The price in SRP was same as price in PDP",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					else
@@ -112,11 +113,12 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					WileyPLUS.checkWileyPLUSInAppliedFacet();			
 					WileyPLUS.checkPublicationDateInSRP_PLP();
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
+					String price=WileyPLUS.checkPriceInSRP_PLP();
 					WileyPLUS.clickOnSRP_WileyProduct();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
 								By.xpath("//div[@class='product-add-to-cart']")));
-						if(WileyPLUS.checkPriceInSRP_PLP().equalsIgnoreCase(WileyPLUS.checkPriceInPDP()))
+						if(price.equalsIgnoreCase(WileyPLUS.checkPriceInPDP()))
 							Reporting.updateTestReport("The price in PLP was same as price in PDP",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
@@ -139,7 +141,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 
-
+			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -181,6 +183,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -222,6 +225,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -270,6 +274,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -316,6 +321,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -364,7 +370,8 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			catch(Exception e) {
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}			
+			}
+			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -418,6 +425,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WileyPLUS.WileyLogOut();
 
 		}
 		catch(Exception e) {
@@ -471,7 +479,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-
+			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -517,6 +525,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -573,7 +582,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-
+			WileyPLUS.WileyLogOut();
 
 		}
 		catch(Exception e) {
@@ -654,7 +663,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			WileyPLUS.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC14", "WileyPLUS_Test_Data", "Password"));
 			WileyPLUS.clickOnSaveAndContinueButton();
 			WileyPLUS.checkIfUserInBillingStep();
-			WileyPLUS.checkGlobalCountryList(driver,excelOperation.getTestData("TC14", "WileyPLUS_Test_Data", "Bill_Country"));
+			WileyPLUS.checkGlobalCountryListBilling(driver,excelOperation.getTestData("TC14", "WileyPLUS_Test_Data", "Bill_Country"));
 			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
@@ -716,11 +725,11 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					WileyPLUS.enterPhoneNumberBilling(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Bill_Phone_Number"));
 					WileyPLUS.clickOnSaveAndContinueButton();
 					try {
-						if(WileyPLUS.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-							WileyPLUS.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+						wait.until(ExpectedConditions.visibilityOf(WileyPLUS.returnUseSelectedBillingAddressButtonAddressDoctorPopUp())); 
+						WileyPLUS.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 					}
 					catch(Exception e) {
-						Reporting.updateTestReport("Adress doctor pop up did not appear",
+						Reporting.updateTestReport("Address doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 					}
 					WileyPLUS.checkCourseNameInOrderReviewPage(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Course"));
@@ -756,7 +765,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
-					WileyPLUS.WileyLogOut();
+
 
 				}
 				catch(Exception e) {
@@ -772,6 +781,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						, CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
+			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -793,6 +803,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			driver.navigate().refresh();
 			WileyPLUS.checkIfUserIsOnCartPage(driver);
 			WileyPLUS.checkBrandNameWileyPLUS();
+			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 			WileyPLUS.clickOnProceedToCheckoutButton();
 			String email=WileyPLUS.enterEmailIdInCreateAccountForm();
 			WileyPLUS.clickOnCreateAccountButton();
@@ -827,9 +838,10 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					WileyPLUS.enterPhoneNumberBilling(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Phone_Number"));
 					WileyPLUS.clickOnSaveAndContinueButton();
 					try {
-						if(WileyPLUS.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-						{WileyPLUS.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-						}}
+						wait.until(ExpectedConditions.visibilityOf(WileyPLUS.returnUseSelectedBillingAddressButtonAddressDoctorPopUp()));
+						WileyPLUS.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+					}
+
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -865,7 +877,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						Reporting.updateTestReport("Order was not placed and saved global address couldn't be validated", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
-					WileyPLUS.WileyLogOut();
+
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -880,7 +892,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						, CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
-
+			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -902,6 +914,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			driver.navigate().refresh();
 			WileyPLUS.checkIfUserIsOnCartPage(driver);
 			WileyPLUS.checkBrandNameWileyPLUS();
+			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 			WileyPLUS.clickOnProceedToCheckoutButton();
 			String email=WileyPLUS.enterEmailIdInCreateAccountForm();
 			WileyPLUS.clickOnCreateAccountButton();
@@ -915,13 +928,13 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
 				WileyPLUS.enterAddressLine1Shipping(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_Address_line1"));
 				WileyPLUS.enterShippingZIPCode(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_Zip_Code"));
-				//WileyPLUS.enterShippingCity(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_City"));
+				WileyPLUS.enterShippingCity(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_City"));
 				//WileyPLUS.enterState(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_State"));
 				WileyPLUS.enterPhoneNumberShipping(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_Phone_Number"));
 				WileyPLUS.clickOnSaveAndContinueButton();
 				try {
-					if(WileyPLUS.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-						WileyPLUS.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+					wait.until(ExpectedConditions.visibilityOf(WileyPLUS.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()));
+					WileyPLUS.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 				catch(Exception e) {
 					Reporting.updateTestReport("Adress doctor pop up did not appear",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
@@ -974,7 +987,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						Reporting.updateTestReport("Order was not placed and saved global address couldn't be validated", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
-					WileyPLUS.WileyLogOut();
+
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -988,6 +1001,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						+ " and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -1121,7 +1135,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 							By.xpath("//span[contains(text(),'add course')]")));
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
-					WileyPLUS.enterCourseSectionId("B84272");
+					WileyPLUS.enterCourseSectionId("A66148");
 					WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -1213,6 +1227,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Create account form could not be submitted and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WileyPLUS.WileyLogOut();
 
 		}
 		catch(Exception e) {
@@ -1388,7 +1403,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 										Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 												StatusDetails.FAIL);
 									}
-									WileyPLUS.WileyLogOut();
+
 
 								}
 								catch(Exception e) {
@@ -1426,6 +1441,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Create account form could not be submitted and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -1514,7 +1530,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 							By.xpath("//span[contains(text(),'add course')]")));
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
-					WileyPLUS.enterCourseSectionId("A79129");
+					WileyPLUS.enterCourseSectionId("A77549");
 					WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -1599,7 +1615,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 										Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 												StatusDetails.FAIL);
 									}
-									WileyPLUS.WileyLogOut();
+
 
 
 								}
@@ -1638,6 +1654,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Create account form could not be submitted and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -1822,7 +1839,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 																Reporting.updateTestReport("Currency change modal pop up was not displayed ", 
 																		CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 															}
-															
+
 														}
 														catch(Exception e) {
 															Reporting.updateTestReport("The cart error dialog box didn't appear"
@@ -1841,19 +1858,19 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 															+ " and caused timeout exception",
 															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 												}
-												
+
 											}
 											catch(Exception e){
 												Reporting.updateTestReport("Cart was not merged in USD", 
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
-											
+
 										}
 										catch(Exception e){
 											Reporting.updateTestReport("User was not on cart page and caused timeout exception",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
-										
+
 									}
 									catch(Exception e) {
 										Reporting.updateTestReport("Currency change modal pop up was not displayed ", 
@@ -1891,6 +1908,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Create account form could not be submitted and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();

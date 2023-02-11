@@ -1,36 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="36" total="37" passed="1" failed="0" skipped="0">
+<testng-results ignored="68" total="97" passed="29" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-02-10T13:09:30 IST" name="Default suite" finished-at="2023-02-10T13:11:01 IST" duration-ms="91185">
+  <suite started-at="2023-02-11T22:05:22 IST" name="PPE_Regression" finished-at="2023-02-11T23:01:57 IST" duration-ms="3395666">
     <groups>
     </groups>
-    <test started-at="2023-02-10T13:09:30 IST" name="Default test" finished-at="2023-02-10T13:11:01 IST" duration-ms="91185">
+    <test started-at="2023-02-11T22:05:22 IST" name="Wiley_Test_Suite" finished-at="2023-02-11T23:01:57 IST" duration-ms="3395666">
       <class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@1750fbeb]" started-at="2023-02-10T13:09:30 IST" name="initiate" finished-at="2023-02-10T13:09:40 IST" duration-ms="10008" status="PASS">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@72bc6553]" started-at="2023-02-11T22:05:30 IST" name="launchBrowser" finished-at="2023-02-11T22:05:31 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="23" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchBrowser -->
+        <test-method signature="TC01_Digital_Product_Purchase_New_User()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@72bc6553]" started-at="2023-02-11T22:11:54 IST" name="TC01_Digital_Product_Purchase_New_User" finished-at="2023-02-11T22:14:35 IST" duration-ms="160995" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC01_Digital_Product_Purchase_New_User -->
+        <test-method signature="TC03_Physical_productpurchase_ForNewUser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@72bc6553]" started-at="2023-02-11T22:14:35 IST" name="TC03_Physical_productpurchase_ForNewUser" finished-at="2023-02-11T22:17:17 IST" duration-ms="162635" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC03_Physical_productpurchase_ForNewUser -->
+        <test-method signature="TC18_Tax_Recalculation()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@72bc6553]" started-at="2023-02-11T22:17:17 IST" name="TC18_Tax_Recalculation" finished-at="2023-02-11T22:19:26 IST" duration-ms="128863" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC18_Tax_Recalculation -->
+        <test-method signature="TC20_New_user_tax_for_physical_product()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@72bc6553]" started-at="2023-02-11T22:19:26 IST" name="TC20_New_user_tax_for_physical_product" finished-at="2023-02-11T22:21:04 IST" duration-ms="97909" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC20_New_user_tax_for_physical_product -->
+        <test-method signature="TC21_Existing_user_tax_for_physical_product()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@72bc6553]" started-at="2023-02-11T22:21:04 IST" name="TC21_Existing_user_tax_for_physical_product" finished-at="2023-02-11T22:22:33 IST" duration-ms="88779" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC21_Existing_user_tax_for_physical_product -->
+        <test-method signature="TC22_New_User_Tax_for_Digital_product()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@72bc6553]" started-at="2023-02-11T22:22:33 IST" name="TC22_New_User_Tax_for_Digital_product" finished-at="2023-02-11T22:24:16 IST" duration-ms="102583" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC22_New_User_Tax_for_Digital_product -->
+        <test-method signature="TC23_Existing_User_Tax_for_Digital_Product()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@72bc6553]" started-at="2023-02-11T22:24:16 IST" name="TC23_Existing_User_Tax_for_Digital_Product" finished-at="2023-02-11T22:27:01 IST" duration-ms="165314" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC23_Existing_User_Tax_for_Digital_Product -->
+        <test-method signature="TC24_Verify_Shipping_Methods_for_POD_Products()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@72bc6553]" started-at="2023-02-11T22:27:01 IST" name="TC24_Verify_Shipping_Methods_for_POD_Products" finished-at="2023-02-11T22:27:57 IST" duration-ms="55765" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC24_Verify_Shipping_Methods_for_POD_Products -->
+        <test-method signature="TC26_Login_Page_Validation()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@72bc6553]" started-at="2023-02-11T22:27:57 IST" name="TC26_Login_Page_Validation" finished-at="2023-02-11T22:29:47 IST" duration-ms="110442" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC26_Login_Page_Validation -->
+        <test-method signature="TC28_Cart_Update_from_Digital_to_Phygital()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@72bc6553]" started-at="2023-02-11T22:29:47 IST" name="TC28_Cart_Update_from_Digital_to_Phygital" finished-at="2023-02-11T22:30:38 IST" duration-ms="51133" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC28_Cart_Update_from_Digital_to_Phygital -->
+        <test-method signature="TC32_Preorder_Backorder_Flow_With_Print_Pdf_Page()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@72bc6553]" started-at="2023-02-11T22:30:38 IST" name="TC32_Preorder_Backorder_Flow_With_Print_Pdf_Page" finished-at="2023-02-11T22:33:19 IST" duration-ms="160694" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC32_Preorder_Backorder_Flow_With_Print_Pdf_Page -->
+        <test-method signature="TC35_EMEA_Catalog_Updates()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@72bc6553]" started-at="2023-02-11T22:33:19 IST" name="TC35_EMEA_Catalog_Updates" finished-at="2023-02-11T22:37:44 IST" duration-ms="265252" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC35_EMEA_Catalog_Updates -->
+        <test-method signature="TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@72bc6553]" started-at="2023-02-11T22:37:44 IST" name="TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP" finished-at="2023-02-11T22:39:18 IST" duration-ms="93428" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP -->
+      </class> <!-- Test_Suite.Wiley_NA_Cart_Test_Suite -->
+      <class name="Test_Suite.WileyPLUS_Test_Suite">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@66982506]" started-at="2023-02-11T22:05:30 IST" name="launchBrowser" finished-at="2023-02-11T22:05:30 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="22" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchBrowser -->
+        <test-method signature="TC01_SRP_For_WileyPLUS()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@66982506]" started-at="2023-02-11T22:39:18 IST" name="TC01_SRP_For_WileyPLUS" finished-at="2023-02-11T22:39:53 IST" duration-ms="34864" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC01_SRP_For_WileyPLUS -->
+        <test-method signature="TC02_PLP_For_WileyPLUS()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@66982506]" started-at="2023-02-11T22:39:53 IST" name="TC02_PLP_For_WileyPLUS" finished-at="2023-02-11T22:40:42 IST" duration-ms="49097" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC02_PLP_For_WileyPLUS -->
+        <test-method signature="TC05_Check_If_URL_Not_Truncated_For_WileyPLUS()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@66982506]" started-at="2023-02-11T22:40:42 IST" name="TC05_Check_If_URL_Not_Truncated_For_WileyPLUS" finished-at="2023-02-11T22:41:30 IST" duration-ms="48709" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC05_Check_If_URL_Not_Truncated_For_WileyPLUS -->
+        <test-method signature="TC06_Format_Facet_WileyPLUS()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@66982506]" started-at="2023-02-11T22:41:30 IST" name="TC06_Format_Facet_WileyPLUS" finished-at="2023-02-11T22:42:12 IST" duration-ms="41763" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC06_Format_Facet_WileyPLUS -->
+        <test-method signature="TC13_Global_Country_List_In_Shipping()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@66982506]" started-at="2023-02-11T22:42:12 IST" name="TC13_Global_Country_List_In_Shipping" finished-at="2023-02-11T22:44:58 IST" duration-ms="166285" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC13_Global_Country_List_In_Shipping -->
+        <test-method signature="TC14_Global_Country_List_In_Billing()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@66982506]" started-at="2023-02-11T22:44:58 IST" name="TC14_Global_Country_List_In_Billing" finished-at="2023-02-11T22:47:14 IST" duration-ms="135025" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC14_Global_Country_List_In_Billing -->
+        <test-method signature="TC15_Course_Details_During_WileyPLUS_Checkout()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@66982506]" started-at="2023-02-11T22:47:14 IST" name="TC15_Course_Details_During_WileyPLUS_Checkout" finished-at="2023-02-11T22:53:12 IST" duration-ms="358693" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC15_Course_Details_During_WileyPLUS_Checkout -->
+        <test-method signature="TC16_Check_Global_Saved_Billing_Address()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@66982506]" started-at="2023-02-11T22:53:12 IST" name="TC16_Check_Global_Saved_Billing_Address" finished-at="2023-02-11T22:55:12 IST" duration-ms="120035" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC16_Check_Global_Saved_Billing_Address -->
+        <test-method signature="TC17_Check_Global_Saved_Shipping_Address()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@66982506]" started-at="2023-02-11T22:55:12 IST" name="TC17_Check_Global_Saved_Shipping_Address" finished-at="2023-02-11T22:57:20 IST" duration-ms="127246" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC17_Check_Global_Saved_Shipping_Address -->
+        <test-method signature="TC19_Validate_Continue_Shopping_Link()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@66982506]" started-at="2023-02-11T22:57:20 IST" name="TC19_Validate_Continue_Shopping_Link" finished-at="2023-02-11T22:58:30 IST" duration-ms="70873" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC19_Validate_Continue_Shopping_Link -->
+        <test-method signature="TC20_Place_WileyPLUS_CAD_Order_From_Frontend()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@66982506]" started-at="2023-02-11T22:58:30 IST" name="TC20_Place_WileyPLUS_CAD_Order_From_Frontend" finished-at="2023-02-11T22:59:34 IST" duration-ms="63659" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC20_Place_WileyPLUS_CAD_Order_From_Frontend -->
+        <test-method signature="TC21_Place_WileyPLUS_USD_Order_From_Frontend()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@66982506]" started-at="2023-02-11T22:59:34 IST" name="TC21_Place_WileyPLUS_USD_Order_From_Frontend" finished-at="2023-02-11T23:00:42 IST" duration-ms="68254" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC21_Place_WileyPLUS_USD_Order_From_Frontend -->
+        <test-method signature="TC22_Merge_Cart_Functionality()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@66982506]" started-at="2023-02-11T23:00:42 IST" name="TC22_Merge_Cart_Functionality" finished-at="2023-02-11T23:01:50 IST" duration-ms="67708" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC22_Merge_Cart_Functionality -->
+      </class> <!-- Test_Suite.WileyPLUS_Test_Suite -->
+      <class name="Test_Suite.Vet_Test_Suite">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.Vet_Test_Suite@536f2a7e]" started-at="2023-02-11T22:05:30 IST" name="initializeRepo" finished-at="2023-02-11T22:05:30 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="48" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initializeRepo -->
+        <test-method signature="TC20_Edit_Billing_address_in_my_account()[pri:0, instance:Test_Suite.Vet_Test_Suite@536f2a7e]" started-at="2023-02-11T22:08:52 IST" name="TC20_Edit_Billing_address_in_my_account" finished-at="2023-02-11T22:10:17 IST" duration-ms="85279" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC20_Edit_Billing_address_in_my_account -->
+        <test-method signature="TC21_Riskified_Declined_Order()[pri:0, instance:Test_Suite.Vet_Test_Suite@536f2a7e]" started-at="2023-02-11T22:10:17 IST" name="TC21_Riskified_Declined_Order" finished-at="2023-02-11T22:11:54 IST" duration-ms="96960" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC21_Riskified_Declined_Order -->
+      </class> <!-- Test_Suite.Vet_Test_Suite -->
+      <class name="Test_Suite.AGS_Test_Suite">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.AGS_Test_Suite@723ca036]" started-at="2023-02-11T22:05:22 IST" name="initiate" finished-at="2023-02-11T22:05:30 IST" duration-ms="8782" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@40943a6]]>
+                <![CDATA[org.testng.TestRunner@5da39ad8]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@1750fbeb]" started-at="2023-02-10T13:09:40 IST" name="launchBrowser" finished-at="2023-02-10T13:09:40 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="74" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.AGS_Test_Suite@723ca036]" started-at="2023-02-11T22:05:30 IST" name="initializeRepo" finished-at="2023-02-11T22:05:30 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="70" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- launchBrowser -->
-        <test-method signature="TC37_Generic_info_hover_text_EBook_PDP()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@1750fbeb]" started-at="2023-02-10T13:09:40 IST" name="TC37_Generic_info_hover_text_EBook_PDP" finished-at="2023-02-10T13:11:00 IST" duration-ms="79071" status="PASS">
+        </test-method> <!-- initializeRepo -->
+        <test-method signature="TC10_Place_Order_Non_US_Address()[pri:0, instance:Test_Suite.AGS_Test_Suite@723ca036]" started-at="2023-02-11T22:05:31 IST" name="TC10_Place_Order_Non_US_Address" finished-at="2023-02-11T22:08:52 IST" duration-ms="200801" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC37_Generic_info_hover_text_EBook_PDP -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@1750fbeb]" started-at="2023-02-10T13:11:00 IST" name="CloseBrowser" finished-at="2023-02-10T13:11:01 IST" duration-ms="1893" status="PASS">
+        </test-method> <!-- TC10_Place_Order_Non_US_Address -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.AGS_Test_Suite@723ca036]" started-at="2023-02-11T23:01:50 IST" name="CloseBrowser" finished-at="2023-02-11T23:01:57 IST" duration-ms="7182" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
-      </class> <!-- Test_Suite.Wiley_NA_Cart_Test_Suite -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+      </class> <!-- Test_Suite.AGS_Test_Suite -->
+    </test> <!-- Wiley_Test_Suite -->
+  </suite> <!-- PPE_Regression -->
 </testng-results>

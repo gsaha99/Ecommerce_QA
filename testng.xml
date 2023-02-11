@@ -5,39 +5,59 @@
     
     
     <classes>
-      <class name="Test_Suite.WEL_Test_Suite">
+      <class name="Test_Suite.AGS_Test_Suite">
       <methods>
 		 
-        <include name="TC15_.*" />
-        <include name="TC17_.*" />
+        <include name="TC10_.*" />
+        
+        </methods>
+      </class>
+      
+      <class name="Test_Suite.Vet_Test_Suite">
+      <methods>
+		 
+        <include name="TC20_.*" />
+        <include name="TC21_.*" />
+        
+        </methods>
+      </class>
+      
+      <class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
+      <methods>
+		 
+        <include name="TC01_.*" />
+        <include name="TC03_.*" />
         <include name="TC18_.*" />
+        <include name="TC20_.*" />
+        <include name="TC21_.*" />
         <include name="TC22_.*" />
+        <include name="TC23_.*" />
         <include name="TC24_.*" />
+        <include name="TC26_.*" />
         <include name="TC28_.*" />
-        <include name="TC29_.*" />
-        <include name="TC30_.*" />
         <include name="TC32_.*" />
-        <include name="TC34_.*" />
         <include name="TC35_.*" />
         <include name="TC36_.*" />
-        <include name="TC37_.*" />
-        <include name="TC38_.*" />
-        <include name="TC39_.*" />
-        <include name="TC40_.*" />
-        <include name="TC43_.*" />
-        <include name="TC44_.*" />
-        <include name="TC51_.*" />
-        <include name="TC52_.*" />
-        <include name="TC53_.*" />
-        <include name="TC61_.*" />
-        <include name="TC69_.*" />
-        <include name="TC70_.*" />
-        <include name="TC71_.*" />
-        <include name="TC72_.*" />
-        <include name="TC73_.*" />
-        <include name="TC79_.*" />
-        <include name="TC80_.*" />
-        <include name="TC81_.*" />
+        
+        </methods>
+      </class>
+      
+      <class name="Test_Suite.WileyPLUS_Test_Suite">
+      <methods>
+		 
+        <include name="TC01_.*" />
+        <include name="TC02_.*" />
+        <include name="TC05_.*" />
+        <include name="TC06_.*" />
+        <include name="TC13_.*" />
+        <include name="TC14_.*" />
+        <include name="TC15_.*" />
+        <include name="TC16_.*" />
+        <include name="TC17_.*" />
+        <include name="TC19_.*" />
+        <include name="TC20_.*" />
+        <include name="TC21_.*" />
+        <include name="TC22_.*" />
         
         </methods>
       </class>

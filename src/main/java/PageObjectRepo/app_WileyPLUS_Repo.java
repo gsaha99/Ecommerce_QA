@@ -988,6 +988,52 @@ public class app_WileyPLUS_Repo {
 		}
 	}
 	
+
+	/*
+	 * @Date: 02/01/23
+	 * @Description: Clicks on the country drop down in billing
+	 */
+	public void checkGlobalCountryListBilling(WebDriver driver,String countryList) throws IOException{
+		try {
+			//Total 6 countries are present in the datasheet
+			String[] countries=countryList.split(",");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			for(String country:countries) {
+				try {
+					String xpathOfCountry="//option[contains(text(),'"+country+"')]";
+					if(driver.findElement(By.xpath(xpathOfCountry)).isDisplayed()) {
+						try 
+						{
+							Select countryDropDown = new Select(SelectCountryDropDown);
+							countryDropDown.selectByVisibleText(country);
+						    /*WebElement selectedOption = countryDropDown.getFirstSelectedOption();
+							wait.until(ExpectedConditions.textToBePresentInElement(selectedOption, country));*/
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
+							Reporting.updateTestReport(country+" was present in the country dropdown and was selected",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						}
+						catch(Exception e){
+							Reporting.updateTestReport(country+" was present in the country dropdown"
+									+ " but couldn't be selected", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					}
+					else
+						Reporting.updateTestReport(country+" was not present in the country dropdown",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Global country list was not present in the country drop down ",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}
+			
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Global country list couldn't be validated ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
 	/*
 	 * @Date: 2/1/23
 	 * @Description: Checks if user is inthe shipping step or not
@@ -1496,7 +1542,9 @@ public class app_WileyPLUS_Repo {
 	 */
 	public void enterShippingCity(String shippingCity) throws IOException {
 		try {
+			Thread.sleep(1000);
 			ShippingCity.clear();
+			Thread.sleep(1000);
 			ShippingCity.sendKeys(shippingCity);
 			Reporting.updateTestReport("ShippingCity: " + shippingCity + " was entered successfully ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1512,8 +1560,6 @@ public class app_WileyPLUS_Repo {
 	 */
 	public void enterState(String state) throws IOException {
 		try {
-			
-			
 			SelectStateDropDown.clear();
 			SelectStateDropDown.sendKeys(state);
 			SelectStateDropDown.sendKeys(Keys.ENTER);

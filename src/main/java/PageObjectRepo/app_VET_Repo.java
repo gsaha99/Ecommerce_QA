@@ -505,8 +505,9 @@ public class app_VET_Repo {
 	 */
 	public void enterAddressLine1(String line1) throws IOException{
 		try {
+			Thread.sleep(1000);
 			AddressLine1.clear();
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			AddressLine1.sendKeys(line1);
 			Reporting.updateTestReport("Address line 1: "+line1+" was entered",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}

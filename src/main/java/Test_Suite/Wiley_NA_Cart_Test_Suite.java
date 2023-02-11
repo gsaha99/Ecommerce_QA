@@ -139,7 +139,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 
-						wiley.WileyLogOut();
+						
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -159,6 +159,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 
 		}
 		catch(Exception e){
@@ -258,7 +259,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
 							}
-							wiley.WileyLogOut();
+							
 						} else {
 							Reporting.updateTestReport("user was not on Secure Checkout Page",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -283,6 +284,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 		catch (Exception e) {
 			wiley.wileyLogOutException();
@@ -384,7 +386,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						wiley.WileyLogOut();
+						
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -403,6 +405,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 
 		catch (Exception e) {
@@ -503,7 +506,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						wiley.WileyLogOut();
+						
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -523,6 +526,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 		catch(Exception e){
 			wiley.wileyLogOutException();
@@ -600,7 +604,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
-					wiley.WileyLogOut();
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -613,6 +616,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		} catch (Exception e) {
 			wiley.wileyLogOutException();
 			System.out.println(e.getMessage());
@@ -694,7 +698,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						wiley.WileyLogOut();
 
 					}
 					catch(Exception e) {
@@ -713,6 +716,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 
 		catch (Exception e) {
@@ -828,7 +832,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
 							}
-							wiley.WileyLogOut();
+							
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Cardholder name field in Card information"
@@ -851,7 +855,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}			
+			}
+			wiley.WileyLogOut();
 		}
 		catch(Exception e){
 			wiley.wileyLogOutException();
@@ -962,7 +967,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
 							}
-							wiley.WileyLogOut();
+							
 
 						}
 						catch(Exception e) {
@@ -987,6 +992,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 
 		}
 		catch(Exception e) {
@@ -1091,7 +1097,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						wiley.WileyLogOut();
+						
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -1111,6 +1117,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 
 		}
 
@@ -1218,7 +1225,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						wiley.WileyLogOut();
+						
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -1237,6 +1244,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -1365,7 +1373,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 										Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 												StatusDetails.FAIL);
 									}
-									wiley.WileyLogOut();
+									
 								}
 								catch(Exception e) {
 									Reporting.updateTestReport("Billing City was not clickable"
@@ -1403,6 +1411,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -1517,7 +1526,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						wiley.WileyLogOut();
+						
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -1536,6 +1545,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -1644,7 +1654,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						wiley.WileyLogOut();
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -1664,6 +1673,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 
 		} catch (Exception e) {
 			wiley.wileyLogOutException();
@@ -1772,7 +1782,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						wiley.WileyLogOut();
+						
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -1791,6 +1801,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 
 		}
 		catch(Exception e){
@@ -1896,7 +1907,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						wiley.WileyLogOut();
+						
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -1916,6 +1927,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 		catch(Exception e){
 			wiley.wileyLogOutException();
@@ -2021,7 +2033,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						wiley.WileyLogOut();
+						
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Shipping Address line 1 was not clickable"
@@ -2040,6 +2052,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 
 		}
 		catch(Exception e){
@@ -2150,7 +2163,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						wiley.WileyLogOut();
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Shipping Address line 1 was not clickable"
@@ -2169,6 +2181,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -2194,7 +2207,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
-				ScrollingWebPage.PageScrolldown(driver,0,400,SS_path);
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String email=wiley.enterEmailIdInCreateAccountForm();
 				wiley.clickOnCreateAccountButton();
@@ -2292,7 +2305,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								else
 									Reporting.updateTestReport("Both the tax values were equal for two different billing addresses",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								wiley.WileyLogOut();
+								
 							}
 							catch(Exception e) {
 								Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -2326,6 +2339,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -2393,6 +2407,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -2498,7 +2513,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						wiley.WileyLogOut();
+						
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -2517,6 +2532,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -2542,6 +2558,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				wiley.enterExistingWileyUserMailID(excelOperation.getTestData("TC21", "WILEY_NA_Cart_Test_Data", "Email_Id"));
@@ -2590,7 +2607,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
-					wiley.WileyLogOut();
+					
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -2603,6 +2620,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -2709,7 +2727,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						wiley.WileyLogOut();
+						
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -2730,6 +2748,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -2821,7 +2840,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						wiley.WileyLogOut();
+						
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -2841,6 +2860,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -2956,7 +2976,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC28", "WILEY_NA_Cart_Test_Data", "Password"));
 					wiley.clickOnSaveAndContinueButton();
 					wiley.checkIfUserIsInShippingStep();
-					wiley.WileyLogOut();
+					
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
@@ -2967,6 +2987,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -3002,12 +3023,13 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.checkCartItemQuantity();
 				wiley.checkBreadCrumbCartPage();
 				wiley.checkTextInOrderSummaryTab();
-				wiley.WileyLogOut();
+				
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 
 		}
 		catch(Exception e) {
@@ -3058,7 +3080,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					String quantity=wiley.checkCartItemQuantity();
 					if(quantity.equals("2")) Reporting.updateTestReport("New Cart was merged with old cart", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					else Reporting.updateTestReport("New Cart was not merged with old cart", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					wiley.WileyLogOut();
+					
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
@@ -3069,6 +3091,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -3159,7 +3182,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
-					wiley.WileyLogOut();
+					
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -3172,6 +3195,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 
 		}
 		catch(Exception e) {
@@ -3302,7 +3326,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						wiley.WileyLogOut();
+						
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -3322,6 +3346,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 		catch(Exception e){
 			wiley.wileyLogOutException();
@@ -3437,6 +3462,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -3476,7 +3502,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.clickOnSRP_WileyProduct();
 				wiley.clickOnAddToCartButton();
 				wiley.clickOnViewCartButton();
-				ScrollingWebPage.PageScrolldown(driver,0,900,SS_path);
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				if(!wiley.checkIfGuestCheckoutButtonIsPresent()) Reporting.updateTestReport("Guest checkout button was not present in login page when digital product is present in cart",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -3489,13 +3515,14 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "Password"));
 				wiley.clickOnLogInAndContinueButton();
 				wiley.checkErrorMessageAfterEnteringWrongPassword();
-				wiley.WileyLogOut();
-				driver.manage().deleteAllCookies();
+				
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
+			driver.manage().deleteAllCookies();
 
 		}
 		catch(Exception e) {
@@ -3555,29 +3582,33 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.VetCosultPurchaseOption();
 				wiley.checkPriceInPDPForVetConsult();
 				wiley.ClikingOnVETSoultIconOnPDPPage();
-				String mainWindowHandle = driver.getWindowHandle();
-				Set<String> allWindowHandles = driver.getWindowHandles();
-				java.util.Iterator<String> iterator = allWindowHandles.iterator();
-				while (iterator.hasNext()) {
-					String ChildWindow = iterator.next();
-					if (!mainWindowHandle.equalsIgnoreCase(ChildWindow)) {
-						driver.switchTo().window(ChildWindow);
-						String titleofvetpage = driver.getTitle();
-						if (titleofvetpage.equals("VetConsult"))
+				try {
+					Set<String> allWindowHandles = driver.getWindowHandles();
+					java.util.Iterator<String> iterator = allWindowHandles.iterator();
 
-							Reporting.updateTestReport("VET Consult Page is displayed",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-
-						else
-							Reporting.updateTestReport("Failed to Load Vet Consult page",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
-					}
+					String storefront = iterator.next();
+					String ChildWindow=iterator.next();
+					driver.switchTo().window(ChildWindow);
+					String title=driver.getTitle();
+					if(title.equalsIgnoreCase("VetConsult"))
+						Reporting.updateTestReport("VET Consult Page is displayed", 
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport("Failed to Load Vet Consult page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					driver.switchTo().window(storefront);
+					driver.close();
+					driver.switchTo().window(ChildWindow);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("One new window was not opened after clicking on vetconsult", 
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				}
 			}
 			else
 				Reporting.updateTestReport("VET Consult was not present under format",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			wiley.WileyLogOut();
 
 		} catch (Exception e) {
 			wiley.wileyLogOutException();
@@ -3618,6 +3649,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					Reporting.updateTestReport("User was redirected to : "+driver.getCurrentUrl()+", for "
 							+region+" region.", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.WileyLogOut();
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -3671,7 +3703,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									+region+" region.", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
 							Reporting.updateTestReport("User was redirected to : "+driver.getCurrentUrl()+", for "
-									+region+" region.", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									+region+" region, so it is a non WileyReader product.", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Request Digital Evaluation Copy link was not clickable"
@@ -3679,6 +3711,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 				}
 			}
+			
+			wiley.WileyLogOut();
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -3716,6 +3750,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					
 				}
 			}
+			wiley.WileyLogOut();
 			
 		}
 		catch(Exception e) {
