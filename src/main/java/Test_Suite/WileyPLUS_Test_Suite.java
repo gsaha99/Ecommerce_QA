@@ -1149,6 +1149,9 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 									presenceOfElementLocated
 									(By.xpath("//p[contains(text(),' Your Cart')]")));
 							WileyPLUS.checkIfUserIsOnCartPage(driver);
+							ScrollingWebPage.PageScrolldown(driver,0,800,SS_path);
+							wait.until(ExpectedConditions.
+									elementToBeClickable(By.xpath("(//button[@id='continue-shopping-button'])[2]")));
 							WileyPLUS.clickOnContinueShoppingButton();
 							try {
 								wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -1178,7 +1181,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 											wait.until(ExpectedConditions.presenceOfElementLocated(
 													By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing, Education and Research')]")));
 											wait.until(ExpectedConditions.visibilityOfElementLocated(
-													By.xpath("//a[@href='/']/img[@class='brand-logo']")));
+													By.xpath("//img[@alt='Wiley Consumer Logo']")));
 											Reporting.updateTestReport("Wiley Storefront homepage was opened after clicking on continue shopping button"
 													+ " when the last added product was wiley.com",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1530,7 +1533,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 							By.xpath("//span[contains(text(),'add course')]")));
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
-					WileyPLUS.enterCourseSectionId("A77549");
+					WileyPLUS.enterCourseSectionId("A79129");
 					WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(

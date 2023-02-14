@@ -3,41 +3,14 @@
 <suite name="PPE_Regression">
   <test thread-count="5" name="Wiley_Test_Suite">
     
-    
     <classes>
-      <class name="Test_Suite.AGS_Test_Suite">
-      <methods>
-		 
-        <include name="TC10_.*" />
-        
-        </methods>
-      </class>
-      
-      <class name="Test_Suite.Vet_Test_Suite">
-      <methods>
-		 
-        <include name="TC20_.*" />
-        <include name="TC21_.*" />
-        
-        </methods>
-      </class>
       
       <class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
       <methods>
 		 
-        <include name="TC01_.*" />
-        <include name="TC03_.*" />
-        <include name="TC18_.*" />
-        <include name="TC20_.*" />
-        <include name="TC21_.*" />
-        <include name="TC22_.*" />
-        <include name="TC23_.*" />
-        <include name="TC24_.*" />
-        <include name="TC26_.*" />
+        
         <include name="TC28_.*" />
-        <include name="TC32_.*" />
-        <include name="TC35_.*" />
-        <include name="TC36_.*" />
+       
         
         </methods>
       </class>
@@ -45,12 +18,7 @@
       <class name="Test_Suite.WileyPLUS_Test_Suite">
       <methods>
 		 
-        <include name="TC01_.*" />
-        <include name="TC02_.*" />
-        <include name="TC05_.*" />
-        <include name="TC06_.*" />
-        <include name="TC13_.*" />
-        <include name="TC14_.*" />
+        
         <include name="TC15_.*" />
         <include name="TC16_.*" />
         <include name="TC17_.*" />

@@ -81,64 +81,65 @@ public class AGS_Test_Suite extends DriverModule {
 							try {
 								wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(text(), 'State')]")));
 								AGS.enterState(excelOperation.getTestData("TC01", "AGS_Test_Data", "State"));
-								AGS.enterZip(excelOperation.getTestData("TC01", "AGS_Test_Data", "Zip_Code"));
-								AGS.enterPhoneNumber(excelOperation.getTestData("TC01", "AGS_Test_Data", "Phone_Number"));
-								AGS.checkBoxBilling();
-								AGS.continueToCardDetailsPage();
-								String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
-								System.out.println(payment_gateway);
-								if (payment_gateway.contains("WPG")) {
-									/* WPG Code */
-									PaymentGateway.paymentWPG_AGS(driver, AGS, "TC01", SS_path);
-								} else {
-									/** WPS Code **/
-									PaymentGateway.paymentWPS_AGS(driver, AGS, "TC01", SS_path);
-								}
-								try {
-									wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
-									String OrderConfirmationPage = driver.getTitle().trim();
-									if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | AGS Site")) {
-										String orderID = AGS.fetchOrderId();
-										String tax = AGS.fetchTax();
-										String total = AGS.fetchTotal();
-										excelOperation.updateTestData("TC01", "AGS_Test_Data", "Order_Id", orderID);
-										excelOperation.updateTestData("TC01", "AGS_Test_Data", "Tax", tax);
-										excelOperation.updateTestData("TC01", "AGS_Test_Data", "Total", total);
-										excelOperation.updateTestData("TC01", "AGS_Test_Data", "Email_Id", email);
-										excelOperation.updateTestData("TC09", "AGS_Test_Data", "Email_Id", email);
-										excelOperation.updateTestData("TC11", "AGS_Test_Data", "Email_Id", email);
-										excelOperation.updateTestData("TC12", "AGS_Test_Data", "Email_Id", email);
-										AGS.logOut(driver);
-										driver.get(excelOperation.getTestData("Yopmail_URL",
-												"Generic_Dataset", "Data"));
-										AGS.enterEmailIdInYopmail(email);
-										AGS.clickOnArrowButton();
-										if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
-											Reporting.updateTestReport("Order Confirmation mail was received",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-											OrderConfirmationMail.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
-										}
-										else {
-											Reporting.updateTestReport("Order Confirmation mail was not received",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
-										}
-									}
-									else
-										Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-												StatusDetails.FAIL);
-								}
-
-								catch(Exception e)
-								{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-										StatusDetails.FAIL);
-								AGS.logOut(driver);}
 							}
 							catch(Exception e){
 								Reporting.updateTestReport("State field was not present for this country: "
 										+excelOperation.getTestData("TC01", "AGS_Test_Data", "Country"),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 							}
+							AGS.enterZip(excelOperation.getTestData("TC01", "AGS_Test_Data", "Zip_Code"));
+							AGS.enterPhoneNumber(excelOperation.getTestData("TC01", "AGS_Test_Data", "Phone_Number"));
+							AGS.checkBoxBilling();
+							AGS.continueToCardDetailsPage();
+							String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
+							System.out.println(payment_gateway);
+							if (payment_gateway.contains("WPG")) {
+								/* WPG Code */
+								PaymentGateway.paymentWPG_AGS(driver, AGS, "TC01", SS_path);
+							} else {
+								/** WPS Code **/
+								PaymentGateway.paymentWPS_AGS(driver, AGS, "TC01", SS_path);
+							}
+							try {
+								wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
+								String OrderConfirmationPage = driver.getTitle().trim();
+								if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | AGS Site")) {
+									String orderID = AGS.fetchOrderId();
+									String tax = AGS.fetchTax();
+									String total = AGS.fetchTotal();
+									excelOperation.updateTestData("TC01", "AGS_Test_Data", "Order_Id", orderID);
+									excelOperation.updateTestData("TC01", "AGS_Test_Data", "Tax", tax);
+									excelOperation.updateTestData("TC01", "AGS_Test_Data", "Total", total);
+									excelOperation.updateTestData("TC01", "AGS_Test_Data", "Email_Id", email);
+									excelOperation.updateTestData("TC09", "AGS_Test_Data", "Email_Id", email);
+									excelOperation.updateTestData("TC11", "AGS_Test_Data", "Email_Id", email);
+									excelOperation.updateTestData("TC12", "AGS_Test_Data", "Email_Id", email);
+									AGS.logOut(driver);
+									driver.get(excelOperation.getTestData("Yopmail_URL",
+											"Generic_Dataset", "Data"));
+									AGS.enterEmailIdInYopmail(email);
+									AGS.clickOnArrowButton();
+									if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+										Reporting.updateTestReport("Order Confirmation mail was received",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										OrderConfirmationMail.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
+									}
+									else {
+										Reporting.updateTestReport("Order Confirmation mail was not received",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+									}
+								}
+								else
+									Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+											StatusDetails.FAIL);
+							}
+
+							catch(Exception e)
+							{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+							AGS.logOut(driver);}
+
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Address line 1 was not loaded and caused timeout exception",
@@ -158,7 +159,7 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
@@ -208,59 +209,60 @@ public class AGS_Test_Suite extends DriverModule {
 							try {
 								wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(text(), 'State')]")));
 								AGS.enterState(excelOperation.getTestData("TC02", "AGS_Test_Data", "State"));
-								AGS.enterZip(excelOperation.getTestData("TC02", "AGS_Test_Data", "Zip_Code"));
-								AGS.enterPhoneNumber(excelOperation.getTestData("TC02", "AGS_Test_Data", "Phone_Number"));
-								AGS.checkBoxBilling();
-								AGS.continueToCardDetailsPage();
-								String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
-								System.out.println(payment_gateway);
-								if (payment_gateway.contains("WPG")) {
-									/* WPG Code */
-									PaymentGateway.paymentWPG_AGS(driver, AGS, "TC02", SS_path);
-								} else {
-									/** WPS Code **/
-									PaymentGateway.paymentWPS_AGS(driver, AGS, "TC02", SS_path);
-								}
-								try {
-									wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
-									String OrderConfirmationPage = driver.getTitle().trim();
-									if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | AGS Site")) {
-										String orderID = AGS.fetchOrderId();
-										String tax = AGS.fetchTax();
-										String total = AGS.fetchTotal();
-										excelOperation.updateTestData("TC02", "AGS_Test_Data", "Order_Id", orderID);
-										excelOperation.updateTestData("TC02", "AGS_Test_Data", "Tax", tax);
-										excelOperation.updateTestData("TC02", "AGS_Test_Data", "Total", total);
-										excelOperation.updateTestData("TC02", "AGS_Test_Data", "Email_Id", email);
-										AGS.logOut(driver);
-										driver.get(excelOperation.getTestData("Yopmail_URL",
-												"Generic_Dataset", "Data"));
-										AGS.enterEmailIdInYopmail(email);
-										AGS.clickOnArrowButton();
-										if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
-											Reporting.updateTestReport("Order Confirmation mail was received",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-											OrderConfirmationMail.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
-										}
-										else {
-											Reporting.updateTestReport("Order Confirmation mail was not received",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
-									}
-									else
-										Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-												StatusDetails.FAIL);
-								}
-								catch(Exception e)
-								{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-										StatusDetails.FAIL);
-								AGS.logOut(driver);}
 							}
 							catch(Exception e){
 								Reporting.updateTestReport("State field was not present for this country: "
 										+excelOperation.getTestData("TC02", "AGS_Test_Data", "Country"),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 							}
+							AGS.enterZip(excelOperation.getTestData("TC02", "AGS_Test_Data", "Zip_Code"));
+							AGS.enterPhoneNumber(excelOperation.getTestData("TC02", "AGS_Test_Data", "Phone_Number"));
+							AGS.checkBoxBilling();
+							AGS.continueToCardDetailsPage();
+							String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
+							System.out.println(payment_gateway);
+							if (payment_gateway.contains("WPG")) {
+								/* WPG Code */
+								PaymentGateway.paymentWPG_AGS(driver, AGS, "TC02", SS_path);
+							} else {
+								/** WPS Code **/
+								PaymentGateway.paymentWPS_AGS(driver, AGS, "TC02", SS_path);
+							}
+							try {
+								wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
+								String OrderConfirmationPage = driver.getTitle().trim();
+								if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | AGS Site")) {
+									String orderID = AGS.fetchOrderId();
+									String tax = AGS.fetchTax();
+									String total = AGS.fetchTotal();
+									excelOperation.updateTestData("TC02", "AGS_Test_Data", "Order_Id", orderID);
+									excelOperation.updateTestData("TC02", "AGS_Test_Data", "Tax", tax);
+									excelOperation.updateTestData("TC02", "AGS_Test_Data", "Total", total);
+									excelOperation.updateTestData("TC02", "AGS_Test_Data", "Email_Id", email);
+									AGS.logOut(driver);
+									driver.get(excelOperation.getTestData("Yopmail_URL",
+											"Generic_Dataset", "Data"));
+									AGS.enterEmailIdInYopmail(email);
+									AGS.clickOnArrowButton();
+									if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+										Reporting.updateTestReport("Order Confirmation mail was received",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										OrderConfirmationMail.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
+									}
+									else {
+										Reporting.updateTestReport("Order Confirmation mail was not received",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+								}
+								else
+									Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+											StatusDetails.FAIL);
+							}
+							catch(Exception e)
+							{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+							AGS.logOut(driver);}
+
 						} catch (Exception e) {
 							Reporting.updateTestReport("Billing address page was not loaded and caused timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -279,7 +281,7 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			
+
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -333,7 +335,7 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Account couldn't be  created", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
-			
+
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -446,7 +448,7 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("No reset password mail was recieved in yopmail inbox", 
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			
+
 
 		} catch (Exception e) {
 			AGS.logOut(driver);
@@ -516,7 +518,7 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			
+
 		}
 		catch(Exception e) {
 			AGS.logOut(driver);
@@ -566,64 +568,65 @@ public class AGS_Test_Suite extends DriverModule {
 							try {
 								wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(text(), 'State')]")));
 								AGS.enterState(excelOperation.getTestData("TC07", "AGS_Test_Data", "State"));
-								AGS.enterZip(excelOperation.getTestData("TC07", "AGS_Test_Data", "Zip_Code"));
-								AGS.enterPhoneNumber(excelOperation.getTestData("TC07", "AGS_Test_Data", "Phone_Number"));
-								AGS.checkBoxBilling();
-								AGS.continueToCardDetailsPage();
-								String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
-								System.out.println(payment_gateway);
-								if (payment_gateway.contains("WPG")) {
-									/* WPG Code */
-									PaymentGateway.paymentWPG_AGS(driver, AGS, "TC07", SS_path);
-								} else {
-									/** WPS Code **/
-									PaymentGateway.paymentWPS_AGS(driver, AGS, "TC07", SS_path);
-
-								}
-								try {
-									wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
-									String OrderConfirmationPage = driver.getTitle().trim();
-									if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | AGS Site")) {
-										String orderID = AGS.fetchOrderId();
-										String tax = AGS.fetchTax();
-										String total = AGS.fetchTotal();
-										excelOperation.updateTestData("TC07", "AGS_Test_Data", "Order_Id", orderID);
-										excelOperation.updateTestData("TC07", "AGS_Test_Data", "Tax", tax);
-										excelOperation.updateTestData("TC07", "AGS_Test_Data", "Total", total);
-										excelOperation.updateTestData("TC07", "AGS_Test_Data", "Email_Id", email);
-										excelOperation.updateTestData("TC14", "AGS_Test_Data", "Email_Id", email);
-										AGS.logOut(driver);
-										driver.get(excelOperation.getTestData("Yopmail_URL",
-												"Generic_Dataset", "Data"));
-										AGS.enterEmailIdInYopmail(email);
-										AGS.clickOnArrowButton();
-										if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
-											Reporting.updateTestReport("Order Confirmation mail was received",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-											OrderConfirmationMail.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
-										}
-										else {
-											Reporting.updateTestReport("Order Confirmation mail was not received",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
-									}
-
-									else
-									{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-											StatusDetails.FAIL);
-									AGS.logOut(driver);}
-
-								}
-								catch(Exception e) {
-									Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-											StatusDetails.FAIL);
-								}
 							}
 							catch(Exception e){
 								Reporting.updateTestReport("State field was not present for this country: "
-										+excelOperation.getTestData("TC07", "AGS_Test_Data", "Country"),
-										CaptureScreenshot.getScreenshot(SS_path),StatusDetails.INFO);
+										+excelOperation.getTestData("TC01", "AGS_Test_Data", "Country"),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 							}
+							AGS.enterZip(excelOperation.getTestData("TC07", "AGS_Test_Data", "Zip_Code"));
+							AGS.enterPhoneNumber(excelOperation.getTestData("TC07", "AGS_Test_Data", "Phone_Number"));
+							AGS.checkBoxBilling();
+							AGS.continueToCardDetailsPage();
+							String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
+							System.out.println(payment_gateway);
+							if (payment_gateway.contains("WPG")) {
+								/* WPG Code */
+								PaymentGateway.paymentWPG_AGS(driver, AGS, "TC07", SS_path);
+							} else {
+								/** WPS Code **/
+								PaymentGateway.paymentWPS_AGS(driver, AGS, "TC07", SS_path);
+
+							}
+							try {
+								wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
+								String OrderConfirmationPage = driver.getTitle().trim();
+								if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | AGS Site")) {
+									String orderID = AGS.fetchOrderId();
+									String tax = AGS.fetchTax();
+									String total = AGS.fetchTotal();
+									excelOperation.updateTestData("TC07", "AGS_Test_Data", "Order_Id", orderID);
+									excelOperation.updateTestData("TC07", "AGS_Test_Data", "Tax", tax);
+									excelOperation.updateTestData("TC07", "AGS_Test_Data", "Total", total);
+									excelOperation.updateTestData("TC07", "AGS_Test_Data", "Email_Id", email);
+									excelOperation.updateTestData("TC14", "AGS_Test_Data", "Email_Id", email);
+									AGS.logOut(driver);
+									driver.get(excelOperation.getTestData("Yopmail_URL",
+											"Generic_Dataset", "Data"));
+									AGS.enterEmailIdInYopmail(email);
+									AGS.clickOnArrowButton();
+									if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+										Reporting.updateTestReport("Order Confirmation mail was received",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										OrderConfirmationMail.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
+									}
+									else {
+										Reporting.updateTestReport("Order Confirmation mail was not received",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+								}
+
+								else
+								{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+										StatusDetails.FAIL);
+								AGS.logOut(driver);}
+
+							}
+							catch(Exception e) {
+								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+										StatusDetails.FAIL);
+							}
+
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Address line 1 was not loaded and caused timeout exception",
@@ -692,61 +695,61 @@ public class AGS_Test_Suite extends DriverModule {
 							try {
 								wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(text(), 'State')]")));
 								AGS.enterState(excelOperation.getTestData("TC08", "AGS_Test_Data", "State"));
-								AGS.enterZip(excelOperation.getTestData("TC08", "AGS_Test_Data", "Zip_Code"));
-								AGS.enterPhoneNumber(excelOperation.getTestData("TC08", "AGS_Test_Data", "Phone_Number"));
-								AGS.checkBoxBilling();
-								AGS.continueToCardDetailsPage();
-								String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
-								System.out.println(payment_gateway);
-								if (payment_gateway.contains("WPG")) {
-									/* WPG Code */
-									PaymentGateway.paymentWPG_AGS(driver, AGS, "TC08", SS_path);
-								} else {
-									/** WPS Code **/
-									PaymentGateway.paymentWPS_AGS(driver, AGS, "TC08", SS_path);
-
-								}
-								try {
-									wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
-									String OrderConfirmationPage = driver.getTitle().trim();
-									if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | AGS Site")) {
-										String orderID = AGS.fetchOrderId();
-										String tax = AGS.fetchTax();
-										String total = AGS.fetchTotal();
-										excelOperation.updateTestData("TC08", "AGS_Test_Data", "Order_Id", orderID);
-										excelOperation.updateTestData("TC08", "AGS_Test_Data", "Tax", tax);
-										excelOperation.updateTestData("TC08", "AGS_Test_Data", "Total", total);
-										excelOperation.updateTestData("TC08", "AGS_Test_Data", "Email_Id", email);
-										excelOperation.updateTestData("TC13", "AGS_Test_Data", "Email_Id", email);
-										AGS.logOut(driver);
-										driver.get(excelOperation.getTestData("Yopmail_URL",
-												"Generic_Dataset", "Data"));
-										AGS.enterEmailIdInYopmail(email);
-										AGS.clickOnArrowButton();
-										if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
-											Reporting.updateTestReport("Order Confirmation mail was received",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-											OrderConfirmationMail.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
-										}
-										else {
-											Reporting.updateTestReport("Order Confirmation mail was not received",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
-									}
-									else
-										Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-												StatusDetails.FAIL);
-								}
-								catch(Exception e)
-								{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-										StatusDetails.FAIL);
-								AGS.logOut(driver);}
 							}
 							catch(Exception e){
 								Reporting.updateTestReport("State field was not present for this country: "
 										+excelOperation.getTestData("TC08", "AGS_Test_Data", "Country"),
-										CaptureScreenshot.getScreenshot(SS_path),StatusDetails.INFO);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 							}
+							AGS.enterZip(excelOperation.getTestData("TC08", "AGS_Test_Data", "Zip_Code"));
+							AGS.enterPhoneNumber(excelOperation.getTestData("TC08", "AGS_Test_Data", "Phone_Number"));
+							AGS.checkBoxBilling();
+							AGS.continueToCardDetailsPage();
+							String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
+							System.out.println(payment_gateway);
+							if (payment_gateway.contains("WPG")) {
+								/* WPG Code */
+								PaymentGateway.paymentWPG_AGS(driver, AGS, "TC08", SS_path);
+							} else {
+								/** WPS Code **/
+								PaymentGateway.paymentWPS_AGS(driver, AGS, "TC08", SS_path);
+
+							}
+							try {
+								wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
+								String OrderConfirmationPage = driver.getTitle().trim();
+								if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | AGS Site")) {
+									String orderID = AGS.fetchOrderId();
+									String tax = AGS.fetchTax();
+									String total = AGS.fetchTotal();
+									excelOperation.updateTestData("TC08", "AGS_Test_Data", "Order_Id", orderID);
+									excelOperation.updateTestData("TC08", "AGS_Test_Data", "Tax", tax);
+									excelOperation.updateTestData("TC08", "AGS_Test_Data", "Total", total);
+									excelOperation.updateTestData("TC08", "AGS_Test_Data", "Email_Id", email);
+									excelOperation.updateTestData("TC13", "AGS_Test_Data", "Email_Id", email);
+									AGS.logOut(driver);
+									driver.get(excelOperation.getTestData("Yopmail_URL",
+											"Generic_Dataset", "Data"));
+									AGS.enterEmailIdInYopmail(email);
+									AGS.clickOnArrowButton();
+									if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+										Reporting.updateTestReport("Order Confirmation mail was received",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										OrderConfirmationMail.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
+									}
+									else {
+										Reporting.updateTestReport("Order Confirmation mail was not received",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+								}
+								else
+									Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+											StatusDetails.FAIL);
+							}
+							catch(Exception e)
+							{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+							AGS.logOut(driver);}
 
 						}
 						catch(Exception e) {
@@ -766,7 +769,7 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			
+
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -817,46 +820,47 @@ public class AGS_Test_Suite extends DriverModule {
 								try {
 									wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(text(), 'State')]")));
 									AGS.enterState(excelOperation.getTestData("TC09", "AGS_Test_Data", "State"));
-									AGS.enterZip(excelOperation.getTestData("TC09", "AGS_Test_Data", "Zip_Code"));
-									AGS.enterPhoneNumber(excelOperation.getTestData("TC09", "AGS_Test_Data", "Phone_Number"));
-									AGS.checkBoxBilling();
-									AGS.continueToCardDetailsPage();
-									String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
-									System.out.println(payment_gateway);
-									if (payment_gateway.contains("WPG")) {
-										/* WPG Code */
-										PaymentGateway.paymentWPG_AGS(driver, AGS, "TC09", SS_path);
-									} else {
-										/** WPS Code **/
-										PaymentGateway.paymentWPS_AGS(driver, AGS, "TC09", SS_path);
-
-									}
-									try {
-										wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
-										String OrderConfirmationPage = driver.getTitle().trim();
-										if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | AGS Site")) {
-											String orderID = AGS.fetchOrderId();
-											String tax = AGS.fetchTax();
-											String total = AGS.fetchTotal();
-											excelOperation.updateTestData("TC09", "AGS_Test_Data", "Order_Id", orderID);
-											excelOperation.updateTestData("TC09", "AGS_Test_Data", "Tax", tax);
-											excelOperation.updateTestData("TC09", "AGS_Test_Data", "Total", total);
-										}
-										else 
-											Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-													StatusDetails.FAIL);
-										AGS.logOut(driver);
-									}
-									catch(Exception e) {
-										Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-												StatusDetails.FAIL);
-									}
 								}
 								catch(Exception e){
 									Reporting.updateTestReport("State field was not present for this country: "
 											+excelOperation.getTestData("TC09", "AGS_Test_Data", "Country"),
-											CaptureScreenshot.getScreenshot(SS_path),StatusDetails.INFO);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 								}
+								AGS.enterZip(excelOperation.getTestData("TC09", "AGS_Test_Data", "Zip_Code"));
+								AGS.enterPhoneNumber(excelOperation.getTestData("TC09", "AGS_Test_Data", "Phone_Number"));
+								AGS.checkBoxBilling();
+								AGS.continueToCardDetailsPage();
+								String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
+								System.out.println(payment_gateway);
+								if (payment_gateway.contains("WPG")) {
+									/* WPG Code */
+									PaymentGateway.paymentWPG_AGS(driver, AGS, "TC09", SS_path);
+								} else {
+									/** WPS Code **/
+									PaymentGateway.paymentWPS_AGS(driver, AGS, "TC09", SS_path);
+
+								}
+								try {
+									wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
+									String OrderConfirmationPage = driver.getTitle().trim();
+									if (OrderConfirmationPage.equalsIgnoreCase("Order Confirmation | AGS Site")) {
+										String orderID = AGS.fetchOrderId();
+										String tax = AGS.fetchTax();
+										String total = AGS.fetchTotal();
+										excelOperation.updateTestData("TC09", "AGS_Test_Data", "Order_Id", orderID);
+										excelOperation.updateTestData("TC09", "AGS_Test_Data", "Tax", tax);
+										excelOperation.updateTestData("TC09", "AGS_Test_Data", "Total", total);
+									}
+									else 
+										Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+												StatusDetails.FAIL);
+									AGS.logOut(driver);
+								}
+								catch(Exception e) {
+									Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+											StatusDetails.FAIL);
+								}
+
 							}
 							catch(Exception e) {
 								Reporting.updateTestReport("Address line 1 was not loaded"
@@ -879,7 +883,7 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			
+
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -981,271 +985,278 @@ public class AGS_Test_Suite extends DriverModule {
 							{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 							AGS.logOut(driver);}
-						
 
 
 
-					}
-					catch(Exception e) {
-						Reporting.updateTestReport("Address line 1 was not loaded and caused timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path),
-								StatusDetails.FAIL);
+
+						}
+						catch(Exception e) {
+							Reporting.updateTestReport("Address line 1 was not loaded and caused timeout exception",
+									CaptureScreenshot.getScreenshot(SS_path),
+									StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Billing address page was not loaded and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				} catch (Exception e) {
-					Reporting.updateTestReport("Billing address page was not loaded and caused timeout exception",
+					Reporting.updateTestReport("Create Account / Login page was not loaded and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			} catch (Exception e) {
-				Reporting.updateTestReport("Create Account / Login page was not loaded and caused timeout exception",
+				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-		} catch (Exception e) {
-			Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
+
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			AGS.logOut(driver);
+
 		}
-		
 	}
-	catch (Exception e) {
-		System.out.println(e.getMessage());
-		Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
-				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		AGS.logOut(driver);
 
-	}
-}
-
-/*
- * @Description: Edits the name in edit profile, my account section
- * 
- * @Date: 19/12/22
- */
-@Test
-public void TC11_Edit_Profile() throws IOException {
-	try {
-		Reporting.test = Reporting.extent.createTest("TC11_Edit_Profile");
-		driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-		driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-		driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
-		AGS.enterExistingUserId(excelOperation.getTestData("TC11", "AGS_Test_Data", "Email_Id"));
-		AGS.enterExistingUserPassword(excelOperation.getTestData("TC11", "AGS_Test_Data", "Password"));
-		AGS.clickOnLoginButton();
-		AGS.isMyAccountPage();
-		String editProfilePage=driver.getTitle().trim();
-		if (editProfilePage.equalsIgnoreCase("Edit Profile | AGS Site")) {
-			AGS.editProfileLastName(excelOperation.getTestData("TC11", "AGS_Test_Data", "Last_Name"));
-			AGS.clickOnMyAcountSaveButton();
-			Thread.sleep(1000);
-			AGS.checkAlertMessageAfterUserDataUpdation();
-		}
-		else
-			Reporting.updateTestReport("User was not on edit profile page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		AGS.logOut(driver);
-
-	} catch (Exception e) {
-		System.out.println(e.getMessage());
-		Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
-				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		AGS.logOut(driver);
-
-	}
-}
-
-/*
- * @Description: Edits the billing address in edit payment, my account section
- * 
- * @Date: 19/12/22
- */
-@Test
-public void TC12_Edit_Billing_Address() throws IOException {
-	try {
-		Reporting.test = Reporting.extent.createTest("TC12_Edit_Billing_Address");
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-		driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-		driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
-		AGS.enterExistingUserId(excelOperation.getTestData("TC12", "AGS_Test_Data", "Email_Id"));
-		AGS.enterExistingUserPassword(excelOperation.getTestData("TC12", "AGS_Test_Data", "Password"));
-		AGS.clickOnLoginButton();
-		AGS.isMyAccountPage();
-		AGS.clickOnEditPayment();
-		AGS.enterBillingFirstName(excelOperation.getTestData("TC12", "AGS_Test_Data", "First_Name"));
-		AGS.enterBillingLastName(excelOperation.getTestData("TC12", "AGS_Test_Data", "Last_Name"));
-		AGS.selectCountry(excelOperation.getTestData("TC12", "AGS_Test_Data", "Country"));
+	/*
+	 * @Description: Edits the name in edit profile, my account section
+	 * 
+	 * @Date: 19/12/22
+	 */
+	@Test
+	public void TC11_Edit_Profile() throws IOException {
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(By.id("addressLine1")));
-			AGS.enterAddressLine1(excelOperation.getTestData("TC12", "AGS_Test_Data", "Address_line1"));
-			AGS.enterCity(excelOperation.getTestData("TC12", "AGS_Test_Data", "City"));
+			Reporting.test = Reporting.extent.createTest("TC11_Edit_Profile");
+			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
+			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
+			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			AGS.enterExistingUserId(excelOperation.getTestData("TC11", "AGS_Test_Data", "Email_Id"));
+			AGS.enterExistingUserPassword(excelOperation.getTestData("TC11", "AGS_Test_Data", "Password"));
+			AGS.clickOnLoginButton();
+			AGS.isMyAccountPage();
+			String editProfilePage=driver.getTitle().trim();
+			if (editProfilePage.equalsIgnoreCase("Edit Profile | AGS Site")) {
+				AGS.editProfileLastName(excelOperation.getTestData("TC11", "AGS_Test_Data", "Last_Name"));
+				AGS.clickOnMyAcountSaveButton();
+				Thread.sleep(1000);
+				AGS.checkAlertMessageAfterUserDataUpdation();
+			}
+			else
+				Reporting.updateTestReport("User was not on edit profile page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			AGS.logOut(driver);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			AGS.logOut(driver);
+
+		}
+	}
+
+	/*
+	 * @Description: Edits the billing address in edit payment, my account section
+	 * 
+	 * @Date: 19/12/22
+	 */
+	@Test
+	public void TC12_Edit_Billing_Address() throws IOException {
+		try {
+			Reporting.test = Reporting.extent.createTest("TC12_Edit_Billing_Address");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
+			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
+			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			AGS.enterExistingUserId(excelOperation.getTestData("TC12", "AGS_Test_Data", "Email_Id"));
+			AGS.enterExistingUserPassword(excelOperation.getTestData("TC12", "AGS_Test_Data", "Password"));
+			AGS.clickOnLoginButton();
+			AGS.isMyAccountPage();
+			AGS.clickOnEditPayment();
+			AGS.enterBillingFirstName(excelOperation.getTestData("TC12", "AGS_Test_Data", "First_Name"));
+			AGS.enterBillingLastName(excelOperation.getTestData("TC12", "AGS_Test_Data", "Last_Name"));
+			AGS.selectCountry(excelOperation.getTestData("TC12", "AGS_Test_Data", "Country"));
 			try {
-				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(text(), 'State')]")));
-				AGS.enterState(excelOperation.getTestData("TC12", "AGS_Test_Data", "State"));
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("addressLine1")));
+				AGS.enterAddressLine1(excelOperation.getTestData("TC12", "AGS_Test_Data", "Address_line1"));
+				AGS.enterCity(excelOperation.getTestData("TC12", "AGS_Test_Data", "City"));
+				try {
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(text(), 'State')]")));
+					AGS.enterState(excelOperation.getTestData("TC12", "AGS_Test_Data", "State"));
+				}
+				catch(Exception e){
+					System.out.println("State field was not present for this country: "+excelOperation.getTestData("TC12", "AGS_Test_Data", "Country"));
+				}
 				AGS.enterZip(excelOperation.getTestData("TC12", "AGS_Test_Data", "Zip_Code"));
 				AGS.enterPhoneNumber(excelOperation.getTestData("TC12", "AGS_Test_Data", "Phone_Number"));
 				Thread.sleep(1000);
 				AGS.clickOnMyAcountSaveButton();
 				AGS.checkAlertMessageAfterUserDataUpdation();
 
+
+
 			}
-			catch(Exception e){
-				System.out.println("State field was not present for this country: "+excelOperation.getTestData("TC12", "AGS_Test_Data", "Country"));
+			catch(Exception e)
+			{
+				Reporting.updateTestReport("Address line 1 was not loaded and caused"
+						+ "timeout exception", CaptureScreenshot.getScreenshot(SS_path),
+						StatusDetails.FAIL);
 			}
 
 		}
-		catch(Exception e)
-		{
-			Reporting.updateTestReport("Address line 1 was not loaded and caused"
-					+ "timeout exception", CaptureScreenshot.getScreenshot(SS_path),
-					StatusDetails.FAIL);
-		}
-		
-	}
-	catch (Exception e) {
-		System.out.println(e.getMessage());
-		Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
-				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		AGS.logOut(driver);
-
-	}
-}
-
-/*
- * @Description: Edits the card details in edit payment, my account section
- * 
- * @Date: 19/12/22
- */
-@Test
-public void TC13_Edit_Card_Details() throws IOException {
-	try {
-		Reporting.test = Reporting.extent.createTest("TC13_Edit_Card_Details");
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-		driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-		driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
-		AGS.enterExistingUserId(excelOperation.getTestData("TC13", "AGS_Test_Data", "Email_Id"));
-		AGS.enterExistingUserPassword(excelOperation.getTestData("TC13", "AGS_Test_Data", "Password"));
-		AGS.clickOnLoginButton();
-		AGS.isMyAccountPage();
-		AGS.clickOnEditPayment();
-		Thread.sleep(1000);
-		AGS.clickOnUpdateCreditCardButton();
-		try{
-			wait.until(ExpectedConditions.presenceOfElementLocated(
-					By.xpath("//div[contains(text(),'Change the credit card on"
-							+ " file by entering a new one ')]")));
-			String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
-			if (payment_gateway.contains("WPG")) {
-
-				PaymentGateway.paymentWPG_AGS(driver, AGS, "TC13", SS_path);
-			} else {
-
-				PaymentGateway.paymentWPS_AGS(driver, AGS, "TC13", SS_path);
-			}
-			String lastFourFetchedFromEditPayment=AGS.fetchLastFourCardNumberDigit();
-			String input = excelOperation.getTestData("TC13", "AGS_Test_Data", "Card_Number");
-			String lastFourChars = "";  
-
-			if (input.length() > 4) {
-				lastFourChars = input.substring(input.length() - 4);
-			} else {
-				lastFourChars = input;
-			}
-			if(lastFourFetchedFromEditPayment.equalsIgnoreCase(lastFourChars)) {
-				Reporting.updateTestReport("The credit card details were updated successfully", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			}
-			else 
-				Reporting.updateTestReport("The credit card details was not updated updated ", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
-
-		}
-		catch(Exception e) {
-			Reporting.updateTestReport("Edit card details was not loaded and caused timeout exception",
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			AGS.logOut(driver);
+
 		}
-		AGS.logOut(driver);
-
-	} catch (Exception e) {
-		System.out.println(e.getMessage());
-		Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
-				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		AGS.logOut(driver);
-
 	}
-}
 
-/*
- * @Date: 20/12/22
- * @Description: If the auto- renew toggle was on, then it turns it off and if it was off, it turns the toggle on 
- */
-@Test
-public void TC14_Manage_Subscription_Auto_Renew_Toggle_validation() throws IOException {
-	try {
-		Reporting.test = Reporting.extent.createTest("TC14_Manage_Subscription_Auto_Renew_Toggle_validation");
-		driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-		driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-		driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
-		AGS.enterExistingUserId(excelOperation.getTestData("TC14", "AGS_Test_Data", "Email_Id"));
-		AGS.enterExistingUserPassword(excelOperation.getTestData("TC14", "AGS_Test_Data", "Password"));
-		AGS.clickOnLoginButton();
-		AGS.isMyAccountPage();
-		AGS.clickOnManageSubscription();
-		Boolean toggle = AGS.checkIfAutoRenewToggleOn();
-		if (!toggle) {
-			AGS.clickOnAutoRenewToggle();
-			Thread.sleep(1000);
-			Reporting.updateTestReport("Auto Renew toggle was successfully switched on",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} else {
-			AGS.clickOnAutoRenewToggle();
-			Thread.sleep(1000);
-			Reporting.updateTestReport("Auto Renew toggle was successfully switched off",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		}
-		AGS.logOut(driver);
-	} catch (Exception e) {
-		AGS.logOut(driver);
-		System.out.println(e.getMessage());
-		Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
-	}
-}
-
-/*
- * @Date: 20/12/22
- * @Description: Places an order with last name "RiskifiedDenie" which results in riskified declined  order
- */
-@Test
-public void TC15_Riskified_Declined_Order() throws IOException{
-	try {
-		Reporting.test = Reporting.extent.createTest("TC15_Riskified_Declined_Order");
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-		driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-		driver.get(excelOperation.getTestData("AGS_Subscription_URL", "Generic_Dataset", "Data"));
-		AGS.clickOnYearlySubscriptionButton();
+	/*
+	 * @Description: Edits the card details in edit payment, my account section
+	 * 
+	 * @Date: 19/12/22
+	 */
+	@Test
+	public void TC13_Edit_Card_Details() throws IOException {
 		try {
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'My Cart')]")));
-			System.out.println("Cart page came");
-			AGS.clickOnContinueButtonCartPage();
+			Reporting.test = Reporting.extent.createTest("TC13_Edit_Card_Details");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
+			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
+			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			AGS.enterExistingUserId(excelOperation.getTestData("TC13", "AGS_Test_Data", "Email_Id"));
+			AGS.enterExistingUserPassword(excelOperation.getTestData("TC13", "AGS_Test_Data", "Password"));
+			AGS.clickOnLoginButton();
+			AGS.isMyAccountPage();
+			AGS.clickOnEditPayment();
+			Thread.sleep(1000);
+			AGS.clickOnUpdateCreditCardButton();
+			try{
+				wait.until(ExpectedConditions.presenceOfElementLocated(
+						By.xpath("//div[contains(text(),'Change the credit card on"
+								+ " file by entering a new one ')]")));
+				String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
+				if (payment_gateway.contains("WPG")) {
+
+					PaymentGateway.paymentWPG_AGS(driver, AGS, "TC13", SS_path);
+				} else {
+
+					PaymentGateway.paymentWPS_AGS(driver, AGS, "TC13", SS_path);
+				}
+				String lastFourFetchedFromEditPayment=AGS.fetchLastFourCardNumberDigit();
+				String input = excelOperation.getTestData("TC13", "AGS_Test_Data", "Card_Number");
+				String lastFourChars = "";  
+
+				if (input.length() > 4) {
+					lastFourChars = input.substring(input.length() - 4);
+				} else {
+					lastFourChars = input;
+				}
+				if(lastFourFetchedFromEditPayment.equalsIgnoreCase(lastFourChars)) {
+					Reporting.updateTestReport("The credit card details were updated successfully", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				else 
+					Reporting.updateTestReport("The credit card details was not updated updated ", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Edit card details was not loaded and caused timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			AGS.logOut(driver);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			AGS.logOut(driver);
+
+		}
+	}
+
+	/*
+	 * @Date: 20/12/22
+	 * @Description: If the auto- renew toggle was on, then it turns it off and if it was off, it turns the toggle on 
+	 */
+	@Test
+	public void TC14_Manage_Subscription_Auto_Renew_Toggle_validation() throws IOException {
+		try {
+			Reporting.test = Reporting.extent.createTest("TC14_Manage_Subscription_Auto_Renew_Toggle_validation");
+			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
+			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
+			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			AGS.enterExistingUserId(excelOperation.getTestData("TC14", "AGS_Test_Data", "Email_Id"));
+			AGS.enterExistingUserPassword(excelOperation.getTestData("TC14", "AGS_Test_Data", "Password"));
+			AGS.clickOnLoginButton();
+			AGS.isMyAccountPage();
+			AGS.clickOnManageSubscription();
+			Boolean toggle = AGS.checkIfAutoRenewToggleOn();
+			if (!toggle) {
+				AGS.clickOnAutoRenewToggle();
+				Thread.sleep(1000);
+				Reporting.updateTestReport("Auto Renew toggle was successfully switched on",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			} else {
+				AGS.clickOnAutoRenewToggle();
+				Thread.sleep(1000);
+				Reporting.updateTestReport("Auto Renew toggle was successfully switched off",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			AGS.logOut(driver);
+		} catch (Exception e) {
+			AGS.logOut(driver);
+			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Date: 20/12/22
+	 * @Description: Places an order with last name "RiskifiedDenie" which results in riskified declined  order
+	 */
+	@Test
+	public void TC15_Riskified_Declined_Order() throws IOException{
+		try {
+			Reporting.test = Reporting.extent.createTest("TC15_Riskified_Declined_Order");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
+			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
+			driver.get(excelOperation.getTestData("AGS_Subscription_URL", "Generic_Dataset", "Data"));
+			AGS.clickOnYearlySubscriptionButton();
 			try {
-				wait.until(ExpectedConditions
-						.presenceOfElementLocated(By.xpath("//h1[contains(text(),"
-								+ "'Create an Account or Login')]")));
-				AGS.enterFirstName(excelOperation.getTestData("TC15", "AGS_Test_Data", "First_Name"));
-				AGS.enterLastName(excelOperation.getTestData("TC15", "AGS_Test_Data", "Last_Name"));
-				String email = AGS.enterEmailId();
-				AGS.enterPassword(excelOperation.getTestData("TC15", "AGS_Test_Data", "Password"));
-				AGS.clickCreateAccountButton();
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'My Cart')]")));
+				System.out.println("Cart page came");
+				AGS.clickOnContinueButtonCartPage();
 				try {
 					wait.until(ExpectedConditions
-							.presenceOfElementLocated(By.xpath("//div[contains(text(),'Billing Address')]")));
-					AGS.enterBillingFirstName(excelOperation.getTestData("TC15", "AGS_Test_Data", "First_Name"));
-					AGS.enterBillingLastName(excelOperation.getTestData("TC15", "AGS_Test_Data", "Last_Name"));
-					AGS.selectCountry(excelOperation.getTestData("TC15", "AGS_Test_Data", "Country"));
+							.presenceOfElementLocated(By.xpath("//h1[contains(text(),"
+									+ "'Create an Account or Login')]")));
+					AGS.enterFirstName(excelOperation.getTestData("TC15", "AGS_Test_Data", "First_Name"));
+					AGS.enterLastName(excelOperation.getTestData("TC15", "AGS_Test_Data", "Last_Name"));
+					String email = AGS.enterEmailId();
+					AGS.enterPassword(excelOperation.getTestData("TC15", "AGS_Test_Data", "Password"));
+					AGS.clickCreateAccountButton();
 					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By.id("addressLine1")));
-						AGS.enterAddressLine1(excelOperation.getTestData("TC15", "AGS_Test_Data", "Address_line1"));
-						AGS.enterCity(excelOperation.getTestData("TC15", "AGS_Test_Data", "City"));
+						wait.until(ExpectedConditions
+								.presenceOfElementLocated(By.xpath("//div[contains(text(),'Billing Address')]")));
+						AGS.enterBillingFirstName(excelOperation.getTestData("TC15", "AGS_Test_Data", "First_Name"));
+						AGS.enterBillingLastName(excelOperation.getTestData("TC15", "AGS_Test_Data", "Last_Name"));
+						AGS.selectCountry(excelOperation.getTestData("TC15", "AGS_Test_Data", "Country"));
 						try {
-							wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(text(), 'State')]")));
-							AGS.enterState(excelOperation.getTestData("TC15", "AGS_Test_Data", "State"));
+							wait.until(ExpectedConditions.elementToBeClickable(By.id("addressLine1")));
+							AGS.enterAddressLine1(excelOperation.getTestData("TC15", "AGS_Test_Data", "Address_line1"));
+							AGS.enterCity(excelOperation.getTestData("TC15", "AGS_Test_Data", "City"));
+							try {
+								wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(text(), 'State')]")));
+								AGS.enterState(excelOperation.getTestData("TC15", "AGS_Test_Data", "State"));
+							}
+							catch(Exception e){
+								Reporting.updateTestReport("State field was not present for this country: "
+										+excelOperation.getTestData("TC15", "AGS_Test_Data", "Country"),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+							}
 							AGS.enterZip(excelOperation.getTestData("TC15", "AGS_Test_Data", "Zip_Code"));
 							AGS.enterPhoneNumber(excelOperation.getTestData("TC15", "AGS_Test_Data", "Phone_Number"));
 							AGS.checkBoxBilling();
@@ -1307,39 +1318,35 @@ public void TC15_Riskified_Declined_Order() throws IOException{
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);				
 							}
+						} catch (Exception e) {
+							Reporting.updateTestReport("Billing address page was not loaded and caused timeout exception",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
-						catch(Exception e){
-							System.out.println("State field was not present for this country: "+excelOperation.getTestData("TC15", "AGS_Test_Data", "Country"));
-						}
-					} catch (Exception e) {
-						Reporting.updateTestReport("Billing address page was not loaded and caused timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
-				}
-				catch(Exception e) {
-					Reporting.updateTestReport("Address line 1 was not loaded"
-							+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
-							StatusDetails.FAIL);				
+					catch(Exception e) {
+						Reporting.updateTestReport("Address line 1 was not loaded"
+								+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);				
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Create Account / Login page was not loaded and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			} catch (Exception e) {
-				Reporting.updateTestReport("Create Account / Login page was not loaded and caused timeout exception",
+				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-		} catch (Exception e) {
-			Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+
 		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			AGS.logOut(driver);
 
-
+		}
 	}
-	catch (Exception e) {
-		System.out.println(e.getMessage());
-		Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
-				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		AGS.logOut(driver);
-
-	}
-}
 
 
 
