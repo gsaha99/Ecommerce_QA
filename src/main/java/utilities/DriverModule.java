@@ -7,10 +7,12 @@ import java.util.concurrent.TimeUnit;
 
 import javax.naming.Context;
 
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
@@ -45,9 +47,15 @@ public class DriverModule {
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);	
-			WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
+			Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
 			
-			Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_"+date);
+			String browserName = caps.getBrowserName();							
+			String browserVersion = caps.getBrowserVersion();
+			
+			String OS_Name = System.getProperty("os.name").toLowerCase();
+			
+			Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_"+date,browserName,browserVersion,OS_Name);
+			
 			
 
 		}catch(Exception e){ System.out.println(e.getMessage());}
