@@ -11,8 +11,12 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
@@ -41,8 +45,13 @@ public class DriverModule {
 
 			//configure options parameter to Chrome driver
 			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--incognito");		      		      	
+			options.addArguments("--incognito");
 			driver = new ChromeDriver(options);
+			/*FirefoxOptions options = new FirefoxOptions();
+			options.addArguments("-private");
+			driver = new FirefoxDriver(options);*/
+			
+			
 
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
