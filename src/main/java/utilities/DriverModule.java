@@ -11,6 +11,8 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,41 +27,77 @@ public class DriverModule {
 
 	public  static WebDriver driver =null;
 	
-
-
 	@BeforeTest
+	//@Parameters("chrome")
 	public void initiate(ITestContext context)
 	{
-		
 		try {
-			String date = new SimpleDateFormat("hhmmss").format(new Date());
+			String browser ="chrome"; // Currently Chrome is hardcoded 
 			
+			String date = new SimpleDateFormat("hhmmss").format(new Date());			
 			String testSuiteName=context.getCurrentXmlTest().getClasses().stream()
-		               					.findFirst().get().getName().substring(11);
+		               .findFirst().get().getName().substring(11);
 			
-			//System.setProperty("webdriver.chrome.driver", ".\\driver\\chromedriver.exe");
-
-			//configure options parameter to Chrome driver
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--incognito");		      		      	
-			driver = new ChromeDriver(options);
-
-			driver.manage().window().maximize();
-			driver.manage().deleteAllCookies();
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);	
-			Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
-			
-			String browserName = caps.getBrowserName();							
-			String browserVersion = caps.getBrowserVersion();
-			
-			String OS_Name = System.getProperty("os.name").toLowerCase();
-			
-			Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_"+date,browserName,browserVersion,OS_Name);
-			
-			
-
-		}catch(Exception e){ System.out.println(e.getMessage());}
+			if(browser.equalsIgnoreCase("firefox")){
+				//create firefox instance
 		
+				driver = new FirefoxDriver();
+				driver.manage().window().maximize();
+				driver.manage().deleteAllCookies();
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);			
+				
+				Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
+				
+				String browserName = caps.getBrowserName();							
+				String browserVersion = caps.getBrowserVersion();
+				
+				String OS_Name = System.getProperty("os.name").toLowerCase();
+				
+				Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_"+date,browserName,browserVersion,OS_Name);
+				
+			}
+				//Check if parameter passed as 'chrome'
+			else if(browser.equalsIgnoreCase("chrome")){
+				
+				//configure options parameter to Chrome driver
+				ChromeOptions options = new ChromeOptions();
+				options.addArguments("--incognito");		      		      	
+				driver = new ChromeDriver(options);
+				
+				driver.manage().window().maximize();
+				driver.manage().deleteAllCookies();
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);	
+				
+				Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
+				
+				String browserName = caps.getBrowserName();							
+				String browserVersion = caps.getBrowserVersion();
+				
+				String OS_Name = System.getProperty("os.name").toLowerCase();
+				
+				Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_"+date,browserName,browserVersion,OS_Name);
+				
+			}
+			else if(browser.equalsIgnoreCase("Edge")){
+				//set path to Edge.exe
+				
+				driver = new EdgeDriver();
+				driver.manage().window().maximize();
+				driver.manage().deleteAllCookies();
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);			
+				
+				Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
+				
+				String browserName = caps.getBrowserName();							
+				String browserVersion = caps.getBrowserVersion();
+				
+				String OS_Name = System.getProperty("os.name").toLowerCase();
+				
+				Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_"+date,browserName,browserVersion,OS_Name);
+			}
+					
+		}
+		catch(Exception e){ System.out.println(e.getMessage());}
 
 	}
 
