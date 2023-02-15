@@ -80,7 +80,7 @@ public class Reporting {
 			extent.setSystemInfo("Browser", BrowserName);
 			extent.setSystemInfo("Browser Version", BrowserVersion);
 			extent.setSystemInfo("JAVA Version", Java_Version);
-			extent.setSystemInfo("Browser Mode","Incognito");
+			extent.setSystemInfo("Browser Mode","Normal");
 
 			//configuration items to change the look and feel
 			//add content, manage tests etc

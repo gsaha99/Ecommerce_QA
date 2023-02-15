@@ -109,6 +109,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			THarness.Http_EnterCardCVC(excelOperation.getTestData("TC02", "TestHarness_Test_Data", "CVV"));
 			driver.switchTo().parentFrame();
 			THarness.paymentDetailsSubmit();
+			driver.switchTo().defaultContent();
 			
 		    try {
 			
@@ -245,6 +246,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			THarness.Http_EnterCardCVC(excelOperation.getTestData("TC04", "TestHarness_Test_Data", "CVV"));
 			driver.switchTo().parentFrame();
 			THarness.paymentDetailsSubmit();
+			driver.switchTo().defaultContent();
 			
 			try {
 			     
@@ -337,6 +339,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			THarness.Http_EnterCardCVC(excelOperation.getTestData("TC05", "TestHarness_Test_Data", "CVV"));
 			driver.switchTo().parentFrame();
 			THarness.paymentDetailsSubmit();
+			driver.switchTo().defaultContent();
 			
 			try {
 				
@@ -431,6 +434,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			THarness.Http_EnterCardCVC(excelOperation.getTestData("TC06", "TestHarness_Test_Data", "CVV"));
 			driver.switchTo().parentFrame();
 			THarness.paymentDetailsSubmit();
+			driver.switchTo().defaultContent();
 			
 			try {
 			
@@ -565,6 +569,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			THarness.Http_EnterCardCVC(excelOperation.getTestData("TC08", "TestHarness_Test_Data", "CVV"));
 			driver.switchTo().parentFrame();
 			THarness.paymentDetailsSubmit();
+			driver.switchTo().defaultContent();
 			
 			try {
 			
@@ -656,6 +661,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			THarness.Http_EnterCardCVC(excelOperation.getTestData("TC09", "TestHarness_Test_Data", "CVV"));
 			driver.switchTo().parentFrame();
 			THarness.paymentDetailsSubmit();
+			driver.switchTo().defaultContent();
 			
 			try {
 				
@@ -755,6 +761,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			THarness.Http_EnterCardCVC(excelOperation.getTestData("TC10", "TestHarness_Test_Data", "CVV"));
 			driver.switchTo().parentFrame();
 			THarness.paymentDetailsSubmit();
+			driver.switchTo().defaultContent();
 			
 			try {
 				
@@ -928,6 +935,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			THarness.Http_EnterCardCVC(excelOperation.getTestData("TC12", "TestHarness_Test_Data", "CVV"));
 			driver.switchTo().parentFrame();
 			THarness.paymentDetailsSubmit();
+			driver.switchTo().defaultContent();
 			
 			try {
 				

@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
@@ -24,7 +25,7 @@ public class DriverModule {
 	public void initiate(ITestContext context)
 	{
 		try {
-			String browser ="chrome"; // Currently Chrome is hardcoded 
+			String browser ="Edge"; // Currently Chrome is hardcoded 
 			
 			String date = new SimpleDateFormat("hhmmss").format(new Date());			
 			String testSuiteName=context.getCurrentXmlTest().getClasses().stream()
@@ -73,7 +74,9 @@ public class DriverModule {
 			else if(browser.equalsIgnoreCase("Edge")){
 				//set path to Edge.exe
 				
-				driver = new EdgeDriver();
+				EdgeOptions options = new EdgeOptions();
+				options.addArguments("InPrivate");		      		      	
+				driver = new EdgeDriver(options);
 				driver.manage().window().maximize();
 				driver.manage().deleteAllCookies();
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);			
