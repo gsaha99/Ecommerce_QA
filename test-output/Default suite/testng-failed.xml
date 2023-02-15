@@ -3,19 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Test_Suite.WEL_Test_Suite">
+      <class name="Test_Suite.Vet_Test_Suite">
         <methods>
-          <include name="initializeRepo"/>
-          <include name="TC75_Check_Add_To_Cart_Functionality_for_Heads_Up_Validation"/>
-          <include name="TC74_WEL_Cart_Upsells_Add_Summary_Line"/>
-          <include name="TC71_PlaceNewUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax"/>
-          <include name="TC72_PlaceExistingUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax"/>
           <include name="initiate"/>
           <include name="CloseBrowser"/>
-          <include name="TC79_Email_Format_Validation"/>
-          <include name="TC73_ValidateTaxin_IndiaForPhysicalOrder"/>
+          <include name="TC01_Anonymous_User_Registration"/>
+          <include name="initializeRepo"/>
         </methods>
-      </class> <!-- Test_Suite.WEL_Test_Suite -->
+      </class> <!-- Test_Suite.Vet_Test_Suite -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
