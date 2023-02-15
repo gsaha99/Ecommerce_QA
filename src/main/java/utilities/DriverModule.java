@@ -1,27 +1,19 @@
 package utilities;
 
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-
-import javax.naming.Context;
-
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+
 
 public class DriverModule {
 
@@ -38,9 +30,9 @@ public class DriverModule {
 			String testSuiteName=context.getCurrentXmlTest().getClasses().stream()
 		               .findFirst().get().getName().substring(11);
 			
+
 			if(browser.equalsIgnoreCase("firefox")){
-				//create firefox instance
-		
+
 				driver = new FirefoxDriver();
 				driver.manage().window().maximize();
 				driver.manage().deleteAllCookies();
