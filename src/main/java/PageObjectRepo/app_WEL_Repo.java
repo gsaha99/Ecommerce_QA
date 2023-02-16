@@ -124,6 +124,9 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//div[@class='account d-none d-lg-inline-block']")
 	WebElement AccountMyIcon;
+	
+	@FindBy(xpath = "//select[@id='address.region']")
+	WebElement SelectState;
 
 	@FindBy(xpath = "//button[contains(text(),'I Accept')]")
 	WebElement AcceptButtonOnWileyWELPrivacyAgreement;
@@ -350,6 +353,9 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//input[@id='discountCodeValue'])[2]")
 	WebElement ExtranDiscount;
 
+	@FindBy(xpath = "//input[@id='discountCodeValue']")
+	WebElement ExtraDiscountCode;
+
 	@FindBy(xpath = "//button[@id='discountApplyBtn']")
 	WebElement ApplyDiscountButton;
 
@@ -415,6 +421,9 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//input[@id='address.region']")
 	WebElement IndiaState;
+
+	@FindBy(xpath = "//input[@id='address.region']")
+	WebElement ChinaState;
 
 	@FindBy(xpath = "//div[@class='welCheckoutBtnDiv multiPaymentPaypalBtn']/button")
 	WebElement ProccedtoPaypal;
@@ -981,12 +990,12 @@ public class app_WEL_Repo {
 		try {
 			CMAExploreCourse.click();
 			Thread.sleep(2000);
-			Reporting.updateTestReport("CMA Explore Coursee button clicked successfully ",
+			Reporting.updateTestReport("Explore Coursee button clicked successfully ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		} catch (Exception e) {
 			Reporting.updateTestReport(
-					"Failed to click on CMA Explore Course button with the error message " + e.getClass().toString(),
+					"Failed to click on  Explore Course button with the error message " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 
@@ -1381,6 +1390,20 @@ public class app_WEL_Repo {
 
 		}
 	}
+	
+	
+	public void selectStateFromDropsown(String state) throws IOException {
+		try {
+
+			Select stateDropdown = new Select(SelectState);
+			stateDropdown.selectByVisibleText(state);
+			Reporting.updateTestReport("State " + state + " has been selected successfully by user",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("User failed to select state " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 
 	public void EnterPasswordLoginPage(String Loginpassword) throws IOException {
 		try {
@@ -1502,6 +1525,19 @@ public class app_WEL_Repo {
 	public void EnterExtraDiscountCode(String PromoCode) throws IOException {
 		try {
 			ExtranDiscount.sendKeys(PromoCode);
+			Reporting.updateTestReport("PromoCode was entered Successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to enter the PromoCode with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
+	public void EnterCouponExtraDiscountCode(String PromoCode) throws IOException {
+		try {
+			ExtraDiscountCode.sendKeys(PromoCode);
 			Reporting.updateTestReport("PromoCode was entered Successfully", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.PASS);
 		} catch (Exception e) {
@@ -2318,6 +2354,20 @@ public class app_WEL_Repo {
 			IndiaState.sendKeys(Keys.ENTER);
 
 			Reporting.updateTestReport("State " + ShipInd + " has been selected successfully by user",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("User failed to select State " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void enterStateChina(String cState) throws IOException {
+		try {
+			IndiaState.clear();
+			IndiaState.sendKeys(cState);
+			IndiaState.sendKeys(Keys.ENTER);
+
+			Reporting.updateTestReport("State  has been selected successfully by user",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("User failed to select State " + e.getClass().toString(),

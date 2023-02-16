@@ -47,17 +47,17 @@ public class DriverModule {
 			//System.setProperty("webdriver.chrome.driver", ".\\driver\\chromedriver.ee");
 
 			//configure options parameter to Chrome driver	
-			//			String cpath=SeleniumManager.getInstance().getDriverPath("chromedriver");
-			//			System.out.println(cpath);
-			//			ChromeOptions options = new ChromeOptions();
-			//			options.addArguments("--incognito");		      		      	
-			//			driver = new ChromeDriver(options);
+			/*String cpath=SeleniumManager.getInstance().getDriverPath("chromedriver");
+			System.out.println(cpath);
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--incognito");		      		      	
+			driver = new ChromeDriver(options);*/
 
-			//			FirefoxOptions options = new FirefoxOptions();
-			//			options.addArguments("-private");
-			//			driver = new FirefoxDriver(options);
-			//			String cpath=SeleniumManager.getInstance().getDriverPath("geckodriver");
-			//			System.out.println(cpath);
+			/*FirefoxOptions options = new FirefoxOptions();
+			options.addArguments("-private");
+			driver = new FirefoxDriver(options);
+			String cpath=SeleniumManager.getInstance().getDriverPath("geckodriver");
+			System.out.println(cpath);*/
 
 			EdgeOptions options = new EdgeOptions();
 			options.addArguments("InPrivate");
@@ -74,7 +74,7 @@ public class DriverModule {
 			String OS_Name = System.getProperty("os.name").toLowerCase();
 
 			Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_"+date,browserName,browserVersion,OS_Name);
-			
+
 
 		}catch(Exception e){ System.out.println(e.getMessage());}
 

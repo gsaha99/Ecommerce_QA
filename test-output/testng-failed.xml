@@ -1,29 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [PPE_Regression]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="Wiley_Test_Suite(failed)">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Test_Suite.AGS_Test_Suite">
+      <class name="Test_Suite.Vet_Test_Suite">
         <methods>
-          <include name="CloseBrowser"/>
-        </methods>
-      </class> <!-- Test_Suite.AGS_Test_Suite -->
-      <class name="Test_Suite.WileyPLUS_Test_Suite">
-        <methods>
-          <include name="TC15_Course_Details_During_WileyPLUS_Checkout"/>
           <include name="CloseBrowser"/>
           <include name="initiate"/>
-          <include name="TC20_Place_WileyPLUS_CAD_Order_From_Frontend"/>
-          <include name="TC17_Check_Global_Saved_Shipping_Address"/>
-          <include name="TC22_Merge_Cart_Functionality"/>
-          <include name="TC13_Global_Country_List_In_Shipping"/>
-          <include name="TC21_Place_WileyPLUS_USD_Order_From_Frontend"/>
-          <include name="TC16_Check_Global_Saved_Billing_Address"/>
-          <include name="TC19_Validate_Continue_Shopping_Link"/>
-          <include name="launchBrowser"/>
-          <include name="TC14_Global_Country_List_In_Billing"/>
+          <include name="TC01_Anonymous_User_Registration"/>
+          <include name="initializeRepo"/>
         </methods>
-      </class> <!-- Test_Suite.WileyPLUS_Test_Suite -->
+      </class> <!-- Test_Suite.Vet_Test_Suite -->
     </classes>
-  </test> <!-- Wiley_Test_Suite(failed) -->
-</suite> <!-- Failed suite [PPE_Regression] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->
