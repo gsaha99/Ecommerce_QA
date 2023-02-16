@@ -43,7 +43,7 @@
       </ThreadGroup>
       <hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-          <stringProp name="filename">C:/Users/rigupta/OneDrive - Wiley/Desktop/JmeterDataFile/Token.csv</stringProp>
+          <stringProp name="filename">.//JmeterDataFile/Token.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">ID</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>
@@ -605,7 +605,7 @@ try {
         </TestAction>
         <hashTree/>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-          <stringProp name="filename">C:/Users/rigupta/OneDrive - Wiley/Desktop/JmeterDataFile/Authcode.csv</stringProp>
+          <stringProp name="filename">.//JmeterDataFile/Authcode.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">authcode</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>
@@ -1160,7 +1160,7 @@ try {
       </ThreadGroup>
       <hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-          <stringProp name="filename">C:/Users/rigupta/OneDrive - Wiley/Desktop/JmeterDataFile/Token.csv</stringProp>
+          <stringProp name="filename">.//JmeterDataFile/Token.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">ID,Token</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>
