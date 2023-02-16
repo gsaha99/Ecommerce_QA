@@ -86,7 +86,7 @@ public class Reporting {
 			//add content, manage tests etc
 
 			report.config().setDocumentTitle("Automation Report");
-			report.config().setReportName("PPE Automation Report");
+			report.config().setReportName("WPS Automation Report");
 			report.config().setTheme(Theme.STANDARD);
 			report.config().setTimeStampFormat("EEEE, MMMM dd, yyyy, hh:mm a '('zzz')'");
 			
