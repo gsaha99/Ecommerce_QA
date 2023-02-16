@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class dbConnect {
 	
 	
-	public static String DB_Select(String DBName,String TableName,String ColumnName1,String ColumnName2) throws InstantiationException, IllegalAccessException
+	public static String DB_Select(String DBName,String Query,String Parameter) throws InstantiationException, IllegalAccessException
     
 	{
         String connectionUrl = "jdbc:mysql://wps.c7hepfyiogmn.us-east-1.rds.amazonaws.com:3306/"+DBName;
@@ -21,17 +21,30 @@ public class dbConnect {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(connectionUrl,userid,pwd);
             Statement stmt= con.createStatement();
-            String SQL = "SELECT * FROM "+DBName+"."+TableName+" order by "+ColumnName2+" desc limit 1";
-            System.out.println(SQL);
-            ResultSet rs = stmt.executeQuery(SQL);
+            //String SQL = "SELECT * FROM "+DBName+"."+TableName+" order by "+ColumnName2+" desc limit 1";
+            //System.out.println(SQL);
+            
+            ResultSet rs = stmt.executeQuery(Query);
+            System.out.println(rs);
+            
             
     
             // Iterate through the data in the result set and display it.
-         while (rs.next()) 
-              {
-        	    System.out.println(rs.getString(ColumnName1));
-        	    columnValue = rs.getString(ColumnName1);
-              }
+            if (Parameter=="Int")
+            {
+                Integer Col=null;
+        	    System.out.println(rs.getInt(0));
+        	    Col = rs.getInt(0);
+        	    columnValue=Col.toString();
+              
+            }
+            
+            else if (Parameter == "VarChar")
+            {
+            	System.out.println(rs.getString(0));
+        	    columnValue = rs.getString(0);
+            }
+            
 		  con.close();
             }
 

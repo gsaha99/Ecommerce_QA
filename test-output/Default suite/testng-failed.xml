@@ -3,14 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Test_Suite.TestHarness_RegressionSuite">
+      <class name="Test_Suite.ClientPortal_RegressionSuite">
         <methods>
+          <include name="TC02_AddNewClientApp_WPSAdmin"/>
           <include name="CloseBrowser"/>
           <include name="initiate"/>
-          <include name="TC01_HTTP_Probe"/>
           <include name="initializeRepo"/>
         </methods>
-      </class> <!-- Test_Suite.TestHarness_RegressionSuite -->
+      </class> <!-- Test_Suite.ClientPortal_RegressionSuite -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

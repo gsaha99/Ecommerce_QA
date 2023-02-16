@@ -101,6 +101,13 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	@FindBy(name="targetUrl")
     WebElement entertargetUrl;
+	
+	@FindBy(xpath = "//li[contains(text(),'Promote to Production')]")
+    WebElement Click_PromoteToProd;
+	
+	@FindBy(xpath = "//div[@class='colAction']")
+    WebElement Click_ViewIcon;
+	
 
 	
 	/* 
@@ -159,6 +166,22 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	@FindBy(xpath = "//a[contains(text(),'Copyright © 2000-2023')]")
 	WebElement ClickFooter;
+	
+	 /*
+	  * Author : Varisa
+	  * Description : Method to click on Approve button in my Approve client App page
+	  */
+
+	 @FindBy(xpath = "(//div[@class='btn-grp'])[3]/button[@class='btn blue-btn']")
+	 WebElement Click_Approve;
+
+	 /*
+	  * Author : Varisa
+	  * Description : Method to click on Confirm button
+	  */
+
+	  @FindBy(xpath = "(//div[@class='btn-grp'])[2]/button[@class='btn blue-btn']")
+	  WebElement Click_Confirm;
 	
 	/* 
 	 * Author : Jayanta
@@ -619,6 +642,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	public void WPSAdmin_Enter_ClientApp_HomeName(String name) throws IOException {
 		try {
 			enterHomeName.sendKeys(name);
+			Thread.sleep(2000);
 			Reporting.updateTestReport("Name " +name+ " Entered successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
@@ -800,5 +824,107 @@ public class app_ClientPortal_Repo extends DriverModule {
 		}
 	}
 	
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to click Promote to Prod tab in My worklist for WPS Admin
+	 */
+	
+	public void WPSAdmin_Click_PromoteToProd() throws IOException {
+		try {
+			Click_PromoteToProd.click();
+			Reporting.updateTestReport("Promote to Prod tab is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Promote to Prod tab is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to click view icon in My worklist for WPS Admin
+	 */
+	
+	public void WPSAdmin_Click_ViewIcon() throws IOException {
+		try {
+			Click_ViewIcon.click();
+			Reporting.updateTestReport("View Icon is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("View Icon is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Varisa
+	 * Description :  Method to click Approve button in Approve client app screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_Click_Approve() throws IOException {
+		try {
+			Click_Approve.click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Do you really want to approve?')]")));
+		    driver.findElement(By.xpath("//span[contains(text(),'Do you really want to approve?')]")).click();
+		    Thread.sleep(5000);
+			Reporting.updateTestReport("Approve button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Approve button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Varisa
+	 * Description :  Method to click Confirm button in Approve client app screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_Click_Confirm() throws IOException {
+		try {
+			Click_Confirm.click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'application has been approved')]")));
+		    driver.findElement(By.xpath("//span[contains(text(),'application has been approved')]")).click();
+		    Thread.sleep(5000);
+			Reporting.updateTestReport("Confirm button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Confirm button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+
+	/* 
+	 * Author : Jayanta
+	 * Description :  Method to click Promote button in Promote client app screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_Click_Promote() throws IOException {
+		try {
+			Click_Approve.click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Do you really want to')]")));
+		    driver.findElement(By.xpath("//h2[contains(text(),'Do you really want to')]")).click();
+			Reporting.updateTestReport("Promote button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Promote button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Varisa
+	 * Description :  Method to click Confirm button in Approve client app screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_Click_Promote_Confirm() throws IOException {
+		try {
+			Click_Confirm.click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'application has been initiated')]")));
+		    driver.findElement(By.xpath("//span[contains(text(),'application has been initiated')]")).click();
+		    Thread.sleep(2000);
+			Reporting.updateTestReport("Confirm button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Confirm button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
 
 }
