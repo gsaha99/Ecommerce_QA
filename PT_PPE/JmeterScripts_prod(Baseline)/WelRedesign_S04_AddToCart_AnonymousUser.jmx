@@ -53,7 +53,7 @@
       </ThreadGroup>
       <hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-          <stringProp name="filename">C:/Users/rigupta/OneDrive - Wiley/Desktop/JmeterDataFile/WelRedesign_S04.csv</stringProp>
+          <stringProp name="filename">.//JmeterDataFile/WelRedesign_S04.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">Product1,Product2</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>

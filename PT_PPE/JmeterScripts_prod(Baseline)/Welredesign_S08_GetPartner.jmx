@@ -48,7 +48,7 @@
       </ThreadGroup>
       <hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-          <stringProp name="filename">C:/Users/rigupta/OneDrive - Wiley/Desktop/JmeterDataFile/Welredesign_S08_GetPartner.csv</stringProp>
+          <stringProp name="filename">.//JmeterDataFile/Welredesign_S08_GetPartner.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">PageNo</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>

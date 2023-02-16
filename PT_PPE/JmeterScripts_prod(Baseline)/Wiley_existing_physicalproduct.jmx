@@ -139,7 +139,7 @@
         </TestAction>
         <hashTree/>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-          <stringProp name="filename">C:/Users/rigupta/OneDrive - Wiley/Desktop/JmeterDataFile/S21.csv</stringProp>
+          <stringProp name="filename">.//JmeterDataFile/S21.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">email</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>

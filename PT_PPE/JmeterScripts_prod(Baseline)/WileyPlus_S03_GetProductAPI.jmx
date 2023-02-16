@@ -77,7 +77,7 @@
       </ThreadGroup>
       <hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-          <stringProp name="filename">C:/Users/rigupta/OneDrive - Wiley/Desktop/JmeterDataFile/WileyplusS03.csv</stringProp>
+          <stringProp name="filename">.//JmeterDataFile/WileyplusS03.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">EprofID</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>

@@ -186,7 +186,7 @@
       </ThreadGroup>
       <hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-          <stringProp name="filename">C:/Users/rigupta/OneDrive - Wiley/Desktop/JmeterDataFile/WEL_S05A.csv</stringProp>
+          <stringProp name="filename">.//JmeterDataFile/WEL_S05A.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">pURL,email</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>
