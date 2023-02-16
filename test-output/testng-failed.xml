@@ -5,8 +5,8 @@
     <classes>
       <class name="Test_Suite.Vet_Test_Suite">
         <methods>
-          <include name="CloseBrowser"/>
           <include name="initiate"/>
+          <include name="CloseBrowser"/>
           <include name="TC01_Anonymous_User_Registration"/>
           <include name="initializeRepo"/>
         </methods>

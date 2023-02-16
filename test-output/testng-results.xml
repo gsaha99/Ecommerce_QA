@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="60" total="61" passed="1" failed="0" skipped="0">
+<testng-results ignored="16" total="17" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-02-15T15:36:41 IST" name="Default suite" finished-at="2023-02-15T15:39:44 IST" duration-ms="182584">
+  <suite started-at="2023-02-15T15:40:07 IST" name="Default suite" finished-at="2023-02-15T15:40:41 IST" duration-ms="33798">
     <groups>
     </groups>
-    <test started-at="2023-02-15T15:36:41 IST" name="Default test" finished-at="2023-02-15T15:39:44 IST" duration-ms="182584">
-      <class name="Test_Suite.WEL_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-15T15:36:41 IST" name="initiate" finished-at="2023-02-15T15:36:52 IST" duration-ms="10673" status="PASS">
+    <test started-at="2023-02-15T15:40:07 IST" name="Default test" finished-at="2023-02-15T15:40:41 IST" duration-ms="33798">
+      <class name="Test_Suite.Vet_Test_Suite">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.Vet_Test_Suite@d737b89]" started-at="2023-02-15T15:40:07 IST" name="initiate" finished-at="2023-02-15T15:40:18 IST" duration-ms="10820" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@3af36922]]>
+                <![CDATA[org.testng.TestRunner@28cd2c2]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-15T15:36:52 IST" name="initializeRepo" finished-at="2023-02-15T15:36:52 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="90" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.Vet_Test_Suite@d737b89]" started-at="2023-02-15T15:40:18 IST" name="initializeRepo" finished-at="2023-02-15T15:40:18 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="87" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeRepo -->
-        <test-method signature="TC53_PlaceOrder_JapanAddress()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-15T15:36:52 IST" name="TC53_PlaceOrder_JapanAddress" finished-at="2023-02-15T15:39:41 IST" duration-ms="169659" status="PASS">
+        <test-method signature="TC03_StandaloneLogin()[pri:0, instance:Test_Suite.Vet_Test_Suite@d737b89]" started-at="2023-02-15T15:40:18 IST" name="TC03_StandaloneLogin" finished-at="2023-02-15T15:40:39 IST" duration-ms="21288" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC53_PlaceOrder_JapanAddress -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.WEL_Test_Suite@76494737]" started-at="2023-02-15T15:39:41 IST" name="CloseBrowser" finished-at="2023-02-15T15:39:44 IST" duration-ms="2076" status="PASS">
+        </test-method> <!-- TC03_StandaloneLogin -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.Vet_Test_Suite@d737b89]" started-at="2023-02-15T15:40:39 IST" name="CloseBrowser" finished-at="2023-02-15T15:40:41 IST" duration-ms="1535" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
-      </class> <!-- Test_Suite.WEL_Test_Suite -->
+      </class> <!-- Test_Suite.Vet_Test_Suite -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
