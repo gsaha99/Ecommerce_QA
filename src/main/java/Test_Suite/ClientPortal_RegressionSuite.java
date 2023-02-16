@@ -150,7 +150,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			/*try {
+			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
 			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID"));
 			}
@@ -213,13 +213,13 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			ScrollingWebPage.PageScrolldown(driver, 0, 600);
 			CPortal.WPSAdmin_ClickPaymentMethod();
 			CPortal.WPSAdmin_Click_DebitCard();
-			CPortal.WPSAdmin_Click_Add();*/
+			CPortal.WPSAdmin_Click_Add();
 			String DBName=excelOperation.getTestData("TC02", "DB_Query", "DB_Name");
 			String query=excelOperation.getTestData("TC02", "DB_Query", "Query");
 			String datatype=excelOperation.getTestData("TC02", "DB_Query", "Data_Type");
 			String clientappname=dbConnect.DB_Select(DBName,query,datatype);
 			System.out.println(clientappname);
-			/*if(clientappname.compareTo(ClientAppName)==0)
+			if(clientappname.compareTo(ClientAppName)==0)
 		       {
 			
 			      Reporting.updateTestReport("DB Validation is done and Client App Name is: " + clientappname,
@@ -242,7 +242,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		      {
 			      Reporting.updateTestReport("Filtering is working",
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		      }*/
+		      }
 			
 		}
 		catch (Exception e) 
@@ -321,12 +321,15 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickRegisterNewUser();
 			CPortal.WPSAdmin_Enter_First_Name("TestAutoFirstName");
 			CPortal.WPSAdmin_Enter_Last_Name("TestAutoLastName");
-			String uuid = Integer.toString(((new Random().nextInt(100))+1));
+			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
 			String SSOID = "TestUser"+uuid+"@wiley.com";
 			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
 			CPortal.WPSAdmin_SelectRole();
 			CPortal.WPSAdmin_ClickRegister();
-			String ssoid=dbConnect.DB_Select("wps_access_qa","user","sso_id","user_id");
+			String DBName=excelOperation.getTestData("TC03", "DB_Query", "DB_Name");
+			String query=excelOperation.getTestData("TC03", "DB_Query", "Query");
+			String datatype=excelOperation.getTestData("TC03", "DB_Query", "Data_Type");
+			String ssoid=dbConnect.DB_Select(DBName,query,datatype);
 			System.out.println(ssoid);
 			if(ssoid.compareTo(SSOID)==0)
 		       {
@@ -419,7 +422,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_SelectHTTP();
 			CPortal.WPSAdmin_SelectBusinessUnit();
-			String uuid = Integer.toString(((new Random().nextInt(100))+1));
+			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
 			String ClientAppName="TestAuto_"+uuid;
 			CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
 			CPortal.WPSAdmin_Enter_ClientApp_ShortName("TA"+uuid);
@@ -441,7 +444,22 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			CPortal.WPSAdmin_Click_Promote();
 			CPortal.WPSAdmin_Click_Promote_Confirm();
+			String DBName=excelOperation.getTestData("TC07", "DB_Query", "DB_Name");
+			String query=excelOperation.getTestData("TC07", "DB_Query", "Query");
+			String datatype=excelOperation.getTestData("TC07", "DB_Query", "Data_Type");
+			String statusid=dbConnect.DB_Select(DBName,query,datatype);
+			System.out.println(statusid);
+			if(statusid.equalsIgnoreCase("2"))
+		       {
 			
+			      Reporting.updateTestReport("DB Validation is done and Promotion Status ID: " + statusid,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		       }
+		      else 
+		       {
+			      Reporting.updateTestReport("DB Validation is not done and Promotion Status ID: " + statusid,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		       }
 			/*CPortal.WPSAdmin_Enter_ClientApp_HomeName(clientappname);
 			String FetchName=CPortal.WPSAdmin_Fetch_ClientApp_HomeName();
 			if(ClientAppName.compareTo(FetchName)==0) 
@@ -534,7 +552,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_SelectSOAP();
 			CPortal.WPSAdmin_SelectBusinessUnit();
-			String uuid = Integer.toString(((new Random().nextInt(100))+1));
+			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
 			String ClientAppName="TestAuto_"+uuid;
 			CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
 			CPortal.WPSAdmin_Enter_ClientApp_ShortName("TA"+uuid);
@@ -565,7 +583,10 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			ScrollingWebPage.PageDown(driver, SS_path);
 			CPortal.WPSAdmin_Click_Save();
-			String clientappname=dbConnect.DB_Select("wps_client_app_qa","client_app","name","client_app_id");
+			String DBName=excelOperation.getTestData("TC02", "DB_Query", "DB_Name");
+			String query=excelOperation.getTestData("TC02", "DB_Query", "Query");
+			String datatype=excelOperation.getTestData("TC02", "DB_Query", "Data_Type");
+			String clientappname=dbConnect.DB_Select(DBName,query,datatype);
 			System.out.println(clientappname);
 			if(clientappname.compareTo(NewClientAppName)==0)
 		       {
@@ -935,7 +956,10 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_Click_DebitCard();
 			//ScrollingWebPage.PageScrolldown(driver, 0, 600);
 			CPortal.WPSSuppport_Click_Register();
-			String clientappname=dbConnect.DB_Select("wps_client_app_qa","client_app","name","client_app_id");
+			String DBName=excelOperation.getTestData("TC02", "DB_Query", "DB_Name");
+			String query=excelOperation.getTestData("TC02", "DB_Query", "Query");
+			String datatype=excelOperation.getTestData("TC02", "DB_Query", "Data_Type");
+			String clientappname=dbConnect.DB_Select(DBName,query,datatype);
 			System.out.println(clientappname);
 			if(clientappname.compareTo(ClientAppName)==0)
 		       {

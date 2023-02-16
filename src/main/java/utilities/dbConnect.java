@@ -25,24 +25,27 @@ public class dbConnect {
             //System.out.println(SQL);
             
             ResultSet rs = stmt.executeQuery(Query);
-            System.out.println(rs);
-            
-            
-    
+           
             // Iterate through the data in the result set and display it.
-            if (Parameter=="Int")
+            if (Parameter.equalsIgnoreCase("Int"))
             {
+            	while (rs.next())
+            	{
                 Integer Col=null;
-        	    System.out.println(rs.getInt(0));
-        	    Col = rs.getInt(0);
+        	    System.out.println(rs.getInt(1));
+        	    Col = rs.getInt(1);
         	    columnValue=Col.toString();
+            	}
               
             }
             
-            else if (Parameter == "VarChar")
+            else if (Parameter.equalsIgnoreCase("VarChar"))
             {
-            	System.out.println(rs.getString(0));
-        	    columnValue = rs.getString(0);
+            	while (rs.next())
+            	{
+            	System.out.println(rs.getString(1));
+        	    columnValue = rs.getString(1);
+            	}
             }
             
 		  con.close();
