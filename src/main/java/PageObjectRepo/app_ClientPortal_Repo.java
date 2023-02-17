@@ -55,7 +55,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	@FindBy(xpath = "//*[local-name()='svg' and @class='fa-icon' and @stroke-linecap='round']/*[local-name()='path']")
     WebElement ClickLogOut;
 	
-	@FindBy(xpath = "//img[@class='tile-img']")
+	@FindBy(xpath = "(//img[@class='tile-img'])[1]")
 	WebElement ClickLogOutImage;
 	
 	@FindBy(xpath = "//button[@type='button' and @class='btn blue-btn']")
@@ -84,7 +84,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	@FindBy(name="appShortName")
     WebElement enterClientAppShortName;
 	
-	@FindBy(xpath = "//option[@value='690']")
+	@FindBy(xpath = "//option[@value='671']")
     WebElement selectUserID;
 	
 	@FindBy(xpath = "//span[contains(text(),'Card Payment')]")
@@ -862,8 +862,8 @@ public class app_ClientPortal_Repo extends DriverModule {
 	public void WPSAdmin_Click_Approve() throws IOException {
 		try {
 			Click_Approve.click();
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Do you really want to approve?')]")));
-		    driver.findElement(By.xpath("//span[contains(text(),'Do you really want to approve?')]")).click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Do you really want to ')]")));
+		    driver.findElement(By.xpath("//h2[contains(text(),'Do you really want to ')]")).click();
 		    Thread.sleep(5000);
 			Reporting.updateTestReport("Approve button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
