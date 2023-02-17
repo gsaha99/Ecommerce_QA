@@ -933,7 +933,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_SelectHTTP();
 			CPortal.WPSAdmin_SelectBusinessUnit();
-			String uuid = Integer.toString(((new Random().nextInt(100))+1));
+			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
 			String ClientAppName="WPSSupportTestAuto_"+uuid;
 			CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
 			CPortal.WPSAdmin_Enter_ClientApp_ShortName("WPSSTA"+uuid);
