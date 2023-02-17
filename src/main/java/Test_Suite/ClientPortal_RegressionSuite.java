@@ -447,33 +447,24 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			String DBName=excelOperation.getTestData("TC07", "DB_Query", "DB_Name");
 			String query=excelOperation.getTestData("TC07", "DB_Query", "Query");
 			String datatype=excelOperation.getTestData("TC07", "DB_Query", "Data_Type");
-			String statusid=dbConnect.DB_Select(DBName,query,datatype);
-			System.out.println(statusid);
-			if(statusid.equalsIgnoreCase("2"))
+			String expectedstatusid="";
+			do 
+			{
+			expectedstatusid=dbConnect.DB_Select(DBName,query,datatype);
+			System.out.println(expectedstatusid);
+			}
+			while ((Integer.parseInt(expectedstatusid)!=4)&&(Integer.parseInt(expectedstatusid)!=5));
+			if(expectedstatusid.equalsIgnoreCase(excelOperation.getTestData("Promoted", "Generic_Dataset", "Data")))
 		       {
 			
-			      Reporting.updateTestReport("DB Validation is done and Promotion Status ID: " + statusid,
+			      Reporting.updateTestReport("DB Validation is done, app is promoted to prod and Promotion Status ID: " + expectedstatusid,
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		       }
-		      else 
+		      else if(expectedstatusid.equalsIgnoreCase(excelOperation.getTestData("Promotion_Failed", "Generic_Dataset", "Data")))
 		       {
-			      Reporting.updateTestReport("DB Validation is not done and Promotion Status ID: " + statusid,
+			      Reporting.updateTestReport("Promotion is failed and Promotion Status ID: " + expectedstatusid,
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		       }
-			/*CPortal.WPSAdmin_Enter_ClientApp_HomeName(clientappname);
-			String FetchName=CPortal.WPSAdmin_Fetch_ClientApp_HomeName();
-			if(ClientAppName.compareTo(FetchName)==0) 
-		      {
-			
-			      Reporting.updateTestReport("Filtering is working",
-					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		      }
-		     else 
-		      {
-			      Reporting.updateTestReport("Filtering is not working",
-					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		      }*/
-		
 			
 		}
 		catch (Exception e) 
