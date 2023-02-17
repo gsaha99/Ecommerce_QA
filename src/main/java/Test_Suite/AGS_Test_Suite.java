@@ -138,18 +138,18 @@ public class AGS_Test_Suite extends DriverModule {
 							catch(Exception e)
 							{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
-							AGS.logOut(driver);}
+							}
 
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Address line 1 was not loaded and caused timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							AGS.logOut(driver);
+							
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Billing address page was not loaded and caused timeout exception",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						AGS.logOut(driver);
+						
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Create Account / Login page was not loaded and caused timeout exception",
@@ -159,12 +159,13 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 	}
@@ -261,7 +262,7 @@ public class AGS_Test_Suite extends DriverModule {
 							catch(Exception e)
 							{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
-							AGS.logOut(driver);}
+							}
 
 						} catch (Exception e) {
 							Reporting.updateTestReport("Billing address page was not loaded and caused timeout exception",
@@ -281,13 +282,13 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 	}
@@ -335,13 +336,13 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Account couldn't be  created", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
-
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -372,9 +373,9 @@ public class AGS_Test_Suite extends DriverModule {
 			else
 				Reporting.updateTestReport("Password reset was not successful",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Password reset was not successful with error message " + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -448,10 +449,10 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("No reset password mail was recieved in yopmail inbox", 
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
@@ -503,12 +504,12 @@ public class AGS_Test_Suite extends DriverModule {
 						else
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
-						AGS.logOut(driver);
+						
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
-						AGS.logOut(driver);
+						
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Create Account / Login page was not loaded and caused timeout exception",
@@ -518,10 +519,10 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 		}
 		catch(Exception e) {
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
@@ -619,7 +620,7 @@ public class AGS_Test_Suite extends DriverModule {
 								else
 								{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
-								AGS.logOut(driver);}
+								}
 
 							}
 							catch(Exception e) {
@@ -645,13 +646,13 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -749,7 +750,7 @@ public class AGS_Test_Suite extends DriverModule {
 							catch(Exception e)
 							{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
-							AGS.logOut(driver);}
+							}
 
 						}
 						catch(Exception e) {
@@ -769,13 +770,13 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -854,7 +855,7 @@ public class AGS_Test_Suite extends DriverModule {
 									else 
 										Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 												StatusDetails.FAIL);
-									AGS.logOut(driver);
+									
 								}
 								catch(Exception e) {
 									Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
@@ -883,13 +884,13 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 		}}
 
 	/*
@@ -984,7 +985,7 @@ public class AGS_Test_Suite extends DriverModule {
 							catch(Exception e)
 							{Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
-							AGS.logOut(driver);}
+							}
 
 
 
@@ -1007,13 +1008,13 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 	}
@@ -1043,13 +1044,13 @@ public class AGS_Test_Suite extends DriverModule {
 			}
 			else
 				Reporting.updateTestReport("User was not on edit profile page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 	}
@@ -1101,13 +1102,13 @@ public class AGS_Test_Suite extends DriverModule {
 						+ "timeout exception", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
-
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 	}
@@ -1165,13 +1166,13 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Edit card details was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 	}
@@ -1204,9 +1205,9 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Auto Renew toggle was successfully switched off",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			}
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
@@ -1336,14 +1337,14 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOut(driver);
+			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 
 		}
 	}

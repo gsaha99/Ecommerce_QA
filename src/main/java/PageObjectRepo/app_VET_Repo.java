@@ -298,6 +298,7 @@ public class app_VET_Repo {
 			Reporting.updateTestReport("Couldn't log out with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters the email id in the login form

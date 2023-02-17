@@ -623,6 +623,27 @@ public class app_AGS_Repo {
 	}
 	
 	/*
+	 * @Date: 17/02/23
+	 * @Description: Hits the logout url
+	 */
+	public void logOutWithURL(WebDriver driver,String url) throws IOException {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			driver.get(url);
+			try {
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//title[contains(text(),'ARCHITECTURAL GRAPHIC STANDARDS ONLINE')]")));
+				Reporting.updateTestReport("User was logged out successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Couldn't log out with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Couldn't log out with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
 	 * @Description: Clicks on Monthly Subscription button
 	 * @Date: 15/12/22
 	 */

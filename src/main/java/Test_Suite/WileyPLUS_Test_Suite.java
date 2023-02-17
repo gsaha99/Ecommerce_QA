@@ -1135,7 +1135,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 							By.xpath("//span[contains(text(),'add course')]")));
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
-					WileyPLUS.enterCourseSectionId("A66148");
+					WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Course"));
 					WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -1320,7 +1320,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 							By.xpath("//span[contains(text(),'add course')]")));
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
-					WileyPLUS.enterCourseSectionId("A03598");
+					WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Course"));
 					WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -1533,7 +1533,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 							By.xpath("//span[contains(text(),'add course')]")));
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
-					WileyPLUS.enterCourseSectionId("A79129");
+					WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Course"));
 					WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -1746,7 +1746,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 							By.xpath("//span[contains(text(),'add course')]")));
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
-					WileyPLUS.enterCourseSectionId("A03598");
+					WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "Course"));
 					WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -1797,7 +1797,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 															By.xpath("//span[contains(text(),'add course')]")));
 													Thread.sleep(2000);
 													WileyPLUS.clickOnOnboardingAddCourseButton();
-													WileyPLUS.enterCourseSectionId("A03598");
+													WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "Course"));
 													WileyPLUS.clickOnContinueButtonInOnboarding();
 													try {
 														wait.until(ExpectedConditions.presenceOfElementLocated(
