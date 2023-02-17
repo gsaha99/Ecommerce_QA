@@ -4735,8 +4735,9 @@ public class WEL_Test_Suite extends DriverModule {
 											By.xpath("//div[@class='row taxCalculationDetails orderReviewRightPanel']/"
 													+ "div[@class='col-6 noPadding price orderDetailCommonVal']")));
 									wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-											"//a[@href='/checkout/multi/delivery-address/add/']/span[@class='stepEdit']")));
-									WEL.clickOnShippingDetailsEditIcon();
+											"//div[@class='step-head checkoutCompletedStep']//div[@class='edit']/a")));
+									//WEL.clickOnShippingDetailsEditIcon();
+									WEL.ClickOnEditIcononShippingPage();
 									WEL.GuestFirstName(
 											excelOperation.getTestData("TC38", "WEL_Test_Data", "Guest_Fname"));
 									WEL.GuestLastName(
@@ -4799,8 +4800,9 @@ public class WEL_Test_Suite extends DriverModule {
 														"//div[@class='row taxCalculationDetails orderReviewRightPanel']/"
 																+ "div[@class='col-6 noPadding price orderDetailCommonVal']")));
 												wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-														"//a[@href='/checkout/multi/delivery-address/add/']/span[@class='stepEdit']")));
-												WEL.clickOnShippingDetailsEditIcon();
+														"//div[@class='step-head checkoutCompletedStep']//div[@class='edit']/a")));
+												WEL.ClickOnEditIcononShippingPage();
+												//WEL.clickOnShippingDetailsEditIcon();
 												WEL.GuestFirstName(excelOperation.getTestData("TC38", "WEL_Test_Data",
 														"Guest_Fname"));
 												WEL.GuestLastName(excelOperation.getTestData("TC38", "WEL_Test_Data",
@@ -5019,6 +5021,7 @@ public class WEL_Test_Suite extends DriverModule {
 													"((//div[@class='FundingInstrument_container_16IeJ'])[2]//span)[1]")));
 											WEL.ClickOnPaypalCreditRadioButton();
 											WEL.ClickOnPaypalReviewOrder();
+											ScrollingWebPage.PageDown(driver, SS_path);
 											WEL.clickOnPlaceOrderButton();
 											String orderID = WEL.fetchOrderId();
 											excelOperation.updateTestData("TC37", "WEL_Test_Data", "Order_Id", orderID);
@@ -5135,9 +5138,24 @@ public class WEL_Test_Suite extends DriverModule {
 								WEL.ShipTownIndiaCity(
 										excelOperation.getTestData("TC73", "WEL_Test_Data", "Sh_City/ Province"));
 								try {
-									wait.until(ExpectedConditions
+									wait1.until(ExpectedConditions
 											.elementToBeClickable(By.xpath("//input[@id='address.region']")));
 									WEL.enterState(excelOperation.getTestData("TC73", "WEL_Test_Data", "Sh_State"));
+								} catch (Exception e) {
+									try {
+										wait1.until(ExpectedConditions
+												.elementToBeClickable(By.xpath("//select[@id='address.region']")));
+										WEL.selectStateFromDropsown(
+												excelOperation.getTestData("TC73", "WEL_Test_Data", "Sh_State"));
+									} catch (Exception e1) {
+
+										Reporting.updateTestReport(
+												"State field was not clickable and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+									}
+
+								}
 									WEL.ShipPhoneNumber(
 											excelOperation.getTestData("TC73", "WEL_Test_Data", "Sh_Phone_Number"));
 									WEL.ClickingOnSaveAndContinue();
@@ -5199,11 +5217,7 @@ public class WEL_Test_Suite extends DriverModule {
 												"The name field in card information step was not clickable and caused timeout exception",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
-								} catch (Exception e) {
-									Reporting.updateTestReport(
-											"State field was not visible and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+								
 							} catch (Exception e) {
 								Reporting.updateTestReport("Help button was not visible and caused timeout exception",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
