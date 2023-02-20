@@ -145,7 +145,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		
 		try {
 			Reporting.test = Reporting.extent.createTest("TC02_Client Portal: "
-					+ "Verify whether WPS admin is able to create New Client Application"
+					+ "Verify whether WPS admin is able to create New Client Application,"
+					+ "and verify the filter functionality at home screen"
 					);
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
@@ -480,11 +481,11 @@ public class ClientPortal_RegressionSuite extends DriverModule {
      * @Description: Validation of New Client App edit for WPS Admin
      */
 	@Test
-	public void TC07_EditClientApp_WPSAdmin() throws IOException
+	public void TC06_EditClientApp_WPSAdmin() throws IOException
 	{
 		
 		try {
-			Reporting.test = Reporting.extent.createTest("TC07_Client Portal: "
+			Reporting.test = Reporting.extent.createTest("TC06_Client Portal: "
 					+ "Verify the Edit option in the home page"
 					);
 			
@@ -606,11 +607,11 @@ public class ClientPortal_RegressionSuite extends DriverModule {
     * @Description: Validation of login functionality for WPS Admin
     */
 	@Test
-	public void TC08_Pagination_WPSAdmin() throws IOException
+	public void TC07_Pagination_WPSAdmin() throws IOException
 	{
 		
 		try {
-			Reporting.test = Reporting.extent.createTest("TC08_Client Portal: "
+			Reporting.test = Reporting.extent.createTest("TC07_Client Portal: "
 					+ "Verify whether system is showing the count of the client application in home page,"
 					+ " and in My Worklist and pagination is working properly for WPS Admin role.");
 			
@@ -684,11 +685,11 @@ public class ClientPortal_RegressionSuite extends DriverModule {
      * @Description: Validation of footer for WPS Admin
      */
 	@Test
-	public void TC09_Footer_WPSAdmin() throws IOException
+	public void TC08_Footer_WPSAdmin() throws IOException
 	{
 		
 		try {
-			Reporting.test = Reporting.extent.createTest("TC09_Client Portal: "
+			Reporting.test = Reporting.extent.createTest("TC08_Client Portal: "
 					+ "Verify whether system display Footer as \"\"Copyright Â© 2000-2021 by John Wiley & Sons, Inc., or related companies. All rights reserved.\","
 					+ " in all the screens of Client portal and Verify whether System allow user to navigate,"
 					+ "to the separate tab when user clicks on \"\"Copyright Â© 2000-2021\" hyper link on footer.");
@@ -768,11 +769,11 @@ public class ClientPortal_RegressionSuite extends DriverModule {
      * @Description: Validation of login functionality for WPS Support
      */
 	@Test
-	public void TC10_Login_WPSSupport() throws IOException
+	public void TC09_Login_WPSSupport() throws IOException
 	{
 		
 		try {
-			Reporting.test = Reporting.extent.createTest("TC10_Client Portal: "
+			Reporting.test = Reporting.extent.createTest("TC09_Client Portal: "
 					+ "Validate that the user should be able to see the user name on top right corner,"
 					+ " WPS Support user contains the Home,Create New Application, Register new User, My Work List,"
 					+ "Transaction search  options  on header of the page,"
@@ -866,11 +867,11 @@ public class ClientPortal_RegressionSuite extends DriverModule {
      * @Description: Validation of New Client App add for WPS Support
      */
 	@Test
-	public void TC16_RegisterNewClientApp_WPSSupport() throws IOException
+	public void TC13_RegisterNewClientApp_WPSSupport() throws IOException
 	{
 		
 		try {
-			Reporting.test = Reporting.extent.createTest("TC16_Client Portal: "
+			Reporting.test = Reporting.extent.createTest("TC13_Client Portal: "
 					+ "Verify whether system allows user to register a new client app by entering values in all the mandatory fields and also verify below," 
 					+ "system should display the entry in Client_app table when client_admin register a new client app using client portal," 
 					+ "system should navigate user back to the Home Screen when user enter values in all the mandatory fields and click on Register Button," 
@@ -1123,11 +1124,11 @@ public class ClientPortal_RegressionSuite extends DriverModule {
      * @Description: Validation of login functionality for Client Admin
      */
 	@Test
-	public void TC34_Login_ClientAdmin() throws IOException
+	public void TC25_Login_ClientAdmin() throws IOException
 	{
 		
 		try {
-			Reporting.test = Reporting.extent.createTest("TC34_Client Portal: "
+			Reporting.test = Reporting.extent.createTest("TC25_Client Portal: "
 					+ "Validate that the user should be able to see the user name on top right corner,"
 					+ " Client Admin user contains the Home,Register New Application,"
 					+ "Transaction search  options  on header of the page,"
@@ -1220,11 +1221,11 @@ public class ClientPortal_RegressionSuite extends DriverModule {
      * @Description: Validation of New Client App add for Client Admin
      */
 	@Test
-	public void TC35_RegisterNewClientApp_ClientAdmin() throws IOException
+	public void TC26_RegisterNewClientApp_ClientAdmin() throws IOException
 	{
 		
 		try {
-			Reporting.test = Reporting.extent.createTest("TC35_Client Portal: "
+			Reporting.test = Reporting.extent.createTest("TC26_Client Portal: "
 					+ "Verify whether Client admin is able to register New Client Application"
 					);
 			
