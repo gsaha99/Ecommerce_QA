@@ -1435,12 +1435,39 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			      Reporting.updateTestReport("Filtering is not working",
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		      }
+			CPortal.WPSAdmin_ClickEditIcon();
+			CPortal.ClientAdmin_EditBusinessUnit();
+			driver.findElement(By.xpath("//h1[contains(text(),'Edit Client Application')]")).click();
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			CPortal.WPSAdmin_Click_Save();
+			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
+			CPortal.WPSAdmin_ClickEditIcon();
+			String actualBU=excelOperation.getTestData("Research", "Generic_Dataset", "Data");
+			String DBName1=excelOperation.getTestData("TC38", "DB_Query", "DB_Name");
+			String query1=excelOperation.getTestData("TC38", "DB_Query", "Query");
+			String datatype1=excelOperation.getTestData("TC38", "DB_Query", "Data_Type");
+			String expectedBU=dbConnect.DB_Select(DBName1,query1,datatype1);
+			if(expectedBU.equalsIgnoreCase(actualBU))
+		       {
+			
+			      Reporting.updateTestReport("DB Validation is done, app is edited and  new Business Unit ID is: " + expectedBU,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		       }
+		      else 
+		       {
+			      Reporting.updateTestReport("DB Validation is failed and new Business Unit ID is not: " + expectedBU,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		       }
+			
+			
 			
 		}
 		catch (Exception e) 
 		{
-			System.out.println("Registering new client app with Client Admin Role Failed" + e.getMessage());
-			Reporting.updateTestReport("Registering new client app with Client Admin Role Failed" + e.getMessage(),
+			System.out.println("Registering new client app with Client Admin Role and edit client app Failed" + e.getMessage());
+			Reporting.updateTestReport("Registering new client app with Client Admin Role and edit client app Failed" + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}

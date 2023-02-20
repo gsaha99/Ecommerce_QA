@@ -78,6 +78,9 @@ public class app_ClientPortal_Repo extends DriverModule {
 	@FindBy(xpath = "//option[@value='APL']")
     WebElement selectBusinessUnit;
 	
+	@FindBy(xpath = "//option[@value='Research']")
+    WebElement editBusinessUnit;
+	
 	@FindBy(name="name")
     WebElement enterClientAppName;
 	
@@ -426,6 +429,21 @@ public class app_ClientPortal_Repo extends DriverModule {
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Business Unit is not selected : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author - Jayanta 
+	 * Description : Method to edit Business Unit as Research in edit new client app screen for Client Admin
+	 */
+	
+	public void ClientAdmin_EditBusinessUnit() throws IOException {
+		try {
+			 editBusinessUnit.click();
+			Reporting.updateTestReport("Business Unit is edited successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Business Unit is not edited : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 	
@@ -925,6 +943,6 @@ public class app_ClientPortal_Repo extends DriverModule {
 			Reporting.updateTestReport("Confirm button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-
+	
 
 }
