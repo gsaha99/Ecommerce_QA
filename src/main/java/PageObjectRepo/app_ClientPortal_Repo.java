@@ -133,6 +133,9 @@ public class app_ClientPortal_Repo extends DriverModule {
 	@FindBy(xpath = "//button[@type='submit' and @class='btn blue-btn']")
 	WebElement ClickRegister;
 	
+	@FindBy(xpath = "//button[@class='btn white-btn back-btn']")
+	WebElement ClickCancel;
+	
 	/* 
 	 * Author : Jayanta
 	 * Description : Object repo for Client portal WPS Admin home page filter
@@ -661,6 +664,22 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	/* 
 	 * Author : Jayanta
+	 * Description :  Method to click cancel button in Register new client app screen for Client Admin
+	 */
+	
+	public void ClientAdmin_Click_Cancel() throws IOException {
+		try {
+			ClickCancel.click();
+		    Thread.sleep(5000);
+			Reporting.updateTestReport("Cancel button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Cancel button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Jayanta
 	 * Description : Method to enter name in Client App Home screen for WPS Admin
 	 */
 	
@@ -790,6 +809,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 			Reporting.updateTestReport("Register button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
 	
 	/* 
 	 * Author - Jayanta 

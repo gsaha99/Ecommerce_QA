@@ -209,6 +209,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
 			CPortal.WPSAdmin_Enter_ClientApp_ShortName("TA"+uuid);
 			CPortal.WPSAdmin_SelectUserID();
+			driver.findElement(By.xpath("//h1[contains(text(),'Add New Client Application')]")).click();
 			ScrollingWebPage.PageDown(driver, SS_path);
 			ScrollingWebPage.PageDown(driver, SS_path);
 			ScrollingWebPage.PageScrolldown(driver, 0, 600);
@@ -549,6 +550,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
 			CPortal.WPSAdmin_Enter_ClientApp_ShortName("TA"+uuid);
 			CPortal.WPSAdmin_SelectUserID();
+			driver.findElement(By.xpath("//h1[contains(text(),'Add New Client Application')]")).click();
 			ScrollingWebPage.PageDown(driver, SS_path);
 			ScrollingWebPage.PageDown(driver, SS_path);
 			ScrollingWebPage.PageScrolldown(driver, 0, 600);
@@ -604,7 +606,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 
 	 /*
     * @Author: Jayanta
-    * @Description: Validation of login functionality for WPS Admin
+    * @Description: Validation of Pagination functionality for WPS Admin
     */
 	@Test
 	public void TC07_Pagination_WPSAdmin() throws IOException
@@ -1119,6 +1121,106 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		}
 	}
 	
+	/*
+     * @Author: Varisa
+     * @Description: Validation of Register a New User for WPS Support
+     */
+	@Test
+	public void TC16_RegisterNewUser_WPSSupport() throws IOException
+	{
+		
+		try {
+			Reporting.test = Reporting.extent.createTest("TC16_Client Portal: "
+					+ "Verify whether WPS Support able to Register New User"
+					);
+			
+			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
+			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0118")));
+			CPortal.WPSAdmin_LogIN_EnterPWD(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			CPortal.WPSAdmin_ClickRegisterNewUser();
+			CPortal.WPSAdmin_Enter_First_Name("TestAutoSupportFirstName");
+			CPortal.WPSAdmin_Enter_Last_Name("TestAutoSupportLastName");
+			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
+			String SSOID = "TestUserSupport"+uuid+"@wiley.com";
+			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
+			CPortal.WPSSupport_SelectWPSSupportRole();
+			CPortal.WPSAdmin_ClickRegister();
+			String DBName=excelOperation.getTestData("TC16", "DB_Query", "DB_Name");
+			String query=excelOperation.getTestData("TC16", "DB_Query", "Query");
+			String datatype=excelOperation.getTestData("TC16", "DB_Query", "Data_Type");
+			String ssoid=dbConnect.DB_Select(DBName,query,datatype);
+			System.out.println(ssoid);
+			if(ssoid.compareTo(SSOID)==0)
+		       {
+			
+			      Reporting.updateTestReport("DB Validation is done and SSO ID is: " + ssoid,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		       }
+		      else 
+		       {
+			      Reporting.updateTestReport("DB Validation is not done and SSO ID is not: " + SSOID,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		       }
+			
+			
+		}
+		catch (Exception e) 
+		{
+			System.out.println("Register new user with WPS Support Role Failed" + e.getMessage());
+			Reporting.updateTestReport("Register new user with WPS Support Role Failed" + e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
 	 /*
      * @Author: Jayanta
      * @Description: Validation of login functionality for Client Admin
@@ -1473,24 +1575,25 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		}
 	}
 	
-	/*
-     * @Author: Varisa
-     * @Description: Validation of Register a New User for WPS Support
+	 /*
+     * @Author: Jayanta
+     * @Description: Validation of cancel button in New Client App register screen for Client Admin
      */
 	@Test
-	public void TC16_RegisterNewUser_WPSASupport() throws IOException
+	public void TC28_RegisterNewClientApp_Cancel_ClientAdmin() throws IOException
 	{
 		
 		try {
-			Reporting.test = Reporting.extent.createTest("TC16_Client Portal: "
-					+ "Verify whether WPS Support able to Register New User"
+			Reporting.test = Reporting.extent.createTest("TC28_Client Portal: "
+					+ "Validate the functionality of Cancel button displayed in the "
+					+ "Register New Client Application Screen with Type SOAP."
 					);
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
-			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID"));
+			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "EmailID"));
 			}
 			catch (Exception e) 
 			{
@@ -1510,7 +1613,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			}
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0118")));
-			CPortal.WPSAdmin_LogIN_EnterPWD(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD"));
+			CPortal.WPSAdmin_LogIN_EnterPWD(excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "PWD"));
 			}
 			catch (Exception e) 
 			{
@@ -1538,40 +1641,80 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			CPortal.WPSAdmin_ClickRegisterNewUser();
-			CPortal.WPSAdmin_Enter_First_Name("TestAutoSupportFirstName");
-			CPortal.WPSAdmin_Enter_Last_Name("TestAutoSupportLastName");
+			CPortal.WPSAdmin_ClickNewClientApp();
+			CPortal.WPSAdmin_SelectSOAP();
+			CPortal.WPSAdmin_SelectBusinessUnit();
 			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
-			String SSOID = "TestUserSupport"+uuid+"@wiley.com";
-			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
-			CPortal.WPSSupport_SelectWPSSupportRole();
-			CPortal.WPSAdmin_ClickRegister();
-			String DBName=excelOperation.getTestData("TC16", "DB_Query", "DB_Name");
-			String query=excelOperation.getTestData("TC16", "DB_Query", "Query");
-			String datatype=excelOperation.getTestData("TC16", "DB_Query", "Data_Type");
-			String ssoid=dbConnect.DB_Select(DBName,query,datatype);
-			System.out.println(ssoid);
-			if(ssoid.compareTo(SSOID)==0)
-		       {
-			
-			      Reporting.updateTestReport("DB Validation is done and SSO ID is: " + ssoid,
-					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		       }
-		      else 
-		       {
-			      Reporting.updateTestReport("DB Validation is not done and SSO ID is not: " + SSOID,
-					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		       }
-			
+			String ClientAppName="ClientAdminTestAuto_"+uuid;
+			CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
+			CPortal.WPSAdmin_Enter_ClientApp_ShortName("CATA"+uuid);
+			CPortal.WPSAdmin_SelectUserID();
+			driver.findElement(By.xpath("//h1[contains(text(),'Register New Client Application')]")).click();
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageScrolldown(driver, 0, 600);
+			CPortal.WPSAdmin_ClickPaymentMethod();
+			CPortal.WPSAdmin_Click_DebitCard();
+			CPortal.ClientAdmin_Click_Cancel();
+			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'No records found!')]")));
+			CPortal.WPSAdmin_ClickLogOut();
+			CPortal.WPSAdmin_ClickLogOutImage();
+			CPortal.WPSAdmin_ClickLogIN();
+			CPortal.WPSAdmin_ClickAnotherUserAccount();
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
+			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0118")));
+			CPortal.WPSAdmin_LogIN_EnterPWD(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			CPortal.WPSAdmin_ClickMyWorklist();
+			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'No records found!')]")));
 			
 		}
 		catch (Exception e) 
 		{
-			System.out.println("Register new user with WPS Support Role Failed" + e.getMessage());
-			Reporting.updateTestReport("Register new user with WPS Support Role Failed" + e.getMessage(),
+			System.out.println("Cancelling new client app with Client Admin Role Failed" + e.getMessage());
+			Reporting.updateTestReport("Cancelling new client app with Client Admin Role Failed" + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
 
 
 
