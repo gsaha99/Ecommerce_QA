@@ -266,7 +266,7 @@ public class app_WEL_Repo {
 	@FindBy(id = "firstName")
 	WebElement GuestFirstName;
 
-	@FindBy(id = "lastName']")
+	@FindBy(id = "lastName")
 	WebElement GuestLastName;
 
 	@FindBy(id = "address.country")

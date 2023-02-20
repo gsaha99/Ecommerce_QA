@@ -11,15 +11,16 @@
       <methods>
 		 
         
-        <include name="TC13_.*" />
-        <include name="TC19_.*" />
-        <include name="TC25_.*" />
-        <include name="TC26_.*" />
-        <include name="TC37_.*" />
-        <include name="TC38_.*" />
-        <include name="TC52_.*" />
-         <include name="TC69_.*" />
-          <include name="TC73_.*" />
+        <include name="TC01_.*" />
+        <include name="TC02_.*" />
+        <include name="TC03_.*" />
+        <include name="TC04_.*" />
+        <include name="TC05_.*" />
+        <include name="TC06_.*" />
+        <include name="TC07_.*" />
+         <include name="TC08_.*" />
+          <include name="TC09_.*" />
+          <include name="TC10_.*" />
         
         </methods>
       </class>
