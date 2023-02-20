@@ -180,6 +180,14 @@ public class app_ClientPortal_Repo extends DriverModule {
 
 	 @FindBy(xpath = "(//div[@class='btn-grp'])[3]/button[@class='btn blue-btn']")
 	 WebElement Click_Approve;
+	 
+	 /*
+	  * Author : Jayanta
+	  * Description : Object Repo for decline button in Approve client App page
+	  */
+
+	 @FindBy(xpath = "(//div[@class='btn-grp'])[3]/button[@class='btn white-btn']")
+	 WebElement Click_Decline;
 
 	 /*
 	  * Author : Varisa
@@ -918,6 +926,24 @@ public class app_ClientPortal_Repo extends DriverModule {
 	}
 	
 	/* 
+	 * Author : Jayanta
+	 * Description :  Method to click Decline button in Approve client app screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_Click_Decline() throws IOException {
+		try {
+			Click_Decline.click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Do you really want to ')]")));
+		    driver.findElement(By.xpath("//h2[contains(text(),'Do you really want to ')]")).click();
+		    Thread.sleep(5000);
+			Reporting.updateTestReport("Decline button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Decline button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
 	 * Author : Varisa
 	 * Description :  Method to click Confirm button in Approve client app screen for WPS Admin
 	 */
@@ -927,6 +953,24 @@ public class app_ClientPortal_Repo extends DriverModule {
 			Click_Confirm.click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'application has been approved')]")));
 		    driver.findElement(By.xpath("//span[contains(text(),'application has been approved')]")).click();
+		    Thread.sleep(5000);
+			Reporting.updateTestReport("Confirm button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Confirm button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description :  Method to click Confirm button in Decline client app screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_Decline_Click_Confirm() throws IOException {
+		try {
+			Click_Confirm.click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'application has been declined')]")));
+		    driver.findElement(By.xpath("//span[contains(text(),'application has been declined')]")).click();
 		    Thread.sleep(5000);
 			Reporting.updateTestReport("Confirm button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
