@@ -167,11 +167,8 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//button[contains(text(),'EXPLORE COURSES')])[1]")
 	WebElement CMAExploreCourse;
 
-	@FindBy(xpath = "//button[@class='free-trial-btn  ']")
-	WebElement CPAFreeTrail;
-
-	@FindBy(xpath = "//button[contains(text(),'FREE')]")
-	WebElement CIAFreeTrial;
+	@FindBy(xpath = "//button[contains(text(),'FREE TRIAL')]")
+	WebElement FreeTrialButton;
 
 	@FindBy(name = "firstName")
 	WebElement FreeTrailFname;
@@ -233,8 +230,8 @@ public class app_WEL_Repo {
 	@FindBy(id = "voucher-remove-button_0")
 	WebElement CouponRemove;
 
-	@FindBy(xpath = "(//span[@class='welCheckoutContBtnText'])[2]")
-	WebElement ClickOnCheckout;
+	@FindBy(xpath = "//button[@id='cartCheckoutBtn']/span")
+	WebElement CheckOutButtonOnCartPage;
 
 	@FindBy(id = "username")
 	WebElement username;
@@ -482,8 +479,6 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='col dropdown-item product-dropdown-desktop-item item1']//li[2]/a")
 	WebElement CPATestBank;
 
-	@FindBy(xpath = "//div[@class='partner-detail partner-list-container']//div[@class='col-xs-12 col-sm-6 package-selection-col']//button")
-	WebElement PartnerProductAddToCartButton;
 
 	@FindBy(xpath = "//div[@class='form-group']//input[@id='inputPartnerSearch']")
 	WebElement PartnerInputSearch;
@@ -518,9 +513,6 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//div[@class='container product-categories-container']//div[2]//dd/a[contains(text(),'CPA')]")
 	WebElement DeanDortonCPAProduct;
-
-	@FindBy(xpath = "(//div[@class='col']//button)[2]")
-	WebElement DeanDortonAddToCart;
 
 	@FindBy(xpath = "//input[@placeholder='Enter your inbox here']")
 	WebElement EnterEmailIdInYopmail;
@@ -569,9 +561,6 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "(//div[@class='col-xs-12 col-sm-4 supplements-cards']/div/a)[1]")
 	WebElement CFASupplementProduct;
-
-	@FindBy(xpath = "//button[contains(text(),'ADD')]")
-	WebElement SupplementAddToCart;
 
 	@FindBy(xpath = "(//div[@class='col-6 noPadding price orderDetailCommonVal'])[2]")
 	WebElement ShippingCharge;
@@ -1028,7 +1017,7 @@ public class app_WEL_Repo {
 
 	public void ClickonCheckOutOnCartPage() throws IOException {
 		try {
-			ClickOnCheckout.click();
+			CheckOutButtonOnCartPage.click();
 			Reporting.updateTestReport("Checkout Button clicked successfully ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
@@ -1842,10 +1831,10 @@ public class app_WEL_Repo {
 		}
 	}
 
-	public void ClickOnFreeTrail() throws IOException {
+	public void clickOnFreeTrialButton() throws IOException {
 		try {
-			CPAFreeTrail.click();
-			Reporting.updateTestReport("CPA Free-trail was clicked successfully",
+			FreeTrialButton.click();
+			Reporting.updateTestReport("Free trial button was clicked successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("Failed to click Save And Continue button " + e.getClass().toString(),
@@ -1853,16 +1842,6 @@ public class app_WEL_Repo {
 		}
 	}
 
-	public void ClickOnCIAFreeTrail() throws IOException {
-		try {
-			CIAFreeTrial.click();
-			Reporting.updateTestReport("CIA Free-trail was clicked successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click Save And Continue button " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
 
 	public void FreeTrailFirstName(String FFName) throws IOException {
 		try {
@@ -2710,16 +2689,6 @@ public class app_WEL_Repo {
 
 
 
-	public void ClickOnAddToCartUniversityProduct() throws IOException {
-		try {
-			PartnerProductAddToCartButton.click();
-			Reporting.updateTestReport("Add TO Cart was clickedc successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click on Add To Cart" + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
 
 	public void EnterUniversityName(String universityname) throws IOException {
 		try {
@@ -2897,16 +2866,6 @@ public class app_WEL_Repo {
 		}
 	}
 
-	public void ClickOnAddToCartForDeanDortonProduct() throws IOException {
-		try {
-			DeanDortonAddToCart.click();
-			Reporting.updateTestReport("Add TO Cart was clicked successfully", CaptureScreenshot.getScreenshot(SS_path),
-					StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click on Add To Cart" + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
 
 	/*
 	 * @Author: Anindita
@@ -3239,44 +3198,15 @@ public class app_WEL_Repo {
 		}
 	}
 
-	public void ClickOnAddToCartForSupplement() throws IOException {
-		try {
-			SupplementAddToCart.click();
-			Reporting.updateTestReport("Add To Cart  was Clicked successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click on Add TO Cart " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
 
-	public void ClickOnCMAFreeTrail() throws IOException {
-		try {
-			CPAFreeTrail.click();
-			Reporting.updateTestReport("CMA Free-trail was clicked successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click Save And Continue button " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
-
-	public void ClickOnCFAFreeTrail() throws IOException {
-		try {
-			CPAFreeTrail.click();
-			Reporting.updateTestReport("CFA Free-trail was clicked successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click Save And Continue button " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
-
+	/*
+	 * @Description: Enters first name in the free trial form 
+	 */
 	public String FreeTrialFirstName() throws IOException {
 		try {
 
 			String cpaftext = FreeTrailFname.getText();
-			Reporting.updateTestReport("First Name filed is appeard successfully on  Free Trail from",
+			Reporting.updateTestReport("First Name field is appeard successfully on  Free Trail form",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return cpaftext;
 		} catch (Exception e) {
@@ -3286,6 +3216,9 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Description: Enters last name in the free trial form 
+	 */
 	public String FreeTrailLastName() throws IOException {
 		try {
 
@@ -3300,6 +3233,9 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Description: Enters email id in the free trial form for new user
+	 */
 	public String FreeTrailEmail() throws IOException {
 		try {
 
@@ -3314,6 +3250,9 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Description: Enters password in the free trial form for new user
+	 */
 	public String FreeTrailPassword() throws IOException {
 		try {
 
@@ -3327,7 +3266,10 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
-
+	
+	/*
+	 * @Description: Clicks on Activate button in the PIN Activation page
+	 */
 	public void ClickOnActiactePIN() throws IOException {
 		try {
 			ActivatePIN.click();
@@ -3338,7 +3280,10 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-
+	
+	/*
+	 * @Description: Fetches the shipping charge value when multiple products are present in cart
+	 */
 	public String ShippingChargeForMultipleProducts() throws IOException {
 		try {
 			String ShipCharge = ShippingCharge.getText();
