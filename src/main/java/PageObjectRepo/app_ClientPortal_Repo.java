@@ -185,6 +185,13 @@ public class app_ClientPortal_Repo extends DriverModule {
 
 	  @FindBy(xpath = "(//div[@class='btn-grp'])[2]/button[@class='btn blue-btn']")
 	  WebElement Click_Confirm;
+	  
+	  /*
+	   * Author : Varisa
+	   * Description : Method to click on Confirm button
+	   */
+	  @FindBy(xpath = "//option[@value='WPS_Support']")
+	    WebElement selectWPSSupportRole;
 	
 	/* 
 	 * Author : Jayanta
@@ -944,5 +951,19 @@ public class app_ClientPortal_Repo extends DriverModule {
 		}
 	}
 	
+	/* 
+	 * Author - Varisa 
+	 * Description : Method to select Role as WPS Admin in Register New User screen for WPS Admin
+	 */
+	
+	public void WPSSupport_SelectWPSSupportRole() throws IOException {
+		try {
+			selectWPSSupportRole.click();
+			Reporting.updateTestReport("Role is selected successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Role is not selected : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 
 }

@@ -948,9 +948,9 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_Click_DebitCard();
 			//ScrollingWebPage.PageScrolldown(driver, 0, 600);
 			CPortal.WPSSuppport_Click_Register();
-			String DBName=excelOperation.getTestData("TC02", "DB_Query", "DB_Name");
-			String query=excelOperation.getTestData("TC02", "DB_Query", "Query");
-			String datatype=excelOperation.getTestData("TC02", "DB_Query", "Data_Type");
+			String DBName=excelOperation.getTestData("TC13", "DB_Query", "DB_Name");
+			String query=excelOperation.getTestData("TC13", "DB_Query", "Query");
+			String datatype=excelOperation.getTestData("TC13", "DB_Query", "Data_Type");
 			String clientappname=dbConnect.DB_Select(DBName,query,datatype);
 			System.out.println(clientappname);
 			if(clientappname.compareTo(ClientAppName)==0)
@@ -1472,6 +1472,107 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
+	/*
+     * @Author: Varisa
+     * @Description: Validation of Register a New User for WPS Support
+     */
+	@Test
+	public void TC16_RegisterNewUser_WPSASupport() throws IOException
+	{
+		
+		try {
+			Reporting.test = Reporting.extent.createTest("TC16_Client Portal: "
+					+ "Verify whether WPS Support able to Register New User"
+					);
+			
+			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
+			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0118")));
+			CPortal.WPSAdmin_LogIN_EnterPWD(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			CPortal.WPSAdmin_ClickRegisterNewUser();
+			CPortal.WPSAdmin_Enter_First_Name("TestAutoSupportFirstName");
+			CPortal.WPSAdmin_Enter_Last_Name("TestAutoSupportLastName");
+			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
+			String SSOID = "TestUserSupport"+uuid+"@wiley.com";
+			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
+			CPortal.WPSSupport_SelectWPSSupportRole();
+			CPortal.WPSAdmin_ClickRegister();
+			String DBName=excelOperation.getTestData("TC16", "DB_Query", "DB_Name");
+			String query=excelOperation.getTestData("TC16", "DB_Query", "Query");
+			String datatype=excelOperation.getTestData("TC16", "DB_Query", "Data_Type");
+			String ssoid=dbConnect.DB_Select(DBName,query,datatype);
+			System.out.println(ssoid);
+			if(ssoid.compareTo(SSOID)==0)
+		       {
+			
+			      Reporting.updateTestReport("DB Validation is done and SSO ID is: " + ssoid,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		       }
+		      else 
+		       {
+			      Reporting.updateTestReport("DB Validation is not done and SSO ID is not: " + SSOID,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		       }
+			
+			
+		}
+		catch (Exception e) 
+		{
+			System.out.println("Register new user with WPS Support Role Failed" + e.getMessage());
+			Reporting.updateTestReport("Register new user with WPS Support Role Failed" + e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
 
 
 }
