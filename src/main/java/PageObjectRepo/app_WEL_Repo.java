@@ -35,7 +35,7 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']/label")
 	WebElement ShipMethod;
 
-	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']/label[@class='deliveryModeLabel']/span")
+	@FindBy(xpath = "//label[@class='deliveryModeLabel']/span")
 	WebElement ShipValue;
 
 	@FindBy(xpath = "(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
@@ -44,17 +44,8 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
 	WebElement UseSelectedBillingAddressButtonAddressDoctorPopUp;
 
-	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']//span[contains(text(),'$40')]")
-	WebElement SingaporeShipMethod;
-
-	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']//span[contains(text(),'$40')]")
-	WebElement IndiaShipMethod;
-
-	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']//span[contains(text(),'$5')]")
-	WebElement CanadaShipMethod;
-
-	@FindBy(xpath = "//div[@class='deliveryMethodMainExceptFirstDiv']//span[contains(text(),'$12')]")
-	WebElement CanadaShipMethod2;
+	@FindBy(xpath = "(//label[@class='deliveryModeLabel deliveryModeLabelExceptFirst']/span)[1]")
+	WebElement SecondShippingCharge;
 
 	@FindBy(xpath = "(//img[@class='js-responsive-image'])[1]")
 	WebElement WELIconOrderConfirmationPage;
@@ -71,10 +62,7 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//div[@class='row banner-position']//div[3]//button)[1]")
 	WebElement Level1TestBank;
 
-	@FindBy(xpath = "//div[@class='package-selection-container platinum-package']//button")
-	WebElement CAIAAddToCart;
-
-	@FindBy(xpath = "//input[@id='nameOnCard']")
+	@FindBy(id = "nameOnCard")
 	WebElement CardHolderName;
 
 	@FindBy(xpath = "(//a[@href='/my-account'])[1]")
@@ -86,25 +74,25 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//div[@id='welSiteExceptLogoMainDiv']/div[@class='welGlobalHeaderNavbar'])[1]/span[3]/span/a")
 	WebElement BackToCart;
 
-	@FindBy(xpath = "//button[@id='removeEntry_0']")
+	@FindBy(id = "removeEntry_0")
 	WebElement RemoveIcon;
 
 	@FindBy(xpath = "//a[contains(text(),'Create')]")
 	WebElement CreateOne;
 
-	@FindBy(xpath = "//input[@id='register.email']")
+	@FindBy(id = "register.email")
 	WebElement EmailAddress;
 
-	@FindBy(xpath = "//input[@id='register.confirmEmail']")
+	@FindBy(id = "register.confirmEmail")
 	WebElement ConfirmEmailAddress;
 
-	@FindBy(xpath = "//input[@name='studentFirstName']")
+	@FindBy(name = "studentFirstName")
 	WebElement FirstName;
 
-	@FindBy(xpath = "//input[@name='studentLastName']")
+	@FindBy(name = "studentLastName")
 	WebElement LastName;
 
-	@FindBy(xpath = "//input[@name='pwd']")
+	@FindBy(name = "pwd")
 	WebElement Password;
 
 	@FindBy(xpath = "//label[@for='termsCheck']")
@@ -125,7 +113,7 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='account d-none d-lg-inline-block']")
 	WebElement AccountMyIcon;
 	
-	@FindBy(xpath = "//select[@id='address.region']")
+	@FindBy(id = "address.region")
 	WebElement SelectState;
 
 	@FindBy(xpath = "//button[contains(text(),'I Accept')]")
@@ -152,12 +140,6 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='product-list-page']//div[@class='comparison-table-title-container header-sticky']//div[2]/a")
 	WebElement CIAViewCourse;
 
-	@FindBy(xpath = "//div[@class='product-detail-page']//div[@class='container-fluid banner-container product-detail-banner mt-4']//button")
-	WebElement CIAAddToCart;
-
-	@FindBy(xpath = "//div[@id='Ultimate_CPA Review Course 2022 (Mentorship & Tutoring Bundle)']//form//button")
-	WebElement CPAAddToCart;
-
 	@FindBy(xpath = "((//div[@class='col-xs-12 col-sm-6 package-selection-left-col'])[2]//form//label)[2]")
 	WebElement CIAeBook;
 
@@ -167,10 +149,10 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='helpButton']")
 	WebElement HelpButton;
 
-	@FindBy(xpath = "//button[@id='addressSubmit']")
+	@FindBy(id = "addressSubmit")
 	WebElement SaveAndContinueShippingAddressPage;
 
-	@FindBy(xpath = "//select[@id='quantity_0']")
+	@FindBy(id = "quantity_0")
 	WebElement SelectQuantity;
 
 	@FindBy(xpath = "//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[2]")
@@ -191,28 +173,28 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//button[contains(text(),'FREE')]")
 	WebElement CIAFreeTrial;
 
-	@FindBy(xpath = "//div[@class='form-box']//input[@name='firstName']")
+	@FindBy(name = "firstName")
 	WebElement FreeTrailFname;
 
-	@FindBy(xpath = "//div[@class='form-box']//input[@name='lastName']")
+	@FindBy(name = "lastName")
 	WebElement FreeTrailLname;
 
-	@FindBy(xpath = "//div[@class='form-box']//input[@name='email']")
+	@FindBy(name = "email")
 	WebElement FreeTrailEmail;
 
-	@FindBy(xpath = "//div[@class='form-box']//select[@name='country']")
+	@FindBy(name = "country")
 	WebElement FreeTrailCountry;
 
-	@FindBy(xpath = "//div[@class='form-box']//select[@name='region']")
+	@FindBy(name = "region")
 	WebElement FreeTrailState;
 
-	@FindBy(xpath = "//div[@class='form-box']//input[@name='password']")
+	@FindBy(name = "password")
 	WebElement FreeTrailPassword;
 
-	@FindBy(xpath = "//div[@class='form-box']//input[@name='termsAndConditions']")
+	@FindBy(name = "termsAndConditions")
 	WebElement FreeTrailTermsAndConditions;
 
-	@FindBy(xpath = "//div[@class='form-box']//input[@name='signUp']")
+	@FindBy(name = "signUp")
 	WebElement FreeTrailSignupCheckbox;
 
 	@FindBy(xpath = "//div[@class='form-box']//button[@class='form-button']")
@@ -221,7 +203,7 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='progress-bar-outer-box']//p[contains(text(),'almost')]")
 	WebElement CPAFreeTrailConfirmationText;
 
-	@FindBy(xpath = "//button[@id='addNewAddressButton']")
+	@FindBy(id = "addNewAddressButton")
 	WebElement AddNewAddress;
 
 	@FindBy(xpath = "(//div[@class='container-fluid course-pkg-background']//div[@class='card-footer bg-transparent course-pkg-cards-footer'])[1]//button[contains(text(),'VIEW COURSE OPTIONS')]")
@@ -248,115 +230,106 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//button[contains(text(),'SHOP COURSES')]")
 	WebElement ShopCourses;
 
-	@FindBy(xpath = "//div[@class='container-fluid banner-container product-detail-banner mt-4']//div[7]//button")
-	WebElement AddToCart;
-
-	@FindBy(xpath = "//button[contains(text(),'ADD')]")
-	WebElement CMAAddtoCart;
-
-	@FindBy(xpath = "//span[@id='voucher-remove-button_0']")
+	@FindBy(id = "voucher-remove-button_0")
 	WebElement CouponRemove;
 
 	@FindBy(xpath = "(//span[@class='welCheckoutContBtnText'])[2]")
 	WebElement ClickOnCheckout;
 
-	@FindBy(xpath = "//input[@id='username']")
+	@FindBy(id = "username")
 	WebElement username;
 
-	@FindBy(xpath = "//input[@id='password']")
+	@FindBy(id = "password")
 	WebElement passsowrd;
 
-	@FindBy(xpath = "//input[@id='j_username']")
+	@FindBy(id = "j_username")
 	WebElement FreeTrailLoginusername;
 
-	@FindBy(xpath = "//input[@id='j_password']")
+	@FindBy(id = "j_password")
 	WebElement FreeTrailLoginpasssowrd;
 
 	@FindBy(xpath = "//a[@class='recover-password pull-left checkoutForgotPwdLinkCss']")
 	WebElement StandaloneForgotpwd;
 
-	@FindBy(xpath = "//input[@id='forgottenPwd.email']")
+	@FindBy(id = "forgottenPwd.email")
 	WebElement EmailOnForgotPassword;
 
 	@FindBy(xpath = "//button[@data-form_id='forgottenPwdForm']")
 	WebElement SubmitbuttonOnForgotPassword;
 
-	@FindBy(xpath = "//input[@id='guest.email']")
+	@FindBy(id = "guest.email")
 	WebElement GuestUser;
 
 	@FindBy(xpath = "//div[@id='guestCheckoutRegBtn']//span[@class='welCheckoutContBtnText']")
 	WebElement CreateAccount;
 
-	@FindBy(xpath = "//input[@id='guest.confemail']")
+	@FindBy(id = "guest.confemail")
 	WebElement GuestConfinmEmail;
 
-	@FindBy(xpath = "//input[@id='firstName']")
+	@FindBy(id = "firstName")
 	WebElement GuestFirstName;
 
-	@FindBy(xpath = "//input[@id='lastName']")
+	@FindBy(id = "lastName']")
 	WebElement GuestLastName;
 
-	@FindBy(xpath = "//select[@id='address.country']")
+	@FindBy(id = "address.country")
 	WebElement SelectCountryDropDown;
 
-	@FindBy(xpath = "//select[@id='address.country']")
+	@FindBy(id = "address.country")
 	WebElement ShipCountry;
 
-	@FindBy(xpath = "//input[@id='street1']")
+	@FindBy(id = "street1")
 	WebElement AddressLine1;
 
-	@FindBy(xpath = "//input[@id='line1']")
+	@FindBy(id = "line1")
 	WebElement ShipAddressLineOne;
 
-	@FindBy(xpath = "//input[@id='street2']")
+	@FindBy(id = "street2")
 	WebElement AddressLine2;
 
-	@FindBy(xpath = "//input[@id='postalCode']")
+	@FindBy(id = "postalCode")
 	WebElement PostalCode;
 
-	@FindBy(xpath = "//input[@id='postcode']")
+	@FindBy(id = "postcode")
 	WebElement ShipPostcode;
 
-	@FindBy(xpath = "//input[@id='city']")
+	@FindBy(id = "city")
 	WebElement BillCity;
 
-	@FindBy(xpath = "//input[@id='townCity']")
+	@FindBy(id = "townCity")
 	WebElement TownCity;
 
-	@FindBy(xpath = "//input[@id='phoneNumber']")
+	@FindBy(id = "phoneNumber")
 	WebElement BillPhoneNumber;
 
-	@FindBy(xpath = "//input[@id='address.region']")
-	WebElement ShipState;
-
-	@FindBy(xpath = "//input[@id='phone']")
+	@FindBy(id = "phone")
 	WebElement ShipPhoneNumber;
 
-	@FindBy(xpath = "//input[@id='j_username']")
+	@FindBy(id = "j_username")
 	WebElement LoginUser;
 
-	@FindBy(xpath = "//input[@id='j_password']")
+	@FindBy(id = "j_password")
 	WebElement LoginPassword;
 
 	@FindBy(xpath = "//button[@data-form_id='loginForm']")
 	WebElement LoginAndContinue;
 
-	@FindBy(xpath = "//a[@href=\"/login/pw/request?t=ch\"]")
+	@FindBy(xpath = "//a[@href='/login/pw/request?t=ch']")
 	WebElement ForgotpwdOnCheckoutPage;
 
 	@FindBy(xpath = "//span[@class='addDiscountLabelOnCart']")
 	WebElement AddaDiscountCode;
 
-	@FindBy(xpath = "//input[@id='discountCodeValue']")
+	@FindBy(id = "discountCodeValue")
 	WebElement DiscountLabel;
 
 	@FindBy(xpath = "(//input[@id='discountCodeValue'])[2]")
-	WebElement ExtranDiscount;
+	WebElement ExtraDiscount;
 
-	@FindBy(xpath = "//input[@id='discountCodeValue']")
+	@FindBy(id = "discountCodeValue")
 	WebElement ExtraDiscountCode;
 
-	@FindBy(xpath = "//button[@id='discountApplyBtn']")
+	@FindBy(id = "discountApplyBtn")
 	WebElement ApplyDiscountButton;
 
 	@FindBy(xpath = "//div[@class='float-left my-account-header']/label")
@@ -368,25 +341,25 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//div[@class='simple-responsive-banner-component'])[1]/a")
 	WebElement WELIconOnCheckOutPage;
 
-	@FindBy(xpath = "//button[@id='addressSubmit']")
+	@FindBy(id = "addressSubmit")
 	WebElement ShipSaveAndContinue;
 
-	@FindBy(xpath = "//input[@id='number']")
+	@FindBy(id = "number")
 	WebElement CardNumber;
 
-	@FindBy(xpath = "//select[@id='expiryMonth']")
+	@FindBy(id = "expiryMonth")
 	WebElement ExpirationDateForMonth;
 
-	@FindBy(xpath = "//select[@id='expiryYear']")
+	@FindBy(id = "expiryYear")
 	WebElement ExpirationDateForYear;
 
-	@FindBy(xpath = "//input[@id='securityCode']")
+	@FindBy(id = "securityCode")
 	WebElement CVV_Number;
 
-	@FindBy(xpath = "//button[@id='paymentBilling']")
+	@FindBy(id = "paymentBilling")
 	WebElement SaveAndContinueOnCheckOutPage;
 
-	@FindBy(xpath = "//label[@id='sameAsBillingLabel']")
+	@FindBy(id = "sameAsBillingLabel")
 	WebElement ShippingBillingSameAddress;
 
 	@FindBy(xpath = "(//button[@id='placeOrder'])[1]")
@@ -416,14 +389,8 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//button[@class='button form-button welCheckoutBtn submitWelForm width100']")
 	WebElement FreeTrailSubbmit;
 
-	@FindBy(xpath = "//input[@id='townCity']")
-	WebElement IndiaCity;
-
-	@FindBy(xpath = "//input[@id='address.region']")
-	WebElement IndiaState;
-
-	@FindBy(xpath = "//input[@id='address.region']")
-	WebElement ChinaState;
+	@FindBy(id = "address.region")
+	WebElement EnterState;
 
 	@FindBy(xpath = "//div[@class='welCheckoutBtnDiv multiPaymentPaypalBtn']/button")
 	WebElement ProccedtoPaypal;
@@ -431,13 +398,13 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='welCheckoutBtnDiv multiPaymentPaypalCreditBtn']/button")
 	WebElement ProceedtoPaypalCredit;
 
-	@FindBy(xpath = "//input[@name='login_email']")
+	@FindBy(name = "login_email")
 	WebElement PaypalUsername;
 
 	@FindBy(xpath = "//div[@class='actions']/button[@name='btnNext']")
 	WebElement NextButtonOnPaypalPage;
 
-	@FindBy(xpath = "//input[@name='login_password']")
+	@FindBy(name = "login_password")
 	WebElement Paypalpassword;
 
 	@FindBy(xpath = "//div[@class='actions']/button[@name='btnLogin']")
@@ -515,9 +482,6 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='col dropdown-item product-dropdown-desktop-item item1']//li[2]/a")
 	WebElement CPATestBank;
 
-	@FindBy(xpath = "//div[@class='package-selection-container platinum-package']//div[2]//button")
-	WebElement CPATestBankAddToCart;
-
 	@FindBy(xpath = "//div[@class='partner-detail partner-list-container']//div[@class='col-xs-12 col-sm-6 package-selection-col']//button")
 	WebElement PartnerProductAddToCartButton;
 
@@ -540,7 +504,7 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='navbar-collapse']/ul/li[3]/a")
 	WebElement ActiavteCodeIcon;
 
-	@FindBy(xpath = "//input[@id='pin']")
+	@FindBy(id = "pin")
 	WebElement PinInput;
 
 	@FindBy(xpath = "//div[@class='pinActivationBodyMainDiv']//button")
@@ -1033,21 +997,6 @@ public class app_WEL_Repo {
 
 	}
 
-	public void ClickonCMAAddToCart() throws IOException {
-
-		try {
-			AddToCart.click();
-			Thread.sleep(2000);
-			Reporting.updateTestReport("Add to Cart was slected successfully ",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-
-		} catch (Exception e) {
-			Reporting.updateTestReport(
-					"Failed to click on Add To Cart with the error message " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-
-	}
 
 	public void ClickonShopCourse() throws IOException {
 		try {
@@ -1063,18 +1012,6 @@ public class app_WEL_Repo {
 
 	}
 
-	public void ClickonAddToCart() throws IOException {
-		try {
-			AddToCart.click();
-			Reporting.updateTestReport("AddTocart was Clicked successfully ", CaptureScreenshot.getScreenshot(SS_path),
-					StatusDetails.PASS);
-
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click on AddToCart with the error message " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-
-	}
 
 	public void ClickonCouponRemove() throws IOException {
 		try {
@@ -1253,18 +1190,6 @@ public class app_WEL_Repo {
 		}
 	}
 
-	public void ShipState(String shipstate) throws IOException {
-		try {
-
-			Select state = new Select(ShipState);
-			state.selectByVisibleText(shipstate);
-			Reporting.updateTestReport("State " + state + " has been selected successfully by user",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("User failed to select State " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
 
 	public void AddressLineOne(String ALineOne) throws IOException {
 		try {
@@ -1524,7 +1449,7 @@ public class app_WEL_Repo {
 
 	public void EnterExtraDiscountCode(String PromoCode) throws IOException {
 		try {
-			ExtranDiscount.sendKeys(PromoCode);
+			ExtraDiscount.sendKeys(PromoCode);
 			Reporting.updateTestReport("PromoCode was entered Successfully", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.PASS);
 		} catch (Exception e) {
@@ -1703,33 +1628,7 @@ public class app_WEL_Repo {
 		}
 	}
 
-	public void ClickOnCIAAddProduct() throws IOException {
-		try {
 
-			CIAAddToCart.click();
-			Reporting.updateTestReport("Add To Cart was selected successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport(
-					"Failed to click on Add To Cart with the error message " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
-		}
-	}
-
-	public void ClickOnCPAAddProduct() throws IOException {
-		try {
-
-			CPAAddToCart.click();
-			Reporting.updateTestReport("Add To Cart was selected successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport(
-					"Failed to click on Add To Cart with the error message " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
-		}
-	}
 
 	public void ClickOnCIAeBook() throws IOException {
 		try {
@@ -1755,19 +1654,6 @@ public class app_WEL_Repo {
 		}
 	}
 
-	public void ClickOnCAIAAddProduct() throws IOException {
-		try {
-
-			CAIAAddToCart.click();
-			Reporting.updateTestReport("Add To Cart was selected successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport(
-					"Failed to click on Add To Cart with the error message " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
-		}
-	}
 
 	public void ClickOnSelectQuantity() throws IOException {
 		try {
@@ -2162,57 +2048,7 @@ public class app_WEL_Repo {
 		}
 	}
 
-	public String ShippingMethodForSingapore() throws IOException {
-		try {
-			String Singaporemethod = SingaporeShipMethod.getText();
-			Reporting.updateTestReport("The Shipping method Displayed successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			return Singaporemethod;
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to Shipping method " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			return "";
-		}
-	}
 
-	public String ShippingMethodForIndia() throws IOException {
-		try {
-			String IndiaShpmethod = IndiaShipMethod.getText();
-			Reporting.updateTestReport("The Shipping method Displayed successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			return IndiaShpmethod;
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to Shipping method " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			return "";
-		}
-	}
-
-	public String ShippingMethodOneForCanada() throws IOException {
-		try {
-			String Canadamethod = CanadaShipMethod.getText();
-			Reporting.updateTestReport("The Shipping method Displayed successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			return Canadamethod;
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to Shipping method " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			return "";
-		}
-	}
-
-	public String ShippingMethodTwoForCanada() throws IOException {
-		try {
-			String Canadamethod2 = CanadaShipMethod2.getText();
-			Reporting.updateTestReport("The Shipping method Displayed successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			return Canadamethod2;
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to Shipping method " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			return "";
-		}
-	}
 
 	public void FreeTraiModelPopUpLoginButton() throws IOException {
 		try {
@@ -2335,45 +2171,21 @@ public class app_WEL_Repo {
 		return UseSelectedBillingAddressButtonAddressDoctorPopUp;
 	}
 
-	public void ShipTownIndiaCity(String City) throws IOException {
+
+	public void enterState(String state) throws IOException {
 		try {
-			IndiaCity.sendKeys(City);
-			Reporting.updateTestReport("City: " + City + " was entered successfully in the City section",
+			EnterState.clear();
+			EnterState.sendKeys(state);
+			EnterState.sendKeys(Keys.ENTER);
+
+			Reporting.updateTestReport("State " + state + " has been selected successfully by user",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
-			Reporting.updateTestReport("City was not entered with the error message " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
-		}
-	}
-
-	public void enterState(String ShipInd) throws IOException {
-		try {
-			IndiaState.clear();
-			IndiaState.sendKeys(ShipInd);
-			IndiaState.sendKeys(Keys.ENTER);
-
-			Reporting.updateTestReport("State " + ShipInd + " has been selected successfully by user",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("User failed to select State " + e.getClass().toString(),
+			Reporting.updateTestReport("User failed to enter State " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 
-	public void enterStateChina(String cState) throws IOException {
-		try {
-			IndiaState.clear();
-			IndiaState.sendKeys(cState);
-			IndiaState.sendKeys(Keys.ENTER);
-
-			Reporting.updateTestReport("State  has been selected successfully by user",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("User failed to select State " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
 
 	public void SelectPayPalOption() throws IOException {
 		try {
@@ -2896,16 +2708,7 @@ public class app_WEL_Repo {
 		}
 	}
 
-	public void ClickOnAddToCartCPATestBank() throws IOException {
-		try {
-			CPATestBankAddToCart.click();
-			Reporting.updateTestReport("Add TO Cart was clicked successfully", CaptureScreenshot.getScreenshot(SS_path),
-					StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click on Add To Cart" + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
+
 
 	public void ClickOnAddToCartUniversityProduct() throws IOException {
 		try {
@@ -3346,19 +3149,7 @@ public class app_WEL_Repo {
 		}
 	}
 
-	public void ClickOnCFAAddProduct() throws IOException {
-		try {
-
-			CIAAddToCart.click();
-			Reporting.updateTestReport("Add To Cart was selected successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport(
-					"Failed to click on Add To Cart with the error message " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
-		}
-	}
+	
 
 	/*
 	 * @Author: Anindita
