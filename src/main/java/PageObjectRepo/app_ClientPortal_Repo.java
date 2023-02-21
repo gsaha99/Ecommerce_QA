@@ -211,6 +211,21 @@ public class app_ClientPortal_Repo extends DriverModule {
 		
 		@FindBy(xpath = "//span[contains(text(),'Type is required')]")
 		WebElement ClickTypeErrorMessage;
+		
+		@FindBy(xpath = "//span[contains(text(),'Business Unit is required')]")
+		WebElement ClickBusinessUnitErrorMessage;
+		
+		@FindBy(xpath = "//span[contains(text(),'Name is required')]")
+		WebElement ClickNameErrorMessage;
+		
+		@FindBy(xpath = "//span[contains(text(),'Application Short Name is required')]")
+		WebElement ClickAppShortNameErrorMessage;
+		
+		@FindBy(xpath = "//span[contains(text(),'User ID is required')]")
+		WebElement ClickUserIdErrorMessage;
+		
+		@FindBy(xpath = "//span[contains(text(),'Please select at least one payment method')]")
+		WebElement ClickpaymentsErrorMessage;
 	
 	/* 
 	 * Author : Jayanta
@@ -1072,5 +1087,67 @@ public class app_ClientPortal_Repo extends DriverModule {
 				return "null";
 			   }
 		}
-
+	
+	public String FetchError_RegisterApp_BU() throws IOException{
+	      try {
+				String errorType=ClickBusinessUnitErrorMessage.getText();
+				System.out.println(errorType);
+				Reporting.updateTestReport("Error message for Business Unit field is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorType;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for Business Unit field is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
+	public String FetchError_RegisterApp_Name() throws IOException{
+	      try {
+				String errorType=ClickNameErrorMessage.getText();
+				System.out.println(errorType);
+				Reporting.updateTestReport("Error message for Name field is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorType;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for Name field is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
+	public String FetchError_RegisterApp_App_Short_Name() throws IOException{
+	      try {
+				String errorType=ClickAppShortNameErrorMessage.getText();
+				System.out.println(errorType);
+				Reporting.updateTestReport("Error message for App short name field is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorType;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for App short name field is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
+	
+	public String FetchError_RegisterApp_User_ID() throws IOException{
+	      try {
+				String errorType=ClickUserIdErrorMessage.getText();
+				System.out.println(errorType);
+				Reporting.updateTestReport("Error message for User ID field is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorType;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for User ID field is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
+	
+	public String FetchError_RegisterApp_Payment_Method() throws IOException{
+	      try {
+				String errorType=ClickpaymentsErrorMessage.getText();
+				System.out.println(errorType);
+				Reporting.updateTestReport("Error message for Payment Method field is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorType;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for Payment Method field is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
 }

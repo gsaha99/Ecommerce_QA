@@ -1110,10 +1110,76 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		     }
 		     else 
 		     {
-			   Reporting.updateTestReport("TestCase is not Type is required",
+			   Reporting.updateTestReport("Error message for Type field is not showing",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		     }
-		     		
+		     
+		     String actualErrorType1 = CPortal.FetchError_RegisterApp_BU();
+	            String expectedErrorType1=excelOperation.getTestData("BU", "CPortal_Error_Message", "Error_Message");
+			     if(actualErrorType1.equalsIgnoreCase(expectedErrorType1))
+			     {
+
+				   Reporting.updateTestReport("Error message for BU field is showing and message is: " + actualErrorType1,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			     }
+			     else 
+			     {
+				   Reporting.updateTestReport("Error message for BU field is not showing",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			     }
+	         String actualErrorType2 = CPortal.FetchError_RegisterApp_Name();
+		        String expectedErrorType2=excelOperation.getTestData("Name", "CPortal_Error_Message", "Error_Message");
+				  if(actualErrorType2.equalsIgnoreCase(expectedErrorType2))
+				   {
+
+					 Reporting.updateTestReport("Error message for Name field is showing and message is: " + actualErrorType2,
+					   CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				   }
+				    else 
+				    {
+					 Reporting.updateTestReport("Error message for Name field is not showing",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				    }
+				     
+		     String actualErrorType3 = CPortal.FetchError_RegisterApp_App_Short_Name();
+			   String expectedErrorType3=excelOperation.getTestData("App_Short_Name", "CPortal_Error_Message", "Error_Message");
+				 if(actualErrorType3.equalsIgnoreCase(expectedErrorType3))
+				  {
+                   Reporting.updateTestReport("Error message for App short name field is showing and message is: " + actualErrorType3,
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				  }
+				    else 
+					{
+				      Reporting.updateTestReport("Error message for App short name field is not showing",
+					   CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+		     String actualErrorType4 = CPortal.FetchError_RegisterApp_User_ID();
+			   String expectedErrorType4=excelOperation.getTestData("User_ID", "CPortal_Error_Message", "Error_Message");
+				 if(actualErrorType4.equalsIgnoreCase(expectedErrorType4))
+			       {
+			        Reporting.updateTestReport("Error message for User_ID field is showing and message is: " + actualErrorType4,
+					  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				   }
+				    else 
+				     {
+					   Reporting.updateTestReport("Error message for User_ID field is not showing",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							  
+			         }
+						  	  
+			String actualErrorType5 = CPortal.FetchError_RegisterApp_Payment_Method();
+		     String expectedErrorType5=excelOperation.getTestData("Payment_Method", "CPortal_Error_Message", "Error_Message");
+		        if(actualErrorType5.equalsIgnoreCase(expectedErrorType5))
+			     {
+                   Reporting.updateTestReport("Error message for payment method field is showing and message is: " + actualErrorType5,
+					  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				 }
+				  else 
+			      {
+			       Reporting.updateTestReport("Error message for payment method field is not showing",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				  }	  
+					         		
 	  }
 		catch (Exception e) 
 		{
