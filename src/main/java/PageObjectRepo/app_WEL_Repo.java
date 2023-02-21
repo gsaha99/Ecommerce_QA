@@ -152,7 +152,7 @@ public class app_WEL_Repo {
 	@FindBy(id = "addressSubmit")
 	WebElement SaveAndContinueShippingAddressPage;
 
-	@FindBy(id = "quantity_0")
+	@FindBy(xpath = "//select[@id='quantity_0']")
 	WebElement SelectQuantity;
 
 	@FindBy(xpath = "//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[2]")
@@ -167,7 +167,7 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//button[contains(text(),'EXPLORE COURSES')])[1]")
 	WebElement CMAExploreCourse;
 
-	@FindBy(xpath = "//button[contains(text(),'FREE TRIAL')]")
+	@FindBy(xpath = "//button[@class='free-trial-btn  secondary-btn-hovered']")
 	WebElement FreeTrialButton;
 
 	@FindBy(name = "firstName")
@@ -428,7 +428,7 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//img[@title='Wiley EL'])[1]")
 	WebElement WELHomePageLogoOnCartPage;
 
-	@FindBy(xpath = "//button[contains(text(),'ADD TO CART')]")
+	@FindBy(xpath = "//button[@type='submit' and @class='add-to-cart-btn  ']")
 	WebElement AddToCartButtonOnPDP;
 
 	@FindBy(id = "recommendTitle")

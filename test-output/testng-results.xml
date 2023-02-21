@@ -2,31 +2,31 @@
 <testng-results ignored="60" total="61" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-02-20T19:23:06 IST" name="Default suite" finished-at="2023-02-20T19:25:34 IST" duration-ms="147953">
+  <suite started-at="2023-02-21T13:43:04 IST" name="Default suite" finished-at="2023-02-21T13:44:13 IST" duration-ms="69277">
     <groups>
     </groups>
-    <test started-at="2023-02-20T19:23:06 IST" name="Default test" finished-at="2023-02-20T19:25:34 IST" duration-ms="147953">
+    <test started-at="2023-02-21T13:43:04 IST" name="Default test" finished-at="2023-02-21T13:44:13 IST" duration-ms="69277">
       <class name="Test_Suite.WEL_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.WEL_Test_Suite@3f4faf53]" started-at="2023-02-20T19:23:06 IST" name="initiate" finished-at="2023-02-20T19:23:13 IST" duration-ms="7412" status="PASS">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.WEL_Test_Suite@2a693f59]" started-at="2023-02-21T13:43:04 IST" name="initiate" finished-at="2023-02-21T13:43:12 IST" duration-ms="8019" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@33d7765a]]>
+                <![CDATA[org.testng.TestRunner@1e98b788]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.WEL_Test_Suite@3f4faf53]" started-at="2023-02-20T19:23:13 IST" name="initializeRepo" finished-at="2023-02-20T19:23:13 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="102" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.WEL_Test_Suite@2a693f59]" started-at="2023-02-21T13:43:12 IST" name="initializeRepo" finished-at="2023-02-21T13:43:12 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="163" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeRepo -->
-        <test-method signature="TC05_UserLoginDuring_Checkout()[pri:0, instance:Test_Suite.WEL_Test_Suite@3f4faf53]" started-at="2023-02-20T19:23:13 IST" name="TC05_UserLoginDuring_Checkout" finished-at="2023-02-20T19:25:32 IST" duration-ms="138436" status="PASS">
+        <test-method signature="TC14_ExtraDiscount_CouponCodeGOVT()[pri:0, instance:Test_Suite.WEL_Test_Suite@2a693f59]" started-at="2023-02-21T13:43:12 IST" name="TC14_ExtraDiscount_CouponCodeGOVT" finished-at="2023-02-21T13:44:11 IST" duration-ms="59086" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC05_UserLoginDuring_Checkout -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.WEL_Test_Suite@3f4faf53]" started-at="2023-02-20T19:25:32 IST" name="CloseBrowser" finished-at="2023-02-20T19:25:34 IST" duration-ms="1855" status="PASS">
+        </test-method> <!-- TC14_ExtraDiscount_CouponCodeGOVT -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.WEL_Test_Suite@2a693f59]" started-at="2023-02-21T13:44:11 IST" name="CloseBrowser" finished-at="2023-02-21T13:44:13 IST" duration-ms="1922" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
