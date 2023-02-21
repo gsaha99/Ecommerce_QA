@@ -7606,7 +7606,7 @@ public class WEL_Test_Suite extends DriverModule {
 						.elementToBeClickable(By.xpath("//a[@class='navbar-brand brand-logo-top-desktop']")));
 				WEL.FreeTrailWELIcon();
 
-				ScrollingWebPage.PageDown(driver, SS_path);
+				ScrollingWebPage.PageScrolldown(driver, 0, 600, SS_path);
 				try {
 					actions.moveToElement(driver.findElement
 							(By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[2]"))); 
