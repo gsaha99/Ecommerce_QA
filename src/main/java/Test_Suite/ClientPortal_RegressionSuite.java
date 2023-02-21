@@ -1102,7 +1102,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			driver.findElement(By.xpath("//h1[contains(text(),'Register New Client Application')]")).click();
             String actualErrorType = CPortal.FetchError_RegisterApp_Type();
             String expectedErrorType=excelOperation.getTestData("Type", "CPortal_Error_Message", "Error_Message");
-		     if(actualErrorType.equalsIgnoreCase(expectedErrorType))
+		    if(actualErrorType.equalsIgnoreCase(expectedErrorType))
 		     {
 
 			   Reporting.updateTestReport("Error message for type field is showing and message is: " + actualErrorType,
@@ -1114,67 +1114,67 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		     }
 		     
-		     String actualErrorType1 = CPortal.FetchError_RegisterApp_BU();
-	            String expectedErrorType1=excelOperation.getTestData("BU", "CPortal_Error_Message", "Error_Message");
-			     if(actualErrorType1.equalsIgnoreCase(expectedErrorType1))
-			     {
+		    String actualErrorBU = CPortal.FetchError_RegisterApp_BU();
+	        String expectedErrorBU=excelOperation.getTestData("BU", "CPortal_Error_Message", "Error_Message");
+			if(actualErrorBU.equalsIgnoreCase(expectedErrorBU))
+			   {
 
-				   Reporting.updateTestReport("Error message for BU field is showing and message is: " + actualErrorType1,
+				   Reporting.updateTestReport("Error message for BU field is showing and message is: " + actualErrorBU,
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			     }
-			     else 
-			     {
+			   }
+			else 
+			   {
 				   Reporting.updateTestReport("Error message for BU field is not showing",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			     }
-	         String actualErrorType2 = CPortal.FetchError_RegisterApp_Name();
-		        String expectedErrorType2=excelOperation.getTestData("Name", "CPortal_Error_Message", "Error_Message");
-				  if(actualErrorType2.equalsIgnoreCase(expectedErrorType2))
+			    }
+	        String actualErrorName = CPortal.FetchError_RegisterApp_Name();
+		    String expectedErrorName=excelOperation.getTestData("Name", "CPortal_Error_Message", "Error_Message");
+	        if(actualErrorName.equalsIgnoreCase(expectedErrorName))
 				   {
 
-					 Reporting.updateTestReport("Error message for Name field is showing and message is: " + actualErrorType2,
+					 Reporting.updateTestReport("Error message for Name field is showing and message is: " + actualErrorName,
 					   CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				   }
-				    else 
+		    else 
 				    {
 					 Reporting.updateTestReport("Error message for Name field is not showing",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				    }
 				     
-		     String actualErrorType3 = CPortal.FetchError_RegisterApp_App_Short_Name();
-			   String expectedErrorType3=excelOperation.getTestData("App_Short_Name", "CPortal_Error_Message", "Error_Message");
-				 if(actualErrorType3.equalsIgnoreCase(expectedErrorType3))
+		    String actualErrorAppShortName = CPortal.FetchError_RegisterApp_App_Short_Name();
+			String expectedErrorAppShortName=excelOperation.getTestData("App_Short_Name", "CPortal_Error_Message", "Error_Message");
+		    if(actualErrorAppShortName.equalsIgnoreCase(expectedErrorAppShortName))
 				  {
-                   Reporting.updateTestReport("Error message for App short name field is showing and message is: " + actualErrorType3,
+                   Reporting.updateTestReport("Error message for App short name field is showing and message is: " + actualErrorAppShortName,
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				  }
-				    else 
-					{
+			else 
+				 {
 				      Reporting.updateTestReport("Error message for App short name field is not showing",
 					   CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
-		     String actualErrorType4 = CPortal.FetchError_RegisterApp_User_ID();
-			   String expectedErrorType4=excelOperation.getTestData("User_ID", "CPortal_Error_Message", "Error_Message");
-				 if(actualErrorType4.equalsIgnoreCase(expectedErrorType4))
+				}
+		    String actualErrorUserID = CPortal.FetchError_RegisterApp_User_ID();
+			String expectedErrorUserID=excelOperation.getTestData("User_ID", "CPortal_Error_Message", "Error_Message");
+		    if(actualErrorUserID.equalsIgnoreCase(expectedErrorUserID))
 			       {
-			        Reporting.updateTestReport("Error message for User_ID field is showing and message is: " + actualErrorType4,
+			        Reporting.updateTestReport("Error message for User_ID field is showing and message is: " + actualErrorUserID,
 					  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				   }
-				    else 
+		    else 
 				     {
 					   Reporting.updateTestReport("Error message for User_ID field is not showing",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							  
 			         }
 						  	  
-			String actualErrorType5 = CPortal.FetchError_RegisterApp_Payment_Method();
-		     String expectedErrorType5=excelOperation.getTestData("Payment_Method", "CPortal_Error_Message", "Error_Message");
-		        if(actualErrorType5.equalsIgnoreCase(expectedErrorType5))
+		     String actualErrorPaymentMethod = CPortal.FetchError_RegisterApp_Payment_Method();
+		     String expectedErrorPaymentMethod=excelOperation.getTestData("Payment_Method", "CPortal_Error_Message", "Error_Message");
+		     if(actualErrorPaymentMethod.equalsIgnoreCase(expectedErrorPaymentMethod))
 			     {
-                   Reporting.updateTestReport("Error message for payment method field is showing and message is: " + actualErrorType5,
+                   Reporting.updateTestReport("Error message for payment method field is showing and message is: " + actualErrorPaymentMethod,
 					  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				 }
-				  else 
+		     else 
 			      {
 			       Reporting.updateTestReport("Error message for payment method field is not showing",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -2135,7 +2135,99 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		}
 	}
 	
-
-
+	/*
+     * @Author: Jayanta
+     * @Description: Validation of login functionality for Service Desk User
+     */
+	@Test
+	public void TC29_Login_ServiceDeskUser() throws IOException
+	{
+		
+		try {
+			Reporting.test = Reporting.extent.createTest("TC29_Client Portal: "
+					+ "Login into Client Portal as Service Desk User"
+					+ "and Validate the Header and the Footer of Register New User  when service desk user is logged in."
+					+ "Also Validate the Logout Functionality as Service Desk User."
+					);
+			
+			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
+			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("Service_Desk_User", "ClientPortal_SignIN", "EmailID"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0118")));
+			CPortal.WPSAdmin_LogIN_EnterPWD(excelOperation.getTestData("Service_Desk_User", "ClientPortal_SignIN", "PWD"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			CPortal.WPSAdmin_ClickRegisterNewUser();
+			String actualUserName = driver.findElement(By.xpath("//div[@class='userNameCircle']")).getText();
+		    String expectedUserName = excelOperation.getTestData("Service_Desk_User", "ClientPortal_SignIN", "Initial");
+		    if(actualUserName.compareTo(expectedUserName)==0) 
+		      {
+			
+			      Reporting.updateTestReport("User Name is: " + actualUserName,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		      }
+		     else 
+		      {
+			      Reporting.updateTestReport("User Name is not: " + expectedUserName,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		      }
+		    
+		    CPortal.WPSAdmin_ClickFooter();
+		    CPortal.WPSAdmin_ClickLogOut();
+			
+	
+		}
+		catch (Exception e) 
+		{
+			System.out.println("Client Portal Log In with Service Desk User Role Failed" + e.getMessage());
+			Reporting.updateTestReport("Client Portal Log In with Service Desk User Role Failed" + e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 
 }
