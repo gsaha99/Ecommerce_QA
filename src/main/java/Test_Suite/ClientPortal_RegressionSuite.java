@@ -1023,6 +1023,108 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 	
 	/*
      * @Author: Varisa
+     * @Description: Validation of negative scenario in New Client app register screen for WPS Support
+     */
+	@Test
+	public void TC12_RegisterNewClientApp_Negative_Scenarios_WPSSupport() throws IOException
+	{
+		
+		try {
+			Reporting.test = Reporting.extent.createTest("TC12_Client Portal: "
+					+ "Verify the below negative scenarion in Register New Client app screen :"
+					+ "whether system display error message when user tries to register new client app without entering values in Type dropdown."
+					+ "whether system displays error message when user tries to register new client app without entering values in Name field."
+					+ "the system  displays error message when user tries to register new client app without entering values in Template field."
+					+ "system should not displays error message when user tries to register new client app without entering values in Target URL field if the type is SOAP."
+					+ "whether system  displays * mandatory and error message when user tries to register new client app without entering values in Target URL and LANSA field if the type is HTTP."
+					+ "whether system does not displays error message when user tries to register new client app without entering values in LANSA URL field if the type is SOAP."
+
+					);
+			
+			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
+			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0118")));
+			CPortal.WPSAdmin_LogIN_EnterPWD(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			CPortal.WPSAdmin_ClickNewClientApp();
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageScrolldown(driver, 0, 600);
+			//ScrollingWebPage.PageScrolldown(driver, 0, 600);
+			CPortal.Click_Register_Error();
+			driver.findElement(By.xpath("//h1[contains(text(),'Register New Client Application')]")).click();
+            String actualErrorType = CPortal.FetchError_RegisterApp_Type();
+            String expectedErrorType=excelOperation.getTestData("Type", "CPortal_Error_Message", "Error_Message");
+		     if(actualErrorType.equalsIgnoreCase(expectedErrorType))
+		     {
+
+			   Reporting.updateTestReport("Error message for type field is showing and message is: " + actualErrorType,
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		     }
+		     else 
+		     {
+			   Reporting.updateTestReport("TestCase is not Type is required",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		     }
+		     		
+	  }
+		catch (Exception e) 
+		{
+			System.out.println("Register new client app Negative Scenarios with WPS Support Role Failed" + e.getMessage());
+			Reporting.updateTestReport("Register new client app Negative Scenarios with WPS Support Role Failed" + e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+     * @Author: Varisa
      * @Description: Validation of New Client App add for WPS Support
      */
 	@Test

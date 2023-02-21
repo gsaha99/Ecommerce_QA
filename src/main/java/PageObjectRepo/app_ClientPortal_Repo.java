@@ -203,6 +203,14 @@ public class app_ClientPortal_Repo extends DriverModule {
 	   */
 	  @FindBy(xpath = "//option[@value='WPS_Support']")
 	    WebElement selectWPSSupportRole;
+	  
+	  /* 
+	   * Author : Varisa
+	   * Description : Object repo for Type error in register New Client App page. 
+	   */
+		
+		@FindBy(xpath = "//span[contains(text(),'Type is required')]")
+		WebElement ClickTypeErrorMessage;
 	
 	/* 
 	 * Author : Jayanta
@@ -818,6 +826,23 @@ public class app_ClientPortal_Repo extends DriverModule {
 		}
 	}
 	
+	/* 
+	 * Author : Jayanta
+	 * Description :  Method to click Register button for error message in Register new client app screen
+	 */
+	
+	public void Click_Register_Error() throws IOException {
+		try {
+			ClickRegister.click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Type is required')]")));
+		    Thread.sleep(5000);
+			Reporting.updateTestReport("Register button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Register button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
 	
 	/* 
 	 * Author - Jayanta 
@@ -1029,5 +1054,23 @@ public class app_ClientPortal_Repo extends DriverModule {
 			Reporting.updateTestReport("Role is not selected : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
+	/* 
+	 * Author - Varisa 
+	 * Description : Method to fetch error for type field in Register New Client App page.
+	 */
+	
+	public String FetchError_RegisterApp_Type() throws IOException{
+	      try {
+				String errorType=ClickTypeErrorMessage.getText();
+				System.out.println(errorType);
+				Reporting.updateTestReport("Error message for type field is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorType;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for type field is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
 
 }
