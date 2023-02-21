@@ -1834,6 +1834,101 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		}
 	}
 	
+	/*
+     * @Author: Jayanta
+     * @Description: Validation of negative scenario in New Client app register screen for Client Admin
+     */
+	@Test
+	public void TC27_RegisterNewClientApp_Negative_Scenarios_ClientAdmin() throws IOException
+	{
+		
+		try {
+			Reporting.test = Reporting.extent.createTest("TC27_Client Portal: "
+					+ "Verify the negative scenarios for Register New Client App :"
+					+ "1.Validate the error message displayed when user tries to register the user without entering values in mandatory field."
+					+ "2. Check whether system display error message when user enter values which exceeds 35 characters in Field-Name ,Template, Target URL."
+                    );
+			
+			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
+			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "EmailID"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0118")));
+			CPortal.WPSAdmin_LogIN_EnterPWD(excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "PWD"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			CPortal.WPSAdmin_ClickNewClientApp();
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageScrolldown(driver, 0, 600);
+			CPortal.Click_Register_Error();
+			driver.findElement(By.xpath("//h1[contains(text(),'Register New Client Application')]")).click();
+            String actualErrorType = CPortal.FetchError_RegisterApp_Type();
+            String expectedErrorType=excelOperation.getTestData("Type", "CPortal_Error_Message", "Error_Message");
+		     if(actualErrorType.equalsIgnoreCase(expectedErrorType))
+		     {
+
+			   Reporting.updateTestReport("Error message for type field is showing and message is: " + actualErrorType,
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		     }
+		     else 
+		     {
+			   Reporting.updateTestReport("TestCase is not Type is required",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		     }
+		     		
+	  }
+		catch (Exception e) 
+		{
+			System.out.println("Register new client app Negative Scenarios with Client Admin Role Failed" + e.getMessage());
+			Reporting.updateTestReport("Register new client app Negative Scenarios with Client Admin Role Failed" + e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 	 /*
      * @Author: Jayanta
      * @Description: Validation of cancel button in New Client App register screen for Client Admin
