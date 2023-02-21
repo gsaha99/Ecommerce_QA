@@ -130,6 +130,9 @@ public class app_ClientPortal_Repo extends DriverModule {
 	@FindBy(xpath = "//option[@value='WPS_Admin']")
     WebElement selectRole;
 	
+	@FindBy(xpath = "//option[@value='Client_Admin']")
+    WebElement selectRoleSDUser;
+	
 	@FindBy(xpath = "//button[@type='submit' and @class='btn blue-btn']")
 	WebElement ClickRegister;
 	
@@ -670,6 +673,21 @@ public class app_ClientPortal_Repo extends DriverModule {
 	public void WPSAdmin_SelectRole() throws IOException {
 		try {
 			selectRole.click();
+			Reporting.updateTestReport("Role is selected successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Role is not selected : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author - Jayanta 
+	 * Description : Method to select Role as Client Admin in Register New User screen for Service Desk User
+	 */
+	
+	public void SDUser_SelectRole() throws IOException {
+		try {
+			selectRoleSDUser.click();
 			Reporting.updateTestReport("Role is selected successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){

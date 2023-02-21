@@ -2229,5 +2229,108 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
+	/*
+     * @Author: Jayanta
+     * @Description: Validation of Register a New User for Service Desk User
+     */
+	@Test
+	public void TC31_RegisterNewUser_SDUser() throws IOException
+	{
+		
+		try {
+			Reporting.test = Reporting.extent.createTest("TC31_Client Portal: "
+					+ "1.whether service desk user able to register the new user with role as - "
+					+ "Client admin, Application User, Service Desk User,"
+					+ "2.Validate the entry in DB (Table-User,User_role) once the new user"
+					+ "is registered by service desk user in client portal."
+					);
+			
+			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
+			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("Service_Desk_User", "ClientPortal_SignIN", "EmailID"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0118")));
+			CPortal.WPSAdmin_LogIN_EnterPWD(excelOperation.getTestData("Service_Desk_User", "ClientPortal_SignIN", "PWD"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			CPortal.WPSAdmin_ClickRegisterNewUser();
+			CPortal.WPSAdmin_Enter_First_Name("TestAutoFirstName");
+			CPortal.WPSAdmin_Enter_Last_Name("TestAutoLastName");
+			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
+			String SSOID = "TestSDUser"+uuid+"@wiley.com";
+			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
+			CPortal.SDUser_SelectRole();
+			CPortal.WPSAdmin_ClickRegister();
+			String DBName=excelOperation.getTestData("TC03", "DB_Query", "DB_Name");
+			String query=excelOperation.getTestData("TC03", "DB_Query", "Query");
+			String datatype=excelOperation.getTestData("TC03", "DB_Query", "Data_Type");
+			String ssoid=dbConnect.DB_Select(DBName,query,datatype);
+			System.out.println(ssoid);
+			if(ssoid.compareTo(SSOID)==0)
+		       {
+			
+			      Reporting.updateTestReport("DB Validation is done and SSO ID is: " + ssoid,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		       }
+		      else 
+		       {
+			      Reporting.updateTestReport("DB Validation is not done and SSO ID is not: " + SSOID,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		       }
+			
+			
+		}
+		catch (Exception e) 
+		{
+			System.out.println("Register new user with Service Desk User Role Failed" + e.getMessage());
+			Reporting.updateTestReport("Register new user with Service Desk User Role Failed" + e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 
 }
