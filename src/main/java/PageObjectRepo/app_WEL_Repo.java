@@ -167,7 +167,7 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//button[contains(text(),'EXPLORE COURSES')])[1]")
 	WebElement CMAExploreCourse;
 
-	@FindBy(xpath = "//button[@class='free-trial-btn  secondary-btn-hovered']")
+	@FindBy(xpath = "//button[contains(text(),'FREE TRIAL')]")
 	WebElement FreeTrialButton;
 
 	@FindBy(name = "firstName")
@@ -1837,7 +1837,7 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport("Free trial button was clicked successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click Save And Continue button " + e.getClass().toString(),
+			Reporting.updateTestReport("Failed to click on Free_trail button " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}

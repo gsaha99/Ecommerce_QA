@@ -1,29 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="PPE_Regression">
-  <test thread-count="5" name="Wiley_Test_Suite">
-    
-    <classes>
-      
-      
-      
-      <class name="Test_Suite.WEL_Test_Suite">
-      <methods>
-		 
-        
-        <include name="TC01_.*" />
-        <include name="TC02_.*" />
-        <include name="TC03_.*" />
-        <include name="TC04_.*" />
-        <include name="TC05_.*" />
-        <include name="TC06_.*" />
-        <include name="TC07_.*" />
-         <include name="TC08_.*" />
-          <include name="TC09_.*" />
-          <include name="TC10_.*" />
-        
-        </methods>
-      </class>
-    </classes>
-  </test> <!-- Test_Regression -->
+	<test thread-count="5" name="Wiley_Test_Suite">
+
+
+		<classes>
+			<class name="Test_Suite.WEL_Test_Suite">
+				<methods>
+					<include name="TC06_.*" />
+					<include name="TC07_.*" />
+					<include name="TC09_.*" />
+					<include name="TC10_.*" />
+					<include name="TC11_.*" />
+					<include name="TC12_.*" />
+					<include name="TC13_.*" />
+					<include name="TC14_.*" />
+					<include name="TC21_.*" />
+					<include name="TC22_.*" />
+					<include name="TC24_.*" />
+					<include name="TC26_.*" />
+					<include name="TC36_.*" />
+					<include name="TC37_.*" />
+					<include name="TC42_.*" />
+					<include name="TC53_.*" />
+					<include name="TC69_.*" />
+					<include name="TC70_.*" />
+					<include name="TC77_.*" />
+					
+				</methods>
+			</class>
+		</classes>
+	</test> <!-- Test_Regression -->
 </suite> <!-- PPE Regression -->
