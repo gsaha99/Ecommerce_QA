@@ -256,6 +256,14 @@ public class app_ClientPortal_Repo extends DriverModule {
 	    @FindBy(xpath = "(//span[@class='input-err-msg'])[3]")
 	    WebElement ClickSSOIDSizeErrorMessage;
 	    
+	    /* 
+		 * Author : Jayanta
+		 * Description : Object repo to click revert in Home page. 
+		 */
+	    
+	    @FindBy(xpath = "//a[contains(text(),'revert')]")
+	    WebElement Click_Revert;
+	    
 	
 	/* 
 	 * Author : Jayanta
@@ -1354,6 +1362,38 @@ public class app_ClientPortal_Repo extends DriverModule {
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Register button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to click revert icon in Home screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_Click_RevertIcon() throws IOException {
+		try {
+			Click_Revert.click();
+			Reporting.updateTestReport("Revert Icon is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Revert Icon is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description :  Method to click Promote button in Promote client app screen for WPS Admin
+	 */
+	
+	public void WPSAdmin_Click_RevertConfirm() throws IOException {
+		try {
+			Click_Approve.click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Do you really want to')]")));
+		    driver.findElement(By.xpath("//h2[contains(text(),'Do you really want to')]")).click();
+			Reporting.updateTestReport("Confirm button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Confirm button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 }

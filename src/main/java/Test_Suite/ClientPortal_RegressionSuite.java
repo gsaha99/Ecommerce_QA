@@ -624,7 +624,64 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			      Reporting.updateTestReport("Promotion is failed and Promotion Status ID: " + expectedstatusid,
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		       }
+			CPortal.WPSAdmin_ClickHome();
+			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
+			CPortal.WPSAdmin_ClickEditIcon();
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			CPortal.WPSAdmin_Click_Save();
+			CPortal.WPSAdmin_ClickMyWorklist();
+			CPortal.WPSAdmin_Click_PromoteToProd();
+			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
+			CPortal.WPSAdmin_Click_ViewIcon();
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			CPortal.WPSAdmin_Click_Promote();
+			CPortal.WPSAdmin_Click_Promote_Confirm();
+			do 
+			{
+			expectedstatusid=dbConnect.DB_Select(DBName,query,datatype);
+			System.out.println(expectedstatusid);
+			}
+			while ((Integer.parseInt(expectedstatusid)!=4)&&(Integer.parseInt(expectedstatusid)!=5));
+			if(expectedstatusid.equalsIgnoreCase(excelOperation.getTestData("Promoted", "Generic_Dataset", "Data")))
+		       {
 			
+			      Reporting.updateTestReport("DB Validation is done, app is promoted to prod and Promotion Status ID: " + expectedstatusid,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		       }
+		      else if(expectedstatusid.equalsIgnoreCase(excelOperation.getTestData("Promotion_Failed", "Generic_Dataset", "Data")))
+		       {
+			      Reporting.updateTestReport("Promotion is failed and Promotion Status ID: " + expectedstatusid,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		       }
+			CPortal.WPSAdmin_ClickHome();
+			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
+			CPortal.WPSAdmin_Click_RevertIcon();
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			CPortal.WPSAdmin_Click_RevertConfirm();
+			CPortal.WPSAdmin_Click_Promote_Confirm();
+			do 
+			{
+			expectedstatusid=dbConnect.DB_Select(DBName,query,datatype);
+			System.out.println(expectedstatusid);
+			}
+			while ((Integer.parseInt(expectedstatusid)!=6));
+			if(expectedstatusid.equalsIgnoreCase(excelOperation.getTestData("Promotion_Rollback", "Generic_Dataset", "Data")))
+		       {
+			
+			      Reporting.updateTestReport("DB Validation is done, Promotion is reverted and Promotion Status ID: " + expectedstatusid,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		       }
+		      else if(expectedstatusid.equalsIgnoreCase(excelOperation.getTestData("Promotion_Failed", "Generic_Dataset", "Data")))
+		       {
+			      Reporting.updateTestReport("Promotion is not reverted and Promotion Status ID: " + expectedstatusid,
+					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		       }
+				
 		}
 		catch (Exception e) 
 		{
