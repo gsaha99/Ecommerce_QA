@@ -229,6 +229,33 @@ public class app_ClientPortal_Repo extends DriverModule {
 		
 		@FindBy(xpath = "//span[contains(text(),'Please select at least one payment method')]")
 		WebElement ClickpaymentsErrorMessage;
+		
+		/* 
+		 * Author : Jayanta
+		 * Description : Object repo for  error in register New User page. 
+		 */
+			
+	    @FindBy(xpath = "//span[contains(text(),'First Name is required')]")
+	    WebElement ClickFNameErrorMessage;
+	    
+	    @FindBy(xpath = "//span[contains(text(),'Last Name is required')]")
+	    WebElement ClickLNameErrorMessage;
+	    
+	    @FindBy(xpath = "(//span[@class='input-err-msg'])[3]")
+	    WebElement ClickSSOIDErrorMessage;
+	    
+	    @FindBy(xpath = "//span[contains(text(),'Role is required')]")
+	    WebElement ClickRoleErrorMessage;
+	    
+	    @FindBy(xpath = "//span[contains(text(),'First Name can not exceed 35 characters')]")
+	    WebElement ClickFNameSizeErrorMessage;
+	    
+	    @FindBy(xpath = "//span[contains(text(),'Last Name can not exceed 35 characters')]")
+	    WebElement ClickLNameSizeErrorMessage;
+	    
+	    @FindBy(xpath = "(//span[@class='input-err-msg'])[3]")
+	    WebElement ClickSSOIDSizeErrorMessage;
+	    
 	
 	/* 
 	 * Author : Jayanta
@@ -627,6 +654,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	public void WPSAdmin_Enter_First_Name(String fname) throws IOException {
 		try {
+			enterFirstName.clear();
 			enterFirstName.sendKeys(fname);
 			Reporting.updateTestReport("First Name " +fname+ " Entered successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
@@ -642,6 +670,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	public void WPSAdmin_Enter_Last_Name(String lname) throws IOException {
 		try {
+			enterLastName.clear();
 			enterLastName.sendKeys(lname);
 			Reporting.updateTestReport("Last Name " +lname+ " Entered successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
@@ -657,6 +686,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	public void WPSAdmin_Enter_SSO_ID(String sso) throws IOException {
 		try {
+			enterSSOID.clear();
 			enterSSOID.sendKeys(sso);
 			Reporting.updateTestReport("SSO ID " +sso+ " Entered successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
@@ -1168,4 +1198,162 @@ public class app_ClientPortal_Repo extends DriverModule {
 				return "null";
 			   }
 		}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to click Register Button for negative scenario in Register New User screen
+	 */
+	
+	public void ClickRegister_Negative() throws IOException {
+		try {
+			ClickRegister.click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1[contains(text(),'Register New User')]")));
+			Reporting.updateTestReport("Register button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Register button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author - Jayanta 
+	 * Description : Method to fetch error for First name field in Register New User page.
+	 */
+	
+	public String FetchError_RegisterUser_FName() throws IOException{
+	      try {
+				String errorFName=ClickFNameErrorMessage.getText();
+				System.out.println(errorFName);
+				Reporting.updateTestReport("Error message for First Name field is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorFName;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for First Name field is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
+	
+	/* 
+	 * Author - Jayanta 
+	 * Description : Method to fetch error for Last name field in Register New User page.
+	 */
+	
+	public String FetchError_RegisterUser_LName() throws IOException{
+	      try {
+				String errorLName=ClickLNameErrorMessage.getText();
+				System.out.println(errorLName);
+				Reporting.updateTestReport("Error message for Last Name field is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorLName;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for Last Name field is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
+	
+	/* 
+	 * Author - Jayanta 
+	 * Description : Method to fetch error for SSO ID field in Register New User page.
+	 */
+	
+	public String FetchError_RegisterUser_SSOID() throws IOException{
+	      try {
+				String errorSSOID=ClickSSOIDErrorMessage.getText();
+				System.out.println(errorSSOID);
+				Reporting.updateTestReport("Error message for SSO ID field is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorSSOID;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for SSO ID field is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
+	
+	/* 
+	 * Author - Jayanta 
+	 * Description : Method to fetch error for Role field in Register New User page.
+	 */
+	
+	public String FetchError_RegisterUser_Role() throws IOException{
+	      try {
+				String errorRole=ClickRoleErrorMessage.getText();
+				System.out.println(errorRole);
+				Reporting.updateTestReport("Error message for Role field is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorRole;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for Role field is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
+	
+	/* 
+	 * Author - Jayanta 
+	 * Description : Method to fetch error for First Name field Size in Register New User page.
+	 */
+	
+	public String FetchError_RegisterUser_FName_Size() throws IOException{
+	      try {
+				String errorFNameSize=ClickFNameSizeErrorMessage.getText();
+				System.out.println(errorFNameSize);
+				Reporting.updateTestReport("Error message for First Name field Size is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorFNameSize;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for First Name field Size is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
+	
+	/* 
+	 * Author - Jayanta 
+	 * Description : Method to fetch error for Last Name field Size in Register New User page.
+	 */
+	
+	public String FetchError_RegisterUser_LName_Size() throws IOException{
+	      try {
+				String errorLNameSize=ClickLNameSizeErrorMessage.getText();
+				System.out.println(errorLNameSize);
+				Reporting.updateTestReport("Error message for Last Name field Size is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorLNameSize;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for Last Name field Size is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
+	
+	/* 
+	 * Author - Jayanta 
+	 * Description : Method to fetch error for SSO ID field Size in Register New User page.
+	 */
+	
+	public String FetchError_RegisterUser_SSOID_Size() throws IOException{
+	      try {
+				String errorSSOIDSize=ClickSSOIDErrorMessage.getText();
+				System.out.println(errorSSOIDSize);
+				Reporting.updateTestReport("Error message for SSO ID field Size is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorSSOIDSize;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for SSO ID field Size is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to click Register Button in Register New User screen for existing user
+	 */
+	
+	public void ClickRegister_ExistingUser() throws IOException {
+		try {
+			ClickRegister.click();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'user already exists')]")));
+			Reporting.updateTestReport("Register button is clicked successfully and User Exists ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Register button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 }

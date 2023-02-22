@@ -1983,7 +1983,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		     }
 		     else 
 		     {
-			   Reporting.updateTestReport("TestCase is not Type is required",
+			   Reporting.updateTestReport("Error message for type field is not showing",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		     }
 		     String actualErrorBU = CPortal.FetchError_RegisterApp_BU();
@@ -2296,6 +2296,196 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		}
 	}
 	
+	/*
+     * @Author: Jayanta
+     * @Description: Validation of negative scenario in Register a New User screen for Service Desk User
+     */
+	@Test
+	public void TC30_RegisterNewUser_Negative_Scenarios_SDUser() throws IOException
+	{
+		
+		try {
+			Reporting.test = Reporting.extent.createTest("TC30_Client Portal: "
+					+ "Verify the negative scenarios for Register New User: "
+					+ "1.Validate the error message displayed when user tries to register"
+					+ " the user without entering values in mandatory field."
+					+ "2.Check whether system display error message when user enter values"
+					+ " which exceeds 35 characters in Field-First Name ,Last Name, SSO ID."
+					+ "3.Validate the error message displayed when service desk user"
+					+ " tries to register the user with existing user details."
+					);
+			
+			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
+			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("Service_Desk_User", "ClientPortal_SignIN", "EmailID"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0118")));
+			CPortal.WPSAdmin_LogIN_EnterPWD(excelOperation.getTestData("Service_Desk_User", "ClientPortal_SignIN", "PWD"));
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
+			CPortal.WPSAdmin_LogIN_ClickNext();
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Element not found due to timeout" + e.getMessage());
+				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			CPortal.WPSAdmin_ClickRegisterNewUser();
+			CPortal.ClickRegister_Negative();
+			String actualErrorFName = CPortal.FetchError_RegisterUser_FName();
+            String expectedErrorFName=excelOperation.getTestData("FName", "CPortal_Error_Message", "Error_Message");
+            if(actualErrorFName.equalsIgnoreCase(expectedErrorFName))
+		     {
+
+			   Reporting.updateTestReport("Error message for First Name field is showing and message is: " + actualErrorFName,
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		     }
+		     else 
+		     {
+			   Reporting.updateTestReport("Error message for First Name field is not showing",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		     }
+            String actualErrorLName = CPortal.FetchError_RegisterUser_LName();
+            String expectedErrorLName=excelOperation.getTestData("LName", "CPortal_Error_Message", "Error_Message");
+            if(actualErrorLName.equalsIgnoreCase(expectedErrorLName))
+		     {
+
+			   Reporting.updateTestReport("Error message for Last Name field is showing and message is: " + actualErrorLName,
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		     }
+		     else 
+		     {
+			   Reporting.updateTestReport("Error message for Last Name field is not showing",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		     }
+            String actualErrorSSOID = CPortal.FetchError_RegisterUser_SSOID();
+            String expectedErrorSSOID=excelOperation.getTestData("SSOID", "CPortal_Error_Message", "Error_Message");
+            if(actualErrorSSOID.equalsIgnoreCase(expectedErrorSSOID))
+		     {
+
+			   Reporting.updateTestReport("Error message for SSO ID field is showing and message is: " + actualErrorSSOID,
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		     }
+		     else 
+		     {
+			   Reporting.updateTestReport("Error message for SSO ID field is not showing",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		     }
+            String actualErrorRole = CPortal.FetchError_RegisterUser_Role();
+            String expectedErrorRole=excelOperation.getTestData("Role", "CPortal_Error_Message", "Error_Message");
+            if(actualErrorRole.equalsIgnoreCase(expectedErrorRole))
+		     {
+
+			   Reporting.updateTestReport("Error message for Role field is showing and message is: " + actualErrorRole,
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		     }
+		     else 
+		     {
+			   Reporting.updateTestReport("Error message for Role field is not showing",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		     }
+			CPortal.WPSAdmin_Enter_First_Name(excelOperation.getTestData("Field_Size", "Generic_Dataset", "Data"));
+			CPortal.WPSAdmin_Enter_Last_Name(excelOperation.getTestData("Field_Size", "Generic_Dataset", "Data"));
+			CPortal.WPSAdmin_Enter_SSO_ID(excelOperation.getTestData("Field_Size", "Generic_Dataset", "Data"));
+			CPortal.SDUser_SelectRole();
+			CPortal.ClickRegister_Negative();
+			String actualErrorFNameSize = CPortal.FetchError_RegisterUser_FName_Size();
+            String expectedErrorFNameSize=excelOperation.getTestData("Fname_Size", "CPortal_Error_Message", "Error_Message");
+            if(actualErrorFNameSize.equalsIgnoreCase(expectedErrorFNameSize))
+		     {
+
+			   Reporting.updateTestReport("Error message for First Name field size is showing and message is: " + actualErrorFNameSize,
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		     }
+		     else 
+		     {
+			   Reporting.updateTestReport("Error message for First Name field size is not showing",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		     }
+            String actualErrorLNameSize = CPortal.FetchError_RegisterUser_LName_Size();
+            String expectedErrorLNameSize=excelOperation.getTestData("Lname_Size", "CPortal_Error_Message", "Error_Message");
+            if(actualErrorLNameSize.equalsIgnoreCase(expectedErrorLNameSize))
+		     {
+
+			   Reporting.updateTestReport("Error message for Last Name field size is showing and message is: " + actualErrorLNameSize,
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		     }
+		     else 
+		     {
+			   Reporting.updateTestReport("Error message for Last Name field size is not showing",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		     }
+            String actualErrorSSOIDSize = CPortal.FetchError_RegisterUser_SSOID_Size();
+            String expectedErrorSSOIDSize =excelOperation.getTestData("SSOID_Size", "CPortal_Error_Message", "Error_Message");
+            if(actualErrorSSOIDSize.equalsIgnoreCase(expectedErrorSSOIDSize))
+		     {
+
+			   Reporting.updateTestReport("Error message for SSO ID field size is showing and message is: " + actualErrorSSOIDSize,
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		     }
+		     else 
+		     {
+			   Reporting.updateTestReport("Error message for SSO ID field size is not showing",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		     }
+            CPortal.WPSAdmin_Enter_First_Name("TestAutoFirstName");
+			CPortal.WPSAdmin_Enter_Last_Name("TestAutoLastName");
+			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
+			String SSOID = "TestSDUser"+uuid+"@wiley.com";
+			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
+			CPortal.SDUser_SelectRole();
+			CPortal.WPSAdmin_ClickRegister();
+			CPortal.WPSAdmin_Enter_First_Name("TestAutoFirstName");
+			CPortal.WPSAdmin_Enter_Last_Name("TestAutoLastName");
+			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
+			CPortal.SDUser_SelectRole();
+			CPortal.ClickRegister_ExistingUser();
+				
+		}
+		catch (Exception e) 
+		{
+			System.out.println("Register new user with Service Desk User Role Failed" + e.getMessage());
+			Reporting.updateTestReport("Register new user with Service Desk User Role Failed" + e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 	/*
      * @Author: Jayanta
      * @Description: Validation of Register a New User for Service Desk User
