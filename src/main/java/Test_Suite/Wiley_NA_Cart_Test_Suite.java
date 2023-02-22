@@ -26,6 +26,7 @@ import utilities.excelOperation;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 
@@ -60,6 +61,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 			driver.get(wiley.wileyURLConcatenation("TC01", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal price=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -67,6 +69,17 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal subtotal=new BigDecimal(wiley.fetchOrderSubTotalInCartPage().substring(1));
+				if(price.compareTo(subtotal)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String email=wiley.enterEmailIdInCreateAccountForm();
@@ -139,7 +152,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 
-						
+
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -259,7 +272,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
 							}
-							
+
 						} else {
 							Reporting.updateTestReport("user was not on Secure Checkout Page",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -386,7 +399,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						
+
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -506,7 +519,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						
+
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -632,6 +645,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC06_Mixed_productpurchase_ForExistingUser");
 			driver.get(wiley.wileyURLConcatenation("TC06", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -642,12 +656,22 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.searchDataInSearchBar(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "ISBN"));
 				wiley.clickOnSRP_WileyProduct();
+				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 				wiley.clickOnAddToCartButton();
 				try {
 					wait.until(ExpectedConditions.
 							elementToBeClickable
 							(By.xpath("//button[contains(text(),'View Cart')]")));
 					wiley.clickOnViewCartButton();
+					BigDecimal subtotal=new BigDecimal(wiley.fetchOrderSubTotalInCartPage().substring(1));
+					if(priceOfFirstProduct.add(priceOfSecondProduct).compareTo(subtotal)==0) 
+						Reporting.updateTestReport(
+								"The addition of all the products' price is same as the subtotal in cart page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"The addition of all the products' pricedidn't match with the subtotal in cart page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 					wiley.clickOnProceedToCheckoutButton();
 					String emailID=excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "Email_Id");
@@ -738,6 +762,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC07", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.
@@ -747,12 +772,22 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.searchDataInSearchBar(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "ISBN"));
 				//Wiley.clickOnSearchIcon();
 				wiley.clickOnSRP_WileyProduct();
+				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 				wiley.clickOnAddToCartButton();
 				try {
 					wait.until(ExpectedConditions.
 							elementToBeClickable
 							(By.xpath("//button[contains(text(),'View Cart')]")));
 					wiley.clickOnViewCartButton();
+					BigDecimal subtotal=new BigDecimal(wiley.fetchOrderSubTotalInCartPage().substring(1));
+					if(priceOfFirstProduct.add(priceOfSecondProduct).compareTo(subtotal)==0) 
+						Reporting.updateTestReport(
+								"The addition of all the products' price is same as the subtotal in cart page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"The addition of all the products' pricedidn't match with the subtotal in cart page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 					wiley.clickOnProceedToCheckoutButton();
 					//Create Account 
@@ -832,7 +867,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
 							}
-							
+
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Cardholder name field in Card information"
@@ -877,6 +912,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC08", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.
@@ -887,12 +923,22 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				//Wiley.clickOnSearchIcon();
 				wiley.clickOnSRP_WileyProduct();
 				wiley.clickOnPrintTab();
+				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 				wiley.clickOnAddToCartButton();
 				try {
 					wait.until(ExpectedConditions.
 							elementToBeClickable
 							(By.xpath("//button[contains(text(),'View Cart')]")));
 					wiley.clickOnViewCartButton();
+					BigDecimal subtotal=new BigDecimal(wiley.fetchOrderSubTotalInCartPage().substring(1));
+					if(priceOfFirstProduct.add(priceOfSecondProduct).compareTo(subtotal)==0) 
+						Reporting.updateTestReport(
+								"The addition of all the products' price is same as the subtotal in cart page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"The addition of all the products' pricedidn't match with the subtotal in cart page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 					wiley.clickOnProceedToCheckoutButton();
 					//Guest
@@ -967,7 +1013,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
 							}
-							
+
 
 						}
 						catch(Exception e) {
@@ -1097,7 +1143,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						
+
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -1225,7 +1271,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						
+
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -1373,7 +1419,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 										Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 												StatusDetails.FAIL);
 									}
-									
+
 								}
 								catch(Exception e) {
 									Reporting.updateTestReport("Billing City was not clickable"
@@ -1434,6 +1480,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC12", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.
@@ -1444,6 +1491,31 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.clickOnPromotionCodelink();
 				wiley.enterPromoCode(excelOperation.getTestData("WILEY_PROMO_ADD", "Generic_Dataset", "Data"));
 				wiley.ApplyPromo();
+				BigDecimal subtotal=new BigDecimal(wiley.fetchOrderSubTotalInCartPage().substring(1));
+				BigDecimal ordertotalInCart=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				BigDecimal discount=new BigDecimal(wiley.fetchDiscountAmountInCartPage().substring(2));
+				System.out.println(discount);
+				if(subtotal.multiply(new BigDecimal(0.25)).setScale(2, RoundingMode.CEILING).compareTo(discount)==0) 
+					Reporting.updateTestReport(
+							"The rounded value of :"+subtotal.multiply(new BigDecimal(0.25))+
+							" is same as the discount value: "+discount,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The rounded value of :"+subtotal.multiply(new BigDecimal(0.25))+
+							" is not same as the discount value: "+discount,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				if(priceOfFirstProduct.subtract(discount).compareTo(ordertotalInCart)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price and the subtraction of the discount"
+									+ " is same as the subtotal in cart page",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' price and the subtraction of the discount "
+									+ "didn't match with the subtotal in cart page",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
 				ScrollingWebPage.PageScrolldown(driver,0,900,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String email=wiley.enterEmailIdInCreateAccountForm();
@@ -1526,7 +1598,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						
+
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -1782,7 +1854,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						
+
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -1907,7 +1979,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						
+
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -2033,7 +2105,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						
+
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Shipping Address line 1 was not clickable"
@@ -2074,6 +2146,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC17", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.
@@ -2084,6 +2157,30 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.clickOnPromotionCodelink();
 				wiley.enterPromoCode(excelOperation.getTestData("WILEY_PROMO_SDP66", "Generic_Dataset", "Data"));
 				wiley.ApplyPromo();
+				BigDecimal subtotal=new BigDecimal(wiley.fetchOrderSubTotalInCartPage().substring(1));
+				BigDecimal ordertotalInCart=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				BigDecimal discount=new BigDecimal(wiley.fetchDiscountAmountInCartPage().substring(2));
+				System.out.println(discount);
+				if(subtotal.multiply(new BigDecimal(0.35)).setScale(2, RoundingMode.CEILING).compareTo(discount)==0) 
+					Reporting.updateTestReport(
+							"The rounded value of :"+subtotal.multiply(new BigDecimal(0.35))+
+							" is same as the discount value: "+discount,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The rounded value of :"+subtotal.multiply(new BigDecimal(0.35))+
+							" is not same as the discount value: "+discount,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				if(priceOfFirstProduct.subtract(discount).compareTo(ordertotalInCart)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price and the subtraction of the discount"
+									+ " is same as the subtotal in cart page",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' price and the subtraction of the discount "
+									+ "didn't match with the subtotal in cart page",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,900,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String emailID = wiley.enterEmailIdInCreateAccountForm();
@@ -2305,7 +2402,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								else
 									Reporting.updateTestReport("Both the tax values were equal for two different billing addresses",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								
+
 							}
 							catch(Exception e) {
 								Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -2513,7 +2610,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						
+
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -2607,7 +2704,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
-					
+
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -2727,7 +2824,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						
+
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -2840,7 +2937,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						
+
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -2976,7 +3073,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC28", "WILEY_NA_Cart_Test_Data", "Password"));
 					wiley.clickOnSaveAndContinueButton();
 					wiley.checkIfUserIsInShippingStep();
-					
+
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
@@ -3023,7 +3120,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.checkCartItemQuantity();
 				wiley.checkBreadCrumbCartPage();
 				wiley.checkTextInOrderSummaryTab();
-				
+
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
@@ -3050,6 +3147,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC30_Cart_Merge_Functionality");
 			driver.get(wiley.wileyURLConcatenation("TC30", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -3065,22 +3163,33 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				wiley.WileyLogOut();			
-				driver.get(wiley.wileyURLConcatenation("TC30", "WILEY_NA_Cart_Test_Data", "ISBN"));			
+				driver.get(wiley.wileyURLConcatenation("TC30", "WILEY_NA_Cart_Test_Data", "ISBN"));		
+				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 				wiley.clickOnAddToCartButton();
 				try {
 					wait.until(ExpectedConditions.
 							elementToBeClickable
 							(By.xpath("//button[contains(text(),'View Cart')]")));
 					wiley.clickOnViewCartButton();
+					
 					ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 					wiley.clickOnProceedToCheckoutButton();
 					wiley.enterExistingWileyUserMailID(excelOperation.getTestData("TC30", "WILEY_NA_Cart_Test_Data", "Email_Id"));
 					wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC30", "WILEY_NA_Cart_Test_Data", "Password"));
 					wiley.clickOnLogInAndContinueButton();
 					String quantity=wiley.checkCartItemQuantity();
+					BigDecimal ordertotal=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+					if(priceOfFirstProduct.add(priceOfSecondProduct).compareTo(ordertotal)==0) 
+						Reporting.updateTestReport(
+								"The addition of all the products' price is same as the subtotal in cart page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"The addition of all the products' pricedidn't match with the subtotal in cart page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					if(quantity.equals("2")) Reporting.updateTestReport("New Cart was merged with old cart", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					else Reporting.updateTestReport("New Cart was not merged with old cart", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					
+
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
@@ -3111,6 +3220,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC31", "WILEY_NA_Cart_Test_Data", "URL"));			
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.
@@ -3120,6 +3230,30 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.clickOnPromotionCodelink();
 				wiley.enterPromoCode(excelOperation.getTestData("WILEY_100_PERCENT_PROMO", "Generic_Dataset", "Data"));
 				wiley.ApplyPromo();
+				BigDecimal subtotal=new BigDecimal(wiley.fetchOrderSubTotalInCartPage().substring(1));
+				BigDecimal ordertotalInCart=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				BigDecimal discount=new BigDecimal(wiley.fetchDiscountAmountInCartPage().substring(2));
+				System.out.println(discount);
+				if(subtotal.multiply(new BigDecimal(1.00)).setScale(2, RoundingMode.CEILING).compareTo(discount)==0) 
+					Reporting.updateTestReport(
+							"The rounded value of :"+subtotal.multiply(new BigDecimal(1.00))+
+							" is same as the discount value: "+discount,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The rounded value of :"+subtotal.multiply(new BigDecimal(1.00))+
+							" is not same as the discount value: "+discount,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				if(priceOfFirstProduct.subtract(discount).compareTo(ordertotalInCart)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price and the subtraction of the discount"
+									+ " is same as the subtotal in cart page",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' price and the subtraction of the discount "
+									+ "didn't match with the subtotal in cart page",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String email=wiley.enterEmailIdInCreateAccountForm();
@@ -3182,7 +3316,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
-					
+
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Billing address line 1 was not clickable"
@@ -3217,6 +3351,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC32", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.
@@ -3233,12 +3368,22 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			//Wiley.clickOnSearchIcon();
 			wiley.clickOnSRP_WileyProduct();
 			wiley.clickOnPrintTab();
+			BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCart=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.add(priceOfSecondProduct).compareTo(ordertotalInCart)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				wiley.checkNextAvailabilityDatePreorderInCartPage();
 				wiley.checkNextAvailabilityDateBackorderInCartPage();
 				wiley.checkNotificationMessagePreorderInCartPage();
@@ -3326,7 +3471,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
-						
+
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name ield in Card information"
@@ -3515,7 +3660,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "Password"));
 				wiley.clickOnLogInAndContinueButton();
 				wiley.checkErrorMessageAfterEnteringWrongPassword();
-				
+
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
@@ -3711,7 +3856,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 				}
 			}
-			
+
 			wiley.WileyLogOut();
 		}
 		catch(Exception e) {
@@ -3743,15 +3888,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					else
 						Reporting.updateTestReport("Correct text was not present in generic info for eBook"
-					+wiley.fetchGenericHoverInfo(driver).length()+" "+
+								+wiley.fetchGenericHoverInfo(driver).length()+" "+
 								excelOperation.getTestData("TC37", "WILEY_NA_Cart_Test_Data", "Expected_Result").trim().length(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					
-					
+
+
 				}
 			}
 			wiley.WileyLogOut();
-			
+
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();

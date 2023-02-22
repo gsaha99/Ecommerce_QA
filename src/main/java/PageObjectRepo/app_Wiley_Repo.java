@@ -490,6 +490,18 @@ public class app_Wiley_Repo {
 	
 	@FindBy(xpath="//i[@aria-label='Purchase option description']")
 	WebElement GenericHoverInfo;
+	
+	@FindBy(xpath="//p[@class='pr-price']")
+	WebElement ProductPriceInPDP;
+	
+	@FindBy(xpath="//div[@class='col-xs-6 noPadding price orderDetailCommonVal']")
+	WebElement OrderSubtotalInCartPage;
+	
+	@FindBy(xpath="(//div[@class='col-xs-6 noPadding orderDetailTotalVal'])[2]")
+	WebElement OrderTotalInCartPage;
+	
+	@FindBy(xpath="//div[@class='row no-margin cartTotalVoucherApply']/div[@class='col-xs-6 noPadding price navyBlueVal']")
+	WebElement DiscountValue;
 
 	/*
 	 * @Author: Anindita
@@ -3125,6 +3137,82 @@ public class app_Wiley_Repo {
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("The first line of generic hover info couldn't be returned"+e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Date: 22/02/23
+	 * @Description: Fetches the product's price from PDP
+	 */
+	public String fetchPriceInPDP() throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"Price of the product in PDP: "+ProductPriceInPDP.getText().trim()+" was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return ProductPriceInPDP.getText().trim();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport(
+					"Price of the product in PDP could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Date: 22/02/23
+	 * @Description: Fetches the the order subtotal from cart page
+	 */
+	public String fetchOrderSubTotalInCartPage() throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"Subtotal of the order: "+OrderSubtotalInCartPage.getText().trim()+" was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return OrderSubtotalInCartPage.getText().trim();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport(
+					"Subtotal of the order in cart page could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Date: 22/02/23
+	 * @Description: Fetches the Order total in cart page
+	 */
+	public String fetchOrderTotalInCartPage() throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"Order total in cart page : "+OrderTotalInCartPage.getText().trim()+" was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return OrderTotalInCartPage.getText().trim();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport(
+					"Order total in cart page could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Date: 22/02/23
+	 * @Description: Fetches the the discount amount from cart page
+	 */
+	public String fetchDiscountAmountInCartPage() throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"Discount amount: "+DiscountValue.getText().split("-")[1]+" was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return DiscountValue.getText().split("-")[1];
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport(
+					"Discount amount in cart page could not be returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return "";
 		}

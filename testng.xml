@@ -7,25 +7,11 @@
 		<classes>
 			<class name="Test_Suite.WEL_Test_Suite">
 				<methods>
-					<include name="TC06_.*" />
-					<include name="TC07_.*" />
-					<include name="TC09_.*" />
-					<include name="TC10_.*" />
-					<include name="TC11_.*" />
-					<include name="TC12_.*" />
-					<include name="TC13_.*" />
-					<include name="TC14_.*" />
-					<include name="TC21_.*" />
-					<include name="TC22_.*" />
+					<include name="TC03_.*" />
+					<include name="TC20_.*" />
 					<include name="TC24_.*" />
-					<include name="TC26_.*" />
 					<include name="TC36_.*" />
-					<include name="TC37_.*" />
-					<include name="TC42_.*" />
-					<include name="TC53_.*" />
-					<include name="TC69_.*" />
-					<include name="TC70_.*" />
-					<include name="TC77_.*" />
+					<include name="TC50_.*" />
 					
 				</methods>
 			</class>

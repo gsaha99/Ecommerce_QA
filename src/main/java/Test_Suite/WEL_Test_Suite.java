@@ -187,7 +187,7 @@ public class WEL_Test_Suite extends DriverModule {
 						.elementToBeClickable(By.xpath("(//button[contains(text(),'EXPLORE COURSES')])[1]")));
 				WEL.ClickonExploreCourseCMAProduct();
 				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
 							"(//div[@class='container-fluid course-pkg-background']//div[@class='card-footer bg-transparent course-pkg-cards-footer'])[1]//button[contains(text(),'VIEW COURSE OPTIONS')]")));
 					ScrollingWebPage.PageDown(driver, SS_path);
 					WEL.ClickonViewCourseForCMAProduct();
@@ -195,7 +195,7 @@ public class WEL_Test_Suite extends DriverModule {
 						wait.until(ExpectedConditions
 								.elementToBeClickable(By.xpath("//div[@class='btn-group btn-group-toggle']/label[2]")));
 						WEL.ClickonCMAeBook();
-						
+
 						try {
 							wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
 									"//button[@type='submit' and @class='add-to-cart-btn  ']")));
@@ -346,7 +346,7 @@ public class WEL_Test_Suite extends DriverModule {
 								"//button[@type='submit' and @class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						WEL.clickOnAddToCartButtonOnPDP();
-						
+
 						try {
 							wait.until(ExpectedConditions
 									.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -965,33 +965,8 @@ public class WEL_Test_Suite extends DriverModule {
 						"//button[@type='submit' and @class='add-to-cart-btn  ']")));
 				ScrollingWebPage.PageDown(driver, SS_path);
 				WEL.clickOnAddToCartButtonOnPDP();
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-			} catch (Exception e) {
 				try {
-					if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
-						Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-						driver.navigate().refresh();
-					}
-				} catch (Exception e1) {
-					Reporting.updateTestReport(
-							"Checkout button was not clickable in the cart page" + " and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
-
-			}
-			driver.get(urls[1]);
-			
-			try {
-				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-						"//button[@type='submit' and @class='add-to-cart-btn  ']")));
-				ScrollingWebPage.PageScrolldown(driver,0,200, SS_path);
-				WEL.clickOnAddToCartButtonOnPDP();
-				try {
-					wait.until(
-							ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
 				} catch (Exception e) {
 					try {
@@ -1007,81 +982,106 @@ public class WEL_Test_Suite extends DriverModule {
 					}
 
 				}
-				WEL.ClickonCheckOutOnCartPage();
-				WEL.EnterexistingUserName(excelOperation.getTestData("TC13", "WEL_Test_Data", "Email_Address"));
-				WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC13", "WEL_Test_Data", "Password"));
-				WEL.ClickonLoginAndContinue();
-				try {
-					wait.until(
-							ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+				driver.get(urls[1]);
 
-				} catch (Exception e) {
+				try {
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+							"//button[@type='submit' and @class='add-to-cart-btn  ']")));
+					ScrollingWebPage.PageScrolldown(driver,0,200, SS_path);
+					WEL.clickOnAddToCartButtonOnPDP();
 					try {
-						if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
-							Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-							driver.navigate().refresh();
-						}
-					} catch (Exception e1) {
-						Reporting.updateTestReport(
-								"Checkout button was not clickable in the cart page" + " and caused timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
+						wait.until(
+								ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
-				}
-				WEL.ClickonCheckOutOnCartPage();
-				WEL.ClickOnAddaDiscountCode();
-				ScrollingWebPage.PageDown(driver, SS_path);
-				WEL.EnterCouponExtraDiscountCode(excelOperation.getTestData("TC13", "WEL_Test_Data", "PromoCode"));
-				WEL.ClickOnDiscountApplyButton();
-				WEL.ClickonCheckOutOnCartPage();
-				WEL.ClickOnEnterNewAddressButtonOnShippingPage();
-				WEL.GuestFirstName(excelOperation.getTestData("TC13", "WEL_Test_Data", "Guest_Fname"));
-				WEL.GuestLastName(excelOperation.getTestData("TC13", "WEL_Test_Data", "Guest_Lname"));
-				WEL.selectShipCountry(excelOperation.getTestData("TC13", "WEL_Test_Data", "Sh_Country"));
-				WEL.ShipAddressLineOne(excelOperation.getTestData("TC13", "WEL_Test_Data", "Sh_Address_line1"));
-				WEL.ShipPostCode(excelOperation.getTestData("TC13", "WEL_Test_Data", "Sh_Zip_Code"));
-				WEL.ShipPhoneNumber(excelOperation.getTestData("TC13", "WEL_Test_Data", "Sh_Phone_Number"));
-				WEL.SaveContinueCheckOutPage();
-				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
-				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-					WEL.enterCardHolderName(excelOperation.getTestData("TC13", "WEL_Test_Data", "Guest_Fname"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-					WEL.enterCardNumber(excelOperation.getTestData("TC13", "WEL_Test_Data", "Card_Number"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-					WEL.selectExpirationMonthFromDropDown(
-							excelOperation.getTestData("TC13", "WEL_Test_Data", "Expiry_Month"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-					WEL.selectExpirationYearFromDropDown(
-							excelOperation.getTestData("TC13", "WEL_Test_Data", "Expiry_Year"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-					WEL.enterCVV_Number(excelOperation.getTestData("TC13", "WEL_Test_Data", "CVV"));
-					driver.switchTo().defaultContent();
-					WEL.SaveAndContinueCheckOut();
-					WEL.clickOnPlaceOrderButton();
-					String orderID = WEL.fetchOrderId();
-					excelOperation.updateTestData("TC13", "WEL_Test_Data", "Order_Id", orderID);
+					} catch (Exception e) {
+						try {
+							if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
+								Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+								driver.navigate().refresh();
+							}
+						} catch (Exception e1) {
+							Reporting.updateTestReport(
+									"Checkout button was not clickable in the cart page" + " and caused timeout exception",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+
+					}
+					WEL.ClickonCheckOutOnCartPage();
+					WEL.EnterexistingUserName(excelOperation.getTestData("TC13", "WEL_Test_Data", "Email_Address"));
+					WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC13", "WEL_Test_Data", "Password"));
+					WEL.ClickonLoginAndContinue();
+					try {
+						wait.until(
+								ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+
+					} catch (Exception e) {
+						try {
+							if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
+								Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+								driver.navigate().refresh();
+							}
+						} catch (Exception e1) {
+							Reporting.updateTestReport(
+									"Checkout button was not clickable in the cart page" + " and caused timeout exception",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+
+					}
+					WEL.ClickonCheckOutOnCartPage();
+					WEL.ClickOnAddaDiscountCode();
 					ScrollingWebPage.PageDown(driver, SS_path);
-					String tax = WEL.fetchTaxAmount();
-					excelOperation.updateTestData("TC13", "WEL_Test_Data", "Tax", tax);
-					String orderTotal = WEL.fetchOrderTotal();
-					excelOperation.updateTestData("TC13", "WEL_Test_Data", "Order_Total", orderTotal);
+					WEL.EnterCouponExtraDiscountCode(excelOperation.getTestData("TC13", "WEL_Test_Data", "PromoCode"));
+					WEL.ClickOnDiscountApplyButton();
+					WEL.ClickonCheckOutOnCartPage();
+					WEL.ClickOnEnterNewAddressButtonOnShippingPage();
+					WEL.GuestFirstName(excelOperation.getTestData("TC13", "WEL_Test_Data", "Guest_Fname"));
+					WEL.GuestLastName(excelOperation.getTestData("TC13", "WEL_Test_Data", "Guest_Lname"));
+					WEL.selectShipCountry(excelOperation.getTestData("TC13", "WEL_Test_Data", "Sh_Country"));
+					WEL.ShipAddressLineOne(excelOperation.getTestData("TC13", "WEL_Test_Data", "Sh_Address_line1"));
+					WEL.ShipPostCode(excelOperation.getTestData("TC13", "WEL_Test_Data", "Sh_Zip_Code"));
+					WEL.ShipPhoneNumber(excelOperation.getTestData("TC13", "WEL_Test_Data", "Sh_Phone_Number"));
+					WEL.SaveContinueCheckOutPage();
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+					try {
+						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						WEL.enterCardHolderName(excelOperation.getTestData("TC13", "WEL_Test_Data", "Guest_Fname"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+						WEL.enterCardNumber(excelOperation.getTestData("TC13", "WEL_Test_Data", "Card_Number"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+						WEL.selectExpirationMonthFromDropDown(
+								excelOperation.getTestData("TC13", "WEL_Test_Data", "Expiry_Month"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+						WEL.selectExpirationYearFromDropDown(
+								excelOperation.getTestData("TC13", "WEL_Test_Data", "Expiry_Year"));
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+						WEL.enterCVV_Number(excelOperation.getTestData("TC13", "WEL_Test_Data", "CVV"));
+						driver.switchTo().defaultContent();
+						WEL.SaveAndContinueCheckOut();
+						WEL.clickOnPlaceOrderButton();
+						String orderID = WEL.fetchOrderId();
+						excelOperation.updateTestData("TC13", "WEL_Test_Data", "Order_Id", orderID);
+						ScrollingWebPage.PageDown(driver, SS_path);
+						String tax = WEL.fetchTaxAmount();
+						excelOperation.updateTestData("TC13", "WEL_Test_Data", "Tax", tax);
+						String orderTotal = WEL.fetchOrderTotal();
+						excelOperation.updateTestData("TC13", "WEL_Test_Data", "Order_Total", orderTotal);
 
-					WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+						WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+					} catch (Exception e) {
+						Reporting.updateTestReport("Failed to click on CPAAdd To cart timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
 				} catch (Exception e) {
-					Reporting.updateTestReport("Failed to click on CPAAdd To cart timeout exception",
+					Reporting.updateTestReport(
+							"Card Details was not enetred due to Time Out Exception: " + e.getClass().toString(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
-			} catch (Exception e) {
-				Reporting.updateTestReport(
-						"Card Details was not enetred due to Time Out Exception: " + e.getClass().toString(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}}
+				}}
 			catch(Exception e) {
 				Reporting.updateTestReport("Failed to click on Add to cart button due to  timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -1986,24 +1986,27 @@ public class WEL_Test_Suite extends DriverModule {
 				ScrollingWebPage.PageDown(driver, SS_path);
 				WEL.ClickOnViewCourseForCIAProduct();
 				try {
+
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+							"//button[@type='submit' and @class='add-to-cart-btn  ']")));
 					ScrollingWebPage.PageDown(driver, SS_path);
-					wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-							"//div[@class='product-detail-page']//div[@class='container-fluid banner-container product-detail-banner mt-4']//button")));
 					WEL.clickOnAddToCartButtonOnPDP();
 					WEL.ClickWELIconCheckoutPage();
-					ScrollingWebPage.PageDown(driver, SS_path);
+
 					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By
+						wait.until(ExpectedConditions.presenceOfElementLocated(By
 								.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_3']/a[2]")));
+						ScrollingWebPage.PageDown(driver, SS_path);
 						WEL.ClickOnCAIAProduct();
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(
 									By.xpath("(//div[@class='row banner-position']//div[3]//button)[1]")));
 							WEL.ClickOnLevel1TestBankForCAIAProduct();
 							try {
-								ScrollingWebPage.PageDown(driver, SS_path);
+
 								wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-										"//div[@class='package-selection-container platinum-package']//button")));
+										"//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								ScrollingWebPage.PageDown(driver, SS_path);
 								WEL.clickOnAddToCartButtonOnPDP();
 								try {
 									wait.until(ExpectedConditions
@@ -2125,108 +2128,108 @@ public class WEL_Test_Suite extends DriverModule {
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated
 						(By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[1]")));
-			ScrollingWebPage.PageScrolldown(driver, 0, 600, SS_path);
-			WEL.ClickonCPAProduct();
-			WEL.clickOnFreeTrialButton();
-			WEL.FreeTrailFirstName(excelOperation.getTestData("TC21", "WEL_Test_Data", "First_Name"));
-			WEL.FreeTrailLastName(excelOperation.getTestData("TC21", "WEL_Test_Data", "Last_Name"));
-			WEL.EnterFreeTrailNewtUser();
-			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
-			WEL.FreeTrailCountry(excelOperation.getTestData("TC21", "WEL_Test_Data", "Sh_Country"));
-			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
-			WEL.FreeTrailState(excelOperation.getTestData("TC21", "WEL_Test_Data", "Sh_State"));
-			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
-			WEL.FreeTrailPassword(excelOperation.getTestData("TC21", "WEL_Test_Data", "Password"));
-			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
-			WEL.FreeTrailTermsAndCOndtionsCheckBox();
-			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
-			WEL.FreeTrailSignUpCheckBox();
-			WEL.FreeTrailSignInButton();
-			String cpaftextmessage = WEL.FreeTrailCPAText();
-			if (cpaftextmessage.equals("You’re almost set!"))
-				Reporting.updateTestReport(
-						"CPA FreeTail is successfully completed and page having text You’re almost set!",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else
-				Reporting.updateTestReport("Failed to Load the CPA FreeTail Page",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				ScrollingWebPage.PageScrolldown(driver, 0, 600, SS_path);
+				WEL.ClickonCPAProduct();
+				WEL.clickOnFreeTrialButton();
+				WEL.FreeTrailFirstName(excelOperation.getTestData("TC21", "WEL_Test_Data", "First_Name"));
+				WEL.FreeTrailLastName(excelOperation.getTestData("TC21", "WEL_Test_Data", "Last_Name"));
+				WEL.EnterFreeTrailNewtUser();
+				ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+				WEL.FreeTrailCountry(excelOperation.getTestData("TC21", "WEL_Test_Data", "Sh_Country"));
+				ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+				WEL.FreeTrailState(excelOperation.getTestData("TC21", "WEL_Test_Data", "Sh_State"));
+				ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+				WEL.FreeTrailPassword(excelOperation.getTestData("TC21", "WEL_Test_Data", "Password"));
+				ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+				WEL.FreeTrailTermsAndCOndtionsCheckBox();
+				ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+				WEL.FreeTrailSignUpCheckBox();
+				WEL.FreeTrailSignInButton();
+				String cpaftextmessage = WEL.FreeTrailCPAText();
+				if (cpaftextmessage.equals("You’re almost set!"))
+					Reporting.updateTestReport(
+							"CPA FreeTail is successfully completed and page having text You’re almost set!",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Failed to Load the CPA FreeTail Page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
-			WEL.FreeTrailWELIcon();
-			try {
-				wait.until(ExpectedConditions.presenceOfElementLocated(
-						By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[2]")));
-			ScrollingWebPage.PageScrolldown(driver, 0, 600, SS_path);
-			WEL.ClickonCMAProduct();
-			WEL.clickOnFreeTrialButton();
-			WEL.FreeTrailFirstName(excelOperation.getTestData("TC21", "WEL_Test_Data", "First_Name"));
-			WEL.FreeTrailLastName(excelOperation.getTestData("TC21", "WEL_Test_Data", "Last_Name"));
-			WEL.EnterFreeTrailNewtUser();
-			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+				WEL.FreeTrailWELIcon();
+				try {
+					wait.until(ExpectedConditions.presenceOfElementLocated(
+							By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[2]")));
+					ScrollingWebPage.PageScrolldown(driver, 0, 600, SS_path);
+					WEL.ClickonCMAProduct();
+					WEL.clickOnFreeTrialButton();
+					WEL.FreeTrailFirstName(excelOperation.getTestData("TC21", "WEL_Test_Data", "First_Name"));
+					WEL.FreeTrailLastName(excelOperation.getTestData("TC21", "WEL_Test_Data", "Last_Name"));
+					WEL.EnterFreeTrailNewtUser();
+					ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
 
-			WEL.FreeTrailCountry(excelOperation.getTestData("TC21", "WEL_Test_Data", "Sh_Country"));
-			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+					WEL.FreeTrailCountry(excelOperation.getTestData("TC21", "WEL_Test_Data", "Sh_Country"));
+					ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
 
-			WEL.FreeTrailState(excelOperation.getTestData("TC21", "WEL_Test_Data", "Sh_State"));
-			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+					WEL.FreeTrailState(excelOperation.getTestData("TC21", "WEL_Test_Data", "Sh_State"));
+					ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
 
-			WEL.FreeTrailPassword(excelOperation.getTestData("TC21", "WEL_Test_Data", "Password"));
-			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+					WEL.FreeTrailPassword(excelOperation.getTestData("TC21", "WEL_Test_Data", "Password"));
+					ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
 
-			WEL.FreeTrailTermsAndCOndtionsCheckBox();
-			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+					WEL.FreeTrailTermsAndCOndtionsCheckBox();
+					ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
 
-			WEL.FreeTrailSignUpCheckBox();
-			WEL.FreeTrailSignInButton();
-			WEL.FreeTrailCPAText();
-			if (cpaftextmessage.equals("You’re almost set!"))
-				Reporting.updateTestReport(
-						"CMA FreeTail is successfully completed and page having text You’re almost set!",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else
-				Reporting.updateTestReport("Failed to Load the CMA FreeTail Page",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			WEL.FreeTrailWELIcon();
-			try {
-				wait.until(ExpectedConditions.presenceOfElementLocated(
-						By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_2']/a[1]")));
-			ScrollingWebPage.PageScrolldown(driver, 0, 400, SS_path);
-			WEL.ClickonCFAProduct();
-			WEL.clickOnFreeTrialButton();
-			WEL.FreeTrailFirstName(excelOperation.getTestData("TC21", "WEL_Test_Data", "First_Name"));
-			WEL.FreeTrailLastName(excelOperation.getTestData("TC21", "WEL_Test_Data", "Last_Name"));
-			WEL.EnterFreeTrailNewtUser();
-			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
-			WEL.FreeTrailCountry(excelOperation.getTestData("TC21", "WEL_Test_Data", "Sh_Country"));
-			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
-			WEL.FreeTrailState(excelOperation.getTestData("TC21", "WEL_Test_Data", "Sh_State"));
-			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
-			WEL.FreeTrailPassword(excelOperation.getTestData("TC21", "WEL_Test_Data", "Password"));
-			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
-			WEL.FreeTrailTermsAndCOndtionsCheckBox();
-			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
-			WEL.FreeTrailSignUpCheckBox();
-			WEL.FreeTrailSignInButton();
-			WEL.FreeTrailCPAText();
+					WEL.FreeTrailSignUpCheckBox();
+					WEL.FreeTrailSignInButton();
+					WEL.FreeTrailCPAText();
+					if (cpaftextmessage.equals("You’re almost set!"))
+						Reporting.updateTestReport(
+								"CMA FreeTail is successfully completed and page having text You’re almost set!",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport("Failed to Load the CMA FreeTail Page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					WEL.FreeTrailWELIcon();
+					try {
+						wait.until(ExpectedConditions.presenceOfElementLocated(
+								By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_2']/a[1]")));
+						ScrollingWebPage.PageScrolldown(driver, 0, 400, SS_path);
+						WEL.ClickonCFAProduct();
+						WEL.clickOnFreeTrialButton();
+						WEL.FreeTrailFirstName(excelOperation.getTestData("TC21", "WEL_Test_Data", "First_Name"));
+						WEL.FreeTrailLastName(excelOperation.getTestData("TC21", "WEL_Test_Data", "Last_Name"));
+						WEL.EnterFreeTrailNewtUser();
+						ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+						WEL.FreeTrailCountry(excelOperation.getTestData("TC21", "WEL_Test_Data", "Sh_Country"));
+						ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+						WEL.FreeTrailState(excelOperation.getTestData("TC21", "WEL_Test_Data", "Sh_State"));
+						ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+						WEL.FreeTrailPassword(excelOperation.getTestData("TC21", "WEL_Test_Data", "Password"));
+						ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+						WEL.FreeTrailTermsAndCOndtionsCheckBox();
+						ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+						WEL.FreeTrailSignUpCheckBox();
+						WEL.FreeTrailSignInButton();
+						WEL.FreeTrailCPAText();
 
-			if (cpaftextmessage.equals("You’re almost set!"))
-				Reporting.updateTestReport(
-						"CFA FreeTail is successfully completed and page having text You’re almost set!",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else
-				Reporting.updateTestReport("Failed to Load the CFA FreeTail Page",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-			}
-			
-			catch(Exception e) {
-				Reporting.updateTestReport("Failed to click on CFA Product due to  timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Failed to click on CMA Product due to  timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
+						if (cpaftextmessage.equals("You’re almost set!"))
+							Reporting.updateTestReport(
+									"CFA FreeTail is successfully completed and page having text You’re almost set!",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Failed to Load the CFA FreeTail Page",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+					}
+
+					catch(Exception e) {
+						Reporting.updateTestReport("Failed to click on CFA Product due to  timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Failed to click on CMA Product due to  timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Failed to click on CPA Product due to  timeout exception",
@@ -2417,10 +2420,11 @@ public class WEL_Test_Suite extends DriverModule {
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
-			ScrollingWebPage.PageDown(driver, SS_path);
+
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(
+				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[2]")));
+				ScrollingWebPage.PageDown(driver, SS_path);
 				WEL.ClickonCMAProduct();
 			} catch (Exception e) {
 				Reporting.updateTestReport("Failed to click on CMA Product  due to timeout exception",
@@ -2431,101 +2435,112 @@ public class WEL_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions
 						.elementToBeClickable(By.xpath("(//button[contains(text(),'EXPLORE COURSES')])[1]")));
 				WEL.ClickonExploreCourseCMAProduct();
-				ScrollingWebPage.PageDown(driver, SS_path);
-				WEL.ClickonViewCourseForCMAProduct();
 				try {
-					wait.until(ExpectedConditions
-							.elementToBeClickable(By.xpath("//div[@class='btn-group btn-group-toggle']/label[1]")));
-					WEL.ClickonCMAPrinteBook();
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+							"(//div[@class='container-fluid course-pkg-background']"
+							+ "//div[@class='card-footer bg-transparent course-pkg-cards-footer'])[1]//"
+							+ "button[contains(text(),'VIEW COURSE OPTIONS')]")));
 					ScrollingWebPage.PageDown(driver, SS_path);
+					WEL.ClickonViewCourseForCMAProduct();
 					try {
 						wait.until(ExpectedConditions
-								.elementToBeClickable(By.xpath("//button[contains(text(),'ADD TO CART')]")));
-						WEL.clickOnAddToCartButtonOnPDP();
+								.elementToBeClickable(By.xpath("//div[@class='btn-group btn-group-toggle']/label[1]")));
+						WEL.ClickonCMAPrinteBook();
+
 						try {
 							wait.until(ExpectedConditions
-									.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-						} catch (Exception e) {
-							try {
-								if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-										.isDisplayed()) {
-									Reporting.updateTestReport(
-											"Server error came in cart page and the page was refreshed",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-									driver.navigate().refresh();
-								}
-							} catch (Exception e1) {
-								Reporting.updateTestReport(
-										"Checkout button was not clickable in the cart page"
-												+ " and caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
-
-						}
-						WEL.ClickonCheckOutOnCartPage();
-						WEL.EnterexistingUserName(excelOperation.getTestData("TC16", "WEL_Test_Data", "Email_Address"));
-						WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC16", "WEL_Test_Data", "Password"));
-						WEL.ClickonLoginAndContinue();
-						WEL.ClickonCheckOutOnCartPage();
-						WEL.ClickonCheckOutOnCartPage();
-						WEL.ClickOnEnterNewAddressButtonOnShippingPage();
-						WEL.GuestFirstName(excelOperation.getTestData("TC24", "WEL_Test_Data", "Guest_Fname"));
-						WEL.GuestLastName(excelOperation.getTestData("TC24", "WEL_Test_Data", "Guest_Lname"));
-						WEL.selectShipCountry(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_Country"));
-						WEL.ShipAddressLineOne(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_Address_line1"));
-						WEL.ShipPostCode(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_Zip_Code"));
-						WEL.ShipTownCity(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_City/ Province"));
-						WEL.enterState(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_State"));
-						WEL.ShipPhoneNumber(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_Phone_Number"));
-						WEL.ShipSaveAndContinueButton();
-						try {
-							if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed())
-								WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
-						} catch (Exception e) {
-							Reporting.updateTestReport("Address Suggestiond page is not appering on Shipping page",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-						}
-						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
-						try {
-							wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-							WEL.enterCardHolderName(excelOperation.getTestData("TC03", "WEL_Test_Data", "Guest_Fname"));
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-							WEL.enterCardNumber(excelOperation.getTestData("TC16", "WEL_Test_Data", "Card_Number"));
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-							WEL.selectExpirationMonthFromDropDown(
-									excelOperation.getTestData("TC16", "WEL_Test_Data", "Expiry_Month"));
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-							WEL.selectExpirationYearFromDropDown(
-									excelOperation.getTestData("TC16", "WEL_Test_Data", "Expiry_Year"));
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-							WEL.enterCVV_Number(excelOperation.getTestData("TC16", "WEL_Test_Data", "CVV"));
-							driver.switchTo().defaultContent();
-							WEL.SaveAndContinueCheckOut();
-							WEL.clickOnPlaceOrderButton();
-							String orderID = WEL.fetchOrderId();
-							excelOperation.updateTestData("TC24", "WEL_Test_Data", "Order_Id", orderID);
+									.presenceOfElementLocated(By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
-							String tax = WEL.fetchTaxValue();
-							excelOperation.updateTestData("TC24", "WEL_Test_Data", "Tax", tax);
-							String orderTotal = WEL.fetchOrderTotal();
-							excelOperation.updateTestData("TC24", "WEL_Test_Data", "Order_Total", orderTotal);
+							WEL.clickOnAddToCartButtonOnPDP();
+							try {
+								wait.until(ExpectedConditions
+										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+							} catch (Exception e) {
+								try {
+									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+											.isDisplayed()) {
+										Reporting.updateTestReport(
+												"Server error came in cart page and the page was refreshed",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+										driver.navigate().refresh();
+									}
+								} catch (Exception e1) {
+									Reporting.updateTestReport(
+											"Checkout button was not clickable in the cart page"
+													+ " and caused timeout exception",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+
+							}
+							WEL.ClickonCheckOutOnCartPage();
+							WEL.EnterexistingUserName(excelOperation.getTestData("TC16", "WEL_Test_Data", "Email_Address"));
+							WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC16", "WEL_Test_Data", "Password"));
+							WEL.ClickonLoginAndContinue();
+							WEL.ClickonCheckOutOnCartPage();
+							WEL.ClickonCheckOutOnCartPage();
+							WEL.ClickOnEnterNewAddressButtonOnShippingPage();
+							WEL.GuestFirstName(excelOperation.getTestData("TC24", "WEL_Test_Data", "Guest_Fname"));
+							WEL.GuestLastName(excelOperation.getTestData("TC24", "WEL_Test_Data", "Guest_Lname"));
+							WEL.selectShipCountry(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_Country"));
+							WEL.ShipAddressLineOne(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_Address_line1"));
+							WEL.ShipPostCode(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_Zip_Code"));
+							WEL.ShipTownCity(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_City/ Province"));
+							WEL.enterState(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_State"));
+							WEL.ShipPhoneNumber(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_Phone_Number"));
+							WEL.ShipSaveAndContinueButton();
+							try {
+								if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed())
+									WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+							} catch (Exception e) {
+								Reporting.updateTestReport("Address Suggestiond page is not appering on Shipping page",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+							}
+							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+							try {
+								wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+								WEL.enterCardHolderName(excelOperation.getTestData("TC03", "WEL_Test_Data", "Guest_Fname"));
+								driver.switchTo().defaultContent();
+								driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+								WEL.enterCardNumber(excelOperation.getTestData("TC16", "WEL_Test_Data", "Card_Number"));
+								driver.switchTo().defaultContent();
+								driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+								WEL.selectExpirationMonthFromDropDown(
+										excelOperation.getTestData("TC16", "WEL_Test_Data", "Expiry_Month"));
+								driver.switchTo().defaultContent();
+								driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+								WEL.selectExpirationYearFromDropDown(
+										excelOperation.getTestData("TC16", "WEL_Test_Data", "Expiry_Year"));
+								driver.switchTo().defaultContent();
+								driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+								WEL.enterCVV_Number(excelOperation.getTestData("TC16", "WEL_Test_Data", "CVV"));
+								driver.switchTo().defaultContent();
+								WEL.SaveAndContinueCheckOut();
+								WEL.clickOnPlaceOrderButton();
+								String orderID = WEL.fetchOrderId();
+								excelOperation.updateTestData("TC24", "WEL_Test_Data", "Order_Id", orderID);
+								ScrollingWebPage.PageDown(driver, SS_path);
+								String tax = WEL.fetchTaxValue();
+								excelOperation.updateTestData("TC24", "WEL_Test_Data", "Tax", tax);
+								String orderTotal = WEL.fetchOrderTotal();
+								excelOperation.updateTestData("TC24", "WEL_Test_Data", "Order_Total", orderTotal);
+
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"The name field in card information step was not clickable and caused timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
 						} catch (Exception e) {
-							Reporting.updateTestReport(
-									"The name field in card information step was not clickable and caused timeout exception",
+							Reporting.updateTestReport("Failed to AddToCart due to timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					} catch (Exception e) {
-						Reporting.updateTestReport("Failed to AddToCart due to timeout exception",
+						Reporting.updateTestReport("Failed to CMAPrint due to timeout exception",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
-				} catch (Exception e) {
-					Reporting.updateTestReport("Failed to CMAPrint due to timeout exception",
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Failed to click on View course and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			} catch (Exception e) {
@@ -3940,16 +3955,27 @@ public class WEL_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 							}
 
-							WEL.ClickOnPaypalReviewOrder();
-							ScrollingWebPage.PageScrolldown(driver, 0, 500, SS_path);
-							WEL.clickOnPlaceOrderButton();
-							String orderID = WEL.fetchOrderId();
-							excelOperation.updateTestData("TC34", "WEL_Test_Data", "Order_Id", orderID);
-							ScrollingWebPage.PageScrolldown(driver, 0, 800, SS_path);
-							String tax = WEL.fetchTaxAmount();
-							excelOperation.updateTestData("TC34", "WEL_Test_Data", "Tax", tax);
-							String orderTotal = WEL.fetchOrderTotal();
-							excelOperation.updateTestData("TC34", "WEL_Test_Data", "Order_Total", orderTotal);
+							try{
+								wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+										"((//div[@class='FundingInstrument_container_16IeJ'])[2]//span)[1]")));
+
+								WEL.ClickOnPaypalCreditRadioButton();
+								WEL.ClickOnPaypalReviewOrder();
+								ScrollingWebPage.PageDown(driver, SS_path);
+								WEL.clickOnPlaceOrderButton();
+								String orderID = WEL.fetchOrderId();
+								excelOperation.updateTestData("TC34", "WEL_Test_Data", "Order_Id", orderID);
+								ScrollingWebPage.PageScrolldown(driver, 0, 800, SS_path);
+								String tax = WEL.fetchTaxAmount();
+								excelOperation.updateTestData("TC34", "WEL_Test_Data", "Tax", tax);
+								String orderTotal = WEL.fetchOrderTotal();
+								excelOperation.updateTestData("TC34", "WEL_Test_Data", "Order_Total", orderTotal);
+							}
+							catch(Exception e) {
+								Reporting.updateTestReport(
+										"Paypal credit radio button didn't appear and caused timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
 						} catch (Exception e) {
 							Reporting.updateTestReport(
 									"The View Course link on CIA PDP was not clickable and caused timeout exception",
@@ -5731,6 +5757,8 @@ public class WEL_Test_Suite extends DriverModule {
 												.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
 										WEL.ShipPostCode(
 												excelOperation.getTestData("TC50", "WEL_Test_Data", "Sh_Zip_Code"));
+										WEL.ShipTownCity
+										(excelOperation.getTestData("TC50", "WEL_Test_Data", "Sh_City/ Province"));
 										WEL.ShipPhoneNumber(
 												excelOperation.getTestData("TC50", "WEL_Test_Data", "Sh_Phone_Number"));
 
@@ -7652,75 +7680,75 @@ public class WEL_Test_Suite extends DriverModule {
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[1]")));
-			ScrollingWebPage.PageDown(driver, SS_path);
-			/*Actions actions = new Actions(driver); 
+				ScrollingWebPage.PageDown(driver, SS_path);
+				/*Actions actions = new Actions(driver); 
 			actions.moveToElement(driver.findElement
 					(By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[1]"))); 
 			actions.click();
 			actions.build().perform();*/
-			WEL.ClickonCPAProduct();
-			WEL.clickOnFreeTrialButton();
-			WEL.FreeTrialFirstName();
-			WEL.FreeTrailLastName();
-			WEL.FreeTrailEmail();
-			WEL.FreeTrailPassword();
-
-			try {
-				wait.until(ExpectedConditions
-						.elementToBeClickable(By.xpath("//a[@class='navbar-brand brand-logo-top-desktop']")));
-				WEL.FreeTrailWELIcon();
-
+				WEL.ClickonCPAProduct();
+				WEL.clickOnFreeTrialButton();
+				WEL.FreeTrialFirstName();
+				WEL.FreeTrailLastName();
+				WEL.FreeTrailEmail();
+				WEL.FreeTrailPassword();
 
 				try {
-					wait.until(ExpectedConditions.presenceOfElementLocated(
-							By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[2]")));
-					ScrollingWebPage.PageScrolldown(driver,0,600, SS_path);
-					/*actions.moveToElement(driver.findElement
+					wait.until(ExpectedConditions
+							.elementToBeClickable(By.xpath("//a[@class='navbar-brand brand-logo-top-desktop']")));
+					WEL.FreeTrailWELIcon();
+
+
+					try {
+						wait.until(ExpectedConditions.presenceOfElementLocated(
+								By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[2]")));
+						ScrollingWebPage.PageScrolldown(driver,0,600, SS_path);
+						/*actions.moveToElement(driver.findElement
 							(By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[2]"))); 
 					actions.click();
 					actions.build().perform();*/
-					WEL.ClickonCMAProduct();
+						WEL.ClickonCMAProduct();
 
-					WEL.clickOnFreeTrialButton();
-					WEL.FreeTrialFirstName();
-					WEL.FreeTrailLastName();
-					WEL.FreeTrailEmail();
-					WEL.FreeTrailPassword();
-					try {
-						wait.until(ExpectedConditions
-								.elementToBeClickable(By.xpath("//a[@class='navbar-brand brand-logo-top-desktop']")));
-						WEL.FreeTrailWELIcon();
+						WEL.clickOnFreeTrialButton();
+						WEL.FreeTrialFirstName();
+						WEL.FreeTrailLastName();
+						WEL.FreeTrailEmail();
+						WEL.FreeTrailPassword();
 						try {
-							wait.until(ExpectedConditions.presenceOfElementLocated
-									(By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_2']/a[1]")));
-							ScrollingWebPage.PageScrolldown(driver, 0, 400, SS_path);
-							/*actions.moveToElement(driver.findElement
+							wait.until(ExpectedConditions
+									.elementToBeClickable(By.xpath("//a[@class='navbar-brand brand-logo-top-desktop']")));
+							WEL.FreeTrailWELIcon();
+							try {
+								wait.until(ExpectedConditions.presenceOfElementLocated
+										(By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_2']/a[1]")));
+								ScrollingWebPage.PageScrolldown(driver, 0, 400, SS_path);
+								/*actions.moveToElement(driver.findElement
 									(By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_2']/a[1]"))); 
 							actions.click();
 							actions.build().perform();*/
-							WEL.ClickonCFAProduct();
-							WEL.clickOnFreeTrialButton();
-							WEL.FreeTrialFirstName();
-							WEL.FreeTrailLastName();
-							WEL.FreeTrailEmail();
-							WEL.FreeTrailPassword();
-						}
-						catch(Exception e) {
-							Reporting.updateTestReport("Failed to click on CFA Product due to  timeout exception",
+								WEL.ClickonCFAProduct();
+								WEL.clickOnFreeTrialButton();
+								WEL.FreeTrialFirstName();
+								WEL.FreeTrailLastName();
+								WEL.FreeTrailEmail();
+								WEL.FreeTrailPassword();
+							}
+							catch(Exception e) {
+								Reporting.updateTestReport("Failed to click on CFA Product due to  timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+						} catch (Exception e) {
+							Reporting.updateTestReport("Failed to click on WEL Icon due to  timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					} catch (Exception e) {
-						Reporting.updateTestReport("Failed to click on WEL Icon due to  timeout exception",
+						Reporting.updateTestReport("Failed to click on CMAProduct due to  timeout exception",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				} catch (Exception e) {
-					Reporting.updateTestReport("Failed to click on CMAProduct due to  timeout exception",
+					Reporting.updateTestReport("Failed to click WEL Icon due to  timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
-			} catch (Exception e) {
-				Reporting.updateTestReport("Failed to click WEL Icon due to  timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Failed to click on CPA Product due to  timeout exception",
