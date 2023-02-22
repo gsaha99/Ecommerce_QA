@@ -1975,7 +1975,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			driver.findElement(By.xpath("//h1[contains(text(),'Register New Client Application')]")).click();
             String actualErrorType = CPortal.FetchError_RegisterApp_Type();
             String expectedErrorType=excelOperation.getTestData("Type", "CPortal_Error_Message", "Error_Message");
-		     if(actualErrorType.equalsIgnoreCase(expectedErrorType))
+            if(actualErrorType.equalsIgnoreCase(expectedErrorType))
 		     {
 
 			   Reporting.updateTestReport("Error message for type field is showing and message is: " + actualErrorType,
@@ -1986,8 +1986,74 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			   Reporting.updateTestReport("TestCase is not Type is required",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		     }
-		     		
-	  }
+		     String actualErrorBU = CPortal.FetchError_RegisterApp_BU();
+		     String expectedErrorBU=excelOperation.getTestData("BU", "CPortal_Error_Message", "Error_Message");
+		     if(actualErrorBU.equalsIgnoreCase(expectedErrorBU))
+			   {
+
+				   Reporting.updateTestReport("Error message for BU field is showing and message is: " + actualErrorBU,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			   }
+			else 
+			   {
+				   Reporting.updateTestReport("Error message for BU field is not showing",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			    }
+	        String actualErrorName = CPortal.FetchError_RegisterApp_Name();
+		    String expectedErrorName=excelOperation.getTestData("Name", "CPortal_Error_Message", "Error_Message");
+	        if(actualErrorName.equalsIgnoreCase(expectedErrorName))
+				   {
+
+					 Reporting.updateTestReport("Error message for Name field is showing and message is: " + actualErrorName,
+					   CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				   }
+		    else 
+				    {
+					 Reporting.updateTestReport("Error message for Name field is not showing",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				    }
+				     
+		    String actualErrorAppShortName = CPortal.FetchError_RegisterApp_App_Short_Name();
+			String expectedErrorAppShortName=excelOperation.getTestData("App_Short_Name", "CPortal_Error_Message", "Error_Message");
+		    if(actualErrorAppShortName.equalsIgnoreCase(expectedErrorAppShortName))
+				  {
+                 Reporting.updateTestReport("Error message for App short name field is showing and message is: " + actualErrorAppShortName,
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				  }
+			else 
+				 {
+				      Reporting.updateTestReport("Error message for App short name field is not showing",
+					   CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+		    String actualErrorUserID = CPortal.FetchError_RegisterApp_User_ID();
+			String expectedErrorUserID=excelOperation.getTestData("User_ID", "CPortal_Error_Message", "Error_Message");
+		    if(actualErrorUserID.equalsIgnoreCase(expectedErrorUserID))
+			       {
+			        Reporting.updateTestReport("Error message for User_ID field is showing and message is: " + actualErrorUserID,
+					  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				   }
+		    else 
+				     {
+					   Reporting.updateTestReport("Error message for User_ID field is not showing",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							  
+			         }
+		    ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			String actualErrorPaymentMethod = CPortal.FetchError_RegisterApp_Payment_Method();
+			String expectedErrorPaymentMethod=excelOperation.getTestData("Payment_Method", "CPortal_Error_Message", "Error_Message");
+			if(actualErrorPaymentMethod.equalsIgnoreCase(expectedErrorPaymentMethod))
+		     {
+          Reporting.updateTestReport("Error message for payment method field is showing and message is: " + actualErrorPaymentMethod,
+				  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			 }
+	        else 
+		      {
+		       Reporting.updateTestReport("Error message for payment method field is not showing",
+				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			  }
+		     
+		}
 		catch (Exception e) 
 		{
 			System.out.println("Register new client app Negative Scenarios with Client Admin Role Failed" + e.getMessage());
