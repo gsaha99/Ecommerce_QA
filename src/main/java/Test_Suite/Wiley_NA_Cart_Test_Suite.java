@@ -195,6 +195,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC02", "WILEY_NA_Cart_Test_Data", "URL"));
 
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -202,6 +203,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();	
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String email=excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Email_Id");
@@ -315,12 +325,22 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC03", "WILEY_NA_Cart_Test_Data", "URL"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String emailID = wiley.enterEmailIdInCreateAccountForm();
@@ -440,12 +460,22 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC04_Physical_Product_Purchase_Guest_User");
 			driver.get(wiley.wileyURLConcatenation("TC04", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String email=wiley.enterEmailIdInCreateAccountForm();
@@ -559,6 +589,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC05_Physical_productpurchase_ForExistingUser");
 			driver.get(wiley.wileyURLConcatenation("TC05", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -567,6 +598,16 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
 				wiley.selectQuantityDropDown(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Quantity"));
+				BigDecimal quantity=new BigDecimal(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Quantity"));
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.multiply(quantity).compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String emailID=excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Email_Id");
@@ -1056,12 +1097,22 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC09", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String emailID = wiley.enterEmailIdInCreateAccountForm();
@@ -1187,12 +1238,22 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC10", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String email=wiley.enterEmailIdInCreateAccountForm();
@@ -1311,12 +1372,22 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC11", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String email=wiley.enterEmailIdInCreateAccountForm();
@@ -1639,6 +1710,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC13", "WILEY_NA_Cart_Test_Data", "URL"));
 			//driver.navigate().refresh();
 			//wiley.ebookRentalProduct();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -1646,6 +1718,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String email=wiley.enterEmailIdInCreateAccountForm();
@@ -1766,12 +1847,22 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC14", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String emailID = wiley.enterEmailIdInCreateAccountForm();
@@ -1894,6 +1985,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC15_eBundle_product_purchase");
 			driver.get(wiley.wileyURLConcatenation("TC15", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -1901,6 +1993,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String email=wiley.enterEmailIdInCreateAccountForm();
@@ -2019,12 +2120,22 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC16", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String emailID = wiley.enterEmailIdInCreateAccountForm();
@@ -2297,6 +2408,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest(" TC18_Tax_Recalculation");
 			driver.get(wiley.wileyURLConcatenation("TC18", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -2304,6 +2416,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String email=wiley.enterEmailIdInCreateAccountForm();
@@ -2457,12 +2578,22 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC19", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String emailID = wiley.enterEmailIdInCreateAccountForm();
@@ -2525,12 +2656,22 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC20", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String emailID = wiley.enterEmailIdInCreateAccountForm();
@@ -2649,6 +2790,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC21_Existing_user_tax_for_physical_product");
 			driver.get(wiley.wileyURLConcatenation("TC21", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -2656,6 +2798,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				wiley.enterExistingWileyUserMailID(excelOperation.getTestData("TC21", "WILEY_NA_Cart_Test_Data", "Email_Id"));
@@ -2738,6 +2889,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC22", "WILEY_NA_Cart_Test_Data", "URL"));
 
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -2745,6 +2897,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String email=wiley.enterEmailIdInCreateAccountForm();
@@ -2865,6 +3026,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC23_Existing_User_Tax_for_Digital_Product");
 			driver.get(wiley.wileyURLConcatenation("TC23", "WILEY_NA_Cart_Test_Data", "URL"));			
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -2872,6 +3034,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String email=excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "Email_Id");
@@ -2979,6 +3150,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC24_Verify_Shipping_Methods_for_POD_Products");
 			driver.get(wiley.wileyURLConcatenation("TC24", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -2986,6 +3158,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String emailID = wiley.enterEmailIdInCreateAccountForm();
@@ -3041,6 +3222,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC28_Cart_Update_from_Digital_to_Phygital");
 			driver.get(wiley.wileyURLConcatenation("TC28", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -3059,12 +3241,22 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.searchDataInSearchBar(excelOperation.getTestData("TC28", "WILEY_NA_Cart_Test_Data", "ISBN"));
 				wiley.clickOnSRP_WileyProduct();
 				wiley.clickOnPrintTab();
+				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 				wiley.clickOnAddToCartButton();
 				try {
 					wait.until(ExpectedConditions.
 							elementToBeClickable
 							(By.xpath("//button[contains(text(),'View Cart')]")));
 					wiley.clickOnViewCartButton();
+					BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+					if(priceOfFirstProduct.add(priceOfSecondProduct).compareTo(ordertotalInCartPage)==0) 
+						Reporting.updateTestReport(
+								"The addition of all the products' price is same as the subtotal in cart page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"The addition of all the products' pricedidn't match with the subtotal in cart page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 					wiley.clickOnProceedToCheckoutButton();
 					String email1=wiley.enterEmailIdInCreateAccountForm();
@@ -3629,6 +3821,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC26_Login_Page_Validation");
 			driver.get(wiley.wileyURLConcatenation("TC26", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -3636,6 +3829,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				if(wiley.checkIfGuestCheckoutButtonIsPresent()) Reporting.updateTestReport("Guest checkout button is present in login page when only normal physical product is present in cart",
@@ -3645,8 +3839,18 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.clickOnCartIcon();
 				wiley.searchDataInSearchBar(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "ISBN"));
 				wiley.clickOnSRP_WileyProduct();
+				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 				wiley.clickOnAddToCartButton();
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.add(priceOfSecondProduct).compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				if(!wiley.checkIfGuestCheckoutButtonIsPresent()) Reporting.updateTestReport("Guest checkout button was not present in login page when digital product is present in cart",
