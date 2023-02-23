@@ -5,38 +5,12 @@
     <classes>
       <class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
         <methods>
-          <include name="TC15_eBundle_product_purchase"/>
-          <include name="initiate"/>
-          <include name="TC17_Purchase_with_Coupon_Discount"/>
-          <include name="TC24_Verify_Shipping_Methods_for_POD_Products"/>
-          <include name="TC27_Validate_AEM_Header_Footer"/>
-          <include name="TC23_Existing_User_Tax_for_Digital_Product"/>
-          <include name="TC11_Shipping_And_BillingAddresses_different"/>
-          <include name="TC37_Generic_info_hover_text_EBook_PDP"/>
-          <include name="TC35_EMEA_Catalog_Updates"/>
-          <include name="TC29_Cart_Page_UI_Validation"/>
-          <include name="TC26_Login_Page_Validation"/>
-          <include name="TC25_Searching_by_Keyword_Rguroo"/>
-          <include name="TC34_Verify_VETCONSULT_Purchase_Option_on_PDPpage"/>
-          <include name="TC18_Tax_Recalculation"/>
-          <include name="TC14_Textbook_Rental_product_purchase"/>
-          <include name="TC28_Cart_Update_from_Digital_to_Phygital"/>
-          <include name="TC09_Higher_Education_Digitalproductpurchase_ForNewUser"/>
-          <include name="TC08_Mixed_Product_No_Stock_Guest_User"/>
-          <include name="TC19_Country_Restriction_Validation"/>
-          <include name="TC20_New_user_tax_for_physical_product"/>
-          <include name="TC16_Higher_Education_Physical_product_purchase"/>
-          <include name="TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP"/>
-          <include name="TC12_Product_having_ADD_Promotion"/>
-          <include name="TC30_Cart_Merge_Functionality"/>
+          <include name="nameBefore"/>
           <include name="launchBrowser"/>
-          <include name="TC13_eBook_Rental_product_Purchase"/>
-          <include name="TC31_Zero_Dollar_Flow_For_Digital_Product"/>
-          <include name="TC33_Forgot_Password_Functionality"/>
+          <include name="initiate"/>
           <include name="CloseBrowser"/>
-          <include name="TC21_Existing_user_tax_for_physical_product"/>
-          <include name="TC32_Preorder_Backorder_Flow_With_Print_Pdf_Page"/>
-          <include name="TC22_New_User_Tax_for_Digital_product"/>
+          <include name="TC06_Mixed_productpurchase_ForExistingUser"/>
+          <include name="nameAfter"/>
         </methods>
       </class> <!-- Test_Suite.Wiley_NA_Cart_Test_Suite -->
     </classes>
