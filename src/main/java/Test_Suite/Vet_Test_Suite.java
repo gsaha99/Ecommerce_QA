@@ -11,8 +11,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeGroups;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -31,6 +33,7 @@ import utilities.StatusDetails;
 import utilities.excelOperation;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Calendar;
@@ -56,6 +59,17 @@ public class Vet_Test_Suite extends DriverModule {
 		Eloqua = PageFactory.initElements(driver, app_Eloqua_Repo.class);
 		RiskifiedRepo = PageFactory.initElements(driver, app_Riskified_Repo.class);
 
+	}
+	@BeforeMethod
+	public void nameBefore(Method method)
+	{
+	    System.out.println("Test case: " + method.getName()+" execution started");       
+	}
+	
+	@AfterMethod
+	public void nameAfter(Method method)
+	{
+	    System.out.println("Test case: " + method.getName()+" execution completed");       
 	}
 
 	/*

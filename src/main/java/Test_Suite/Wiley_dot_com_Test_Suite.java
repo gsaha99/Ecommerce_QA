@@ -8,7 +8,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -25,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 
 import java.util.Date;
+import java.lang.reflect.Method;
 
 
 public class Wiley_dot_com_Test_Suite extends DriverModule {
@@ -35,6 +37,20 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	@BeforeTest
 	public void launchBrowser() {
 		wiley = PageFactory.initElements(driver, app_Wiley_Repo.class);
+	}
+	
+	
+
+	@BeforeMethod
+	public void nameBefore(Method method)
+	{
+	    System.out.println("Test case: " + method.getName()+" execution started");       
+	}
+	
+	@AfterMethod
+	public void nameAfter(Method method)
+	{
+	    System.out.println("Test case: " + method.getName()+" execution completed");       
 	}
 
 	/*
