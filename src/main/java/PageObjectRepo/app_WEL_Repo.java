@@ -32,6 +32,45 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//a[@class='icon-color nav-login']")
 	WebElement StandaloneLogin;
 
+	@FindBy(xpath = "//input[@placeholder='Enter your inbox here']")
+	WebElement Enteryopmail;
+
+	@FindBy(xpath = "//button[@title='Check Inbox @yopmail.com']")
+	WebElement clickonbutton;
+
+	@FindBy(id = "updatePwd.pwd")
+	WebElement NewPasswordField;
+
+	@FindBy(xpath = "(//main[@class='yscrollbar']/div/div/div/table/tbody/tr/td/center/table/tbody/tr/td)[2]//a[contains(text(),'Reset Password')]")
+	WebElement ResetPasswordLink;
+
+	@FindBy(id = "updatePwd.checkPwd")
+	WebElement ConfirmNewPasswordField;
+
+	@FindBy(xpath = "(//button[@type='button'])[5]")
+	WebElement SubmitButtonInResetPasswordPage;
+
+	@FindBy(xpath = "//div[@class='col-6 noPadding orderDetailTotalVal']")
+	WebElement OrderTotalInCartPage;
+
+	@FindBy(xpath = "//div[@class='cartPageProductCurrentPrice']")
+	WebElement OrderSubtotalInCartPage;
+
+	@FindBy(xpath = "//p[@class='new-price']")
+	WebElement ProductPriceInPDP;
+
+	@FindBy(xpath = "//p[@class='old-price']")
+	WebElement ProductOldPriceInPDP;
+
+	@FindBy(xpath = "//div[@id='orderSummaryProductTotalValue']")
+	WebElement PriceOfFirstProductInOrderReview;
+
+	@FindBy(xpath = "//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Taxes')]/following-sibling::div")
+	WebElement TaxInOrderReview;
+
+	@FindBy(xpath = "//div[@id='totalPriceValue']")
+	WebElement TotalInOrderReview;
+
 	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']/label")
 	WebElement ShipMethod;
 
@@ -112,7 +151,7 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//div[@class='account d-none d-lg-inline-block']")
 	WebElement AccountMyIcon;
-	
+
 	@FindBy(id = "address.region")
 	WebElement SelectState;
 
@@ -478,7 +517,6 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//div[@class='col dropdown-item product-dropdown-desktop-item item1']//li[2]/a")
 	WebElement CPATestBank;
-
 
 	@FindBy(xpath = "//div[@class='form-group']//input[@id='inputPartnerSearch']")
 	WebElement PartnerInputSearch;
@@ -986,7 +1024,6 @@ public class app_WEL_Repo {
 
 	}
 
-
 	public void ClickonShopCourse() throws IOException {
 		try {
 			ShopCourses.click();
@@ -1000,7 +1037,6 @@ public class app_WEL_Repo {
 		}
 
 	}
-
 
 	public void ClickonCouponRemove() throws IOException {
 		try {
@@ -1179,7 +1215,6 @@ public class app_WEL_Repo {
 		}
 	}
 
-
 	public void AddressLineOne(String ALineOne) throws IOException {
 		try {
 			AddressLine1.sendKeys(ALineOne);
@@ -1304,8 +1339,7 @@ public class app_WEL_Repo {
 
 		}
 	}
-	
-	
+
 	public void selectStateFromDropsown(String state) throws IOException {
 		try {
 
@@ -1617,8 +1651,6 @@ public class app_WEL_Repo {
 		}
 	}
 
-
-
 	public void ClickOnCIAeBook() throws IOException {
 		try {
 			CIAeBook.click();
@@ -1642,7 +1674,6 @@ public class app_WEL_Repo {
 
 		}
 	}
-
 
 	public void ClickOnSelectQuantity() throws IOException {
 		try {
@@ -1842,7 +1873,6 @@ public class app_WEL_Repo {
 		}
 	}
 
-
 	public void FreeTrailFirstName(String FFName) throws IOException {
 		try {
 			FreeTrailFname.sendKeys(FFName);
@@ -2027,8 +2057,6 @@ public class app_WEL_Repo {
 		}
 	}
 
-
-
 	public void FreeTraiModelPopUpLoginButton() throws IOException {
 		try {
 			FreeTrailModelPopUpLogin.click();
@@ -2150,7 +2178,6 @@ public class app_WEL_Repo {
 		return UseSelectedBillingAddressButtonAddressDoctorPopUp;
 	}
 
-
 	public void enterState(String state) throws IOException {
 		try {
 			EnterState.clear();
@@ -2164,7 +2191,6 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-
 
 	public void SelectPayPalOption() throws IOException {
 		try {
@@ -2687,9 +2713,6 @@ public class app_WEL_Repo {
 		}
 	}
 
-
-
-
 	public void EnterUniversityName(String universityname) throws IOException {
 		try {
 			PartnerInputSearch.sendKeys(universityname);
@@ -2865,7 +2888,6 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-
 
 	/*
 	 * @Author: Anindita
@@ -3108,8 +3130,6 @@ public class app_WEL_Repo {
 		}
 	}
 
-	
-
 	/*
 	 * @Author: Anindita
 	 * 
@@ -3198,9 +3218,8 @@ public class app_WEL_Repo {
 		}
 	}
 
-
 	/*
-	 * @Description: Enters first name in the free trial form 
+	 * @Description: Enters first name in the free trial form
 	 */
 	public String FreeTrialFirstName() throws IOException {
 		try {
@@ -3217,7 +3236,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Description: Enters last name in the free trial form 
+	 * @Description: Enters last name in the free trial form
 	 */
 	public String FreeTrailLastName() throws IOException {
 		try {
@@ -3266,7 +3285,137 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
-	
+
+	public void enteryopmail(String username) throws IOException {
+		try {
+			Enteryopmail.sendKeys(username);
+			Reporting.updateTestReport("Email entered : " + username + " was entered successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to enter Email Id", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		}
+
+	}
+
+	public void clickonbutton() throws IOException {
+		try {
+			clickonbutton.click();
+			Reporting.updateTestReport("Arrow button clicked successfully ", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on arrowbutton", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+
+		}
+	}
+
+	public void clickOnResetPasswordLink() throws IOException {
+		try {
+			ResetPasswordLink.click();
+			Reporting.updateTestReport("Reset password link was clicked successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Click on Reset Password link " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void enterNewPasswordInResetPassword(String password) throws IOException {
+		try {
+			NewPasswordField.sendKeys(password);
+			Reporting.updateTestReport("New Password : " + password + " was entered successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to enter Password " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+
+	public void enterConfirmPasswordInResetPassword(String password) throws IOException {
+		try {
+			ConfirmNewPasswordField.sendKeys(password);
+			Reporting.updateTestReport("Confirm Password : " + password + " was entered successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to enter ConfirmPassword " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	public void clickOnResetPasswordSubmit() throws IOException {
+		try {
+			SubmitButtonInResetPasswordPage.click();
+			Reporting.updateTestReport("Submit was clicked successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed click on Submit button on ResetPassword Page " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
+	public String fetchFirstProductPriceInOrderReview() throws IOException {
+		try {
+			String price = PriceOfFirstProductInOrderReview.getText();
+			Reporting.updateTestReport(
+					"First Product Price: " + price.trim() + " was fetched in order review step successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+			return price.trim();
+		} catch (Exception e) {
+			Reporting.updateTestReport("First Product Price couldn't be fetched in order review step ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+
+	public String fetchTaxInOrderReview() throws IOException {
+		try {
+			String tax = TaxInOrderReview.getText();
+			Reporting.updateTestReport("Tax: " + tax.trim() + " was fetched in order review step successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			System.out.println(tax.trim());
+			return tax.trim();
+		} catch (Exception e) {
+			Reporting.updateTestReport("Tax couldn't be fetched in order review step ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+
+	public String fetchTotalInOrderReview() throws IOException {
+		try {
+			String total = TotalInOrderReview.getText();
+			Reporting.updateTestReport(
+					"Order total: " + total.trim() + " was fetched in order review step successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return total.trim();
+		} catch (Exception e) {
+			Reporting.updateTestReport("Order total couldn't be fetched in order review step ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+
+	public String fetchOrderTotalInCartPage() throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"Order total in cart page : " + OrderTotalInCartPage.getText().trim() + " was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return OrderTotalInCartPage.getText();
+		} catch (Exception e) {
+			Reporting.updateTestReport("Order total in cart page could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
 	/*
 	 * @Description: Clicks on Activate button in the PIN Activation page
 	 */
@@ -3280,9 +3429,10 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
-	 * @Description: Fetches the shipping charge value when multiple products are present in cart
+	 * @Description: Fetches the shipping charge value when multiple products are
+	 * present in cart
 	 */
 	public String ShippingChargeForMultipleProducts() throws IOException {
 		try {
@@ -3293,6 +3443,33 @@ public class app_WEL_Repo {
 			return ShipCharge;
 		} catch (Exception e) {
 			Reporting.updateTestReport("Order id was not fetched with error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	public String fetchOldPriceInPDP() throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"Price of the product in PDP: " + ProductOldPriceInPDP.getText().trim() + " was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return ProductOldPriceInPDP.getText();
+		} catch (Exception e) {
+			Reporting.updateTestReport("Price of the product in PDP could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	public String fetchOrderSubTotalInCartPage() throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"Subtotal of the order: " + OrderSubtotalInCartPage.getText().trim() + " was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			System.out.println(OrderSubtotalInCartPage.getText().trim());
+			return OrderSubtotalInCartPage.getText();
+		} catch (Exception e) {
+			Reporting.updateTestReport("Subtotal of the order in cart page could not be returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return "";
 		}
