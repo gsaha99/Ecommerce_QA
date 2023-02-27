@@ -168,6 +168,9 @@ public class app_ClientPortal_Repo extends DriverModule {
 	@FindBy(xpath = "//button[@type='submit' and @class='btn blue-btn']")
 	WebElement ClickSave;
 	
+	@FindBy(xpath = "//*[local-name()='svg' and @class='fa-icon2' and @viewBox='0 0 576 512']/*[local-name()='path']")
+    WebElement WPSSuportClickViewIcon;
+	
 	/* 
 	 * Author : Jayanta
 	 * Description : Object repo for footer in every page of Client portal for WPS Admin 
@@ -1007,9 +1010,29 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	public void WPSAdmin_Click_ViewIcon() throws IOException {
 		try {
-			//Click_ViewIcon.click();
-			act.moveToElement(Click_ViewIcon).click().build().perform();
+			Click_ViewIcon.click();
+			//wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Do you really want to ')]")));
+			//act.moveToElement(Click_ViewIcon).click().build().perform();
 			Thread.sleep(5000);
+			Reporting.updateTestReport("View Icon is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("View Icon is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/* 
+	 * Author : Jayanta
+	 * Description : Method to click view icon in My worklist for WPS Admin
+	 */
+	
+	public void WPSSupport_Click_ViewIcon() throws IOException {
+		try {
+			//Click_ViewIcon.click();
+			act.moveToElement(WPSSuportClickViewIcon).click().build().perform();
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1[contains(text(),'View Client Application')]")));
+			//act.moveToElement(Click_ViewIcon).click().build().perform();
+			//Thread.sleep(5000);
 			Reporting.updateTestReport("View Icon is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){

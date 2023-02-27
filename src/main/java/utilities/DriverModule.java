@@ -25,7 +25,7 @@ public class DriverModule {
 	public void initiate(ITestContext context)
 	{
 		try {
-			String browser ="Edge"; // Currently Chrome is hardcoded 
+			String browser ="chrome"; // Currently Chrome is hardcoded 
 			
 			String date = new SimpleDateFormat("hhmmss").format(new Date());			
 			String testSuiteName=context.getCurrentXmlTest().getClasses().stream()

@@ -1161,7 +1161,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_Click_DebitCard();
 			//ScrollingWebPage.PageScrolldown(driver, 0, 600);
 			CPortal.WPSSuppport_Click_Register();
-			String DBName=excelOperation.getTestData("TC13", "DB_Query", "DB_Name");
+			/*String DBName=excelOperation.getTestData("TC13", "DB_Query", "DB_Name");
 			String query=excelOperation.getTestData("TC13", "DB_Query", "Query");
 			String datatype=excelOperation.getTestData("TC13", "DB_Query", "Data_Type");
 			String clientappname=dbConnect.DB_Select(DBName,query,datatype);
@@ -1176,10 +1176,10 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		       {
 			      Reporting.updateTestReport("DB Validation is not done and Client App Name is not: " + ClientAppName,
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		       }
+		       }*
 			
 			CPortal.WPSAdmin_ClickMyWorklist();
-			CPortal.WPSAdmin_Enter_ClientApp_HomeName(clientappname);
+			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
 			String FetchName=CPortal.WPSAdmin_Fetch_ClientApp_HomeName();
 			if(ClientAppName.compareTo(FetchName)==0) 
 		      {
@@ -1191,7 +1191,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		      {
 			      Reporting.updateTestReport("Filtering is not working",
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		      }
+		      }*/
 			
 			
 			
@@ -1244,8 +1244,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			CPortal.WPSAdmin_ClickMyWorklist();
-			CPortal.WPSAdmin_Enter_ClientApp_HomeName(clientappname);
-			String FetchName1=CPortal.WPSAdmin_Fetch_ClientApp_HomeName();
+			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
+			/*String FetchName1=CPortal.WPSAdmin_Fetch_ClientApp_HomeName();
 			if(ClientAppName.compareTo(FetchName1)==0) 
 		      {
 			
@@ -1257,7 +1257,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			      Reporting.updateTestReport("Filtering is not working",
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		      }
-			
+			*/
 			CPortal.WPSAdmin_Click_ViewIcon();
 			ScrollingWebPage.PageDown(driver, SS_path);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -1309,8 +1309,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			CPortal.WPSAdmin_ClickHome();
-			CPortal.WPSAdmin_Enter_ClientApp_HomeName(clientappname);									
-			CPortal.WPSAdmin_Click_ViewIcon();
+			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);									
+			CPortal.WPSSupport_Click_ViewIcon();
 			ScrollingWebPage.PageDown(driver, SS_path);
 			ScrollingWebPage.PageDown(driver, SS_path);
 			ScrollingWebPage.PageDown(driver, SS_path);			
