@@ -230,6 +230,18 @@ public class app_ClientPortal_Repo extends DriverModule {
 		@FindBy(xpath = "//span[contains(text(),'Please select at least one payment method')]")
 		WebElement ClickpaymentsErrorMessage;
 		
+		@FindBy(xpath = "//span[contains(text(),'Template is required')]")
+		WebElement ClickTemplateErrorMessage;
+		
+		@FindBy(xpath = "//span[contains(text(),'Target URL is required')]")
+		WebElement ClickTargetURLErrorMessage;
+		
+		@FindBy(xpath = "//span[contains(text(),'Name can not exceed 35 characters')]")
+		WebElement ClickName1ErrorMessage;
+		
+		@FindBy(xpath = "//span[contains(text(),'Special character/whitespace is not allowed for application shortname. Please provide another value.')]")
+		WebElement ClickAppShortName1ErrorMessage;
+		
 		/* 
 		 * Author : Jayanta
 		 * Description : Object repo for  error in register New User page. 
@@ -905,7 +917,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	public void Click_Register_Error() throws IOException {
 		try {
 			ClickRegister.click();
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Type is required')]")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1[contains(text(),'Register New Client Application')]")));
 		    Thread.sleep(5000);
 			Reporting.updateTestReport("Register button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
@@ -995,7 +1007,9 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	public void WPSAdmin_Click_ViewIcon() throws IOException {
 		try {
-			Click_ViewIcon.click();
+			//Click_ViewIcon.click();
+			act.moveToElement(Click_ViewIcon).click().build().perform();
+			Thread.sleep(5000);
 			Reporting.updateTestReport("View Icon is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
@@ -1396,4 +1410,74 @@ public class app_ClientPortal_Repo extends DriverModule {
 			Reporting.updateTestReport("Confirm button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
+	/* 
+	 * Author : Varisa
+	 * Description :  Method to enter Name in the Name field.
+	 */
+	
+	public String FetchError_RegisterApp_Name1() throws IOException{
+	      try {
+				String errorType=ClickName1ErrorMessage.getText();
+				System.out.println(errorType);
+				Reporting.updateTestReport("Error message for Name1 field is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorType;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for Name1 field is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
+	
+	/* 
+	 * Author : Varisa
+	 * Description :  Method to enter AppShortName1 in the Name field.
+	 */
+	
+	public String FetchError_RegisterApp_App_Short_Name1() throws IOException{
+	      try {
+				String errorType=ClickAppShortName1ErrorMessage.getText();
+				System.out.println(errorType);
+				Reporting.updateTestReport("Error message for AppShortName1 field is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorType;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for AppShortName1 field is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
+	/* 
+	 * Author : Varisa
+	 * Description :  Method to enter Template in the Name field.
+	 */
+	
+	public String FetchError_RegisterApp_Template() throws IOException{
+	      try {
+				String errorType=ClickTemplateErrorMessage.getText();
+				System.out.println(errorType);
+				Reporting.updateTestReport("Error message for Template field is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorType;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for Template field is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
+	/* 
+	 * Author : Varisa
+	 * Description :  Method to enter Target URL in the Name field.
+	 */
+	
+	public String FetchError_RegisterApp_TargetURL() throws IOException{
+	      try {
+				String errorType=ClickTargetURLErrorMessage.getText();
+				System.out.println(errorType);
+				Reporting.updateTestReport("Error message for Target URL field is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return errorType;
+			    }
+			catch(Exception e) {
+				Reporting.updateTestReport("Error message for Target URL field is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "null";
+			   }
+		}
 }
