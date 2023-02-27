@@ -2,6 +2,7 @@ package Test_Suite;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
@@ -701,14 +702,26 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			WileyPLUS.checkIfUserIsOnCartPage(driver);
 			WileyPLUS.checkBrandNameWileyPLUS();
 			WileyPLUS.checkCourseNameInCartPage(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Course"));
+
+			WileyPLUS.checkTextInOrderSummaryTab(excelOperation.getTestData
+					("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
 			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 			WileyPLUS.clickOnProceedToCheckoutButton();
+			if(!WileyPLUS.checkIfGuestCheckoutButtonIsPresent()) Reporting.updateTestReport("Guest checkout button was not present in login"
+					+ " page when digital/rental product is present in cart",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else Reporting.updateTestReport("Guest checkout button is present in login page when digital product is present in cart",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			String email=WileyPLUS.enterEmailIdInCreateAccountForm();
 			WileyPLUS.clickOnCreateAccountButton();
+			WileyPLUS.checkTextInOrderSummaryTab(excelOperation.getTestData
+					("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
 			WileyPLUS.confirmEmailIdInCreateAccountForm(email);
 			WileyPLUS.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Password"));
 			WileyPLUS.clickOnSaveAndContinueButton();
 			WileyPLUS.checkIfUserInBillingStep();
+			WileyPLUS.checkTextInOrderSummaryTab(excelOperation.getTestData
+					("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
 			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
@@ -746,10 +759,21 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						Reporting.updateTestReport("Address doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 					}
+					if(new BigDecimal(WileyPLUS.fetchFirstProductPriceInOrderReview().substring(1))
+							.add(new BigDecimal(WileyPLUS.fetchTaxInOrderReview().substring(1)))
+							.compareTo(new BigDecimal(WileyPLUS.fetchTotalInOrderReview().substring(1)))==0)
+						Reporting.updateTestReport("First Product price + Tax "
+								+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport("First Product price + Tax "
+								+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					WileyPLUS.checkCourseNameInOrderReviewPage(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Course"));
 					WileyPLUS.clickOnPlaceOrderButton();
 					String orderconfirmation = driver.getTitle();
 					if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+						WileyPLUS.checkPrintReciept();
+						WileyPLUS.checkTextInOrderConfirmationPage(
+								excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
 						ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 						WileyPLUS.checkCourseNameInOrderConfirmationPage(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Course"));
 						String orderId = WileyPLUS.fetchOrderId();
@@ -860,9 +884,20 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 					}
+					if(new BigDecimal(WileyPLUS.fetchFirstProductPriceInOrderReview().substring(1))
+							.add(new BigDecimal(WileyPLUS.fetchTaxInOrderReview().substring(1)))
+							.compareTo(new BigDecimal(WileyPLUS.fetchTotalInOrderReview().substring(1)))==0)
+						Reporting.updateTestReport("First Product price + Tax "
+								+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport("First Product price + Tax "
+								+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					WileyPLUS.clickOnPlaceOrderButton();
 					String orderconfirmation = driver.getTitle();
 					if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+						WileyPLUS.checkPrintReciept();
+						WileyPLUS.checkTextInOrderConfirmationPage(
+								excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
 						ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 						String orderId = WileyPLUS.fetchOrderId();
 						excelOperation.updateTestData("TC16", "WileyPLUS_Test_Data", "Order_Id", orderId);
@@ -972,9 +1007,21 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					WileyPLUS.enterCVV_Number(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "CVV"));
 					driver.switchTo().defaultContent();			
 					WileyPLUS.clickOnSaveAndContinueButton();
+					if(new BigDecimal(WileyPLUS.fetchFirstProductPriceInOrderReview().substring(1))
+							.add(new BigDecimal(WileyPLUS.fetchShippingChargeInOrderReview().substring(1)))
+							.add(new BigDecimal(WileyPLUS.fetchTaxInOrderReview().substring(1)))
+							.compareTo(new BigDecimal(WileyPLUS.fetchTotalInOrderReview().substring(1)))==0)
+						Reporting.updateTestReport("First Product price + Tax + Shipping charge"
+								+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport("First Product price+ Tax + Shipping charge"
+								+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					WileyPLUS.clickOnPlaceOrderButton();
 					String orderconfirmation = driver.getTitle();
 					if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+						WileyPLUS.checkPrintReciept();
+						WileyPLUS.checkTextInOrderConfirmationPage(
+								excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
 						ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 						String orderId = WileyPLUS.fetchOrderId();
 						excelOperation.updateTestData("TC17", "WileyPLUS_Test_Data", "Order_Id", orderId);
@@ -1388,9 +1435,20 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 										Reporting.updateTestReport("Adress doctor pop up did not appear",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 									}
+									if(new BigDecimal(WileyPLUS.fetchFirstProductPriceInOrderReview().substring(5))
+											.add(new BigDecimal(WileyPLUS.fetchTaxInOrderReview().substring(5)))
+											.compareTo(new BigDecimal(WileyPLUS.fetchTotalInOrderReview().substring(5)))==0)
+										Reporting.updateTestReport("First Product price + Tax "
+												+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									else
+										Reporting.updateTestReport("First Product price + Tax "
+												+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									WileyPLUS.clickOnPlaceOrderButton();
 									String orderconfirmation = driver.getTitle();
 									if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+										WileyPLUS.checkPrintReciept();
+										WileyPLUS.checkTextInOrderConfirmationPage(
+												excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
 										ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 										String orderId = WileyPLUS.fetchOrderId();
 										excelOperation.updateTestData("TC20", "WileyPLUS_Test_Data", "Order_Id", orderId);
@@ -1470,7 +1528,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 27/01/23
-	 * @Description: Places one order in CAD Currency from WileyPLUS Frontend
+	 * @Description: Places one order in USD Currency from WileyPLUS Frontend
 	 */
 	@Test
 	public void TC21_Place_WileyPLUS_USD_Order_From_Frontend() throws IOException{
@@ -1600,9 +1658,21 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 									WileyPLUS.enterCVV_Number(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "CVV"));
 									driver.switchTo().defaultContent();
 									WileyPLUS.clickOnSaveAndContinueButton();
+									if(new BigDecimal(WileyPLUS.fetchFirstProductPriceInOrderReview().substring(1))
+											.add(new BigDecimal(WileyPLUS.fetchShippingChargeInOrderReview().substring(1)))
+											.add(new BigDecimal(WileyPLUS.fetchTaxInOrderReview().substring(1)))
+											.compareTo(new BigDecimal(WileyPLUS.fetchTotalInOrderReview().substring(1)))==0)
+										Reporting.updateTestReport("First Product price + Tax + Shipping charge"
+												+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									else
+										Reporting.updateTestReport("First Product price+ Tax + Shipping charge"
+												+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									WileyPLUS.clickOnPlaceOrderButton();
 									String orderconfirmation = driver.getTitle();
 									if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+										WileyPLUS.checkPrintReciept();
+										WileyPLUS.checkTextInOrderConfirmationPage(
+												excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
 										ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 										String orderId = WileyPLUS.fetchOrderId();
 										excelOperation.updateTestData("TC21", "WileyPLUS_Test_Data", "Order_Id", orderId);

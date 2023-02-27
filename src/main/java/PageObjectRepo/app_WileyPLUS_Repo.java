@@ -193,6 +193,28 @@ public class app_WileyPLUS_Repo {
 	WebElement FirstProductsPrice;
 	@FindBy(xpath="(//div[@class='productPriceLabel']/span)[2]")
 	WebElement SecondProductsPrice;
+	@FindBy(xpath="//p[@class='pr-price']")
+	WebElement ProductPriceInPDP;	
+	@FindBy(xpath="//div[@class='col-xs-6 noPadding price orderDetailCommonVal']")
+	WebElement OrderSubtotalInCartPage;
+	@FindBy(xpath="//div[@class='guestCreateAccountBtnDiv']/button/span[text()='Continue as Guest']")
+	WebElement GuestCheckoutButton;
+	@FindBy(xpath="(//div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[1]")
+	WebElement PriceOfFirstProductInOrderReview;
+	@FindBy(xpath="(//div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[2]")
+	WebElement PriceOfSecondProductInOrderReview;
+	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewSummaryTitle' and contains(text(),'Total:')]/following-sibling::div")
+	WebElement TotalInOrderReview;	
+	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Shipping:')]/following-sibling::div")
+	WebElement ShippingChargeInOrderReview;	
+	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Discount:')]/following-sibling::div")
+	WebElement DiscountInOrderReview;
+	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Taxes:')]/following-sibling::div")
+	WebElement TaxInOrderReview;
+	@FindBy(xpath="//a[@class='icon-print']/span[@class='glyphicon glyphicon-print']")
+	WebElement PrintRecieptIconInOrderConfirmation;
+
+
 	
 	
 	
@@ -2018,6 +2040,242 @@ public class app_WileyPLUS_Repo {
 		catch(Exception e){
 			Reporting.updateTestReport("Second product's price couldn't be displayed",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+	}
+	
+	/*
+	 * @Date: 27/02/23
+	 * @Description: Fetches the product's price from PDP
+	 */
+	public String fetchPriceInPDP() throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"Price of the product in PDP: "+ProductPriceInPDP.getText().trim()+" was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return ProductPriceInPDP.getText().trim();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport(
+					"Price of the product in PDP could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Date: 27/02/23
+	 * @Description: Fetches the the order subtotal from cart page
+	 */
+	public String fetchOrderSubTotalInCartPage() throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"Subtotal of the order: "+OrderSubtotalInCartPage.getText().trim()+" was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return OrderSubtotalInCartPage.getText().trim();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport(
+					"Subtotal of the order in cart page could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Author:Anindita
+	 * @Description: Checks if Text In Order Summary Tab during checkout
+	 * @Date: 27/02/22
+	 */
+	public void checkTextInOrderSummaryTab(String message, WebDriver driver) throws IOException{
+		try {
+			if(driver.findElement(By.xpath
+					("//div/i[contains(text(),'"+message+"')]")).isDisplayed()) 
+				Reporting.updateTestReport("Text: "+message+" In Order Summary Tab is present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else 
+				Reporting.updateTestReport("Text: "+message+" In Order Summary Tab is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Text: "+message+" In Order Summary Tab is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks if the Guest checkout button is present or not
+	 * @Date: 27/02/23
+	 */
+	public boolean checkIfGuestCheckoutButtonIsPresent() throws IOException{
+		try {
+			if(GuestCheckoutButton.isDisplayed()) {
+
+				return true;
+			}
+			else {
+
+				return false;
+			}
+		}
+		catch(Exception e) {
+			return false;
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Fetches the First Product's Price from Order Review Step
+	 * @Date: 23/02/23
+	 */
+	public String fetchFirstProductPriceInOrderReview() throws IOException{
+		try {
+			String price=PriceOfFirstProductInOrderReview.getText();
+			Reporting.updateTestReport("First Product Price: "+price.trim()+" was fetched in order review step successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+			return price.trim();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("First Product Price couldn't be fetched in order review step ", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Fetches the Second Product's Price from Order Review Step
+	 * @Date: 23/02/23
+	 */
+	public String fetchSecondProductPriceInOrderReview() throws IOException{
+		try {
+			String price=PriceOfSecondProductInOrderReview.getText();
+			Reporting.updateTestReport("Second Product Price: "+price.trim()+" was fetched in order review step successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+			return price.trim();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Second Product Price couldn't be fetched in order review step ", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Fetches the shipping charge from Order Review Step
+	 * @Date: 23/02/23
+	 */
+	public String fetchShippingChargeInOrderReview() throws IOException{
+		try {
+			String shipping=ShippingChargeInOrderReview.getText();
+			Reporting.updateTestReport("Shipping charge: "+shipping.trim()+" was fetched in order review step successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+			return shipping.trim();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Shipping charge couldn't be fetched in order review step ", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Fetches the discount from Order Review Step
+	 * @Date: 23/02/23
+	 */
+	public String fetchDiscountInOrderReview() throws IOException{
+		try {
+			String discount=DiscountInOrderReview.getText().split("(-)")[1].substring(1);
+			Reporting.updateTestReport("Discount: "+discount.trim()+" was fetched in order review step successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+			return discount.trim();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Discount couldn't be fetched in order review step ", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+	
+	
+	/*
+	 * @Author:Anindita
+	 * @Description: Checks if Text in Order confirmation page
+	 * @Date: 23/02/22
+	 */
+	public void checkTextInOrderConfirmationPage(String message, WebDriver driver) throws IOException{
+		try {
+			if(driver.findElement(By.xpath
+					("//div[@id=\"orderConfirmationProgressAboveText\" and contains(text(),\""+message+"\")]")).isDisplayed()) 
+				
+				Reporting.updateTestReport("Text: "+message+" In Order confirmation page is present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else 
+				Reporting.updateTestReport("Text: "+message+" In Order confirmation page is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Text: "+message+" In Order confirmation page is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Fetches the tax from Order Review Step
+	 * @Date: 7/11/22
+	 */
+	public String fetchTaxInOrderReview() throws IOException{
+		try {
+			String tax=TaxInOrderReview.getText();
+			Reporting.updateTestReport("Tax: "+tax.trim()+" was fetched in order review step successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+			return tax.trim();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Tax couldn't be fetched in order review step ", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Fetches the total from Order Review Step
+	 * @Date: 23/02/23
+	 */
+	public String fetchTotalInOrderReview() throws IOException{
+		try {
+			String total=TotalInOrderReview.getText();
+			Reporting.updateTestReport("Order total: "+total.trim()+" was fetched in order review step successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+			return total.trim();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Order total couldn't be fetched in order review step ", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+	
+	/*
+	 * Author:Anindita
+	 * @Description: Checks on the print receipt link in order confirmation page
+	 * @Date: 14/11/22
+	 */
+	public void checkPrintReciept() throws IOException{
+		try {
+			if(PrintRecieptIconInOrderConfirmation.isDisplayed()) 
+			{
+
+				Reporting.updateTestReport("The print reciept icon was present in the order confirmation page", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			else Reporting.updateTestReport("The print reciept icon was not present in the order confirmation page", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The print reciept icon was not present in the order confirmation page", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 	

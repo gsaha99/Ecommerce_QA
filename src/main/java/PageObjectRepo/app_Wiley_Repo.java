@@ -3346,7 +3346,8 @@ public class app_Wiley_Repo {
 	public void checkTextInOrderConfirmationPage(String message, WebDriver driver) throws IOException{
 		try {
 			if(driver.findElement(By.xpath
-					("//div[@id='orderConfirmationProgressAboveText' and contains(text(),'"+message+"')]")).isDisplayed()) 
+					("//div[@id=\"orderConfirmationProgressAboveText\" and contains(text(),\""+message+"\")]")).isDisplayed()) 
+				
 				Reporting.updateTestReport("Text: "+message+" In Order confirmation page is present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else 
 				Reporting.updateTestReport("Text: "+message+" In Order confirmation page is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);

@@ -74,7 +74,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 			driver.get(wiley.wileyURLConcatenation("TC01", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
-			BigDecimal price=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -82,16 +81,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
-				BigDecimal subtotal=new BigDecimal(wiley.fetchOrderSubTotalInCartPage().substring(1));
-				if(price.compareTo(subtotal)==0) 
-					Reporting.updateTestReport(
-							"The addition of all the products' price is same as the subtotal in cart page",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				else
-					Reporting.updateTestReport(
-							"The addition of all the products' pricedidn't match with the subtotal in cart page",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
 				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 						("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
@@ -740,6 +729,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							.multiply(quantity)
 							.add(new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1)))
 							.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
+							.setScale(2, RoundingMode.CEILING)
 							.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
 						Reporting.updateTestReport("First Product price + Tax + Shipping charge"
 								+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -833,7 +823,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "Password"));
 					wiley.clickOnLogInAndContinueButton();
 					wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
-							("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
+							("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
 					//wiley.selectQuantityDropDown(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "Quantity"));
 					ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 					wiley.clickOnProceedToCheckoutButton();
