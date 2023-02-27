@@ -35,11 +35,11 @@ public class DriverModule {
 
 
 	@BeforeTest
-	@Parameters("browser")
-	public void initiate(ITestContext context,String browser)
+	//@Parameters("browser")
+	public void initiate(ITestContext context)
 	{
 		try {
-			//String browser="chrome";
+			String browser="chrome";
 			String date = new SimpleDateFormat("hhmmss").format(new Date());
 			
 			String testSuiteName=context.getCurrentXmlTest().getClasses().stream()
