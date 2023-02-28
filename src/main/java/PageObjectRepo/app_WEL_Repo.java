@@ -61,12 +61,21 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//p[@class='old-price']")
 	WebElement ProductOldPriceInPDP;
+	
+	@FindBy(xpath="//p[@class='last-price']")
+	WebElement PartnerProductPDPPrice;
+	
+	@FindBy(xpath="//p[@class='your-price']")
+	WebElement DeanDartonPDPrice;
 
 	@FindBy(xpath = "//div[@id='orderSummaryProductTotalValue']")
 	WebElement PriceOfFirstProductInOrderReview;
 
 	@FindBy(xpath = "//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Taxes')]/following-sibling::div")
 	WebElement TaxInOrderReview;
+	
+	@FindBy(xpath="//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Discount')]/following-sibling::div")
+	WebElement DiscountInOrderReview;
 
 	@FindBy(xpath = "//div[@id='totalPriceValue']")
 	WebElement TotalInOrderReview;
@@ -3460,6 +3469,47 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
+	
+	
+	public String fetchPartnerProductPriceInPDP() throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"Price of the product in PDP: " + PartnerProductPDPPrice.getText().trim() + " was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return PartnerProductPDPPrice.getText();
+		} catch (Exception e) {
+			Reporting.updateTestReport("Price of the product in PDP could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	
+	public String fetchPartnerPriceInPDP() throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"Price of the product in PDP: " + DeanDartonPDPrice.getText().trim() + " was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return  DeanDartonPDPrice.getText();
+		} catch (Exception e) {
+			Reporting.updateTestReport("Price of the product in PDP could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	public String fetchProductPriceInPDP() throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"Price of the product in PDP: " + ProductPriceInPDP.getText().trim() + " was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return ProductPriceInPDP.getText();
+		} catch (Exception e) {
+			Reporting.updateTestReport("Price of the product in PDP could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
 
 	public String fetchOrderSubTotalInCartPage() throws IOException {
 		try {
@@ -3475,4 +3525,18 @@ public class app_WEL_Repo {
 		}
 	}
 
+	public String fetchDiscountInOrderReview() throws IOException {
+		try {
+			String discount = DiscountInOrderReview.getText().split("(-)")[1].substring(1);
+			Reporting.updateTestReport(
+					"Discount: " + discount.trim() + " was fetched in order review step successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return discount.trim();
+		} catch (Exception e) {
+			Reporting.updateTestReport("Discount couldn't be fetched in order review step ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+
+		}
+	}
 }
