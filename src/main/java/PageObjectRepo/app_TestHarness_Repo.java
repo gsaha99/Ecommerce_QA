@@ -309,12 +309,95 @@ public class app_TestHarness_Repo {
     @FindBy(xpath = "//a[contains(text(),'Token Settle')]")
     WebElement ClickSOAP_TokenSettle;
     
-    /* 
+   /* 
     * Author : Varisa
     * Description : Object repo for SOAP Token Refund operation
     */
     @FindBy(xpath = "//a[contains(text(),'Token Refund')]")
     WebElement ClickSOAP_TokenRefund;
+    
+    /* 
+	 * Author : Jayanta
+	 * Description : Object repo to click Embedded in HTTP Client 
+	 */
+    
+    @FindBy(xpath = "//a[contains(text(),'Embedded')]")
+    WebElement Click_Embedded;
+    
+    /* 
+	 * Author : Jayanta
+	 * Description : Object repo to enter client app id in embedded flow in HTTP Client 
+	 */
+    
+    @FindBy(name="WPG_appId")
+    WebElement enterEmbeddedClientAppID;
+    
+    /* 
+	 * Author : Jayanta
+	 * Description : Object repo to enter email id,intent type,Customer Name,IsEmbedded in embedded flow in HTTP Client 
+	 */
+    
+    @FindBy(name="WPG_email")
+    WebElement enterEmbeddedEmailID;
+    
+    @FindBy(xpath = "//option[@value='AUTHORIZE']")
+    WebElement Embedded_selectIntentAuth;
+    
+    @FindBy(xpath = "//option[@value='AUTHORIZE_CAPTURE']")
+    WebElement Embedded_selectIntentCapture;
+    
+    @FindBy(xpath = "//option[@value='SAVE_CARD']")
+    WebElement Embedded_selectIntentSaveCard;
+    
+    @FindBy(name="WPG_customerName")
+    WebElement enterEmbeddedCustName;
+    
+    @FindBy(xpath = "//option[@value='Yes']")
+    WebElement isEmbeddedYes;
+    
+    @FindBy(xpath = "//option[@value='No']")
+    WebElement isEmbeddedNo;
+    
+    @FindBy(xpath = "//button[@class='btn btn-primary w-100']")
+    WebElement Embedded_clickProceedToPay;
+    
+    @FindBy(xpath = "//button[contains(text(),'See More')]")
+	WebElement ClickSeeMore;
+    
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[6]")
+	WebElement HTTP_Embedded_FetchOperation;
+    
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[8]")
+	WebElement HTTP_Embedded_FetchReturnCode;
+    
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[10]")
+	WebElement HTTP_Embedded_FetchReturnMessage;
+    
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[14]")
+	WebElement HTTP_Embedded_FetchTransID;
+    
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[16]")
+	WebElement HTTP_Embedded_FetchValue;
+    
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[20]")
+	WebElement HTTP_Embedded_FetchMerchantResponse;
+    
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[22]")
+	WebElement HTTP_Embedded_FetchMerchantReference;
+    
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[32]")
+	WebElement HTTP_Embedded_FetchToken;
+    
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[34]")
+	WebElement HTTP_Embedded_FetchAuthCode;
+    
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[36]")
+	WebElement HTTP_Embedded_FetchAcquirerID;
+    
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[38]")
+	WebElement HTTP_Embedded_FetchAcquirerName;
+    
+    
     
     
 	
@@ -1345,7 +1428,7 @@ public class app_TestHarness_Repo {
 		        Reporting.updateTestReport("SOAP TokenSettle clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		    }
 		    catch(Exception e){
-		        Reporting.updateTestReport("SOAP TokenSettle is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		        Reporting.updateTestReport("SOAP TokenSettle is not clicked "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		    }
 		
 		}
@@ -1361,14 +1444,271 @@ public class app_TestHarness_Repo {
 	            Reporting.updateTestReport("SOAP TokenRefund clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 	        }
 	        catch(Exception e){
-	            Reporting.updateTestReport("SOAP TokenRefund is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+	            Reporting.updateTestReport("SOAP TokenRefund is not clicked "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 	        }
-
-	 
-
-	    }
+        }
 		
+		/* 
+		 * Author - Jayanta 
+		 * Description : Method for Embedded flow
+		 */
 		
-	
-	
+		public void ClickHTTP_Embedded() throws IOException {
+			try {
+				Click_Embedded.click();
+				Reporting.updateTestReport("Embedded is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e){
+				Reporting.updateTestReport("Embedded is not clicked "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		public void Http_Embedded_EnterClientID(String clientID) throws IOException {
+			try {
+				enterEmbeddedClientAppID.clear();
+				enterEmbeddedClientAppID.sendKeys(clientID);
+				Reporting.updateTestReport("Client ID Entered successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e){
+				Reporting.updateTestReport("Client ID is not Entered "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		public void Http_Embedded_EnterEmailID(String emailID) throws IOException {
+			try {
+				enterEmbeddedEmailID.clear();
+				enterEmbeddedEmailID.sendKeys(emailID);
+				Reporting.updateTestReport("Email ID Entered successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e){
+				Reporting.updateTestReport("Email ID is not Entered "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		public void Http_Embedded_SelectIntentAuth() throws IOException {
+			try {
+				Embedded_selectIntentAuth.click();
+				Reporting.updateTestReport("Auth intent type is selected successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e){
+				Reporting.updateTestReport("Auth intent type is not selected "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		public void Http_Embedded_SelectIntentCapture() throws IOException {
+			try {
+				Embedded_selectIntentCapture.click();
+				Reporting.updateTestReport("Auth Capture intent type is selected successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e){
+				Reporting.updateTestReport("Auth Capture intent type is not selected "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		public void Http_Embedded_SelectIntentSaveCard() throws IOException {
+			try {
+				Embedded_selectIntentSaveCard.click();
+				Reporting.updateTestReport("Save Card intent type is selected successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e){
+				Reporting.updateTestReport("Save Card intent type is not selected "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		public void Http_Embedded_EnterCustName(String custName) throws IOException {
+			try {
+				enterEmbeddedCustName.clear();
+				enterEmbeddedCustName.sendKeys(custName);
+				Thread.sleep(2000);
+				Reporting.updateTestReport("Customer name Entered successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e){
+				Reporting.updateTestReport("Customer name is not Entered "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		public void Http_Embedded_SelectIsEmbeddedYes() throws IOException {
+			try {
+				isEmbeddedYes.click();
+				Thread.sleep(2000);
+				Reporting.updateTestReport("IsEmbedded is selected as Yes successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e){
+				Reporting.updateTestReport("IsEmbedded is not selected as Yes successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		public void Http_Embedded_SelectIsEmbeddedNo() throws IOException {
+			try {
+				isEmbeddedNo.click();
+				Reporting.updateTestReport("IsEmbedded is selected as No successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e){
+				Reporting.updateTestReport("IsEmbedded is not selected as No successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		public void Http_Embedded_ClickProceedToPay() throws IOException {
+			try {
+				Embedded_clickProceedToPay.click();
+				Reporting.updateTestReport("Proceed to Pay button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e){
+				Reporting.updateTestReport("Proceed to Pay button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		public void ClickEmbedded_SeeMore() throws IOException {
+			try {
+				ClickSeeMore.click();
+				Reporting.updateTestReport("See More clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e){
+				Reporting.updateTestReport("See More is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		public String Http_Embedded_FetchOperation() throws IOException{
+		      try {
+					String operation=HTTP_Embedded_FetchOperation.getText();
+					System.out.println(operation);
+					Reporting.updateTestReport("Operation is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return operation;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Operation is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
+		public String Http_Embedded_FetchReturnCode() throws IOException{
+		      try {
+					String returnCode=HTTP_Embedded_FetchReturnCode.getText();
+					System.out.println(returnCode);
+					Reporting.updateTestReport("Return Code is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return returnCode;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Return Code is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
+		public String Http_Embedded_FetchReturnMessage() throws IOException{
+		      try {
+					String returnMessage=HTTP_Embedded_FetchReturnMessage.getText();
+					System.out.println(returnMessage);
+					Reporting.updateTestReport("Return message is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return returnMessage;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Return message is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
+		public String Http_Embedded_FetchTransID() throws IOException{
+		      try {
+					String transID=HTTP_Embedded_FetchTransID.getText();
+					System.out.println(transID);
+					Reporting.updateTestReport("TransID is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return transID;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("TransID is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
+		public String Http_Embedded_FetchValue() throws IOException{
+		      try {
+					String value=HTTP_Embedded_FetchValue.getText();
+					System.out.println(value);
+					Reporting.updateTestReport("Value is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return value;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Value is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
+		public String Http_Embedded_FetchMerchantResponse() throws IOException{
+		      try {
+					String merchantResponse=HTTP_Embedded_FetchMerchantResponse.getText();
+					System.out.println(merchantResponse);
+					Reporting.updateTestReport("Merchant Response is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return merchantResponse;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Merchant Response is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
+		public String Http_Embedded_FetchMerchantReference() throws IOException{
+		      try {
+					String merchantReference=HTTP_Embedded_FetchMerchantReference.getText();
+					System.out.println(merchantReference);
+					Reporting.updateTestReport("Merchant Reference is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return merchantReference;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Merchant Reference is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
+		public String Http_Embedded_FetchToken() throws IOException{
+		      try {
+					String token=HTTP_Embedded_FetchToken.getText();
+					System.out.println(token);
+					Reporting.updateTestReport("Token is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return token;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Token is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
+		public String Http_Embedded_FetchAuthCode() throws IOException{
+		      try {
+					String authCode=HTTP_Embedded_FetchAuthCode.getText();
+					System.out.println(authCode);
+					Reporting.updateTestReport("Auth Code is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return authCode;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Auth Code is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
+		public String Http_Embedded_FetchAcquirerID() throws IOException{
+		      try {
+					String acquirerID=HTTP_Embedded_FetchAcquirerID.getText();
+					System.out.println(acquirerID);
+					Reporting.updateTestReport("Acquirer ID is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return acquirerID;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Acquirer ID is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
+		public String Http_Embedded_FetchAcquirerName() throws IOException{
+		      try {
+					String acquirerName=HTTP_Embedded_FetchAcquirerName.getText();
+					System.out.println(acquirerName);
+					Reporting.updateTestReport("Acquirer Name is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return acquirerName;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Acquirer Name is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
 }
