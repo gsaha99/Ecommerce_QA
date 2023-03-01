@@ -1023,7 +1023,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	/* 
 	 * Author : Jayanta
-	 * Description : Method to click view icon in My worklist for WPS Admin
+	 * Description : Method to click view icon in home screen for WPS Support
 	 */
 	
 	public void WPSSupport_Click_ViewIcon() throws IOException {
