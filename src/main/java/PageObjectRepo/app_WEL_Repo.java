@@ -76,6 +76,9 @@ public class app_WEL_Repo {
 	
 	@FindBy(xpath="//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Discount')]/following-sibling::div")
 	WebElement DiscountInOrderReview;
+	
+	@FindBy(xpath="//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Shipping')]/following-sibling::div")
+	WebElement ShippingChargeInOrderReview;
 
 	@FindBy(xpath = "//div[@id='totalPriceValue']")
 	WebElement TotalInOrderReview;
@@ -421,6 +424,9 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//div[@class='col-md-5 col-6 noPadding orderReviewTotalPrice']")
 	WebElement OrderTotal;
+	
+	@FindBy(xpath="//div[@class='col-6 noPadding orderDetailTotalVal']")
+	WebElement OrderTotalonCartPage;
 
 	@FindBy(xpath = "(//div[contains(text(),'Shipping')])[2]/following-sibling::div")
 	WebElement ShippingChargeInOrderConfirmation;
@@ -1849,6 +1855,9 @@ public class app_WEL_Repo {
 		}
 	}
 
+	
+
+	
 	public void SelectingUSEButton() throws IOException {
 		try {
 			UseButton.click();
@@ -2648,7 +2657,7 @@ public class app_WEL_Repo {
 		try {
 
 			showmore.click();
-			Reporting.updateTestReport("The show mote clcicked successfully on Shipping Page",
+			Reporting.updateTestReport("The show more clcicked successfully on Shipping Page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		} catch (Exception e) {
@@ -2658,6 +2667,22 @@ public class app_WEL_Repo {
 		}
 	}
 
+	
+	public String fetchShippingChargeInOrderReview() throws IOException{
+		try {
+			String shipping=ShippingChargeInOrderReview.getText();
+			Reporting.updateTestReport("Shipping charge: "+shipping.trim()+" was fetched in order review step successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+			return shipping.trim();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Shipping charge couldn't be fetched in order review step ", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+	
 	public void ClickOnUseButtonForExistingShippingAddress() throws IOException {
 		try {
 
