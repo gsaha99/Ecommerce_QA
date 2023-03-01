@@ -516,8 +516,32 @@ public class app_Wiley_Repo {
 	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Discount:')]/following-sibling::div")
 	WebElement DiscountInOrderReview;
 	
+	@FindBy(xpath="(//span[@class='facet-label'])[1]")
+	WebElement FirstFacetItem;
 	
+	@FindBy(xpath="(//span[@class='facet-label'])[1]/span[@class='facet-text']")
+	WebElement FirstFacetItemText;
 	
+	@FindBy(xpath="(//span[@class='facet-label'])[1]/span[@class='facet-text']/span[@class='facet-value-count']/i")
+	WebElement FirstFacetItemQuantity;
+	
+	@FindBy(xpath="((//span[@class='nav-tabs-results'])[1]/i)[2]")
+	WebElement NumberOfProductsAfterFiltering;
+	
+	@FindBy(xpath="//i[@class='clear-facets active']/a")
+	WebElement ResetFilter;
+	
+	@FindBy(xpath="//span[contains(text(),'E-Book')]//parent::span[@class='facet-label']")
+	WebElement EBookFormatFacet;
+	
+	@FindBy(xpath="//span[contains(text(),'E-Book')]/span[@class='facet-value-count']/i")
+	WebElement EBookFormatFacetQuantity;
+	
+	@FindBy(xpath="(//li[@class='pagination-quantity-text'])[1]")
+	WebElement TotalNumberOfPages;
+	
+	@FindBy(id="wrongCardValidation")
+	WebElement WrongCardDetailsErrorMessage;
 	
 	
 
@@ -984,6 +1008,7 @@ public class app_Wiley_Repo {
 	 */
 	public void enterCardHolderName(String cardHolderName) throws IOException {
 		try {
+			
 			CardHolderName.sendKeys(cardHolderName);
 			Reporting.updateTestReport("Card Holder Name: " + cardHolderName + " was entered successfully ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -3356,6 +3381,159 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Text: "+message+" In Order confirmation page is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
+	/*
+	 * @Description: Clicks on the format facet
+	 * @Date: 01/03/23
+	 */
+	public void clickOnAuthorFacet() throws IOException{
+		try {
+			AuthorFacet.click();
+			Reporting.updateTestReport("Author under the facet was clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Author under the facet couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Selects First Facet Item
+	 * @Date: 01/03/23
+	 */
+	public String clickOnFirstFacetValue() throws IOException{
+		try {
+			FirstFacetItem.click();
+			Reporting.updateTestReport("First Facet Item was clicked with Text: "
+			+FirstFacetItemText.getText().replace(FirstFacetItemQuantity.getText(), "")+" and Quantity of that Filter: "+FirstFacetItemQuantity.getText(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return FirstFacetItemText.getText().trim().replace(FirstFacetItemQuantity.getText(), "")+"#"+FirstFacetItemQuantity.getText();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("First Facet Item couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks number of items after filtering
+	 * @Date: 01/03/23
+	 */
+	public void checkNumberOfProductsAfterFiltering(String numbers) throws IOException{
+		try {
+			if(NumberOfProductsAfterFiltering.getText().equalsIgnoreCase(numbers)) {
+				Reporting.updateTestReport("The number of products after filtering is correctly shown as: "+numbers,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				
+			}
+			else {
+				Reporting.updateTestReport("The number of products after filtering is: "+NumberOfProductsAfterFiltering.getText()+
+						" which is not matching with: "+numbers,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				
+			}
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The number of products after filtering couldn't be fetched",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Fetch all the search result web element
+	 * @Date: 1/2/22
+	 */
+	public List<WebElement> getAllFilteredResultProducts() throws IOException{
+		try {
+			List<WebElement> products=driver.findElements(By.xpath("//h3[@class='product-title']"));
+			Reporting.updateTestReport("List of filtered products was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return products;
+			
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("List of filtered products couldn't be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return null;
+		}
+	}
+	
+	/*
+	 * @Author:Anindita
+	 * @Description: Clicks on rest to rest all formats
+	 * @Date: 01/03/23
+	 */
+	public void clickOnResetFilter() throws IOException {
+		try {
+			ResetFilter.click();
+			Reporting.updateTestReport("Reset all button for facet was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Reset all button for facet couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+	}
+	/*
+	 * @Author: Anindita
+	 * @Description: Selects the E-Book format
+	 * @Date: 01/03/23
+	 */
+	public String clickOnEBookFormatFacetValue() throws IOException{
+		try {
+			EBookFormatFacet.click();
+			Reporting.updateTestReport("EBook Format Facet was clicked with Text: "
+			+EBookFormatFacet.getText().replace(EBookFormatFacetQuantity.getText(), "")+" and Quantity of that Filter: "+EBookFormatFacetQuantity.getText(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return EBookFormatFacet.getText().trim().replace(EBookFormatFacetQuantity.getText(), "")+"#"+EBookFormatFacetQuantity.getText();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("EBook Format Facet couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Fetches the total number of pages in pagination
+	 */
+	public int fetchNumberOfPagesAfterFiltering() throws IOException{
+		try {
+			String page=TotalNumberOfPages.getText();
+			String number=page.split("of")[1].substring(1).split(" ")[0];
+			Reporting.updateTestReport("Number of total pages: "+number+" was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return Integer.parseInt(number);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Number of total pages couldn't be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return 0;
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks if wrong card details error message is present or not
+	 * @Date: 1/3/23
+	 */
+	public void checkWrongCardErrorMessage() throws IOException{
+		try {
+			Reporting.updateTestReport("Wrong card details error was displayed with message: "
+		+WrongCardDetailsErrorMessage.getText() , CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Wrong card details error was not displayed ", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+	}
+	
 
 }
 

@@ -3,8 +3,7 @@ package Test_Suite;
 import org.openqa.selenium.By;
 
 import org.openqa.selenium.JavascriptExecutor;
-
-
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -26,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 
 import java.util.Date;
+import java.util.List;
 import java.lang.reflect.Method;
 
 
@@ -38,19 +38,19 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	public void launchBrowser() {
 		wiley = PageFactory.initElements(driver, app_Wiley_Repo.class);
 	}
-	
-	
+
+
 
 	@BeforeMethod
 	public void nameBefore(Method method)
 	{
-	    System.out.println("Test case: " + method.getName()+" execution started");       
+		System.out.println("Test case: " + method.getName()+" execution started");       
 	}
-	
+
 	@AfterMethod
 	public void nameAfter(Method method)
 	{
-	    System.out.println("Test case: " + method.getName()+" execution completed");       
+		System.out.println("Test case: " + method.getName()+" execution completed");       
 	}
 
 	/*
@@ -455,7 +455,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	 * @Date: 25/11/22
 	 */
 	@Test
-	public void TC15_Product_Search_Results_Page() throws IOException{
+	public void TC15_Product_Search_Results_Page_Facet_Validation() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC15_Product_Search_Results_Page");
 			driver.get(wiley.wileyURLConcatenation("TC15", "WILEY_Dot_Com_Test_Data", "URL"));
@@ -475,6 +475,86 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 				wiley.checkPublishedDateFacet();
 				wiley.checkBrandsFacet();
 				wiley.checkSeriesFacet();
+				//Validation of Author Facet
+				wiley.clickOnAuthorFacet();
+				String facetTextAndQuantity=wiley.clickOnFirstFacetValue();
+				String authorName=facetTextAndQuantity.split("#")[0];
+				String quantity=facetTextAndQuantity.split("#")[1];
+				wiley.checkNumberOfProductsAfterFiltering(quantity);
+				int numberOfPages;
+				if(Integer.parseInt(quantity)%10==0) 
+					numberOfPages=Integer.parseInt(quantity)/10;
+				else
+					numberOfPages=Integer.parseInt(quantity)/10+1;
+				if(wiley.fetchNumberOfPagesAfterFiltering()==numberOfPages)
+					Reporting.updateTestReport("Pagination funationility is working fine after filtering with Author field",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Pagination funationility is not working",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				List<WebElement> filteredProducts=driver.findElements(By.className("product-title"));
+				System.out.println(filteredProducts.size());
+				int flag=0;
+				for(int i=1;i<filteredProducts.size()+1;i++) {
+					try {
+						WebElement author=driver.findElement(By.xpath("(//div[@class='product-author'])"+"["+i+"]"));
+						System.out.println(author.getText());
+						if (author.getText().contains(authorName))
+							System.out.println(i+"th iteration");
+						else
+						{flag=1;
+						Reporting.updateTestReport("This product with title : "+
+								driver.findElement(By.xpath("(//h3[@class='product-title']/a)"+"["+i+"]")).getText()
+								+" has different author", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);}
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Author name field for each product was not found",
+								CaptureScreenshot.getScreenshot(quantity), StatusDetails.FAIL);
+					}
+				}
+				if(flag==0) {
+					Reporting.updateTestReport("All the filtered products has same Author as: "+authorName,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				wiley.clickOnResetFilter();
+				//Validation of Format Facet
+				wiley.clickOnFormatFacet();
+				String facetTextAndQuantityForFormat=wiley.clickOnEBookFormatFacetValue();
+				String format=facetTextAndQuantityForFormat.split("#")[0];
+				String quantity1=facetTextAndQuantityForFormat.split("#")[1];
+				wiley.checkNumberOfProductsAfterFiltering(quantity1);
+				int numberOfPages1;
+				if(Integer.parseInt(quantity)%10==0) 
+					numberOfPages1=Integer.parseInt(quantity1)/10;
+				else
+					numberOfPages1=Integer.parseInt(quantity1)/10+1;
+				if(wiley.fetchNumberOfPagesAfterFiltering()==numberOfPages1)
+					Reporting.updateTestReport("Pagination funationility is working fine after filtering with Format field",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Pagination funationility is not working",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				List<WebElement> filteredProductsForFormat=driver.findElements(By.className("product-title"));
+				int flag1=0;
+				for(int i=1;i<filteredProductsForFormat.size()+1;i++) {
+					try {
+						WebElement formatFacet=driver.findElement(By.xpath("(//div[@class='product-content']/span[1])"+"["+i+"]"));
+						if (formatFacet.getText().compareTo(format)==1)
+						{flag1=1;
+						Reporting.updateTestReport("This product with title : "+
+								driver.findElement(By.xpath("(//h3[@class='product-title']/a)"+"["+i+"]")).getText()
+								+" has different format", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);}
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Format  field for each product was not found",
+								CaptureScreenshot.getScreenshot(quantity), StatusDetails.FAIL);
+					}
+				}
+				if(flag1==0) {
+					Reporting.updateTestReport("All the filtered products has same format as: "+format,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Searched highlighted term was not displayed"
@@ -490,7 +570,9 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
+
+
 
 
 

@@ -37,6 +37,8 @@ public class app_Riskified_Repo {
 	WebElement AGSFromDropdown;
 	@FindBy(xpath="//div[contains(text(),'Vet Consult - Wiley')]")
 	WebElement VETFromDropdown;
+	@FindBy(xpath="//div[contains(text(),'wiley.com')]")
+	WebElement WileyFromDropDown;
 
 	/*
 	 * @Description: Enters Riskified User id in login page
@@ -182,7 +184,7 @@ public class app_Riskified_Repo {
 			else
 			{
 			Reporting.updateTestReport("The order was not declined from Riskified",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 		} catch (Exception e) {
 			Reporting.updateTestReport("Order was not declined with error message " + e.getClass().toString(),
@@ -204,6 +206,23 @@ public class app_Riskified_Repo {
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("VET was couldn't be selected from the dropdown ", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Description: Selects the Wiley Storefront from Riskified to search order id
+	 * @Date: 1/3/23
+	 */
+	public void selectWileyFromDropdown(String SS_path) throws IOException{
+		try {
+			SelectedDropdown.click();
+			WileyFromDropDown.click();
+			Reporting.updateTestReport("Wiley was successfully selected from the dropdown ", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Wiley was couldn't be selected from the dropdown ", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.FAIL);
 		}
 	}

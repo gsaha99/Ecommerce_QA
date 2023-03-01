@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="21" total="22" passed="1" failed="0" skipped="0">
+<testng-results ignored="38" total="39" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-02-27T18:28:30 IST" name="Default suite" finished-at="2023-02-27T18:32:00 IST" duration-ms="209699">
+  <suite started-at="2023-03-01T21:32:04 IST" name="Default suite" finished-at="2023-03-01T21:34:21 IST" duration-ms="136890">
     <groups>
     </groups>
-    <test started-at="2023-02-27T18:28:30 IST" name="Default test" finished-at="2023-02-27T18:32:00 IST" duration-ms="209699">
-      <class name="Test_Suite.WileyPLUS_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@59402b8f]" started-at="2023-02-27T18:28:30 IST" name="initiate" finished-at="2023-02-27T18:28:38 IST" duration-ms="7694" status="PASS">
+    <test started-at="2023-03-01T21:32:04 IST" name="Default test" finished-at="2023-03-01T21:34:21 IST" duration-ms="136890">
+      <class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@23e84203]" started-at="2023-03-01T21:32:04 IST" name="initiate" finished-at="2023-03-01T21:32:11 IST" duration-ms="7124" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@e881e46]]>
+                <![CDATA[org.testng.TestRunner@7b1a30e5]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@59402b8f]" started-at="2023-02-27T18:28:38 IST" name="launchBrowser" finished-at="2023-02-27T18:28:38 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="84" status="PASS">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@23e84203]" started-at="2023-03-01T21:32:11 IST" name="launchBrowser" finished-at="2023-03-01T21:32:11 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="87" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchBrowser -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@59402b8f]" started-at="2023-02-27T18:28:38 IST" name="nameBefore" finished-at="2023-02-27T18:28:38 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@23e84203]" started-at="2023-03-01T21:32:11 IST" name="nameBefore" finished-at="2023-03-01T21:32:11 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test_Suite.WileyPLUS_Test_Suite.TC21_Place_WileyPLUS_USD_Order_From_Frontend() throws java.io.IOException]]>
+                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC39_Riskified_Declined_Order_With_Last_Name_Decline() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameBefore -->
-        <test-method signature="TC21_Place_WileyPLUS_USD_Order_From_Frontend()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@59402b8f]" started-at="2023-02-27T18:28:38 IST" name="TC21_Place_WileyPLUS_USD_Order_From_Frontend" finished-at="2023-02-27T18:31:55 IST" duration-ms="197412" status="PASS">
+        <test-method signature="TC39_Riskified_Declined_Order_With_Last_Name_Decline()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@23e84203]" started-at="2023-03-01T21:32:11 IST" name="TC39_Riskified_Declined_Order_With_Last_Name_Decline" finished-at="2023-03-01T21:34:16 IST" duration-ms="124353" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC21_Place_WileyPLUS_USD_Order_From_Frontend -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@59402b8f]" started-at="2023-02-27T18:31:55 IST" name="nameAfter" finished-at="2023-02-27T18:31:55 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- TC39_Riskified_Declined_Order_With_Last_Name_Decline -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@23e84203]" started-at="2023-03-01T21:34:16 IST" name="nameAfter" finished-at="2023-03-01T21:34:16 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test_Suite.WileyPLUS_Test_Suite.TC21_Place_WileyPLUS_USD_Order_From_Frontend() throws java.io.IOException]]>
+                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC39_Riskified_Declined_Order_With_Last_Name_Decline() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.WileyPLUS_Test_Suite@59402b8f]" started-at="2023-02-27T18:31:55 IST" name="CloseBrowser" finished-at="2023-02-27T18:32:00 IST" duration-ms="4393" status="PASS">
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@23e84203]" started-at="2023-03-01T21:34:16 IST" name="CloseBrowser" finished-at="2023-03-01T21:34:21 IST" duration-ms="5177" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
-      </class> <!-- Test_Suite.WileyPLUS_Test_Suite -->
+      </class> <!-- Test_Suite.Wiley_NA_Cart_Test_Suite -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
