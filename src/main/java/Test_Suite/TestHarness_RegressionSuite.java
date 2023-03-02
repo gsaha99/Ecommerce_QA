@@ -971,8 +971,8 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "Operation", THarness.Http_Tokenise_FetchOperation());
 			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "transID", THarness.Http_Tokenise_FetchTransID());
 			       ScrollingWebPage.PageDown(driver,SS_path);
-			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "merchantResponse", THarness.Http_Auth_FetchMerchantResponse());
-			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "merchantReference", THarness.Http_Auth_FetchMerchantReference());
+			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "merchantResponse", THarness.Http_AuthSettle_FetchMerchantResponse());
+			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "merchantReference", THarness.Http_AuthSettle_FetchMerchantReference());
 			       ScrollingWebPage.PageDown(driver,SS_path);
 			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "Token", THarness.Http_Auth_FetchToken());
 			       excelOperation.updateTestData("TC12", "TestHarness_Test_Data", "Res_auth_Code", THarness.Http_Auth_FetchAuthCode());
@@ -2929,6 +2929,193 @@ public class TestHarness_RegressionSuite extends DriverModule {
 		{
 			System.out.println("HTTP Embedded flow with intent type Save Card is Failed" + e.getMessage());
 			Reporting.updateTestReport("HTTP Embedded flow with intent type Save Card is Failed" + e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		
+	}
+	
+	/*
+     * @Author: Jayanta
+     * @Description: Validation of HTTP Non Embedded operation with intent type Auth request and response page data in ES and Stripe
+     */
+	@Test
+	public void TC36_HTTP_NonEmbedded_Auth_ES_Stripe_Validation() throws IOException
+	{
+		
+		try {
+			Reporting.test = Reporting.extent.createTest("TC36_HTTP Client: "
+					+ "Validate that for Non Embedded operation with intent type Auth,"
+					+ "Request and Result page is displayed successfully with all the required details"
+					);
+			
+			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
+			THarness.ClickHttp_Interface();
+			THarness.ClickHTTP_Embedded();
+			THarness.Http_Embedded_EnterClientID(excelOperation.getTestData("Embedded_ClientApp_ID_QA", "Generic_Dataset", "Data"));
+			THarness.Http_Embedded_EnterEmailID(excelOperation.getTestData("Embedded_Email_ID", "Generic_Dataset", "Data"));
+			THarness.Http_Embedded_SelectIntentAuth();
+			THarness.Http_Embedded_EnterCustName(excelOperation.getTestData("Embedded_Customer_Name", "Generic_Dataset", "Data"));
+			THarness.Http_Embedded_SelectIsEmbeddedNo();
+			THarness.Http_Tokenise_ClickContinue();
+			THarness.Http_Embedded_ClickProceedToPay();
+			driver.switchTo().frame("tokenFrame");
+			driver.switchTo().frame(0);
+		    THarness.Http_EnterCardNumber(excelOperation.getTestData("TC36", "TestHarness_Embedded_TestData", "Card_Number"));
+			THarness.Http_EnterCardExpiry(excelOperation.getTestData("TC36", "TestHarness_Embedded_TestData", "Expiry_Date"));
+			THarness.Http_EnterCardCVC(excelOperation.getTestData("TC36", "TestHarness_Embedded_TestData", "CVV"));
+		    driver.switchTo().parentFrame();
+			THarness.paymentDetailsSubmit();
+			driver.switchTo().defaultContent();
+	           
+			try {
+			
+				WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
+		        pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Authorise Response')]")));
+		        driver.findElement(By.xpath("//h2[contains(text(),'Authorise Response')]")).click();
+                String returnMessage = THarness.Http_Tokenise_FetchReturnMessage();
+				if(returnMessage.compareTo("SUCCESS")==0) 
+				     {
+					
+					   Reporting.updateTestReport("Return message is: " + returnMessage,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				     }
+				else 
+				     {
+					   Reporting.updateTestReport("Return message is not SUCCESS",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				     }
+				excelOperation.updateTestData("TC36", "TestHarness_Embedded_TestData", "Return_Message", returnMessage);
+				String returnCode = THarness.Http_Tokenise_FetchReturnCode();
+		        if(returnCode.compareTo("0")==0) 
+		             {
+					   Reporting.updateTestReport("Return code is: " + returnCode,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				     }
+				else 
+				     {
+					   Reporting.updateTestReport("Return code is not 0",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				     }
+				excelOperation.updateTestData("TC36", "TestHarness_Embedded_TestData", "Return_Code", returnCode);
+		        excelOperation.updateTestData("TC36", "TestHarness_Embedded_TestData", "Operation", THarness.Http_Tokenise_FetchOperation());
+		        excelOperation.updateTestData("TC36", "TestHarness_Embedded_TestData", "transID", THarness.Http_Tokenise_FetchTransID());
+		        ScrollingWebPage.PageDown(driver,SS_path);
+		        excelOperation.updateTestData("TC36", "TestHarness_Embedded_TestData", "merchantResponse", THarness.Http_Auth_FetchMerchantResponse());
+		        excelOperation.updateTestData("TC36", "TestHarness_Embedded_TestData", "merchantReference", THarness.Http_Auth_FetchMerchantReference());
+	            ScrollingWebPage.PageDown(driver,SS_path);
+		        excelOperation.updateTestData("TC36", "TestHarness_Embedded_TestData", "Token", THarness.Http_Auth_FetchToken());
+		        excelOperation.updateTestData("TC36", "TestHarness_Embedded_TestData", "Res_auth_Code", THarness.Http_Auth_FetchAuthCode());
+		        excelOperation.updateTestData("TC36", "TestHarness_Embedded_TestData", "acquirerID", THarness.Http_Auth_FetchAcquirerID());
+		        ScrollingWebPage.PageDown(driver,SS_path);
+		        excelOperation.updateTestData("TC36", "TestHarness_Embedded_TestData", "acquirerName", THarness.Http_Auth_FetchAcquirerName());
+		        
+		}
+		catch (Exception e) 
+	       {
+		        System.out.println("Response page is not displayed after 50 seconds" + e.getMessage());
+		        Reporting.updateTestReport("Response page is not displayed after 50 seconds" + e.getMessage(),
+				        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+	       }
+			
+		} 
+		catch (Exception e) 
+		{
+			System.out.println("HTTP Non Embedded flow with intent type Auth is Failed" + e.getMessage());
+			Reporting.updateTestReport("HTTP Non Embedded flow with intent type Auth is Failed" + e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		
+	}
+	
+	/*
+     * @Author: Jayanta
+     * @Description: Validation of HTTP Non Embedded operation with intent type Auth-Capture request and response page data in ES and Stripe
+     */
+	@Test
+	public void TC37_HTTP_NonEmbedded_AuthCapture_ES_Stripe_Validation() throws IOException
+	{
+		
+		try {
+			Reporting.test = Reporting.extent.createTest("TC37_HTTP Client: "
+					+ "Validate that for Non Embedded operation with intent type Auth-Capture,"
+					+ "Request and Result page is displayed successfully with all the required details"
+					);
+			
+			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
+			THarness.ClickHttp_Interface();
+			THarness.ClickHTTP_Embedded();
+			THarness.Http_Embedded_EnterClientID(excelOperation.getTestData("Embedded_ClientApp_ID_QA", "Generic_Dataset", "Data"));
+			THarness.Http_Embedded_EnterEmailID(excelOperation.getTestData("Embedded_Email_ID", "Generic_Dataset", "Data"));
+			THarness.Http_Embedded_SelectIntentCapture();
+			THarness.Http_Embedded_EnterCustName(excelOperation.getTestData("Embedded_Customer_Name", "Generic_Dataset", "Data"));
+			THarness.Http_Embedded_SelectIsEmbeddedNo();
+			THarness.Http_Tokenise_ClickContinue();
+			THarness.Http_Embedded_ClickProceedToPay();
+			driver.switchTo().frame("tokenFrame");
+			driver.switchTo().frame(0);
+		    THarness.Http_EnterCardNumber(excelOperation.getTestData("TC37", "TestHarness_Embedded_TestData", "Card_Number"));
+			THarness.Http_EnterCardExpiry(excelOperation.getTestData("TC37", "TestHarness_Embedded_TestData", "Expiry_Date"));
+			THarness.Http_EnterCardCVC(excelOperation.getTestData("TC37", "TestHarness_Embedded_TestData", "CVV"));
+		    driver.switchTo().parentFrame();
+			THarness.paymentDetailsSubmit();
+			driver.switchTo().defaultContent();
+	           
+			try {
+			
+				WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
+			       pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Authorise & Settle Response')]")));
+			       driver.findElement(By.xpath("//h2[contains(text(),'Authorise & Settle Response')]")).click();
+			       String returnMessage = THarness.Http_Tokenise_FetchReturnMessage();
+			       if(returnMessage.compareTo("SUCCESS")==0) 
+			       {
+				
+				        Reporting.updateTestReport("Return message is: " + returnMessage,
+						     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			       }
+			       else 
+			       {
+				        Reporting.updateTestReport("Return message is not SUCCESS",
+						       CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			       }
+			       excelOperation.updateTestData("TC37", "TestHarness_Embedded_TestData", "Return_Message", returnMessage);
+			       String returnCode = THarness.Http_Tokenise_FetchReturnCode();
+			       if(returnCode.compareTo("0")==0) 
+			       {
+				
+				        Reporting.updateTestReport("Return code is: " + returnCode,
+						      CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			       }
+			       else 
+			       {
+				        Reporting.updateTestReport("Return code is not 0",
+						      CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			       }
+			       excelOperation.updateTestData("TC37", "TestHarness_Embedded_TestData", "Return_Code", returnCode);
+			       excelOperation.updateTestData("TC37", "TestHarness_Embedded_TestData", "Operation", THarness.Http_Tokenise_FetchOperation());
+			       excelOperation.updateTestData("TC37", "TestHarness_Embedded_TestData", "transID", THarness.Http_Tokenise_FetchTransID());
+			       ScrollingWebPage.PageDown(driver,SS_path);
+			       excelOperation.updateTestData("TC37", "TestHarness_Embedded_TestData", "merchantResponse", THarness.Http_AuthSettle_FetchMerchantResponse());
+			       excelOperation.updateTestData("TC37", "TestHarness_Embedded_TestData", "merchantReference", THarness.Http_AuthSettle_FetchMerchantReference());
+			       ScrollingWebPage.PageDown(driver,SS_path);
+			       excelOperation.updateTestData("TC37", "TestHarness_Embedded_TestData", "Token", THarness.Http_Auth_FetchToken());
+			       excelOperation.updateTestData("TC37", "TestHarness_Embedded_TestData", "Res_auth_Code", THarness.Http_Auth_FetchAuthCode());
+			       excelOperation.updateTestData("TC37", "TestHarness_Embedded_TestData", "acquirerID", THarness.Http_Auth_FetchAcquirerID());
+			       ScrollingWebPage.PageDown(driver,SS_path);
+			       excelOperation.updateTestData("TC37", "TestHarness_Embedded_TestData", "acquirerName", THarness.Http_Auth_FetchAcquirerName());
+			       
+			}
+			catch (Exception e) 
+		       {
+			        System.out.println("Response page is not displayed after 50 seconds" + e.getMessage());
+			        Reporting.updateTestReport("Response page is not displayed after 50 seconds" + e.getMessage(),
+					        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		       }
+			
+		} 
+		catch (Exception e) 
+		{
+			System.out.println("HTTP Non Embedded flow with intent type Auth-Capture is Failed" + e.getMessage());
+			Reporting.updateTestReport("HTTP Non Embedded flow with intent type Auth-Capture is Failed" + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 		

@@ -1113,7 +1113,7 @@ public class app_TestHarness_Repo {
 	 * Description : Method to fetch merchant reference in Auth & Settle operation
 	 */
 	
-	public String Http_Auth_FetSettlechMerchantReference() throws IOException{
+	public String Http_AuthSettle_FetchMerchantReference() throws IOException{
 	      try {
 				String merchantReference=authSettleMerchantReference.getText();
 				System.out.println(merchantReference);
