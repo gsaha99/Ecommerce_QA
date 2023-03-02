@@ -278,6 +278,13 @@ public class app_ClientPortal_Repo extends DriverModule {
 	    
 	    @FindBy(xpath = "//a[contains(text(),'revert')]")
 	    WebElement Click_Revert;
+	    /* 
+		 * Author : Varisa
+		 * Description : Object repo to click Save in View Client App page. 
+		 */
+	    
+	    @FindBy(xpath = "//button[@type='button' and @class='btn white-btn back-btn']")
+		WebElement ClickBack;
 	    
 	
 	/* 
@@ -1502,5 +1509,22 @@ public class app_ClientPortal_Repo extends DriverModule {
 				Reporting.updateTestReport("Error message for Target URL field is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				return "null";
 			   }
-		}
 }
+/* 
+ * Author : Varisa
+ * Description :  Method to click Back button in View client app screen for Application User
+ */
+
+public void ApplicationUser_Click_Back() throws IOException {
+	try {
+		ClickBack.click();
+	    Thread.sleep(5000);
+		Reporting.updateTestReport("Back button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+	}
+	catch(Exception e){
+		Reporting.updateTestReport("Back button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+	}
+ }
+}
+
+
