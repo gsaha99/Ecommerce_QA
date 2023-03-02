@@ -361,6 +361,9 @@ public class app_TestHarness_Repo {
     @FindBy(xpath = "//button[@class='btn btn-primary w-100']")
     WebElement Embedded_clickProceedToPay;
     
+    @FindBy(xpath = "//button[@class='btn btn-primary w-auto']")
+    WebElement Embedded_clickProceed;
+    
     @FindBy(xpath = "//button[contains(text(),'See More')]")
 	WebElement ClickSeeMore;
     
@@ -379,14 +382,29 @@ public class app_TestHarness_Repo {
     @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[16]")
 	WebElement HTTP_Embedded_FetchValue;
     
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[16]")
+	WebElement HTTP_Embedded_SaveCard_FetchMerchantResponse;
+    
     @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[20]")
 	WebElement HTTP_Embedded_FetchMerchantResponse;
+    
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[20]")
+	WebElement HTTP_Embedded_AuthCapture_FetchMerchantReference;
+    
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[18]")
+	WebElement HTTP_Embedded_SaveCard_FetchMerchantReference;
     
     @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[22]")
 	WebElement HTTP_Embedded_FetchMerchantReference;
     
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[22]")
+	WebElement HTTP_Embedded_AuthCapture_FetchMerchantResponse;
+    
     @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[32]")
 	WebElement HTTP_Embedded_FetchToken;
+    
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[28]")
+	WebElement HTTP_Embedded_SaveCard_FetchToken;
     
     @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[34]")
 	WebElement HTTP_Embedded_FetchAuthCode;
@@ -394,8 +412,14 @@ public class app_TestHarness_Repo {
     @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[36]")
 	WebElement HTTP_Embedded_FetchAcquirerID;
     
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[30]")
+	WebElement HTTP_Embedded_SaveCard_FetchAcquirerID;
+    
     @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[38]")
 	WebElement HTTP_Embedded_FetchAcquirerName;
+    
+    @FindBy(xpath = "(//div[@class='orderReviewSuccess-col'])[32]")
+	WebElement HTTP_Embedded_SaveCard_FetchAcquirerName;
     
     
     
@@ -1558,6 +1582,16 @@ public class app_TestHarness_Repo {
 			}
 		}
 		
+		public void Http_Embedded_ClickProceed() throws IOException {
+			try {
+				Embedded_clickProceed.click();
+				Reporting.updateTestReport("Proceed button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e){
+				Reporting.updateTestReport("Proceed button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
 		public void ClickEmbedded_SeeMore() throws IOException {
 			try {
 				ClickSeeMore.click();
@@ -1646,6 +1680,32 @@ public class app_TestHarness_Repo {
 				   }
 			}
 		
+		public String Http_Embedded_AuthCapture_FetchMerchantResponse() throws IOException{
+		      try {
+					String merchantResponse=HTTP_Embedded_AuthCapture_FetchMerchantResponse.getText();
+					System.out.println(merchantResponse);
+					Reporting.updateTestReport("Merchant Response is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return merchantResponse;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Merchant Response is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
+		public String Http_Embedded_SaveCard_FetchMerchantResponse() throws IOException{
+		      try {
+					String merchantResponse=HTTP_Embedded_SaveCard_FetchMerchantResponse.getText();
+					System.out.println(merchantResponse);
+					Reporting.updateTestReport("Merchant Response is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return merchantResponse;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Merchant Response is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
 		public String Http_Embedded_FetchMerchantReference() throws IOException{
 		      try {
 					String merchantReference=HTTP_Embedded_FetchMerchantReference.getText();
@@ -1659,9 +1719,47 @@ public class app_TestHarness_Repo {
 				   }
 			}
 		
+		public String Http_Embedded_AuthCapture_FetchMerchantReference() throws IOException{
+		      try {
+					String merchantReference=HTTP_Embedded_AuthCapture_FetchMerchantReference.getText();
+					System.out.println(merchantReference);
+					Reporting.updateTestReport("Merchant Reference is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return merchantReference;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Merchant Reference is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
+		public String Http_Embedded_SaveCard_FetchMerchantReference() throws IOException{
+		      try {
+					String merchantReference=HTTP_Embedded_SaveCard_FetchMerchantReference.getText();
+					System.out.println(merchantReference);
+					Reporting.updateTestReport("Merchant Reference is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return merchantReference;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Merchant Reference is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
 		public String Http_Embedded_FetchToken() throws IOException{
 		      try {
 					String token=HTTP_Embedded_FetchToken.getText();
+					System.out.println(token);
+					Reporting.updateTestReport("Token is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return token;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Token is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
+		public String Http_Embedded_SaveCard_FetchToken() throws IOException{
+		      try {
+					String token=HTTP_Embedded_SaveCard_FetchToken.getText();
 					System.out.println(token);
 					Reporting.updateTestReport("Token is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					return token;
@@ -1698,9 +1796,35 @@ public class app_TestHarness_Repo {
 				   }
 			}
 		
+		public String Http_Embedded_SaveCard_FetchAcquirerID() throws IOException{
+		      try {
+					String acquirerID=HTTP_Embedded_SaveCard_FetchAcquirerID.getText();
+					System.out.println(acquirerID);
+					Reporting.updateTestReport("Acquirer ID is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return acquirerID;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Acquirer ID is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
 		public String Http_Embedded_FetchAcquirerName() throws IOException{
 		      try {
 					String acquirerName=HTTP_Embedded_FetchAcquirerName.getText();
+					System.out.println(acquirerName);
+					Reporting.updateTestReport("Acquirer Name is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					return acquirerName;
+				    }
+				catch(Exception e) {
+					Reporting.updateTestReport("Acquirer Name is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					return "";
+				   }
+			}
+		
+		public String Http_Embedded_SaveCard_FetchAcquirerName() throws IOException{
+		      try {
+					String acquirerName=HTTP_Embedded_SaveCard_FetchAcquirerName.getText();
 					System.out.println(acquirerName);
 					Reporting.updateTestReport("Acquirer Name is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					return acquirerName;
