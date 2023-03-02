@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="36" total="37" passed="1" failed="0" skipped="0">
+<testng-results ignored="37" total="38" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-03-02T15:03:11 IST" name="Default suite" finished-at="2023-03-02T15:03:57 IST" duration-ms="46024">
+  <suite started-at="2023-03-02T15:26:06 IST" name="Default suite" finished-at="2023-03-02T15:27:00 IST" duration-ms="53724">
     <groups>
     </groups>
-    <test started-at="2023-03-02T15:03:11 IST" name="Default test" finished-at="2023-03-02T15:03:57 IST" duration-ms="46024">
+    <test started-at="2023-03-02T15:26:06 IST" name="Default test" finished-at="2023-03-02T15:27:00 IST" duration-ms="53724">
       <class name="Test_Suite.TestHarness_RegressionSuite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5890e879]" started-at="2023-03-02T15:03:11 IST" name="initiate" finished-at="2023-03-02T15:03:17 IST" duration-ms="5898" status="PASS">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@6440112d]" started-at="2023-03-02T15:26:06 IST" name="initiate" finished-at="2023-03-02T15:26:16 IST" duration-ms="10386" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@b5c902]]>
+                <![CDATA[org.testng.TestRunner@53bb71e5]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5890e879]" started-at="2023-03-02T15:03:17 IST" name="initializeRepo" finished-at="2023-03-02T15:03:17 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="60" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@6440112d]" started-at="2023-03-02T15:26:16 IST" name="initializeRepo" finished-at="2023-03-02T15:26:16 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="64" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeRepo -->
-        <test-method signature="TC37_HTTP_NonEmbedded_AuthCapture_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5890e879]" started-at="2023-03-02T15:03:17 IST" name="TC37_HTTP_NonEmbedded_AuthCapture_ES_Stripe_Validation" finished-at="2023-03-02T15:03:55 IST" duration-ms="38238" status="PASS">
+        <test-method signature="TC38_HTTP_NonEmbedded_SaveCard_ES_Stripe_Validation()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@6440112d]" started-at="2023-03-02T15:26:16 IST" name="TC38_HTTP_NonEmbedded_SaveCard_ES_Stripe_Validation" finished-at="2023-03-02T15:26:57 IST" duration-ms="41039" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC37_HTTP_NonEmbedded_AuthCapture_ES_Stripe_Validation -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@5890e879]" started-at="2023-03-02T15:03:56 IST" name="CloseBrowser" finished-at="2023-03-02T15:03:57 IST" duration-ms="1751" status="PASS">
+        </test-method> <!-- TC38_HTTP_NonEmbedded_SaveCard_ES_Stripe_Validation -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@6440112d]" started-at="2023-03-02T15:26:57 IST" name="CloseBrowser" finished-at="2023-03-02T15:27:00 IST" duration-ms="2161" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
