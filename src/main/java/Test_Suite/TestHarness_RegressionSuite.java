@@ -2784,7 +2784,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
 			THarness.ClickHTTP_Embedded();
-			THarness.Http_Embedded_EnterClientID(excelOperation.getTestData("Embedded_ClientApp_ID_DEV", "Generic_Dataset", "Data"));
+			THarness.Http_Embedded_EnterClientID(excelOperation.getTestData("Embedded_ClientApp_ID_QA", "Generic_Dataset", "Data"));
 			THarness.Http_Embedded_EnterEmailID(excelOperation.getTestData("Embedded_Email_ID", "Generic_Dataset", "Data"));
 			THarness.Http_Embedded_SelectIntentCapture();
 			THarness.Http_Embedded_EnterCustName(excelOperation.getTestData("Embedded_Customer_Name", "Generic_Dataset", "Data"));
@@ -2869,7 +2869,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
 			THarness.ClickHTTP_Embedded();
-			THarness.Http_Embedded_EnterClientID(excelOperation.getTestData("Embedded_ClientApp_ID_DEV", "Generic_Dataset", "Data"));
+			THarness.Http_Embedded_EnterClientID(excelOperation.getTestData("Embedded_ClientApp_ID_QA", "Generic_Dataset", "Data"));
 			THarness.Http_Embedded_EnterEmailID(excelOperation.getTestData("Embedded_Email_ID", "Generic_Dataset", "Data"));
 			THarness.Http_Embedded_SelectIntentSaveCard();
 			THarness.Http_Embedded_EnterCustName(excelOperation.getTestData("Embedded_Customer_Name", "Generic_Dataset", "Data"));
