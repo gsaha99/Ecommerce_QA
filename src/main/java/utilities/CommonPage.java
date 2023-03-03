@@ -13,9 +13,9 @@ import PageObjectRepo.app_ClientPortal_Repo;
 import Test_Suite.TestHarness_RegressionSuite;
 
 public class CommonPage {
-	public static String SS_path=TestHarness_RegressionSuite.SS_path;
+	//public static String SS_path=TestHarness_RegressionSuite.SS_path;
 
-	public void LogIN(WebDriver driver,app_ClientPortal_Repo CPortal,String EmailID, String PWD) throws IOException {
+	public static void LogIN(WebDriver driver,app_ClientPortal_Repo CPortal,String EmailID, String PWD,String SS_path) throws IOException {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		if(driver.findElement(By.id("otherTileText")).isDisplayed())
 		{

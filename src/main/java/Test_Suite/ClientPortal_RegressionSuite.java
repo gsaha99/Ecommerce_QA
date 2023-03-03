@@ -31,8 +31,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 	app_ClientPortal_Repo CPortal;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
-	CommonPage commonPage = new CommonPage();
-	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+	//CommonPage commonPage = new CommonPage();
+	//WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		
 	@BeforeTest
 	public void initializeRepo() {
@@ -58,7 +58,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			String emailID=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
 			String pwd=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
-			commonPage.LogIN(driver,CPortal, emailID, pwd);
+			CommonPage.LogIN(driver,CPortal, emailID, pwd,SS_path);
 			/*try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
 			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID"));
@@ -158,7 +158,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			String emailID=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
 			String pwd=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
-			commonPage.LogIN(driver,CPortal, emailID, pwd);
+			CommonPage.LogIN(driver,CPortal, emailID, pwd,SS_path);
 			
 			/*CPortal.WPSAdmin_ClickAnotherUserAccount();
 			try {
@@ -283,7 +283,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			String emailID=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
 			String pwd=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
-			commonPage.LogIN(driver,CPortal, emailID, pwd);
+			CommonPage.LogIN(driver,CPortal, emailID, pwd,SS_path);
 			/*CPortal.WPSAdmin_ClickAnotherUserAccount();
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
