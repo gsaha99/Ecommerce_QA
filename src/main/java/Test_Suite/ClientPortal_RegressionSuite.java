@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 
 import PageObjectRepo.app_ClientPortal_Repo;
 import utilities.CaptureScreenshot;
+import utilities.CommonPage;
 import utilities.DriverModule;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
@@ -30,6 +31,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 	app_ClientPortal_Repo CPortal;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
+	CommonPage commonPage = new CommonPage();
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		
 	@BeforeTest
 	public void initializeRepo() {
@@ -45,7 +48,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 	{
 		
 		try {
-			Reporting.test = Reporting.extent.createTest("TC001_Client Portal: "
+			Reporting.test = Reporting.extent.createTest("TC01_Client Portal: "
 					+ "Validate that the user should be able to see the user name on top right corner,"
 					+ " WPS Admin user contains the Home,Create New Application, Register new User, My Work List,"
 					+ "Transaction search  options  on header of the page,"
@@ -53,8 +56,10 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ "on click of that Logout is visible.");
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			try {
+			String emailID=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
+			String pwd=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
+			commonPage.LogIN(driver,CPortal, emailID, pwd);
+			/*try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
 			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID"));
 			}
@@ -103,7 +108,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 				System.out.println("Element not found due to timeout" + e.getMessage());
 				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
+			}*/
 			CPortal.WPSAdmin_ClickHome();
 			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_ClickRegisterNewUser();
@@ -124,6 +129,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		    
 		    CPortal.WPSAdmin_ClickTransactionSearch();
 		    CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 	
 		}
@@ -150,7 +156,11 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					);
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			String emailID=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
+			String pwd=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
+			commonPage.LogIN(driver,CPortal, emailID, pwd);
+			
+			/*CPortal.WPSAdmin_ClickAnotherUserAccount();
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
 			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID"));
@@ -200,7 +210,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 				System.out.println("Element not found due to timeout" + e.getMessage());
 				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
+			}*/
 			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_SelectSOAP();
 			CPortal.WPSAdmin_SelectBusinessUnit();
@@ -245,6 +255,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			      Reporting.updateTestReport("Filtering is working",
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		      }
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 		}
 		catch (Exception e) 
@@ -269,7 +281,10 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					);
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			String emailID=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
+			String pwd=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
+			commonPage.LogIN(driver,CPortal, emailID, pwd);
+			/*CPortal.WPSAdmin_ClickAnotherUserAccount();
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
 			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID"));
@@ -319,7 +334,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 				System.out.println("Element not found due to timeout" + e.getMessage());
 				Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
+			}*/
 			CPortal.WPSAdmin_ClickRegisterNewUser();
 			CPortal.WPSAdmin_Enter_First_Name("TestAutoFirstName");
 			CPortal.WPSAdmin_Enter_Last_Name("TestAutoLastName");
@@ -344,6 +359,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			      Reporting.updateTestReport("DB Validation is not done and SSO ID is not: " + SSOID,
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		       }
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 			
 		}
@@ -370,6 +387,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			CPortal.WPSAdmin_ClickAnotherUserAccount();
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
 			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "EmailID"));
@@ -503,6 +521,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			      Reporting.updateTestReport("DB Validation is failed and app status is not: " + expectedStatusID,
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		       }
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 		}
 		catch (Exception e) 
@@ -528,6 +548,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			CPortal.WPSAdmin_ClickAnotherUserAccount();
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
 			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID"));
@@ -682,6 +703,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		       }
 				
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 		}
 		catch (Exception e) 
 		{
@@ -706,6 +729,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			CPortal.WPSAdmin_ClickAnotherUserAccount();
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
 			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID"));
@@ -807,6 +831,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			      Reporting.updateTestReport("DB Validation is not done and Client App Name is not: " + NewClientAppName,
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		       }
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 		}
 		catch (Exception e) 
@@ -833,6 +859,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			CPortal.WPSAdmin_ClickAnotherUserAccount();
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
 			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID"));
@@ -885,6 +912,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			}
 			CPortal.WPSAdmin_ClickHome();
 			CPortal.WPSAdmin_CheckPagination();
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 		}
 		catch (Exception e) 
@@ -912,6 +941,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			CPortal.WPSAdmin_ClickAnotherUserAccount();
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
 			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID"));
@@ -970,6 +1000,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickFooter();
 			CPortal.WPSAdmin_ClickMyWorklist();
 			CPortal.WPSAdmin_ClickFooter();
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 		}
 		catch (Exception e) 
@@ -998,6 +1030,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			CPortal.WPSAdmin_ClickAnotherUserAccount();
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
 			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID"));
@@ -1068,6 +1101,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		    
 		    CPortal.WPSAdmin_ClickTransactionSearch();
 		    CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 		}
 		catch (Exception e) 
@@ -1094,6 +1128,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			CPortal.WPSAdmin_ClickAnotherUserAccount();
 			try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("i0116")));
 			CPortal.WPSAdmin_LogIN_EnterSignInEmail(excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID"));
@@ -1395,6 +1430,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 				}
 				CPortal.WPSAdmin_ClickHome();
 				CPortal.WPSAdmin_CheckPagination();
+				CPortal.WPSAdmin_ClickLogOut();
+			    CPortal.WPSAdmin_ClickLogOutImage();
 				
 			}
 			catch (Exception e) 
@@ -1625,6 +1662,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			       Reporting.updateTestReport("Error message for TargetURL field is not showing",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				  }
+		     CPortal.WPSAdmin_ClickLogOut();
+			 CPortal.WPSAdmin_ClickLogOutImage();
 			
 					         		
 	  }
@@ -1883,6 +1922,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			      Reporting.updateTestReport("Filtering is not working",
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		      }
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 		}
 		catch (Exception e) 
@@ -2021,6 +2062,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickMyWorklist();
 			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'No records found!')]")));
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 		}
 		catch (Exception e) 
@@ -2120,6 +2163,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			      Reporting.updateTestReport("DB Validation is not done and SSO ID is not: " + SSOID,
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		       }
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 			
 		}
@@ -2205,6 +2250,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickFooter();
 			CPortal.WPSAdmin_ClickMyWorklist();
 			CPortal.WPSAdmin_ClickFooter();
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 		}
 		catch (Exception e) 
@@ -2286,6 +2333,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickHome();			
 		    CPortal.WPSAdmin_ClickTransactionSearch();
 		    CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 	
 		}
@@ -2564,6 +2612,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
 			CPortal.SDUser_SelectRole();
 			CPortal.ClickRegister_ExistingUser();
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 				
 		}
 		catch (Exception e) 
@@ -2660,6 +2710,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		    
 		    CPortal.WPSAdmin_ClickTransactionSearch();
 		    CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 	
 		}
@@ -2916,6 +2967,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			      Reporting.updateTestReport("DB Validation is failed and new Business Unit ID is not: " + expectedBU,
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		       }
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 			
 			
@@ -3080,6 +3133,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		       Reporting.updateTestReport("Error message for payment method field is not showing",
 				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			  }
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 		     
 		}
 		catch (Exception e) 
@@ -3219,6 +3274,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickMyWorklist();
 			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'No records found!')]")));
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 		}
 		catch (Exception e) 
@@ -3313,6 +3370,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		    
 		    CPortal.WPSAdmin_ClickFooter();
 		    CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 	
 		}
@@ -3505,6 +3563,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
 			CPortal.SDUser_SelectRole();
 			CPortal.ClickRegister_ExistingUser();
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 				
 		}
 		catch (Exception e) 
@@ -3606,6 +3666,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			      Reporting.updateTestReport("DB Validation is not done and SSO ID is not: " + SSOID,
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		       }
+			CPortal.WPSAdmin_ClickLogOut();
+		    CPortal.WPSAdmin_ClickLogOutImage();
 			
 			
 		}
@@ -3616,11 +3678,5 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
-	/*
-    * @Author: Varisa
-    * @Description: Validation of footer for WPS Admin
-    */
-	
 
 }

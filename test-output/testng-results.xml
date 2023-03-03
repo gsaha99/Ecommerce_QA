@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="25" total="26" passed="1" failed="0" skipped="0">
+<testng-results ignored="37" total="38" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-03-02T15:56:20 IST" name="Default suite" finished-at="2023-03-02T15:57:27 IST" duration-ms="67802">
+  <suite started-at="2023-03-03T17:12:27 IST" name="Default suite" finished-at="2023-03-03T17:12:42 IST" duration-ms="14573">
     <groups>
     </groups>
-    <test started-at="2023-03-02T15:56:20 IST" name="Default test" finished-at="2023-03-02T15:57:27 IST" duration-ms="67802">
-      <class name="Test_Suite.ClientPortal_RegressionSuite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@48bb62]" started-at="2023-03-02T15:56:20 IST" name="initiate" finished-at="2023-03-02T15:56:26 IST" duration-ms="6495" status="PASS">
+    <test started-at="2023-03-03T17:12:27 IST" name="Default test" finished-at="2023-03-03T17:12:42 IST" duration-ms="14573">
+      <class name="Test_Suite.TestHarness_RegressionSuite">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@6440112d]" started-at="2023-03-03T17:12:28 IST" name="initiate" finished-at="2023-03-03T17:12:35 IST" duration-ms="7465" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@72a8361b]]>
+                <![CDATA[org.testng.TestRunner@4ef4f627]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@48bb62]" started-at="2023-03-02T15:56:26 IST" name="initializeRepo" finished-at="2023-03-02T15:56:26 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="73" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@6440112d]" started-at="2023-03-03T17:12:35 IST" name="initializeRepo" finished-at="2023-03-03T17:12:35 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="92" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeRepo -->
-        <test-method signature="TC28_RegisterNewClientApp_Cancel_ClientAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@48bb62]" started-at="2023-03-02T15:56:26 IST" name="TC28_RegisterNewClientApp_Cancel_ClientAdmin" finished-at="2023-03-02T15:57:26 IST" duration-ms="59490" status="PASS">
+        <test-method signature="TC01_HTTP_Probe()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@6440112d]" started-at="2023-03-03T17:12:35 IST" name="TC01_HTTP_Probe" finished-at="2023-03-03T17:12:41 IST" duration-ms="5457" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC28_RegisterNewClientApp_Cancel_ClientAdmin -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@48bb62]" started-at="2023-03-02T15:57:26 IST" name="CloseBrowser" finished-at="2023-03-02T15:57:27 IST" duration-ms="1675" status="PASS">
+        </test-method> <!-- TC01_HTTP_Probe -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@6440112d]" started-at="2023-03-03T17:12:41 IST" name="CloseBrowser" finished-at="2023-03-03T17:12:42 IST" duration-ms="1489" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
-      </class> <!-- Test_Suite.ClientPortal_RegressionSuite -->
+      </class> <!-- Test_Suite.TestHarness_RegressionSuite -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
