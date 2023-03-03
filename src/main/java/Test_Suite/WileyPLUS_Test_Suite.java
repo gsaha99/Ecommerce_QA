@@ -19,6 +19,7 @@ import org.testng.annotations.Test;
 import PageObjectRepo.app_WileyPLUS_Repo;
 import utilities.CaptureScreenshot;
 import utilities.OrderConfirmationMail;
+import utilities.PaymentGateway;
 import utilities.DriverModule;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
@@ -725,20 +726,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-				WileyPLUS.enterCardHolderName(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "First_Name"));
-				driver.switchTo().defaultContent();
-				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-				WileyPLUS.enterCardNumber(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Card_Number"));
-				driver.switchTo().defaultContent();
-				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-				WileyPLUS.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Expiry_Month"));
-				driver.switchTo().defaultContent();
-				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-				WileyPLUS.selectExpirationYearFromDropDown(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Expiry_Year"));
-				driver.switchTo().defaultContent();
-				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-				WileyPLUS.enterCVV_Number(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "CVV"));
-				driver.switchTo().defaultContent();			
+				PaymentGateway.paymentWileyPLUS(driver, WileyPLUS, "TC15", SS_path)	;	
 				WileyPLUS.enterFirstName(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "First_Name"));
 				WileyPLUS.enterLastName(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Last_Name"));
 				WileyPLUS.selectCountry(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Bill_Country"));
@@ -852,20 +840,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-				WileyPLUS.enterCardHolderName(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "First_Name"));
-				driver.switchTo().defaultContent();
-				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-				WileyPLUS.enterCardNumber(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Card_Number"));
-				driver.switchTo().defaultContent();
-				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-				WileyPLUS.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Expiry_Month"));
-				driver.switchTo().defaultContent();
-				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-				WileyPLUS.selectExpirationYearFromDropDown(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Expiry_Year"));
-				driver.switchTo().defaultContent();
-				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-				WileyPLUS.enterCVV_Number(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "CVV"));
-				driver.switchTo().defaultContent();			
+				PaymentGateway.paymentWileyPLUS(driver, WileyPLUS, "TC16", SS_path)	;		
 				WileyPLUS.enterFirstName(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "First_Name"));
 				WileyPLUS.enterLastName(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Last_Name"));
 				WileyPLUS.selectCountry(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Country"));
@@ -992,20 +967,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-					WileyPLUS.enterCardHolderName(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "First_Name"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-					WileyPLUS.enterCardNumber(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Card_Number"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-					WileyPLUS.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Expiry_Month"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-					WileyPLUS.selectExpirationYearFromDropDown(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Expiry_Year"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-					WileyPLUS.enterCVV_Number(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "CVV"));
-					driver.switchTo().defaultContent();			
+					PaymentGateway.paymentWileyPLUS(driver, WileyPLUS, "TC17", SS_path)	;		
 					WileyPLUS.clickOnSaveAndContinueButton();
 					if(new BigDecimal(WileyPLUS.fetchFirstProductPriceInOrderReview().substring(1))
 							.add(new BigDecimal(WileyPLUS.fetchShippingChargeInOrderReview().substring(1)))
@@ -1401,20 +1363,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 							try {
 								wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-								WileyPLUS.enterCardHolderName(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "First_Name"));
-								driver.switchTo().defaultContent();
-								driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-								WileyPLUS.enterCardNumber(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Card_Number"));
-								driver.switchTo().defaultContent();
-								driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-								WileyPLUS.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Expiry_Month"));
-								driver.switchTo().defaultContent();
-								driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-								WileyPLUS.selectExpirationYearFromDropDown(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Expiry_Year"));
-								driver.switchTo().defaultContent();
-								driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-								WileyPLUS.enterCVV_Number(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "CVV"));
-								driver.switchTo().defaultContent();			
+								PaymentGateway.paymentWileyPLUS(driver, WileyPLUS, "TC20", SS_path)	;		
 								WileyPLUS.enterFirstName(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "First_Name"));
 								WileyPLUS.enterLastName(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Last_Name"));
 								WileyPLUS.selectCountry(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Bill_Country"));
@@ -1643,20 +1592,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 								driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 								try {
 									wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-									WileyPLUS.enterCardHolderName(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "First_Name"));
-									driver.switchTo().defaultContent();
-									driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-									WileyPLUS.enterCardNumber(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Card_Number"));
-									driver.switchTo().defaultContent();
-									driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-									WileyPLUS.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Expiry_Month"));
-									driver.switchTo().defaultContent();
-									driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-									WileyPLUS.selectExpirationYearFromDropDown(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Expiry_Year"));
-									driver.switchTo().defaultContent();
-									driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-									WileyPLUS.enterCVV_Number(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "CVV"));
-									driver.switchTo().defaultContent();
+									PaymentGateway.paymentWileyPLUS(driver, WileyPLUS, "TC21", SS_path)	;
 									WileyPLUS.clickOnSaveAndContinueButton();
 									if(new BigDecimal(WileyPLUS.fetchFirstProductPriceInOrderReview().substring(1))
 											.add(new BigDecimal(WileyPLUS.fetchShippingChargeInOrderReview().substring(1)))

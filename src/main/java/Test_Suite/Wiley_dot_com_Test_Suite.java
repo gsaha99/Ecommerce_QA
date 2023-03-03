@@ -589,8 +589,17 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			try {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(newXpath)));
 				wiley.checkProductsWithHighlightedSearchedTerm(newXpath);
-				wiley.clickOnSortDropDown();
-				wiley.clickOnPublicationDateFromSortDropDown();
+				//wiley.clickOnSortDropDown();
+				WebElement l1=driver.findElement(By.id("sortOptions-button"));
+				WebElement l=driver.findElement(By.xpath("//div[contains(text(),'Publication Date (newest-oldest)')]"));
+				//wiley.clickOnPublicationDateFromSortDropDown();
+				JavascriptExecutor j = (JavascriptExecutor) driver;
+				try {
+					j.executeScript("arguments[0].click();", l1);
+			    j.executeScript("arguments[0].click();", l);}
+				catch(Exception e) {
+					Reporting.updateTestReport(e.getMessage(),CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+				}
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='ui-selectmenu-text' and contains(text(),"
 						+ "'Publication Date (newest-oldest)')]")));
 				//wait.until(ExpectedConditions.urlContains("publicationDate"));
@@ -639,14 +648,14 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 						
 					}
 					catch(Exception e) {
-						Reporting.updateTestReport("Author name field for each product was not found",
+						Reporting.updateTestReport(e.getMessage()+" Publication date field for each product was not found",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				}
 				
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("Searched highlighted term was not displayed"
+				Reporting.updateTestReport(e.getMessage()+" Searched highlighted term was not displayed"
 						+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}

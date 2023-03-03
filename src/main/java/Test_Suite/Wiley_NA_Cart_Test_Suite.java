@@ -18,6 +18,7 @@ import PageObjectRepo.app_Riskified_Repo;
 import PageObjectRepo.app_Wiley_Repo;
 import utilities.CaptureScreenshot;
 import utilities.OrderConfirmationMail;
+import utilities.PaymentGateway;
 import utilities.DriverModule;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
@@ -76,6 +77,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 			driver.get(wiley.wileyURLConcatenation("TC01", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -83,6 +85,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 						("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
@@ -104,20 +115,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-					wiley.enterCardHolderName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "First_Name"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-					wiley.enterCardNumber(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-					wiley.enterCVV_Number(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "CVV"));
-					driver.switchTo().defaultContent();			
+					PaymentGateway.paymentWiley(driver, wiley, "TC01", SS_path);
 					wiley.enterFirstName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					wiley.enterLastName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Last_Name"));
 					wiley.selectCountry(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
@@ -138,14 +136,23 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 						}
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(taxInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Tax "
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
 							Reporting.updateTestReport("First Product price + Tax "
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						wiley.clickOnPlaceOrderButton();
 						if(wiley.checkIfUserIsInOrderConfirmation()) Reporting.updateTestReport("User is in Order Confirmation page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else Reporting.updateTestReport("User was not in Order Confirmation page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -160,7 +167,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 						String tax=wiley.fetchTaxAmount();
 						String orderTotal=wiley.fetchOrderTotal();
-
 						excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Tax", tax);
 						excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Order_Total", orderTotal);
 						driver.get(excelOperation.getTestData("Yopmail_URL",
@@ -257,20 +263,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				driver.switchTo().frame(0);
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-					wiley.enterCardHolderName(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "First_Name"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.className("gw-proxy-number")));		
-					wiley.enterCardNumber(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.className("gw-proxy-securityCode")));
-					wiley.enterCVV_Number(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "CVV"));
-					driver.switchTo().defaultContent();
+					PaymentGateway.paymentWiley(driver, wiley, "TC02", SS_path);
 					wiley.clickOnEnterNewAddress();
 					wiley.enterFirstName(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					wiley.enterLastName(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Last_Name"));
@@ -293,17 +286,26 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 						}
 						wiley.clickOnSaveAndContinueButton();
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(taxInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Tax "
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
 							Reporting.updateTestReport("First Product price + Tax "
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						String title = driver.getTitle();
 						if (title.equalsIgnoreCase("Secure Checkout | Wiley")) {
-							Reporting.updateTestReport("user was on Secure Checkout Page",
+							Reporting.updateTestReport("User was on Secure Checkout Page",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							wiley.clickOnPlaceOrderButton();
 							String orderconfirmation = driver.getTitle();
@@ -424,30 +426,27 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					driver.switchTo().frame(0);
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-						wiley.enterCardHolderName(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "First_Name"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));			
-						wiley.enterCardNumber(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-						wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-						wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-						wiley.enterCVV_Number(excelOperation.getTestData("TC03", "WILEY_NA_Cart_Test_Data", "CVV"));
-						driver.switchTo().defaultContent();
+						PaymentGateway.paymentWiley(driver, wiley, "TC03", SS_path);
 						wiley.clickOnSaveAndContinueButton();
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1)))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(shippingInOrderReview)
+								.add(taxInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Tax + Shipping charge"
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("First Product price+ Tax + Shipping charge"
+							Reporting.updateTestReport("First Product price + Tax +Shipping charge"
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						wiley.clickOnPlaceOrderButton();
 						String orderconfirmation = driver.getTitle();
 						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -572,30 +571,27 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-						wiley.enterCardHolderName(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "First_Name"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-						wiley.enterCardNumber(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-						wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-						wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-						wiley.enterCVV_Number(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "CVV"));
-						driver.switchTo().defaultContent();
+						PaymentGateway.paymentWiley(driver, wiley, "TC04", SS_path);
 						wiley.clickOnSaveAndContinueButton();
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1)))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(shippingInOrderReview)
+								.add(taxInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Tax + Shipping charge"
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("First Product price+ Tax + Shipping charge"
+							Reporting.updateTestReport("First Product price + Tax +Shipping charge"
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						wiley.clickOnPlaceOrderButton();
 						String orderconfirmation = driver.getTitle();
 						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -712,32 +708,29 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				driver.switchTo().frame(driver.findElement(By.className("gw-proxy-nameOnCard"))); // Thread.sleep(2000);
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-					wiley.enterCardHolderName(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "First_Name"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.className("gw-proxy-number")));
-					wiley.enterCardNumber(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.className("gw-proxy-securityCode")));
-					wiley.enterCVV_Number(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "CVV"));
-					driver.switchTo().defaultContent();
+					PaymentGateway.paymentWiley(driver, wiley, "TC05", SS_path);
 					wiley.clickOnSaveAndContinueButton();
-					if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
+					BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+					BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+					BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+					BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
+					if(firstProductPriceInOrderReview
 							.multiply(quantity)
-							.add(new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1)))
-							.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
+							.add(shippingInOrderReview)
+							.add(taxInOrderReview)
 							.setScale(2, RoundingMode.CEILING)
-							.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+							.compareTo(orderTotalInOrderReview)==0)
 						Reporting.updateTestReport("First Product price + Tax + Shipping charge"
 								+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					else
-						Reporting.updateTestReport("First Product price+ Tax + Shipping charge"
+						Reporting.updateTestReport("First Product price + Tax +Shipping charge"
 								+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+						Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					wiley.clickOnPlaceOrderButton();
 					String orderconfirmation = driver.getTitle();
 					if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -837,31 +830,35 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					driver.switchTo().frame(0);
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-						wiley.enterCardHolderName(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "First_Name"));
-						driver.switchTo().defaultContent();				
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));				
-						wiley.enterCardNumber(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-						wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-						wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-						wiley.enterCVV_Number(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "CVV"));
-						driver.switchTo().defaultContent();
+						PaymentGateway.paymentWiley(driver, wiley, "TC06", SS_path);
 						wiley.clickOnSaveAndContinueButton();
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchSecondProductPriceInOrderReview().substring(1)))
-								.add(new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1)))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal secondProductPriceInOrderReview=new BigDecimal(wiley.fetchSecondProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(secondProductPriceInOrderReview)
+								.add(shippingInOrderReview)
+								.add(taxInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Second product's price+ Tax + Shipping charge"
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
 							Reporting.updateTestReport("First Product price + Second product's price+ Tax + Shipping charge"
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("First product's Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("First product's Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfSecondProduct.compareTo(secondProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Second product's Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Second product's Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						wiley.clickOnPlaceOrderButton();
 						String orderconfirmation = driver.getTitle();
 						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -990,31 +987,35 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-							wiley.enterCardHolderName(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "First_Name"));
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-							wiley.enterCardNumber(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-							wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-							wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-							wiley.enterCVV_Number(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "CVV"));
-							driver.switchTo().defaultContent();
+							PaymentGateway.paymentWiley(driver, wiley, "TC07", SS_path);
 							wiley.clickOnSaveAndContinueButton();
-							if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-									.add(new BigDecimal(wiley.fetchSecondProductPriceInOrderReview().substring(1)))
-									.add(new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1)))
-									.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-									.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+							BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+							BigDecimal secondProductPriceInOrderReview=new BigDecimal(wiley.fetchSecondProductPriceInOrderReview().substring(1));
+							BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+							BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+							BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
+							if(firstProductPriceInOrderReview
+									.add(secondProductPriceInOrderReview)
+									.add(shippingInOrderReview)
+									.add(taxInOrderReview)
+									.compareTo(orderTotalInOrderReview)==0)
 								Reporting.updateTestReport("First Product price + Second product's price+ Tax + Shipping charge"
 										+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							else
 								Reporting.updateTestReport("First Product price + Second product's price+ Tax + Shipping charge"
 										+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+								Reporting.updateTestReport("First product's Price in PDP is same as the price in Order Review",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport("First product's Price in PDP is not same as the price in Order Review",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							if(priceOfSecondProduct.compareTo(secondProductPriceInOrderReview)==0)
+								Reporting.updateTestReport("Second product's Price in PDP is same as the price in Order Review",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport("Second product's Price in PDP is not same as the price in Order Review",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							wiley.clickOnPlaceOrderButton();
 							String orderconfirmation = driver.getTitle();
 							if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -1155,31 +1156,35 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-							wiley.enterCardHolderName(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "First_Name"));
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-							wiley.enterCardNumber(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-							wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-							wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-							wiley.enterCVV_Number(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "CVV"));
-							driver.switchTo().defaultContent();
+							PaymentGateway.paymentWiley(driver, wiley, "TC08", SS_path);
 							wiley.clickOnSaveAndContinueButton();
-							if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-									.add(new BigDecimal(wiley.fetchSecondProductPriceInOrderReview().substring(1)))
-									.add(new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1)))
-									.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-									.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+							BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+							BigDecimal secondProductPriceInOrderReview=new BigDecimal(wiley.fetchSecondProductPriceInOrderReview().substring(1));
+							BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+							BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+							BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
+							if(firstProductPriceInOrderReview
+									.add(secondProductPriceInOrderReview)
+									.add(shippingInOrderReview)
+									.add(taxInOrderReview)
+									.compareTo(orderTotalInOrderReview)==0)
 								Reporting.updateTestReport("First Product price + Second product's price+ Tax + Shipping charge"
 										+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							else
 								Reporting.updateTestReport("First Product price + Second product's price+ Tax + Shipping charge"
 										+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+								Reporting.updateTestReport("First product's Price in PDP is same as the price in Order Review",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport("First product's Price in PDP is not same as the price in Order Review",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							if(priceOfSecondProduct.compareTo(secondProductPriceInOrderReview)==0)
+								Reporting.updateTestReport("Second product's Price in PDP is same as the price in Order Review",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport("Second product's Price in PDP is not same as the price in Order Review",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							wiley.clickOnPlaceOrderButton();
 							String orderconfirmation = driver.getTitle();
 							if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -1300,21 +1305,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				driver.switchTo().frame(0);
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-					wiley.enterCardHolderName(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "First_Name"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-
-					wiley.enterCardNumber(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-					wiley.enterCVV_Number(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "CVV"));
-					driver.switchTo().defaultContent();
+					PaymentGateway.paymentWiley(driver, wiley, "TC09", SS_path);
 					wiley.enterFirstName(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					wiley.enterLastName(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Last_Name"));
 					wiley.selectCountry(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
@@ -1335,14 +1326,23 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 						}
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(taxInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Tax "
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
 							Reporting.updateTestReport("First Product price + Tax "
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						wiley.clickOnPlaceOrderButton();
 						String orderconfirmation = driver.getTitle();
 						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -1477,30 +1477,27 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					driver.switchTo().frame(0);
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-						wiley.enterCardHolderName(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "First_Name"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-						wiley.enterCardNumber(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-						wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-						wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-						wiley.enterCVV_Number(excelOperation.getTestData("TC10", "WILEY_NA_Cart_Test_Data", "CVV"));
-						driver.switchTo().defaultContent();
+						PaymentGateway.paymentWiley(driver, wiley, "TC10", SS_path);
 						wiley.clickOnSaveAndContinueButton();
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1)))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(shippingInOrderReview)
+								.add(taxInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Tax + Shipping charge"
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("First Product price+ Tax + Shipping charge"
+							Reporting.updateTestReport("First Product price + Tax +Shipping charge"
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						wiley.clickOnPlaceOrderButton();
 						String orderconfirmation = driver.getTitle();
 						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -1632,22 +1629,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					driver.switchTo().frame(0);
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-						wiley.enterCardHolderName(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "First_Name"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-						wiley.enterCardNumber(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-						wiley.selectExpirationMonthFromDropDown(
-								excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-						wiley.selectExpirationYearFromDropDown(
-								excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-						wiley.enterCVV_Number(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "CVV"));
-						driver.switchTo().defaultContent();
+						PaymentGateway.paymentWiley(driver, wiley, "TC11", SS_path);
 						driver.findElement(By.xpath("//label[@id='sameAsBillingLabel']")).click();
 						wiley.enterFirstName(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "First_Name"));
 						wiley.enterLastName(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Last_Name"));
@@ -1671,15 +1653,25 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 										Reporting.updateTestReport("Adress doctor pop up did not appear",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 									}
-									if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-											.add(new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1)))
-											.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-											.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+									BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+									BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+									BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+									BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
+									if(firstProductPriceInOrderReview
+											.add(shippingInOrderReview)
+											.add(taxInOrderReview)
+											.compareTo(orderTotalInOrderReview)==0)
 										Reporting.updateTestReport("First Product price + Tax + Shipping charge"
 												+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 									else
-										Reporting.updateTestReport("First Product price+ Tax + Shipping charge"
+										Reporting.updateTestReport("First Product price + Tax +Shipping charge"
 												+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+										Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									else
+										Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									wiley.clickOnPlaceOrderButton();
 									String orderconfirmation = driver.getTitle();
 									if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -1851,34 +1843,30 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					driver.switchTo().frame(0);
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-						wiley.enterCardHolderName(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "First_Name"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-						wiley.enterCardNumber(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-						wiley.selectExpirationMonthFromDropDown(
-								excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-						wiley.selectExpirationYearFromDropDown(
-								excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-						wiley.enterCVV_Number(excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "CVV"));
-						driver.switchTo().defaultContent();
+						PaymentGateway.paymentWiley(driver, wiley, "TC12", SS_path);
 						// Thread.sleep(3000);
 						wiley.clickOnSaveAndContinueButton();
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1)))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.subtract(new BigDecimal(wiley.fetchDiscountInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
+						BigDecimal discountInOrderReview=new BigDecimal(wiley.fetchDiscountInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(shippingInOrderReview)
+								.add(taxInOrderReview)
+								.subtract(discountInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Tax + Shipping charge - Discount"
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("First Product price+ Tax + Shipping charge - Discount"
+							Reporting.updateTestReport("First Product price + Tax + Shipping charge - Discount"
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						wiley.clickOnPlaceOrderButton();
 						String orderconfirmation = driver.getTitle();
 						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -1998,22 +1986,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				driver.switchTo().frame(0);
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-					wiley.enterCardHolderName(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "First_Name"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-					wiley.enterCardNumber(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-					wiley.selectExpirationMonthFromDropDown(
-							excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-					wiley.selectExpirationYearFromDropDown(
-							excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-					wiley.enterCVV_Number(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "CVV"));
-					driver.switchTo().defaultContent();
+					PaymentGateway.paymentWiley(driver, wiley, "TC13", SS_path);
 					wiley.enterFirstName(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					wiley.enterLastName(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Last_Name"));
 					wiley.selectCountry(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
@@ -2034,14 +2007,23 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 						}
 						//wiley.clickOnRentalTermsCheckbox();
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(taxInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Tax "
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
 							Reporting.updateTestReport("First Product price + Tax "
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						wiley.clickOnPlaceOrderButton();
 						String orderconfirmation = driver.getTitle();
 						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -2178,32 +2160,28 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					driver.switchTo().frame(0);
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-						wiley.enterCardHolderName(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "First_Name"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-
-						wiley.enterCardNumber(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-						wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-						wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-						wiley.enterCVV_Number(excelOperation.getTestData("TC14", "WILEY_NA_Cart_Test_Data", "CVV"));
-						driver.switchTo().defaultContent();
+						PaymentGateway.paymentWiley(driver, wiley, "TC14", SS_path);
 						wiley.clickOnSaveAndContinueButton();
 						wiley.clickOnRentalTermsCheckbox();
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1)))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(shippingInOrderReview)
+								.add(taxInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Tax + Shipping charge"
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("First Product price+ Tax + Shipping charge"
+							Reporting.updateTestReport("First Product price + Tax +Shipping charge"
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						wiley.clickOnPlaceOrderButton();
 						String orderconfirmation = driver.getTitle();
 						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -2322,20 +2300,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-					wiley.enterCardHolderName(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "First_Name"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-					wiley.enterCardNumber(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-					wiley.enterCVV_Number(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "CVV"));
-					driver.switchTo().defaultContent();
+					PaymentGateway.paymentWiley(driver, wiley, "TC15", SS_path);
 					wiley.enterFirstName(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					wiley.enterLastName(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Last_Name"));
 					wiley.selectCountry(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
@@ -2356,14 +2321,23 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 						}
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(taxInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Tax "
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
 							Reporting.updateTestReport("First Product price + Tax "
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						wiley.clickOnPlaceOrderButton();
 						String orderconfirmation = driver.getTitle();
 						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -2496,31 +2470,28 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					driver.switchTo().frame(0);
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-						wiley.enterCardHolderName(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "First_Name"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-						wiley.enterCardNumber(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-						wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-						wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-						wiley.enterCVV_Number(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "CVV"));
-						driver.switchTo().defaultContent();
+						PaymentGateway.paymentWiley(driver, wiley, "TC16", SS_path);
 						wiley.clickOnSaveAndContinueButton();
 						wiley.clickOnRentalTermsCheckbox();
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1)))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(shippingInOrderReview)
+								.add(taxInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Tax + Shipping charge"
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("First Product price+ Tax + Shipping charge"
+							Reporting.updateTestReport("First Product price + Tax +Shipping charge"
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						wiley.clickOnPlaceOrderButton();
 						String orderconfirmation = driver.getTitle();
 						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -2670,31 +2641,29 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					driver.switchTo().frame(0);
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-						wiley.enterCardHolderName(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "First_Name"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-						wiley.enterCardNumber(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-						wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-						wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-						wiley.enterCVV_Number(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "CVV"));
-						driver.switchTo().defaultContent();
+						PaymentGateway.paymentWiley(driver, wiley, "TC17", SS_path);
 						wiley.clickOnSaveAndContinueButton();
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1)))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.subtract(new BigDecimal(wiley.fetchDiscountInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
+						BigDecimal discountInOrderReview=new BigDecimal(wiley.fetchDiscountInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(shippingInOrderReview)
+								.add(taxInOrderReview)
+								.subtract(discountInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Tax + Shipping charge - Discount"
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("First Product price+ Tax + Shipping charge - Discount"
+							Reporting.updateTestReport("First Product price + Tax + Shipping charge - Discount"
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						wiley.clickOnPlaceOrderButton();
 						String orderconfirmation = driver.getTitle();
 						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -2798,20 +2767,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-					wiley.enterCardHolderName(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "First_Name"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-					wiley.enterCardNumber(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-					wiley.enterCVV_Number(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "CVV"));
-					driver.switchTo().defaultContent();			
+					PaymentGateway.paymentWiley(driver, wiley, "TC18", SS_path);		
 					wiley.enterFirstName(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					wiley.enterLastName(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Last_Name"));
 					wiley.selectCountry(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
@@ -2841,20 +2797,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));			
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-							wiley.enterCardHolderName(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "First_Name"));
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-							wiley.enterCardNumber(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-							wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-							wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-							driver.switchTo().defaultContent();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-							wiley.enterCVV_Number(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "CVV"));
-							driver.switchTo().defaultContent();			
+							PaymentGateway.paymentWiley(driver, wiley, "TC18", SS_path);			
 							wiley.enterFirstName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "First_Name"));
 							wiley.enterLastName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Last_Name"));
 							wiley.selectCountry(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
@@ -3078,30 +3021,27 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					driver.switchTo().frame(0);
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-						wiley.enterCardHolderName(excelOperation.getTestData("TC20", "WILEY_NA_Cart_Test_Data", "First_Name"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));			
-						wiley.enterCardNumber(excelOperation.getTestData("TC20", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-						wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC20", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-						wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC20", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-						wiley.enterCVV_Number(excelOperation.getTestData("TC20", "WILEY_NA_Cart_Test_Data", "CVV"));
-						driver.switchTo().defaultContent();
+						PaymentGateway.paymentWiley(driver, wiley, "TC20", SS_path);
 						wiley.clickOnSaveAndContinueButton();
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1)))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(shippingInOrderReview)
+								.add(taxInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Tax + Shipping charge"
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("First Product price+ Tax + Shipping charge"
+							Reporting.updateTestReport("First Product price + Tax +Shipping charge"
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						wiley.clickOnPlaceOrderButton();
 						String orderconfirmation = driver.getTitle();
 						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -3215,30 +3155,27 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				driver.switchTo().frame(0);
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-					wiley.enterCardHolderName(excelOperation.getTestData("TC21", "WILEY_NA_Cart_Test_Data", "First_Name"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-					wiley.enterCardNumber(excelOperation.getTestData("TC21", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC21", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC21", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-					wiley.enterCVV_Number(excelOperation.getTestData("TC21", "WILEY_NA_Cart_Test_Data", "CVV"));
-					driver.switchTo().defaultContent();
+					PaymentGateway.paymentWiley(driver, wiley, "TC21", SS_path);
 					wiley.clickOnSaveAndContinueButton();
-					if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-							.add(new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1)))
-							.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-							.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+					BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+					BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+					BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+					BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
+					if(firstProductPriceInOrderReview
+							.add(shippingInOrderReview)
+							.add(taxInOrderReview)
+							.compareTo(orderTotalInOrderReview)==0)
 						Reporting.updateTestReport("First Product price + Tax + Shipping charge"
 								+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					else
-						Reporting.updateTestReport("First Product price+ Tax + Shipping charge"
+						Reporting.updateTestReport("First Product price + Tax +Shipping charge"
 								+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+						Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					wiley.clickOnPlaceOrderButton();
 					String orderconfirmation = driver.getTitle();
 					if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -3332,20 +3269,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-					wiley.enterCardHolderName(excelOperation.getTestData("TC22", "WILEY_NA_Cart_Test_Data", "First_Name"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-					wiley.enterCardNumber(excelOperation.getTestData("TC22", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC22", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC22", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-					wiley.enterCVV_Number(excelOperation.getTestData("TC22", "WILEY_NA_Cart_Test_Data", "CVV"));
-					driver.switchTo().defaultContent();			
+					PaymentGateway.paymentWiley(driver, wiley, "TC22", SS_path);
 					wiley.enterFirstName(excelOperation.getTestData("TC22", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					wiley.enterLastName(excelOperation.getTestData("TC22", "WILEY_NA_Cart_Test_Data", "Last_Name"));
 					wiley.selectCountry(excelOperation.getTestData("TC22", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
@@ -3367,14 +3291,23 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 						}
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(taxInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Tax "
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
 							Reporting.updateTestReport("First Product price + Tax "
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						wiley.clickOnPlaceOrderButton();
 						String orderconfirmation = driver.getTitle();
 						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -3484,20 +3417,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				driver.switchTo().frame(0);
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-					wiley.enterCardHolderName(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "First_Name"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-					wiley.enterCardNumber(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-					wiley.enterCVV_Number(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "CVV"));
-					driver.switchTo().defaultContent();
+					PaymentGateway.paymentWiley(driver, wiley, "TC23", SS_path);
 					//wiley.clickOnEnterNewAddress();
 					wiley.enterFirstName(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					wiley.enterLastName(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "Last_Name"));
@@ -3519,14 +3439,23 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 						}
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(taxInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Tax "
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
 							Reporting.updateTestReport("First Product price + Tax "
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						wiley.clickOnPlaceOrderButton();
 						String orderconfirmation = driver.getTitle();
 						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
@@ -4098,20 +4027,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					driver.switchTo().frame(0);
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-						wiley.enterCardHolderName(excelOperation.getTestData("TC32", "WILEY_NA_Cart_Test_Data", "First_Name"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='card number']")));
-						wiley.enterCardNumber(excelOperation.getTestData("TC32", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='expiryMonth']")));
-						wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC32", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-						wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC32", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-						driver.switchTo().defaultContent();
-						driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='securityCode']")));
-						wiley.enterCVV_Number(excelOperation.getTestData("TC32", "WILEY_NA_Cart_Test_Data", "CVV"));
-						driver.switchTo().defaultContent();
+						PaymentGateway.paymentWiley(driver, wiley, "TC32", SS_path);
 						wiley.clickOnSaveAndContinueButton();
 						wiley.checkNextAvailabilityDatePreorderInOrderReviewPage();
 						wiley.checkNextAvailabilityDateBackorderInOrderReviewPage();
@@ -4652,20 +4568,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-					wiley.enterCardHolderName(excelOperation.getTestData("TC38", "WILEY_NA_Cart_Test_Data", "First_Name"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-					wiley.enterCardNumber(excelOperation.getTestData("TC38", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC38", "WILEY_NA_Cart_Test_Data", "Expiry_Month").split(",")[0]);
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC38", "WILEY_NA_Cart_Test_Data", "Expiry_Year").split(",")[0]);
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-					wiley.enterCVV_Number(excelOperation.getTestData("TC38", "WILEY_NA_Cart_Test_Data", "CVV"));
-					driver.switchTo().defaultContent();			
+					PaymentGateway.paymentWiley(driver, wiley, "TC38", SS_path);		
 					wiley.enterFirstName(excelOperation.getTestData("TC38", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					wiley.enterLastName(excelOperation.getTestData("TC38", "WILEY_NA_Cart_Test_Data", "Last_Name"));
 					wiley.selectCountry(excelOperation.getTestData("TC38", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
@@ -4729,6 +4632,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 			driver.get(wiley.wileyURLConcatenation("TC39", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -4736,6 +4640,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 						("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
@@ -4757,20 +4670,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-					wiley.enterCardHolderName(excelOperation.getTestData("TC39", "WILEY_NA_Cart_Test_Data", "First_Name"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-					wiley.enterCardNumber(excelOperation.getTestData("TC39", "WILEY_NA_Cart_Test_Data", "Card_Number"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-					wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC39", "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-					wiley.selectExpirationYearFromDropDown(excelOperation.getTestData("TC39", "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-					driver.switchTo().defaultContent();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-					wiley.enterCVV_Number(excelOperation.getTestData("TC39", "WILEY_NA_Cart_Test_Data", "CVV"));
-					driver.switchTo().defaultContent();			
+					PaymentGateway.paymentWiley(driver, wiley, "TC39", SS_path);			
 					wiley.enterFirstName(excelOperation.getTestData("TC39", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					wiley.enterLastName(excelOperation.getTestData("TC39", "WILEY_NA_Cart_Test_Data", "Last_Name"));
 					wiley.selectCountry(excelOperation.getTestData("TC39", "WILEY_NA_Cart_Test_Data", "Bill_Country"));
@@ -4791,14 +4691,23 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 						}
-						if(new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1))
-								.add(new BigDecimal(wiley.fetchTaxInOrderReview().substring(1)))
-								.compareTo(new BigDecimal(wiley.fetchTotalInOrderReview().substring(1)))==0)
+						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+						if(firstProductPriceInOrderReview
+								.add(taxInOrderReview)
+								.compareTo(orderTotalInOrderReview)==0)
 							Reporting.updateTestReport("First Product price + Tax "
 									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
 							Reporting.updateTestReport("First Product price + Tax "
 									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						wiley.clickOnPlaceOrderButton();
 						if(wiley.checkIfUserIsInOrderConfirmation()) Reporting.updateTestReport("User is in Order Confirmation page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else Reporting.updateTestReport("User was not in Order Confirmation page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
