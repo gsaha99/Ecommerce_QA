@@ -23,7 +23,7 @@ import utilities.excelOperation;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.lang.reflect.Method;
@@ -509,7 +509,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Author name field for each product was not found",
-								CaptureScreenshot.getScreenshot(quantity), StatusDetails.FAIL);
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				}
 				if(flag==0) {
@@ -570,8 +570,95 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Validate the sorting functionality in search result page
+	 * @Date: 3/3/23 
+	 */
+	@Test
+	public void TC16_Sort_Functionality_In_SRP() throws IOException{
+		try {
+			Reporting.test = Reporting.extent.createTest("TC16_Sort_Functionality_In_SRP");
+			driver.get(wiley.wileyURLConcatenation("TC16", "WILEY_Dot_Com_Test_Data", "URL"));
+			driver.navigate().refresh();
+			wiley.Entertextonsearcbar(excelOperation.getTestData("TC16", "WILEY_Dot_Com_Test_Data", "SearchBox_Text"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			String newXpath="(//span[@class='search-highlight' and contains(text(),'"+
+					excelOperation.getTestData("TC16", "WILEY_Dot_Com_Test_Data", "SearchBox_Text")+"')])[1]";
+			try {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(newXpath)));
+				wiley.checkProductsWithHighlightedSearchedTerm(newXpath);
+				wiley.clickOnSortDropDown();
+				wiley.clickOnPublicationDateFromSortDropDown();
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='ui-selectmenu-text' and contains(text(),"
+						+ "'Publication Date (newest-oldest)')]")));
+				//wait.until(ExpectedConditions.urlContains("publicationDate"));
+				String date="Dec 2023";
+				String previousMonth="Dec";
+				String previousYear="2023";
+				List<WebElement> filteredProducts=driver.findElements(By.className("product-title"));
+				System.out.println(filteredProducts.size());
+				String[] months=new String[] {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+				for(int i=1;i<filteredProducts.size()+1;i++) {
+					try {
+						WebElement publicationDate=driver.findElement(By.xpath(
+								"(//div[@class='product-date wileyProductDateGroup wileyProductPubDate'])"+"["+i+"]"));
+						if(i==1) {
+							date=publicationDate.getText();
+							previousMonth=date.split(" ")[0];
+							previousYear=date.split(" ")[1];
+							
+						}
+						else {
+							String currentdate=publicationDate.getText();
+							String currentMonth=currentdate.split(" ")[0];
+							String currentYear=currentdate.split(" ")[1];
+							if(Integer.parseInt(currentYear)<Integer.parseInt(previousYear))
+								Reporting.updateTestReport("Current date: "+currentdate+" is older than previous date: "+date,
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else {
+								if(Integer.parseInt(currentYear)==Integer.parseInt(previousYear)) {
+									if(Arrays.asList(months).indexOf(currentMonth)<Arrays.asList(months).indexOf(previousMonth))
+										Reporting.updateTestReport("Current date: "+currentdate+" is older than previous date: "+date,
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									else
+										Reporting.updateTestReport("Current date: "+currentdate+" is not older than previous date: "+date,
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+								else
+									Reporting.updateTestReport("Current date: "+currentdate+" is not older than previous date: "+date,
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+							date=currentdate;
+							previousMonth=currentMonth;
+							previousYear=currentYear;
+								
+						}
+						
+						
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Author name field for each product was not found",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				}
+				
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Searched highlighted term was not displayed"
+						+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
+						StatusDetails.FAIL);
+			}
 
-
+		}
+		catch(Exception e) {
+			wiley.wileyLogOutException();
+			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 
 
 

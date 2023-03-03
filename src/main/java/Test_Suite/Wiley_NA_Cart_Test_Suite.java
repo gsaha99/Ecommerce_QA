@@ -27,6 +27,7 @@ import utilities.excelOperation;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -3384,6 +3385,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							String orderId = wiley.fetchOrderId();
 							excelOperation.updateTestData("TC22", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
 							excelOperation.updateTestData("TC22", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+							excelOperation.updateTestData("TC40", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
 							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 							String ordertotal = wiley.fetchOrderTotal();
 							String taxamount = wiley.fetchTaxAmount();
@@ -4862,6 +4864,145 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 		}
 		catch(Exception e){
+			wiley.wileyLogOutException();
+			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Author: Anindita
+	 * @Description: Verifies if the Shipping charge for multiple products are getting calculated properly
+	 * @Date: 3/3/23
+	 */
+	@Test
+	public void TC40_Shipping_Charge_For_Multiple_Products() throws IOException{
+		try {
+			Reporting.test = Reporting.extent.createTest("TC40_Shipping_Charge_For_Multiple_Products");
+			driver.get(wiley.wileyURLConcatenation("TC40", "WILEY_NA_Cart_Test_Data", "URL"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			driver.navigate().refresh();
+			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
+			wiley.clickOnAddToCartButton();
+			try {
+				wait.until(ExpectedConditions.
+						elementToBeClickable
+						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.compareTo(ordertotalInCartPage)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
+						("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String emailID=excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Email_Id");
+				wiley.enterExistingWileyUserMailID(emailID);
+				wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC05", "WILEY_NA_Cart_Test_Data", "Password"));
+				wiley.clickOnLogInAndContinueButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
+						("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
+				//By default the country is selected as US
+				BigDecimal standardShippingChargeForOneUnit=wiley.fetchShippingCharge(driver, "Standard Shipping");
+				BigDecimal expressShippingChargeForOneUnit=wiley.fetchShippingCharge(driver, "Express Shipping");
+				BigDecimal nextDayShippingChargeForOneUnit=wiley.fetchShippingCharge(driver, "Next Day Shipping");
+				wiley.clickOnEnterNewAddresButtonInShipping();
+				String country1=excelOperation.getTestData("TC40", "WILEY_NA_Cart_Test_Data", "Shipping_Country").split(",")[0];
+				String country2=excelOperation.getTestData("TC40", "WILEY_NA_Cart_Test_Data", "Shipping_Country").split(",")[1];
+				System.out.println(country1+country2);
+				wiley.selectCountry(country1);
+				//validation for Brzil/ columbia
+				BigDecimal airMailChargeForOneUnit=wiley.fetchShippingCharge(driver, "Air Mail");
+				BigDecimal courierChargeForOneUnit=wiley.fetchShippingCharge(driver, "Courier");
+				wiley.selectCountry(country2);
+
+				BigDecimal twoDayChargeForOneUnit=wiley.fetchShippingCharge(driver, "2-Day");
+				wiley.clickOnCartIcon();
+				String quantity=excelOperation.getTestData("TC40", "WILEY_NA_Cart_Test_Data", "Quantity");
+				wiley.selectQuantityDropDown(quantity);
+				BigDecimal ordertotalInCartPage1=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+				if(priceOfFirstProduct.multiply(new BigDecimal(quantity)).compareTo(ordertotalInCartPage1)==0) 
+					Reporting.updateTestReport(
+							"The addition of all the products' price is same as the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				//By default the country is selected as US
+				BigDecimal standardShippingChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Standard Shipping");
+				BigDecimal expressShippingChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Express Shipping");
+				BigDecimal nextDayShippingChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Next Day Shipping");
+				if((standardShippingChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
+						.multiply(new BigDecimal("0.01")))).setScale(2, RoundingMode.CEILING).compareTo(standardShippingChargeForMultiUnit)==0)
+					Reporting.updateTestReport("Shipping charge has been correctly calculated for Standard shipping",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					{Reporting.updateTestReport("Shipping charge has been wrongly calculated for Standard shipping",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				     System.out.println((standardShippingChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal(1)))
+							.multiply((new BigDecimal("0.01"))))).setScale(2, RoundingMode.CEILING));}
+				if((expressShippingChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
+						.multiply(new BigDecimal("4")))).setScale(2, RoundingMode.CEILING).compareTo(expressShippingChargeForMultiUnit)==0)
+					Reporting.updateTestReport("Shipping charge has been correctly calculated for Express shipping",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Shipping charge has been wrongly calculated for Express shipping",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				if((nextDayShippingChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
+						.multiply(new BigDecimal("4")))).setScale(2, RoundingMode.CEILING).compareTo(nextDayShippingChargeForMultiUnit)==0)
+					Reporting.updateTestReport("Shipping charge has been correctly calculated for Next day shipping",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Shipping charge has been wrongly calculated for Next day shipping",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				wiley.clickOnEnterNewAddresButtonInShipping();
+				wiley.selectCountry(country1);
+				//validation for Brzil/ columbia
+				BigDecimal airMailChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Air Mail");
+				BigDecimal courierChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Courier");
+				if((airMailChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
+						.multiply(new BigDecimal("5")))).setScale(2, RoundingMode.CEILING).compareTo(airMailChargeForMultiUnit)==0)
+					Reporting.updateTestReport("Air mail charge has been correctly calculated for Standard shipping",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Air mail charge has been wrongly calculated for Standard shipping",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				if((courierChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
+						.multiply(new BigDecimal("10")))).setScale(2, RoundingMode.CEILING).compareTo(courierChargeForMultiUnit)==0)
+					Reporting.updateTestReport("Courier charge has been correctly calculated for Standard shipping",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Courier charge has been wrongly calculated for Standard shipping",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				wiley.selectCountry(country2);
+				BigDecimal twoDayChargeForMultiUnit=wiley.fetchShippingCharge(driver, "2-Day");
+				if((twoDayChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
+						.multiply(new BigDecimal("4")))).setScale(2, RoundingMode.CEILING).compareTo(twoDayChargeForMultiUnit)==0)
+					Reporting.updateTestReport("2 day charge has been correctly calculated for Standard shipping",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("2 day charge has been wrongly calculated for Standard shipping",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				
+
+					}catch(Exception e) {
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			wiley.WileyLogOut();
+		}
+		catch(Exception e) {
 			wiley.wileyLogOutException();
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);

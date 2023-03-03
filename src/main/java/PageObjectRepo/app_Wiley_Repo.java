@@ -1,6 +1,7 @@
 package PageObjectRepo;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
@@ -32,29 +33,17 @@ public class app_Wiley_Repo {
 
 	WebDriver driver;
 
-
-
 	@FindBy(xpath = "//button[contains(text(),'View Cart')]")
 	WebElement ViewCartButton;
 
 	@FindBy(xpath = "(//span[contains(text(),'Proceed to Checkout')])[2]")
 	WebElement ProceedToCheckoutButton;
 
-
-
-
-
-
 	@FindBy(xpath = "//span[contains(text(),'Save and Continue')]")
 	WebElement SaveAndContinueButton;
 
-
 	@FindBy(xpath = "//select[@id='address.country']")
 	WebElement SelectCountryDropDown;
-
-
-
-
 
 	@FindBy(xpath = "(//input[@id='postcode'])[1]")
 	WebElement ShippingZIPCode;
@@ -65,13 +54,8 @@ public class app_Wiley_Repo {
 	@FindBy(xpath = "(//input[@id='address.region'])[1]")
 	WebElement SelectStateDropDown;
 
-
-
 	@FindBy(xpath = "(//input[@name='deliveryMode'])[2]")
 	WebElement ShippingMethod;
-
-
-
 
 	@FindBy(xpath = "//select[@id='expiryMonth']")
 	WebElement ExpirationDateForMonth;
@@ -85,11 +69,8 @@ public class app_Wiley_Repo {
 	@FindBy(xpath = "//button[@id='placeOrder']")
 	WebElement Place_OrderButton;
 
-
-
 	@FindBy(xpath = "(//div[@class='products-list']//section//div//a//img)//following::div//h3//a")
 	WebElement SRP_WileyProduct;
-
 
 	@FindBy(xpath = "//input[@id='j_username']")
 	WebElement ExistingWileyUserMailID;
@@ -103,24 +84,17 @@ public class app_Wiley_Repo {
 	@FindBy(xpath = "//select[@class='cartItemBookQty']")
 	WebElement QuantityDropDown;
 
-
-
 	@FindBy(xpath = "(//span[contains(text(),'Use')])[2]")
 	WebElement USEOptionForExistingAddress;
 
 	@FindBy(xpath = "((//div[contains(text(),'Total')])//following::div)[1]")
 	WebElement OrderTotalAmount;
 
-
-
-
-
 	@FindBy(xpath = "//button[@id='yesBtn']")
 	WebElement YesBtnForSchoolInfo;
 
 	@FindBy(xpath = "//select[@id='region']")
 	WebElement StateDropDownForSchoolInfo;
-
 
 	@FindBy(xpath = "//select[@id='school']")
 	WebElement SchoolDropDown;
@@ -543,7 +517,14 @@ public class app_Wiley_Repo {
 	@FindBy(id="wrongCardValidation")
 	WebElement WrongCardDetailsErrorMessage;
 	
+	@FindBy(id="addNewAddressButton")
+	WebElement EnterNewAddressButton;
 	
+	@FindBy(id="sortOptions-button")
+	WebElement SortDropDown;
+	
+	@FindBy(xpath="//div[contains(text(),'Publication Date (newest-oldest)')]")
+	WebElement PublicationDateFromSortDropDown;
 
 	/*
 	 * @Author: Anindita
@@ -3531,6 +3512,81 @@ public class app_Wiley_Repo {
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Wrong card details error was not displayed ", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Fetches the shipping charge for shipping methods by passing the shipping method name
+	 * @Date: 3/3/23
+	 */
+	public BigDecimal fetchShippingCharge(WebDriver driver,String shippingMethod) throws IOException{
+		try {
+			String xpathOfShippingCharge="//span[@class='delivery-item-title deliveryItemTitle' and contains(text(),'"+
+		shippingMethod+"')]/following-sibling::span/span[@class='textBold']";
+			String xpathOfShippingMethodName="//span[@class='delivery-item-title deliveryItemTitle' and contains(text(),'"+
+					shippingMethod+"')]";
+			String charge=driver.findElement(By.xpath(xpathOfShippingCharge)).getText();
+			Reporting.updateTestReport("Shipping charge value: "+charge+" was returned for shipping method: "+
+			driver.findElement(By.xpath(xpathOfShippingMethodName)).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return new BigDecimal(charge.substring(1));
+			
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Shipping charge couldn't be fetched", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return new BigDecimal(0.00);
+		}
+	}
+	
+
+	/*
+	 * @Author: Anindita
+	 * @Description: Clicks on enter new address button in shipping page
+	 * @Date: 3/3/23
+	 */
+	public void clickOnEnterNewAddresButtonInShipping() throws IOException{
+		try {
+			EnterNewAddressButton.click();
+			Reporting.updateTestReport("Enter new Address button was successfully clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Enter new Address button was couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Clicks on Sorting drop down in search result drop down
+	 * @Date: 3/3/23
+	 */
+	public void clickOnSortDropDown() throws IOException{
+		try {
+			SortDropDown.click();
+			Reporting.updateTestReport("Sort Drop Down button was successfully clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Sort Drop Down button was couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Clicks on Publication Date From Sort Drop Down
+	 * @Date: 3/3/23
+	 */
+	public void clickOnPublicationDateFromSortDropDown() throws IOException{
+		try {
+			PublicationDateFromSortDropDown.click();
+			Reporting.updateTestReport("Publication Date From Sort Drop Down was successfully clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Publication Date From Sort Drop Down was couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 	
