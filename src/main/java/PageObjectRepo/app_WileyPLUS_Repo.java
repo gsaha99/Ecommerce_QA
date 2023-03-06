@@ -123,6 +123,8 @@ public class app_WileyPLUS_Repo {
 	WebElement OrderTotalAmount;
 	@FindBy(xpath="(//div[contains(text(),'Taxes')]//following::div)[1] ")
 	WebElement TotalTax;
+	@FindBy(xpath = "(((//div[contains(text(),'Shipping')])[2])//following::div)[1]")
+	WebElement Shippingcharge;
 	@FindBy(xpath = "//input[@placeholder='Enter your inbox here']")
 	WebElement EnterEmailIdInYopmail;	
 	@FindBy(xpath = "//button[@title='Check Inbox @yopmail.com']")
@@ -1405,6 +1407,25 @@ public class app_WileyPLUS_Repo {
 			Reporting.updateTestReport("Total Tax couldn't fetched",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 			return "";
 		}
+	}
+	
+	/*
+	 * @Date: 02/01/23
+	 * @Description : This Method using for Shipping charge Fetching From Order Confirmation page
+	 */
+	public String fetchShippingCharge() throws IOException {
+		try {
+			String shippingCharge = Shippingcharge.getText();
+			System.out.println();
+			Reporting.updateTestReport("Shipping Charge: "+shippingCharge+" was fetched successfully from Order Confirmation Page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return shippingCharge;
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to fetch the Shipping Charge with error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		return "";
 	}
 	
 	/*

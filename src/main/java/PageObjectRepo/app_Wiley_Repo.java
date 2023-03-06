@@ -475,10 +475,10 @@ public class app_Wiley_Repo {
 	@FindBy(xpath="//div[@class='row no-margin cartTotalVoucherApply']/div[@class='col-xs-6 noPadding price navyBlueVal']")
 	WebElement DiscountValue;
 	
-	@FindBy(xpath="(//div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[1]")
+	@FindBy(xpath="((//div[@class='row no-margin orderReviewDetailsRow'])[1]/div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[1]")
 	WebElement PriceOfFirstProductInOrderReview;
 	
-	@FindBy(xpath="(//div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[2]")
+	@FindBy(xpath="((//div[@class='row no-margin orderReviewDetailsRow'])[2]/div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[1]")
 	WebElement PriceOfSecondProductInOrderReview;
 	
 	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewSummaryTitle' and contains(text(),'Total:')]/following-sibling::div")
@@ -1313,14 +1313,14 @@ public class app_Wiley_Repo {
 	 */
 	public String fetchShippingCharge() throws IOException {
 		try {
-			String shpcharge = Shippingcharge.getText();
+			String shippingCharge = Shippingcharge.getText();
 			System.out.println();
-			Reporting.updateTestReport("Shipping Charge was selected successfully on OrderConfirmation Page",
+			Reporting.updateTestReport("Shipping Charge: "+shippingCharge+" was fetched successfully from Order Confirmation Page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			return shpcharge;
+			return shippingCharge;
 		} catch (Exception e) {
 			Reporting.updateTestReport(
-					"Failed to select the Shipping Charge with error message " + e.getClass().toString(),
+					"Failed to fetch the Shipping Charge with error message " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 		return "";
