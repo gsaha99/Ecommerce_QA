@@ -911,8 +911,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						String xpathOfGlobalSavedAddress="//*[contains(text(),' "
 								+excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Address_line1")+
 								"')]/following-sibling::div[contains(text(),'"+excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Country")+"')]";
-
-						System.out.println(xpathOfGlobalSavedAddress);
+						
 						WileyPLUS.checkGlobalSavedAddress(driver, xpathOfGlobalSavedAddress);
 					}			
 
@@ -1021,7 +1020,6 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						String xpathOfGlobalSavedAddress="//*[contains(text(),' "
 								+excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_Address_line1")+
 								"')]/following-sibling::div[contains(text(),'"+excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Shipping_Country")+"')]";		
-						System.out.println(xpathOfGlobalSavedAddress);
 						WileyPLUS.checkGlobalSavedAddress(driver, xpathOfGlobalSavedAddress);
 					}			
 

@@ -3,6 +3,7 @@ package PageObjectRepo;
 import Test_Suite.WEL_Test_Suite;
 import utilities.CaptureScreenshot;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Driver;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -41,6 +42,24 @@ public class app_WEL_Repo {
 	@FindBy(id = "updatePwd.pwd")
 	WebElement NewPasswordField;
 
+	@FindBy(xpath = "(//div[@class='col-3 noPadding orderReviewDetailsValue'])[1]")
+	WebElement FirstProductPriceinReviewPage;
+
+	@FindBy(xpath = "(//div[@class='col-3 noPadding orderReviewDetailsValue'])[2]")
+	WebElement SecondProductPriceinReviewPage;
+
+	@FindBy(xpath = "//span[@class='apply-discount-link']")
+	WebElement ApplyStudentDiscount;
+
+	@FindBy(xpath="(//p[@class='current-price-link']/a)[2]")
+	WebElement SwitchStudentDsicount;
+	
+	@FindBy(xpath = "(//div[@class='col-3 noPadding orderReviewDetailsValue'])[3]")
+	WebElement ThirdProductPriceinReviewPage;
+
+	@FindBy(id = "totalPriceValue")
+	WebElement OrderTotaOnCartPage;
+
 	@FindBy(xpath = "(//main[@class='yscrollbar']/div/div/div/table/tbody/tr/td/center/table/tbody/tr/td)[2]//a[contains(text(),'Reset Password')]")
 	WebElement ResetPasswordLink;
 
@@ -61,11 +80,11 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//p[@class='old-price']")
 	WebElement ProductOldPriceInPDP;
-	
-	@FindBy(xpath="//p[@class='last-price']")
+
+	@FindBy(xpath = "//p[@class='your-price']")
 	WebElement PartnerProductPDPPrice;
-	
-	@FindBy(xpath="//p[@class='your-price']")
+
+	@FindBy(xpath = "//p[@class='your-price']")
 	WebElement DeanDartonPDPrice;
 
 	@FindBy(xpath = "//div[@id='orderSummaryProductTotalValue']")
@@ -73,11 +92,11 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Taxes')]/following-sibling::div")
 	WebElement TaxInOrderReview;
-	
-	@FindBy(xpath="//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Discount')]/following-sibling::div")
+
+	@FindBy(xpath = "//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Discount')]/following-sibling::div")
 	WebElement DiscountInOrderReview;
-	
-	@FindBy(xpath="//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Shipping')]/following-sibling::div")
+
+	@FindBy(xpath = "//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Shipping')]/following-sibling::div")
 	WebElement ShippingChargeInOrderReview;
 
 	@FindBy(xpath = "//div[@id='totalPriceValue']")
@@ -374,6 +393,9 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//input[@id='discountCodeValue'])[2]")
 	WebElement ExtraDiscount;
 
+	@FindBy(xpath = "(//input[@id='discountCodeValue'])[3]")
+	WebElement DiscoutnonCartPage;
+
 	@FindBy(id = "discountCodeValue")
 	WebElement ExtraDiscountCode;
 
@@ -424,8 +446,8 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//div[@class='col-md-5 col-6 noPadding orderReviewTotalPrice']")
 	WebElement OrderTotal;
-	
-	@FindBy(xpath="//div[@class='col-6 noPadding orderDetailTotalVal']")
+
+	@FindBy(xpath = "//div[@class='col-6 noPadding orderDetailTotalVal']")
 	WebElement OrderTotalonCartPage;
 
 	@FindBy(xpath = "(//div[contains(text(),'Shipping')])[2]/following-sibling::div")
@@ -615,7 +637,7 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//div[@class='col-xs-12 col-sm-4 supplements-cards']/div/a)[1]")
 	WebElement CFASupplementProduct;
 
-	@FindBy(xpath = "(//div[@class='col-6 noPadding price orderDetailCommonVal'])[2]")
+	@FindBy(xpath = "(//div[@class='col-6 noPadding price orderDetailCommonVal'])[3]")
 	WebElement ShippingCharge;
 
 	@FindBy(xpath = "(//div[@class='sc-AxjAm bcMPWx my-accounts-header']//ul/li)[3]")
@@ -1093,6 +1115,35 @@ public class app_WEL_Repo {
 		}
 
 	}
+	
+	public void ClickonApplyStudentDiscount() throws IOException {
+		try {
+			ApplyStudentDiscount.click();
+			Reporting.updateTestReport("ApplyStudentDiscount link clicked successfully user is on My Account page ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on ApplyStudentDiscount link with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+	
+	public void ClickonswitchStudentDiscount() throws IOException {
+		try {
+			SwitchStudentDsicount.click();
+			Reporting.updateTestReport("SwitchStudentDsicount link clicked successfully user is on My Account page ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on SwitchStudentDsicount link with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+	
 
 	public void ClickonForgotPassword() throws IOException {
 		try {
@@ -1498,6 +1549,19 @@ public class app_WEL_Repo {
 		}
 	}
 
+	public void EnterExtraDiscountCodeOnCartPage(String PromoCode) throws IOException {
+		try {
+			DiscoutnonCartPage.sendKeys(PromoCode);
+			Reporting.updateTestReport("PromoCode was entered Successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to enter the PromoCode with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
 	public void EnterCouponExtraDiscountCode(String PromoCode) throws IOException {
 		try {
 			ExtraDiscountCode.sendKeys(PromoCode);
@@ -1855,9 +1919,6 @@ public class app_WEL_Repo {
 		}
 	}
 
-	
-
-	
 	public void SelectingUSEButton() throws IOException {
 		try {
 			UseButton.click();
@@ -2667,22 +2728,21 @@ public class app_WEL_Repo {
 		}
 	}
 
-	
-	public String fetchShippingChargeInOrderReview() throws IOException{
+	public String fetchShippingChargeInOrderReview() throws IOException {
 		try {
-			String shipping=ShippingChargeInOrderReview.getText();
-			Reporting.updateTestReport("Shipping charge: "+shipping.trim()+" was fetched in order review step successfully", CaptureScreenshot.getScreenshot(SS_path),
-					StatusDetails.PASS);
+			String shipping = ShippingChargeInOrderReview.getText();
+			Reporting.updateTestReport(
+					"Shipping charge: " + shipping.trim() + " was fetched in order review step successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return shipping.trim();
-		}
-		catch(Exception e) {
-			Reporting.updateTestReport("Shipping charge couldn't be fetched in order review step ", CaptureScreenshot.getScreenshot(SS_path),
-					StatusDetails.FAIL);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Shipping charge couldn't be fetched in order review step ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return "";
 
 		}
 	}
-	
+
 	public void ClickOnUseButtonForExistingShippingAddress() throws IOException {
 		try {
 
@@ -3391,7 +3451,7 @@ public class app_WEL_Repo {
 		}
 	}
 
-	public String fetchFirstProductPriceInOrderReview() throws IOException {
+	public String fetchFirstProductPriceInOrderSummary() throws IOException {
 		try {
 			String price = PriceOfFirstProductInOrderReview.getText();
 			Reporting.updateTestReport(
@@ -3399,6 +3459,69 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 			return price.trim();
+		} catch (Exception e) {
+			Reporting.updateTestReport("First Product Price couldn't be fetched in order review step ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+
+	public String fetchFirstProductPriceInOrderReview() throws IOException {
+		try {
+
+			String firstprice = FirstProductPriceinReviewPage.getText().trim();
+			if (firstprice.contains(",")) {
+
+				firstprice = firstprice.replace(",", "");
+			} else
+
+				System.out.println("order price doesn't have any comma value");
+			Reporting.updateTestReport(
+					"First Product Price: " + firstprice.trim() + " was fetched in order review step successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+			return firstprice.trim();
+		} catch (Exception e) {
+			Reporting.updateTestReport("First Product Price couldn't be fetched in order review step ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+
+	public String fetchSecondProductPriceInOrderReview() throws IOException {
+		try {
+
+			String secondprice = SecondProductPriceinReviewPage.getText().trim();
+			if (secondprice.contains(","))
+
+				secondprice = secondprice.replace(",", "");
+			Reporting.updateTestReport(
+					"Second Product Price: " + secondprice.trim() + " was fetched in order review step successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+			return secondprice.trim();
+		} catch (Exception e) {
+			Reporting.updateTestReport("First Product Price couldn't be fetched in order review step ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+
+	public String fetchThirdProductPriceInOrderReview() throws IOException {
+		try {
+
+			String thirdprice = ThirdProductPriceinReviewPage.getText().trim();
+			if (thirdprice.contains(","))
+
+				thirdprice = thirdprice.replace(",", "");
+			Reporting.updateTestReport(
+					"Third Product Price: " + thirdprice.trim() + " was fetched in order review step successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+			return thirdprice.trim();
 		} catch (Exception e) {
 			Reporting.updateTestReport("First Product Price couldn't be fetched in order review step ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -3437,12 +3560,19 @@ public class app_WEL_Repo {
 		}
 	}
 
-	public String fetchOrderTotalInCartPage() throws IOException {
+	public String fetchOrderTotalOnCartPage() throws IOException {
 		try {
-			Reporting.updateTestReport(
-					"Order total in cart page : " + OrderTotalInCartPage.getText().trim() + " was returned",
+
+			String ordertottalprice = OrderTotaOnCartPage.getText().trim();
+			if (ordertottalprice.contains(",")) {
+				System.out.println("The Product Price in PDP Page" + (ordertottalprice.replace(",", "")));
+				ordertottalprice = ordertottalprice.replace(",", "");
+			} else
+
+				System.out.println("order price doesn't have any comma value");
+			Reporting.updateTestReport("Order total in cart page : " + ordertottalprice.trim() + " was returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			return OrderTotalInCartPage.getText();
+			return ordertottalprice;
 		} catch (Exception e) {
 			Reporting.updateTestReport("Order total in cart page could not be returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -3476,7 +3606,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return ShipCharge;
 		} catch (Exception e) {
-			Reporting.updateTestReport("Order id was not fetched with error message " + e.getClass().toString(),
+			Reporting.updateTestReport("Shipping Charge was not fetched with error message " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return "";
 		}
@@ -3484,38 +3614,57 @@ public class app_WEL_Repo {
 
 	public String fetchOldPriceInPDP() throws IOException {
 		try {
-			Reporting.updateTestReport(
-					"Price of the product in PDP: " + ProductOldPriceInPDP.getText().trim() + " was returned",
+
+			String pdpoldprice = ProductPriceInPDP.getText().trim();
+			if (pdpoldprice.contains(",")) {
+				System.out.println("The Product Price in PDP Page" + (pdpoldprice.replace(",", "")));
+				pdpoldprice = pdpoldprice.replace(",", "");
+			} else
+
+				System.out.println("order price doesn't have any comma value");
+			Reporting.updateTestReport("Price of the product in PDP: " + pdpoldprice.trim() + " was returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			return ProductOldPriceInPDP.getText();
+			return pdpoldprice;
 		} catch (Exception e) {
 			Reporting.updateTestReport("Price of the product in PDP could not be returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return "";
 		}
 	}
-	
-	
+
 	public String fetchPartnerProductPriceInPDP() throws IOException {
 		try {
-			Reporting.updateTestReport(
-					"Price of the product in PDP: " + PartnerProductPDPPrice.getText().trim() + " was returned",
+			String partnerpdpprice = PartnerProductPDPPrice.getText().trim();
+			if (partnerpdpprice.contains(",")) {
+				System.out.println("The Product Price in PDP Page" + (partnerpdpprice.replace(",", "")));
+				partnerpdpprice = partnerpdpprice.replace(",", "");
+			} else
+
+				System.out.println("order price doesn't have any comma value");
+
+			Reporting.updateTestReport("Price of the product in PDP: " + partnerpdpprice.trim() + " was returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			return PartnerProductPDPPrice.getText();
+			return partnerpdpprice;
 		} catch (Exception e) {
 			Reporting.updateTestReport("Price of the product in PDP could not be returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return "";
 		}
 	}
-	
-	
+
 	public String fetchPartnerPriceInPDP() throws IOException {
 		try {
-			Reporting.updateTestReport(
-					"Price of the product in PDP: " + DeanDartonPDPrice.getText().trim() + " was returned",
+			String partnerprice = DeanDartonPDPrice.getText().trim();
+			if (partnerprice.contains(",")) {
+				System.out.println("The Product Price in PDP Page" + (partnerprice.replace(",", "")));
+				partnerprice = partnerprice.replace(",", "");
+			} else
+
+				System.out.println("order price doesn't have any comma value");
+
+			Reporting.updateTestReport("Price of the product in PDP: " + partnerprice.trim() + " was returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			return  DeanDartonPDPrice.getText();
+			return partnerprice;
 		} catch (Exception e) {
 			Reporting.updateTestReport("Price of the product in PDP could not be returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -3525,10 +3674,17 @@ public class app_WEL_Repo {
 
 	public String fetchProductPriceInPDP() throws IOException {
 		try {
-			Reporting.updateTestReport(
-					"Price of the product in PDP: " + ProductPriceInPDP.getText().trim() + " was returned",
+			String pdpprice = ProductPriceInPDP.getText().trim();
+			if (pdpprice.contains(",")) {
+				System.out.println("The Product Price in PDP Page" + (pdpprice.replace(",", "")));
+				pdpprice = pdpprice.replace(",", "");
+			} else
+
+				System.out.println("order price doesn't have any comma value");
+
+			Reporting.updateTestReport("Price of the product in PDP: " + pdpprice.trim() + " was returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			return ProductPriceInPDP.getText();
+			return pdpprice;
 		} catch (Exception e) {
 			Reporting.updateTestReport("Price of the product in PDP could not be returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -3537,6 +3693,26 @@ public class app_WEL_Repo {
 	}
 
 	public String fetchOrderSubTotalInCartPage() throws IOException {
+		try {
+
+			String subtotalprice = OrderSubtotalInCartPage.getText().trim();
+			if (subtotalprice.contains(",")) {
+
+				subtotalprice = subtotalprice.replace(",", "");
+			} else
+				System.out.println("order price doesn't have any comma value");
+			Reporting.updateTestReport("Subtotal of the order: " + subtotalprice.trim() + " was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			System.out.println(OrderSubtotalInCartPage.getText().trim());
+			return subtotalprice;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Subtotal of the order in cart page could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	public String fetchOrderTotalInCartPage() throws IOException {
 		try {
 			Reporting.updateTestReport(
 					"Subtotal of the order: " + OrderSubtotalInCartPage.getText().trim() + " was returned",

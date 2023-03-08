@@ -129,7 +129,7 @@ public class WEL_Test_Suite extends DriverModule {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
 								By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
-						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(4));
+						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -152,7 +152,7 @@ public class WEL_Test_Suite extends DriverModule {
 							}
 
 						}
-						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 						if (price.compareTo(subtotal) == 0)
 							Reporting.updateTestReport(
 									"The addition of all the products' price is same as the subtotal in cart page",
@@ -228,7 +228,7 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions.presenceOfElementLocated(
 									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
-							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(4));
+							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -251,7 +251,7 @@ public class WEL_Test_Suite extends DriverModule {
 								}
 
 							}
-							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
 								Reporting.updateTestReport(
 										"The addition of all the products' price is same as the subtotal in cart page",
@@ -281,7 +281,7 @@ public class WEL_Test_Suite extends DriverModule {
 								wait.until(ExpectedConditions.visibilityOfElementLocated(
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-								String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 								if (orderprice.contains(",")) {
 									System.out.println(
 											"The Product Price in Review Page" + (orderprice.replace(",", "")));
@@ -430,7 +430,7 @@ public class WEL_Test_Suite extends DriverModule {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
 								By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
-						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(4));
+						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 
 						try {
@@ -454,7 +454,7 @@ public class WEL_Test_Suite extends DriverModule {
 							}
 
 						}
-						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 						if (price.compareTo(subtotal) == 0)
 							Reporting.updateTestReport(
 									"The addition of all the products' price is same as the subtotal in cart page",
@@ -468,7 +468,7 @@ public class WEL_Test_Suite extends DriverModule {
 						WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC05", "WEL_Test_Data", "Password"));
 						WEL.ClickonLoginAndContinue();
 						ScrollingWebPage.PageScrolldown(driver, 0, -300, SS_path);
-						// WEL.ClickOnBackTOCart();
+						WEL.ClickOnBackTOCart();
 						WEL.ClickOnRemoveOnCartPage();
 						WEL.ClickAccountCartPage();
 						try {
@@ -782,7 +782,7 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions.presenceOfElementLocated(
 									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
-							BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(4));
+							BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -805,11 +805,12 @@ public class WEL_Test_Suite extends DriverModule {
 								}
 
 							}
-							WEL.ClickonCouponRemove();
+
 							WEL.ClickOnAddaDiscountCode();
-							WEL.EnterDiscountCode(excelOperation.getTestData("TC09", "WEL_Test_Data", "PromoCode"));
+							WEL.EnterExtraDiscountCode(
+									excelOperation.getTestData("TC09", "WEL_Test_Data", "PromoCode"));
 							WEL.ClickOnDiscountApplyButton();
-							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
 								Reporting.updateTestReport(
 										"The addition of all the products' price is same as the subtotal in cart page",
@@ -819,7 +820,6 @@ public class WEL_Test_Suite extends DriverModule {
 										"The addition of the price is not match with the subtotal in cart page due to STUDENT discount is aplied in Cart Page",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
-							WEL.ClickOnRemoveOnCartPage();
 						} catch (Exception e) {
 							Reporting.updateTestReport("Failed click on View Course for CMA Product",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -874,6 +874,7 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions.presenceOfElementLocated(
 									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
+							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -896,10 +897,22 @@ public class WEL_Test_Suite extends DriverModule {
 								}
 
 							}
-							WEL.ClickonCouponRemove();
 							WEL.ClickOnAddaDiscountCode();
-							WEL.EnterDiscountCode(excelOperation.getTestData("TC10", "WEL_Test_Data", "PromoCode"));
+							WEL.EnterExtraDiscountCode(
+									excelOperation.getTestData("TC10", "WEL_Test_Data", "PromoCode"));
 							WEL.ClickOnDiscountApplyButton();
+							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
+							if (price.compareTo(subtotal) == 0) {
+								System.out.println(subtotal);
+								System.out.println(price);
+								Reporting.updateTestReport(
+										"The addition of all the products' price is same as the subtotal in cart page",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							} else
+								Reporting.updateTestReport(
+										"The addition of all the products' pricedidn't match with the subtotal in cart page",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
 							WEL.ClickOnRemoveOnCartPage();
 						} catch (Exception e) {
 							Reporting.updateTestReport("Failed to click on Explore Course for CMAProduct",
@@ -966,8 +979,9 @@ public class WEL_Test_Suite extends DriverModule {
 					wait.until(ExpectedConditions
 							.elementToBeClickable(By.xpath("(//button[contains(text(),'EXPLORE COURSES')])[1]")));
 					WEL.ClickonExploreCourseCMAProduct();
-					ScrollingWebPage.PageDown(driver, SS_path);
+
 					try {
+						ScrollingWebPage.PageDown(driver, SS_path);
 						wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 								"(//div[@class='container-fluid course-pkg-background']//div[@class='card-footer bg-transparent course-pkg-cards-footer'])[1]//button[contains(text(),'VIEW COURSE OPTIONS')]")));
 						WEL.ClickonViewCourseForCMAProduct();
@@ -979,6 +993,7 @@ public class WEL_Test_Suite extends DriverModule {
 								wait.until(ExpectedConditions.presenceOfElementLocated(
 										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 								ScrollingWebPage.PageDown(driver, SS_path);
+								BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 								WEL.clickOnAddToCartButtonOnPDP();
 								try {
 									wait.until(ExpectedConditions
@@ -1001,7 +1016,16 @@ public class WEL_Test_Suite extends DriverModule {
 									}
 
 								}
-								WEL.ClickonCouponRemove();
+								BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
+								if (price.compareTo(subtotal) == 0)
+									Reporting.updateTestReport(
+											"The addition of all the products' price is same as the subtotal in cart page",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport(
+											"The addition of the price is not match with the subtotal in cart page due to STUDENT discount is aplied in Cart Page",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
 								try {
 									wait.until(ExpectedConditions
 											.elementToBeClickable(By.xpath("//button[@id='removeEntry_0']")));
@@ -1064,7 +1088,8 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions.presenceOfElementLocated(
 									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
-							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(4));
+							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+							System.out.println(price);
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -1092,12 +1117,14 @@ public class WEL_Test_Suite extends DriverModule {
 								wait.until(ExpectedConditions
 										.elementToBeClickable(By.xpath("//select[@id='quantity_0']")));
 								WEL.ClickOnSelectQuantity();
-								BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
-								if (price.compareTo(subtotal) == 0)
+								BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
+								if (price.compareTo(subtotal) == 0) {
+									System.out.println(subtotal);
+									System.out.println(price);
 									Reporting.updateTestReport(
 											"The addition of all the products' price is same as the subtotal in cart page",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								else
+								} else
 									Reporting.updateTestReport(
 											"The addition of all the products' pricedidn't match with the subtotal in cart page",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -1157,6 +1184,7 @@ public class WEL_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions
 						.presenceOfElementLocated(By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 				ScrollingWebPage.PageDown(driver, SS_path);
+				BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 				try {
 					wait.until(
@@ -1182,6 +1210,7 @@ public class WEL_Test_Suite extends DriverModule {
 					wait.until(ExpectedConditions.presenceOfElementLocated(
 							By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 					ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+					BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 					WEL.clickOnAddToCartButtonOnPDP();
 					try {
 						wait.until(ExpectedConditions
@@ -1202,6 +1231,22 @@ public class WEL_Test_Suite extends DriverModule {
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 
+					}
+					ScrollingWebPage.PageDown(driver, SS_path);
+					WEL.ClickOnAddaDiscountCode();
+					WEL.EnterExtraDiscountCodeOnCartPage(
+							excelOperation.getTestData("TC13", "WEL_Test_Data", "PromoCode"));
+					WEL.ClickOnDiscountApplyButton();
+					BigDecimal subtotal = new BigDecimal(WEL.fetchOrderTotalOnCartPage().substring(1));
+					if (Firstproductprice.add(secondproductprice).compareTo(subtotal) == 0)
+						Reporting.updateTestReport(
+								"The addition of all the products' price is same as the subtotal in cart page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else {
+
+						Reporting.updateTestReport(
+								"The addition of all the products' pricedidn't match with the subtotal in cart page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 					WEL.ClickonCheckOutOnCartPage();
 					WEL.EnterexistingUserName(excelOperation.getTestData("TC13", "WEL_Test_Data", "Email_Address"));
@@ -1228,10 +1273,6 @@ public class WEL_Test_Suite extends DriverModule {
 
 					}
 					WEL.ClickonCheckOutOnCartPage();
-					WEL.ClickOnAddaDiscountCode();
-					ScrollingWebPage.PageDown(driver, SS_path);
-					WEL.EnterCouponExtraDiscountCode(excelOperation.getTestData("TC13", "WEL_Test_Data", "PromoCode"));
-					WEL.ClickOnDiscountApplyButton();
 					WEL.ClickonCheckOutOnCartPage();
 					WEL.ClickOnEnterNewAddressButtonOnShippingPage();
 					WEL.GuestFirstName(excelOperation.getTestData("TC13", "WEL_Test_Data", "Guest_Fname"));
@@ -1261,6 +1302,51 @@ public class WEL_Test_Suite extends DriverModule {
 						WEL.enterCVV_Number(excelOperation.getTestData("TC13", "WEL_Test_Data", "CVV"));
 						driver.switchTo().defaultContent();
 						WEL.SaveAndContinueCheckOut();
+						try {
+							wait.until(ExpectedConditions.visibilityOfElementLocated(
+									By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+							// This statement is we are getting the firstProduct price in Order Review page
+							// and Storing in String Object
+
+							BigDecimal firstproductprice2 = new BigDecimal(
+									WEL.fetchFirstProductPriceInOrderReview().substring(1));
+
+							BigDecimal secondproductprice2 = new BigDecimal(
+									WEL.fetchSecondProductPriceInOrderReview().substring(1));
+
+							BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
+							System.out.println("The  tax is: " + tax1);
+							String discount = WEL.fetchDiscountInOrderReview();
+							if (discount.contains(",")) {
+								System.out.println("The discount Price in Review Page" + (discount.replace(",", "")));
+								discount = discount.replace(",", "");
+							} else
+
+								System.out.println("order price doesn't have any comma value");
+							BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
+
+							BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(tax1)
+									.subtract(discountinorderreview);
+
+							String totalorderReview = WEL.fetchTotalInOrderReview();
+							if (totalorderReview.contains(","))
+								totalorderReview = totalorderReview.replace(",", "");
+							BigDecimal orderTotalPrice1 = new BigDecimal(totalorderReview.substring(1));
+							if (totalprice.compareTo(orderTotalPrice1) == 0)
+								Reporting.updateTestReport(
+										"First Product price + Second Product price -discount + Tax "
+												+ " = Order total in Order Review step",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport(
+										"First Product price + Tax "
+												+ " is not equal to Order total in Order Review step",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+						} catch (Exception e) {
+							System.out.println(e.getMessage());
+						}
+
 						WEL.clickOnPlaceOrderButton();
 						String orderID = WEL.fetchOrderId();
 						excelOperation.updateTestData("TC13", "WEL_Test_Data", "Order_Id", orderID);
@@ -1316,9 +1402,9 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions
 									.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
-							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(4));
+							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
-							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
 								Reporting.updateTestReport(
 										"The addition of all the products' price is same as the subtotal in cart page",
@@ -1386,6 +1472,7 @@ public class WEL_Test_Suite extends DriverModule {
 						.elementToBeClickable(By.xpath("//div[@class='btn-group btn-group-toggle']/label[2]")));
 				WEL.ClickonCMAeBook();
 			}
+			BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
@@ -1416,7 +1503,7 @@ public class WEL_Test_Suite extends DriverModule {
 						.elementToBeClickable(By.xpath("//div[@class='btn-group btn-group-toggle']/label[2]")));
 				WEL.ClickonCMAeBook();
 			}
-
+			BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
@@ -1447,6 +1534,7 @@ public class WEL_Test_Suite extends DriverModule {
 						.elementToBeClickable(By.xpath("//div[@class='btn-group btn-group-toggle']/label[2]")));
 				WEL.ClickonCMAeBook();
 			}
+			BigDecimal thirdproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
@@ -1465,6 +1553,19 @@ public class WEL_Test_Suite extends DriverModule {
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 
+			}
+			BigDecimal subtotal = new BigDecimal(WEL.fetchOrderTotalOnCartPage().substring(1));
+			if (Firstproductprice.add(secondproductprice).add(thirdproductprice).compareTo(subtotal) == 0)
+				Reporting.updateTestReport(
+						"The addition of all the products' price is same as the subtotal in cart page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else {
+				System.out.println(subtotal);
+				System.out.println(Firstproductprice.add(secondproductprice).add(thirdproductprice));
+
+				Reporting.updateTestReport(
+						"The addition of all the products' pricedidn't match with the subtotal in cart page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			WEL.ClickonCheckOutOnCartPage();
 			String GuestEmail = WEL.EnterGuestUser();
@@ -1510,6 +1611,57 @@ public class WEL_Test_Suite extends DriverModule {
 								"Failed to click Address on Address SUggestion due to timeout exception",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					}
+
+					try {
+						wait.until(ExpectedConditions
+								.visibilityOfElementLocated(By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+						// This statement is we are getting the firstProduct price in Order Review page
+						// and Storing in String Object
+
+						BigDecimal firstproductprice2 = new BigDecimal(
+								WEL.fetchFirstProductPriceInOrderReview().substring(1));
+
+						BigDecimal secondproductprice2 = new BigDecimal(
+								WEL.fetchSecondProductPriceInOrderReview().substring(1));
+
+						BigDecimal thirdproductprice2 = new BigDecimal(
+								WEL.fetchThirdProductPriceInOrderReview().substring(1));
+
+						BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
+						System.out.println("The  tax is: " + tax1);
+
+						// System.out.println("Total Product + Tax Price is :" + totalprice);
+
+						String discount = WEL.fetchDiscountInOrderReview();
+						if (discount.contains(",")) {
+							System.out.println("The discount Price in Review Page" + (discount.replace(",", "")));
+							discount = discount.replace(",", "");
+						} else
+
+							System.out.println("order price doesn't have any comma value");
+						BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
+
+						BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(thirdproductprice2)
+								.add(tax1).subtract(discountinorderreview);
+
+						String totalorderReview = WEL.fetchTotalInOrderReview();
+						if (totalorderReview.contains(","))
+							totalorderReview = totalorderReview.replace(",", "");
+						BigDecimal orderTotalPrice1 = new BigDecimal(totalorderReview.substring(1));
+						if (totalprice.compareTo(orderTotalPrice1) == 0)
+							Reporting.updateTestReport(
+									"First Product price + Second Product price + Third Product price -discount + Tax "
+											+ " = Order total in Order Review step",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport(
+									"First Product price + Tax " + " is not equal to Order total in Order Review step",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
+
 					WEL.clickOnPlaceOrderButton();
 					String orderID = WEL.fetchOrderId();
 					excelOperation.updateTestData("TC15", "WEL_Test_Data", "Order_Id", orderID);
@@ -1556,6 +1708,7 @@ public class WEL_Test_Suite extends DriverModule {
 				WEL.ClickonCMAeBook();
 			}
 			ScrollingWebPage.PageDown(driver, SS_path);
+			BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -1586,6 +1739,7 @@ public class WEL_Test_Suite extends DriverModule {
 				WEL.ClickonCMAeBook();
 			}
 			ScrollingWebPage.PageDown(driver, SS_path);
+			BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -1616,6 +1770,7 @@ public class WEL_Test_Suite extends DriverModule {
 				WEL.ClickonCMAeBook();
 			}
 			ScrollingWebPage.PageDown(driver, SS_path);
+			BigDecimal thirdproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -1634,12 +1789,24 @@ public class WEL_Test_Suite extends DriverModule {
 				}
 
 			}
+			BigDecimal subtotal = new BigDecimal(WEL.fetchOrderTotalOnCartPage().substring(1));
+			System.out.println(subtotal);
+			if (Firstproductprice.add(secondproductprice).add(thirdproductprice).compareTo(subtotal) == 0)
+				Reporting.updateTestReport(
+						"The addition of all the products' price is same as the subtotal in cart page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else {
+				System.out.println(subtotal);
+				System.out.println(Firstproductprice.add(secondproductprice).add(thirdproductprice));
+				Reporting.updateTestReport(
+						"The addition of all the products' pricedidn't match with the subtotal in cart page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 			WEL.ClickonCheckOutOnCartPage();
 			WEL.EnterexistingUserName(excelOperation.getTestData("TC16", "WEL_Test_Data", "Email_Address"));
 			WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC16", "WEL_Test_Data", "Password"));
 			WEL.ClickonLoginAndContinue();
-			WEL.ClickonCheckOutOnCartPage();
-			WEL.ClickonCheckOutOnCartPage();
+
 			WEL.ClickOnEnterNewAddressButtonOnBillingPage();
 			WEL.GuestFirstName(excelOperation.getTestData("TC16", "WEL_Test_Data", "Guest_Fname"));
 			WEL.GuestLastName(excelOperation.getTestData("TC16", "WEL_Test_Data", "Guest_Lname"));
@@ -1678,6 +1845,54 @@ public class WEL_Test_Suite extends DriverModule {
 								"Failed to click Address on Address SUggestion due to timeout exception",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					}
+					try {
+						wait.until(ExpectedConditions
+								.visibilityOfElementLocated(By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+						// This statement is we are getting the firstProduct price in Order Review page
+						// and Storing in String Object
+
+						BigDecimal firstproductprice2 = new BigDecimal(
+								WEL.fetchFirstProductPriceInOrderReview().substring(1));
+
+						BigDecimal secondproductprice2 = new BigDecimal(
+								WEL.fetchSecondProductPriceInOrderReview().substring(1));
+
+						BigDecimal thirdproductprice2 = new BigDecimal(
+								WEL.fetchThirdProductPriceInOrderReview().substring(1));
+
+						BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
+						System.out.println("The  tax is: " + tax1);
+
+						String discount = WEL.fetchDiscountInOrderReview();
+						if (discount.contains(",")) {
+							System.out.println("The discount Price in Review Page" + (discount.replace(",", "")));
+							discount = discount.replace(",", "");
+						} else
+
+							System.out.println("order price doesn't have any comma value");
+						BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
+
+						BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(thirdproductprice2)
+								.add(tax1).subtract(discountinorderreview);
+
+						String totalorderReview = WEL.fetchTotalInOrderReview();
+						if (totalorderReview.contains(","))
+							totalorderReview = totalorderReview.replace(",", "");
+						BigDecimal orderTotalPrice1 = new BigDecimal(totalorderReview.substring(1));
+						if (totalprice.compareTo(orderTotalPrice1) == 0)
+							Reporting.updateTestReport(
+									"First Product price + Second Product price + Third Product price -discount + Tax "
+											+ " = Order total in Order Review step",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport(
+									"First Product price + Tax " + " is not equal to Order total in Order Review step",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
+
 					WEL.clickOnPlaceOrderButton();
 					String orderID = WEL.fetchOrderId();
 					excelOperation.updateTestData("TC16", "WEL_Test_Data", "Order_Id", orderID);
@@ -1720,6 +1935,7 @@ public class WEL_Test_Suite extends DriverModule {
 				wait1.until(ExpectedConditions.elementToBeClickable(By.xpath(
 						"//div[@id='Ultimate_CPA Review Course 2022 (Mentorship & Tutoring Bundle)']//form//button")));
 				ScrollingWebPage.PageDown(driver, SS_path);
+				BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			} catch (Exception e) {
 				driver.navigate().refresh();
@@ -1754,6 +1970,7 @@ public class WEL_Test_Suite extends DriverModule {
 				driver.navigate().refresh();
 				wait1.until(ExpectedConditions.elementToBeClickable(By.xpath(
 						"//div[@class='container-fluid banner-container product-detail-banner mt-4']//div[7]//button")));
+				BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			}
 			try {
@@ -1778,11 +1995,13 @@ public class WEL_Test_Suite extends DriverModule {
 				wait1.until(ExpectedConditions.elementToBeClickable(By.xpath(
 						"//div[@class='product-detail-page']//div[@class='container-fluid banner-container product-detail-banner mt-4']//button")));
 				ScrollingWebPage.PageDown(driver, SS_path);
+				BigDecimal thirdproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			} catch (Exception e) {
 				driver.navigate().refresh();
 				wait1.until(ExpectedConditions.elementToBeClickable(By.xpath(
 						"//div[@class='product-detail-page']//div[@class='container-fluid banner-container product-detail-banner mt-4']//button")));
+
 				WEL.clickOnAddToCartButtonOnPDP();
 			}
 			try {
@@ -1803,7 +2022,6 @@ public class WEL_Test_Suite extends DriverModule {
 
 			}
 			WEL.ClickonCheckOutOnCartPage();
-
 			String GuestEmail = WEL.EnterGuestUser();
 			WEL.ClickingOnCreateAccoutButton();
 			WEL.GuestConfirmEmailId(GuestEmail);
@@ -2054,6 +2272,8 @@ public class WEL_Test_Suite extends DriverModule {
 			String urls[] = excelOperation.getTestData("TC19", "WEL_Test_Data", "URL").split(",");
 			driver.get(urls[0]);
 			ScrollingWebPage.PageDown(driver, SS_path);
+			BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+			System.out.println("firstprice" + Firstproductprice);
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -2074,6 +2294,7 @@ public class WEL_Test_Suite extends DriverModule {
 			}
 			driver.get(urls[1]);
 			ScrollingWebPage.PageDown(driver, SS_path);
+			BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -2093,6 +2314,7 @@ public class WEL_Test_Suite extends DriverModule {
 
 			}
 			driver.get(urls[2]);
+			BigDecimal thirdproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -2110,6 +2332,18 @@ public class WEL_Test_Suite extends DriverModule {
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 
+			}
+			BigDecimal subtotal = new BigDecimal(WEL.fetchOrderTotalOnCartPage().substring(1));
+			if (Firstproductprice.add(secondproductprice).add(thirdproductprice).compareTo(subtotal) == 0)
+				Reporting.updateTestReport(
+						"The addition of all the products' price is same as the subtotal in cart page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else {
+				System.out.println(subtotal);
+				System.out.println(Firstproductprice.add(secondproductprice).add(thirdproductprice));
+				Reporting.updateTestReport(
+						"The addition of all the products' pricedidn't match with the subtotal in cart page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			WEL.ClickonCheckOutOnCartPage();
 			String GuestEmail = WEL.EnterGuestUser();
@@ -2158,6 +2392,39 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Address Suggestiond page is not appering on Billing page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 			}
+			try {
+				wait.until(ExpectedConditions
+						.visibilityOfElementLocated(By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+				// This statement is we are getting the firstProduct price in Order Review page
+				// and Storing in String Object
+
+				BigDecimal firstproductprice2 = new BigDecimal(WEL.fetchFirstProductPriceInOrderReview().substring(1));
+
+				BigDecimal secondproductprice2 = new BigDecimal(
+						WEL.fetchSecondProductPriceInOrderReview().substring(1));
+
+				BigDecimal thirdproductprice2 = new BigDecimal(WEL.fetchThirdProductPriceInOrderReview().substring(1));
+
+				BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
+				System.out.println("The  tax is: " + tax1);
+				BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(thirdproductprice2).add(tax1);
+				String totalorderReview = WEL.fetchTotalInOrderReview();
+				if (totalorderReview.contains(","))
+					totalorderReview = totalorderReview.replace(",", "");
+				BigDecimal orderTotalPrice1 = new BigDecimal(totalorderReview.substring(1));
+				if (totalprice.compareTo(orderTotalPrice1) == 0)
+					Reporting.updateTestReport(
+							"First Product price + Second Product price + Third Product price + Tax "
+									+ " = Order total in Order Review step",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(
+							"First Product price + Tax " + " is not equal to Order total in Order Review step",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
 
 			WEL.clickOnPlaceOrderButton();
 			String orderID = WEL.fetchOrderId();
@@ -2199,6 +2466,7 @@ public class WEL_Test_Suite extends DriverModule {
 					wait.until(ExpectedConditions.presenceOfElementLocated(
 							By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 					ScrollingWebPage.PageDown(driver, SS_path);
+					BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 					WEL.clickOnAddToCartButtonOnPDP();
 					WEL.ClickWELIconCheckoutPage();
 
@@ -2216,6 +2484,8 @@ public class WEL_Test_Suite extends DriverModule {
 								wait.until(ExpectedConditions.elementToBeClickable(
 										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 								ScrollingWebPage.PageDown(driver, SS_path);
+								BigDecimal secondproductprice = new BigDecimal(
+										WEL.fetchProductPriceInPDP().substring(1));
 								WEL.clickOnAddToCartButtonOnPDP();
 								try {
 									wait.until(ExpectedConditions
@@ -2237,6 +2507,18 @@ public class WEL_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
+								}
+								BigDecimal subtotal = new BigDecimal(WEL.fetchOrderTotalOnCartPage().substring(1));
+								if (Firstproductprice.add(secondproductprice).compareTo(subtotal) == 0)
+									Reporting.updateTestReport(
+											"The addition of all the products' price is same as the subtotal in cart page",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else {
+									System.out.println(subtotal);
+
+									Reporting.updateTestReport(
+											"The addition of all the products' pricedidn't match with the subtotal in cart page",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 								WEL.ClickonCheckOutOnCartPage();
 								String GuestEmail = WEL.EnterGuestUser();
@@ -2282,6 +2564,53 @@ public class WEL_Test_Suite extends DriverModule {
 									WEL.enterCVV_Number(excelOperation.getTestData("TC20", "WEL_Test_Data", "CVV"));
 									driver.switchTo().defaultContent();
 									WEL.SaveAndContinueCheckOut();
+									try {
+										wait.until(ExpectedConditions.visibilityOfElementLocated(
+												By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+										// This statement is we are getting the firstProduct price in Order Review page
+										// and Storing in String Object
+
+										BigDecimal firstproductprice2 = new BigDecimal(
+												WEL.fetchFirstProductPriceInOrderReview().substring(1));
+
+										BigDecimal secondproductprice2 = new BigDecimal(
+												WEL.fetchSecondProductPriceInOrderReview().substring(1));
+
+										BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
+										System.out.println("The  tax is: " + tax1);
+
+										String discount = WEL.fetchDiscountInOrderReview();
+										if (discount.contains(",")) {
+											System.out.println(
+													"The discount Price in Review Page" + (discount.replace(",", "")));
+											discount = discount.replace(",", "");
+										} else
+
+											System.out.println("order price doesn't have any comma value");
+										BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
+
+										BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(tax1)
+												.subtract(discountinorderreview);
+
+										String totalorderReview = WEL.fetchTotalInOrderReview();
+										if (totalorderReview.contains(","))
+											totalorderReview = totalorderReview.replace(",", "");
+										BigDecimal orderTotalPrice1 = new BigDecimal(totalorderReview.substring(1));
+										if (totalprice.compareTo(orderTotalPrice1) == 0)
+											Reporting.updateTestReport(
+													"First Product price + Second Product price  -discount + Tax "
+															+ " = Order total in Order Review step",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"First Product price + Tax "
+															+ " is not equal to Order total in Order Review step",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+									} catch (Exception e) {
+										System.out.println(e.getMessage());
+									}
+
 									WEL.clickOnPlaceOrderButton();
 									String orderID = WEL.fetchOrderId();
 									excelOperation.updateTestData("TC20", "WEL_Test_Data", "Order_Id", orderID);
@@ -2658,7 +2987,7 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions.presenceOfElementLocated(
 									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
-							BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(4));
+							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -2681,12 +3010,6 @@ public class WEL_Test_Suite extends DriverModule {
 								}
 
 							}
-							WEL.ClickonCheckOutOnCartPage();
-							WEL.EnterexistingUserName(
-									excelOperation.getTestData("TC16", "WEL_Test_Data", "Email_Address"));
-							WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC16", "WEL_Test_Data", "Password"));
-							WEL.ClickonLoginAndContinue();
-							WEL.ClickonCheckOutOnCartPage();
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
 							if (price.compareTo(subtotal) == 0)
 								Reporting.updateTestReport(
@@ -2697,6 +3020,10 @@ public class WEL_Test_Suite extends DriverModule {
 										"The addition of all the products' pricedidn't match with the subtotal in cart page",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							WEL.ClickonCheckOutOnCartPage();
+							WEL.EnterexistingUserName(
+									excelOperation.getTestData("TC16", "WEL_Test_Data", "Email_Address"));
+							WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC16", "WEL_Test_Data", "Password"));
+							WEL.ClickonLoginAndContinue();
 							WEL.ClickOnEnterNewAddressButtonOnShippingPage();
 							WEL.GuestFirstName(excelOperation.getTestData("TC24", "WEL_Test_Data", "Guest_Fname"));
 							WEL.GuestLastName(excelOperation.getTestData("TC24", "WEL_Test_Data", "Guest_Lname"));
@@ -2744,7 +3071,7 @@ public class WEL_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions.visibilityOfElementLocated(
 											By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-									String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+									String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 									if (orderprice.contains(",")) {
 										System.out.println(
 												"The Product Price in Review Page" + (orderprice.replace(",", "")));
@@ -2754,9 +3081,19 @@ public class WEL_Test_Suite extends DriverModule {
 										System.out.println("order price doesn't have any comma value");
 									BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
+									String discount = WEL.fetchDiscountInOrderReview();
+									if (discount.contains(",")) {
+										System.out.println(
+												"The discount Price in Review Page" + (discount.replace(",", "")));
+										discount = discount.replace(",", "");
+									} else
+
+										System.out.println("order price doesn't have any comma value");
+									BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
+
 									BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 									System.out.println("The  tax is: " + tax1);
-									BigDecimal totalprice = orderproductprice.add(tax1);
+									BigDecimal totalprice = orderproductprice.add(tax1).subtract(discountinorderreview);
 									System.out.println("Total Product + Tax Price is  :" + totalprice);
 
 									String totalorderReview = WEL.fetchTotalInOrderReview();
@@ -2769,7 +3106,8 @@ public class WEL_Test_Suite extends DriverModule {
 
 									if (totalprice.compareTo(orderTotalPrice) == 0)
 										Reporting.updateTestReport(
-												"First Product price + Tax " + " = Order total in Order Review step",
+												"First Product price + Tax - Discount"
+														+ " = Order total in Order Review step",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 									else
 										Reporting.updateTestReport(
@@ -2832,14 +3170,23 @@ public class WEL_Test_Suite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonCMAProduct();
 			try {
+				wait.until(ExpectedConditions
+						.elementToBeClickable(By.xpath("(//button[contains(text(),'EXPLORE COURSES')])[1]")));
 				WEL.ClickonExploreCourseCMAProduct();
 				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+							"(//div[@class='container-fluid course-pkg-background']//div[@class='card-footer bg-transparent course-pkg-cards-footer'])[1]//button[contains(text(),'VIEW COURSE OPTIONS')]")));
 					ScrollingWebPage.PageDown(driver, SS_path);
 					WEL.ClickonViewCourseForCMAProduct();
 					try {
+						wait.until(ExpectedConditions
+								.elementToBeClickable(By.xpath("//div[@class='btn-group btn-group-toggle']/label[1]")));
 						WEL.ClickonCMAPrinteBook();
 						ScrollingWebPage.PageDown(driver, SS_path);
 						try {
+							wait.until(ExpectedConditions.elementToBeClickable(
+									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -2862,36 +3209,21 @@ public class WEL_Test_Suite extends DriverModule {
 								}
 
 							}
+							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
+							if (price.compareTo(subtotal) == 0)
+								Reporting.updateTestReport(
+										"The addition of all the products' price is same as the subtotal in cart page",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport(
+										"The addition of all the products' pricedidn't match with the subtotal in cart page",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							WEL.ClickonCheckOutOnCartPage();
 							WEL.EnterexistingUserName(
 									excelOperation.getTestData("TC16", "WEL_Test_Data", "Email_Address"));
 							WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC16", "WEL_Test_Data", "Password"));
 							WEL.ClickonLoginAndContinue();
-							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
-								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
-
-							}
-							WEL.ClickonCheckOutOnCartPage();
-							WEL.ClickonCheckOutOnCartPage();
-							ScrollingWebPage.PageDown(driver, SS_path);
-							WEL.ClickOnAddNewAddressButton();
+							WEL.ClickOnEnterNewAddressButtonOnShippingPage();
 							WEL.GuestFirstName(excelOperation.getTestData("TC50", "WEL_Test_Data", "Guest_Fname"));
 							WEL.GuestLastName(excelOperation.getTestData("TC50", "WEL_Test_Data", "Guest_Lname"));
 							String countries = excelOperation.getTestData("TC25", "WEL_Test_Data",
@@ -2964,6 +3296,7 @@ public class WEL_Test_Suite extends DriverModule {
 				WEL.ClickonCMAeBook();
 			}
 			ScrollingWebPage.PageDown(driver, SS_path);
+			BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -2986,6 +3319,7 @@ public class WEL_Test_Suite extends DriverModule {
 			// ScrollingWebPage.PageDown(driver, SS_path);
 			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
 			Thread.sleep(2000);
+			BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -3004,12 +3338,22 @@ public class WEL_Test_Suite extends DriverModule {
 				}
 
 			}
+			BigDecimal subtotal = new BigDecimal(WEL.fetchOrderTotalOnCartPage().substring(1));
+			if (Firstproductprice.add(secondproductprice).compareTo(subtotal) == 0)
+				Reporting.updateTestReport(
+						"The addition of all the products' price is same as the subtotal in cart page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else {
+
+				Reporting.updateTestReport(
+						"The addition of all the products' pricedidn't match with the subtotal in cart page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 			WEL.ClickonCheckOutOnCartPage();
 			WEL.EnterexistingUserName(excelOperation.getTestData("TC26", "WEL_Test_Data", "Email_Address"));
 			WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC26", "WEL_Test_Data", "Password"));
 			WEL.ClickonLoginAndContinue();
-			WEL.ClickonCheckOutOnCartPage();
-			WEL.ClickonCheckOutOnCartPage();
+
 			WEL.ShippingChargeForMultipleProducts();
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
@@ -3044,7 +3388,7 @@ public class WEL_Test_Suite extends DriverModule {
 						wait.until(ExpectedConditions
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
-						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(4));
+						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -3067,7 +3411,7 @@ public class WEL_Test_Suite extends DriverModule {
 							}
 
 						}
-						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 						if (price.compareTo(subtotal) == 0)
 							Reporting.updateTestReport(
 									"The addition of all the products' price is same as the subtotal in cart page",
@@ -3080,9 +3424,6 @@ public class WEL_Test_Suite extends DriverModule {
 						WEL.EnterexistingUserName(excelOperation.getTestData("TC16", "WEL_Test_Data", "Email_Address"));
 						WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC16", "WEL_Test_Data", "Password"));
 						WEL.ClickonLoginAndContinue();
-
-						WEL.ClickonCheckOutOnCartPage();
-						WEL.ClickonCheckOutOnCartPage();
 						WEL.ClickOnEnterNewAddressButtonOnShippingPage();
 						WEL.GuestFirstName(excelOperation.getTestData("TC03", "WEL_Test_Data", "Guest_Fname"));
 						WEL.GuestLastName(excelOperation.getTestData("TC03", "WEL_Test_Data", "Guest_Lname"));
@@ -3103,14 +3444,23 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions.visibilityOfElementLocated(
 									By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-							String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+							String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 							if (orderprice.contains(",")) {
 								System.out.println("The Product Price in Review Page" + (orderprice.replace(",", "")));
 								orderprice = orderprice.replace(",", "");
 							} else
 
 								System.out.println("order price doesn't have any comma value");
-							BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
+							String discount = WEL.fetchDiscountInOrderReview();
+							if (discount.contains(",")) {
+								System.out.println("The discount Price in Review Page" + (discount.replace(",", "")));
+								discount = discount.replace(",", "");
+							} else
+
+								System.out.println("order price doesn't have any comma value");
+							BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
+							BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1))
+									.subtract(discountinorderreview);
 
 							String totalorderReview = WEL.fetchTotalInOrderReview();
 							if (totalorderReview.contains(",")) {
@@ -3121,7 +3471,8 @@ public class WEL_Test_Suite extends DriverModule {
 							BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 							if (orderproductprice.compareTo(orderTotalPrice) == 0)
-								Reporting.updateTestReport("First Product price = Order total in Order Review step",
+								Reporting.updateTestReport(
+										"First Product price - Discount = Order total in Order Review step",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							else
 								Reporting.updateTestReport(
@@ -3184,7 +3535,9 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 									"//div[@class='container-fluid banner-container product-detail-banner mt-4']//div[7]//button")));
 							ScrollingWebPage.PageDown(driver, SS_path);
-							BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(4));
+							WEL.ClickonApplyStudentDiscount();
+							WEL.ClickonswitchStudentDiscount();
+							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -3207,33 +3560,7 @@ public class WEL_Test_Suite extends DriverModule {
 								}
 
 							}
-							WEL.ClickonCheckOutOnCartPage();
-							WEL.EnterexistingUserName(
-									excelOperation.getTestData("TC28", "WEL_Test_Data", "Email_Address"));
-							WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC29", "WEL_Test_Data", "Password"));
-							WEL.ClickonLoginAndContinue();
-							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
-								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
-
-							}
-							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
 								Reporting.updateTestReport(
 										"The addition of all the products' price is same as the subtotal in cart page",
@@ -3243,10 +3570,10 @@ public class WEL_Test_Suite extends DriverModule {
 										"The addition of all the products' pricedidn't match with the subtotal in cart page",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							WEL.ClickonCheckOutOnCartPage();
-							WEL.ClickOnAddaDiscountCode();
-							WEL.EnterDiscountCode(excelOperation.getTestData("TC28", "WEL_Test_Data", "PromoCode"));
-							WEL.ClickOnDiscountApplyButton();
-							WEL.ClickonCheckOutOnCartPage();
+							WEL.EnterexistingUserName(
+									excelOperation.getTestData("TC28", "WEL_Test_Data", "Email_Address"));
+							WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC29", "WEL_Test_Data", "Password"));
+							WEL.ClickonLoginAndContinue();
 							WEL.ClickOnEnterNewAddressButtonOnShippingPage();
 							WEL.GuestFirstName(excelOperation.getTestData("TC28", "WEL_Test_Data", "First_Name"));
 							WEL.GuestLastName(excelOperation.getTestData("TC28", "WEL_Test_Data", "Last_Name"));
@@ -3280,7 +3607,7 @@ public class WEL_Test_Suite extends DriverModule {
 								wait.until(ExpectedConditions.visibilityOfElementLocated(
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-								String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 								if (orderprice.contains(",")) {
 									System.out.println(
 											"The Product Price in Review Page" + (orderprice.replace(",", "")));
@@ -3335,7 +3662,7 @@ public class WEL_Test_Suite extends DriverModule {
 								wait.until(ExpectedConditions.visibilityOfElementLocated(
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-								String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 								if (orderprice.contains(",")) {
 									System.out.println(
 											"The Product Price in Review Page" + (orderprice.replace(",", "")));
@@ -3348,11 +3675,6 @@ public class WEL_Test_Suite extends DriverModule {
 								BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
 								BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount);
 
-								BigDecimal Shipcharge = new BigDecimal(
-										WEL.fetchShippingChargeInOrderReview().substring(1));
-								BigDecimal ordertotalpriceincludeshipcharge = orderTotalpriceafterDiscount
-										.add(Shipcharge);
-
 								String totalorderReview = WEL.fetchTotalInOrderReview();
 								if (totalorderReview.contains(",")) {
 									System.out.println(totalorderReview.replace(",", ""));
@@ -3361,9 +3683,9 @@ public class WEL_Test_Suite extends DriverModule {
 									System.out.println("Total order price doesn;t have any comma value");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
-								if (ordertotalpriceincludeshipcharge.compareTo(orderTotalPrice) == 0)
+								if (orderTotalpriceafterDiscount.compareTo(orderTotalPrice) == 0)
 									Reporting.updateTestReport(
-											"First Product price-Discount + Shipping Charge  = Order total in Order Review step",
+											"First Product price-Discount   = Order total in Order Review step",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
 									Reporting.updateTestReport(
@@ -3425,7 +3747,9 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions
 									.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
-							BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(4));
+							WEL.ClickonApplyStudentDiscount();
+							WEL.ClickonswitchStudentDiscount();
+							BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -3448,33 +3772,7 @@ public class WEL_Test_Suite extends DriverModule {
 								}
 
 							}
-							WEL.ClickonCheckOutOnCartPage();
-							WEL.EnterexistingUserName(
-									excelOperation.getTestData("TC29", "WEL_Test_Data", "Email_Address"));
-							WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC29", "WEL_Test_Data", "Password"));
-							WEL.ClickonLoginAndContinue();
-							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
-								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
-
-							}
-							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
 								Reporting.updateTestReport(
 										"The addition of all the products' price is same as the subtotal in cart page",
@@ -3484,10 +3782,10 @@ public class WEL_Test_Suite extends DriverModule {
 										"The addition of all the products' pricedidn't match with the subtotal in cart page",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							WEL.ClickonCheckOutOnCartPage();
-							WEL.ClickOnAddaDiscountCode();
-							WEL.EnterDiscountCode(excelOperation.getTestData("TC29", "WEL_Test_Data", "PromoCode"));
-							WEL.ClickOnDiscountApplyButton();
-							WEL.ClickonCheckOutOnCartPage();
+							WEL.EnterexistingUserName(
+									excelOperation.getTestData("TC29", "WEL_Test_Data", "Email_Address"));
+							WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC29", "WEL_Test_Data", "Password"));
+							WEL.ClickonLoginAndContinue();
 							WEL.ClickOnEnterNewAddressButtonOnShippingPage();
 							WEL.GuestFirstName(excelOperation.getTestData("TC28", "WEL_Test_Data", "First_Name"));
 							WEL.GuestLastName(excelOperation.getTestData("TC28", "WEL_Test_Data", "Last_Name"));
@@ -3520,7 +3818,7 @@ public class WEL_Test_Suite extends DriverModule {
 								wait.until(ExpectedConditions.visibilityOfElementLocated(
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-								String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 								if (orderprice.contains(",")) {
 									System.out.println(
 											"The Product Price in Review Page" + (orderprice.replace(",", "")));
@@ -3575,7 +3873,7 @@ public class WEL_Test_Suite extends DriverModule {
 								wait.until(ExpectedConditions.visibilityOfElementLocated(
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-								String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 								if (orderprice.contains(",")) {
 									System.out.println(
 											"The Product Price in Review Page" + (orderprice.replace(",", "")));
@@ -3661,7 +3959,7 @@ public class WEL_Test_Suite extends DriverModule {
 						WEL.ClickonCMAeBook();
 						ScrollingWebPage.PageDown(driver, SS_path);
 
-						BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(4));
+						BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 
 						try {
 							wait.until(ExpectedConditions
@@ -3688,13 +3986,8 @@ public class WEL_Test_Suite extends DriverModule {
 								}
 
 							}
-							WEL.ClickonCheckOutOnCartPage();
-							WEL.EnterexistingUserName(
-									excelOperation.getTestData("TC30", "WEL_Test_Data", "Email_Address"));
-							WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC30", "WEL_Test_Data", "Password"));
-							WEL.ClickonLoginAndContinue();
 
-							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
 								Reporting.updateTestReport(
 										"The addition of all the products' price is same as the subtotal in cart page",
@@ -3704,7 +3997,10 @@ public class WEL_Test_Suite extends DriverModule {
 										"The addition of all the products' pricedidn't match with the subtotal in cart page",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							WEL.ClickonCheckOutOnCartPage();
-							WEL.ClickonCheckOutOnCartPage();
+							WEL.EnterexistingUserName(
+									excelOperation.getTestData("TC30", "WEL_Test_Data", "Email_Address"));
+							WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC30", "WEL_Test_Data", "Password"));
+							WEL.ClickonLoginAndContinue();
 							WEL.SelectingUSEButton();
 							driver.switchTo()
 									.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
@@ -3741,7 +4037,7 @@ public class WEL_Test_Suite extends DriverModule {
 												By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 										// This statement is we are getting the firstProduct price in Order Review page
 										// and Storing in String Object
-										String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 										if (orderprice.contains(",")) {
 											System.out.println(
 													"The Product Price in Review Page" + (orderprice.replace(",", "")));
@@ -3751,9 +4047,20 @@ public class WEL_Test_Suite extends DriverModule {
 											System.out.println("order price doesn't have any comma value");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
+										String discount = WEL.fetchDiscountInOrderReview();
+										if (discount.contains(",")) {
+											System.out.println(
+													"The discount Price in Review Page" + (discount.replace(",", "")));
+											discount = discount.replace(",", "");
+										} else
+
+											System.out.println("order price doesn't have any comma value");
+										BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
+
 										BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 										System.out.println("The  tax is: " + tax1);
-										BigDecimal totalprice = orderproductprice.add(tax1);
+										BigDecimal totalprice = orderproductprice.add(tax1)
+												.subtract(discountinorderreview);
 										System.out.println("Total Product + Tax Price is  :" + totalprice);
 
 										String totalorderReview = WEL.fetchTotalInOrderReview();
@@ -3766,7 +4073,7 @@ public class WEL_Test_Suite extends DriverModule {
 
 										if (totalprice.compareTo(orderTotalPrice) == 0)
 											Reporting.updateTestReport(
-													"First Product price + Tax "
+													"First Product price + Tax - Discount"
 															+ " = Order total in Order Review step",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
@@ -3848,7 +4155,7 @@ public class WEL_Test_Suite extends DriverModule {
 						wait.until(ExpectedConditions
 								.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
-						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(4));
+						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -3871,7 +4178,7 @@ public class WEL_Test_Suite extends DriverModule {
 							}
 
 						}
-						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 						if (price.compareTo(subtotal) == 0)
 							Reporting.updateTestReport(
 									"The addition of all the products' price is same as the subtotal in cart page",
@@ -3919,7 +4226,7 @@ public class WEL_Test_Suite extends DriverModule {
 								wait.until(ExpectedConditions.visibilityOfElementLocated(
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-								String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 								if (orderprice.contains(",")) {
 									System.out.println(
 											"The Product Price in Review Page" + (orderprice.replace(",", "")));
@@ -4009,7 +4316,7 @@ public class WEL_Test_Suite extends DriverModule {
 						wait.until(ExpectedConditions
 								.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
-						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(4));
+						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -4032,7 +4339,7 @@ public class WEL_Test_Suite extends DriverModule {
 							}
 
 						}
-						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 						if (price.compareTo(subtotal) == 0)
 							Reporting.updateTestReport(
 									"The addition of all the products' price is same as the subtotal in cart page",
@@ -4062,7 +4369,7 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions.visibilityOfElementLocated(
 									By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-							String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+							String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 							if (orderprice.contains(",")) {
 								System.out.println("The Product Price in Review Page" + (orderprice.replace(",", "")));
 								orderprice = orderprice.replace(",", "");
@@ -4115,7 +4422,7 @@ public class WEL_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions.visibilityOfElementLocated(
 											By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-									String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+									String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 									if (orderprice.contains(",")) {
 										System.out.println(
 												"The Product Price in Review Page" + (orderprice.replace(",", "")));
@@ -4207,6 +4514,7 @@ public class WEL_Test_Suite extends DriverModule {
 						try {
 							wait.until(ExpectedConditions
 									.elementToBeClickable(By.xpath("//button[contains(text(),'ADD TO CART')]")));
+							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -4229,13 +4537,20 @@ public class WEL_Test_Suite extends DriverModule {
 								}
 
 							}
+							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
+							if (price.compareTo(subtotal) == 0)
+								Reporting.updateTestReport(
+										"The addition of all the products' price is same as the subtotal in cart page",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport(
+										"The addition of all the products' pricedidn't match with the subtotal in cart page",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							WEL.ClickonCheckOutOnCartPage();
 							WEL.EnterexistingUserName(
 									excelOperation.getTestData("TC16", "WEL_Test_Data", "Email_Address"));
 							WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC16", "WEL_Test_Data", "Password"));
 							WEL.ClickonLoginAndContinue();
-							WEL.ClickonCheckOutOnCartPage();
-							WEL.ClickonCheckOutOnCartPage();
 							WEL.ClickOnEnterNewAddressButtonOnBillingPage();
 							WEL.GuestFirstName(excelOperation.getTestData("TC33", "WEL_Test_Data", "Guest_Fname"));
 							WEL.GuestLastName(excelOperation.getTestData("TC33", "WEL_Test_Data", "Guest_Lname"));
@@ -4345,7 +4660,7 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions
 									.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
-							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(4));
+							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -4368,7 +4683,7 @@ public class WEL_Test_Suite extends DriverModule {
 								}
 
 							}
-							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
 								Reporting.updateTestReport(
 										"The addition of all the products' price is same as the subtotal in cart page",
@@ -4408,7 +4723,7 @@ public class WEL_Test_Suite extends DriverModule {
 								wait.until(ExpectedConditions.visibilityOfElementLocated(
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-								String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 								if (orderprice.contains(",")) {
 									System.out.println(
 											"The Product Price in Review Page" + (orderprice.replace(",", "")));
@@ -4509,7 +4824,7 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions
 									.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
-							BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(4));
+							BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -4532,13 +4847,7 @@ public class WEL_Test_Suite extends DriverModule {
 								}
 
 							}
-							WEL.ClickonCheckOutOnCartPage();
-							WEL.EnterexistingUserName(
-									excelOperation.getTestData("TC35", "WEL_Test_Data", "Email_Address"));
-							WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC35", "WEL_Test_Data", "Password"));
-							WEL.ClickonLoginAndContinue();
-							WEL.ClickonCheckOutOnCartPage();
-							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
 								Reporting.updateTestReport(
 										"The addition of all the products' price is same as the subtotal in cart page",
@@ -4549,6 +4858,10 @@ public class WEL_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							WEL.ClickonCheckOutOnCartPage();
+							WEL.EnterexistingUserName(
+									excelOperation.getTestData("TC35", "WEL_Test_Data", "Email_Address"));
+							WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC35", "WEL_Test_Data", "Password"));
+							WEL.ClickonLoginAndContinue();
 							WEL.ClickOnEnterNewAddressButtonOnShippingPage();
 							WEL.GuestFirstName(excelOperation.getTestData("TC35", "WEL_Test_Data", "Guest_Fname"));
 							WEL.GuestLastName(excelOperation.getTestData("TC35", "WEL_Test_Data", "Guest_Lname"));
@@ -4580,7 +4893,7 @@ public class WEL_Test_Suite extends DriverModule {
 								wait.until(ExpectedConditions.visibilityOfElementLocated(
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-								String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 								if (orderprice.contains(",")) {
 									System.out.println(
 											"The Product Price in Review Page" + (orderprice.replace(",", "")));
@@ -4590,9 +4903,19 @@ public class WEL_Test_Suite extends DriverModule {
 									System.out.println("order price doesn't have any comma value");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
+								String discount = WEL.fetchDiscountInOrderReview();
+								if (discount.contains(",")) {
+									System.out
+											.println("The discount Price in Review Page" + (discount.replace(",", "")));
+									discount = discount.replace(",", "");
+								} else
+
+									System.out.println("order price doesn't have any comma value");
+								BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
+
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 								System.out.println("The  tax is: " + tax1);
-								BigDecimal totalprice = orderproductprice.add(tax1);
+								BigDecimal totalprice = orderproductprice.add(tax1).subtract(discountinorderreview);
 								System.out.println("Total Product + Tax Price is  :" + totalprice);
 
 								String totalorderReview = WEL.fetchTotalInOrderReview();
@@ -4605,7 +4928,7 @@ public class WEL_Test_Suite extends DriverModule {
 
 								if (totalprice.compareTo(orderTotalPrice) == 0)
 									Reporting.updateTestReport(
-											"First Product price + Tax " + " = Order total in Order Review step",
+											"Product price + Tax - Discount" + " = Order total in Order Review step",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
 									Reporting.updateTestReport(
@@ -4675,7 +4998,7 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions
 									.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
-							BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(4));
+							BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -4698,13 +5021,7 @@ public class WEL_Test_Suite extends DriverModule {
 								}
 
 							}
-							WEL.ClickonCheckOutOnCartPage();
-							WEL.EnterexistingUserName(
-									excelOperation.getTestData("TC36", "WEL_Test_Data", "Email_Address"));
-							WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC36", "WEL_Test_Data", "Password"));
-							WEL.ClickonLoginAndContinue();
-							WEL.ClickonCheckOutOnCartPage();
-							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
 								Reporting.updateTestReport(
 										"The addition of all the products' price is same as the subtotal in cart page",
@@ -4714,6 +5031,10 @@ public class WEL_Test_Suite extends DriverModule {
 										"The addition of all the products' pricedidn't match with the subtotal in cart page",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							WEL.ClickonCheckOutOnCartPage();
+							WEL.EnterexistingUserName(
+									excelOperation.getTestData("TC36", "WEL_Test_Data", "Email_Address"));
+							WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC36", "WEL_Test_Data", "Password"));
+							WEL.ClickonLoginAndContinue();
 							WEL.ClickOnEnterNewAddressButtonOnShippingPage();
 							WEL.GuestFirstName(excelOperation.getTestData("TC36", "WEL_Test_Data", "Guest_Fname"));
 							WEL.GuestLastName(excelOperation.getTestData("TC36", "WEL_Test_Data", "Guest_Lname"));
@@ -4758,7 +5079,7 @@ public class WEL_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions.visibilityOfElementLocated(
 											By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-									String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+									String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 									if (orderprice.contains(",")) {
 										System.out.println(
 												"The Product Price in Review Page" + (orderprice.replace(",", "")));
@@ -4768,9 +5089,19 @@ public class WEL_Test_Suite extends DriverModule {
 										System.out.println("order price doesn't have any comma value");
 									BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
+									String discount = WEL.fetchDiscountInOrderReview();
+									if (discount.contains(",")) {
+										System.out.println(
+												"The discount Price in Review Page" + (discount.replace(",", "")));
+										discount = discount.replace(",", "");
+									} else
+
+										System.out.println("order price doesn't have any comma value");
+									BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
+
 									BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 									System.out.println("The  tax is: " + tax1);
-									BigDecimal totalprice = orderproductprice.add(tax1);
+									BigDecimal totalprice = orderproductprice.add(tax1).subtract(discountinorderreview);
 									System.out.println("Total Product + Tax Price is  :" + totalprice);
 
 									String totalorderReview = WEL.fetchTotalInOrderReview();
@@ -4783,7 +5114,8 @@ public class WEL_Test_Suite extends DriverModule {
 
 									if (totalprice.compareTo(orderTotalPrice) == 0)
 										Reporting.updateTestReport(
-												"First Product price + Tax " + " = Order total in Order Review step",
+												"First Product price + Tax - Discount"
+														+ " = Order total in Order Review step",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 									else
 										Reporting.updateTestReport(
@@ -4859,7 +5191,7 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions
 									.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
-							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(4));
+							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -4882,7 +5214,7 @@ public class WEL_Test_Suite extends DriverModule {
 								}
 
 							}
-							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
 								Reporting.updateTestReport(
 										"The addition of all the products' price is same as the subtotal in cart page",
@@ -4948,7 +5280,7 @@ public class WEL_Test_Suite extends DriverModule {
 										wait.until(ExpectedConditions.visibilityOfElementLocated(
 												By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-										String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 										if (orderprice.contains(",")) {
 											System.out.println(
 													"The Product Price in Review Page" + (orderprice.replace(",", "")));
@@ -5064,6 +5396,7 @@ public class WEL_Test_Suite extends DriverModule {
 						wait.until(ExpectedConditions
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
+						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -5086,6 +5419,15 @@ public class WEL_Test_Suite extends DriverModule {
 							}
 
 						}
+						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
+						if (price.compareTo(subtotal) == 0)
+							Reporting.updateTestReport(
+									"The addition of all the products' price is same as the subtotal in cart page",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport(
+									"The addition of all the products' pricedidn't match with the subtotal in cart page",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 						WEL.ClickonCheckOutOnCartPage();
 						String GuestEmail = WEL.EnterGuestUser();
@@ -5364,7 +5706,8 @@ public class WEL_Test_Suite extends DriverModule {
 			Thread.sleep(1000);
 			// wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(EmailConfirmationText)))
 			ScrollingWebPage.PageDown(driver, SS_path);
-			BigDecimal price = new BigDecimal(WEL.fetchPartnerProductPriceInPDP().substring(4));
+			BigDecimal price = new BigDecimal(WEL.fetchPartnerProductPriceInPDP().substring(1));
+			System.out.println("xxx" + price);
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -5383,7 +5726,8 @@ public class WEL_Test_Suite extends DriverModule {
 				}
 
 			}
-			BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+			BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
+			System.out.println("yyy" + subtotal);
 			if (price.compareTo(subtotal) == 0)
 				Reporting.updateTestReport(
 						"The addition of all the products' price is same as the subtotal in cart page",
@@ -5443,7 +5787,7 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions.visibilityOfElementLocated(
 									By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-							String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+							String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 							if (orderprice.contains(",")) {
 								System.out.println("The Product Price in Review Page" + (orderprice.replace(",", "")));
 								orderprice = orderprice.replace(",", "");
@@ -5607,7 +5951,7 @@ public class WEL_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions.visibilityOfElementLocated(
 											By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-									String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+									String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 									if (orderprice.contains(",")) {
 										System.out.println(
 												"The Product Price in Review Page" + (orderprice.replace(",", "")));
@@ -5711,7 +6055,7 @@ public class WEL_Test_Suite extends DriverModule {
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 							"//div[@class='partner-detail partner-list-container']//div[@class='col-xs-12 col-sm-6 package-selection-col']//button")));
-					BigDecimal price = new BigDecimal(WEL.fetchPartnerPriceInPDP().substring(4));
+					BigDecimal price = new BigDecimal(WEL.fetchPartnerPriceInPDP().substring(1));
 					WEL.clickOnAddToCartButtonOnPDP();
 
 					try {
@@ -5736,7 +6080,7 @@ public class WEL_Test_Suite extends DriverModule {
 							}
 
 						}
-						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 						if (price.compareTo(subtotal) == 0)
 							Reporting.updateTestReport(
 									"The addition of all the products' price is same as the subtotal in cart page",
@@ -5805,7 +6149,7 @@ public class WEL_Test_Suite extends DriverModule {
 										wait.until(ExpectedConditions.visibilityOfElementLocated(
 												By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
-										String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 										if (orderprice.contains(",")) {
 											System.out.println(
 													"The Product Price in Review Page" + (orderprice.replace(",", "")));
@@ -7876,7 +8220,7 @@ public class WEL_Test_Suite extends DriverModule {
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			// ScrollingWebPage.PageDown(driver, SS_path);
-			BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(4));
+			BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 						"//div[@class='product-detail-page']//div[@class='container-fluid banner-container product-detail-banner mt-4']//button")));
@@ -7904,12 +8248,14 @@ public class WEL_Test_Suite extends DriverModule {
 
 					}
 
-					BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
-					if (price.compareTo(subtotal) == 0)
+					BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
+					if (price.compareTo(subtotal) == 0) {
+						System.out.println(price);
+						System.out.println(subtotal);
 						Reporting.updateTestReport(
 								"The addition of all the products' price is same as the subtotal in cart page",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					else
+					} else
 						Reporting.updateTestReport(
 								"The addition of all the products' pricedidn't match with the subtotal in cart page",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -7967,7 +8313,7 @@ public class WEL_Test_Suite extends DriverModule {
 							try {
 								wait.until(ExpectedConditions.visibilityOfElementLocated(
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
-								String orderprice = WEL.fetchFirstProductPriceInOrderReview();
+								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 								if (orderprice.contains(",")) {
 									System.out.println(
 											"The Product Price in Review Page" + (orderprice.replace(",", "")));
@@ -8052,7 +8398,7 @@ public class WEL_Test_Suite extends DriverModule {
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
-			BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(4));
+			BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 						"//div[@class='product-detail-page']//div[@class='container-fluid banner-container product-detail-banner mt-4']//button")));
@@ -8076,7 +8422,7 @@ public class WEL_Test_Suite extends DriverModule {
 					}
 
 				}
-				BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(4));
+				BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 				if (price.compareTo(subtotal) == 0)
 					Reporting.updateTestReport(
 							"The addition of all the products' price is same as the subtotal in cart page",
@@ -8138,19 +8484,20 @@ public class WEL_Test_Suite extends DriverModule {
 							try {
 								wait.until(ExpectedConditions.visibilityOfElementLocated(
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
-								String orderprice = WEL.fetchFirstProductPriceInOrderReview();
-								if (orderprice.contains(",")) {
-									System.out.println(
-											"The Product Price in Review Page" + (orderprice.replace(",", "")));
-									orderprice = orderprice.replace(",", "");
-								} else
 
-									System.out.println("order price doesn't have any comma value");
-								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
+								BigDecimal firstproductprice = new BigDecimal(
+										WEL.fetchFirstProductPriceInOrderReview().substring(1));
+
+								BigDecimal secondproductprice = new BigDecimal(
+										WEL.fetchSecondProductPriceInOrderReview().substring(1));
+
+								BigDecimal thirdproductprice = new BigDecimal(
+										WEL.fetchThirdProductPriceInOrderReview().substring(1));
 
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 								System.out.println("The  tax is: " + tax1);
-								BigDecimal totalprice = orderproductprice.add(tax1);
+								BigDecimal totalprice = firstproductprice.add(secondproductprice).add(thirdproductprice)
+										.add(tax1);
 								System.out.println("Total Product + Tax Price is  :" + totalprice);
 
 								String totalorderReview = WEL.fetchTotalInOrderReview();

@@ -352,7 +352,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
 											" is not same as Order total in Order confirmation page: "+ordertotal, 
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								System.out.println("The Order Id is is " + orderId);
 								excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 								excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
 
@@ -390,7 +389,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		}
 		catch (Exception e) {
 			wiley.wileyLogOutException();
-			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 
 		}
@@ -732,7 +730,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		}
 		catch(Exception e){
 			wiley.wileyLogOutException();
-			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
@@ -873,7 +870,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			wiley.WileyLogOut();
 		} catch (Exception e) {
 			wiley.wileyLogOutException();
-			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
@@ -1773,8 +1769,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			wiley.WileyLogOut();
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			wiley.wileyLogOutException();
+			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 
 	}
@@ -1989,7 +1985,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			wiley.WileyLogOut();
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			wiley.wileyLogOutException();
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
@@ -2023,7 +2018,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				BigDecimal subtotal=new BigDecimal(wiley.fetchOrderSubTotalInCartPage().substring(1));
 				BigDecimal ordertotalInCart=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
 				BigDecimal discount=new BigDecimal(wiley.fetchDiscountAmountInCartPage().substring(2));
-				System.out.println(discount);
 				if(subtotal.multiply(new BigDecimal(0.25)).setScale(2, RoundingMode.CEILING).compareTo(discount)==0) 
 					Reporting.updateTestReport(
 							"The rounded value of :"+subtotal.multiply(new BigDecimal(0.25))+
@@ -2189,7 +2183,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			wiley.WileyLogOut();
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			wiley.wileyLogOutException();
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
@@ -2927,7 +2920,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				BigDecimal subtotal=new BigDecimal(wiley.fetchOrderSubTotalInCartPage().substring(1));
 				BigDecimal ordertotalInCart=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
 				BigDecimal discount=new BigDecimal(wiley.fetchDiscountAmountInCartPage().substring(2));
-				System.out.println(discount);
 				if(subtotal.multiply(new BigDecimal(0.35)).setScale(2, RoundingMode.CEILING).compareTo(discount)==0) 
 					Reporting.updateTestReport(
 							"The rounded value of :"+subtotal.multiply(new BigDecimal(0.35))+
@@ -3160,7 +3152,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 						}
 						String tax1=wiley.fetchTaxInOrderReview();
-						System.out.println(tax1);
 						wiley.clickOnEditButtonInBilling();			
 						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));			
 						try {
@@ -3189,7 +3180,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 								}
 								String tax2=wiley.fetchTaxInOrderReview();
-								System.out.println(tax2);
 								if(!tax1.contentEquals(tax2))
 									Reporting.updateTestReport("Tax value for first address: "+tax1+" was recalculated for second address with new value: "+tax2,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -4264,7 +4254,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				BigDecimal subtotal=new BigDecimal(wiley.fetchOrderSubTotalInCartPage().substring(1));
 				BigDecimal ordertotalInCart=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
 				BigDecimal discount=new BigDecimal(wiley.fetchDiscountAmountInCartPage().substring(2));
-				System.out.println(discount);
 				if(subtotal.multiply(new BigDecimal(1.00)).setScale(2, RoundingMode.CEILING).compareTo(discount)==0) 
 					Reporting.updateTestReport(
 							"The rounded value of :"+subtotal.multiply(new BigDecimal(1.00))+
@@ -5020,12 +5009,12 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 	/*
 	 * @Author: Anindita
 	 * @Date: 1/3/23
-	 * @Description: Validates if error message is coming for Declined and Expired Card details
+	 * @Description: Validates if error message is coming for Declined Card details
 	 */
 	@Test
-	public void TC38_Validate_Payment_Status_For_Declined_And_ExpiredCard() throws IOException{
+	public void TC38_Validate_Payment_Status_For_Declined_card() throws IOException{
 		try {
-			Reporting.test = Reporting.extent.createTest("TC38_Validate_Payment_Status_For_Declined_And_ExpiredCard");
+			Reporting.test = Reporting.extent.createTest("TC38_Validate_Payment_Status_For_Declined_card");
 			driver.get(wiley.wileyURLConcatenation("TC38", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.clickOnAddToCartButton();
@@ -5314,7 +5303,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.clickOnEnterNewAddresButtonInShipping();
 				String country1=excelOperation.getTestData("TC40", "WILEY_NA_Cart_Test_Data", "Shipping_Country").split(",")[0];
 				String country2=excelOperation.getTestData("TC40", "WILEY_NA_Cart_Test_Data", "Shipping_Country").split(",")[1];
-				System.out.println(country1+country2);
 				wiley.selectCountry(country1);
 				//validation for Brzil/ columbia
 				BigDecimal airMailChargeForOneUnit=wiley.fetchShippingCharge(driver, "Air Mail");
@@ -5345,10 +5333,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					Reporting.updateTestReport("Shipping charge has been correctly calculated for Standard shipping",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				else
-					{Reporting.updateTestReport("Shipping charge has been wrongly calculated for Standard shipping",
+					Reporting.updateTestReport("Shipping charge has been wrongly calculated for Standard shipping",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				     System.out.println((standardShippingChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal(1)))
-							.multiply((new BigDecimal("0.01"))))).setScale(2, RoundingMode.CEILING));}
 				if((expressShippingChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
 						.multiply(new BigDecimal("4")))).setScale(2, RoundingMode.CEILING).compareTo(expressShippingChargeForMultiUnit)==0)
 					Reporting.updateTestReport("Shipping charge has been correctly calculated for Express shipping",

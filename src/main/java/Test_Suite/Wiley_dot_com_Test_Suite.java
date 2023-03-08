@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -589,17 +590,18 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			try {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(newXpath)));
 				wiley.checkProductsWithHighlightedSearchedTerm(newXpath);
-				//wiley.clickOnSortDropDown();
+				wiley.clickOnSortDropDown();
 				WebElement l1=driver.findElement(By.id("sortOptions-button"));
 				WebElement l=driver.findElement(By.xpath("//div[contains(text(),'Publication Date (newest-oldest)')]"));
-				//wiley.clickOnPublicationDateFromSortDropDown();
-				JavascriptExecutor j = (JavascriptExecutor) driver;
+				wiley.clickOnPublicationDateFromSortDropDown();
+				/*Actions action = new Actions(driver);
 				try {
-					j.executeScript("arguments[0].click();", l1);
-			    j.executeScript("arguments[0].click();", l);}
+					action.moveToElement(l1).click().perform();
+					action.moveToElement(l).click().perform();
+					}
 				catch(Exception e) {
 					Reporting.updateTestReport(e.getMessage(),CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
-				}
+				}*/
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='ui-selectmenu-text' and contains(text(),"
 						+ "'Publication Date (newest-oldest)')]")));
 				//wait.until(ExpectedConditions.urlContains("publicationDate"));
