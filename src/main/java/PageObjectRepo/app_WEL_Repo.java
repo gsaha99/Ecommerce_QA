@@ -70,7 +70,7 @@ public class app_WEL_Repo {
 	WebElement SubmitButtonInResetPasswordPage;
 
 	@FindBy(xpath = "//div[@class='col-6 noPadding orderDetailTotalVal']")
-	WebElement OrderTotalInCartPage;
+	WebElement OrderTotalOnCartPage;
 
 	@FindBy(xpath = "//div[@class='cartPageProductCurrentPrice']")
 	WebElement OrderSubtotalInCartPage;
@@ -3715,10 +3715,10 @@ public class app_WEL_Repo {
 	public String fetchOrderTotalInCartPage() throws IOException {
 		try {
 			Reporting.updateTestReport(
-					"Subtotal of the order: " + OrderSubtotalInCartPage.getText().trim() + " was returned",
+					"Subtotal of the order: " + OrderTotalOnCartPage.getText() + " was returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			System.out.println(OrderSubtotalInCartPage.getText().trim());
-			return OrderSubtotalInCartPage.getText();
+			
+			return OrderTotalOnCartPage.getText();
 		} catch (Exception e) {
 			Reporting.updateTestReport("Subtotal of the order in cart page could not be returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
