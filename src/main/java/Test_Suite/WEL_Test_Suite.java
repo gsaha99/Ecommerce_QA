@@ -284,34 +284,21 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) {
-									System.out.println(
-											"The Product Price in Review Page" + (orderprice.replace(",", "")));
+								if (orderprice.contains(","))
 									orderprice = orderprice.replace(",", "");
-								} else
-
-									System.out.println("order price doesn't have any comma value");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
 								String discount = WEL.fetchDiscountInOrderReview();
-								if (discount.contains(",")) {
-									System.out
-											.println("The discount Price in Review Page" + (discount.replace(",", "")));
+								if (discount.contains(",")) 
 									discount = discount.replace(",", "");
-								} else
-
-									System.out.println("order price doesn't have any comma value");
 								BigDecimal orderpriceafterdiscount = new BigDecimal(discount.substring(1));
 
 								BigDecimal productpriceafterdiscount = orderproductprice
 										.subtract(orderpriceafterdiscount);
 
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) {
-									System.out.println(totalorderReview.replace(",", ""));
+								if (totalorderReview.contains(",")) 
 									totalorderReview = totalorderReview.replace(",", "");
-								} else
-									System.out.println("Total order price doesn;t have any comma value");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 								if (productpriceafterdiscount.compareTo(orderTotalPrice) == 0)
@@ -325,7 +312,7 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								System.out.println(e.getMessage());
+								Reporting.updateTestReport("Order Summary tab was not visible"+e.getMessage(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 							}
 							WEL.ClickOnBackTOCart();
 							WEL.ClickOnRemoveOnCartPage();
@@ -784,7 +771,7 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions.presenceOfElementLocated(
 									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
-							BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -904,13 +891,11 @@ public class WEL_Test_Suite extends DriverModule {
 									excelOperation.getTestData("TC10", "WEL_Test_Data", "PromoCode"));
 							WEL.ClickOnDiscountApplyButton();
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
-							if (price.compareTo(subtotal) == 0) {
-								System.out.println(subtotal);
-								System.out.println(price);
+							if (price.compareTo(subtotal) == 0) 
 								Reporting.updateTestReport(
 										"The addition of all the products' price is same as the subtotal in cart page",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							} else
+							 else
 								Reporting.updateTestReport(
 										"The addition of all the products' pricedidn't match with the subtotal in cart page",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -995,7 +980,7 @@ public class WEL_Test_Suite extends DriverModule {
 								wait.until(ExpectedConditions.presenceOfElementLocated(
 										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 								ScrollingWebPage.PageDown(driver, SS_path);
-								BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+								BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 								WEL.clickOnAddToCartButtonOnPDP();
 								try {
 									wait.until(ExpectedConditions
@@ -1091,7 +1076,6 @@ public class WEL_Test_Suite extends DriverModule {
 									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-							System.out.println(price);
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -1120,13 +1104,11 @@ public class WEL_Test_Suite extends DriverModule {
 										.elementToBeClickable(By.xpath("//select[@id='quantity_0']")));
 								WEL.ClickOnSelectQuantity();
 								BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
-								if (price.compareTo(subtotal) == 0) {
-									System.out.println(subtotal);
-									System.out.println(price);
+								if (price.compareTo(subtotal) == 0) 
 									Reporting.updateTestReport(
 											"The addition of all the products' price is same as the subtotal in cart page",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								} else
+								 else
 									Reporting.updateTestReport(
 											"The addition of all the products' pricedidn't match with the subtotal in cart page",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -1187,6 +1169,7 @@ public class WEL_Test_Suite extends DriverModule {
 						.presenceOfElementLocated(By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 				ScrollingWebPage.PageDown(driver, SS_path);
 				BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+				BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 				try {
 					wait.until(
@@ -1213,6 +1196,7 @@ public class WEL_Test_Suite extends DriverModule {
 							By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 					ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
 					BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+					BigDecimal secondProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 					WEL.clickOnAddToCartButtonOnPDP();
 					try {
 						wait.until(ExpectedConditions
@@ -1315,18 +1299,27 @@ public class WEL_Test_Suite extends DriverModule {
 
 							BigDecimal secondproductprice2 = new BigDecimal(
 									WEL.fetchSecondProductPriceInOrderReview().substring(1));
-
 							BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-							System.out.println("The  tax is: " + tax1);
 							String discount = WEL.fetchDiscountInOrderReview();
-							if (discount.contains(",")) {
-								System.out.println("The discount Price in Review Page" + (discount.replace(",", "")));
+							if (discount.contains(","))
 								discount = discount.replace(",", "");
-							} else
-
-								System.out.println("order price doesn't have any comma value");
 							BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
-
+							if(firstProductPriceWIthoutDiscount.compareTo(firstproductprice2)==0)
+								Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+										+" is same as price in Order Review "+firstproductprice2,
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+										+" is not same as price in Order Review "+firstproductprice2,
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							if(secondProductPriceWIthoutDiscount.compareTo(secondproductprice2)==0)
+								Reporting.updateTestReport("The price of second product in PDP: "+secondProductPriceWIthoutDiscount
+										+" is same as price in Order Review "+secondproductprice2,
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport("The price of second product in PDP: "+secondProductPriceWIthoutDiscount
+										+" is same not as price in Order Review "+secondproductprice2,
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(tax1)
 									.subtract(discountinorderreview);
 
@@ -1346,7 +1339,9 @@ public class WEL_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 						} catch (Exception e) {
-							System.out.println(e.getMessage());
+							Reporting.updateTestReport(
+									"Order summary tab was not visible"+ e.getMessage(),
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 
 						WEL.clickOnPlaceOrderButton();
@@ -1475,6 +1470,7 @@ public class WEL_Test_Suite extends DriverModule {
 				WEL.ClickonCMAeBook();
 			}
 			BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+			BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
@@ -1561,14 +1557,10 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport(
 						"The addition of all the products' price is same as the subtotal in cart page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else {
-				System.out.println(subtotal);
-				System.out.println(Firstproductprice.add(secondproductprice).add(thirdproductprice));
-
+			else 
 				Reporting.updateTestReport(
 						"The addition of all the products' pricedidn't match with the subtotal in cart page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
 			WEL.ClickonCheckOutOnCartPage();
 			String GuestEmail = WEL.EnterGuestUser();
 			WEL.ClickingOnCreateAccoutButton();
@@ -1630,17 +1622,34 @@ public class WEL_Test_Suite extends DriverModule {
 								WEL.fetchThirdProductPriceInOrderReview().substring(1));
 
 						BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-						System.out.println("The  tax is: " + tax1);
-
-						// System.out.println("Total Product + Tax Price is :" + totalprice);
-
+						if(firstProductPriceWIthoutDiscount.compareTo(firstproductprice2)==0)
+							Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+									+" is same as price in Order Review "+firstproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+									+" is not same as price in Order Review "+firstproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(secondproductprice.compareTo(secondproductprice2)==0)
+							Reporting.updateTestReport("The price of second product in PDP: "+secondproductprice
+									+" is same as price in Order Review "+secondproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("The price of second product in PDP: "+secondproductprice
+									+" is same not as price in Order Review "+secondproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						
+						if(thirdproductprice.compareTo(thirdproductprice2)==0)
+							Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
+									+" is same as price in Order Review "+thirdproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
+									+" is same not as price in Order Review "+thirdproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						String discount = WEL.fetchDiscountInOrderReview();
-						if (discount.contains(",")) {
-							System.out.println("The discount Price in Review Page" + (discount.replace(",", "")));
+						if (discount.contains(",")) 
 							discount = discount.replace(",", "");
-						} else
-
-							System.out.println("order price doesn't have any comma value");
 						BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 						BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(thirdproductprice2)
@@ -1661,7 +1670,9 @@ public class WEL_Test_Suite extends DriverModule {
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 					} catch (Exception e) {
-						System.out.println(e.getMessage());
+						Reporting.updateTestReport(
+								"Order summary tab was not visible"+ e.getMessage(),
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 
 					WEL.clickOnPlaceOrderButton();
@@ -1711,6 +1722,7 @@ public class WEL_Test_Suite extends DriverModule {
 			}
 			ScrollingWebPage.PageDown(driver, SS_path);
 			BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+			BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -1792,18 +1804,14 @@ public class WEL_Test_Suite extends DriverModule {
 
 			}
 			BigDecimal subtotal = new BigDecimal(WEL.fetchOrderTotalOnCartPage().substring(1));
-			System.out.println(subtotal);
 			if (Firstproductprice.add(secondproductprice).add(thirdproductprice).compareTo(subtotal) == 0)
 				Reporting.updateTestReport(
 						"The addition of all the products' price is same as the subtotal in cart page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else {
-				System.out.println(subtotal);
-				System.out.println(Firstproductprice.add(secondproductprice).add(thirdproductprice));
+			else
 				Reporting.updateTestReport(
 						"The addition of all the products' pricedidn't match with the subtotal in cart page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
 			WEL.ClickonCheckOutOnCartPage();
 			WEL.EnterexistingUserName(excelOperation.getTestData("TC16", "WEL_Test_Data", "Email_Address"));
 			WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC16", "WEL_Test_Data", "Password"));
@@ -1861,17 +1869,35 @@ public class WEL_Test_Suite extends DriverModule {
 
 						BigDecimal thirdproductprice2 = new BigDecimal(
 								WEL.fetchThirdProductPriceInOrderReview().substring(1));
-
+						if(firstProductPriceWIthoutDiscount.compareTo(firstproductprice2)==0)
+							Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+									+" is same as price in Order Review "+firstproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+									+" is not same as price in Order Review "+firstproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(secondproductprice.compareTo(secondproductprice2)==0)
+							Reporting.updateTestReport("The price of second product in PDP: "+secondproductprice
+									+" is same as price in Order Review "+secondproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("The price of second product in PDP: "+secondproductprice
+									+" is same not as price in Order Review "+secondproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						
+						if(thirdproductprice.compareTo(thirdproductprice2)==0)
+							Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
+									+" is same as price in Order Review "+thirdproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
+									+" is same not as price in Order Review "+thirdproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-						System.out.println("The  tax is: " + tax1);
-
 						String discount = WEL.fetchDiscountInOrderReview();
-						if (discount.contains(",")) {
-							System.out.println("The discount Price in Review Page" + (discount.replace(",", "")));
+						if (discount.contains(",")) 
 							discount = discount.replace(",", "");
-						} else
-
-							System.out.println("order price doesn't have any comma value");
 						BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 						BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(thirdproductprice2)
@@ -1892,7 +1918,9 @@ public class WEL_Test_Suite extends DriverModule {
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 					} catch (Exception e) {
-						System.out.println(e.getMessage());
+						Reporting.updateTestReport(
+								"Order summary tab was not visible"+ e.getMessage(),
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 
 					WEL.clickOnPlaceOrderButton();
@@ -1933,6 +1961,8 @@ public class WEL_Test_Suite extends DriverModule {
 			BigDecimal Firstproductprice;
 			BigDecimal secondproductprice;
 			BigDecimal thirdproductprice;
+			BigDecimal firstProductPriceWIthoutDiscount;
+			BigDecimal secondProductPriceWIthoutDiscount;
 
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			String urls[] = excelOperation.getTestData("TC17", "WEL_Test_Data", "URL").split(",");
@@ -1942,12 +1972,14 @@ public class WEL_Test_Suite extends DriverModule {
 						"//div[@id='Ultimate_CPA Review Course 2022 (Mentorship & Tutoring Bundle)']//form//button")));
 				ScrollingWebPage.PageDown(driver, SS_path);
 				Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+				firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			} catch (Exception e) {
 				driver.navigate().refresh();
 				wait1.until(ExpectedConditions.elementToBeClickable(By.xpath(
 						"//div[@id='Ultimate_CPA Review Course 2022 (Mentorship & Tutoring Bundle)']//form//button")));
 				Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+				firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			}
 			try {
@@ -1973,12 +2005,14 @@ public class WEL_Test_Suite extends DriverModule {
 						"//div[@class='container-fluid banner-container product-detail-banner mt-4']//div[7]//button")));
 				ScrollingWebPage.PageDown(driver, SS_path);
 				secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+				secondProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			} catch (Exception e) {
 				driver.navigate().refresh();
 				wait1.until(ExpectedConditions.elementToBeClickable(By.xpath(
 						"//div[@class='container-fluid banner-container product-detail-banner mt-4']//div[7]//button")));
 				secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+				secondProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			}
 			try {
@@ -2098,19 +2132,36 @@ public class WEL_Test_Suite extends DriverModule {
 
 						BigDecimal thirdproductprice2 = new BigDecimal(
 								WEL.fetchThirdProductPriceInOrderReview().substring(1));
-
+						if(firstProductPriceWIthoutDiscount.compareTo(firstproductprice2)==0)
+							Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+									+" is same as price in Order Review "+firstproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+									+" is not same as price in Order Review "+firstproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(secondProductPriceWIthoutDiscount.compareTo(secondproductprice2)==0)
+							Reporting.updateTestReport("The price of second product in PDP: "+secondProductPriceWIthoutDiscount
+									+" is same as price in Order Review "+secondproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("The price of second product in PDP: "+secondProductPriceWIthoutDiscount
+									+" is same not as price in Order Review "+secondproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						
+						if(thirdproductprice.compareTo(thirdproductprice2)==0)
+							Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
+									+" is same as price in Order Review "+thirdproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
+									+" is same not as price in Order Review "+thirdproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-						System.out.println("The  tax is: " + tax1);
-
-						// System.out.println("Total Product + Tax Price is :" + totalprice);
 
 						String discount = WEL.fetchDiscountInOrderReview();
-						if (discount.contains(",")) {
-							System.out.println("The discount Price in Review Page" + (discount.replace(",", "")));
+						if (discount.contains(","))
 							discount = discount.replace(",", "");
-						} else
-
-							System.out.println("order price doesn't have any comma value");
 						BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 						BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(thirdproductprice2)
@@ -2131,7 +2182,9 @@ public class WEL_Test_Suite extends DriverModule {
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 					} catch (Exception e) {
-						System.out.println(e.getMessage());
+						Reporting.updateTestReport(
+								"Order summary tab was not visible"+ e.getMessage(),
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 					WEL.clickOnPlaceOrderButton();
 					String orderID = WEL.fetchOrderId();
@@ -2171,6 +2224,8 @@ public class WEL_Test_Suite extends DriverModule {
 			BigDecimal Firstproductprice;
 			BigDecimal secondproductprice;
 			BigDecimal thirdproductprice;
+			BigDecimal firstProductPriceWIthoutDiscount;
+			BigDecimal secondProductPriceWIthoutDiscount;
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			String urls[] = excelOperation.getTestData("TC17", "WEL_Test_Data", "URL").split(",");
 			driver.get(urls[0]);
@@ -2179,12 +2234,14 @@ public class WEL_Test_Suite extends DriverModule {
 						"//div[@id='Ultimate_CPA Review Course 2022 (Mentorship & Tutoring Bundle)']//form//button")));
 				ScrollingWebPage.PageDown(driver, SS_path);
 				Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+				firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			} catch (Exception e) {
 				driver.navigate().refresh();
 				wait1.until(ExpectedConditions.elementToBeClickable(By.xpath(
 						"//div[@id='Ultimate_CPA Review Course 2022 (Mentorship & Tutoring Bundle)']//form//button")));
 				Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+				firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			}
 			try {
@@ -2210,12 +2267,14 @@ public class WEL_Test_Suite extends DriverModule {
 						"//div[@class='container-fluid banner-container product-detail-banner mt-4']//div[7]//button")));
 				ScrollingWebPage.PageDown(driver, SS_path);
 				secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+				secondProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			} catch (Exception e) {
 				driver.navigate().refresh();
 				wait1.until(ExpectedConditions.elementToBeClickable(By.xpath(
 						"//div[@class='container-fluid banner-container product-detail-banner mt-4']//div[7]//button")));
 				secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+				secondProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			}
 			try {
@@ -2333,19 +2392,35 @@ public class WEL_Test_Suite extends DriverModule {
 
 						BigDecimal thirdproductprice2 = new BigDecimal(
 								WEL.fetchThirdProductPriceInOrderReview().substring(1));
-
+						if(firstProductPriceWIthoutDiscount.compareTo(firstproductprice2)==0)
+							Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+									+" is same as price in Order Review "+firstproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+									+" is not same as price in Order Review "+firstproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						if(secondProductPriceWIthoutDiscount.compareTo(secondproductprice2)==0)
+							Reporting.updateTestReport("The price of second product in PDP: "+secondProductPriceWIthoutDiscount
+									+" is same as price in Order Review "+secondproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("The price of second product in PDP: "+secondProductPriceWIthoutDiscount
+									+" is same not as price in Order Review "+secondproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						
+						if(thirdproductprice.compareTo(thirdproductprice2)==0)
+							Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
+									+" is same as price in Order Review "+thirdproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
+									+" is same not as price in Order Review "+thirdproductprice2,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-						System.out.println("The  tax is: " + tax1);
-
-						// System.out.println("Total Product + Tax Price is :" + totalprice);
-
 						String discount = WEL.fetchDiscountInOrderReview();
-						if (discount.contains(",")) {
-							System.out.println("The discount Price in Review Page" + (discount.replace(",", "")));
+						if (discount.contains(","))
 							discount = discount.replace(",", "");
-						} else
-
-							System.out.println("order price doesn't have any comma value");
 						BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 						BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(thirdproductprice2)
@@ -2366,7 +2441,9 @@ public class WEL_Test_Suite extends DriverModule {
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 					} catch (Exception e) {
-						System.out.println(e.getMessage());
+						Reporting.updateTestReport(
+								"Order summary tab was not visible"+ e.getMessage(),
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 
 					String orderID = WEL.fetchOrderId();
@@ -2406,7 +2483,6 @@ public class WEL_Test_Suite extends DriverModule {
 			driver.get(urls[0]);
 			ScrollingWebPage.PageDown(driver, SS_path);
 			BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-			System.out.println("firstprice" + Firstproductprice);
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -2471,13 +2547,10 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport(
 						"The addition of all the products' price is same as the subtotal in cart page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else {
-				System.out.println(subtotal);
-				System.out.println(Firstproductprice.add(secondproductprice).add(thirdproductprice));
+			else 
 				Reporting.updateTestReport(
 						"The addition of all the products' pricedidn't match with the subtotal in cart page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
 			WEL.ClickonCheckOutOnCartPage();
 			String GuestEmail = WEL.EnterGuestUser();
 			WEL.ClickingOnCreateAccoutButton();
@@ -2537,9 +2610,32 @@ public class WEL_Test_Suite extends DriverModule {
 						WEL.fetchSecondProductPriceInOrderReview().substring(1));
 
 				BigDecimal thirdproductprice2 = new BigDecimal(WEL.fetchThirdProductPriceInOrderReview().substring(1));
-
+				if(Firstproductprice.compareTo(firstproductprice2)==0)
+					Reporting.updateTestReport("The price of first product in PDP: "+Firstproductprice
+							+" is same as price in Order Review "+firstproductprice2,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("The price of first product in PDP: "+Firstproductprice
+							+" is not same as price in Order Review "+firstproductprice2,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				if(secondproductprice.compareTo(secondproductprice2)==0)
+					Reporting.updateTestReport("The price of second product in PDP: "+secondproductprice
+							+" is same as price in Order Review "+secondproductprice2,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("The price of second product in PDP: "+secondproductprice
+							+" is same not as price in Order Review "+secondproductprice2,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				
+				if(thirdproductprice.compareTo(thirdproductprice2)==0)
+					Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
+							+" is same as price in Order Review "+thirdproductprice2,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
+							+" is same not as price in Order Review "+thirdproductprice2,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-				System.out.println("The  tax is: " + tax1);
 				BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(thirdproductprice2).add(tax1);
 				String totalorderReview = WEL.fetchTotalInOrderReview();
 				if (totalorderReview.contains(","))
@@ -2556,7 +2652,9 @@ public class WEL_Test_Suite extends DriverModule {
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				Reporting.updateTestReport(
+						"Order summary tab was not visible"+ e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 
 			WEL.clickOnPlaceOrderButton();
@@ -2600,6 +2698,7 @@ public class WEL_Test_Suite extends DriverModule {
 							By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 					ScrollingWebPage.PageDown(driver, SS_path);
 					BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+					BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 					WEL.clickOnAddToCartButtonOnPDP();
 					WEL.ClickWELIconCheckoutPage();
 
@@ -2646,13 +2745,10 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"The addition of all the products' price is same as the subtotal in cart page",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								else {
-									System.out.println(subtotal);
-
+								else 
 									Reporting.updateTestReport(
 											"The addition of all the products' pricedidn't match with the subtotal in cart page",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
 								WEL.ClickonCheckOutOnCartPage();
 								String GuestEmail = WEL.EnterGuestUser();
 								WEL.ClickingOnCreateAccoutButton();
@@ -2708,18 +2804,27 @@ public class WEL_Test_Suite extends DriverModule {
 
 										BigDecimal secondproductprice2 = new BigDecimal(
 												WEL.fetchSecondProductPriceInOrderReview().substring(1));
-
+										if(firstProductPriceWIthoutDiscount.compareTo(firstproductprice2)==0)
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is same as price in Order Review "+firstproductprice2,
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is not same as price in Order Review "+firstproductprice2,
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										if(secondproductprice.compareTo(secondproductprice2)==0)
+											Reporting.updateTestReport("The price of second product in PDP: "+secondproductprice
+													+" is same as price in Order Review "+secondproductprice2,
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport("The price of second product in PDP: "+secondproductprice
+													+" is same not as price in Order Review "+secondproductprice2,
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-										System.out.println("The  tax is: " + tax1);
 
 										String discount = WEL.fetchDiscountInOrderReview();
-										if (discount.contains(",")) {
-											System.out.println(
-													"The discount Price in Review Page" + (discount.replace(",", "")));
+										if (discount.contains(",")) 
 											discount = discount.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 										BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(tax1)
@@ -2741,7 +2846,9 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										System.out.println(e.getMessage());
+										Reporting.updateTestReport(
+												"Order summary tab was not visible"+ e.getMessage(),
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 									WEL.clickOnPlaceOrderButton();
@@ -3121,6 +3228,7 @@ public class WEL_Test_Suite extends DriverModule {
 									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+							BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -3205,36 +3313,27 @@ public class WEL_Test_Suite extends DriverModule {
 											By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 									String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-									if (orderprice.contains(",")) {
-										System.out.println(
-												"The Product Price in Review Page" + (orderprice.replace(",", "")));
+									if (orderprice.contains(","))
 										orderprice = orderprice.replace(",", "");
-									} else
-
-										System.out.println("order price doesn't have any comma value");
 									BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+									if(firstProductPriceWIthoutDiscount.compareTo(orderproductprice)==0)
+										Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+												+" is same as price in Order Review "+orderproductprice,
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									else
+										Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+												+" is not same as price in Order Review "+orderproductprice,
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									String discount = WEL.fetchDiscountInOrderReview();
-									if (discount.contains(",")) {
-										System.out.println(
-												"The discount Price in Review Page" + (discount.replace(",", "")));
+									if (discount.contains(",")) 
 										discount = discount.replace(",", "");
-									} else
-
-										System.out.println("order price doesn't have any comma value");
 									BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 									BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-									System.out.println("The  tax is: " + tax1);
 									BigDecimal totalprice = orderproductprice.add(tax1).subtract(discountinorderreview);
-									System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 									String totalorderReview = WEL.fetchTotalInOrderReview();
-									if (totalorderReview.contains(",")) {
-										System.out.println(totalorderReview.replace(",", ""));
+									if (totalorderReview.contains(",")) 
 										totalorderReview = totalorderReview.replace(",", "");
-									} else
-										System.out.println("Total order price doesn;t ahve any comma value");
 									BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 									if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -3249,7 +3348,9 @@ public class WEL_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 								} catch (Exception e) {
-									System.out.println(e.getMessage());
+									Reporting.updateTestReport(
+											"Order summary tab was not visible"+ e.getMessage(),
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 								ScrollingWebPage.PageDown(driver, SS_path);
@@ -3522,6 +3623,7 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -3578,29 +3680,25 @@ public class WEL_Test_Suite extends DriverModule {
 									By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 							String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-							if (orderprice.contains(",")) {
-								System.out.println("The Product Price in Review Page" + (orderprice.replace(",", "")));
+							if (orderprice.contains(","))
 								orderprice = orderprice.replace(",", "");
-							} else
-
-								System.out.println("order price doesn't have any comma value");
 							String discount = WEL.fetchDiscountInOrderReview();
-							if (discount.contains(",")) {
-								System.out.println("The discount Price in Review Page" + (discount.replace(",", "")));
+							if (discount.contains(","))
 								discount = discount.replace(",", "");
-							} else
-
-								System.out.println("order price doesn't have any comma value");
 							BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 							BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1))
 									.subtract(discountinorderreview);
-
+							if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+								Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+										+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+										+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							String totalorderReview = WEL.fetchTotalInOrderReview();
-							if (totalorderReview.contains(",")) {
-								System.out.println(totalorderReview.replace(",", ""));
+							if (totalorderReview.contains(",")) 
 								totalorderReview = totalorderReview.replace(",", "");
-							} else
-								System.out.println("Total order price doesn;t have any comma value");
 							BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 							if (orderproductprice.compareTo(orderTotalPrice) == 0)
@@ -3613,7 +3711,9 @@ public class WEL_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 						} catch (Exception e) {
-							System.out.println(e.getMessage());
+							Reporting.updateTestReport(
+									"Order summary tab was not visible"+ e.getMessage(),
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 						WEL.ClickOnBackTOCart();
 						WEL.ClickOnRemoveOnCartPage();
@@ -3671,6 +3771,7 @@ public class WEL_Test_Suite extends DriverModule {
 							WEL.ClickonApplyStudentDiscount();
 							WEL.ClickonswitchStudentDiscount();
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+							BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -3741,24 +3842,21 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) {
-									System.out.println(
-											"The Product Price in Review Page" + (orderprice.replace(",", "")));
+								if (orderprice.contains(",")) 
 									orderprice = orderprice.replace(",", "");
-								} else
-
-									System.out.println("order price doesn't have any comma value");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+								if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+									Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+											+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+											+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
-								if (shippingcharge.contains(",")) {
-									System.out.println(
-											"The discount Price in Review Page" + (shippingcharge.replace(",", "")));
+								if (shippingcharge.contains(",")) 
 									shippingcharge = shippingcharge.replace(",", "");
-								} else
-
-									System.out.println("order price doesn't have any comma value");
 								BigDecimal ShipchargoneReviewpage = new BigDecimal(shippingcharge.substring(1));
 
 								BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
@@ -3766,11 +3864,8 @@ public class WEL_Test_Suite extends DriverModule {
 										.add(ShipchargoneReviewpage);
 
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) {
-									System.out.println(totalorderReview.replace(",", ""));
+								if (totalorderReview.contains(",")) 
 									totalorderReview = totalorderReview.replace(",", "");
-								} else
-									System.out.println("Total order price doesn;t have any comma value");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 								if (orderTotalpriceafterDiscount.compareTo(orderTotalPrice) == 0)
@@ -3783,7 +3878,9 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								System.out.println(e.getMessage());
+								Reporting.updateTestReport(
+										"Order summary tab was not visible"+ e.getMessage(),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							WEL.ClickOnEditIcononShippingPage();
 							try {
@@ -3808,24 +3905,16 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) {
-									System.out.println(
-											"The Product Price in Review Page" + (orderprice.replace(",", "")));
+								if (orderprice.contains(","))
 									orderprice = orderprice.replace(",", "");
-								} else
-
-									System.out.println("order price doesn't have any comma value");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
 								BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
 								BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount);
 
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) {
-									System.out.println(totalorderReview.replace(",", ""));
+								if (totalorderReview.contains(","))
 									totalorderReview = totalorderReview.replace(",", "");
-								} else
-									System.out.println("Total order price doesn;t have any comma value");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 								if (orderTotalpriceafterDiscount.compareTo(orderTotalPrice) == 0)
@@ -3838,7 +3927,9 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								System.out.println(e.getMessage());
+								Reporting.updateTestReport(
+										"Order summary tab was not visible"+ e.getMessage(),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							WEL.VerificationOfStudentForNonUS();
 
@@ -3894,7 +3985,7 @@ public class WEL_Test_Suite extends DriverModule {
 							ScrollingWebPage.PageDown(driver, SS_path);
 							WEL.ClickonApplyStudentDiscount();
 							WEL.ClickonswitchStudentDiscount();
-							BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -3964,24 +4055,16 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) {
-									System.out.println(
-											"The Product Price in Review Page" + (orderprice.replace(",", "")));
+								if (orderprice.contains(",")) 
 									orderprice = orderprice.replace(",", "");
-								} else
-
-									System.out.println("order price doesn't have any comma value");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
 								BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
 								BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount);
 
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) {
-									System.out.println(totalorderReview.replace(",", ""));
+								if (totalorderReview.contains(","))
 									totalorderReview = totalorderReview.replace(",", "");
-								} else
-									System.out.println("Total order price doesn;t have any comma value");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 								if (orderTotalpriceafterDiscount.compareTo(orderTotalPrice) == 0)
@@ -3994,7 +4077,9 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								System.out.println(e.getMessage());
+								Reporting.updateTestReport(
+										"Order summary tab was not visible"+ e.getMessage(),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							WEL.ClickOnEditIcononShippingPage();
 							try {
@@ -4019,24 +4104,16 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) {
-									System.out.println(
-											"The Product Price in Review Page" + (orderprice.replace(",", "")));
+								if (orderprice.contains(",")) 
 									orderprice = orderprice.replace(",", "");
-								} else
-
-									System.out.println("order price doesn't have any comma value");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
 								BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
 								BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount);
 
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) {
-									System.out.println(totalorderReview.replace(",", ""));
+								if (totalorderReview.contains(",")) 
 									totalorderReview = totalorderReview.replace(",", "");
-								} else
-									System.out.println("Total order price doesn;t have any comma value");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 								if (orderTotalpriceafterDiscount.compareTo(orderTotalPrice) == 0)
@@ -4049,7 +4126,9 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								System.out.println(e.getMessage());
+								Reporting.updateTestReport(
+										"Order summary tab was not visible"+ e.getMessage(),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							WEL.VerificationOfStudentForNonUS();
 
@@ -4104,8 +4183,8 @@ public class WEL_Test_Suite extends DriverModule {
 						WEL.ClickonCMAeBook();
 						ScrollingWebPage.PageDown(driver, SS_path);
 
-						BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
-
+						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 						try {
 							wait.until(ExpectedConditions
 									.elementToBeClickable(By.xpath("//button[contains(text(),'ADD TO CART')]")));
@@ -4183,37 +4262,28 @@ public class WEL_Test_Suite extends DriverModule {
 										// This statement is we are getting the firstProduct price in Order Review page
 										// and Storing in String Object
 										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-										if (orderprice.contains(",")) {
-											System.out.println(
-													"The Product Price in Review Page" + (orderprice.replace(",", "")));
+										if (orderprice.contains(",")) 
 											orderprice = orderprice.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+										if(firstProductPriceWIthoutDiscount.compareTo(orderproductprice)==0)
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is not same as price in Order Review "+orderproductprice,
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										String discount = WEL.fetchDiscountInOrderReview();
-										if (discount.contains(",")) {
-											System.out.println(
-													"The discount Price in Review Page" + (discount.replace(",", "")));
+										if (discount.contains(",")) 
 											discount = discount.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 										BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-										System.out.println("The  tax is: " + tax1);
 										BigDecimal totalprice = orderproductprice.add(tax1)
 												.subtract(discountinorderreview);
-										System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 										String totalorderReview = WEL.fetchTotalInOrderReview();
-										if (totalorderReview.contains(",")) {
-											System.out.println(totalorderReview.replace(",", ""));
+										if (totalorderReview.contains(",")) 
 											totalorderReview = totalorderReview.replace(",", "");
-										} else
-											System.out.println("Total order price doesn;t ahve any comma value");
 										BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 										if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -4228,7 +4298,9 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										System.out.println(e.getMessage());
+										Reporting.updateTestReport(
+												"Order summary tab was not visible"+ e.getMessage(),
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 									ScrollingWebPage.PageDown(driver, SS_path);
@@ -4301,6 +4373,7 @@ public class WEL_Test_Suite extends DriverModule {
 								.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -4372,28 +4445,26 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) {
-									System.out.println(
-											"The Product Price in Review Page" + (orderprice.replace(",", "")));
+								if (orderprice.contains(",")) 
 									orderprice = orderprice.replace(",", "");
-								} else
-
-									System.out.println("order price doesn't have any comma value");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+								if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+									Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+											+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+											+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-								System.out.println("The  tax is: " + tax1);
 								BigDecimal orderproductpriceincludingtax = orderproductprice.add(tax1);
 
 								BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
 								BigDecimal orderTotalpriceafterDiscount = orderproductpriceincludingtax
 										.subtract(discount);
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) {
-									System.out.println(totalorderReview.replace(",", ""));
+								if (totalorderReview.contains(","))
 									totalorderReview = totalorderReview.replace(",", "");
-								} else
-									System.out.println("Total order price doesn;t have any comma value");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 								if (orderTotalpriceafterDiscount.compareTo(orderTotalPrice) == 0)
@@ -4406,8 +4477,10 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								System.out.println(e.getMessage());
-							}
+								Reporting.updateTestReport(
+										"Order summary tab was not visible"+ e.getMessage(),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
 							ScrollingWebPage.PageScrollUp(driver, 0, -300, SS_path);
 							WEL.ClickOnBackTOCart();
 							WEL.ClickOnRemoveOnCartPage();
@@ -4457,11 +4530,13 @@ public class WEL_Test_Suite extends DriverModule {
 							By.xpath("//div[@class='comparison-table-title-container header-sticky']//div[2]/a")));
 					ScrollingWebPage.PageDown(driver, SS_path);
 					WEL.ClickOnViewCourseForCIAProduct();
+					
 					try {
 						wait.until(ExpectedConditions
 								.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -4515,22 +4590,22 @@ public class WEL_Test_Suite extends DriverModule {
 									By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 							String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-							if (orderprice.contains(",")) {
-								System.out.println("The Product Price in Review Page" + (orderprice.replace(",", "")));
+							if (orderprice.contains(",")) 
 								orderprice = orderprice.replace(",", "");
-							} else
-
-								System.out.println("order price doesn't have any comma value");
 							BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+							if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+								Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+										+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+										+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
 							BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount);
 							String totalorderReview = WEL.fetchTotalInOrderReview();
-							if (totalorderReview.contains(",")) {
-								System.out.println(totalorderReview.replace(",", ""));
+							if (totalorderReview.contains(","))
 								totalorderReview = totalorderReview.replace(",", "");
-							} else
-								System.out.println("Total order price doesn;t have any comma value");
 							BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 							if (orderTotalpriceafterDiscount.compareTo(orderTotalPrice) == 0)
@@ -4543,7 +4618,9 @@ public class WEL_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 						} catch (Exception e) {
-							System.out.println(e.getMessage());
+							Reporting.updateTestReport(
+									"Order summary tab was not visible"+ e.getMessage(),
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 						WEL.ShipSaveAndContinueButton();
 						try {
@@ -4568,23 +4645,15 @@ public class WEL_Test_Suite extends DriverModule {
 											By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 									String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-									if (orderprice.contains(",")) {
-										System.out.println(
-												"The Product Price in Review Page" + (orderprice.replace(",", "")));
+									if (orderprice.contains(",")) 
 										orderprice = orderprice.replace(",", "");
-									} else
-
-										System.out.println("order price doesn't have any comma value");
 									BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
 									BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
 									BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount);
 									String totalorderReview = WEL.fetchTotalInOrderReview();
-									if (totalorderReview.contains(",")) {
-										System.out.println(totalorderReview.replace(",", ""));
+									if (totalorderReview.contains(",")) 
 										totalorderReview = totalorderReview.replace(",", "");
-									} else
-										System.out.println("Total order price doesn;t have any comma value");
 									BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 									if (orderTotalpriceafterDiscount.compareTo(orderTotalPrice) == 0)
@@ -4597,7 +4666,9 @@ public class WEL_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 								} catch (Exception e) {
-									System.out.println(e.getMessage());
+									Reporting.updateTestReport(
+											"Order summary tab was not visible"+ e.getMessage(),
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 							} catch (Exception e) {
 								Reporting.updateTestReport(
@@ -4660,6 +4731,7 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions
 									.elementToBeClickable(By.xpath("//button[contains(text(),'ADD TO CART')]")));
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+							
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -4806,6 +4878,7 @@ public class WEL_Test_Suite extends DriverModule {
 									.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+							BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -4869,31 +4942,26 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) {
-									System.out.println(
-											"The Product Price in Review Page" + (orderprice.replace(",", "")));
+								if (orderprice.contains(","))
 									orderprice = orderprice.replace(",", "");
-								} else
-
-									System.out.println("order price doesn't have any comma value");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+								if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+									Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+											+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+											+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-								System.out.println("The  tax is: " + tax1);
 								BigDecimal totalprice = orderproductprice.add(tax1);
-								System.out.println("Total Product + Tax Price is  :" + totalprice);
 
 								BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
 								BigDecimal orderTotalpriceafterDiscount = totalprice.subtract(discount);
-
-								System.out.println("Total Product Price after Discount" + orderTotalpriceafterDiscount);
-
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) {
-									System.out.println(totalorderReview.replace(",", ""));
+								if (totalorderReview.contains(",")) 
 									totalorderReview = totalorderReview.replace(",", "");
-								} else
-									System.out.println("Total order price doesn;t have any comma value");
+								
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 								if (orderTotalpriceafterDiscount.compareTo(orderTotalPrice) == 0)
@@ -4908,7 +4976,9 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								System.out.println(e.getMessage());
+								Reporting.updateTestReport(
+										"Order summary tab was not visible"+ e.getMessage(),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 
 							WEL.clickOnPlaceOrderButton();
@@ -4969,7 +5039,8 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions
 									.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
-							BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+							BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -5039,36 +5110,26 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) {
-									System.out.println(
-											"The Product Price in Review Page" + (orderprice.replace(",", "")));
+								if (orderprice.contains(",")) 
 									orderprice = orderprice.replace(",", "");
-								} else
-
-									System.out.println("order price doesn't have any comma value");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+								if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+									Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+											+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+											+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								String discount = WEL.fetchDiscountInOrderReview();
-								if (discount.contains(",")) {
-									System.out
-											.println("The discount Price in Review Page" + (discount.replace(",", "")));
+								if (discount.contains(","))
 									discount = discount.replace(",", "");
-								} else
-
-									System.out.println("order price doesn't have any comma value");
 								BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
-
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-								System.out.println("The  tax is: " + tax1);
 								BigDecimal totalprice = orderproductprice.add(tax1).subtract(discountinorderreview);
-								System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) {
-									System.out.println(totalorderReview.replace(",", ""));
+								if (totalorderReview.contains(","))
 									totalorderReview = totalorderReview.replace(",", "");
-								} else
-									System.out.println("Total order price doesn;t ahve any comma value");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 								if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -5082,7 +5143,9 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								System.out.println(e.getMessage());
+								Reporting.updateTestReport(
+										"Order summary tab was not visible"+ e.getMessage(),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 
 							WEL.clickOnPlaceOrderButton();
@@ -5143,7 +5206,8 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions
 									.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
-							BigDecimal price = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+							BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -5225,36 +5289,27 @@ public class WEL_Test_Suite extends DriverModule {
 											By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 									String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-									if (orderprice.contains(",")) {
-										System.out.println(
-												"The Product Price in Review Page" + (orderprice.replace(",", "")));
+									if (orderprice.contains(",")) 
 										orderprice = orderprice.replace(",", "");
-									} else
-
-										System.out.println("order price doesn't have any comma value");
 									BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+									if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+										Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+												+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									else
+										Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+												+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									String discount = WEL.fetchDiscountInOrderReview();
-									if (discount.contains(",")) {
-										System.out.println(
-												"The discount Price in Review Page" + (discount.replace(",", "")));
+									if (discount.contains(","))
 										discount = discount.replace(",", "");
-									} else
-
-										System.out.println("order price doesn't have any comma value");
 									BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 									BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-									System.out.println("The  tax is: " + tax1);
 									BigDecimal totalprice = orderproductprice.add(tax1).subtract(discountinorderreview);
-									System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 									String totalorderReview = WEL.fetchTotalInOrderReview();
-									if (totalorderReview.contains(",")) {
-										System.out.println(totalorderReview.replace(",", ""));
+									if (totalorderReview.contains(",")) 
 										totalorderReview = totalorderReview.replace(",", "");
-									} else
-										System.out.println("Total order price doesn;t ahve any comma value");
 									BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 									if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -5269,8 +5324,10 @@ public class WEL_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 								} catch (Exception e) {
-									System.out.println(e.getMessage());
-								}
+									Reporting.updateTestReport(
+											"Order summary tab was not visible"+ e.getMessage(),
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
 
 								ScrollingWebPage.PageDown(driver, SS_path);
 								WEL.clickOnPlaceOrderButton();
@@ -5337,6 +5394,7 @@ public class WEL_Test_Suite extends DriverModule {
 									.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+							BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -5426,32 +5484,29 @@ public class WEL_Test_Suite extends DriverModule {
 												By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-										if (orderprice.contains(",")) {
-											System.out.println(
-													"The Product Price in Review Page" + (orderprice.replace(",", "")));
+										if (orderprice.contains(",")) 
 											orderprice = orderprice.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
 										BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-										System.out.println("The  tax is: " + tax1);
 										BigDecimal totalprice = orderproductprice.add(tax1);
-										System.out.println("Total Product + Tax Price is  :" + totalprice);
 
 										BigDecimal discount = new BigDecimal(
 												WEL.fetchDiscountInOrderReview().substring(1));
 										BigDecimal orderTotalDiscount = totalprice.subtract(discount);
 
 										String totalorderReview = WEL.fetchTotalInOrderReview();
-										if (totalorderReview.contains(",")) {
-											System.out.println(totalorderReview.replace(",", ""));
+										if (totalorderReview.contains(",")) 
 											totalorderReview = totalorderReview.replace(",", "");
-										} else
-											System.out.println("Total order price doesn;t ahve any comma value");
 										BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
-
+										if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										if (orderTotalDiscount.compareTo(orderTotalPrice) == 0)
 											Reporting.updateTestReport(
 													"First Product price - Dsicount + Tax "
@@ -5464,7 +5519,9 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										System.out.println(e.getMessage());
+										Reporting.updateTestReport(
+												"Order summary tab was not visible"+ e.getMessage(),
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 									ScrollingWebPage.PageDown(driver, SS_path);
 									WEL.clickOnPlaceOrderButton();
@@ -5852,7 +5909,7 @@ public class WEL_Test_Suite extends DriverModule {
 			// wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(EmailConfirmationText)))
 			ScrollingWebPage.PageDown(driver, SS_path);
 			BigDecimal price = new BigDecimal(WEL.fetchPartnerProductPriceInPDP().substring(1));
-			System.out.println("xxx" + price);
+			BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchLastPriceInPDPForPartner().substring(1));
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -5872,7 +5929,6 @@ public class WEL_Test_Suite extends DriverModule {
 
 			}
 			BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
-			System.out.println("yyy" + subtotal);
 			if (price.compareTo(subtotal) == 0)
 				Reporting.updateTestReport(
 						"The addition of all the products' price is same as the subtotal in cart page",
@@ -5933,28 +5989,25 @@ public class WEL_Test_Suite extends DriverModule {
 									By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 							String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-							if (orderprice.contains(",")) {
-								System.out.println("The Product Price in Review Page" + (orderprice.replace(",", "")));
+							if (orderprice.contains(","))
 								orderprice = orderprice.replace(",", "");
-							} else
-
-								System.out.println("order price doesn't have any comma value");
 							BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+							if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+								Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+										+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+										+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-							System.out.println("The  tax is: " + tax1);
 							BigDecimal totalprice = orderproductprice.add(tax1);
-							System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 							BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
 							BigDecimal orderTotalDiscount = totalprice.subtract(discount);
 
 							String totalorderReview = WEL.fetchTotalInOrderReview();
-							if (totalorderReview.contains(",")) {
-								System.out.println(totalorderReview.replace(",", ""));
+							if (totalorderReview.contains(",")) 
 								totalorderReview = totalorderReview.replace(",", "");
-							} else
-								System.out.println("Total order price doesn;t ahve any comma value");
 							BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 							if (orderTotalDiscount.compareTo(orderTotalPrice) == 0)
@@ -5968,7 +6021,9 @@ public class WEL_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 						} catch (Exception e) {
-							System.out.println(e.getMessage());
+							Reporting.updateTestReport(
+									"Order summary tab was not visible"+ e.getMessage(),
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 						WEL.clickOnPlaceOrderButton();
 						String orderID = WEL.fetchOrderId();
@@ -6027,7 +6082,8 @@ public class WEL_Test_Suite extends DriverModule {
 					try {
 						wait.until(ExpectedConditions
 								.visibilityOfElementLocated(By.xpath("(//div[@class='col']//button)[2]")));
-						BigDecimal price = new BigDecimal(WEL.fetchPartnerPriceInPDP().substring(1));
+						BigDecimal price = new BigDecimal(WEL.fetchPartnerProductPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchLastPriceInPDPForPartner().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							try {
@@ -6052,7 +6108,6 @@ public class WEL_Test_Suite extends DriverModule {
 
 							}
 							String subtotal = WEL.fetchOrderSubTotalInCartPage();
-							System.out.println("Cart Parice is" + subtotal);
 							if (subtotal.equals("FREE"))
 								Reporting.updateTestReport("The Subtotal is FREE for DeanDorton Products",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -6097,37 +6152,26 @@ public class WEL_Test_Suite extends DriverModule {
 											By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 									String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-									if (orderprice.contains(",")) {
-										System.out.println(
-												"The Product Price in Review Page" + (orderprice.replace(",", "")));
+									if (orderprice.contains(","))
 										orderprice = orderprice.replace(",", "");
-									} else
-
-										System.out.println("order price doesn't have any comma value");
 									BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+									if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+										Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+												+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									else
+										Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+												+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									String discount = WEL.fetchDiscountInOrderReview();
-									if (discount.contains(",")) {
-										System.out.println(
-												"The Discount price in Order Review Page" + discount.replace(",", ""));
+									if (discount.contains(",")) 
 										discount = discount.replace(",", "");
-									} else
-
-										System.out.println("order price doesn't have any comma value");
 									BigDecimal orderdiscountprice = new BigDecimal(discount.substring(1));
-
 									BigDecimal orderTotalDiscount = orderproductprice.subtract(orderdiscountprice);
-									System.out.println("Dsicount" + orderTotalDiscount);
-
 									String totalorderReview = WEL.fetchTotalInOrderReview();
-									if (totalorderReview.contains(",")) {
-										System.out.println(totalorderReview.replace(",", ""));
+									if (totalorderReview.contains(","))
 										totalorderReview = totalorderReview.replace(",", "");
-									} else
-										System.out.println("Total order price doesn;t ahve any comma value");
 									BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
-									System.out.println("The Order Total Price is" + orderTotalPrice);
-
 									if (orderTotalDiscount.compareTo(orderTotalPrice) == 0)
 										Reporting.updateTestReport(
 												"First Product price - Discount "
@@ -6140,7 +6184,9 @@ public class WEL_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 								} catch (Exception e) {
-									System.out.println(e.getMessage());
+									Reporting.updateTestReport(
+											"Order summary tab was not visible"+ e.getMessage(),
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 								WEL.clickOnPlaceOrderButton();
@@ -6200,7 +6246,8 @@ public class WEL_Test_Suite extends DriverModule {
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 							"//div[@class='partner-detail partner-list-container']//div[@class='col-xs-12 col-sm-6 package-selection-col']//button")));
-					BigDecimal price = new BigDecimal(WEL.fetchPartnerPriceInPDP().substring(1));
+					BigDecimal price = new BigDecimal(WEL.fetchPartnerProductPriceInPDP().substring(1));
+					BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchLastPriceInPDPForPartner().substring(1));
 					WEL.clickOnAddToCartButtonOnPDP();
 
 					try {
@@ -6295,45 +6342,31 @@ public class WEL_Test_Suite extends DriverModule {
 												By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-										if (orderprice.contains(",")) {
-											System.out.println(
-													"The Product Price in Review Page" + (orderprice.replace(",", "")));
+										if (orderprice.contains(",")) 
 											orderprice = orderprice.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+										if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 										BigDecimal totalprice = orderproductprice.add(tax1);
-										System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 										String discount = WEL.fetchDiscountInOrderReview();
-										if (discount.contains(",")) {
-											System.out.println(
-													"The discount Price in Review Page" + (discount.replace(",", "")));
+										if (discount.contains(","))
 											discount = discount.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal orderpriceafterdiscount = new BigDecimal(discount.substring(1));
 
 										BigDecimal ordertotalpriceafterdiscount = totalprice
 												.subtract(orderpriceafterdiscount);
-										System.out.println(
-												"The product price after discount" + ordertotalpriceafterdiscount);
-
 										String totalorderReview = WEL.fetchTotalInOrderReview();
-										if (totalorderReview.contains(",")) {
-											System.out.println(totalorderReview.replace(",", ""));
+										if (totalorderReview.contains(","))
 											totalorderReview = totalorderReview.replace(",", "");
-										} else
-											System.out.println("Total order price doesn;t have any comma value");
 										BigDecimal ordertotalPriceonReviewPage = new BigDecimal(
 												totalorderReview.substring(1));
-										System.out.println("The Price of the Product in Review page "
-												+ ordertotalPriceonReviewPage);
-
 										if (ordertotalpriceafterdiscount.compareTo(ordertotalPriceonReviewPage) == 0)
 											Reporting.updateTestReport(
 													"First Product price - Discount + Tax "
@@ -6346,7 +6379,9 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										System.out.println(e.getMessage());
+										Reporting.updateTestReport(
+												"Order summary tab was not visible"+ e.getMessage(),
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 									WEL.clickOnPlaceOrderButton();
@@ -6423,6 +6458,7 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -6519,48 +6555,35 @@ public class WEL_Test_Suite extends DriverModule {
 												By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-										if (orderprice.contains(",")) {
-											System.out.println(
-													"The Product Price in Review Page" + (orderprice.replace(",", "")));
+										if (orderprice.contains(","))
 											orderprice = orderprice.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+										if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										String discount = WEL.fetchDiscountInOrderReview();
-										if (discount.contains(",")) {
-											System.out.println(
-													"The discount Price in Review Page" + (discount.replace(",", "")));
+										if (discount.contains(",")) 
 											discount = discount.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 										String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
-										if (shippingcharge.contains(",")) {
-											System.out.println("The discount Price in Review Page"
-													+ (shippingcharge.replace(",", "")));
+										if (shippingcharge.contains(","))
 											shippingcharge = shippingcharge.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal ShipchargoneReviewpage = new BigDecimal(shippingcharge.substring(1));
 
 										BigDecimal tax = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 
 										BigDecimal totalprice = orderproductprice.add(tax).add(ShipchargoneReviewpage)
 												.subtract(discountinorderreview);
-										System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 										String totalorderReview = WEL.fetchTotalInOrderReview();
-										if (totalorderReview.contains(",")) {
-											System.out.println(totalorderReview.replace(",", ""));
+										if (totalorderReview.contains(",")) 
 											totalorderReview = totalorderReview.replace(",", "");
-										} else
-											System.out.println("Total order price doesn;t ahve any comma value");
 										BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 										if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -6575,7 +6598,9 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										System.out.println(e.getMessage());
+										Reporting.updateTestReport(
+												"Order summary tab was not visible"+ e.getMessage(),
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 									WEL.clickOnShippingDetailsEditIcon();
 									WEL.GuestFirstName(
@@ -6652,54 +6677,39 @@ public class WEL_Test_Suite extends DriverModule {
 															By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 													String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-													if (orderprice.contains(",")) {
-														System.out.println("The Product Price in Review Page"
-																+ (orderprice.replace(",", "")));
+													if (orderprice.contains(",")) 
 														orderprice = orderprice.replace(",", "");
-													} else
-
-														System.out.println("order price doesn't have any comma value");
 													BigDecimal orderproductprice = new BigDecimal(
 															orderprice.substring(1));
-
+													if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+														Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+																+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+													else
+														Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+																+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 													String discount = WEL.fetchDiscountInOrderReview();
-													if (discount.contains(",")) {
-														System.out.println("The discount Price in Review Page"
-																+ (discount.replace(",", "")));
+													if (discount.contains(",")) 
 														discount = discount.replace(",", "");
-													} else
-
-														System.out.println("order price doesn't have any comma value");
 													BigDecimal discountinorderreview = new BigDecimal(
 															discount.substring(1));
 
 													String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
-													if (shippingcharge.contains(",")) {
-														System.out.println("The discount Price in Review Page"
-																+ (shippingcharge.replace(",", "")));
+													if (shippingcharge.contains(",")) 
 														shippingcharge = shippingcharge.replace(",", "");
-													} else
-
-														System.out.println("order price doesn't have any comma value");
 													BigDecimal ShipchargoneReviewpage = new BigDecimal(
 															shippingcharge.substring(1));
 
 													BigDecimal tax = new BigDecimal(
 															WEL.fetchTaxInOrderReview().substring(1));
-													System.out.println("The  tax is: " + tax1);
 													BigDecimal totalprice = orderproductprice.add(tax)
 															.add(ShipchargoneReviewpage)
 															.subtract(discountinorderreview);
-													System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 													String totalorderReview = WEL.fetchTotalInOrderReview();
-													if (totalorderReview.contains(",")) {
-														System.out.println(totalorderReview.replace(",", ""));
+													if (totalorderReview.contains(",")) 
 														totalorderReview = totalorderReview.replace(",", "");
-													} else
-														System.out.println(
-																"Total order price doesn;t ahve any comma value");
 													BigDecimal orderTotalPrice = new BigDecimal(
 															totalorderReview.substring(1));
 
@@ -6716,7 +6726,9 @@ public class WEL_Test_Suite extends DriverModule {
 																StatusDetails.FAIL);
 
 												} catch (Exception e) {
-													System.out.println(e.getMessage());
+													Reporting.updateTestReport(
+															"Order summary tab was not visible"+ e.getMessage(),
+															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 												}
 											} catch (Exception e) {
 												Reporting.updateTestReport(
@@ -6799,6 +6811,7 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -6892,36 +6905,29 @@ public class WEL_Test_Suite extends DriverModule {
 												By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-										if (orderprice.contains(",")) {
-											System.out.println(
-													"The Product Price in Review Page" + (orderprice.replace(",", "")));
+										if (orderprice.contains(","))
 											orderprice = orderprice.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+										if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is same as price in Order Review "+orderproductprice,
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is not same as price in Order Review "+orderproductprice,
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										String discount = WEL.fetchDiscountInOrderReview();
-										if (discount.contains(",")) {
-											System.out.println(
-													"The discount Price in Review Page" + (discount.replace(",", "")));
+										if (discount.contains(","))
 											discount = discount.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 										BigDecimal tax = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-										System.out.println("The  tax is: " + tax1);
 										BigDecimal totalprice = orderproductprice.add(tax)
 												.subtract(discountinorderreview);
 
 										String totalorderReview = WEL.fetchTotalInOrderReview();
-										if (totalorderReview.contains(",")) {
-											System.out.println(totalorderReview.replace(",", ""));
+										if (totalorderReview.contains(",")) 
 											totalorderReview = totalorderReview.replace(",", "");
-										} else
-											System.out.println("Total order price doesn;t ahve any comma value");
 										BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 										if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -6936,7 +6942,9 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										System.out.println(e.getMessage());
+										Reporting.updateTestReport(
+												"Order summary tab was not visible"+ e.getMessage(),
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 									WEL.clickOnShippingDetailsEditIcon();
 									WEL.GuestFirstName(
@@ -7020,36 +7028,21 @@ public class WEL_Test_Suite extends DriverModule {
 															By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 													String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-													if (orderprice.contains(",")) {
-														System.out.println("The Product Price in Review Page"
-																+ (orderprice.replace(",", "")));
+													if (orderprice.contains(",")) 
 														orderprice = orderprice.replace(",", "");
-													} else
-
-														System.out.println("order price doesn't have any comma value");
 													BigDecimal orderproductprice = new BigDecimal(
 															orderprice.substring(1));
 
 													String discount = WEL.fetchDiscountInOrderReview();
-													if (discount.contains(",")) {
-														System.out.println("The discount Price in Review Page"
-																+ (discount.replace(",", "")));
+													if (discount.contains(",")) 
 														discount = discount.replace(",", "");
-													} else
-
-														System.out.println("order price doesn't have any comma value");
 													BigDecimal discountinorderreview = new BigDecimal(
 															discount.substring(1));
 
 													String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
-													if (shippingcharge.contains(",")) {
-														System.out.println("The discount Price in Review Page"
-																+ (shippingcharge.replace(",", "")));
+													if (shippingcharge.contains(",")) 
 														shippingcharge = shippingcharge.replace(",", "");
-													} else
-
-														System.out.println("order price doesn't have any comma value");
 													BigDecimal ShipchargoneReviewpage = new BigDecimal(
 															shippingcharge.substring(1));
 
@@ -7059,15 +7052,9 @@ public class WEL_Test_Suite extends DriverModule {
 													BigDecimal totalprice = orderproductprice.add(tax)
 															.add(ShipchargoneReviewpage)
 															.subtract(discountinorderreview);
-													System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 													String totalorderReview = WEL.fetchTotalInOrderReview();
-													if (totalorderReview.contains(",")) {
-														System.out.println(totalorderReview.replace(",", ""));
+													if (totalorderReview.contains(",")) 
 														totalorderReview = totalorderReview.replace(",", "");
-													} else
-														System.out.println(
-																"Total order price doesn;t ahve any comma value");
 													BigDecimal orderTotalPrice = new BigDecimal(
 															totalorderReview.substring(1));
 
@@ -7085,7 +7072,9 @@ public class WEL_Test_Suite extends DriverModule {
 																StatusDetails.FAIL);
 
 												} catch (Exception e) {
-													System.out.println(e.getMessage());
+													Reporting.updateTestReport(
+															"Order summary tab was not visible"+ e.getMessage(),
+															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 												}
 											} catch (Exception e) {
 												Reporting.updateTestReport(
@@ -7171,6 +7160,7 @@ public class WEL_Test_Suite extends DriverModule {
 						Thread.sleep(1000);
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -7261,35 +7251,28 @@ public class WEL_Test_Suite extends DriverModule {
 											By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 									String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-									if (orderprice.contains(",")) {
-										System.out.println(
-												"The Product Price in Review Page" + (orderprice.replace(",", "")));
+									if (orderprice.contains(",")) 
 										orderprice = orderprice.replace(",", "");
-									} else
-
-										System.out.println("order price doesn't have any comma value");
 									BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+									if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+										Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+												+" is same as price in Order Review "+orderproductprice,
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									else
+										Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+												+" is not same as price in Order Review "+orderproductprice,
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									String discount = WEL.fetchDiscountInOrderReview();
-									if (discount.contains(",")) {
-										System.out.println(
-												"The discount Price in Review Page" + (discount.replace(",", "")));
+									if (discount.contains(","))
 										discount = discount.replace(",", "");
-									} else
-
-										System.out.println("order price doesn't have any comma value");
 									BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 									BigDecimal tax = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-									System.out.println("The  tax is: " + tax1);
 									BigDecimal totalprice = orderproductprice.add(tax).subtract(discountinorderreview);
 
 									String totalorderReview = WEL.fetchTotalInOrderReview();
-									if (totalorderReview.contains(",")) {
-										System.out.println(totalorderReview.replace(",", ""));
+									if (totalorderReview.contains(","))
 										totalorderReview = totalorderReview.replace(",", "");
-									} else
-										System.out.println("Total order price doesn;t ahve any comma value");
 									BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 									if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -7304,7 +7287,9 @@ public class WEL_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 								} catch (Exception e) {
-									System.out.println(e.getMessage());
+									Reporting.updateTestReport(
+											"Order summary tab was not visible"+ e.getMessage(),
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 								WEL.clickOnPaymentDetailsEditIcon();
@@ -7373,36 +7358,22 @@ public class WEL_Test_Suite extends DriverModule {
 													By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 											String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-											if (orderprice.contains(",")) {
-												System.out.println("The Product Price in Review Page"
-														+ (orderprice.replace(",", "")));
+											if (orderprice.contains(",")) 
 												orderprice = orderprice.replace(",", "");
-											} else
-
-												System.out.println("order price doesn't have any comma value");
 											BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
 											String discount = WEL.fetchDiscountInOrderReview();
-											if (discount.contains(",")) {
-												System.out.println("The discount Price in Review Page"
-														+ (discount.replace(",", "")));
+											if (discount.contains(","))
 												discount = discount.replace(",", "");
-											} else
-
-												System.out.println("order price doesn't have any comma value");
 											BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 											BigDecimal tax = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-											System.out.println("The  tax is: " + tax1);
 											BigDecimal totalprice = orderproductprice.add(tax)
 													.subtract(discountinorderreview);
 
 											String totalorderReview = WEL.fetchTotalInOrderReview();
-											if (totalorderReview.contains(",")) {
-												System.out.println(totalorderReview.replace(",", ""));
+											if (totalorderReview.contains(","))
 												totalorderReview = totalorderReview.replace(",", "");
-											} else
-												System.out.println("Total order price doesn;t ahve any comma value");
 											BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 											if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -7417,7 +7388,9 @@ public class WEL_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 										} catch (Exception e) {
-											System.out.println(e.getMessage());
+											Reporting.updateTestReport(
+													"Order summary tab was not visible"+ e.getMessage(),
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 
 									} catch (Exception e) {
@@ -7595,25 +7568,23 @@ public class WEL_Test_Suite extends DriverModule {
 													By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 											String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-											if (orderprice.contains(",")) {
-												System.out.println("The Product Price in Review Page"
-														+ (orderprice.replace(",", "")));
+											if (orderprice.contains(","))
 												orderprice = orderprice.replace(",", "");
-											} else
-
-												System.out.println("order price doesn't have any comma value");
 											BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+											if(price.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+												Reporting.updateTestReport("The price of first product in PDP: "+price
+														+" is same as price in Order Review "+orderproductprice,
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											else
+												Reporting.updateTestReport("The price of first product in PDP: "+price
+														+" is not same as price in Order Review "+orderproductprice,
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											BigDecimal tax = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-											System.out.println("The  tax is: " + tax);
 											BigDecimal totalprice = orderproductprice.add(tax);
 
 											String totalorderReview = WEL.fetchTotalInOrderReview();
-											if (totalorderReview.contains(",")) {
-												System.out.println(totalorderReview.replace(",", ""));
+											if (totalorderReview.contains(",")) 
 												totalorderReview = totalorderReview.replace(",", "");
-											} else
-												System.out.println("Total order price doesn;t ahve any comma value");
 											BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 											if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -7628,7 +7599,9 @@ public class WEL_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 										} catch (Exception e) {
-											System.out.println(e.getMessage());
+											Reporting.updateTestReport(
+													"Order summary tab was not visible"+ e.getMessage(),
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 
 										WEL.clickOnPlaceOrderButton();
@@ -7711,6 +7684,7 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -7820,36 +7794,28 @@ public class WEL_Test_Suite extends DriverModule {
 															By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 													String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-													if (orderprice.contains(",")) {
-														System.out.println("The Product Price in Review Page"
-																+ (orderprice.replace(",", "")));
+													if (orderprice.contains(",")) 
 														orderprice = orderprice.replace(",", "");
-													} else
-
-														System.out.println("order price doesn't have any comma value");
 													BigDecimal orderproductprice = new BigDecimal(
 															orderprice.substring(1));
-
+													if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+														Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+																+" is same as price in Order Review "+orderproductprice,
+																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+													else
+														Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+																+" is not same as price in Order Review "+orderproductprice,
+																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 													String discount = WEL.fetchDiscountInOrderReview();
-													if (discount.contains(",")) {
-														System.out.println("The discount Price in Review Page"
-																+ (discount.replace(",", "")));
+													if (discount.contains(",")) 
 														discount = discount.replace(",", "");
-													} else
-
-														System.out.println("order price doesn't have any comma value");
 													BigDecimal discountinorderreview = new BigDecimal(
 															discount.substring(1));
 
 													String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
-													if (shippingcharge.contains(",")) {
-														System.out.println("The discount Price in Review Page"
-																+ (shippingcharge.replace(",", "")));
+													if (shippingcharge.contains(","))
 														shippingcharge = shippingcharge.replace(",", "");
-													} else
-
-														System.out.println("order price doesn't have any comma value");
 													BigDecimal ShipchargoneReviewpage = new BigDecimal(
 															shippingcharge.substring(1));
 
@@ -7859,15 +7825,9 @@ public class WEL_Test_Suite extends DriverModule {
 													BigDecimal totalprice = orderproductprice.add(tax)
 															.add(ShipchargoneReviewpage)
 															.subtract(discountinorderreview);
-													System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 													String totalorderReview = WEL.fetchTotalInOrderReview();
-													if (totalorderReview.contains(",")) {
-														System.out.println(totalorderReview.replace(",", ""));
+													if (totalorderReview.contains(",")) 
 														totalorderReview = totalorderReview.replace(",", "");
-													} else
-														System.out.println(
-																"Total order price doesn;t ahve any comma value");
 													BigDecimal orderTotalPrice = new BigDecimal(
 															totalorderReview.substring(1));
 
@@ -7885,7 +7845,9 @@ public class WEL_Test_Suite extends DriverModule {
 																StatusDetails.FAIL);
 
 												} catch (Exception e) {
-													System.out.println(e.getMessage());
+													Reporting.updateTestReport(
+															"Order summary tab was not visible"+ e.getMessage(),
+															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 												}
 												WEL.clickOnPlaceOrderButton();
 												String orderID = WEL.fetchOrderId();
@@ -7975,6 +7937,7 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -8088,48 +8051,35 @@ public class WEL_Test_Suite extends DriverModule {
 												By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-										if (orderprice.contains(",")) {
-											System.out.println(
-													"The Product Price in Review Page" + (orderprice.replace(",", "")));
+										if (orderprice.contains(","))
 											orderprice = orderprice.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+										if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is same as price in Order Review "+orderproductprice,
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is not same as price in Order Review "+orderproductprice,
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										String discount = WEL.fetchDiscountInOrderReview();
-										if (discount.contains(",")) {
-											System.out.println(
-													"The discount Price in Review Page" + (discount.replace(",", "")));
+										if (discount.contains(","))
 											discount = discount.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 										String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
-										if (shippingcharge.contains(",")) {
-											System.out.println("The discount Price in Review Page"
-													+ (shippingcharge.replace(",", "")));
+										if (shippingcharge.contains(","))
 											shippingcharge = shippingcharge.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal ShipchargoneReviewpage = new BigDecimal(shippingcharge.substring(1));
 
 										BigDecimal tax = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 
 										BigDecimal totalprice = orderproductprice.add(tax).add(ShipchargoneReviewpage)
 												.subtract(discountinorderreview);
-										System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 										String totalorderReview = WEL.fetchTotalInOrderReview();
-										if (totalorderReview.contains(",")) {
-											System.out.println(totalorderReview.replace(",", ""));
+										if (totalorderReview.contains(","))
 											totalorderReview = totalorderReview.replace(",", "");
-										} else
-											System.out.println("Total order price doesn;t ahve any comma value");
 										BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 										if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -8144,7 +8094,9 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										System.out.println(e.getMessage());
+										Reporting.updateTestReport(
+												"Order summary tab was not visible"+ e.getMessage(),
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 									ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
@@ -8220,6 +8172,7 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -8333,48 +8286,35 @@ public class WEL_Test_Suite extends DriverModule {
 												By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-										if (orderprice.contains(",")) {
-											System.out.println(
-													"The Product Price in Review Page" + (orderprice.replace(",", "")));
+										if (orderprice.contains(",")) 
 											orderprice = orderprice.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+										if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is same as price in Order Review "+orderproductprice,
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is not same as price in Order Review "+orderproductprice,
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										String discount = WEL.fetchDiscountInOrderReview();
-										if (discount.contains(",")) {
-											System.out.println(
-													"The discount Price in Review Page" + (discount.replace(",", "")));
+										if (discount.contains(",")) 
 											discount = discount.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 										String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
-										if (shippingcharge.contains(",")) {
-											System.out.println("The discount Price in Review Page"
-													+ (shippingcharge.replace(",", "")));
+										if (shippingcharge.contains(",")) 
 											shippingcharge = shippingcharge.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal ShipchargoneReviewpage = new BigDecimal(shippingcharge.substring(1));
 
 										BigDecimal tax = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 
 										BigDecimal totalprice = orderproductprice.add(tax).add(ShipchargoneReviewpage)
 												.subtract(discountinorderreview);
-										System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 										String totalorderReview = WEL.fetchTotalInOrderReview();
-										if (totalorderReview.contains(",")) {
-											System.out.println(totalorderReview.replace(",", ""));
+										if (totalorderReview.contains(",")) 
 											totalorderReview = totalorderReview.replace(",", "");
-										} else
-											System.out.println("Total order price doesn;t ahve any comma value");
 										BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 										if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -8389,7 +8329,9 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										System.out.println(e.getMessage());
+										Reporting.updateTestReport(
+												"Order summary tab was not visible"+ e.getMessage(),
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 									ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
@@ -8465,6 +8407,7 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -8578,48 +8521,35 @@ public class WEL_Test_Suite extends DriverModule {
 												By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-										if (orderprice.contains(",")) {
-											System.out.println(
-													"The Product Price in Review Page" + (orderprice.replace(",", "")));
+										if (orderprice.contains(","))
 											orderprice = orderprice.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+										if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is same as price in Order Review "+orderproductprice,
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+													+" is not same as price in Order Review "+orderproductprice,
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										String discount = WEL.fetchDiscountInOrderReview();
-										if (discount.contains(",")) {
-											System.out.println(
-													"The discount Price in Review Page" + (discount.replace(",", "")));
+										if (discount.contains(","))
 											discount = discount.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 										String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
-										if (shippingcharge.contains(",")) {
-											System.out.println("The discount Price in Review Page"
-													+ (shippingcharge.replace(",", "")));
+										if (shippingcharge.contains(","))
 											shippingcharge = shippingcharge.replace(",", "");
-										} else
-
-											System.out.println("order price doesn't have any comma value");
 										BigDecimal ShipchargoneReviewpage = new BigDecimal(shippingcharge.substring(1));
 
 										BigDecimal tax = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 
 										BigDecimal totalprice = orderproductprice.add(tax).add(ShipchargoneReviewpage)
 												.subtract(discountinorderreview);
-										System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 										String totalorderReview = WEL.fetchTotalInOrderReview();
-										if (totalorderReview.contains(",")) {
-											System.out.println(totalorderReview.replace(",", ""));
+										if (totalorderReview.contains(","))
 											totalorderReview = totalorderReview.replace(",", "");
-										} else
-											System.out.println("Total order price doesn;t ahve any comma value");
 										BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 										if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -8634,7 +8564,9 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										System.out.println(e.getMessage());
+										Reporting.updateTestReport(
+												"Order summary tab was not visible"+ e.getMessage(),
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 									ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
@@ -8850,6 +8782,7 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -8947,37 +8880,28 @@ public class WEL_Test_Suite extends DriverModule {
 													By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 											String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-											if (orderprice.contains(",")) {
-												System.out.println("The Product Price in Review Page"
-														+ (orderprice.replace(",", "")));
+											if (orderprice.contains(",")) 
 												orderprice = orderprice.replace(",", "");
-											} else
-
-												System.out.println("order price doesn't have any comma value");
 											BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+											if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+												Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+														+" is same as price in Order Review "+orderproductprice,
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											else
+												Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
+														+" is not same as price in Order Review "+orderproductprice,
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											String discount = WEL.fetchDiscountInOrderReview();
-											if (discount.contains(",")) {
-												System.out.println("The discount Price in Review Page"
-														+ (discount.replace(",", "")));
+											if (discount.contains(","))
 												discount = discount.replace(",", "");
-											} else
-
-												System.out.println("order price doesn't have any comma value");
 											BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 											BigDecimal tax = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-											System.out.println("The  tax is: " + tax);
 											BigDecimal totalprice = orderproductprice.add(tax)
 													.subtract(discountinorderreview);
-											System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 											String totalorderReview = WEL.fetchTotalInOrderReview();
-											if (totalorderReview.contains(",")) {
-												System.out.println(totalorderReview.replace(",", ""));
+											if (totalorderReview.contains(",")) 
 												totalorderReview = totalorderReview.replace(",", "");
-											} else
-												System.out.println("Total order price doesn;t ahve any comma value");
 											BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 											if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -8992,7 +8916,9 @@ public class WEL_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 										} catch (Exception e) {
-											System.out.println(e.getMessage());
+											Reporting.updateTestReport(
+													"Order summary tab was not visible"+ e.getMessage(),
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 										WEL.clickOnPlaceOrderButton();
 										String orderID = WEL.fetchOrderId();
@@ -9142,31 +9068,20 @@ public class WEL_Test_Suite extends DriverModule {
 									By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 							String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-							if (orderprice.contains(",")) {
-								System.out.println("The Product Price in Review Page" + (orderprice.replace(",", "")));
+							if (orderprice.contains(","))
 								orderprice = orderprice.replace(",", "");
-							} else
-
-								System.out.println("order price doesn't have any comma value");
 							BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
 							String discount = WEL.fetchDiscountInOrderReview();
-							if (discount.contains(",")) {
-								System.out.println("The discount Price in Review Page" + (discount.replace(",", "")));
+							if (discount.contains(",")) 
 								discount = discount.replace(",", "");
-							} else
-
-								System.out.println("order price doesn't have any comma value");
 							BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 							BigDecimal totalprice = orderproductprice.subtract(discountinorderreview);
 
 							String totalorderReview = WEL.fetchTotalInOrderReview();
-							if (totalorderReview.contains(",")) {
-								System.out.println(totalorderReview.replace(",", ""));
+							if (totalorderReview.contains(",")) 
 								totalorderReview = totalorderReview.replace(",", "");
-							} else
-								System.out.println("Total order price doesn;t ahve any comma value");
 							BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 							if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -9180,7 +9095,9 @@ public class WEL_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 						} catch (Exception e) {
-							System.out.println(e.getMessage());
+							Reporting.updateTestReport(
+									"Order summary tab was not visible"+ e.getMessage(),
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
@@ -9251,13 +9168,11 @@ public class WEL_Test_Suite extends DriverModule {
 					}
 
 					BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
-					if (price.compareTo(subtotal) == 0) {
-						System.out.println(price);
-						System.out.println(subtotal);
+					if (price.compareTo(subtotal) == 0) 
 						Reporting.updateTestReport(
 								"The addition of all the products' price is same as the subtotal in cart page",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					} else
+					 else
 						Reporting.updateTestReport(
 								"The addition of all the products' pricedidn't match with the subtotal in cart page",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -9316,26 +9231,22 @@ public class WEL_Test_Suite extends DriverModule {
 								wait.until(ExpectedConditions.visibilityOfElementLocated(
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) {
-									System.out.println(
-											"The Product Price in Review Page" + (orderprice.replace(",", "")));
+								if (orderprice.contains(",")) 
 									orderprice = orderprice.replace(",", "");
-								} else
-
-									System.out.println("order price doesn't have any comma value");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+								if(price.compareTo(new BigDecimal(orderprice.substring(1)))==0)
+									Reporting.updateTestReport("The price of first product in PDP: "+price
+											+" is same as price in Order Review "+orderproductprice,
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("The price of first product in PDP: "+price
+											+" is not same as price in Order Review "+orderproductprice,
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-								System.out.println("The  tax is: " + tax1);
 								BigDecimal totalprice = orderproductprice.add(tax1);
-								System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) {
-									System.out.println(totalorderReview.replace(",", ""));
+								if (totalorderReview.contains(","))
 									totalorderReview = totalorderReview.replace(",", "");
-								} else
-									System.out.println("Total order price doesn;t ahve any comma value");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 								if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -9349,7 +9260,9 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								System.out.println(e.getMessage());
+								Reporting.updateTestReport(
+										"Order summary tab was not visible"+ e.getMessage(),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 
 							WEL.clickOnPlaceOrderButton();
@@ -9488,18 +9401,21 @@ public class WEL_Test_Suite extends DriverModule {
 
 								BigDecimal firstproductprice = new BigDecimal(
 										WEL.fetchFirstProductPriceInOrderReview().substring(1));
-
+								if(price.compareTo(firstproductprice)==0)
+									Reporting.updateTestReport("The price of first product in PDP: "+price
+											+" is same as price in Order Review "+firstproductprice,
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("The price of first product in PDP: "+price
+											+" is not same as price in Order Review "+firstproductprice,
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-								System.out.println("The  tax is: " + tax1);
 								BigDecimal totalprice = firstproductprice.add(tax1);
 								WEL.fetchShippingChargeInOrderReview();
 
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) {
-									System.out.println(totalorderReview.replace(",", ""));
+								if (totalorderReview.contains(",")) 
 									totalorderReview = totalorderReview.replace(",", "");
-								} else
-									System.out.println("Total order price doesn;t ahve any comma value");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 								if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -9514,7 +9430,9 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								System.out.println(e.getMessage());
+								Reporting.updateTestReport(
+										"Order summary tab was not visible"+ e.getMessage(),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 
 							WEL.clickOnPlaceOrderButton();
@@ -9673,25 +9591,22 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) {
-									System.out.println(
-											"The Product Price in Review Page" + (orderprice.replace(",", "")));
+								if (orderprice.contains(",")) 
 									orderprice = orderprice.replace(",", "");
-								} else
-
-									System.out.println("order price doesn't have any comma value");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
+								if(price.compareTo(orderproductprice)==0)
+									Reporting.updateTestReport("The price of first product in PDP: "+price
+											+" is same as price in Order Review "+orderproductprice,
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("The price of first product in PDP: "+price
+											+" is not same as price in Order Review "+orderproductprice,
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-								System.out.println("The  tax is: " + tax1);
 								BigDecimal totalprice = orderproductprice.add(tax1);
-								System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) {
-									System.out.println(totalorderReview.replace(",", ""));
+								if (totalorderReview.contains(",")) 
 									totalorderReview = totalorderReview.replace(",", "");
-								} else
-									System.out.println("Total order price doesn;t ahve any comma value");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 								if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -9704,7 +9619,9 @@ public class WEL_Test_Suite extends DriverModule {
 													+ " is not equal to Order total in Order Review step",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							} catch (Exception e) {
-								System.out.println(e.getMessage());
+								Reporting.updateTestReport(
+										"Order summary tab was not visible"+ e.getMessage(),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							WEL.clickOnPlaceOrderButton();
 							String orderID = WEL.fetchOrderId();
@@ -9861,25 +9778,22 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) {
-									System.out.println(
-											"The Product Price in Review Page" + (orderprice.replace(",", "")));
+								if (orderprice.contains(",")) 
 									orderprice = orderprice.replace(",", "");
-								} else
-
-									System.out.println("order price doesn't have any comma value");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
+								if(price.compareTo(orderproductprice)==0)
+									Reporting.updateTestReport("The price of first product in PDP: "+price
+											+" is same as price in Order Review "+orderproductprice,
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("The price of first product in PDP: "+price
+											+" is not same as price in Order Review "+orderproductprice,
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-								System.out.println("The  tax is: " + tax1);
 								BigDecimal totalprice = orderproductprice.add(tax1);
-								System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) {
-									System.out.println(totalorderReview.replace(",", ""));
+								if (totalorderReview.contains(",")) 
 									totalorderReview = totalorderReview.replace(",", "");
-								} else
-									System.out.println("Total order price doesn;t ahve any comma value");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 								if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -9892,7 +9806,9 @@ public class WEL_Test_Suite extends DriverModule {
 													+ " is not equal to Order total in Order Review step",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							} catch (Exception e) {
-								System.out.println(e.getMessage());
+								Reporting.updateTestReport(
+										"Order summary tab was not visible"+ e.getMessage(),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 
 							WEL.clickOnPlaceOrderButton();
@@ -9954,6 +9870,7 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -10070,34 +9987,26 @@ public class WEL_Test_Suite extends DriverModule {
 													By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 											String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-											if (orderprice.contains(",")) {
-												System.out.println("The Product Price in Review Page"
-														+ (orderprice.replace(",", "")));
+											if (orderprice.contains(","))
 												orderprice = orderprice.replace(",", "");
-											} else
-
-												System.out.println("order price doesn't have any comma value");
 											BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+											if(price.compareTo(orderproductprice)==0)
+												Reporting.updateTestReport("The price of first product in PDP: "+price
+														+" is same as price in Order Review "+orderproductprice,
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											else
+												Reporting.updateTestReport("The price of first product in PDP: "+price
+														+" is not same as price in Order Review "+orderproductprice,
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											String discount = WEL.fetchDiscountInOrderReview();
-											if (discount.contains(",")) {
-												System.out.println("The discount Price in Review Page"
-														+ (discount.replace(",", "")));
+											if (discount.contains(",")) 
 												discount = discount.replace(",", "");
-											} else
-
-												System.out.println("order price doesn't have any comma value");
 											BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 											String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
-											if (shippingcharge.contains(",")) {
-												System.out.println("The discount Price in Review Page"
-														+ (shippingcharge.replace(",", "")));
+											if (shippingcharge.contains(",")) 
 												shippingcharge = shippingcharge.replace(",", "");
-											} else
-
-												System.out.println("order price doesn't have any comma value");
 											BigDecimal ShipchargoneReviewpage = new BigDecimal(
 													shippingcharge.substring(1));
 
@@ -10105,14 +10014,9 @@ public class WEL_Test_Suite extends DriverModule {
 
 											BigDecimal totalprice = orderproductprice.add(tax)
 													.add(ShipchargoneReviewpage).subtract(discountinorderreview);
-											System.out.println("Total Product + Tax Price is  :" + totalprice);
-
 											String totalorderReview = WEL.fetchTotalInOrderReview();
-											if (totalorderReview.contains(",")) {
-												System.out.println(totalorderReview.replace(",", ""));
+											if (totalorderReview.contains(",")) 
 												totalorderReview = totalorderReview.replace(",", "");
-											} else
-												System.out.println("Total order price doesn;t ahve any comma value");
 											BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 											if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -10127,8 +10031,10 @@ public class WEL_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 										} catch (Exception e) {
-											System.out.println(e.getMessage());
-										}
+											Reporting.updateTestReport(
+													"Order summary tab was not visible"+ e.getMessage(),
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											}
 
 										WEL.clickOnPlaceOrderButton();
 										String orderID = WEL.fetchOrderId();
@@ -10482,6 +10388,7 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -10580,34 +10487,26 @@ public class WEL_Test_Suite extends DriverModule {
 													By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 											String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-											if (orderprice.contains(",")) {
-												System.out.println("The Product Price in Review Page"
-														+ (orderprice.replace(",", "")));
+											if (orderprice.contains(",")) 
 												orderprice = orderprice.replace(",", "");
-											} else
-
-												System.out.println("order price doesn't have any comma value");
 											BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-
+											if(price.compareTo(orderproductprice)==0)
+												Reporting.updateTestReport("The price of first product in PDP: "+price
+														+" is same as price in Order Review "+orderproductprice,
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											else
+												Reporting.updateTestReport("The price of first product in PDP: "+price
+														+" is not same as price in Order Review "+orderproductprice,
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											String discount = WEL.fetchDiscountInOrderReview();
-											if (discount.contains(",")) {
-												System.out.println("The discount Price in Review Page"
-														+ (discount.replace(",", "")));
+											if (discount.contains(",")) 
 												discount = discount.replace(",", "");
-											} else
-
-												System.out.println("order price doesn't have any comma value");
 											BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 											String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
-											if (shippingcharge.contains(",")) {
-												System.out.println("The discount Price in Review Page"
-														+ (shippingcharge.replace(",", "")));
+											if (shippingcharge.contains(",")) 
 												shippingcharge = shippingcharge.replace(",", "");
-											} else
-
-												System.out.println("order price doesn't have any comma value");
 											BigDecimal ShipchargoneReviewpage = new BigDecimal(
 													shippingcharge.substring(1));
 
@@ -10615,14 +10514,10 @@ public class WEL_Test_Suite extends DriverModule {
 
 											BigDecimal totalprice = orderproductprice.add(tax)
 													.add(ShipchargoneReviewpage).subtract(discountinorderreview);
-											System.out.println("Total Product + Tax Price is  :" + totalprice);
 
 											String totalorderReview = WEL.fetchTotalInOrderReview();
-											if (totalorderReview.contains(",")) {
-												System.out.println(totalorderReview.replace(",", ""));
+											if (totalorderReview.contains(",")) 
 												totalorderReview = totalorderReview.replace(",", "");
-											} else
-												System.out.println("Total order price doesn;t ahve any comma value");
 											BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 											if (totalprice.compareTo(orderTotalPrice) == 0)
@@ -10637,7 +10532,7 @@ public class WEL_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 										} catch (Exception e) {
-											System.out.println(e.getMessage());
+											Reporting.updateTestReport(e.getMessage(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 
 										WEL.clickOnPlaceOrderButton();

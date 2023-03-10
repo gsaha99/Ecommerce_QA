@@ -80,12 +80,14 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//p[@class='old-price']")
 	WebElement ProductOldPriceInPDP;
+	
+	@FindBy(xpath="//p[@class='last-price']")
+	WebElement ProductLastPriceForPartner;
 
 	@FindBy(xpath = "//p[@class='your-price']")
 	WebElement PartnerProductPDPPrice;
 
-	@FindBy(xpath = "//p[@class='your-price']")
-	WebElement DeanDartonPDPrice;
+	
 
 	@FindBy(xpath = "//div[@id='orderSummaryProductTotalValue']")
 	WebElement PriceOfFirstProductInOrderReview;
@@ -3615,18 +3617,34 @@ public class app_WEL_Repo {
 	public String fetchOldPriceInPDP() throws IOException {
 		try {
 
-			String pdpoldprice = ProductPriceInPDP.getText().trim();
+			String pdpoldprice = ProductOldPriceInPDP.getText().trim();
 			if (pdpoldprice.contains(",")) {
-				System.out.println("The Product Price in PDP Page" + (pdpoldprice.replace(",", "")));
+				System.out.println("The Product Price without discount in PDP Page" + (pdpoldprice.replace(",", "")));
 				pdpoldprice = pdpoldprice.replace(",", "");
-			} else
-
-				System.out.println("order price doesn't have any comma value");
-			Reporting.updateTestReport("Price of the product in PDP: " + pdpoldprice.trim() + " was returned",
+			}
+			Reporting.updateTestReport("Price of the product without discount in PDP: " + pdpoldprice.trim() + " was returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return pdpoldprice;
 		} catch (Exception e) {
 			Reporting.updateTestReport("Price of the product in PDP could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	public String fetchLastPriceInPDPForPartner() throws IOException {
+		try {
+
+			String pdpoldprice = ProductLastPriceForPartner.getText().trim();
+			if (pdpoldprice.contains(",")) {
+				System.out.println("The Product Price without partner price in PDP Page" + (pdpoldprice.replace(",", "")));
+				pdpoldprice = pdpoldprice.replace(",", "");
+			}
+			Reporting.updateTestReport("Price of the product without partner price in PDP: " + pdpoldprice.trim() + " was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return pdpoldprice;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Price of the product partner price in PDP could not be returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return "";
 		}
@@ -3652,27 +3670,29 @@ public class app_WEL_Repo {
 		}
 	}
 
-	public String fetchPartnerPriceInPDP() throws IOException {
+	
+
+	public String fetchProductPriceInPDP() throws IOException {
 		try {
-			String partnerprice = DeanDartonPDPrice.getText().trim();
-			if (partnerprice.contains(",")) {
-				System.out.println("The Product Price in PDP Page" + (partnerprice.replace(",", "")));
-				partnerprice = partnerprice.replace(",", "");
+			String pdpprice = ProductPriceInPDP.getText().trim();
+			if (pdpprice.contains(",")) {
+				System.out.println("The Product Price in PDP Page" + (pdpprice.replace(",", "")));
+				pdpprice = pdpprice.replace(",", "");
 			} else
 
 				System.out.println("order price doesn't have any comma value");
 
-			Reporting.updateTestReport("Price of the product in PDP: " + partnerprice.trim() + " was returned",
+			Reporting.updateTestReport("Price of the product in PDP: " + pdpprice.trim() + " was returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			return partnerprice;
+			return pdpprice;
 		} catch (Exception e) {
 			Reporting.updateTestReport("Price of the product in PDP could not be returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return "";
 		}
 	}
-
-	public String fetchProductPriceInPDP() throws IOException {
+	
+	public String fetchProductPriceInPDPWithoutDiscount() throws IOException {
 		try {
 			String pdpprice = ProductPriceInPDP.getText().trim();
 			if (pdpprice.contains(",")) {
