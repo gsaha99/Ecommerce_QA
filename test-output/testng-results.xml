@@ -1,58 +1,344 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="60" total="61" passed="1" failed="0" skipped="0">
+<testng-results ignored="49" total="61" passed="12" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-03-10T15:31:56 IST" name="Default suite" finished-at="2023-03-10T15:34:04 IST" duration-ms="128309">
+  <suite started-at="2023-03-10T21:32:41 IST" name="PPE_Regression" finished-at="2023-03-10T22:06:45 IST" duration-ms="2043364">
     <groups>
     </groups>
-    <test started-at="2023-03-10T15:31:56 IST" name="Default test" finished-at="2023-03-10T15:34:04 IST" duration-ms="128309">
+    <test started-at="2023-03-10T21:32:41 IST" name="Wiley_Test_Suite" finished-at="2023-03-10T22:06:45 IST" duration-ms="2043364">
       <class name="Test_Suite.WEL_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.WEL_Test_Suite@28dcca0c]" started-at="2023-03-10T15:31:56 IST" name="initiate" finished-at="2023-03-10T15:32:04 IST" duration-ms="8012" status="PASS">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:32:41 IST" name="initiate" finished-at="2023-03-10T21:32:49 IST" duration-ms="8277" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@5dcf0772]]>
+                <![CDATA[org.testng.TestRunner@22d72c99]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.WEL_Test_Suite@28dcca0c]" started-at="2023-03-10T15:32:04 IST" name="initializeRepo" finished-at="2023-03-10T15:32:04 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="235" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:32:49 IST" name="initializeRepo" finished-at="2023-03-10T21:32:50 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="88" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeRepo -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@28dcca0c]" started-at="2023-03-10T15:32:04 IST" name="nameBefore" finished-at="2023-03-10T15:32:04 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:32:50 IST" name="nameBefore" finished-at="2023-03-10T21:32:50 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC70_PlaceExistingUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax() throws java.io.IOException]]>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC16_PlaceOrder_CMACPACFA_DigitalProducts_ForExistingUser() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameBefore -->
-        <test-method signature="TC70_PlaceExistingUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax()[pri:0, instance:Test_Suite.WEL_Test_Suite@28dcca0c]" started-at="2023-03-10T15:32:04 IST" name="TC70_PlaceExistingUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax" finished-at="2023-03-10T15:34:02 IST" duration-ms="118045" status="PASS">
+        <test-method signature="TC16_PlaceOrder_CMACPACFA_DigitalProducts_ForExistingUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:32:50 IST" name="TC16_PlaceOrder_CMACPACFA_DigitalProducts_ForExistingUser" finished-at="2023-03-10T21:34:24 IST" duration-ms="94149" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC70_PlaceExistingUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@28dcca0c]" started-at="2023-03-10T15:34:02 IST" name="nameAfter" finished-at="2023-03-10T15:34:02 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- TC16_PlaceOrder_CMACPACFA_DigitalProducts_ForExistingUser -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:34:24 IST" name="nameAfter" finished-at="2023-03-10T21:34:24 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC70_PlaceExistingUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax() throws java.io.IOException]]>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC16_PlaceOrder_CMACPACFA_DigitalProducts_ForExistingUser() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.WEL_Test_Suite@28dcca0c]" started-at="2023-03-10T15:34:02 IST" name="CloseBrowser" finished-at="2023-03-10T15:34:04 IST" duration-ms="1903" status="PASS">
+        <test-method signature="TC18_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForExistingUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:34:24 IST" name="TC18_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForExistingUser" finished-at="2023-03-10T21:37:01 IST" duration-ms="157259" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC18_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForExistingUser -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:34:24 IST" name="nameBefore" finished-at="2023-03-10T21:34:24 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC18_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForExistingUser() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:37:01 IST" name="nameAfter" finished-at="2023-03-10T21:37:01 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC18_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForExistingUser() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method signature="TC24_PlaceOrder_UsingSavedShippingAddress_ForExistingUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:37:01 IST" name="TC24_PlaceOrder_UsingSavedShippingAddress_ForExistingUser" finished-at="2023-03-10T21:40:43 IST" duration-ms="221769" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC24_PlaceOrder_UsingSavedShippingAddress_ForExistingUser -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:37:01 IST" name="nameBefore" finished-at="2023-03-10T21:37:01 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC24_PlaceOrder_UsingSavedShippingAddress_ForExistingUser() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:40:43 IST" name="nameAfter" finished-at="2023-03-10T21:40:43 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC24_PlaceOrder_UsingSavedShippingAddress_ForExistingUser() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method signature="TC28_StudentVerification_ForDigitalCartofUSANDNonUS()[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:40:43 IST" name="TC28_StudentVerification_ForDigitalCartofUSANDNonUS" finished-at="2023-03-10T21:42:35 IST" duration-ms="111803" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC28_StudentVerification_ForDigitalCartofUSANDNonUS -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:40:43 IST" name="nameBefore" finished-at="2023-03-10T21:40:43 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC28_StudentVerification_ForDigitalCartofUSANDNonUS() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:42:35 IST" name="nameAfter" finished-at="2023-03-10T21:42:35 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC28_StudentVerification_ForDigitalCartofUSANDNonUS() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:42:35 IST" name="nameBefore" finished-at="2023-03-10T21:42:35 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC29_StudentVerification_ForPhysicalCartofUSANDNonUS() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC29_StudentVerification_ForPhysicalCartofUSANDNonUS()[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:42:35 IST" name="TC29_StudentVerification_ForPhysicalCartofUSANDNonUS" finished-at="2023-03-10T21:44:14 IST" duration-ms="98910" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC29_StudentVerification_ForPhysicalCartofUSANDNonUS -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:44:14 IST" name="nameAfter" finished-at="2023-03-10T21:44:14 IST" duration-ms="24" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC29_StudentVerification_ForPhysicalCartofUSANDNonUS() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method signature="TC36_PlaceOrder_withPaypalCredit_OptionForExistingUser()[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:44:14 IST" name="TC36_PlaceOrder_withPaypalCredit_OptionForExistingUser" finished-at="2023-03-10T21:46:28 IST" duration-ms="134607" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC36_PlaceOrder_withPaypalCredit_OptionForExistingUser -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:44:14 IST" name="nameBefore" finished-at="2023-03-10T21:44:14 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC36_PlaceOrder_withPaypalCredit_OptionForExistingUser() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:46:28 IST" name="nameAfter" finished-at="2023-03-10T21:46:28 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC36_PlaceOrder_withPaypalCredit_OptionForExistingUser() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:46:28 IST" name="nameBefore" finished-at="2023-03-10T21:46:28 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC44_PlaceOrderFor_UniversityPartner_Product() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC44_PlaceOrderFor_UniversityPartner_Product()[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:46:28 IST" name="TC44_PlaceOrderFor_UniversityPartner_Product" finished-at="2023-03-10T21:48:34 IST" duration-ms="125563" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC44_PlaceOrderFor_UniversityPartner_Product -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:48:34 IST" name="nameAfter" finished-at="2023-03-10T21:48:34 IST" duration-ms="3" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC44_PlaceOrderFor_UniversityPartner_Product() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:48:34 IST" name="nameBefore" finished-at="2023-03-10T21:48:34 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC46_Tax_Recalculation_After_Editing_Shipping_Method() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC46_Tax_Recalculation_After_Editing_Shipping_Method()[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:48:34 IST" name="TC46_Tax_Recalculation_After_Editing_Shipping_Method" finished-at="2023-03-10T21:50:56 IST" duration-ms="141997" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC46_Tax_Recalculation_After_Editing_Shipping_Method -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:50:56 IST" name="nameAfter" finished-at="2023-03-10T21:50:56 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC46_Tax_Recalculation_After_Editing_Shipping_Method() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method signature="TC53_PlaceOrder_JapanAddress()[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:50:56 IST" name="TC53_PlaceOrder_JapanAddress" finished-at="2023-03-10T21:52:54 IST" duration-ms="118413" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC53_PlaceOrder_JapanAddress -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:50:56 IST" name="nameBefore" finished-at="2023-03-10T21:50:56 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC53_PlaceOrder_JapanAddress() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:52:54 IST" name="nameAfter" finished-at="2023-03-10T21:52:54 IST" duration-ms="3" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC53_PlaceOrder_JapanAddress() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:52:54 IST" name="nameBefore" finished-at="2023-03-10T21:52:54 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC62_Email_Verification_For__New_User() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC62_Email_Verification_For__New_User()[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:52:54 IST" name="TC62_Email_Verification_For__New_User" finished-at="2023-03-10T21:58:37 IST" duration-ms="342219" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC62_Email_Verification_For__New_User -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:58:37 IST" name="nameAfter" finished-at="2023-03-10T21:58:37 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC62_Email_Verification_For__New_User() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:58:37 IST" name="nameBefore" finished-at="2023-03-10T21:58:37 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC73_ValidateTaxin_IndiaForPhysicalOrder() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC73_ValidateTaxin_IndiaForPhysicalOrder()[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T21:58:37 IST" name="TC73_ValidateTaxin_IndiaForPhysicalOrder" finished-at="2023-03-10T22:01:15 IST" duration-ms="158677" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC73_ValidateTaxin_IndiaForPhysicalOrder -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T22:01:15 IST" name="nameAfter" finished-at="2023-03-10T22:01:15 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC73_ValidateTaxin_IndiaForPhysicalOrder() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method signature="TC79_Email_Format_Validation()[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T22:01:15 IST" name="TC79_Email_Format_Validation" finished-at="2023-03-10T22:06:41 IST" duration-ms="326235" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC79_Email_Format_Validation -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T22:01:15 IST" name="nameBefore" finished-at="2023-03-10T22:01:15 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC79_Email_Format_Validation() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T22:06:41 IST" name="nameAfter" finished-at="2023-03-10T22:06:41 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC79_Email_Format_Validation() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.WEL_Test_Suite@45d84a20]" started-at="2023-03-10T22:06:41 IST" name="CloseBrowser" finished-at="2023-03-10T22:06:45 IST" duration-ms="3071" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
       </class> <!-- Test_Suite.WEL_Test_Suite -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- Wiley_Test_Suite -->
+  </suite> <!-- PPE_Regression -->
 </testng-results>

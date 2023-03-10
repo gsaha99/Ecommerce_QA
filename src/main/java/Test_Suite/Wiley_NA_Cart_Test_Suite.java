@@ -487,6 +487,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							String orderId = wiley.fetchOrderId();
 							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
 							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
+							excelOperation.updateTestData("TC05", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
 							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 							String ordertotal = wiley.fetchOrderTotal();
 							String taxInOrderConfirmation = wiley.fetchTaxAmount();

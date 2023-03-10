@@ -2736,6 +2736,8 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport(
 					"Shipping charge: " + shipping.trim() + " was fetched in order review step successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			if(shipping.equalsIgnoreCase("FREE"))
+				return "$0.00";
 			return shipping.trim();
 		} catch (Exception e) {
 			Reporting.updateTestReport("Shipping charge couldn't be fetched in order review step ",
