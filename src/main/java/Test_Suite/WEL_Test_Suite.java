@@ -3863,7 +3863,7 @@ public class WEL_Test_Suite extends DriverModule {
 								BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
 								BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount)
 										.add(ShipchargoneReviewpage);
-
+								System.out.println(orderTotalpriceafterDiscount);
 								String totalorderReview = WEL.fetchTotalInOrderReview();
 								if (totalorderReview.contains(",")) 
 									totalorderReview = totalorderReview.replace(",", "");
