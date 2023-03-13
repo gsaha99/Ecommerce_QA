@@ -164,6 +164,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Order_Id", orderID);
 						excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
 						excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+						excelOperation.updateTestData("TC06", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
 						ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 						String tax=wiley.fetchTaxAmount();
 						String orderTotal=wiley.fetchOrderTotal();
@@ -5301,7 +5302,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				BigDecimal standardShippingChargeForOneUnit=wiley.fetchShippingCharge(driver, "Standard Shipping");
 				BigDecimal expressShippingChargeForOneUnit=wiley.fetchShippingCharge(driver, "Express Shipping");
 				BigDecimal nextDayShippingChargeForOneUnit=wiley.fetchShippingCharge(driver, "Next Day Shipping");
-				wiley.clickOnEnterNewAddresButtonInShipping();
+				//wiley.clickOnEnterNewAddresButtonInShipping();
 				String country1=excelOperation.getTestData("TC40", "WILEY_NA_Cart_Test_Data", "Shipping_Country").split(",")[0];
 				String country2=excelOperation.getTestData("TC40", "WILEY_NA_Cart_Test_Data", "Shipping_Country").split(",")[1];
 				wiley.selectCountry(country1);
