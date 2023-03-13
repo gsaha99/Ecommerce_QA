@@ -1176,6 +1176,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
 					WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Course"));
+					Thread.sleep(2000);
 					WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -1361,6 +1362,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
 					WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Course"));
+					Thread.sleep(2000);
 					WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -1425,7 +1427,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 										ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 										String ordertotal = WileyPLUS.fetchOrderTotal();
 										String taxInOrderConfirmation = WileyPLUS.fetchTaxAmount();
-										if(taxInOrderReview.compareTo(new BigDecimal(taxInOrderConfirmation.substring(1)))==0)
+										if(taxInOrderReview.compareTo(new BigDecimal(taxInOrderConfirmation.substring(5)))==0)
 											Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
 													" is same as tax in Order confirmation page: "+taxInOrderConfirmation, 
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1433,7 +1435,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 											Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
 													" is not same as tax in Order confirmation page: "+taxInOrderConfirmation, 
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										if(orderTotalInOrderReview.compareTo(new BigDecimal(ordertotal.substring(1)))==0)
+										if(orderTotalInOrderReview.compareTo(new BigDecimal(ordertotal.substring(5)))==0)
 											Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
 													" is same as Order total in Order confirmation page: "+ordertotal, 
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1591,6 +1593,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
 					WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Course"));
+					Thread.sleep(2000);
 					WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -1832,6 +1835,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
 					WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "Course"));
+					Thread.sleep(2000);
 					WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -1883,6 +1887,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 													Thread.sleep(2000);
 													WileyPLUS.clickOnOnboardingAddCourseButton();
 													WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "Course"));
+													Thread.sleep(2000);
 													WileyPLUS.clickOnContinueButtonInOnboarding();
 													try {
 														wait.until(ExpectedConditions.presenceOfElementLocated(

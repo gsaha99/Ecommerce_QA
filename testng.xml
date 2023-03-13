@@ -5,20 +5,15 @@
 
 
 		<classes>
-			<class name="Test_Suite.WEL_Test_Suite">
+			<class name="Test_Suite.WileyPLUS_Test_Suite">
 				<methods>
+					<include name="TC05_.*" />
 					<include name="TC16_.*" />
-					<include name="TC18_.*" />
-					<include name="TC24_.*" />
-					<include name="TC28_.*" />
-					<include name="TC29_.*" />
-					<include name="TC36_.*" />
-					<include name="TC44_.*" />
-					<include name="TC46_.*" />
-					<include name="TC53_.*" />
-					<include name="TC62_.*" />
-					<include name="TC73_.*" />
-					<include name="TC79_.*" />
+					<include name="TC19_.*" />
+					<include name="TC20_.*" />
+					<include name="TC21_.*" />
+					<include name="TC22_.*" />
+					
 					
 					
 				</methods>
