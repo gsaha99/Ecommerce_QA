@@ -3,16 +3,30 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
+      <class name="Test_Suite.AGS_Test_Suite">
         <methods>
-          <include name="nameBefore"/>
-          <include name="launchBrowser"/>
-          <include name="initiate"/>
-          <include name="TC40_Shipping_Charge_For_Multiple_Products"/>
-          <include name="CloseBrowser"/>
           <include name="nameAfter"/>
+          <include name="TC11_Edit_Profile"/>
+          <include name="TC08_Place_Order_With_Discount_Code"/>
+          <include name="TC12_Edit_Billing_Address"/>
+          <include name="TC05_ResetPasswordFromLoginPage"/>
+          <include name="TC10_Place_Order_Non_US_Address"/>
+          <include name="initiate"/>
+          <include name="TC04_Reset_Password_My_Account"/>
+          <include name="TC09_Place_Order_With_Existing_User"/>
+          <include name="TC07_Verify_tax_Non_US_Address"/>
+          <include name="TC02_User_Submit_Order_Monthly"/>
+          <include name="initializeRepo"/>
+          <include name="TC06_Zero_Dollar_Flow"/>
+          <include name="TC03_Standalone_Registration_and_Login"/>
+          <include name="CloseBrowser"/>
+          <include name="nameBefore"/>
+          <include name="TC14_Manage_Subscription_Auto_Renew_Toggle_validation"/>
+          <include name="TC13_Edit_Card_Details"/>
+          <include name="TC15_Riskified_Declined_Order"/>
+          <include name="TC01_Anonymous_User_Registration"/>
         </methods>
-      </class> <!-- Test_Suite.Wiley_NA_Cart_Test_Suite -->
+      </class> <!-- Test_Suite.AGS_Test_Suite -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

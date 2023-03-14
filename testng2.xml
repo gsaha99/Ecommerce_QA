@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="PPE_Regression" thread-count="2" parallel="classes" >
+
+ <test name="ChromeTest">
+	<parameter name="browser" value="Chrome"/>
+	<classes>
+	<class name="Test_Suite.AGS_Test_Suite"/>
+	<!-- class name="Test_Suite.Wiley_dot_com_Test_Suite"/-->	
+	</classes>
+</test>
+
+<test name="EdgeTest">
+	<parameter name="browser" value="Edge" />
+	<classes>
+	<!-- class name="Test_Suite.AGS_Test_Suite"/-->
+	<class name="Test_Suite.Wiley_NA_Cart_Test_Suite"/>
+	</classes>	
+</test> 
+ 
+ 
+</suite> <!-- PPE Regression -->
+
