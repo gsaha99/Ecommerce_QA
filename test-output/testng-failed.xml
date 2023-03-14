@@ -5,17 +5,12 @@
     <classes>
       <class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
         <methods>
-          <include name="TC39_Riskified_Declined_Order_With_Last_Name_Decline"/>
           <include name="nameBefore"/>
           <include name="launchBrowser"/>
           <include name="initiate"/>
-          <include name="CloseBrowser"/>
           <include name="TC40_Shipping_Charge_For_Multiple_Products"/>
-          <include name="TC38_Validate_Payment_Status_For_Declined_card"/>
-          <include name="TC37_Generic_info_hover_text_EBook_PDP"/>
-          <include name="TC35_EMEA_Catalog_Updates"/>
+          <include name="CloseBrowser"/>
           <include name="nameAfter"/>
-          <include name="TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP"/>
         </methods>
       </class> <!-- Test_Suite.Wiley_NA_Cart_Test_Suite -->
     </classes>

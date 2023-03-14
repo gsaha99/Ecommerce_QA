@@ -129,7 +129,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 						wiley.clickOnSaveAndContinueButton();
 						try {
-							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 							{wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 							}}
 						catch(Exception e) {
@@ -164,7 +164,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Order_Id", orderID);
 						excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
 						excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
-						excelOperation.updateTestData("TC06", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+						
 						ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 						String tax=wiley.fetchTaxAmount();
 						String orderTotal=wiley.fetchOrderTotal();
@@ -295,7 +295,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						//						wiley.SelectState(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data","Bill_State"));
 						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 						try {
-							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 						}
 						catch(Exception e) {
@@ -446,7 +446,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.selectShippingMethod();
 					wiley.clickOnSaveAndContinueButton();
 					try {
-						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]"))); 
 							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -489,6 +489,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
 							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
 							excelOperation.updateTestData("TC05", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
+							excelOperation.updateTestData("TC06", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
 							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 							String ordertotal = wiley.fetchOrderTotal();
 							String taxInOrderConfirmation = wiley.fetchTaxAmount();
@@ -616,7 +617,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
 					wiley.clickOnSaveAndContinueButton();
 					try {
-						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -1101,7 +1102,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
 						wiley.clickOnSaveAndContinueButton();
 						try {
-							if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 								wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -1295,7 +1296,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
 						wiley.clickOnSaveAndContinueButton();
 						try {
-							if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 								wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -1493,7 +1494,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 						wiley.clickOnSaveAndContinueButton();
 						try {
-							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 						}
 						catch(Exception e) {
@@ -1656,7 +1657,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.selectShippingMethod();
 					wiley.clickOnSaveAndContinueButton();
 					try {
-						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -1832,7 +1833,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
 					wiley.clickOnSaveAndContinueButton();
 					try {
-						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -1860,7 +1861,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 									wiley.clickOnSaveAndContinueButton();
 									try {
-										if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+										wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 											wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 									}
 									catch(Exception e) {
@@ -2068,7 +2069,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							excelOperation.getTestData("TC12", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
 					wiley.clickOnSaveAndContinueButton();
 					try {
-						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -2259,7 +2260,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 						wiley.clickOnSaveAndContinueButton();
 						try {
-							if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 								wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -2421,7 +2422,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.selectShippingMethod();
 					wiley.clickOnSaveAndContinueButton();
 					try {
-						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -2613,7 +2614,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 						wiley.clickOnSaveAndContinueButton();
 						try {
-							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 						}
 						catch(Exception e) {
@@ -2770,7 +2771,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.selectShippingMethod();
 					wiley.clickOnSaveAndContinueButton();
 					try {
-						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -2968,7 +2969,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.selectShippingMethod();
 					wiley.clickOnSaveAndContinueButton();
 					try {
-						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -3146,7 +3147,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						Thread.sleep(3000);
 						wiley.clickOnSaveAndContinueButton();
 						try {
-							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 						}
 						catch(Exception e) {
@@ -3174,7 +3175,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								Thread.sleep(1000);
 								wiley.clickOnSaveAndContinueButton();
 								try {
-									if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+									wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 										wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 								}
 								catch(Exception e) {
@@ -3284,7 +3285,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC19", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
 					wiley.clickOnSaveAndContinueButton();
 					try {
-						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -3370,7 +3371,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.selectShippingMethod();
 					wiley.clickOnSaveAndContinueButton();
 					try {
-						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -3692,7 +3693,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC22", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 						wiley.clickOnSaveAndContinueButton();
 						try {
-							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 						}
 						catch(Exception e) {
@@ -3856,7 +3857,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 						wiley.clickOnSaveAndContinueButton();
 						try {
-							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 						}
 						catch(Exception e) {
@@ -4303,7 +4304,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC31", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 					wiley.clickOnSaveAndContinueButton();
 					try {
-						if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 					}
 					catch(Exception e) {
@@ -4454,7 +4455,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.selectShippingMethod();
 					wiley.clickOnSaveAndContinueButton();
 					try {
-						if(wiley.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -5061,7 +5062,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC38", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 						wiley.clickOnSaveAndContinueButton();
 						try {
-							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 							{wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 							}}
 						catch(Exception e) {
@@ -5163,9 +5164,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC39", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 						wiley.clickOnSaveAndContinueButton();
 						try {
-							if(wiley.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-							{wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-							}}
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
+							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+							}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
@@ -5351,7 +5352,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				else
 					Reporting.updateTestReport("Shipping charge has been wrongly calculated for Next day shipping",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				wiley.clickOnEnterNewAddresButtonInShipping();
+				//wiley.clickOnEnterNewAddresButtonInShipping();
 				wiley.selectCountry(country1);
 				//validation for Brzil/ columbia
 				BigDecimal airMailChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Air Mail");

@@ -5,14 +5,14 @@
 
 
 		<classes>
-			<class name="Test_Suite.WileyPLUS_Test_Suite">
+			<class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
 				<methods>
-					<include name="TC05_.*" />
-					<include name="TC16_.*" />
-					<include name="TC19_.*" />
-					<include name="TC20_.*" />
-					<include name="TC21_.*" />
-					<include name="TC22_.*" />
+					<include name="TC06_.*" />
+					<include name="TC15_.*" />
+					<include name="TC33_.*" />
+					<include name="TC38_.*" />
+					<include name="TC40_.*" />
+					
 					
 					
 					
