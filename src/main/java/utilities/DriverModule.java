@@ -38,7 +38,7 @@ public class DriverModule {
 	public void initiate(ITestContext context)
 	{
 		try {
-			String browser ="Edge"; // Currently Chrome is hardcoded 
+			String browser ="chrome"; // Currently Chrome is hardcoded 
 			
 			String date = new SimpleDateFormat("hhmmss").format(new Date());			
 			String testSuiteName=context.getCurrentXmlTest().getClasses().stream()
@@ -69,6 +69,7 @@ public class DriverModule {
 				
 				//configure options parameter to Chrome driver
 				ChromeOptions options = new ChromeOptions();
+				options.addArguments("--remote-allow-origins=*");
 				options.addArguments("--incognito");		      		      	
 				driver = new ChromeDriver(options);
 				
