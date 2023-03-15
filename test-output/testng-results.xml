@@ -1,474 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="17" passed="17" failed="0" skipped="0">
+<testng-results ignored="40" total="41" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-03-14T09:27:10 IST" name="Default suite" finished-at="2023-03-14T09:46:11 IST" duration-ms="1141173">
+  <suite started-at="2023-03-15T16:16:54 IST" name="Default suite" finished-at="2023-03-15T16:18:18 IST" duration-ms="83764">
     <groups>
     </groups>
-    <test started-at="2023-03-14T09:27:10 IST" name="Default test" finished-at="2023-03-14T09:46:11 IST" duration-ms="1141173">
-      <class name="Test_Suite.Vet_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:27:10 IST" name="initiate" finished-at="2023-03-14T09:27:16 IST" duration-ms="5984" status="PASS">
+    <test started-at="2023-03-15T16:16:54 IST" name="Default test" finished-at="2023-03-15T16:18:18 IST" duration-ms="83764">
+      <class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@514646ef]" started-at="2023-03-15T16:16:54 IST" name="initiate" finished-at="2023-03-15T16:17:01 IST" duration-ms="7111" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@7d3cb276]]>
+                <![CDATA[org.testng.TestRunner@231cdda8]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:27:16 IST" name="initializeRepo" finished-at="2023-03-14T09:27:16 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="195" status="PASS">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@514646ef]" started-at="2023-03-15T16:17:01 IST" name="launchBrowser" finished-at="2023-03-15T16:17:01 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="77" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- initializeRepo -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:27:16 IST" name="nameBefore" finished-at="2023-03-14T09:27:16 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- launchBrowser -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@514646ef]" started-at="2023-03-15T16:17:01 IST" name="nameBefore" finished-at="2023-03-15T16:17:01 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.Data_Preparation() throws java.io.IOException]]>
+                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC41_Create_Account_Funtionality_With_Wrong_Password_Formats() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameBefore -->
-        <test-method signature="Data_Preparation()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:27:16 IST" name="Data_Preparation" finished-at="2023-03-14T09:29:20 IST" duration-ms="123570" status="PASS">
+        <test-method signature="TC41_Create_Account_Funtionality_With_Wrong_Password_Formats()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@514646ef]" started-at="2023-03-15T16:17:01 IST" name="TC41_Create_Account_Funtionality_With_Wrong_Password_Formats" finished-at="2023-03-15T16:18:15 IST" duration-ms="73079" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Data_Preparation -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:29:20 IST" name="nameAfter" finished-at="2023-03-14T09:29:20 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- TC41_Create_Account_Funtionality_With_Wrong_Password_Formats -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@514646ef]" started-at="2023-03-15T16:18:15 IST" name="nameAfter" finished-at="2023-03-15T16:18:15 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.Data_Preparation() throws java.io.IOException]]>
+                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC41_Create_Account_Funtionality_With_Wrong_Password_Formats() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:29:20 IST" name="nameBefore" finished-at="2023-03-14T09:29:20 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC01_Anonymous_User_Registration() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC01_Anonymous_User_Registration()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:29:20 IST" name="TC01_Anonymous_User_Registration" finished-at="2023-03-14T09:33:28 IST" duration-ms="248744" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC01_Anonymous_User_Registration -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:33:28 IST" name="nameAfter" finished-at="2023-03-14T09:33:28 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC01_Anonymous_User_Registration() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method signature="TC02_Create_Account()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:33:28 IST" name="TC02_Create_Account" finished-at="2023-03-14T09:33:38 IST" duration-ms="9299" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC02_Create_Account -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:33:28 IST" name="nameBefore" finished-at="2023-03-14T09:33:28 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC02_Create_Account() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:33:38 IST" name="nameAfter" finished-at="2023-03-14T09:33:38 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC02_Create_Account() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:33:38 IST" name="nameBefore" finished-at="2023-03-14T09:33:38 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC03_StandaloneLogin() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC03_StandaloneLogin()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:33:38 IST" name="TC03_StandaloneLogin" finished-at="2023-03-14T09:33:48 IST" duration-ms="10068" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC03_StandaloneLogin -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:33:48 IST" name="nameAfter" finished-at="2023-03-14T09:33:48 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC03_StandaloneLogin() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method signature="TC04_Login_During_Checkout()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:33:48 IST" name="TC04_Login_During_Checkout" finished-at="2023-03-14T09:34:30 IST" duration-ms="42642" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC04_Login_During_Checkout -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:33:48 IST" name="nameBefore" finished-at="2023-03-14T09:33:48 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC04_Login_During_Checkout() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:34:30 IST" name="nameAfter" finished-at="2023-03-14T09:34:30 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC04_Login_During_Checkout() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method signature="TC05_Reset_Password_My_Account()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:34:30 IST" name="TC05_Reset_Password_My_Account" finished-at="2023-03-14T09:34:45 IST" duration-ms="14425" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC05_Reset_Password_My_Account -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:34:30 IST" name="nameBefore" finished-at="2023-03-14T09:34:30 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC05_Reset_Password_My_Account() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:34:45 IST" name="nameAfter" finished-at="2023-03-14T09:34:45 IST" duration-ms="3" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC05_Reset_Password_My_Account() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method signature="TC06_ResetPasswordFromLoginPage()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:34:45 IST" name="TC06_ResetPasswordFromLoginPage" finished-at="2023-03-14T09:35:38 IST" duration-ms="52944" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC06_ResetPasswordFromLoginPage -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:34:45 IST" name="nameBefore" finished-at="2023-03-14T09:34:45 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC06_ResetPasswordFromLoginPage() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:35:38 IST" name="nameAfter" finished-at="2023-03-14T09:35:38 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC06_ResetPasswordFromLoginPage() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:35:38 IST" name="nameBefore" finished-at="2023-03-14T09:35:38 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC07_Verify_Tax() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC07_Verify_Tax()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:35:38 IST" name="TC07_Verify_Tax" finished-at="2023-03-14T09:39:23 IST" duration-ms="225034" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC07_Verify_Tax -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:39:23 IST" name="nameAfter" finished-at="2023-03-14T09:39:23 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC07_Verify_Tax() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method signature="TC08_Eloqua_validation()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:39:23 IST" name="TC08_Eloqua_validation" finished-at="2023-03-14T09:40:29 IST" duration-ms="66589" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC08_Eloqua_validation -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:39:23 IST" name="nameBefore" finished-at="2023-03-14T09:39:23 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC08_Eloqua_validation() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:40:29 IST" name="nameAfter" finished-at="2023-03-14T09:40:29 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC08_Eloqua_validation() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method signature="TC11_Place_Order_With_Promo_Code()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:40:29 IST" name="TC11_Place_Order_With_Promo_Code" finished-at="2023-03-14T09:42:15 IST" duration-ms="105728" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC11_Place_Order_With_Promo_Code -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:40:29 IST" name="nameBefore" finished-at="2023-03-14T09:40:29 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC11_Place_Order_With_Promo_Code() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:42:15 IST" name="nameAfter" finished-at="2023-03-14T09:42:15 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC11_Place_Order_With_Promo_Code() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:42:15 IST" name="nameBefore" finished-at="2023-03-14T09:42:15 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC12_PlaceOrderwithNonUSAddress() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC12_PlaceOrderwithNonUSAddress()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:42:15 IST" name="TC12_PlaceOrderwithNonUSAddress" finished-at="2023-03-14T09:43:04 IST" duration-ms="49259" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC12_PlaceOrderwithNonUSAddress -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:43:04 IST" name="nameAfter" finished-at="2023-03-14T09:43:04 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC12_PlaceOrderwithNonUSAddress() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method signature="TC16_Manage_Subscription()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:43:04 IST" name="TC16_Manage_Subscription" finished-at="2023-03-14T09:43:14 IST" duration-ms="9677" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC16_Manage_Subscription -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:43:04 IST" name="nameBefore" finished-at="2023-03-14T09:43:04 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC16_Manage_Subscription() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:43:14 IST" name="nameAfter" finished-at="2023-03-14T09:43:14 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC16_Manage_Subscription() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method signature="TC17_Auto_Renew_Toggle_validation()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:43:14 IST" name="TC17_Auto_Renew_Toggle_validation" finished-at="2023-03-14T09:43:27 IST" duration-ms="12503" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC17_Auto_Renew_Toggle_validation -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:43:14 IST" name="nameBefore" finished-at="2023-03-14T09:43:14 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC17_Auto_Renew_Toggle_validation() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:43:27 IST" name="nameAfter" finished-at="2023-03-14T09:43:27 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC17_Auto_Renew_Toggle_validation() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:43:27 IST" name="nameBefore" finished-at="2023-03-14T09:43:27 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC18_ZeroOrder() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC18_ZeroOrder()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:43:27 IST" name="TC18_ZeroOrder" finished-at="2023-03-14T09:43:49 IST" duration-ms="22672" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC18_ZeroOrder -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:43:49 IST" name="nameAfter" finished-at="2023-03-14T09:43:49 IST" duration-ms="2" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC18_ZeroOrder() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method signature="TC19_Edit_Profile_from_my_account_page()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:43:49 IST" name="TC19_Edit_Profile_from_my_account_page" finished-at="2023-03-14T09:44:01 IST" duration-ms="11801" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC19_Edit_Profile_from_my_account_page -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:43:49 IST" name="nameBefore" finished-at="2023-03-14T09:43:49 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC19_Edit_Profile_from_my_account_page() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:44:01 IST" name="nameAfter" finished-at="2023-03-14T09:44:01 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC19_Edit_Profile_from_my_account_page() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method signature="TC20_Edit_Billing_address_in_my_account()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:44:01 IST" name="TC20_Edit_Billing_address_in_my_account" finished-at="2023-03-14T09:44:26 IST" duration-ms="25236" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC20_Edit_Billing_address_in_my_account -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:44:01 IST" name="nameBefore" finished-at="2023-03-14T09:44:01 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC20_Edit_Billing_address_in_my_account() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:44:26 IST" name="nameAfter" finished-at="2023-03-14T09:44:26 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC20_Edit_Billing_address_in_my_account() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method signature="TC21_Riskified_Declined_Order()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:44:26 IST" name="TC21_Riskified_Declined_Order" finished-at="2023-03-14T09:46:09 IST" duration-ms="102977" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC21_Riskified_Declined_Order -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:44:26 IST" name="nameBefore" finished-at="2023-03-14T09:44:26 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC21_Riskified_Declined_Order() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:46:09 IST" name="nameAfter" finished-at="2023-03-14T09:46:09 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC21_Riskified_Declined_Order() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.Vet_Test_Suite@16eb3ea3]" started-at="2023-03-14T09:46:09 IST" name="CloseBrowser" finished-at="2023-03-14T09:46:11 IST" duration-ms="1662" status="PASS">
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@514646ef]" started-at="2023-03-15T16:18:15 IST" name="CloseBrowser" finished-at="2023-03-15T16:18:18 IST" duration-ms="3439" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
-      </class> <!-- Test_Suite.Vet_Test_Suite -->
+      </class> <!-- Test_Suite.Wiley_NA_Cart_Test_Suite -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

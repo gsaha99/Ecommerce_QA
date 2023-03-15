@@ -16,6 +16,7 @@ public class ScrollingWebPage {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(" + xcord + "," + ycord + ")");
+			Thread.sleep(2000);
 			Reporting.updateTestReport("The page was scrolled down", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.INFO);
 		} catch (Exception e) {
@@ -28,6 +29,7 @@ public class ScrollingWebPage {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(" + xcord + "," + ycord + ")");
+			Thread.sleep(2000);
 			Reporting.updateTestReport("The page was scrolled up", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.INFO);
 		} catch (Exception e) {
@@ -45,6 +47,19 @@ public class ScrollingWebPage {
 					StatusDetails.INFO);
 		} catch (Exception e) {
 			Reporting.updateTestReport("Unable to Perform Page Down", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.WARNING);
+		}
+	}
+	
+	public static void PageUp(WebDriver driver,String SS_path) throws IOException {
+		try {
+			Actions at = new Actions(driver);
+			at.sendKeys(Keys.PAGE_UP).build().perform();
+			Thread.sleep(2000);
+			Reporting.updateTestReport("Perform Page Up", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.INFO);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Unable to Perform Page Up", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.WARNING);
 		}
 	}

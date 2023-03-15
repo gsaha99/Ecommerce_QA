@@ -625,6 +625,8 @@ public class app_Wiley_Repo {
 	 */
 	public void enterPasswordInCreateAccountForm(String password) throws IOException {
 		try {
+			PasswordInCreateAccount.clear();
+			Thread.sleep(1000);
 			PasswordInCreateAccount.sendKeys(password);
 			Reporting.updateTestReport("Password: "+password+" was entered successfully in the Create Account Form",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
@@ -1786,11 +1788,14 @@ public class app_Wiley_Repo {
 	public void checkNextAvailabilityDatePreorderInCartPage() throws IOException{
 		try {
 			if(NextAvailabilityDateForPreorderProductInCartPage.isDisplayed()) 
-				Reporting.updateTestReport("Nextavailability date was present for pre-order product", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				Reporting.updateTestReport("Nextavailability date was present for pre-order product",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			//Reporting.updateTestReport("Next Availibility date is present for pre-order product as: "+driver.findElement(By.xpath("(//span[@class='cart-item-info-val'])[2]")).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("NextAvailibilityDate was not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			Reporting.updateTestReport("NextAvailibilityDate was not present for Pre-order product. "
+					+ "Probable reason might be, the date is not set up in backoffice",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 
 	}
@@ -1806,7 +1811,9 @@ public class app_Wiley_Repo {
 			//Reporting.updateTestReport("Next Availibility date is present for back-order product as: "+driver.findElement(By.xpath("(//span[@class='cart-item-info-val'])[4]")).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("NextAvailibilityDate was not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			Reporting.updateTestReport("NextAvailibilityDate was not present for Back-order product. "
+					+ "Probable reason might be, the date is not set up in backoffice",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 
 	}
@@ -1851,11 +1858,12 @@ public class app_Wiley_Repo {
 	public void checkNextAvailabilityDatePreorderInOrderReviewPage() throws IOException{
 		try {
 			if(PreOrderNextAvailabilityDateOrderReview.isDisplayed()) 
-				Reporting.updateTestReport("Nextavailability date was present for preorder product"+PreOrderNextAvailabilityDateOrderReview.getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				Reporting.updateTestReport("Next availability date was present for preorder product "+PreOrderNextAvailabilityDateOrderReview.getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			//Reporting.updateTestReport("Next Availibility date is present for back-order product as: "+driver.findElement(By.xpath("(//span[@class='cart-item-info-val'])[4]")).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("NextAvailibilityDate was not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			Reporting.updateTestReport("Next AvailibilityDate was not present for Pre-order product"
+					+ " because of data setup issue", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 
 	}
@@ -1868,11 +1876,12 @@ public class app_Wiley_Repo {
 	public void checkNextAvailabilityDateBackorderInOrderReviewPage() throws IOException{
 		try {
 			if(BackOrderNextAvailabilityDateOrderReview.isDisplayed()) 
-				Reporting.updateTestReport("Nextavailability date was present for backorder product"+BackOrderNextAvailabilityDateOrderReview.getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				Reporting.updateTestReport("Next availability date was present for backorder product"+BackOrderNextAvailabilityDateOrderReview.getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			//Reporting.updateTestReport("Next Availibility date is present for back-order product as: "+driver.findElement(By.xpath("(//span[@class='cart-item-info-val'])[4]")).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("NextAvailibilityDate was not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			Reporting.updateTestReport("Next AvailibilityDate was not present for backrder product"
+					+ " because of data setup issue.", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 
 	}
@@ -3590,6 +3599,275 @@ public class app_Wiley_Repo {
 		}
 	}
 	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks At least 10 characters -> this criteria in password page
+	 * @Date: 15/3/23
+	 */
+	public void checkAtLeast10Characters(WebDriver driver,String colour) throws IOException {
+		try {
+			String xpathOfCriteria;
+			if(colour.equalsIgnoreCase("blue")) {
+				xpathOfCriteria="//span[@id='registerCheckLength']/span[@style='color: rgb(0, 82, 116);']";
+				try {
+				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+					Reporting.updateTestReport("At least 10 characters was satisfied and was in blue colour",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("At least 10 characters was not satisfied",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}
+			else
+			{
+				xpathOfCriteria="//span[@id='registerCheckLength']/span[@style='color: rgb(164, 47, 19);']";
+				try {
+				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+					Reporting.updateTestReport("At least 10 characters was not satisfied and was in red colour",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("At least 10 characters was satisfied",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}		
+			
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("At least 10 charactersthis condition couldn't be verified",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks At least 3 of the following: -> this criteria in password page
+	 * @Date: 15/3/23
+	 */
+	public void checkAtLeast3ofTheFollowing(WebDriver driver,String colour) throws IOException {
+		try {
+			String xpathOfCriteria;
+			if(colour.equalsIgnoreCase("blue")) {
+				xpathOfCriteria="//span[@id='registerCheckAttribute']/span[@style='color: rgb(0, 82, 116);']";
+				try {
+				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+					Reporting.updateTestReport("At least 3 criterias was satisfied and was in blue colour",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("At least  3 criterias was not satisfied",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}
+			else
+			{
+				xpathOfCriteria="//span[@id='registerCheckAttribute']/span[@style='color: rgb(164, 47, 19);']";
+				try {
+				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+					Reporting.updateTestReport("At least  3 criterias was not satisfied and was in red colour",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("At least  3 criterias was satisfied",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}		
+			
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("At least  3 criterias this condition couldn't be verified",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks UpperCase -> this criteria in password page
+	 * @Date: 15/3/23
+	 */
+	public void checkUpperCase(WebDriver driver,String colour) throws IOException {
+		try {
+			String xpathOfCriteria;
+			if(colour.equalsIgnoreCase("blue")) {
+				xpathOfCriteria="//div[@id='registerCheckUpperCaseDiv']/span[@style='color: rgb(0, 82, 116);']";
+				try {
+				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+					Reporting.updateTestReport("UpperCase was satisfied and was in blue colour",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("UpperCase was not satisfied",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}
+			else
+			{
+				xpathOfCriteria="//div[@id='registerCheckUpperCaseDiv']/span[@style='color: rgb(164, 47, 19);']";
+				try {
+				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+					Reporting.updateTestReport("UpperCase was not satisfied and was in red colour",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("UpperCase was satisfied",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}		
+			
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("UpperCase this condition couldn't be verified",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks Lower Case -> this criteria in password page
+	 * @Date: 15/3/23
+	 */
+	public void checkLowerCase(WebDriver driver,String colour) throws IOException {
+		try {
+			String xpathOfCriteria;
+			if(colour.equalsIgnoreCase("blue")) {
+				xpathOfCriteria="//div[@id='registerCheckLowerCaseDiv']/span[@style='color: rgb(0, 82, 116);']";
+				try {
+				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+					Reporting.updateTestReport("Lower Case was satisfied and was in blue colour",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Lower Case was not satisfied",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}
+			else
+			{
+				xpathOfCriteria="//div[@id='registerCheckLowerCaseDiv']/span[@style='color: rgb(164, 47, 19);']";
+				try {
+				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+					Reporting.updateTestReport("Lower Case was not satisfied and was in red colour",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Lower Case was satisfied",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}		
+			
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Lower Case this condition couldn't be verified",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks Number -> this criteria in password page
+	 * @Date: 15/3/23
+	 */
+	public void checkNumber(WebDriver driver,String colour) throws IOException {
+		try {
+			String xpathOfCriteria;
+			if(colour.equalsIgnoreCase("blue")) {
+				xpathOfCriteria="//div[@id='registerCheckNumCaseDiv']/span[@style='color: rgb(0, 82, 116);']";
+				try {
+				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+					Reporting.updateTestReport("Number was satisfied and was in blue colour",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Number was not satisfied",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}
+			else
+			{
+				xpathOfCriteria="//div[@id='registerCheckNumCaseDiv']/span[@style='color: rgb(164, 47, 19);']";
+				try {
+				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+					Reporting.updateTestReport("Number was not satisfied and was in red colour",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Number was satisfied",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}		
+			
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Number this condition couldn't be verified",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks Special Character -> this criteria in password page
+	 * @Date: 15/3/23
+	 */
+	public void checkSpecialCharacter(WebDriver driver,String colour) throws IOException {
+		try {
+			String xpathOfCriteria;
+			if(colour.equalsIgnoreCase("blue")) {
+				xpathOfCriteria="//div[@id='registerCheckSpclCharDiv']/span[@style='color: rgb(0, 82, 116);']";
+				try {
+				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+					Reporting.updateTestReport("Special Character was satisfied and was in blue colour",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Special Character was not satisfied",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}
+			else
+			{
+				xpathOfCriteria="//div[@id='registerCheckSpclCharDiv']/span[@style='color: rgb(164, 47, 19);']";
+				try {
+				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+					Reporting.updateTestReport("Special Character was not satisfied and was in red colour",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Special Character was satisfied",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}		
+			
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Special Character this condition couldn't be verified",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 15/3/23
+	 * @Description: Checks the password criteria insuffiency message
+	 * @Author: Anindita
+	 */
+	public void checkPasswordCriteriaInsufficiencyMessage(String message) throws IOException{
+		try {
+			String xpath="//div[@class='help-block commonErrorWelStyle' and contains(text(),'"+message+"')]";
+			try {
+				if(driver.findElement(By.xpath(xpath)).isDisplayed())
+					Reporting.updateTestReport("Password criteria insuffiency message: "+message+" was displayed",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Password criteria insuffiency message was not displayed",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Password criteria insuffiency message was not displayed with exception "+e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 
 }
 

@@ -55,19 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<<<<<<< HEAD
-<td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>1/0/0</td>
 </tr><tr>
-<td>Started on:</td><td>Tue Mar 14 12:13:53 IST 2023</td>
+<td>Started on:</td><td>Wed Mar 15 16:16:54 IST 2023</td>
 </tr>
-<tr><td>Total time:</td><td>7 seconds (7974 ms)</td>
-=======
-<td>Tests passed/Failed/Skipped:</td><td>17/0/0</td>
-</tr><tr>
-<td>Started on:</td><td>Tue Mar 14 09:27:10 IST 2023</td>
-</tr>
-<tr><td>Total time:</td><td>1141 seconds (1141173 ms)</td>
->>>>>>> 16adc7d01aba133b9955328d2ff05f221eda244f
+<tr><td>Total time:</td><td>83 seconds (83764 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -75,8 +67,8 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
-<table width='100%' border='1' class='invocation-failed'>
-<tr><td colspan='4' align='center'><b>FAILED CONFIGURATIONS</b></td></tr>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
 <td><b>Attribute(s)</b></td>
 <td width="30%"><b>Exception</b></td>
@@ -84,229 +76,10 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<<<<<<< HEAD
-<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.CloseBrowser()'><b>CloseBrowser</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
-<td><div><pre>java.lang.NullPointerException: Cannot invoke &quot;com.aventstack.extentreports.ExtentReports.flush()&quot; because &quot;utilities.Reporting.extent&quot; is null
-	at utilities.Reporting.summaryEndReport(Reporting.java:134)
-	at utilities.DriverModule.CloseBrowser(DriverModule.java:120)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:361)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:296)
-	at org.testng.TestRunner.invokeTestConfigurations(TestRunner.java:643)
-	at org.testng.TestRunner.afterRun(TestRunner.java:891)
-	at org.testng.TestRunner.run(TestRunner.java:604)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:433)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:427)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:387)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:330)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
-	at org.testng.TestNG.runSuites(TestNG.java:1099)
-	at org.testng.TestNG.run(TestNG.java:1067)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1930401429", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1930401429'><pre>java.lang.NullPointerException: Cannot invoke &quot;com.aventstack.extentreports.ExtentReports.flush()&quot; because &quot;utilities.Reporting.extent&quot; is null
-	at utilities.Reporting.summaryEndReport(Reporting.java:134)
-	at utilities.DriverModule.CloseBrowser(DriverModule.java:120)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:361)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:296)
-	at org.testng.TestRunner.invokeTestConfigurations(TestRunner.java:643)
-	at org.testng.TestRunner.afterRun(TestRunner.java:891)
-	at org.testng.TestRunner.run(TestRunner.java:604)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:433)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:427)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:387)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:330)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
-	at org.testng.TestNG.runSuites(TestNG.java:1099)
-	at org.testng.TestNG.run(TestNG.java:1067)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div></td>
-<td>0</td>
-<td>Test_Suite.Wiley_NA_Cart_Test_Suite@19932c16</td></tr>
-</table><p>
-<table width='100%' border='1' class='invocation-failed'>
-<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
-<tr><td><b>Test method</b></td>
-<td><b>Attribute(s)</b></td>
-<td width="30%"><b>Exception</b></td>
-<td width="10%"><b>Time (seconds)</b></td>
-<td><b>Instance</b></td>
-</tr>
-<tr>
-<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC40_Shipping_Charge_For_Multiple_Products()'><b>TC40_Shipping_Charge_For_Multiple_Products</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
-<td><div><pre>java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;scrShot&quot; is null
-	at utilities.CaptureScreenshot.getScreenshot(CaptureScreenshot.java:31)
-	at Test_Suite.Wiley_NA_Cart_Test_Suite.TC40_Shipping_Charge_For_Multiple_Products(Wiley_NA_Cart_Test_Suite.java:5394)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:962)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.testng.TestRunner.privateRun(TestRunner.java:806)
-	at org.testng.TestRunner.run(TestRunner.java:601)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:433)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:427)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:387)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:330)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
-	at org.testng.TestNG.runSuites(TestNG.java:1099)
-	at org.testng.TestNG.run(TestNG.java:1067)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1583722422", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1583722422'><pre>java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;scrShot&quot; is null
-	at utilities.CaptureScreenshot.getScreenshot(CaptureScreenshot.java:31)
-	at Test_Suite.Wiley_NA_Cart_Test_Suite.TC40_Shipping_Charge_For_Multiple_Products(Wiley_NA_Cart_Test_Suite.java:5394)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:962)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.testng.TestRunner.privateRun(TestRunner.java:806)
-	at org.testng.TestRunner.run(TestRunner.java:601)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:433)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:427)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:387)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:330)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
-	at org.testng.TestNG.runSuites(TestNG.java:1099)
-	at org.testng.TestNG.run(TestNG.java:1067)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div></td>
-<td>2</td>
-<td>Test_Suite.Wiley_NA_Cart_Test_Suite@19932c16</td></tr>
-=======
-<td title='Test_Suite.Vet_Test_Suite.TC11_Place_Order_With_Promo_Code()'><b>TC11_Place_Order_With_Promo_Code</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
+<td title='Test_Suite.Wiley_NA_Cart_Test_Suite.TC41_Create_Account_Funtionality_With_Wrong_Password_Formats()'><b>TC41_Create_Account_Funtionality_With_Wrong_Password_Formats</b><br>Test class: Test_Suite.Wiley_NA_Cart_Test_Suite</td>
 <td></td>
-<td>105</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
-<tr>
-<td title='Test_Suite.Vet_Test_Suite.TC01_Anonymous_User_Registration()'><b>TC01_Anonymous_User_Registration</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
-<td></td>
-<td>248</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
-<tr>
-<td title='Test_Suite.Vet_Test_Suite.TC06_ResetPasswordFromLoginPage()'><b>TC06_ResetPasswordFromLoginPage</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
-<td></td>
-<td>52</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
-<tr>
-<td title='Test_Suite.Vet_Test_Suite.TC05_Reset_Password_My_Account()'><b>TC05_Reset_Password_My_Account</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
-<td></td>
-<td>14</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
-<tr>
-<td title='Test_Suite.Vet_Test_Suite.TC04_Login_During_Checkout()'><b>TC04_Login_During_Checkout</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
-<td></td>
-<td>42</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
-<tr>
-<td title='Test_Suite.Vet_Test_Suite.TC16_Manage_Subscription()'><b>TC16_Manage_Subscription</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
-<td></td>
-<td>9</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
-<tr>
-<td title='Test_Suite.Vet_Test_Suite.TC17_Auto_Renew_Toggle_validation()'><b>TC17_Auto_Renew_Toggle_validation</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
-<td></td>
-<td>12</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
-<tr>
-<td title='Test_Suite.Vet_Test_Suite.TC08_Eloqua_validation()'><b>TC08_Eloqua_validation</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
-<td></td>
-<td>66</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
-<tr>
-<td title='Test_Suite.Vet_Test_Suite.TC20_Edit_Billing_address_in_my_account()'><b>TC20_Edit_Billing_address_in_my_account</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
-<td></td>
-<td>25</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
-<tr>
-<td title='Test_Suite.Vet_Test_Suite.Data_Preparation()'><b>Data_Preparation</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
-<td></td>
-<td>123</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
-<tr>
-<td title='Test_Suite.Vet_Test_Suite.TC21_Riskified_Declined_Order()'><b>TC21_Riskified_Declined_Order</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
-<td></td>
-<td>102</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
-<tr>
-<td title='Test_Suite.Vet_Test_Suite.TC07_Verify_Tax()'><b>TC07_Verify_Tax</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
-<td></td>
-<td>225</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
-<tr>
-<td title='Test_Suite.Vet_Test_Suite.TC12_PlaceOrderwithNonUSAddress()'><b>TC12_PlaceOrderwithNonUSAddress</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
-<td></td>
-<td>49</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
-<tr>
-<td title='Test_Suite.Vet_Test_Suite.TC02_Create_Account()'><b>TC02_Create_Account</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
-<td></td>
-<td>9</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
-<tr>
-<td title='Test_Suite.Vet_Test_Suite.TC03_StandaloneLogin()'><b>TC03_StandaloneLogin</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
-<td></td>
-<td>10</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
-<tr>
-<td title='Test_Suite.Vet_Test_Suite.TC18_ZeroOrder()'><b>TC18_ZeroOrder</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
-<td></td>
-<td>22</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
-<tr>
-<td title='Test_Suite.Vet_Test_Suite.TC19_Edit_Profile_from_my_account_page()'><b>TC19_Edit_Profile_from_my_account_page</b><br>Test class: Test_Suite.Vet_Test_Suite</td>
-<td></td>
-<td>11</td>
-<td>Test_Suite.Vet_Test_Suite@16eb3ea3</td></tr>
->>>>>>> 16adc7d01aba133b9955328d2ff05f221eda244f
+<td>73</td>
+<td>Test_Suite.Wiley_NA_Cart_Test_Suite@514646ef</td></tr>
 </table><p>
 </body>
 </html>

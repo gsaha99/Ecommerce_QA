@@ -4427,10 +4427,11 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 						("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
 				wiley.checkNextAvailabilityDatePreorderInCartPage();
-				wiley.checkNextAvailabilityDateBackorderInCartPage();
 				wiley.checkNotificationMessagePreorderInCartPage();
+				ScrollingWebPage.PageScrolldown(driver,0,400,SS_path);
+				wiley.checkNextAvailabilityDateBackorderInCartPage();
 				wiley.checkNotificationMessageBackorderInCartPage();
-				ScrollingWebPage.PageScrolldown(driver,0,900,SS_path);
+				ScrollingWebPage.PageScrolldown(driver,0,450,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String email=wiley.enterEmailIdInCreateAccountForm();
 				wiley.clickOnCreateAccountButton();
@@ -4468,6 +4469,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 						PaymentGateway.paymentWiley(driver, wiley, "TC32", SS_path);
 						wiley.clickOnSaveAndContinueButton();
+						ScrollingWebPage.PageScrolldown(driver, 0, 900, SS_path);
 						wiley.checkNextAvailabilityDatePreorderInOrderReviewPage();
 						wiley.checkNextAvailabilityDateBackorderInOrderReviewPage();
 						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
@@ -5387,6 +5389,106 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+		}
+		catch(Exception e) {
+			wiley.wileyLogOutException();
+			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date:  15/03/23
+	 * @Description: Checks if user is able to create an account with entering password which is not fulfilling the criteria
+	 * -------------------------Negative scenario-------------------------
+	 */
+	@Test
+	public void TC41_Create_Account_Funtionality_With_Wrong_Password_Formats() throws IOException{
+		try {
+			Reporting.test = Reporting.extent.createTest("TC41_Create_Account_Funtionality_With_Wrong_Password_Formats");
+			driver.get(wiley.wileyURLConcatenation("TC41", "WILEY_NA_Cart_Test_Data", "URL"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			driver.navigate().refresh();
+			wiley.clickOnAddToCartButton();
+			String[] passwords=excelOperation.getTestData("TC41", "WILEY_NA_Cart_Test_Data", "Password").split(",");
+			try {
+				wait.until(ExpectedConditions.
+						elementToBeClickable
+						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				String email=wiley.enterEmailIdInCreateAccountForm();
+				wiley.clickOnCreateAccountButton();				
+				wiley.confirmEmailIdInCreateAccountForm(email);
+				//First password only lower case letters and numbers with less than 10 characters.
+				wiley.enterPasswordInCreateAccountForm(passwords[0]);
+				wiley.checkAtLeast10Characters(driver, "red");
+				wiley.checkAtLeast3ofTheFollowing(driver, "red");
+				wiley.checkUpperCase(driver, "red");
+				wiley.checkLowerCase(driver, "blue");
+				wiley.checkNumber(driver, "blue");
+				wiley.checkSpecialCharacter(driver, "red");
+				wiley.clickOnSaveAndContinueButton();
+				String errorMessage=excelOperation.getTestData("PasswordInsufficiencyErrorMessage",
+						"Generic_Messages", "Data");
+				String xpathOfError="//div[@class='help-block commonErrorWelStyle' and contains(text(),'"+errorMessage+"')]";
+				System.out.println(xpathOfError);
+				try {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathOfError)));
+					Reporting.updateTestReport("Password criteria insuffiency message: "+errorMessage+" was displayed",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Password criteria insuffiency message was not displayed",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				
+				//Second password containing Lowercase letters and special characters with more than 10 characters
+				wiley.enterPasswordInCreateAccountForm(passwords[1]);
+				wiley.checkAtLeast10Characters(driver, "blue");
+				wiley.checkAtLeast3ofTheFollowing(driver, "red");
+				wiley.checkUpperCase(driver, "red");
+				wiley.checkLowerCase(driver, "blue");
+				wiley.checkNumber(driver, "red");
+				wiley.checkSpecialCharacter(driver, "blue");
+				wiley.clickOnSaveAndContinueButton();
+				try {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathOfError)));
+					Reporting.updateTestReport("Password criteria insuffiency message: "+errorMessage+" was displayed",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Password criteria insuffiency message was not displayed",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				
+				//Third password containing Lowercase letters, Uppercase letters, Numbers, special characters but does not have 10 or more characters(
+				wiley.enterPasswordInCreateAccountForm(passwords[2]);
+				wiley.checkAtLeast10Characters(driver, "red");
+				wiley.checkAtLeast3ofTheFollowing(driver, "blue");
+				wiley.checkUpperCase(driver, "blue");
+				wiley.checkLowerCase(driver, "blue");
+				wiley.checkNumber(driver, "blue");
+				wiley.checkSpecialCharacter(driver, "blue");
+				wiley.clickOnSaveAndContinueButton();	
+				
+				try {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathOfError)));
+					Reporting.updateTestReport("Password criteria insuffiency message: "+errorMessage+" was displayed",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Password criteria insuffiency message was not displayed",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			wiley.WileyLogOut();
+			
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
