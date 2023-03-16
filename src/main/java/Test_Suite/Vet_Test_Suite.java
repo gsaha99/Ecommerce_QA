@@ -106,10 +106,10 @@ public class Vet_Test_Suite extends DriverModule {
 				String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
 				if (payment_gateway.contains("WPG")) {
 					/* WPG Code */
-					PaymentGateway.paymentWPG_VET(driver, VET, "TC01", SS_path);
+					PaymentGateway.paymentVET("WPG",driver, VET, "TC01", SS_path);
 				} else {
 					/** WPS Code **/
-					PaymentGateway.paymentWPS_VET(driver, VET, "TC01", SS_path);
+					PaymentGateway.paymentVET("WPS",driver, VET, "TC01", SS_path);
 				}
 				try {
 					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed."
@@ -239,10 +239,10 @@ public class Vet_Test_Suite extends DriverModule {
 			System.out.println(payment_gateway);
 			if (payment_gateway.contains("WPG")) {
 				/* WPG Code */
-				PaymentGateway.paymentWPG_VET(driver, VET, "TC04", SS_path);
+				PaymentGateway.paymentVET("WPG",driver, VET, "TC04", SS_path);
 			} else {
 				/** WPS Code **/
-				PaymentGateway.paymentWPS_VET(driver, VET, "TC04", SS_path);
+				PaymentGateway.paymentVET("WPS",driver, VET, "TC04", SS_path);
 			}
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -419,10 +419,10 @@ public class Vet_Test_Suite extends DriverModule {
 			System.out.println(payment_gateway);
 			if (payment_gateway.contains("WPG")) {
 				/* WPG Code */
-				PaymentGateway.paymentWPG_VET(driver, VET, "TC07", SS_path);
+				PaymentGateway.paymentVET("WPG",driver, VET, "TC07", SS_path);
 			} else {
 				/** WPS Code **/
-				PaymentGateway.paymentWPS_VET(driver, VET, "TC07", SS_path);
+				PaymentGateway.paymentVET("WPS",driver, VET, "TC07", SS_path);
 			}
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -572,10 +572,10 @@ public class Vet_Test_Suite extends DriverModule {
 				System.out.println(payment_gateway);
 				if (payment_gateway.contains("WPG")) {
 					/* WPG Code */
-					PaymentGateway.paymentWPG_VET(driver, VET, "TC11", SS_path);
+					PaymentGateway.paymentVET("WPG",driver, VET, "TC11", SS_path);
 				} else {
 					/** WPS Code **/
-					PaymentGateway.paymentWPS_VET(driver, VET, "TC11", SS_path);
+					PaymentGateway.paymentVET("WPS",driver, VET, "TC11", SS_path);
 				}
 				try {
 					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed."
@@ -652,10 +652,10 @@ public class Vet_Test_Suite extends DriverModule {
 			System.out.println(payment_gateway);
 			if (payment_gateway.contains("WPG")) {
 				/* WPG Code */
-				PaymentGateway.paymentWPG_VET(driver, VET, "TC12", SS_path);
+				PaymentGateway.paymentVET("WPG",driver, VET, "TC12", SS_path);
 			} else {
 				/** WPS Code **/
-				PaymentGateway.paymentWPS_VET(driver, VET, "TC12", SS_path);
+				PaymentGateway.paymentVET("WPS",driver, VET, "TC12", SS_path);
 			}
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
@@ -1257,10 +1257,10 @@ public class Vet_Test_Suite extends DriverModule {
 				System.out.println(payment_gateway);
 				if (payment_gateway.contains("WPG")) {
 					/* WPG Code */
-					PaymentGateway.paymentWPG_VET(driver, VET, "TC01", SS_path);
+					PaymentGateway.paymentVET("WPG",driver, VET, "TC01", SS_path);
 				} else {
 					/** WPS Code **/
-					PaymentGateway.paymentWPS_VET(driver, VET, "TC01", SS_path);
+					PaymentGateway.paymentVET("WPS",driver, VET, "TC01", SS_path);
 				}
 				try {
 					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed."
@@ -1349,10 +1349,10 @@ public class Vet_Test_Suite extends DriverModule {
 							System.out.println(payment_gateway);
 							if (payment_gateway.contains("WPG")) {
 
-								PaymentGateway.paymentWPG_VET(driver, VET, "TC21", SS_path);
+								PaymentGateway.paymentVET("WPG",driver, VET, "TC21", SS_path);
 							} else {
 
-								PaymentGateway.paymentWPS_VET(driver, VET, "TC21", SS_path);
+								PaymentGateway.paymentVET("WPS",driver, VET, "TC21", SS_path);
 							}
 
 							try {

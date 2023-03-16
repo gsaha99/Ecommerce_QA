@@ -109,10 +109,10 @@ public class AGS_Test_Suite extends DriverModule {
 							System.out.println(payment_gateway);
 							if (payment_gateway.contains("WPG")) {
 								/* WPG Code */
-								PaymentGateway.paymentWPG_AGS(driver, AGS, "TC01", SS_path);
+								PaymentGateway.paymentAGS("WPG",driver, AGS, "TC01", SS_path);
 							} else {
 								/** WPS Code **/
-								PaymentGateway.paymentWPS_AGS(driver, AGS, "TC01", SS_path);
+								PaymentGateway.paymentAGS("WPS",driver, AGS, "TC01", SS_path);
 							}
 							try {
 								wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
@@ -238,10 +238,10 @@ public class AGS_Test_Suite extends DriverModule {
 							System.out.println(payment_gateway);
 							if (payment_gateway.contains("WPG")) {
 								/* WPG Code */
-								PaymentGateway.paymentWPG_AGS(driver, AGS, "TC02", SS_path);
+								PaymentGateway.paymentAGS("WPG",driver, AGS, "TC02", SS_path);
 							} else {
 								/** WPS Code **/
-								PaymentGateway.paymentWPS_AGS(driver, AGS, "TC02", SS_path);
+								PaymentGateway.paymentAGS("WPS",driver, AGS, "TC02", SS_path);
 							}
 							try {
 								wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
@@ -597,10 +597,10 @@ public class AGS_Test_Suite extends DriverModule {
 							System.out.println(payment_gateway);
 							if (payment_gateway.contains("WPG")) {
 								/* WPG Code */
-								PaymentGateway.paymentWPG_AGS(driver, AGS, "TC07", SS_path);
+								PaymentGateway.paymentAGS("WPG",driver, AGS, "TC07", SS_path);
 							} else {
 								/** WPS Code **/
-								PaymentGateway.paymentWPS_AGS(driver, AGS, "TC07", SS_path);
+								PaymentGateway.paymentAGS("WPS",driver, AGS, "TC07", SS_path);
 
 							}
 							try {
@@ -724,10 +724,10 @@ public class AGS_Test_Suite extends DriverModule {
 							System.out.println(payment_gateway);
 							if (payment_gateway.contains("WPG")) {
 								/* WPG Code */
-								PaymentGateway.paymentWPG_AGS(driver, AGS, "TC08", SS_path);
+								PaymentGateway.paymentAGS("WPG",driver, AGS, "TC08", SS_path);
 							} else {
 								/** WPS Code **/
-								PaymentGateway.paymentWPS_AGS(driver, AGS, "TC08", SS_path);
+								PaymentGateway.paymentAGS("WPS",driver, AGS, "TC08", SS_path);
 
 							}
 							try {
@@ -849,10 +849,10 @@ public class AGS_Test_Suite extends DriverModule {
 								System.out.println(payment_gateway);
 								if (payment_gateway.contains("WPG")) {
 									/* WPG Code */
-									PaymentGateway.paymentWPG_AGS(driver, AGS, "TC09", SS_path);
+									PaymentGateway.paymentAGS("WPG",driver, AGS, "TC09", SS_path);
 								} else {
 									/** WPS Code **/
-									PaymentGateway.paymentWPS_AGS(driver, AGS, "TC09", SS_path);
+									PaymentGateway.paymentAGS("WPS",driver, AGS, "TC09", SS_path);
 
 								}
 								try {
@@ -959,10 +959,10 @@ public class AGS_Test_Suite extends DriverModule {
 							System.out.println(payment_gateway);
 							if (payment_gateway.contains("WPG")) {
 								/* WPG Code */
-								PaymentGateway.paymentWPG_AGS(driver, AGS, "TC01", SS_path);
+								PaymentGateway.paymentAGS("WPG",driver, AGS, "TC10", SS_path);
 							} else {
 								/** WPS Code **/
-								PaymentGateway.paymentWPS_AGS(driver, AGS, "TC01", SS_path);
+								PaymentGateway.paymentAGS("WPS",driver, AGS, "TC10", SS_path);
 							}
 							try {
 								wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
@@ -1154,10 +1154,10 @@ public class AGS_Test_Suite extends DriverModule {
 				String payment_gateway = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
 				if (payment_gateway.contains("WPG")) {
 
-					PaymentGateway.paymentWPG_AGS(driver, AGS, "TC13", SS_path);
+					PaymentGateway.paymentAGS("WPG",driver, AGS, "TC13", SS_path);
 				} else {
 
-					PaymentGateway.paymentWPS_AGS(driver, AGS, "TC13", SS_path);
+					PaymentGateway.paymentAGS("WPS",driver, AGS, "TC13", SS_path);
 				}
 				String lastFourFetchedFromEditPayment=AGS.fetchLastFourCardNumberDigit();
 				String input = excelOperation.getTestData("TC13", "AGS_Test_Data", "Card_Number");
@@ -1280,10 +1280,10 @@ public class AGS_Test_Suite extends DriverModule {
 							System.out.println(payment_gateway);
 							if (payment_gateway.contains("WPG")) {
 								/* WPG Code */
-								PaymentGateway.paymentWPG_AGS(driver, AGS, "TC15", SS_path);
+								PaymentGateway.paymentAGS("WPG",driver, AGS, "TC15", SS_path);
 							} else {
 								/** WPS Code **/
-								PaymentGateway.paymentWPS_AGS(driver, AGS, "TC15", SS_path);
+								PaymentGateway.paymentAGS("WPS",driver, AGS, "TC15", SS_path);
 							}
 							try {
 								wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed. A confirmation email')]")));
