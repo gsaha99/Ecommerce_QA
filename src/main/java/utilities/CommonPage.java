@@ -17,7 +17,7 @@ public class CommonPage {
 
 	public static void LogIN(WebDriver driver,app_ClientPortal_Repo CPortal,String EmailID, String PWD,String SS_path) throws IOException 
 	{
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		//boolean loginValue=driver.findElement(By.id("otherTileText")).isDisplayed();
 		try {
 					wait.until(ExpectedConditions.presenceOfElementLocated(By.id("otherTileText")));
@@ -28,7 +28,7 @@ public class CommonPage {
 					}
 					catch (Exception e) 
 					{
-						System.out.println("Element not found due to timeout" + e.getMessage());
+						
 						Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
@@ -39,7 +39,7 @@ public class CommonPage {
 					}
 					catch (Exception e) 
 					{
-						System.out.println("Element not found due to timeout" + e.getMessage());
+						
 						Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
@@ -50,7 +50,7 @@ public class CommonPage {
 					}
 					catch (Exception e) 
 					{
-						System.out.println("Element not found due to timeout" + e.getMessage());
+						
 						Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
@@ -60,7 +60,6 @@ public class CommonPage {
 					}
 					catch (Exception e) 
 					{
-						System.out.println("Element not found due to timeout" + e.getMessage());
 						Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
@@ -70,9 +69,8 @@ public class CommonPage {
 					}
 					catch (Exception e) 
 					{
-						System.out.println("Element not found due to timeout" + e.getMessage());
-						Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						Reporting.updateTestReport("Login with different user ID" + e.getMessage(),
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					}
 				
 		}
@@ -84,7 +82,7 @@ public class CommonPage {
 						}
 						catch (Exception e1) 
 						{
-							System.out.println("Element not found due to timeout" + e1.getMessage());
+							
 							Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
@@ -94,7 +92,7 @@ public class CommonPage {
 						}
 						catch (Exception e1) 
 						{
-							System.out.println("Element not found due to timeout" + e1.getMessage());
+							
 							Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
@@ -104,7 +102,7 @@ public class CommonPage {
 						}
 						catch (Exception e1) 
 						{
-							System.out.println("Element not found due to timeout" + e1.getMessage());
+							
 							Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
@@ -114,7 +112,7 @@ public class CommonPage {
 						}
 						catch (Exception e1) 
 						{
-							System.out.println("Element not found due to timeout" + e1.getMessage());
+							
 							Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
@@ -124,7 +122,7 @@ public class CommonPage {
 						}
 						catch (Exception e1) 
 						{
-							System.out.println("Element not found due to timeout" + e1.getMessage());
+							
 							Reporting.updateTestReport("Element not found due to timeout" + e.getMessage(),
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}	

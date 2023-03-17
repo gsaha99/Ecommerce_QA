@@ -340,7 +340,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	public void WPSAdmin_ClickHome() throws IOException {
 		try {
 			ClickHome.click();
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			Reporting.updateTestReport("Home is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
