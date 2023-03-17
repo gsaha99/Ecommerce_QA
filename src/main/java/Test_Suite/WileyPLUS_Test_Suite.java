@@ -1232,6 +1232,18 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 													+ " when the last added product was wiley.com and caused timeout exception",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
+										driver.get(excelOperation.getTestData("Onboarding_My_Account_Page", "Generic_Dataset", "Data"));
+										try {
+											wait.until(ExpectedConditions.visibilityOfElementLocated
+													(By.xpath("//button[@data-testid='dropdown-menu__icon-button']")));
+											WileyPLUS.clickOnProfileIconInOnboardingMyAccount();
+											WileyPLUS.logoutFromOnboardingMyAccount(driver);
+										}
+										catch(Exception e) {
+											Reporting.updateTestReport("Onboarding my account icon was not loaded "
+													+ "and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										}
+										
 									}
 									catch(Exception e) {
 										Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
@@ -1458,7 +1470,18 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 										else {
 											Reporting.updateTestReport("Order Confirmation mail was not received",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}				
+										}
+										driver.get(excelOperation.getTestData("Onboarding_My_Account_Page", "Generic_Dataset", "Data"));
+										try {
+											wait.until(ExpectedConditions.visibilityOfElementLocated
+													(By.xpath("//button[@data-testid='dropdown-menu__icon-button']")));
+											WileyPLUS.clickOnProfileIconInOnboardingMyAccount();
+											WileyPLUS.logoutFromOnboardingMyAccount(driver);
+										}
+										catch(Exception e) {
+											Reporting.updateTestReport("Onboarding my account icon was not loaded "
+													+ "and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										}
 									}			
 
 									else {
@@ -1699,7 +1722,18 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 										else {
 											Reporting.updateTestReport("Order Confirmation mail was not received",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}				
+										}	
+										driver.get(excelOperation.getTestData("Onboarding_My_Account_Page", "Generic_Dataset", "Data"));
+										try {
+											wait.until(ExpectedConditions.visibilityOfElementLocated
+													(By.xpath("//button[@data-testid='dropdown-menu__icon-button']")));
+											WileyPLUS.clickOnProfileIconInOnboardingMyAccount();
+											WileyPLUS.logoutFromOnboardingMyAccount(driver);
+										}
+										catch(Exception e) {
+											Reporting.updateTestReport("Onboarding my account icon was not loaded "
+													+ "and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										}
 									}			
 
 									else {
@@ -1917,6 +1951,17 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 																				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 																		WileyPLUS.getFirstProductsPrice();
 																		WileyPLUS.getSecondProductsPrice();
+																		driver.get(excelOperation.getTestData("Onboarding_My_Account_Page", "Generic_Dataset", "Data"));
+																		try {
+																			wait.until(ExpectedConditions.visibilityOfElementLocated
+																					(By.xpath("//button[@data-testid='dropdown-menu__icon-button']")));
+																			WileyPLUS.clickOnProfileIconInOnboardingMyAccount();
+																			WileyPLUS.logoutFromOnboardingMyAccount(driver);
+																		}
+																		catch(Exception e) {
+																			Reporting.updateTestReport("Onboarding my account icon was not loaded "
+																					+ "and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+																		}
 																	}
 																	catch(Exception e){
 																		Reporting.updateTestReport("Cart was not merged in CAD", 

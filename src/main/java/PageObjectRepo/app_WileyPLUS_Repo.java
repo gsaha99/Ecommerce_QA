@@ -215,6 +215,10 @@ public class app_WileyPLUS_Repo {
 	WebElement TaxInOrderReview;
 	@FindBy(xpath="//a[@class='icon-print']/span[@class='glyphicon glyphicon-print']")
 	WebElement PrintRecieptIconInOrderConfirmation;
+	@FindBy(xpath="//button[@data-testid='dropdown-menu__icon-button']")
+	WebElement AccountIconInOnboarding;
+	@FindBy(xpath="//div[@data-testid='logout-menu-item__button']/div/span")
+	WebElement LogOutButtonOnboarding;
 
 
 	
@@ -2297,6 +2301,43 @@ public class app_WileyPLUS_Repo {
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("The print reciept icon was not present in the order confirmation page", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Clicks on the account icon in onboarding page
+	 * @Date: 17/03/23
+	 */
+	public void clickOnProfileIconInOnboardingMyAccount() throws IOException{
+		try {
+			AccountIconInOnboarding.click();
+			Reporting.updateTestReport("The account icon in onboarding page was successfully cliked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The account icon in onboarding page couldn't be cliked "+e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Logs out user from Onboarding my account page
+	 * @Date: 17/03/23
+	 */
+	public void logoutFromOnboardingMyAccount(WebDriver driver) throws IOException{
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			LogOutButtonOnboarding.click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated
+					(By.xpath("//h2[@data-testid='login-page__title']")));
+			Reporting.updateTestReport("User was logged out from onboarding my account",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("User couldn't be logged out from onboarding my account "+e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 	

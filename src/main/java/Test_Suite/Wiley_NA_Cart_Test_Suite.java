@@ -2114,6 +2114,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							String orderId = wiley.fetchOrderId();
 							excelOperation.updateTestData("TC12", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
 							excelOperation.updateTestData("TC12", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+							excelOperation.updateTestData("TC26", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
 							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 							String ordertotal = wiley.fetchOrderTotal();
 							String taxInOrderConfirmation = wiley.fetchTaxAmount();
@@ -2294,6 +2295,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							String orderId = wiley.fetchOrderId();
 							excelOperation.updateTestData("TC13", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
 							excelOperation.updateTestData("TC13", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+							excelOperation.updateTestData("TC30", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
 							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 							String ordertotal = wiley.fetchOrderTotal();
 							String taxInOrderConfirmation = wiley.fetchTaxAmount();
@@ -4162,6 +4164,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 	 * @Author: Anindita
 	 * @Description: Validating the cart merge functionality( old cart and new cart getting merged)
 	 * @Date: 9/11/22
+	 * The user ids for this tc is getting populated from TC13
 	 */
 	@Test
 	public void TC30_Cart_Merge_Functionality() throws IOException{
@@ -4595,6 +4598,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 	 * @Author: Anindita
 	 * @Description: Validates the reset password functionality 
 	 * @Date: 15/11/22
+	 * The user id for this test case is getting populated from TC31
 	 */
 
 	@Test
@@ -4715,6 +4719,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 	 * @Author: Anindita
 	 * @Description: Validates the login page functionalities (Error message)
 	 * @Date: 17/11/22
+	 * The user id for this test case is populated from TC12 
 	 */
 	@Test
 	public void TC26_Login_Page_Validation() throws IOException{
