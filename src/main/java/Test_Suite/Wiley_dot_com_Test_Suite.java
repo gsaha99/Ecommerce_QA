@@ -55,7 +55,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			else
 				Reporting.updateTestReport("Failed to Load the microsites page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			ScrollingWebPage.PageScrolldown(driver,0,19000);
+			ScrollingWebPage.PageScrolldown(driver,0,19000,SS_path);
 
 		} catch (Exception e) {
 			wiley.WileyLogOut();
@@ -81,7 +81,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			wiley.checkPublishingServicesLinkInCartPageHeader();
 			wiley.checkProfessionalDevelopmentLinkInCartPageHeader();
 			wiley.checkEducationResourcesoncartPage();
-			ScrollingWebPage.PageScrolldown(driver,0,29000);
+			ScrollingWebPage.PageScrolldown(driver,0,29000,SS_path);
 			wiley.checkSiteMapononpdppage();
 			wiley.checkRighrtAndPermissonsononpdppage();
 			wiley.checkTermsofuseonpdptpage();
@@ -106,7 +106,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC03_SiteFooter");
 			driver.get(wiley.wileyURLConcatenation("TC03", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
-			ScrollingWebPage.PageScrolldown(driver,0,19000);
+			ScrollingWebPage.PageScrolldown(driver,0,19000,SS_path);
 			wiley.checkSiteMaponfooter();
 			wiley.checkPrivacypolicyOnFooter();
 			wiley.checkTermsofuseOnFooter();
@@ -128,7 +128,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	@Test
 	public void TC04_404_Errorpage() throws IOException {
 		try {
-			
+
 			Reporting.test = Reporting.extent.createTest("TC04_404 Error Page");
 			driver.get(wiley.wileyURLConcatenation("TC04", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -159,7 +159,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC05_About Us Page");
 			driver.get(wiley.wileyURLConcatenation("TC05", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
-			ScrollingWebPage.PageScrolldown(driver,0,29000);
+			ScrollingWebPage.PageScrolldown(driver,0,29000,SS_path);
 			wiley.AboutWileyPage();
 			String aboutuspagetitle = driver.getTitle();
 			if (aboutuspagetitle.equals("About Wiley | Over 200 Years of Unlocking Human Potential"))
@@ -189,17 +189,24 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 			driver.get(wiley.wileyURLConcatenation("TC06", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
-			ScrollingWebPage.PageScrolldown(driver,0,30000);
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='/sitemap']")));
-			//wiley.checkSiteMapononpdppage();
-			wiley.clickonsitemap();
-			String sitemaptitle = driver.getTitle();
-			if (sitemaptitle.equals("Site Map"))
-				Reporting.updateTestReport("The title of the Page is : " + sitemaptitle + " ",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else
-				Reporting.updateTestReport("Failed to load the SiteMap Page", CaptureScreenshot.getScreenshot(SS_path),
+			ScrollingWebPage.PageScrolldown(driver,0,30000,SS_path);
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='/sitemap']")));
+				//wiley.checkSiteMapononpdppage();
+				wiley.clickonsitemap();
+				String sitemaptitle = driver.getTitle();
+				if (sitemaptitle.equals("Site Map"))
+					Reporting.updateTestReport("The title of the Page is : " + sitemaptitle + " ",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Failed to load the SiteMap Page", CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Sitemap link on footer was not clickable"
+						+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
+			}
 
 		} catch (Exception e) {
 			wiley.WileyLogOut();
@@ -217,7 +224,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	@Test
 	public void TC07_ProductListPage() throws IOException {
 		try {
-			
+
 			Reporting.test = Reporting.extent.createTest("TC07_ProductListPage");
 			driver.get(wiley.wileyURLConcatenation("TC07", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -258,7 +265,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	@Test
 	public void TC08_HomePage() throws IOException {
 		try {
-			
+
 			Reporting.test = Reporting.extent.createTest("TC08_HomePage");
 			driver.get(wiley.wileyURLConcatenation("TC08", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -277,7 +284,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Vishnu
 	 * 
@@ -286,7 +293,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	@Test
 	public void TC09_SiteHeader() throws IOException {
 		try {
-			
+
 			Reporting.test = Reporting.extent.createTest("TC09_SiteHeader");
 			driver.get(wiley.wileyURLConcatenation("TC09", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -312,7 +319,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	@Test
 	public void TC10_SearchResultEmptyPage() throws IOException {
 		try {
-			
+
 			Reporting.test = Reporting.extent.createTest("TC10_SearchResultEmptyPage");
 			driver.get(wiley.wileyURLConcatenation("TC10", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -325,7 +332,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Failed to Load Results message", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 
-			
+
 		} catch (Exception e) {
 			wiley.wileyLogOutException();
 			System.out.println(e.getMessage());
@@ -333,7 +340,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Vishnu
 	 * 
@@ -342,7 +349,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	@Test
 	public void TC11_Add_To_PopUp() throws IOException {
 		try {
-			
+
 			Reporting.test = Reporting.extent.createTest("TC11_Add_To_PopUp");
 			driver.get(wiley.wileyURLConcatenation("TC11", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -370,7 +377,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			wiley.Entertextonsearcbar(excelOperation.getTestData("TC12", "WILEY_Dot_Com_Test_Data", "SearchBox_Text"));
 			wiley.SearchingFortheProduct();
 			wiley.ClickOnContentSearchOnPDPPage();
-			ScrollingWebPage.PageScrolldown(driver,0,1700);
+			ScrollingWebPage.PageScrolldown(driver,0,1700,SS_path);
 		} catch (Exception e) {
 			wiley.WileyLogOut();
 			System.out.println(e.getMessage());
@@ -391,7 +398,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC13", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.ShopLinkHeaderCLPPage();
-			ScrollingWebPage.PageScrolldown(driver,0,300);
+			ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 			wiley.checkFeaturedProductsOnCLPPage();
 			wiley.ViewAllOnCLPPage();
 		} catch (Exception e) {
@@ -410,7 +417,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	@Test
 	public void TC14_SearchBox() throws IOException {
 		try {
-			
+
 			Reporting.test = Reporting.extent.createTest("TC14_SearchBox");
 			driver.get(wiley.wileyURLConcatenation("TC14", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -425,7 +432,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Validates the Product Search Results Page
@@ -441,17 +448,24 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 			String newXpath="(//span[@class='search-highlight' and contains(text(),'"+
 					excelOperation.getTestData("TC15", "WILEY_Dot_Com_Test_Data", "SearchBox_Text")+"')])[1]";
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(newXpath)));
-			System.out.println(newXpath);
-			wiley.checkProductsWithHighlightedSearchedTerm(newXpath);
-			wiley.checkSubjectFacet();
-			wiley.checkCourseFacet();
-			wiley.checkAuthorFacet();
-			wiley.checkFormatFacet();
-			wiley.checkPublishedDateFacet();
-			wiley.checkBrandsFacet();
-			wiley.checkSeriesFacet();
-			
+			try {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(newXpath)));
+				System.out.println(newXpath);
+				wiley.checkProductsWithHighlightedSearchedTerm(newXpath);
+				wiley.checkSubjectFacet();
+				wiley.checkCourseFacet();
+				wiley.checkAuthorFacet();
+				wiley.checkFormatFacet();
+				wiley.checkPublishedDateFacet();
+				wiley.checkBrandsFacet();
+				wiley.checkSeriesFacet();
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Searched highlighted term was not displayed"
+						+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
+						StatusDetails.FAIL);
+			}
+
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -462,5 +476,5 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	}
 
 
-	
+
 }

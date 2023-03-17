@@ -10,37 +10,56 @@ import org.openqa.selenium.interactions.Actions;
 
 
 public class ScrollingWebPage {
-	//public static String SS_path=TestHarness_RegressionSuite.SS_path;
 
-	public static void PageScrolldown(WebDriver driver, Integer xcord, Integer ycord) throws IOException {
+
+	public static void PageScrolldown(WebDriver driver, Integer xcord, Integer ycord,String SS_path) throws IOException {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("window.scrollBy("+xcord+","+ycord+")");
+			js.executeScript("window.scrollBy(" + xcord + "," + ycord + ")");
+			Reporting.updateTestReport("The page was scrolled down", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.INFO);
 		} catch (Exception e) {
-			e.getMessage();
+			Reporting.updateTestReport("Unable to Scroll Down", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.WARNING);
+		}
+	}
+
+	public static void PageScrollUp(WebDriver driver, Integer xcord, Integer ycord,String SS_path) throws IOException {
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.scrollBy(" + xcord + "," + ycord + ")");
+			Reporting.updateTestReport("The page was scrolled up", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.INFO);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Unable to Scroll Up", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.WARNING);
+		}
+	}
+
+	public static void PageDown(WebDriver driver,String SS_path) throws IOException {
+		try {
+			Actions at = new Actions(driver);
+			at.sendKeys(Keys.PAGE_DOWN).build().perform();
+			Thread.sleep(2000);
+			Reporting.updateTestReport("Perform Page Down", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.INFO);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Unable to Perform Page Down", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.WARNING);
 		}
 	}
 	
-	public static void PageScrollUp(WebDriver driver, Integer xcord, Integer ycord) throws IOException {
-		try {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("window.scrollBy("+xcord+","+ycord+")");
-		} catch (Exception e) {
-			e.getMessage();
-		}
-	}
-	
-	public static void PageDown(WebDriver driver,String SS_path) throws IOException 
+	public static void PageUp(WebDriver driver,String SS_path) throws IOException 
 	{
 		try {
 			Actions at = new Actions(driver);      
-			at.sendKeys(Keys.PAGE_DOWN).build().perform();
+			at.sendKeys(Keys.PAGE_UP).build().perform();
 			Thread.sleep(2000);
-			Reporting.updateTestReport("Perform Page Down",
+			Reporting.updateTestReport("Perform Page UP",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);		
 		} 
 		catch (Exception e) {
-			Reporting.updateTestReport("Unable to Perform Page Down",
+			Reporting.updateTestReport("Unable to Perform Page Up",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 		}
 	}

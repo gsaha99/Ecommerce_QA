@@ -42,14 +42,14 @@ public class app_VET_Repo {
 	@FindBy(id = "password")
 	WebElement Password;
 	@FindBy(id = "register.checkPwd")
-	WebElement ConfirmPassword;
+	WebElement ConfirmPasswordInCreateAccount;
 	@FindBy(xpath="//button[text()='Create Account'] ")
 	WebElement CreateAccountButton;
 	@FindBy(name="j_username")
 	WebElement ExistingUserId;
 	@FindBy(name="j_password")
 	WebElement ExistingUserPassword;
-	@FindBy(xpath="//*[@id=\"loginForm\"]/div[2]/div/button")
+	@FindBy(xpath="//*[@id='loginForm']/div[2]/div/button")
 	WebElement LoginButton;
 	@FindBy(xpath="//span[text()='Change Password']")
 	WebElement ChangePassword;
@@ -75,8 +75,6 @@ public class app_VET_Repo {
 	WebElement AddressFirstName;
 	@FindBy(id="addressSurname")
 	WebElement AddressLastName;
-	@FindBy(id="address.country")
-	WebElement CountryDropDown;
 	@FindBy(id="addressLine1")
 	WebElement AddressLine1;
 	@FindBy(id="addressTownCity")
@@ -105,7 +103,7 @@ public class app_VET_Repo {
 	WebElement MyAccountText;
 	@FindBy(xpath="//span[text()='Change Password']")
 	WebElement ChangePasswordText;
-	@FindBy(xpath="//*[@id=\"root\"]/div/div[1]/div[2]/div[2]/form/button")
+	@FindBy(xpath="//*[@id='root']/div/div[1]/div[2]/div[2]/form/button")
 	WebElement GetStarted;
 	@FindBy(xpath="//span[text()='Edit Payment']")
 	WebElement EditPayment;
@@ -121,16 +119,12 @@ public class app_VET_Repo {
 	WebElement PasswordHybrisBO;
 	@FindBy(xpath="//button[text()='Login']")
 	WebElement HybrisBOLoginButton;
-	@FindBy(xpath="//span[text()='Administration']")
-	WebElement AdministrationTextAfterLogin;
 	@FindBy(xpath="//input[@placeholder='Filter Tree entries']")
 	WebElement SearchFieldInHybrisBO;
 	@FindBy(xpath="//span[text()='Wiley subscription']")
 	WebElement WileySubscriptionField;
 	@FindBy(xpath="//button[@title='Switch search mode']")
 	WebElement SearchButton;
-	@FindBy(xpath="//span[@class='ye-default-reference-editor-bandbox ye-default-reference-editor-bandbox-list-collapsed z-bandbox']/input[@class='z-bandbox-input'][1]")
-	WebElement CustomerIdField;
 	@FindBy(id="saveBilling")
 	WebElement BillingAddressSaveButton;
 	@FindBy(xpath="//div[@class='alert alert-info alert-dismissable vetAlertBoxInfo']")
@@ -141,7 +135,7 @@ public class app_VET_Repo {
 	WebElement ManageSubscription;
 	@FindBy(xpath="//input[@checked='checked']")
 	WebElement AutoRenewToggleOn;
-	@FindBy(xpath="//input[@id='auto_renew']")
+	@FindBy(id="auto_renew")
 	WebElement AutoRenewToggleButton;
 	@FindBy(id="number")
 	WebElement CardNumberWPG;
@@ -169,82 +163,20 @@ public class app_VET_Repo {
 	WebElement Enteryopmail;
 	@FindBy(xpath = "//button[@title='Check Inbox @yopmail.com']")
 	WebElement clickonbutton;
-	@FindBy(id = "refresh")
-	WebElement refresh;
-	@FindBy(xpath = "(//main[@class='yscrollbar']/div/div/div/table/tbody/tr/td/center/table/tbody/tr/td)[2]/p[3]/a[contains(text(),'Click here to change your password')]")
-	WebElement resetpwd;
 	@FindBy(id = "updatePwd.pwd")
 	WebElement updatepassword;
 	@FindBy(id = "updatePwd.checkPwd")
-	WebElement confirmpassword;
+	WebElement ConfirmPasswordInPasswordUpdatePage;
 	@FindBy(xpath = "//button[@type='submit']")
 	WebElement Resetsubmit;
-	@FindBy(id = "wileyAddressForm")
-	WebElement ClearForm;
 	@FindBy(xpath = "//div[@class='alert alert-info alert-dismissable vetAlertBoxInfo']/button[@type='button']")
-	WebElement PassresrtMessage;
+	WebElement PasswordResetMessage;
 	@FindBy(xpath = "(//button[contains(text(),'Get Started')])[2]")
 	WebElement clickOnGetStarted;
 	@FindBy(xpath = "(//button[contains(text(),'Continue')])[2]")
 	WebElement clickOnContinueButton;
-	@FindBy(id = "register.firstName")
-	WebElement First_Name;
-	@FindBy(id = "register.lastName")
-	WebElement Last_name;
-	@FindBy(id = "register.email")
-	WebElement Email_Id;
-	@FindBy(id = "register.confirmEmail")
-	WebElement Confirm_EmailId;
-	@FindBy(id = "password")
-	WebElement UserPassword1;
-	@FindBy(id = "register.checkPwd")
-	WebElement Confirm_Password;
-	@FindBy(xpath = "//button[contains(text(),'Create Account')]")
-	WebElement CreateAccount_Button;
-	@FindBy(id = "addressFirstName")
-	WebElement Billing_FirstName;
-	@FindBy(xpath = "//input[@id='addressSurname']")
-	WebElement Billing_LastName;
-	@FindBy(id = "address.country")
-	WebElement CountryDropDown1;
-	@FindBy(id = "addressLine1")
-	WebElement BillingAddress1;
-	@FindBy(id = "addressTownCity")
-	WebElement BillingCity;
-	@FindBy(id = "addressRegion")
-	WebElement BillingState;
-	@FindBy(id = "addressPostcode")
-	WebElement BilllingZipCode;
-	@FindBy(id = "addressPhone")
-	WebElement BillingPhoneNo;
-	@FindBy(id = "consentGivenFlag")
-	WebElement ConsentCheckBox;
-	@FindBy(xpath = "//span[@class='btn-control']")
-	WebElement BillingContinueBtn;
-	@FindBy(name = "number")
-	WebElement CreditCardNumber;
-	@FindBy(id = "Field-expiryInput")
-	WebElement ExpiryDate1;
-	@FindBy(id = "Field-cvcInput")
-	WebElement CVVNumber;	
 	@FindBy(id = "submit")
-	WebElement SumbitButton;	
-	@FindBy(xpath="//div[@class='table-order-row']/div[1]")
-	WebElement Order_Id;
-	@FindBy(id = "j_username")
-	WebElement ExistingUserID;
-	@FindBy(id = "j_password")
-	WebElement ExistingUserPassword1;	
-	@FindBy(xpath = "//button[contains(text(),'Login')]")
-	WebElement LoginButtonForExisting;	
-	@FindBy(xpath = "(//div[@class='table-order-row'])[5]")
-	WebElement TaxAmount;	
-	@FindBy(xpath = "(//span[contains(text(),'Manage Subscriptions')])[1]")
-	WebElement MangeSubscription;	
-	@FindBy(xpath = "//input[@value='on']")
-	WebElement AutoRenewOn;	
-	@FindBy(xpath = "//a[contains(text(),'Logout')]")
-	WebElement VetLogoutButton;	
+	WebElement SumbitButton;		
 	@FindBy(name = "firstName")
 	WebElement ProfileFirstName;	
 	@FindBy(name = "lastName")
@@ -255,8 +187,6 @@ public class app_VET_Repo {
 	WebElement YOPUserMailID;	
 	@FindBy(id = "refreshbut")
 	WebElement RefreshButton;	
-	@FindBy(id = "refresh")
-	WebElement RefreshButton1;	
 	@FindBy(xpath = "//a[@class='wmlogoclick']")
 	WebElement YOPMailLogo;	
 	@FindBy(xpath = "(((((//td[@align='center'])[1]//table//tbody//tr//td//table//tbody//tr//td)//following::td)[1]//table//tbody//tr//td//p)//following::p)[1]")
@@ -327,7 +257,7 @@ public class app_VET_Repo {
 	{
 		try {
 			Password.sendKeys(password);
-			ConfirmPassword.sendKeys(password);
+			ConfirmPasswordInCreateAccount.sendKeys(password);
 			Reporting.updateTestReport("Password: "+password+" was entered successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
@@ -1073,35 +1003,7 @@ public class app_VET_Repo {
 
 		}
 	}
-	/*
-	 * @Author: Vishnu
-	 * 
-	 */
-	public void refresh() throws IOException {
-		try {
-			refresh.click();
-			Reporting.updateTestReport("mail box refreshed successfully ", CaptureScreenshot.getScreenshot(SS_path),
-					StatusDetails.PASS);
-
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to refresh", CaptureScreenshot.getScreenshot(SS_path),
-					StatusDetails.FAIL);
-		}
-	}
-	/*
-	 * @Author: Vishnu
-	 * 
-	 */
-	public void resetpwdlink() throws IOException {
-		try {
-			resetpwd.click();
-			Reporting.updateTestReport("Reset password link clicked successfully ",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to Click on Reset Password link " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
+	
 
 	
 	/*
@@ -1126,7 +1028,7 @@ public class app_VET_Repo {
 	 */
 	public void ResetConfirmPassword(String cpassword) throws IOException {
 		try {
-			confirmpassword.sendKeys(cpassword);
+			ConfirmPasswordInPasswordUpdatePage.sendKeys(cpassword);
 			Reporting.updateTestReport("Confirm Password : " + cpassword + " was entered successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
@@ -1159,7 +1061,7 @@ public class app_VET_Repo {
 	 */
 	public String PasswordResetSuccess() throws IOException {
 		try {
-			String rmessage = PassresrtMessage.getText();
+			String rmessage = PasswordResetMessage.getText();
 			Reporting.updateTestReport("Success! You can login using your new Password",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return rmessage;
@@ -1205,21 +1107,6 @@ public class app_VET_Repo {
 		}
 	}
 	
-	/*
-	 * Author : Arun 
-	 * Description :This clicking the Refresh Button after entered the YOP MailID
-	 */
-	public void clickOnRefreshButton1() throws IOException {
-
-		try {
-			RefreshButton1.click();
-			Reporting.updateTestReport("RefreshButton1 was clicked successfully", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		}
-		catch (Exception e) {
-			Reporting.updateTestReport("RefreshButton1 was not clicked with the error message " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
 	
 	
 	/*
@@ -1294,41 +1181,7 @@ public class app_VET_Repo {
 
 		}
 	}
-	
-	
-	/*
-	 * Author : Arun 
-	 * Description :This Clicking on Manage Subscription Option after logged into profile
-	 */
-	public void clickOnMangeSubscription() throws IOException {
 
-		try {
-			MangeSubscription.click();
-			Reporting.updateTestReport("MangeSubscription tab was clicked successfully", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		}
-		catch (Exception e) {
-			Reporting.updateTestReport("MangeSubscription tab was not clicked with the error message " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
-	
-	
-	
-	/*
-	 * Author : Arun 
-	 * Description :Verify the TaxAmount in Order Confirmation page
-	 */
-	public String fetchTaxValue() throws IOException {
-		try {
-			String taxrow=TaxAmount.getText();
-			Reporting.updateTestReport("Tax Amount is displaying successfully on order confirmation page", CaptureScreenshot.getScreenshot(SS_path),StatusDetails.PASS);
-			return taxrow;
-		}
-		catch(Exception e) {
-			Reporting.updateTestReport("Tax Amount is not displayed successfully on Order Confirmation page with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			return "";
-		}
-	}
 	
 	/*
 	 * Author : Arun 
@@ -1361,56 +1214,7 @@ public class app_VET_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
-	
-	
-	/*
-	 * Author : Arun 
-	 * Description : Entering Card Number in billing page
-	 */
-	public void enteringCardNumber(String cardnumber) throws IOException {
 		
-		try {
-			//JavascriptExecutor js = (JavascriptExecutor) driver;
-			//js.executeScript("window.scrollBy(0,300)");
-			CreditCardNumber.sendKeys(cardnumber);
-			Reporting.updateTestReport("CardNumber: "+cardnumber+" has been entered successfully ", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS); 	
-		} 	
-		catch (Exception e) {
-			Reporting.updateTestReport("CardNumber was not entered with the error message "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
-	
-	/*
-	 * Author : Arun 
-	 * Description : Entering expirydate in billing page
-	 */
-	public void enterExpirydate(String expirydate) throws IOException {
-		
-		try {
-			ExpiryDate1.sendKeys(expirydate);
-			Reporting.updateTestReport("Expirydate: "+expirydate+" was entered successfully ", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS); 	
-		} 	
-		catch (Exception e) {
-			Reporting.updateTestReport("Expirydate did not entered properly with the error message "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
-	
-	
-	/*
-	 * Author : Arun 
-	 * Description : Entering CVV number in billing page
-	 */
-	public void enterCVVNumber(String cvvno) throws IOException {
-		
-		try {
-			CVVNumber.sendKeys(cvvno);
-			Reporting.updateTestReport("CVVNumber: "+cvvno+ " has been entered successfully ", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS); 	
-		} 	
-		catch (Exception e) {
-			Reporting.updateTestReport("CVVNumber did not entered properly with the error message "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
 	
 	/*
 	 * Author : Arun 
@@ -1427,23 +1231,6 @@ public class app_VET_Repo {
 		}
 	}
 	
-	/*
-	 * Author : Anindita 
-	 * Description : Fetching OrderID From Order Confirmation pag.
-	 */
-	public String fetchingOrderId() throws IOException {
-        try {
-            String id = Order_Id.getText();
-            String order = id.substring(7, 15);
-            Reporting.updateTestReport("Order id was fetched successfully", CaptureScreenshot.getScreenshot(SS_path),
-                    StatusDetails.PASS);
-            return order;
-        } catch (Exception e) {
-            Reporting.updateTestReport("Order id was not fetched with error message " + e.getClass().toString(),
-                    CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-            return "";
-        }
-    }
 
 	/*
 	 * @Date: 02/01/23
