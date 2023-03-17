@@ -562,6 +562,7 @@ public class app_TestHarness_Repo {
 	public void Http_Tokenise_ClickContinue() throws IOException {
 		try {
 			Tokenise_clickContinue.click();
+			Thread.sleep(2000);
 			Reporting.updateTestReport("Continue button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
@@ -1575,6 +1576,7 @@ public class app_TestHarness_Repo {
 		public void Http_Embedded_ClickProceedToPay() throws IOException {
 			try {
 				Embedded_clickProceedToPay.click();
+				Thread.sleep(2000);
 				Reporting.updateTestReport("Proceed to Pay button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			}
 			catch(Exception e){

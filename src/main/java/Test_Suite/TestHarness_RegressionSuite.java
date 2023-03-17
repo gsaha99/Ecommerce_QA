@@ -114,7 +114,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 		    try {
 			
 			     WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
-			     pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Tokenise')]")));
+			     pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Tokenise Response')]")));
                  driver.findElement(By.xpath("//h2[contains(text(),'Tokenise')]")).click();
                  String returnMessage = THarness.Http_Tokenise_FetchReturnMessage();
 			     if(returnMessage.compareTo("SUCCESS")==0) 
@@ -251,7 +251,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			try {
 			     
 				  WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
-			      pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Tokenise')]")));
+			      pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Tokenise Response')]")));
 			      driver.findElement(By.xpath("//h2[contains(text(),'Tokenise')]")).click();
 			
 			      String returnMessage = THarness.Http_Tokenise_FetchReturnMessage();
@@ -344,7 +344,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			try {
 				
 			      WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
-			      pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Tokenise')]")));
+			      pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Tokenise Response')]")));
 			      driver.findElement(By.xpath("//h2[contains(text(),'Tokenise')]")).click();
 			      String actualReturnMessage = THarness.Http_Tokenise_FetchReturnMessage();
 			      String expectedReturnMessage = excelOperation.getTestData("TC05", "Error_Message", "Return_Message");
@@ -1374,33 +1374,34 @@ public class TestHarness_RegressionSuite extends DriverModule {
 		           WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			       pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Token Settle Response')]")));
 			       driver.findElement(By.xpath("//h2[contains(text(),'Token Settle Response')]")).click();
-			       String actualReturnMessage = THarness.Http_Tokenise_FetchReturnMessage();
-				   String expectedReturnMessage = excelOperation.getTestData("TC17", "Error_Message", "Return_Message");
-				   if(actualReturnMessage.compareTo(expectedReturnMessage)==0) 
-					      {
-						
-						        Reporting.updateTestReport("Return message is: " + actualReturnMessage,
-								         CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					      }
-					else 
-					      {
-						        Reporting.updateTestReport("Return message is not: " + expectedReturnMessage,
-								         CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					      }
-					excelOperation.updateTestData("TC17", "TestHarness_Test_Data", "Return_Message", actualReturnMessage);
-					String actualReturnCode = THarness.Http_Tokenise_FetchReturnCode();
-					String expectedReturnCode = excelOperation.getTestData("TC17", "Error_Message", "Return_Code");
-					if(actualReturnCode.compareTo(expectedReturnCode)==0) 
-					      {				
-						        Reporting.updateTestReport("Return code is: " + actualReturnCode,
-								     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					      }
-					else 
-					      {
-						        Reporting.updateTestReport("Return code is not: " + expectedReturnCode,
-								       CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					      }
-					excelOperation.updateTestData("TC17", "TestHarness_Test_Data", "Return_Code", actualReturnCode);
+			       String returnMessage = THarness.Http_Tokenise_FetchReturnMessage();
+				   //String expectedReturnMessage = excelOperation.getTestData("TC17", "Error_Message", "Return_Message");
+			       if(returnMessage.compareTo("SUCCESS")==0) 
+			       {
+				
+				        Reporting.updateTestReport("Return message is: " + returnMessage,
+						     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			       }
+			    else 
+			       {
+				        Reporting.updateTestReport("Return message is not SUCCESS",
+						       CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			       }
+					excelOperation.updateTestData("TC17", "TestHarness_Test_Data", "Return_Message", returnMessage);
+					String returnCode = THarness.Http_Tokenise_FetchReturnCode();
+					//String expectedReturnCode = excelOperation.getTestData("TC17", "Error_Message", "Return_Code");
+					if(returnCode.compareTo("0")==0) 
+				       {
+					
+					        Reporting.updateTestReport("Return code is: " + returnCode,
+							      CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				       }
+				    else 
+				       {
+					        Reporting.updateTestReport("Return code is not 0",
+							      CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				       }
+					excelOperation.updateTestData("TC17", "TestHarness_Test_Data", "Return_Code", returnCode);
 			        excelOperation.updateTestData("TC17", "TestHarness_Test_Data", "Operation", THarness.Http_Tokenise_FetchOperation());
 			        excelOperation.updateTestData("TC17", "TestHarness_Test_Data", "transID", THarness.Http_Tokenise_FetchTransID());
 			        ScrollingWebPage.PageDown(driver,SS_path);
@@ -2200,33 +2201,34 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			
 		            WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			        pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Token Settle Response')]")));
-			        String actualReturnMessage = THarness.Http_Tokenise_FetchReturnMessage();
-					String expectedReturnMessage = excelOperation.getTestData("TC27", "Error_Message", "Return_Message");
-					if(actualReturnMessage.compareTo(expectedReturnMessage)==0) 
-								      {
-									
-									        Reporting.updateTestReport("Return message is: " + actualReturnMessage,
-											         CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								      }
-					else 
-								      {
-									        Reporting.updateTestReport("Return message is not: " + expectedReturnMessage,
-											         CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								      }
-					excelOperation.updateTestData("TC27", "TestHarness_Test_Data", "Return_Message", actualReturnMessage);
-					String actualReturnCode = THarness.Http_Tokenise_FetchReturnCode();
-					String expectedReturnCode = excelOperation.getTestData("TC27", "Error_Message", "Return_Code");
-					if(actualReturnCode.compareTo(expectedReturnCode)==0) 
-								      {				
-									        Reporting.updateTestReport("Return code is: " + actualReturnCode,
-											     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								      }
-					else 
-								      {
-									        Reporting.updateTestReport("Return code is not: " + expectedReturnCode,
-											       CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								      }
-					excelOperation.updateTestData("TC27", "TestHarness_Test_Data", "Return_Code", actualReturnCode);
+			        String returnMessage = THarness.Http_Tokenise_FetchReturnMessage();
+					//String expectedReturnMessage = excelOperation.getTestData("TC27", "Error_Message", "Return_Message");
+					if(returnMessage.compareTo("SUCCESS")==0) 
+				       {
+					
+					        Reporting.updateTestReport("Return message is: " + returnMessage,
+							     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				       }
+				   else 
+				       {
+					        Reporting.updateTestReport("Return message is not SUCCESS",
+							       CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				       }
+					excelOperation.updateTestData("TC27", "TestHarness_Test_Data", "Return_Message", returnMessage);
+					String returnCode = THarness.Http_Tokenise_FetchReturnCode();
+					//String expectedReturnCode = excelOperation.getTestData("TC27", "Error_Message", "Return_Code");
+					 if(returnCode.compareTo("0")==0) 
+				       {
+					
+					        Reporting.updateTestReport("Return code is: " + returnCode,
+							      CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				       }
+				   else 
+				       {
+					        Reporting.updateTestReport("Return code is not 0",
+							      CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				       }
+					excelOperation.updateTestData("TC27", "TestHarness_Test_Data", "Return_Code", returnCode);
 			        excelOperation.updateTestData("TC27", "TestHarness_Test_Data", "Operation", THarness.Http_Tokenise_FetchOperation());
 			        excelOperation.updateTestData("TC27", "TestHarness_Test_Data", "transID", THarness.Http_Tokenise_FetchTransID());
 			        ScrollingWebPage.PageDown(driver,SS_path);
