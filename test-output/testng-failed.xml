@@ -5,11 +5,9 @@
     <classes>
       <class name="Test_Suite.TestHarness_RegressionSuite">
         <methods>
-          <include name="TC02_HTTP_Tokenise_Request_Response"/>
           <include name="TC17_HTTP_Validate_for_Token_Settle_Error_Message"/>
           <include name="TC18_HTTP_TokenAuthSettle_ES_Stripe_Validation"/>
           <include name="initiate"/>
-          <include name="TC06_HTTP_Validate_Request_Response"/>
           <include name="TC36_HTTP_NonEmbedded_Auth_ES_Stripe_Validation"/>
           <include name="TC33_HTTP_Embedded_Auth_ES_Stripe_Validation"/>
           <include name="TC15_HTTP_Validate_for_Token_Auth_Error_Message"/>
@@ -18,7 +16,6 @@
           <include name="TC34_HTTP_Embedded_AuthCapture_ES_Stripe_Validation"/>
           <include name="TC19_HTTP_Validate_for_Token_Auth_Settle_Error_Message"/>
           <include name="TC14_HTTP_TokenAuth_ES_Stripe_Validation"/>
-          <include name="TC04_HTTP_Tokenise_ES_Stripe_Validation"/>
           <include name="TC30_SOAP_TokenRefund_ES_Stripe_Validation"/>
           <include name="TC32_SOAP_VoidAuth_Error_Message"/>
           <include name="TC10_HTTP_Authorise_ES_Stripe_Validation"/>
@@ -27,23 +24,18 @@
           <include name="TC28_SOAP_TokenAuthSettle_ES_Stripe_Validation"/>
           <include name="TC16_HTTP_TokenSettle_ES_Stripe_Validation"/>
           <include name="TC35_HTTP_Embedded_SaveCard_ES_Stripe_Validation"/>
-          <include name="TC09_HTTP_Validate_Error_Message"/>
           <include name="TC26_SOAP_TokenSettle_ES_Stripe_Validation"/>
-          <include name="TC05_HTTP_Tokenise_Error_Message"/>
           <include name="TC21_HTTP_Validate_for_Void_Auth_Error_Message"/>
           <include name="TC31_SOAP_VoidAuth_ES_Stripe_Validation"/>
-          <include name="TC08_HTTP_Validate_ES_Stripe_Validation"/>
           <include name="TC24_SOAP_TokenAuth_ES_Stripe_Validation"/>
           <include name="TC29_SOAP_TokenAuthSettle_Error_Message"/>
           <include name="TC11_HTTP_Authorise_Error_Message"/>
           <include name="TC20_HTTP_VoidAuth_ES_Stripe_Validation"/>
           <include name="TC23_SOAP_Probe_Error_Message_Validation"/>
           <include name="TC37_HTTP_NonEmbedded_AuthCapture_ES_Stripe_Validation"/>
-          <include name="TC07_HTTP_Validate_IFrame"/>
           <include name="TC13_HTTP_AuthSettle_Error_Message"/>
           <include name="CloseBrowser"/>
           <include name="TC25_SOAP_TokenAuth_Error_Message_Validation"/>
-          <include name="TC03_HTTP_Tokenise_IFrame"/>
           <include name="TC38_HTTP_NonEmbedded_SaveCard_ES_Stripe_Validation"/>
         </methods>
       </class> <!-- Test_Suite.TestHarness_RegressionSuite -->

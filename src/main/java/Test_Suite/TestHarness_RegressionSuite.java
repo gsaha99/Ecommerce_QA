@@ -25,6 +25,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 	app_TestHarness_Repo THarness;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
+	//WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
 		
 	@BeforeTest
 	public void initializeRepo() {
@@ -414,7 +415,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC06_HTTP Client: "
 					+ "Validate that for Validate operation,"
 					+ " Request and Result page is displayed successfully with all the required details");
-			
+			WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
 			THarness.ClickHttp_Validate();
@@ -429,6 +430,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			THarness.Http_Tokenise_ClickContinue();
 			driver.switchTo().frame("tokenFrame");
             driver.switchTo().frame(0);
+            //pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(text(),'Card number')]")));
 	        THarness.Http_EnterCardNumber(excelOperation.getTestData("TC06", "TestHarness_Test_Data", "Card_Number"));
 			THarness.Http_EnterCardExpiry(excelOperation.getTestData("TC06", "TestHarness_Test_Data", "Expiry_Date"));
 			THarness.Http_EnterCardCVC(excelOperation.getTestData("TC06", "TestHarness_Test_Data", "CVV"));
@@ -438,7 +440,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			
 			try {
 			
-			       WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
+			       
 			       pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Validate Response')]")));
 			       driver.findElement(By.xpath("//h2[contains(text(),'Validate Response')]")).click();
 			       String returnMessage = THarness.Http_Tokenise_FetchReturnMessage();
@@ -739,7 +741,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for Authorise Operation,"
 					+ "Request page, payment portal is displayed with proper Iframe, Result page is displayed successfully with all the required details"
 					+ "and proper data is displayed in elastic as well as Stripe");
-			
+			WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
 			THarness.ClickHttp_Authorise();
@@ -756,6 +758,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			THarness.Http_Tokenise_ClickContinue();
 			driver.switchTo().frame("tokenFrame");
             driver.switchTo().frame(0);
+            //pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(text(),'Card number')]")));
 	        THarness.Http_EnterCardNumber(excelOperation.getTestData("TC10", "TestHarness_Test_Data", "Card_Number"));
 			THarness.Http_EnterCardExpiry(excelOperation.getTestData("TC10", "TestHarness_Test_Data", "Expiry_Date"));
 			THarness.Http_EnterCardCVC(excelOperation.getTestData("TC10", "TestHarness_Test_Data", "CVV"));
@@ -765,7 +768,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			
 			try {
 				
-			        WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
+			        
 			        pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Authorise Response')]")));
 			        driver.findElement(By.xpath("//h2[contains(text(),'Authorise Response')]")).click();
                     String returnMessage = THarness.Http_Tokenise_FetchReturnMessage();
