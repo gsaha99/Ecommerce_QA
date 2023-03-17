@@ -1,18 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [WPS_Regression]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="Test_Suite(failed)">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
       <class name="Test_Suite.ClientPortal_RegressionSuite">
         <methods>
-          <include name="TC02_AddNewClientApp_WPSAdmin"/>
-          <include name="TC03_RegisterNewUser_WPSAdmin"/>
-          <include name="CloseBrowser"/>
+          <include name="TC31_RegisterNewUser_SDUser"/>
+          <include name="TC07_Pagination_WPSAdmin"/>
+          <include name="TC19_Login_ApplicationUser"/>
+          <include name="TC13_RegisterNewClientApp_WPSSupport"/>
           <include name="initiate"/>
-          <include name="TC01_Login_WPSAdmin"/>
+          <include name="TC16_RegisterNewUser_Negative_Scenarios_WPSSupport"/>
+          <include name="TC18_Footer_WPSSupport"/>
+          <include name="TC10_ViewNewClientApp_WPSSupport"/>
+          <include name="TC26_RegisterNewClientApp_ClientAdmin"/>
+          <include name="TC09_Login_WPSSupport"/>
+          <include name="TC28_RegisterNewClientApp_Cancel_ClientAdmin"/>
+          <include name="TC11_Pagination_WPSSupport"/>
+          <include name="TC27_RegisterNewClientApp_Negative_Scenarios_ClientAdmin"/>
+          <include name="TC22_ViewNewClientApp_ApplicationUser"/>
+          <include name="TC25_Login_ClientAdmin"/>
+          <include name="TC12_RegisterNewClientApp_Negative_Scenarios_WPSSupport"/>
+          <include name="TC06_EditClientApp_WPSAdmin"/>
+          <include name="TC08_Footer_WPSAdmin"/>
+          <include name="TC05_PromoteToProd_WPSAdmin"/>
+          <include name="TC29_Login_ServiceDeskUser"/>
+          <include name="CloseBrowser"/>
+          <include name="TC15_RegisterNewUser_WPSSupport"/>
           <include name="initializeRepo"/>
+          <include name="TC30_RegisterNewUser_Negative_Scenarios_SDUser"/>
+          <include name="TC14_RegisterNewClientApp_Cancel_WPS_Support"/>
         </methods>
       </class> <!-- Test_Suite.ClientPortal_RegressionSuite -->
     </classes>
-  </test> <!-- Test_Suite(failed) -->
-</suite> <!-- Failed suite [WPS_Regression] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

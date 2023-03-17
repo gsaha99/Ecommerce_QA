@@ -17,7 +17,7 @@ public class CommonPage {
 
 	public static void LogIN(WebDriver driver,app_ClientPortal_Repo CPortal,String EmailID, String PWD,String SS_path) throws IOException 
 	{
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		//boolean loginValue=driver.findElement(By.id("otherTileText")).isDisplayed();
 		try {
 					wait.until(ExpectedConditions.presenceOfElementLocated(By.id("otherTileText")));

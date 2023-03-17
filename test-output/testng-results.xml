@@ -1,44 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="23" total="26" passed="3" failed="0" skipped="0">
+<testng-results ignored="0" total="26" passed="26" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-03-16T16:10:02 IST" name="WPS_Regression" finished-at="2023-03-16T16:12:21 IST" duration-ms="138512">
+  <suite started-at="2023-03-16T17:24:45 IST" name="Default suite" finished-at="2023-03-16T18:09:47 IST" duration-ms="2701726">
     <groups>
     </groups>
-    <test started-at="2023-03-16T16:10:02 IST" name="Test_Suite" finished-at="2023-03-16T16:12:21 IST" duration-ms="138512">
+    <test started-at="2023-03-16T17:24:45 IST" name="Default test" finished-at="2023-03-16T18:09:47 IST" duration-ms="2701726">
       <class name="Test_Suite.ClientPortal_RegressionSuite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@4a83a74a]" started-at="2023-03-16T16:10:02 IST" name="initiate" finished-at="2023-03-16T16:10:11 IST" duration-ms="8363" status="PASS">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext)[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:24:45 IST" name="initiate" finished-at="2023-03-16T17:24:58 IST" duration-ms="12850" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@35010a6b]]>
+                <![CDATA[org.testng.TestRunner@351c5f40]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@4a83a74a]" started-at="2023-03-16T16:10:11 IST" name="initializeRepo" finished-at="2023-03-16T16:10:11 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="98" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:24:58 IST" name="initializeRepo" finished-at="2023-03-16T17:24:58 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="156" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeRepo -->
-        <test-method signature="TC01_Login_WPSAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@4a83a74a]" started-at="2023-03-16T16:10:11 IST" name="TC01_Login_WPSAdmin" finished-at="2023-03-16T16:11:06 IST" duration-ms="54792" status="PASS">
+        <test-method signature="TC01_Login_WPSAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:24:58 IST" name="TC01_Login_WPSAdmin" finished-at="2023-03-16T17:26:22 IST" duration-ms="83463" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TC01_Login_WPSAdmin -->
-        <test-method signature="TC02_AddNewClientApp_WPSAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@4a83a74a]" started-at="2023-03-16T16:11:06 IST" name="TC02_AddNewClientApp_WPSAdmin" finished-at="2023-03-16T16:11:52 IST" duration-ms="46774" status="PASS">
+        <test-method signature="TC02_AddNewClientApp_WPSAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:26:22 IST" name="TC02_AddNewClientApp_WPSAdmin" finished-at="2023-03-16T17:27:07 IST" duration-ms="45624" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TC02_AddNewClientApp_WPSAdmin -->
-        <test-method signature="TC03_RegisterNewUser_WPSAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@4a83a74a]" started-at="2023-03-16T16:11:52 IST" name="TC03_RegisterNewUser_WPSAdmin" finished-at="2023-03-16T16:12:19 IST" duration-ms="26726" status="PASS">
+        <test-method signature="TC03_RegisterNewUser_WPSAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:27:07 IST" name="TC03_RegisterNewUser_WPSAdmin" finished-at="2023-03-16T17:27:35 IST" duration-ms="27594" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TC03_RegisterNewUser_WPSAdmin -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@4a83a74a]" started-at="2023-03-16T16:12:19 IST" name="CloseBrowser" finished-at="2023-03-16T16:12:21 IST" duration-ms="1635" status="PASS">
+        <test-method signature="TC04_DeclineNewApp_WPSAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:27:35 IST" name="TC04_DeclineNewApp_WPSAdmin" finished-at="2023-03-16T17:29:32 IST" duration-ms="117369" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC04_DeclineNewApp_WPSAdmin -->
+        <test-method signature="TC05_PromoteToProd_WPSAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:29:32 IST" name="TC05_PromoteToProd_WPSAdmin" finished-at="2023-03-16T17:42:26 IST" duration-ms="773199" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC05_PromoteToProd_WPSAdmin -->
+        <test-method signature="TC06_EditClientApp_WPSAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:42:26 IST" name="TC06_EditClientApp_WPSAdmin" finished-at="2023-03-16T17:43:21 IST" duration-ms="55504" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC06_EditClientApp_WPSAdmin -->
+        <test-method signature="TC07_Pagination_WPSAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:43:21 IST" name="TC07_Pagination_WPSAdmin" finished-at="2023-03-16T17:43:45 IST" duration-ms="24210" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC07_Pagination_WPSAdmin -->
+        <test-method signature="TC08_Footer_WPSAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:43:45 IST" name="TC08_Footer_WPSAdmin" finished-at="2023-03-16T17:44:59 IST" duration-ms="74195" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC08_Footer_WPSAdmin -->
+        <test-method signature="TC09_Login_WPSSupport()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:44:59 IST" name="TC09_Login_WPSSupport" finished-at="2023-03-16T17:45:45 IST" duration-ms="45046" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC09_Login_WPSSupport -->
+        <test-method signature="TC10_ViewNewClientApp_WPSSupport()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:45:45 IST" name="TC10_ViewNewClientApp_WPSSupport" finished-at="2023-03-16T17:48:08 IST" duration-ms="143938" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC10_ViewNewClientApp_WPSSupport -->
+        <test-method signature="TC11_Pagination_WPSSupport()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:48:08 IST" name="TC11_Pagination_WPSSupport" finished-at="2023-03-16T17:48:30 IST" duration-ms="22029" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC11_Pagination_WPSSupport -->
+        <test-method signature="TC12_RegisterNewClientApp_Negative_Scenarios_WPSSupport()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:48:30 IST" name="TC12_RegisterNewClientApp_Negative_Scenarios_WPSSupport" finished-at="2023-03-16T17:49:19 IST" duration-ms="48364" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC12_RegisterNewClientApp_Negative_Scenarios_WPSSupport -->
+        <test-method signature="TC13_RegisterNewClientApp_WPSSupport()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:49:19 IST" name="TC13_RegisterNewClientApp_WPSSupport" finished-at="2023-03-16T17:51:48 IST" duration-ms="148940" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC13_RegisterNewClientApp_WPSSupport -->
+        <test-method signature="TC14_RegisterNewClientApp_Cancel_WPS_Support()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:51:48 IST" name="TC14_RegisterNewClientApp_Cancel_WPS_Support" finished-at="2023-03-16T17:53:38 IST" duration-ms="110204" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC14_RegisterNewClientApp_Cancel_WPS_Support -->
+        <test-method signature="TC15_RegisterNewUser_WPSSupport()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:53:38 IST" name="TC15_RegisterNewUser_WPSSupport" finished-at="2023-03-16T17:54:33 IST" duration-ms="54982" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC15_RegisterNewUser_WPSSupport -->
+        <test-method signature="TC16_RegisterNewUser_Negative_Scenarios_WPSSupport()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:54:33 IST" name="TC16_RegisterNewUser_Negative_Scenarios_WPSSupport" finished-at="2023-03-16T17:55:24 IST" duration-ms="50628" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC16_RegisterNewUser_Negative_Scenarios_WPSSupport -->
+        <test-method signature="TC18_Footer_WPSSupport()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:55:24 IST" name="TC18_Footer_WPSSupport" finished-at="2023-03-16T17:56:15 IST" duration-ms="51787" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC18_Footer_WPSSupport -->
+        <test-method signature="TC19_Login_ApplicationUser()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:56:15 IST" name="TC19_Login_ApplicationUser" finished-at="2023-03-16T17:56:51 IST" duration-ms="35294" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC19_Login_ApplicationUser -->
+        <test-method signature="TC22_ViewNewClientApp_ApplicationUser()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:56:51 IST" name="TC22_ViewNewClientApp_ApplicationUser" finished-at="2023-03-16T17:57:37 IST" duration-ms="46215" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC22_ViewNewClientApp_ApplicationUser -->
+        <test-method signature="TC25_Login_ClientAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:57:37 IST" name="TC25_Login_ClientAdmin" finished-at="2023-03-16T17:58:14 IST" duration-ms="37410" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC25_Login_ClientAdmin -->
+        <test-method signature="TC26_RegisterNewClientApp_ClientAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T17:58:14 IST" name="TC26_RegisterNewClientApp_ClientAdmin" finished-at="2023-03-16T18:00:46 IST" duration-ms="151156" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC26_RegisterNewClientApp_ClientAdmin -->
+        <test-method signature="TC27_RegisterNewClientApp_Negative_Scenarios_ClientAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T18:00:46 IST" name="TC27_RegisterNewClientApp_Negative_Scenarios_ClientAdmin" finished-at="2023-03-16T18:01:22 IST" duration-ms="36615" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC27_RegisterNewClientApp_Negative_Scenarios_ClientAdmin -->
+        <test-method signature="TC28_RegisterNewClientApp_Cancel_ClientAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T18:01:22 IST" name="TC28_RegisterNewClientApp_Cancel_ClientAdmin" finished-at="2023-03-16T18:02:34 IST" duration-ms="71569" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC28_RegisterNewClientApp_Cancel_ClientAdmin -->
+        <test-method signature="TC29_Login_ServiceDeskUser()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T18:02:34 IST" name="TC29_Login_ServiceDeskUser" finished-at="2023-03-16T18:03:12 IST" duration-ms="38074" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC29_Login_ServiceDeskUser -->
+        <test-method signature="TC30_RegisterNewUser_Negative_Scenarios_SDUser()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T18:03:12 IST" name="TC30_RegisterNewUser_Negative_Scenarios_SDUser" finished-at="2023-03-16T18:08:01 IST" duration-ms="289545" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC30_RegisterNewUser_Negative_Scenarios_SDUser -->
+        <test-method signature="TC31_RegisterNewUser_SDUser()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T18:08:01 IST" name="TC31_RegisterNewUser_SDUser" finished-at="2023-03-16T18:09:43 IST" duration-ms="101383" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC31_RegisterNewUser_SDUser -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@402c4085]" started-at="2023-03-16T18:09:43 IST" name="CloseBrowser" finished-at="2023-03-16T18:09:47 IST" duration-ms="3599" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
       </class> <!-- Test_Suite.ClientPortal_RegressionSuite -->
-    </test> <!-- Test_Suite -->
-  </suite> <!-- WPS_Regression -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>
