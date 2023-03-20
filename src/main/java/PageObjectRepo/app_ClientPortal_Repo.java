@@ -340,7 +340,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	public void WPSAdmin_ClickHome() throws IOException {
 		try {
 			ClickHome.click();
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 			Reporting.updateTestReport("Home is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
@@ -1003,6 +1003,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	public void WPSAdmin_Click_PromoteToProd() throws IOException {
 		try {
 			Click_PromoteToProd.click();
+			Thread.sleep(3000);
 			Reporting.updateTestReport("Promote to Prod tab is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){

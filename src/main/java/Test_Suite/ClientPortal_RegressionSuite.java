@@ -1118,7 +1118,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 	{
 		
 		try {
-			Reporting.test = Reporting.extent.createTest("TC14_Client Portal: "
+			Reporting.test = Reporting.extent.createTest("TC15_Client Portal: "
 					+ "Verify whether WPS Support able to Register New User"
 					);
 			
@@ -1587,7 +1587,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		       }
 		      else 
 		       {
-			      Reporting.updateTestReport("DB Validation is failed and new Business Unit ID is not: " + expectedBU,
+			      Reporting.updateTestReport("DB Validation is failed and new Business Unit ID is not: " + actualBU,
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		       }
 			CPortal.WPSAdmin_ClickLogOut();
