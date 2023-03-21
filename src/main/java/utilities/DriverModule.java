@@ -110,14 +110,12 @@ public class DriverModule {
 				
 			}
 			else if(browser.equalsIgnoreCase("safari")){
-				
-				
+
 				Caps.setCapability("os", "OS X");
 				Caps.setCapability("os_version", "Ventura");
 				Caps.setCapability("browser", browser);
 				Caps.setCapability("browser_version", "16.3");
-				
-				
+
 				driver= new RemoteWebDriver(new URL(URL), Caps);
 
 				
@@ -128,8 +126,9 @@ public class DriverModule {
 				Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
 				
 				String browserName = caps.getBrowserName();							
-				String browserVersion = caps.getBrowserVersion();
-				
+
+				String browserVersion = caps.getBrowserVersion();				
+
 				String OS_Name = System.getProperty("os.name").toLowerCase();
 				
 				Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_In_"+browserName+"_"+date,
@@ -137,13 +136,14 @@ public class DriverModule {
 				
 			}
 			else if(browser.equalsIgnoreCase("Edge")){
-				//set path to Edge.exe
+
 				EdgeOptions options = new EdgeOptions();
 				options.addArguments("InPrivate");
 				Caps.setCapability("os", "windows");
 				Caps.setCapability("os_version", "11");
 				Caps.setCapability("browser", browser);
 				Caps.setCapability("browser_version", "110");
+
 				Caps.setCapability(EdgeOptions.CAPABILITY,options);
 				//driver= new RemoteWebDriver(new URL(URL), Caps);
 				driver=new EdgeDriver(options);
@@ -155,8 +155,7 @@ public class DriverModule {
 				Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
 				
 				String browserName = caps.getBrowserName();							
-				String browserVersion = caps.getBrowserVersion();
-				
+				String browserVersion = caps.getBrowserVersion();				
 				String OS_Name = System.getProperty("os.name").toLowerCase();
 				
 				Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_In_"+browserName+"_"+date,
