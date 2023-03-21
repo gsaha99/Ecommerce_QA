@@ -18,9 +18,9 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import PageObjectRepo.app_WileyPLUS_Repo;
 import utilities.CaptureScreenshot;
-import utilities.OrderConfirmationMail;
 import utilities.PaymentGateway;
 import utilities.DriverModule;
+import utilities.EmailValidation;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
@@ -795,10 +795,10 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 								"Generic_Dataset", "Data"));
 						WileyPLUS.enterEmailIdInYopmail(email);
 						WileyPLUS.clickOnCheckInboxButton();
-						if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+						if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 							Reporting.updateTestReport("Order Confirmation mail was received",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							OrderConfirmationMail.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation," ",ordertotal);
+							EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation," ",ordertotal);
 						}
 						else {
 							Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -1125,48 +1125,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						"Generic_Dataset", "Data"));
 				WileyPLUS.enterEmailIdInYopmail(emailId);
 				WileyPLUS.clickOnCheckInboxButton();
-				WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(2));
-				int timeOutSeconds=10;
-				int flag=0;
-				WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-				WebElement element2 = null;
-				/* The purpose of this loop is to wait for maximum of 60 seconds */
-				for (int i = 0; i < timeOutSeconds / 5; i++) {
-
-					try {
-						driver.switchTo().frame("ifinbox");
-						element2=wait1.until(ExpectedConditions.visibilityOfElementLocated(
-								By.xpath("//div[contains(text(),'Welcome to Wiley')]")));
-
-						if(element2.isDisplayed()==true)
-						{
-							flag=1;
-							element2.click();
-							driver.switchTo().defaultContent();
-							break;
-						}
-
-					} catch (Exception e) {
-						driver.switchTo().defaultContent();        
-						element1.click();
-					}
-				}
-				if(flag==1) {
-					driver.switchTo().frame("ifmail");
-					WileyPLUS.clickOnFinishRegistrationLinkInMail();
-					driver.switchTo().defaultContent();
-					Set<String> allWindowHandles = driver.getWindowHandles();
-					java.util.Iterator<String> iterator = allWindowHandles.iterator();
-					String yopmailHandle = iterator.next();
-					String ChildWindow=iterator.next();
-					driver.switchTo().window(yopmailHandle);
-					driver.close();
-					driver.switchTo().window(ChildWindow);
-				}
-				else {
-					Reporting.updateTestReport("No finish registration mail  was recieved in yopmail inbox", 
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+				EmailValidation.clickOnFinishRegistrationMail(driver, SS_path, WileyPLUS);
 				WileyPLUS.enterEmailIdInOnboardingLogin(emailId);
 				WileyPLUS.enterPasswordInOnboarding(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Password"));
 				WileyPLUS.clickOnOnboardingLoginButton();
@@ -1176,8 +1135,8 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
 					WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Course"));
-					Thread.sleep(2000);
-					WileyPLUS.clickOnContinueButtonInOnboarding();
+					//Thread.sleep(2000);
+					//WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
 								By.xpath("//h2[contains(text(),'Join your course')]")));
@@ -1284,7 +1243,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			WileyPLUS.WileyLogOut();
-
+			driver.manage().deleteAllCookies();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -1323,48 +1282,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						"Generic_Dataset", "Data"));
 				WileyPLUS.enterEmailIdInYopmail(emailId);
 				WileyPLUS.clickOnCheckInboxButton();
-				WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(2));
-				int timeOutSeconds=10;
-				int flag=0;
-				WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-				WebElement element2 = null;
-				/* The purpose of this loop is to wait for maximum of 60 seconds */
-				for (int i = 0; i < timeOutSeconds / 5; i++) {
-
-					try {
-						driver.switchTo().frame("ifinbox");
-						element2=wait1.until(ExpectedConditions.visibilityOfElementLocated(
-								By.xpath("//div[contains(text(),'Welcome to Wiley')]")));
-
-						if(element2.isDisplayed()==true)
-						{
-							flag=1;
-							element2.click();
-							driver.switchTo().defaultContent();
-							break;
-						}
-
-					} catch (Exception e) {
-						driver.switchTo().defaultContent();        
-						element1.click();
-					}
-				}
-				if(flag==1) {
-					driver.switchTo().frame("ifmail");
-					WileyPLUS.clickOnFinishRegistrationLinkInMail();
-					driver.switchTo().defaultContent();
-					Set<String> allWindowHandles = driver.getWindowHandles();
-					java.util.Iterator<String> iterator = allWindowHandles.iterator();
-					String yopmailHandle = iterator.next();
-					String ChildWindow=iterator.next();
-					driver.switchTo().window(yopmailHandle);
-					driver.close();
-					driver.switchTo().window(ChildWindow);
-				}
-				else {
-					Reporting.updateTestReport("No finish registration mail  was recieved in yopmail inbox", 
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+				EmailValidation.clickOnFinishRegistrationMail(driver, SS_path, WileyPLUS);
 				WileyPLUS.enterEmailIdInOnboardingLogin(emailId);
 				WileyPLUS.enterPasswordInOnboarding(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Password"));
 				WileyPLUS.clickOnOnboardingLoginButton();
@@ -1374,8 +1292,8 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
 					WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Course"));
-					Thread.sleep(2000);
-					WileyPLUS.clickOnContinueButtonInOnboarding();
+					//Thread.sleep(2000);
+					//WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
 								By.xpath("//h2[contains(text(),'Join your course')]")));
@@ -1461,7 +1379,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 												"Generic_Dataset", "Data"));
 										WileyPLUS.enterEmailIdInYopmail(emailId);
 										WileyPLUS.clickOnCheckInboxButton();
-										if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+										if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 											ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
 											Reporting.updateTestReport("Order Confirmation mail was received",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1527,6 +1445,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			WileyPLUS.WileyLogOut();
+			driver.manage().deleteAllCookies();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -1565,48 +1484,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						"Generic_Dataset", "Data"));
 				WileyPLUS.enterEmailIdInYopmail(emailId);
 				WileyPLUS.clickOnCheckInboxButton();
-				WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(2));
-				int timeOutSeconds=10;
-				int flag=0;
-				WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-				WebElement element2 = null;
-				/* The purpose of this loop is to wait for maximum of 60 seconds */
-				for (int i = 0; i < timeOutSeconds / 5; i++) {
-
-					try {
-						driver.switchTo().frame("ifinbox");
-						element2=wait1.until(ExpectedConditions.visibilityOfElementLocated(
-								By.xpath("//div[contains(text(),'Welcome to Wiley')]")));
-
-						if(element2.isDisplayed()==true)
-						{
-							flag=1;
-							element2.click();
-							driver.switchTo().defaultContent();
-							break;
-						}
-
-					} catch (Exception e) {
-						driver.switchTo().defaultContent();        
-						element1.click();
-					}
-				}
-				if(flag==1) {
-					driver.switchTo().frame("ifmail");
-					WileyPLUS.clickOnFinishRegistrationLinkInMail();
-					driver.switchTo().defaultContent();
-					Set<String> allWindowHandles = driver.getWindowHandles();
-					java.util.Iterator<String> iterator = allWindowHandles.iterator();
-					String yopmailHandle = iterator.next();
-					String ChildWindow=iterator.next();
-					driver.switchTo().window(yopmailHandle);
-					driver.close();
-					driver.switchTo().window(ChildWindow);
-				}
-				else {
-					Reporting.updateTestReport("No finish registration mail  was recieved in yopmail inbox", 
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+				EmailValidation.clickOnFinishRegistrationMail(driver, SS_path, WileyPLUS);
 				WileyPLUS.enterEmailIdInOnboardingLogin(emailId);
 				WileyPLUS.enterPasswordInOnboarding(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Password"));
 				WileyPLUS.clickOnOnboardingLoginButton();
@@ -1616,8 +1494,8 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
 					WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Course"));
-					Thread.sleep(2000);
-					WileyPLUS.clickOnContinueButtonInOnboarding();
+					//Thread.sleep(2000);
+					//WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
 								By.xpath("//h2[contains(text(),'Join your course')]")));
@@ -1713,11 +1591,11 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 												"Generic_Dataset", "Data"));
 										WileyPLUS.enterEmailIdInYopmail(emailId);
 										WileyPLUS.clickOnCheckInboxButton();
-										if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+										if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 											ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
 											Reporting.updateTestReport("Order Confirmation mail was received",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-											OrderConfirmationMail.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation," ",ordertotal);
+											EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation," ",ordertotal);
 										}
 										else {
 											Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -1780,6 +1658,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			WileyPLUS.WileyLogOut();
+			driver.manage().deleteAllCookies();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -1818,48 +1697,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						"Generic_Dataset", "Data"));
 				WileyPLUS.enterEmailIdInYopmail(emailId);
 				WileyPLUS.clickOnCheckInboxButton();
-				WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(2));
-				int timeOutSeconds=10;
-				int flag=0;
-				WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-				WebElement element2 = null;
-				/* The purpose of this loop is to wait for maximum of 60 seconds */
-				for (int i = 0; i < timeOutSeconds / 5; i++) {
-
-					try {
-						driver.switchTo().frame("ifinbox");
-						element2=wait1.until(ExpectedConditions.visibilityOfElementLocated(
-								By.xpath("//div[contains(text(),'Welcome to Wiley')]")));
-
-						if(element2.isDisplayed()==true)
-						{
-							flag=1;
-							element2.click();
-							driver.switchTo().defaultContent();
-							break;
-						}
-
-					} catch (Exception e) {
-						driver.switchTo().defaultContent();        
-						element1.click();
-					}
-				}
-				if(flag==1) {
-					driver.switchTo().frame("ifmail");
-					WileyPLUS.clickOnFinishRegistrationLinkInMail();
-					driver.switchTo().defaultContent();
-					Set<String> allWindowHandles = driver.getWindowHandles();
-					java.util.Iterator<String> iterator = allWindowHandles.iterator();
-					String yopmailHandle = iterator.next();
-					String ChildWindow=iterator.next();
-					driver.switchTo().window(yopmailHandle);
-					driver.close();
-					driver.switchTo().window(ChildWindow);
-				}
-				else {
-					Reporting.updateTestReport("No finish registration mail  was recieved in yopmail inbox", 
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+				EmailValidation.clickOnFinishRegistrationMail(driver, SS_path, WileyPLUS);
 				WileyPLUS.enterEmailIdInOnboardingLogin(emailId);
 				WileyPLUS.enterPasswordInOnboarding(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "Password"));
 				WileyPLUS.clickOnOnboardingLoginButton();
@@ -1869,8 +1707,8 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
 					WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "Course"));
-					Thread.sleep(2000);
-					WileyPLUS.clickOnContinueButtonInOnboarding();
+					//Thread.sleep(2000);
+					//WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
 								By.xpath("//h2[contains(text(),'Join your course')]")));
@@ -1921,8 +1759,8 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 													Thread.sleep(2000);
 													WileyPLUS.clickOnOnboardingAddCourseButton();
 													WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "Course"));
-													Thread.sleep(2000);
-													WileyPLUS.clickOnContinueButtonInOnboarding();
+													//Thread.sleep(2000);
+													//WileyPLUS.clickOnContinueButtonInOnboarding();
 													try {
 														wait.until(ExpectedConditions.presenceOfElementLocated(
 																By.xpath("//h2[contains(text(),'Join your course')]")));
@@ -2047,6 +1885,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			WileyPLUS.WileyLogOut();
+			driver.manage().deleteAllCookies();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();

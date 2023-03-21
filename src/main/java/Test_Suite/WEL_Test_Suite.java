@@ -25,7 +25,7 @@ import PageObjectRepo.app_Hybris_BO_Repo;
 import PageObjectRepo.app_WEL_Repo;
 import utilities.CaptureScreenshot;
 import utilities.DriverModule;
-import utilities.OrderConfirmationMail;
+import utilities.EmailValidation;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
@@ -8948,12 +8948,12 @@ public class WEL_Test_Suite extends DriverModule {
 												excelOperation.getTestData("Yopmail_URL", "Generic_Dataset", "Data"));
 										WEL.enterEmailIdInYopmail(GuestEmail);
 										WEL.clickOnCheckInboxButton();
-										if (OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver, SS_path,
+										if (EmailValidation.checkIfOrderConfirmationMailReceived(driver, SS_path,
 												EmailConfirmationText)) {
 											ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
 											Reporting.updateTestReport("Order Confirmation mail was received",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-											OrderConfirmationMail.validateOrderConfirmationMailContent("WEL", driver,
+											EmailValidation.validateOrderConfirmationMailContent("WEL", driver,
 													SS_path, tax, shippingCharge, orderTotal);
 										} else {
 											Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -10563,12 +10563,12 @@ public class WEL_Test_Suite extends DriverModule {
 												excelOperation.getTestData("Yopmail_URL", "Generic_Dataset", "Data"));
 										WEL.enterEmailIdInYopmail(GuestEmail);
 										WEL.clickOnCheckInboxButton();
-										if (OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver, SS_path,
+										if (EmailValidation.checkIfOrderConfirmationMailReceived(driver, SS_path,
 												EmailConfirmationText)) {
 											ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
 											Reporting.updateTestReport("Order Confirmation mail was received",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-											OrderConfirmationMail.validateOrderConfirmationMailContent("WEL", driver,
+											EmailValidation.validateOrderConfirmationMailContent("WEL", driver,
 													SS_path, tax, shippingCharge, orderTotal);
 											driver.switchTo().frame("ifmail");
 											WEL.checkMailHeaderElements();

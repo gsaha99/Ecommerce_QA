@@ -25,7 +25,7 @@ import PageObjectRepo.app_Hybris_BO_Repo;
 import PageObjectRepo.app_Riskified_Repo;
 import PageObjectRepo.app_VET_Repo;
 import utilities.CaptureScreenshot;
-import utilities.OrderConfirmationMail;
+import utilities.EmailValidation;
 import utilities.DriverModule;
 import utilities.PaymentGateway;
 import utilities.Reporting;
@@ -126,10 +126,10 @@ public class Vet_Test_Suite extends DriverModule {
 							"Generic_Dataset", "Data"));
 					VET.enterEmailIdInYopmail(email);
 					VET.clickOnArrowButton();
-					if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+					if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 						Reporting.updateTestReport("Order Confirmation mail was received",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						OrderConfirmationMail.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
+						EmailValidation.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
 					}
 					else {
 						Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -440,10 +440,10 @@ public class Vet_Test_Suite extends DriverModule {
 						"Generic_Dataset", "Data"));
 				VET.enterEmailIdInYopmail(email);
 				VET.clickOnArrowButton();
-				if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+				if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 					Reporting.updateTestReport("Order Confirmation mail was received",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					OrderConfirmationMail.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
+					EmailValidation.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
 				}
 				else {
 					Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -592,10 +592,10 @@ public class Vet_Test_Suite extends DriverModule {
 							"Generic_Dataset", "Data"));
 					VET.enterEmailIdInYopmail(email);
 					VET.clickOnArrowButton();
-					if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+					if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 						Reporting.updateTestReport("Order Confirmation mail was received",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						OrderConfirmationMail.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
+						EmailValidation.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
 					}
 					else {
 						Reporting.updateTestReport("Order Confirmation mail was not received",

@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 import PageObjectRepo.app_Riskified_Repo;
 import PageObjectRepo.app_Wiley_Repo;
 import utilities.CaptureScreenshot;
-import utilities.OrderConfirmationMail;
+import utilities.EmailValidation;
 import utilities.PaymentGateway;
 import utilities.DriverModule;
 import utilities.Reporting;
@@ -190,10 +190,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								"Generic_Dataset", "Data"));
 						wiley.enterEmailIdInYopmail(email);
 						wiley.clickOnCheckInboxButton();
-						if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+						if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 							Reporting.updateTestReport("Order Confirmation mail was received",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							OrderConfirmationMail.validateOrderConfirmationMailContent("Wiley",driver,SS_path,tax," ",orderTotal);
+							EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,tax," ",orderTotal);
 						}
 						else {
 							Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -221,7 +221,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
-
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e){
 			wiley.wileyLogOutException();
@@ -387,6 +387,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 		catch (Exception e) {
 			wiley.wileyLogOutException();
@@ -525,10 +526,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									"Generic_Dataset", "Data"));
 							wiley.enterEmailIdInYopmail(emailID);
 							wiley.clickOnCheckInboxButton();
-							if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+							if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								OrderConfirmationMail.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
+								EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -560,6 +561,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 
 		catch (Exception e) {
@@ -694,10 +696,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									"Generic_Dataset", "Data"));
 							wiley.enterEmailIdInYopmail(email);
 							wiley.clickOnCheckInboxButton();
-							if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+							if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								OrderConfirmationMail.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
+								EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -730,6 +732,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e){
 			wiley.wileyLogOutException();
@@ -871,6 +874,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		} catch (Exception e) {
 			wiley.wileyLogOutException();
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
@@ -1028,6 +1032,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 
 		catch (Exception e) {
@@ -1188,7 +1193,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 										"Generic_Dataset", "Data"));
 								wiley.enterEmailIdInYopmail(email);
 								wiley.clickOnCheckInboxButton();
-								if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+								if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 									Reporting.updateTestReport("Order Confirmation mail was received",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
@@ -1228,6 +1233,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e){
 			wiley.wileyLogOutException();
@@ -1381,7 +1387,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 										"Generic_Dataset", "Data"));
 								wiley.enterEmailIdInYopmail(email);
 								wiley.clickOnCheckInboxButton();
-								if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+								if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 									Reporting.updateTestReport("Order Confirmation mail was received",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 									//validateOrderConfirmationMailContent(taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
@@ -1422,6 +1428,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 
 		}
 		catch(Exception e) {
@@ -1592,6 +1599,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 
 		}
 
@@ -1770,6 +1778,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 
 		} catch (Exception e) {
 			wiley.wileyLogOutException();
@@ -1986,6 +1995,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 
 		} catch (Exception e) {
 			wiley.wileyLogOutException();
@@ -2185,6 +2195,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 
 		} catch (Exception e) {
 			wiley.wileyLogOutException();
@@ -2357,6 +2368,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 
 		} catch (Exception e) {
 			wiley.wileyLogOutException();
@@ -2540,7 +2552,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
-
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e){
 			wiley.wileyLogOutException();
@@ -2712,6 +2724,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e){
 			wiley.wileyLogOutException();
@@ -2890,6 +2903,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 
 		}
 		catch(Exception e){
@@ -3086,6 +3100,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -3226,6 +3241,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -3310,6 +3326,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -3415,6 +3432,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							String orderId = wiley.fetchOrderId();
 							excelOperation.updateTestData("TC20", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
 							excelOperation.updateTestData("TC20", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
+							excelOperation.updateTestData("TC21", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
 							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 							String ordertotal = wiley.fetchOrderTotal();
 							String taxInOrderConfirmation = wiley.fetchTaxAmount();
@@ -3486,6 +3504,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -3623,6 +3642,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -3729,6 +3749,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							String orderId = wiley.fetchOrderId();
 							excelOperation.updateTestData("TC22", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
 							excelOperation.updateTestData("TC22", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
+							excelOperation.updateTestData("TC23", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
 							excelOperation.updateTestData("TC40", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
 							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 							String ordertotal = wiley.fetchOrderTotal();
@@ -3793,6 +3814,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -3942,6 +3964,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -3995,6 +4018,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
 				wiley.validateShippingMethodMessageForPOD();
 				wiley.WileyLogOut();
+				wiley.removeProductsFromCart(driver);
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
@@ -4108,6 +4132,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -4151,6 +4176,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 
 		}
 		catch(Exception e) {
@@ -4228,6 +4254,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -4373,6 +4400,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 
 		}
 		catch(Exception e) {
@@ -4586,6 +4614,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e){
 			wiley.wileyLogOutException();
@@ -4705,6 +4734,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -4777,7 +4807,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
-			driver.manage().deleteAllCookies();
+			wiley.removeProductsFromCart(driver);
 
 		}
 		catch(Exception e) {
@@ -4864,6 +4894,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("VET Consult was not present under format",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 
 		} catch (Exception e) {
 			wiley.wileyLogOutException();
@@ -5097,7 +5128,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
-
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -5257,6 +5288,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 
 		}
 		catch(Exception e){
@@ -5394,6 +5426,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();
@@ -5493,6 +5526,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut();
+			wiley.removeProductsFromCart(driver);
 			
 		}
 		catch(Exception e) {

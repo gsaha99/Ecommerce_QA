@@ -3,6 +3,7 @@ package utilities;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.Duration;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +11,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class OrderConfirmationMail {
+import PageObjectRepo.app_WileyPLUS_Repo;
+
+public class EmailValidation {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if order confirmation mail was received
@@ -236,6 +239,61 @@ public class OrderConfirmationMail {
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Order total and tax validation couldn't be done: "+e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Waits for the finish registration mail from Onboarding and clicks on that
+	 */
+	public static void clickOnFinishRegistrationMail(WebDriver driver,String SS_path,app_WileyPLUS_Repo WileyPLUS) throws IOException{
+		try {
+			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(2));
+			int timeOutSeconds=10;
+			int flag=0;
+			WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
+			WebElement element2 = null;
+			/* The purpose of this loop is to wait for maximum of 60 seconds */
+			for (int i = 0; i < timeOutSeconds / 5; i++) {
+
+				try {
+					driver.switchTo().frame("ifinbox");
+					element2=wait1.until(ExpectedConditions.visibilityOfElementLocated(
+							By.xpath("//div[contains(text(),'Welcome to Wiley')]")));
+
+					if(element2.isDisplayed()==true)
+					{
+						flag=1;
+						element2.click();
+						driver.switchTo().defaultContent();
+						break;
+					}
+
+				} catch (Exception e) {
+					driver.switchTo().defaultContent();        
+					element1.click();
+				}
+			}
+			if(flag==1) {
+				driver.switchTo().frame("ifmail");
+				WileyPLUS.clickOnFinishRegistrationLinkInMail();
+				driver.switchTo().defaultContent();
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				java.util.Iterator<String> iterator = allWindowHandles.iterator();
+				String yopmailHandle = iterator.next();
+				String ChildWindow=iterator.next();
+				driver.switchTo().window(yopmailHandle);
+				driver.close();
+				driver.switchTo().window(ChildWindow);
+			}
+			else {
+				Reporting.updateTestReport("No finish registration mail  was recieved in yopmail inbox", 
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Finish registration mail couldn't be validated", 
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}

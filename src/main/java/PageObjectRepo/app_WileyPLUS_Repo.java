@@ -1893,6 +1893,8 @@ public class app_WileyPLUS_Repo {
 	public void enterCourseSectionId(String courseId) throws IOException{
 		try {
 			CourseSectionId.sendKeys(courseId);
+			Thread.sleep(1000);
+			CourseSectionId.sendKeys(Keys.ENTER);
 			Reporting.updateTestReport(courseId+" was entered as Course Section Id",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}

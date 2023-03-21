@@ -23,7 +23,7 @@ import java.math.BigDecimal;
 import PageObjectRepo.app_AGS_Repo;
 import PageObjectRepo.app_Riskified_Repo;
 import utilities.CaptureScreenshot;
-import utilities.OrderConfirmationMail;
+import utilities.EmailValidation;
 import utilities.DriverModule;
 import utilities.PaymentGateway;
 import utilities.Reporting;
@@ -133,10 +133,10 @@ public class AGS_Test_Suite extends DriverModule {
 											"Generic_Dataset", "Data"));
 									AGS.enterEmailIdInYopmail(email);
 									AGS.clickOnArrowButton();
-									if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 										Reporting.updateTestReport("Order Confirmation mail was received",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										OrderConfirmationMail.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
+										EmailValidation.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
 									}
 									else {
 										Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -259,10 +259,10 @@ public class AGS_Test_Suite extends DriverModule {
 											"Generic_Dataset", "Data"));
 									AGS.enterEmailIdInYopmail(email);
 									AGS.clickOnArrowButton();
-									if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 										Reporting.updateTestReport("Order Confirmation mail was received",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										OrderConfirmationMail.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
+										EmailValidation.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
 									}
 									else {
 										Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -620,10 +620,10 @@ public class AGS_Test_Suite extends DriverModule {
 											"Generic_Dataset", "Data"));
 									AGS.enterEmailIdInYopmail(email);
 									AGS.clickOnArrowButton();
-									if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 										Reporting.updateTestReport("Order Confirmation mail was received",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										OrderConfirmationMail.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
+										EmailValidation.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
 									}
 									else {
 										Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -747,10 +747,10 @@ public class AGS_Test_Suite extends DriverModule {
 											"Generic_Dataset", "Data"));
 									AGS.enterEmailIdInYopmail(email);
 									AGS.clickOnArrowButton();
-									if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 										Reporting.updateTestReport("Order Confirmation mail was received",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										OrderConfirmationMail.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
+										EmailValidation.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
 									}
 									else {
 										Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -981,10 +981,10 @@ public class AGS_Test_Suite extends DriverModule {
 											"Generic_Dataset", "Data"));
 									AGS.enterEmailIdInYopmail(email);
 									AGS.clickOnArrowButton();
-									if(OrderConfirmationMail.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
 										Reporting.updateTestReport("Order Confirmation mail was received",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										OrderConfirmationMail.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
+										EmailValidation.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
 									}
 									else {
 										Reporting.updateTestReport("Order Confirmation mail was not received",
