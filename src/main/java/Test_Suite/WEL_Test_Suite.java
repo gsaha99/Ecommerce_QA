@@ -57,7 +57,7 @@ public class WEL_Test_Suite extends DriverModule {
 	/*
 	 * @Author: Vishnu
 	 * 
-	 * @Description: validating the standalone user registraion
+	 * @Description: This test cases is validating the standalone user registration
 	 */
 	@Test
 	/* (invocationCount = 10) */
@@ -107,6 +107,12 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 
 	}
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is validating the user registration duering
+	 * checkout for Physical Cart
+	 */
 
 	@Test
 	public void TC02_UserRegistration_DuringCheckoutForPhysicalCart() throws IOException {
@@ -289,7 +295,7 @@ public class WEL_Test_Suite extends DriverModule {
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
 								String discount = WEL.fetchDiscountInOrderReview();
-								if (discount.contains(",")) 
+								if (discount.contains(","))
 									discount = discount.replace(",", "");
 								BigDecimal orderpriceafterdiscount = new BigDecimal(discount.substring(1));
 
@@ -297,7 +303,7 @@ public class WEL_Test_Suite extends DriverModule {
 										.subtract(orderpriceafterdiscount);
 
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) 
+								if (totalorderReview.contains(","))
 									totalorderReview = totalorderReview.replace(",", "");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -312,7 +318,8 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								Reporting.updateTestReport("Order Summary tab was not visible"+e.getMessage(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+								Reporting.updateTestReport("Order Summary tab was not visible" + e.getMessage(),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							WEL.ClickOnBackTOCart();
 							WEL.ClickOnRemoveOnCartPage();
@@ -704,6 +711,12 @@ public class WEL_Test_Suite extends DriverModule {
 
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test cases is to validate the ForgotPassword Page
+	 * after3Failed Attemsts to Login
+	 */
 	@Test
 	public void TC08_UserRedirection_ToForgotORChangePassword_PageAfter3Failed_AttemptsToLogin() throws IOException {
 		try {
@@ -739,7 +752,7 @@ public class WEL_Test_Suite extends DriverModule {
 
 	/*
 	 * @Author: Vishnu
-	 *
+	 * 
 	 * @Description: This test case is verify the Apply the Student Discount In
 	 * Anonymous Cart
 	 */
@@ -835,6 +848,12 @@ public class WEL_Test_Suite extends DriverModule {
 
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate AddToCart with Promocode with
+	 * Anonymous cart
+	 */
 	@Test
 	public void TC10_AddToCart_WithPromoCode_InAnonymousCart() throws IOException {
 		try {
@@ -891,11 +910,11 @@ public class WEL_Test_Suite extends DriverModule {
 									excelOperation.getTestData("TC10", "WEL_Test_Data", "PromoCode"));
 							WEL.ClickOnDiscountApplyButton();
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
-							if (price.compareTo(subtotal) == 0) 
+							if (price.compareTo(subtotal) == 0)
 								Reporting.updateTestReport(
 										"The addition of all the products' price is same as the subtotal in cart page",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							 else
+							else
 								Reporting.updateTestReport(
 										"The addition of all the products' pricedidn't match with the subtotal in cart page",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -927,6 +946,11 @@ public class WEL_Test_Suite extends DriverModule {
 
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case to validate AddToCart For loggedinUser
+	 */
 	@Test
 	public void TC11_AddToCartFor_LoggedInUser() throws IOException {
 		try {
@@ -1050,6 +1074,12 @@ public class WEL_Test_Suite extends DriverModule {
 
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is validate the Quantity Restriction for
+	 * Physical product
+	 */
 	@Test
 	public void TC12_QunatityRestriction_ForPhysicalProduct() throws IOException {
 		try {
@@ -1104,11 +1134,11 @@ public class WEL_Test_Suite extends DriverModule {
 										.elementToBeClickable(By.xpath("//select[@id='quantity_0']")));
 								WEL.ClickOnSelectQuantity();
 								BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
-								if (price.compareTo(subtotal) == 0) 
+								if (price.compareTo(subtotal) == 0)
 									Reporting.updateTestReport(
 											"The addition of all the products' price is same as the subtotal in cart page",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								 else
+								else
 									Reporting.updateTestReport(
 											"The addition of all the products' pricedidn't match with the subtotal in cart page",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -1144,6 +1174,13 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is placing an order with multiple products and
+	 * promotion for existing user
+	 * 
+	 */
 	@Test
 	public void TC13_PlaceOrder_WithmultipleProducts_And_PromotionForExistingUser() throws IOException {
 		try {
@@ -1169,7 +1206,7 @@ public class WEL_Test_Suite extends DriverModule {
 						.presenceOfElementLocated(By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 				ScrollingWebPage.PageDown(driver, SS_path);
 				BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-				BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+				BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 				try {
 					wait.until(
@@ -1196,7 +1233,8 @@ public class WEL_Test_Suite extends DriverModule {
 							By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 					ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
 					BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-					BigDecimal secondProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+					BigDecimal secondProductPriceWIthoutDiscount = new BigDecimal(
+							WEL.fetchOldPriceInPDP().substring(1));
 					WEL.clickOnAddToCartButtonOnPDP();
 					try {
 						wait.until(ExpectedConditions
@@ -1304,21 +1342,25 @@ public class WEL_Test_Suite extends DriverModule {
 							if (discount.contains(","))
 								discount = discount.replace(",", "");
 							BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
-							if(firstProductPriceWIthoutDiscount.compareTo(firstproductprice2)==0)
-								Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-										+" is same as price in Order Review "+firstproductprice2,
+							if (firstProductPriceWIthoutDiscount.compareTo(firstproductprice2) == 0)
+								Reporting.updateTestReport(
+										"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+												+ " is same as price in Order Review " + firstproductprice2,
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							else
-								Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-										+" is not same as price in Order Review "+firstproductprice2,
+								Reporting.updateTestReport(
+										"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+												+ " is not same as price in Order Review " + firstproductprice2,
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							if(secondProductPriceWIthoutDiscount.compareTo(secondproductprice2)==0)
-								Reporting.updateTestReport("The price of second product in PDP: "+secondProductPriceWIthoutDiscount
-										+" is same as price in Order Review "+secondproductprice2,
+							if (secondProductPriceWIthoutDiscount.compareTo(secondproductprice2) == 0)
+								Reporting.updateTestReport(
+										"The price of second product in PDP: " + secondProductPriceWIthoutDiscount
+												+ " is same as price in Order Review " + secondproductprice2,
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							else
-								Reporting.updateTestReport("The price of second product in PDP: "+secondProductPriceWIthoutDiscount
-										+" is same not as price in Order Review "+secondproductprice2,
+								Reporting.updateTestReport(
+										"The price of second product in PDP: " + secondProductPriceWIthoutDiscount
+												+ " is same not as price in Order Review " + secondproductprice2,
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(tax1)
 									.subtract(discountinorderreview);
@@ -1339,8 +1381,7 @@ public class WEL_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 						} catch (Exception e) {
-							Reporting.updateTestReport(
-									"Order summary tab was not visible"+ e.getMessage(),
+							Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 
@@ -1374,6 +1415,12 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test cases is to validate the ExtraDiscount Coupon code
+	 * GOVT
+	 */
 	@Test
 	public void TC14_ExtraDiscount_CouponCodeGOVT() throws IOException {
 		try {
@@ -1450,6 +1497,13 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the place order for CMA CPA CFA
+	 * Digital Products for new user
+	 * 
+	 */
 	@Test
 	public void TC15_PlaceOrder_CMACPACFA_DigitalProducts_ForNewUser() throws IOException {
 		try {
@@ -1470,7 +1524,7 @@ public class WEL_Test_Suite extends DriverModule {
 				WEL.ClickonCMAeBook();
 			}
 			BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-			BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+			BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
@@ -1557,7 +1611,7 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport(
 						"The addition of all the products' price is same as the subtotal in cart page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else 
+			else
 				Reporting.updateTestReport(
 						"The addition of all the products' pricedidn't match with the subtotal in cart page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -1622,33 +1676,39 @@ public class WEL_Test_Suite extends DriverModule {
 								WEL.fetchThirdProductPriceInOrderReview().substring(1));
 
 						BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-						if(firstProductPriceWIthoutDiscount.compareTo(firstproductprice2)==0)
-							Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-									+" is same as price in Order Review "+firstproductprice2,
+						if (firstProductPriceWIthoutDiscount.compareTo(firstproductprice2) == 0)
+							Reporting.updateTestReport(
+									"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+											+ " is same as price in Order Review " + firstproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-									+" is not same as price in Order Review "+firstproductprice2,
+							Reporting.updateTestReport(
+									"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+											+ " is not same as price in Order Review " + firstproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						if(secondproductprice.compareTo(secondproductprice2)==0)
-							Reporting.updateTestReport("The price of second product in PDP: "+secondproductprice
-									+" is same as price in Order Review "+secondproductprice2,
+						if (secondproductprice.compareTo(secondproductprice2) == 0)
+							Reporting.updateTestReport(
+									"The price of second product in PDP: " + secondproductprice
+											+ " is same as price in Order Review " + secondproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("The price of second product in PDP: "+secondproductprice
-									+" is same not as price in Order Review "+secondproductprice2,
+							Reporting.updateTestReport(
+									"The price of second product in PDP: " + secondproductprice
+											+ " is same not as price in Order Review " + secondproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						
-						if(thirdproductprice.compareTo(thirdproductprice2)==0)
-							Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
-									+" is same as price in Order Review "+thirdproductprice2,
+
+						if (thirdproductprice.compareTo(thirdproductprice2) == 0)
+							Reporting.updateTestReport(
+									"The price of third product in PDP: " + thirdproductprice
+											+ " is same as price in Order Review " + thirdproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
-									+" is same not as price in Order Review "+thirdproductprice2,
+							Reporting.updateTestReport(
+									"The price of third product in PDP: " + thirdproductprice
+											+ " is same not as price in Order Review " + thirdproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						String discount = WEL.fetchDiscountInOrderReview();
-						if (discount.contains(",")) 
+						if (discount.contains(","))
 							discount = discount.replace(",", "");
 						BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
@@ -1670,8 +1730,7 @@ public class WEL_Test_Suite extends DriverModule {
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 					} catch (Exception e) {
-						Reporting.updateTestReport(
-								"Order summary tab was not visible"+ e.getMessage(),
+						Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 
@@ -1701,6 +1760,13 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the place order for CMA CPA CFA
+	 * Digital Products for existing user
+	 * 
+	 */
 	@Test
 	public void TC16_PlaceOrder_CMACPACFA_DigitalProducts_ForExistingUser() throws IOException {
 		try {
@@ -1722,7 +1788,7 @@ public class WEL_Test_Suite extends DriverModule {
 			}
 			ScrollingWebPage.PageDown(driver, SS_path);
 			BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-			BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+			BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -1869,34 +1935,40 @@ public class WEL_Test_Suite extends DriverModule {
 
 						BigDecimal thirdproductprice2 = new BigDecimal(
 								WEL.fetchThirdProductPriceInOrderReview().substring(1));
-						if(firstProductPriceWIthoutDiscount.compareTo(firstproductprice2)==0)
-							Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-									+" is same as price in Order Review "+firstproductprice2,
+						if (firstProductPriceWIthoutDiscount.compareTo(firstproductprice2) == 0)
+							Reporting.updateTestReport(
+									"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+											+ " is same as price in Order Review " + firstproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-									+" is not same as price in Order Review "+firstproductprice2,
+							Reporting.updateTestReport(
+									"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+											+ " is not same as price in Order Review " + firstproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						if(secondproductprice.compareTo(secondproductprice2)==0)
-							Reporting.updateTestReport("The price of second product in PDP: "+secondproductprice
-									+" is same as price in Order Review "+secondproductprice2,
+						if (secondproductprice.compareTo(secondproductprice2) == 0)
+							Reporting.updateTestReport(
+									"The price of second product in PDP: " + secondproductprice
+											+ " is same as price in Order Review " + secondproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("The price of second product in PDP: "+secondproductprice
-									+" is same not as price in Order Review "+secondproductprice2,
+							Reporting.updateTestReport(
+									"The price of second product in PDP: " + secondproductprice
+											+ " is same not as price in Order Review " + secondproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						
-						if(thirdproductprice.compareTo(thirdproductprice2)==0)
-							Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
-									+" is same as price in Order Review "+thirdproductprice2,
+
+						if (thirdproductprice.compareTo(thirdproductprice2) == 0)
+							Reporting.updateTestReport(
+									"The price of third product in PDP: " + thirdproductprice
+											+ " is same as price in Order Review " + thirdproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
-									+" is same not as price in Order Review "+thirdproductprice2,
+							Reporting.updateTestReport(
+									"The price of third product in PDP: " + thirdproductprice
+											+ " is same not as price in Order Review " + thirdproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 						String discount = WEL.fetchDiscountInOrderReview();
-						if (discount.contains(",")) 
+						if (discount.contains(","))
 							discount = discount.replace(",", "");
 						BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
@@ -1918,8 +1990,7 @@ public class WEL_Test_Suite extends DriverModule {
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 					} catch (Exception e) {
-						Reporting.updateTestReport(
-								"Order summary tab was not visible"+ e.getMessage(),
+						Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 
@@ -1950,6 +2021,13 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the place order for CPA, CMA
+	 * Physital products and CFA physical review course for new user
+	 * 
+	 */
 	@Test
 	public void TC17_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForNewUser()
 			throws IOException {
@@ -1972,14 +2050,14 @@ public class WEL_Test_Suite extends DriverModule {
 						"//div[@id='Ultimate_CPA Review Course 2022 (Mentorship & Tutoring Bundle)']//form//button")));
 				ScrollingWebPage.PageDown(driver, SS_path);
 				Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-				firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+				firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			} catch (Exception e) {
 				driver.navigate().refresh();
 				wait1.until(ExpectedConditions.elementToBeClickable(By.xpath(
 						"//div[@id='Ultimate_CPA Review Course 2022 (Mentorship & Tutoring Bundle)']//form//button")));
 				Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-				firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+				firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			}
 			try {
@@ -2005,14 +2083,14 @@ public class WEL_Test_Suite extends DriverModule {
 						"//div[@class='container-fluid banner-container product-detail-banner mt-4']//div[7]//button")));
 				ScrollingWebPage.PageDown(driver, SS_path);
 				secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-				secondProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+				secondProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			} catch (Exception e) {
 				driver.navigate().refresh();
 				wait1.until(ExpectedConditions.elementToBeClickable(By.xpath(
 						"//div[@class='container-fluid banner-container product-detail-banner mt-4']//div[7]//button")));
 				secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-				secondProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+				secondProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			}
 			try {
@@ -2132,30 +2210,36 @@ public class WEL_Test_Suite extends DriverModule {
 
 						BigDecimal thirdproductprice2 = new BigDecimal(
 								WEL.fetchThirdProductPriceInOrderReview().substring(1));
-						if(firstProductPriceWIthoutDiscount.compareTo(firstproductprice2)==0)
-							Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-									+" is same as price in Order Review "+firstproductprice2,
+						if (firstProductPriceWIthoutDiscount.compareTo(firstproductprice2) == 0)
+							Reporting.updateTestReport(
+									"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+											+ " is same as price in Order Review " + firstproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-									+" is not same as price in Order Review "+firstproductprice2,
+							Reporting.updateTestReport(
+									"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+											+ " is not same as price in Order Review " + firstproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						if(secondProductPriceWIthoutDiscount.compareTo(secondproductprice2)==0)
-							Reporting.updateTestReport("The price of second product in PDP: "+secondProductPriceWIthoutDiscount
-									+" is same as price in Order Review "+secondproductprice2,
+						if (secondProductPriceWIthoutDiscount.compareTo(secondproductprice2) == 0)
+							Reporting.updateTestReport(
+									"The price of second product in PDP: " + secondProductPriceWIthoutDiscount
+											+ " is same as price in Order Review " + secondproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("The price of second product in PDP: "+secondProductPriceWIthoutDiscount
-									+" is same not as price in Order Review "+secondproductprice2,
+							Reporting.updateTestReport(
+									"The price of second product in PDP: " + secondProductPriceWIthoutDiscount
+											+ " is same not as price in Order Review " + secondproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						
-						if(thirdproductprice.compareTo(thirdproductprice2)==0)
-							Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
-									+" is same as price in Order Review "+thirdproductprice2,
+
+						if (thirdproductprice.compareTo(thirdproductprice2) == 0)
+							Reporting.updateTestReport(
+									"The price of third product in PDP: " + thirdproductprice
+											+ " is same as price in Order Review " + thirdproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
-									+" is same not as price in Order Review "+thirdproductprice2,
+							Reporting.updateTestReport(
+									"The price of third product in PDP: " + thirdproductprice
+											+ " is same not as price in Order Review " + thirdproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 
@@ -2182,8 +2266,7 @@ public class WEL_Test_Suite extends DriverModule {
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 					} catch (Exception e) {
-						Reporting.updateTestReport(
-								"Order summary tab was not visible"+ e.getMessage(),
+						Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 					WEL.clickOnPlaceOrderButton();
@@ -2213,6 +2296,13 @@ public class WEL_Test_Suite extends DriverModule {
 
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the place order for CPA, CMA
+	 * Physital products and CFA physical review course for existing user
+	 * 
+	 */
 	@Test
 	public void TC18_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForExistingUser()
 			throws IOException {
@@ -2234,14 +2324,14 @@ public class WEL_Test_Suite extends DriverModule {
 						"//div[@id='Ultimate_CPA Review Course 2022 (Mentorship & Tutoring Bundle)']//form//button")));
 				ScrollingWebPage.PageDown(driver, SS_path);
 				Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-				firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+				firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			} catch (Exception e) {
 				driver.navigate().refresh();
 				wait1.until(ExpectedConditions.elementToBeClickable(By.xpath(
 						"//div[@id='Ultimate_CPA Review Course 2022 (Mentorship & Tutoring Bundle)']//form//button")));
 				Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-				firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+				firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			}
 			try {
@@ -2267,14 +2357,14 @@ public class WEL_Test_Suite extends DriverModule {
 						"//div[@class='container-fluid banner-container product-detail-banner mt-4']//div[7]//button")));
 				ScrollingWebPage.PageDown(driver, SS_path);
 				secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-				secondProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+				secondProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			} catch (Exception e) {
 				driver.navigate().refresh();
 				wait1.until(ExpectedConditions.elementToBeClickable(By.xpath(
 						"//div[@class='container-fluid banner-container product-detail-banner mt-4']//div[7]//button")));
 				secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-				secondProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+				secondProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			}
 			try {
@@ -2377,7 +2467,7 @@ public class WEL_Test_Suite extends DriverModule {
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='paymentBilling']")));
 					WEL.SaveAndContinueCheckOut();
-					
+
 					try {
 						wait.until(ExpectedConditions
 								.visibilityOfElementLocated(By.xpath("//div[@id='orderSummaryProductTotalValue']")));
@@ -2392,30 +2482,36 @@ public class WEL_Test_Suite extends DriverModule {
 
 						BigDecimal thirdproductprice2 = new BigDecimal(
 								WEL.fetchThirdProductPriceInOrderReview().substring(1));
-						if(firstProductPriceWIthoutDiscount.compareTo(firstproductprice2)==0)
-							Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-									+" is same as price in Order Review "+firstproductprice2,
+						if (firstProductPriceWIthoutDiscount.compareTo(firstproductprice2) == 0)
+							Reporting.updateTestReport(
+									"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+											+ " is same as price in Order Review " + firstproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-									+" is not same as price in Order Review "+firstproductprice2,
+							Reporting.updateTestReport(
+									"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+											+ " is not same as price in Order Review " + firstproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						if(secondProductPriceWIthoutDiscount.compareTo(secondproductprice2)==0)
-							Reporting.updateTestReport("The price of second product in PDP: "+secondProductPriceWIthoutDiscount
-									+" is same as price in Order Review "+secondproductprice2,
+						if (secondProductPriceWIthoutDiscount.compareTo(secondproductprice2) == 0)
+							Reporting.updateTestReport(
+									"The price of second product in PDP: " + secondProductPriceWIthoutDiscount
+											+ " is same as price in Order Review " + secondproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("The price of second product in PDP: "+secondProductPriceWIthoutDiscount
-									+" is same not as price in Order Review "+secondproductprice2,
+							Reporting.updateTestReport(
+									"The price of second product in PDP: " + secondProductPriceWIthoutDiscount
+											+ " is same not as price in Order Review " + secondproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						
-						if(thirdproductprice.compareTo(thirdproductprice2)==0)
-							Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
-									+" is same as price in Order Review "+thirdproductprice2,
+
+						if (thirdproductprice.compareTo(thirdproductprice2) == 0)
+							Reporting.updateTestReport(
+									"The price of third product in PDP: " + thirdproductprice
+											+ " is same as price in Order Review " + thirdproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
-							Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
-									+" is same not as price in Order Review "+thirdproductprice2,
+							Reporting.updateTestReport(
+									"The price of third product in PDP: " + thirdproductprice
+											+ " is same not as price in Order Review " + thirdproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 						String discount = WEL.fetchDiscountInOrderReview();
@@ -2441,8 +2537,7 @@ public class WEL_Test_Suite extends DriverModule {
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 					} catch (Exception e) {
-						Reporting.updateTestReport(
-								"Order summary tab was not visible"+ e.getMessage(),
+						Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 					WEL.clickOnPlaceOrderButton();
@@ -2474,6 +2569,13 @@ public class WEL_Test_Suite extends DriverModule {
 
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the place order for CPA, CMA CFA
+	 * supplement course for new user
+	 * 
+	 */
 	@Test
 	public void TC19_PlaceOrderOf_CPACMACFA_SupplementCourse_ForNewUser() throws IOException {
 		try {
@@ -2548,7 +2650,7 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport(
 						"The addition of all the products' price is same as the subtotal in cart page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else 
+			else
 				Reporting.updateTestReport(
 						"The addition of all the products' pricedidn't match with the subtotal in cart page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -2611,30 +2713,36 @@ public class WEL_Test_Suite extends DriverModule {
 						WEL.fetchSecondProductPriceInOrderReview().substring(1));
 
 				BigDecimal thirdproductprice2 = new BigDecimal(WEL.fetchThirdProductPriceInOrderReview().substring(1));
-				if(Firstproductprice.compareTo(firstproductprice2)==0)
-					Reporting.updateTestReport("The price of first product in PDP: "+Firstproductprice
-							+" is same as price in Order Review "+firstproductprice2,
+				if (Firstproductprice.compareTo(firstproductprice2) == 0)
+					Reporting.updateTestReport(
+							"The price of first product in PDP: " + Firstproductprice
+									+ " is same as price in Order Review " + firstproductprice2,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				else
-					Reporting.updateTestReport("The price of first product in PDP: "+Firstproductprice
-							+" is not same as price in Order Review "+firstproductprice2,
+					Reporting.updateTestReport(
+							"The price of first product in PDP: " + Firstproductprice
+									+ " is not same as price in Order Review " + firstproductprice2,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				if(secondproductprice.compareTo(secondproductprice2)==0)
-					Reporting.updateTestReport("The price of second product in PDP: "+secondproductprice
-							+" is same as price in Order Review "+secondproductprice2,
+				if (secondproductprice.compareTo(secondproductprice2) == 0)
+					Reporting.updateTestReport(
+							"The price of second product in PDP: " + secondproductprice
+									+ " is same as price in Order Review " + secondproductprice2,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				else
-					Reporting.updateTestReport("The price of second product in PDP: "+secondproductprice
-							+" is same not as price in Order Review "+secondproductprice2,
+					Reporting.updateTestReport(
+							"The price of second product in PDP: " + secondproductprice
+									+ " is same not as price in Order Review " + secondproductprice2,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				
-				if(thirdproductprice.compareTo(thirdproductprice2)==0)
-					Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
-							+" is same as price in Order Review "+thirdproductprice2,
+
+				if (thirdproductprice.compareTo(thirdproductprice2) == 0)
+					Reporting.updateTestReport(
+							"The price of third product in PDP: " + thirdproductprice
+									+ " is same as price in Order Review " + thirdproductprice2,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				else
-					Reporting.updateTestReport("The price of third product in PDP: "+thirdproductprice
-							+" is same not as price in Order Review "+thirdproductprice2,
+					Reporting.updateTestReport(
+							"The price of third product in PDP: " + thirdproductprice
+									+ " is same not as price in Order Review " + thirdproductprice2,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 				BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(thirdproductprice2).add(tax1);
@@ -2653,8 +2761,7 @@ public class WEL_Test_Suite extends DriverModule {
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 			} catch (Exception e) {
-				Reporting.updateTestReport(
-						"Order summary tab was not visible"+ e.getMessage(),
+				Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 
@@ -2677,6 +2784,13 @@ public class WEL_Test_Suite extends DriverModule {
 
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the place order for CIA , CAIA
+	 * products for new user
+	 * 
+	 */
 	@Test
 	public void TC20_PlaceOrder_OfOther_ProductsCIACAIAFor_NewUser() throws IOException {
 		try {
@@ -2699,7 +2813,7 @@ public class WEL_Test_Suite extends DriverModule {
 							By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 					ScrollingWebPage.PageDown(driver, SS_path);
 					BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-					BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+					BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 					WEL.clickOnAddToCartButtonOnPDP();
 					WEL.ClickWELIconCheckoutPage();
 
@@ -2746,7 +2860,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"The addition of all the products' price is same as the subtotal in cart page",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								else 
+								else
 									Reporting.updateTestReport(
 											"The addition of all the products' pricedidn't match with the subtotal in cart page",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -2805,26 +2919,33 @@ public class WEL_Test_Suite extends DriverModule {
 
 										BigDecimal secondproductprice2 = new BigDecimal(
 												WEL.fetchSecondProductPriceInOrderReview().substring(1));
-										if(firstProductPriceWIthoutDiscount.compareTo(firstproductprice2)==0)
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is same as price in Order Review "+firstproductprice2,
+										if (firstProductPriceWIthoutDiscount.compareTo(firstproductprice2) == 0)
+											Reporting.updateTestReport(
+													"The price of first product in PDP: "
+															+ firstProductPriceWIthoutDiscount
+															+ " is same as price in Order Review " + firstproductprice2,
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is not same as price in Order Review "+firstproductprice2,
+											Reporting.updateTestReport("The price of first product in PDP: "
+													+ firstProductPriceWIthoutDiscount
+													+ " is not same as price in Order Review " + firstproductprice2,
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										if(secondproductprice.compareTo(secondproductprice2)==0)
-											Reporting.updateTestReport("The price of second product in PDP: "+secondproductprice
-													+" is same as price in Order Review "+secondproductprice2,
+										if (secondproductprice.compareTo(secondproductprice2) == 0)
+											Reporting.updateTestReport(
+													"The price of second product in PDP: " + secondproductprice
+															+ " is same as price in Order Review "
+															+ secondproductprice2,
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
-											Reporting.updateTestReport("The price of second product in PDP: "+secondproductprice
-													+" is same not as price in Order Review "+secondproductprice2,
+											Reporting.updateTestReport(
+													"The price of second product in PDP: " + secondproductprice
+															+ " is same not as price in Order Review "
+															+ secondproductprice2,
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 
 										String discount = WEL.fetchDiscountInOrderReview();
-										if (discount.contains(",")) 
+										if (discount.contains(","))
 											discount = discount.replace(",", "");
 										BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
@@ -2847,8 +2968,7 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Order summary tab was not visible"+ e.getMessage(),
+										Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
@@ -2896,6 +3016,13 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the place order for CPA, CMA, CFA
+	 * Free-Trial for new user
+	 * 
+	 */
 	@Test
 	public void TC21_PlaceOrder_CPACMACFA_FreeTrailFor_NewUser() throws IOException {
 		try {
@@ -3020,6 +3147,13 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the place order for CPA, CMA, CFA
+	 * Free-Trial for existing user
+	 * 
+	 */
 	@Test
 	public void TC22_PlaceOrder_CPACMACFA_FreeTrailFor_ExistingUser() throws IOException {
 		try {
@@ -3138,6 +3272,13 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the place order for CIA
+	 * Free-Trial for new user
+	 * 
+	 */
 	@Test
 	public void TC23_PlaceOrder_OfOther_ProductsCIA_FreeTrailFor_NewUser() throws IOException {
 		try {
@@ -3189,6 +3330,13 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the place order using saved
+	 * shipping address for existing user
+	 * 
+	 */
 	@Test
 	public void TC24_PlaceOrder_UsingSavedShippingAddress_ForExistingUser() throws IOException {
 		try {
@@ -3229,7 +3377,8 @@ public class WEL_Test_Suite extends DriverModule {
 									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-							BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+									WEL.fetchOldPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -3317,23 +3466,25 @@ public class WEL_Test_Suite extends DriverModule {
 									if (orderprice.contains(","))
 										orderprice = orderprice.replace(",", "");
 									BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-									if(firstProductPriceWIthoutDiscount.compareTo(orderproductprice)==0)
-										Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-												+" is same as price in Order Review "+orderproductprice,
+									if (firstProductPriceWIthoutDiscount.compareTo(orderproductprice) == 0)
+										Reporting.updateTestReport(
+												"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+														+ " is same as price in Order Review " + orderproductprice,
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 									else
-										Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-												+" is not same as price in Order Review "+orderproductprice,
+										Reporting.updateTestReport(
+												"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+														+ " is not same as price in Order Review " + orderproductprice,
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									String discount = WEL.fetchDiscountInOrderReview();
-									if (discount.contains(",")) 
+									if (discount.contains(","))
 										discount = discount.replace(",", "");
 									BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 									BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 									BigDecimal totalprice = orderproductprice.add(tax1).subtract(discountinorderreview);
 									String totalorderReview = WEL.fetchTotalInOrderReview();
-									if (totalorderReview.contains(",")) 
+									if (totalorderReview.contains(","))
 										totalorderReview = totalorderReview.replace(",", "");
 									BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -3349,8 +3500,7 @@ public class WEL_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 								} catch (Exception e) {
-									Reporting.updateTestReport(
-											"Order summary tab was not visible"+ e.getMessage(),
+									Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
@@ -3394,6 +3544,13 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validating the shipping methods for US,
+	 * UK, Australia, Canada,India, Singapore
+	 * 
+	 */
 	@Test
 	public void TC25_ShippingMethodfor_USUKAustralia_CanadaIndiaSingapore() throws IOException {
 		try {
@@ -3511,6 +3668,12 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: Shipping Charge for multiple products
+	 * 
+	 */
 	@Test
 	public void TC26_ShippingChargeFor_MultipleProducts() throws IOException {
 		try {
@@ -3600,6 +3763,12 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: Address Suggestion by Address doctor in Shipping Page
+	 * 
+	 */
 	@Test
 	public void TC27_AddressSuggestion_ByAddressDoctorInShippingpage() throws IOException {
 		try {
@@ -3624,7 +3793,8 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+								WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -3689,16 +3859,21 @@ public class WEL_Test_Suite extends DriverModule {
 							BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 							BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1))
 									.subtract(discountinorderreview);
-							if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-								Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-										+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+							if (firstProductPriceWIthoutDiscount
+									.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+								Reporting.updateTestReport(
+										"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+												+ " is same as price in Order Review "
+												+ new BigDecimal(orderprice.substring(1)),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							else
-								Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-										+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+								Reporting.updateTestReport(
+										"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+												+ " is not same as price in Order Review "
+												+ new BigDecimal(orderprice.substring(1)),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							String totalorderReview = WEL.fetchTotalInOrderReview();
-							if (totalorderReview.contains(",")) 
+							if (totalorderReview.contains(","))
 								totalorderReview = totalorderReview.replace(",", "");
 							BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -3712,8 +3887,7 @@ public class WEL_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 						} catch (Exception e) {
-							Reporting.updateTestReport(
-									"Order summary tab was not visible"+ e.getMessage(),
+							Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 						WEL.ClickOnBackTOCart();
@@ -3743,6 +3917,12 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: Student verification for Digital Cart for US and NON US Address
+	 * 
+	 */
 	@Test
 	public void TC28_StudentVerification_ForDigitalCartofUSANDNonUS() throws IOException {
 		try {
@@ -3772,7 +3952,8 @@ public class WEL_Test_Suite extends DriverModule {
 							WEL.ClickonApplyStudentDiscount();
 							WEL.ClickonswitchStudentDiscount();
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-							BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+									WEL.fetchOldPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -3843,29 +4024,34 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) 
+								if (orderprice.contains(","))
 									orderprice = orderprice.replace(",", "");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-								if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-									Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-											+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+								if (firstProductPriceWIthoutDiscount
+										.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+									Reporting.updateTestReport(
+											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+													+ " is same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
-									Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-											+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+									Reporting.updateTestReport(
+											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+													+ " is not same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
-								if (shippingcharge.contains(",")) 
+								if (shippingcharge.contains(","))
 									shippingcharge = shippingcharge.replace(",", "");
 								BigDecimal ShipchargoneReviewpage = new BigDecimal(shippingcharge.substring(1));
 
 								BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
 								BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount)
 										.add(ShipchargoneReviewpage);
-								System.out.println(orderTotalpriceafterDiscount);
+
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) 
+								if (totalorderReview.contains(","))
 									totalorderReview = totalorderReview.replace(",", "");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -3879,8 +4065,7 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								Reporting.updateTestReport(
-										"Order summary tab was not visible"+ e.getMessage(),
+								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							WEL.ClickOnEditIcononShippingPage();
@@ -3928,8 +4113,7 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								Reporting.updateTestReport(
-										"Order summary tab was not visible"+ e.getMessage(),
+								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							WEL.VerificationOfStudentForNonUS();
@@ -3959,11 +4143,18 @@ public class WEL_Test_Suite extends DriverModule {
 
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is validate the Student verification for
+	 * Physical cart for US and NON US Address
+	 * 
+	 */
 	@Test
 	public void TC29_StudentVerification_ForPhysicalCartofUSANDNonUS() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC29_StudentVerification_ForPhysicalCartofUSANDNonUS");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
@@ -4056,17 +4247,21 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) 
+								if (orderprice.contains(","))
 									orderprice = orderprice.replace(",", "");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-								BigDecimal shippingChargeInOrderReview=new BigDecimal(WEL.fetchShippingChargeInOrderReview().substring(1));
+								BigDecimal shippingChargeInOrderReview = new BigDecimal(
+										WEL.fetchShippingChargeInOrderReview().substring(1));
 								BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
-								BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount).add(shippingChargeInOrderReview);
+								BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount)
+										.add(shippingChargeInOrderReview);
+								System.out.println("XXX" + orderTotalpriceafterDiscount);
 
 								String totalorderReview = WEL.fetchTotalInOrderReview();
 								if (totalorderReview.contains(","))
 									totalorderReview = totalorderReview.replace(",", "");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
+								System.out.println("YY" + orderTotalPrice);
 
 								if (orderTotalpriceafterDiscount.compareTo(orderTotalPrice) == 0)
 									Reporting.updateTestReport(
@@ -4078,8 +4273,7 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								Reporting.updateTestReport(
-										"Order summary tab was not visible"+ e.getMessage(),
+								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							WEL.ClickOnEditIcononShippingPage();
@@ -4092,6 +4286,8 @@ public class WEL_Test_Suite extends DriverModule {
 							}
 							WEL.ClickOnShowMoreShippingAddress();
 							WEL.ClickOnUseButtonForExistingShippingAddress();
+							ScrollingWebPage.PageScrolldown(driver, 0, 1200, SS_path);
+
 							try {
 								wait.until(ExpectedConditions
 										.elementToBeClickable(By.xpath("//button[@id='addressSubmit']")));
@@ -4105,17 +4301,24 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) 
+								if (orderprice.contains(","))
 									orderprice = orderprice.replace(",", "");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
 								BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
-								BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount);
+								
+								BigDecimal shippingChargeInOrderReview = new BigDecimal(
+										WEL.fetchShippingChargeInOrderReview().substring(1));
+								
+								BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount)
+										.add(shippingChargeInOrderReview);
+								System.out.println("Price afterdiscount" + orderTotalpriceafterDiscount);
 
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) 
+								if (totalorderReview.contains(","))
 									totalorderReview = totalorderReview.replace(",", "");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
+								System.out.println("orderTotalPrice" + orderTotalPrice);
 
 								if (orderTotalpriceafterDiscount.compareTo(orderTotalPrice) == 0)
 									Reporting.updateTestReport(
@@ -4127,8 +4330,7 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								Reporting.updateTestReport(
-										"Order summary tab was not visible"+ e.getMessage(),
+								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							WEL.VerificationOfStudentForNonUS();
@@ -4158,6 +4360,13 @@ public class WEL_Test_Suite extends DriverModule {
 
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate place order for using saved
+	 * Billing address for existing user
+	 * 
+	 */
 	@Test
 	public void TC30_PlaceOrder_UsingSavedBillingAddress_ForExistingUser() throws IOException {
 		try {
@@ -4185,7 +4394,8 @@ public class WEL_Test_Suite extends DriverModule {
 						ScrollingWebPage.PageDown(driver, SS_path);
 
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+								WEL.fetchOldPriceInPDP().substring(1));
 						try {
 							wait.until(ExpectedConditions
 									.elementToBeClickable(By.xpath("//button[contains(text(),'ADD TO CART')]")));
@@ -4263,19 +4473,23 @@ public class WEL_Test_Suite extends DriverModule {
 										// This statement is we are getting the firstProduct price in Order Review page
 										// and Storing in String Object
 										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-										if (orderprice.contains(",")) 
+										if (orderprice.contains(","))
 											orderprice = orderprice.replace(",", "");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-										if(firstProductPriceWIthoutDiscount.compareTo(orderproductprice)==0)
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+										if (firstProductPriceWIthoutDiscount.compareTo(orderproductprice) == 0)
+											Reporting.updateTestReport(
+													"The price of first product in PDP: "
+															+ firstProductPriceWIthoutDiscount
+															+ " is same as price in Order Review "
+															+ new BigDecimal(orderprice.substring(1)),
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is not same as price in Order Review "+orderproductprice,
+											Reporting.updateTestReport("The price of first product in PDP: "
+													+ firstProductPriceWIthoutDiscount
+													+ " is not same as price in Order Review " + orderproductprice,
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										String discount = WEL.fetchDiscountInOrderReview();
-										if (discount.contains(",")) 
+										if (discount.contains(","))
 											discount = discount.replace(",", "");
 										BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
@@ -4283,7 +4497,7 @@ public class WEL_Test_Suite extends DriverModule {
 										BigDecimal totalprice = orderproductprice.add(tax1)
 												.subtract(discountinorderreview);
 										String totalorderReview = WEL.fetchTotalInOrderReview();
-										if (totalorderReview.contains(",")) 
+										if (totalorderReview.contains(","))
 											totalorderReview = totalorderReview.replace(",", "");
 										BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -4299,8 +4513,7 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Order summary tab was not visible"+ e.getMessage(),
+										Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
@@ -4351,6 +4564,13 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the Shipping and Billing Address
+	 * for Same for New User
+	 * 
+	 */
 	@Test
 	public void TC31_ShippingAndBilling_AddressSamefor_NewUser() throws IOException {
 		try {
@@ -4374,7 +4594,8 @@ public class WEL_Test_Suite extends DriverModule {
 								.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+								WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -4446,16 +4667,21 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) 
+								if (orderprice.contains(","))
 									orderprice = orderprice.replace(",", "");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-								if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-									Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-											+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+								if (firstProductPriceWIthoutDiscount
+										.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+									Reporting.updateTestReport(
+											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+													+ " is same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
-									Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-											+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+									Reporting.updateTestReport(
+											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+													+ " is not same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 								BigDecimal orderproductpriceincludingtax = orderproductprice.add(tax1);
@@ -4478,10 +4704,9 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								Reporting.updateTestReport(
-										"Order summary tab was not visible"+ e.getMessage(),
+								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+							}
 							ScrollingWebPage.PageScrollUp(driver, 0, -300, SS_path);
 							WEL.ClickOnBackTOCart();
 							WEL.ClickOnRemoveOnCartPage();
@@ -4512,6 +4737,13 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the Shipping and Billing Address
+	 * for different for New User
+	 * 
+	 */
 
 	@Test
 	public void TC32_ShippingAndBilling_AddressDifferentfor_NewUser() throws IOException {
@@ -4531,13 +4763,14 @@ public class WEL_Test_Suite extends DriverModule {
 							By.xpath("//div[@class='comparison-table-title-container header-sticky']//div[2]/a")));
 					ScrollingWebPage.PageDown(driver, SS_path);
 					WEL.ClickOnViewCourseForCIAProduct();
-					
+
 					try {
 						wait.until(ExpectedConditions
 								.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+								WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -4591,16 +4824,21 @@ public class WEL_Test_Suite extends DriverModule {
 									By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 							String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-							if (orderprice.contains(",")) 
+							if (orderprice.contains(","))
 								orderprice = orderprice.replace(",", "");
 							BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-							if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-								Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-										+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+							if (firstProductPriceWIthoutDiscount
+									.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+								Reporting.updateTestReport(
+										"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+												+ " is same as price in Order Review "
+												+ new BigDecimal(orderprice.substring(1)),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							else
-								Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-										+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+								Reporting.updateTestReport(
+										"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+												+ " is not same as price in Order Review "
+												+ new BigDecimal(orderprice.substring(1)),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
 							BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount);
@@ -4619,8 +4857,7 @@ public class WEL_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 						} catch (Exception e) {
-							Reporting.updateTestReport(
-									"Order summary tab was not visible"+ e.getMessage(),
+							Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 						WEL.ShipSaveAndContinueButton();
@@ -4646,14 +4883,14 @@ public class WEL_Test_Suite extends DriverModule {
 											By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 									String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-									if (orderprice.contains(",")) 
+									if (orderprice.contains(","))
 										orderprice = orderprice.replace(",", "");
 									BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
 									BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
 									BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount);
 									String totalorderReview = WEL.fetchTotalInOrderReview();
-									if (totalorderReview.contains(",")) 
+									if (totalorderReview.contains(","))
 										totalorderReview = totalorderReview.replace(",", "");
 									BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -4667,8 +4904,7 @@ public class WEL_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 								} catch (Exception e) {
-									Reporting.updateTestReport(
-											"Order summary tab was not visible"+ e.getMessage(),
+									Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 							} catch (Exception e) {
@@ -4703,6 +4939,12 @@ public class WEL_Test_Suite extends DriverModule {
 
 		}
 	}
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate Address suggestion by Address
+	 * Doctor In Billing Page
+	 */
 
 	@Test
 	public void TC33_AddressSuggestion_ByAddressDoctorInBillingpage() throws IOException {
@@ -4732,7 +4974,7 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions
 									.elementToBeClickable(By.xpath("//button[contains(text(),'ADD TO CART')]")));
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-							
+
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -4853,6 +5095,12 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validatePlace order with paypal payment
+	 * Option for New user
+	 */
 	@Test
 	public void TC34_PlaceOrder_withPaypalPayment_OptionForNewUser() throws IOException {
 		try {
@@ -4879,7 +5127,8 @@ public class WEL_Test_Suite extends DriverModule {
 									.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-							BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+									WEL.fetchOldPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -4946,13 +5195,18 @@ public class WEL_Test_Suite extends DriverModule {
 								if (orderprice.contains(","))
 									orderprice = orderprice.replace(",", "");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-								if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-									Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-											+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+								if (firstProductPriceWIthoutDiscount
+										.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+									Reporting.updateTestReport(
+											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+													+ " is same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
-									Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-											+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+									Reporting.updateTestReport(
+											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+													+ " is not same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 								BigDecimal totalprice = orderproductprice.add(tax1);
@@ -4960,9 +5214,9 @@ public class WEL_Test_Suite extends DriverModule {
 								BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
 								BigDecimal orderTotalpriceafterDiscount = totalprice.subtract(discount);
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) 
+								if (totalorderReview.contains(","))
 									totalorderReview = totalorderReview.replace(",", "");
-								
+
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
 								if (orderTotalpriceafterDiscount.compareTo(orderTotalPrice) == 0)
@@ -4977,8 +5231,7 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								Reporting.updateTestReport(
-										"Order summary tab was not visible"+ e.getMessage(),
+								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 
@@ -5015,6 +5268,13 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validatePlace order with paypal payment
+	 * Option for existing user
+	 */
+
 	@Test
 	public void TC35_PlaceOrder_withPaypalPayment_OptionForExistingUser() throws IOException {
 		try {
@@ -5041,7 +5301,8 @@ public class WEL_Test_Suite extends DriverModule {
 									.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-							BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+									WEL.fetchOldPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -5111,16 +5372,21 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) 
+								if (orderprice.contains(","))
 									orderprice = orderprice.replace(",", "");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-								if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-									Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-											+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+								if (firstProductPriceWIthoutDiscount
+										.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+									Reporting.updateTestReport(
+											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+													+ " is same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
-									Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-											+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+									Reporting.updateTestReport(
+											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+													+ " is not same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								String discount = WEL.fetchDiscountInOrderReview();
 								if (discount.contains(","))
@@ -5144,8 +5410,7 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								Reporting.updateTestReport(
-										"Order summary tab was not visible"+ e.getMessage(),
+								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 
@@ -5182,6 +5447,12 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate Place order with paypalCredit
+	 * Option for existing user
+	 */
 	@Test
 	public void TC36_PlaceOrder_withPaypalCredit_OptionForExistingUser() throws IOException {
 		try {
@@ -5208,7 +5479,8 @@ public class WEL_Test_Suite extends DriverModule {
 									.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-							BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+									WEL.fetchOldPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -5294,7 +5566,7 @@ public class WEL_Test_Suite extends DriverModule {
 												By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-										if (orderprice.contains(",")) 
+										if (orderprice.contains(","))
 											orderprice = orderprice.replace(",", "");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
@@ -5306,16 +5578,23 @@ public class WEL_Test_Suite extends DriverModule {
 										BigDecimal orderTotalDiscount = totalprice.subtract(discount);
 
 										String totalorderReview = WEL.fetchTotalInOrderReview();
-										if (totalorderReview.contains(",")) 
+										if (totalorderReview.contains(","))
 											totalorderReview = totalorderReview.replace(",", "");
 										BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
-										if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+										if (firstProductPriceWIthoutDiscount
+												.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+											Reporting.updateTestReport(
+													"The price of first product in PDP: "
+															+ firstProductPriceWIthoutDiscount
+															+ " is same as price in Order Review "
+															+ new BigDecimal(orderprice.substring(1)),
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+											Reporting.updateTestReport(
+													"The price of first product in PDP: "
+															+ firstProductPriceWIthoutDiscount
+															+ " is not same as price in Order Review "
+															+ new BigDecimal(orderprice.substring(1)),
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										if (orderTotalDiscount.compareTo(orderTotalPrice) == 0)
 											Reporting.updateTestReport(
@@ -5329,8 +5608,7 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Order summary tab was not visible"+ e.getMessage(),
+										Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 									ScrollingWebPage.PageDown(driver, SS_path);
@@ -5378,6 +5656,13 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate Place order with paypalCredit
+	 * Option for new user
+	 */
+
 	@Test
 	public void TC37_PlaceOrder_withPaypalCredit_OptionForNewUser() throws IOException {
 		try {
@@ -5404,7 +5689,8 @@ public class WEL_Test_Suite extends DriverModule {
 									.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-							BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+									WEL.fetchOldPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -5494,7 +5780,7 @@ public class WEL_Test_Suite extends DriverModule {
 												By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-										if (orderprice.contains(",")) 
+										if (orderprice.contains(","))
 											orderprice = orderprice.replace(",", "");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
@@ -5506,16 +5792,23 @@ public class WEL_Test_Suite extends DriverModule {
 										BigDecimal orderTotalDiscount = totalprice.subtract(discount);
 
 										String totalorderReview = WEL.fetchTotalInOrderReview();
-										if (totalorderReview.contains(",")) 
+										if (totalorderReview.contains(","))
 											totalorderReview = totalorderReview.replace(",", "");
 										BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
-										if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+										if (firstProductPriceWIthoutDiscount
+												.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+											Reporting.updateTestReport(
+													"The price of first product in PDP: "
+															+ firstProductPriceWIthoutDiscount
+															+ " is same as price in Order Review "
+															+ new BigDecimal(orderprice.substring(1)),
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+											Reporting.updateTestReport(
+													"The price of first product in PDP: "
+															+ firstProductPriceWIthoutDiscount
+															+ " is not same as price in Order Review "
+															+ new BigDecimal(orderprice.substring(1)),
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										if (orderTotalDiscount.compareTo(orderTotalPrice) == 0)
 											Reporting.updateTestReport(
@@ -5529,8 +5822,7 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Order summary tab was not visible"+ e.getMessage(),
+										Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 									ScrollingWebPage.PageDown(driver, SS_path);
@@ -5579,6 +5871,8 @@ public class WEL_Test_Suite extends DriverModule {
 	}
 
 	/*
+	 * @Author: Vishnu
+	 * 
 	 * @Date: 01/02/23
 	 * 
 	 * @Description: Navigating to and fro between the shipping and billing section
@@ -5919,7 +6213,8 @@ public class WEL_Test_Suite extends DriverModule {
 			// wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(EmailConfirmationText)))
 			ScrollingWebPage.PageDown(driver, SS_path);
 			BigDecimal price = new BigDecimal(WEL.fetchPartnerProductPriceInPDP().substring(1));
-			BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchLastPriceInPDPForPartner().substring(1));
+			BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+					WEL.fetchLastPriceInPDPForPartner().substring(1));
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -6002,13 +6297,18 @@ public class WEL_Test_Suite extends DriverModule {
 							if (orderprice.contains(","))
 								orderprice = orderprice.replace(",", "");
 							BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-							if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-								Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-										+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+							if (firstProductPriceWIthoutDiscount
+									.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+								Reporting.updateTestReport(
+										"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+												+ " is same as price in Order Review "
+												+ new BigDecimal(orderprice.substring(1)),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							else
-								Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-										+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+								Reporting.updateTestReport(
+										"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+												+ " is not same as price in Order Review "
+												+ new BigDecimal(orderprice.substring(1)),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 							BigDecimal totalprice = orderproductprice.add(tax1);
@@ -6016,7 +6316,7 @@ public class WEL_Test_Suite extends DriverModule {
 							BigDecimal orderTotalDiscount = totalprice.subtract(discount);
 
 							String totalorderReview = WEL.fetchTotalInOrderReview();
-							if (totalorderReview.contains(",")) 
+							if (totalorderReview.contains(","))
 								totalorderReview = totalorderReview.replace(",", "");
 							BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -6031,8 +6331,7 @@ public class WEL_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 						} catch (Exception e) {
-							Reporting.updateTestReport(
-									"Order summary tab was not visible"+ e.getMessage(),
+							Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 						WEL.clickOnPlaceOrderButton();
@@ -6070,6 +6369,13 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate Place order with Partner product
+	 * having 100% discount
+	 */
+
 	@Test
 	public void TC43_PlaceOrderwith_PartnerProduct_Having100Percent_Discount() throws IOException {
 		try {
@@ -6090,10 +6396,11 @@ public class WEL_Test_Suite extends DriverModule {
 					ScrollingWebPage.PageDown(driver, SS_path);
 
 					try {
-						wait.until(ExpectedConditions
-								.visibilityOfElementLocated(By.xpath("(//div[@class='col']//button)[2]")));
+						wait.until(ExpectedConditions.visibilityOfElementLocated(
+								By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 						BigDecimal price = new BigDecimal(WEL.fetchPartnerProductPriceInPDP().substring(1));
-						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchLastPriceInPDPForPartner().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+								WEL.fetchLastPriceInPDPForPartner().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							try {
@@ -6165,16 +6472,21 @@ public class WEL_Test_Suite extends DriverModule {
 									if (orderprice.contains(","))
 										orderprice = orderprice.replace(",", "");
 									BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-									if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-										Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-												+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+									if (firstProductPriceWIthoutDiscount
+											.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+										Reporting.updateTestReport(
+												"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+														+ " is same as price in Order Review "
+														+ new BigDecimal(orderprice.substring(1)),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 									else
-										Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-												+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+										Reporting.updateTestReport(
+												"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+														+ " is not same as price in Order Review "
+														+ new BigDecimal(orderprice.substring(1)),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									String discount = WEL.fetchDiscountInOrderReview();
-									if (discount.contains(",")) 
+									if (discount.contains(","))
 										discount = discount.replace(",", "");
 									BigDecimal orderdiscountprice = new BigDecimal(discount.substring(1));
 									BigDecimal orderTotalDiscount = orderproductprice.subtract(orderdiscountprice);
@@ -6194,8 +6506,7 @@ public class WEL_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 								} catch (Exception e) {
-									Reporting.updateTestReport(
-											"Order summary tab was not visible"+ e.getMessage(),
+									Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
@@ -6239,6 +6550,13 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate Place order University Partner
+	 * Product
+	 */
+
 	@Test
 	public void TC44_PlaceOrderFor_UniversityPartner_Product() throws IOException {
 		try {
@@ -6257,7 +6575,8 @@ public class WEL_Test_Suite extends DriverModule {
 					wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 							"//div[@class='partner-detail partner-list-container']//div[@class='col-xs-12 col-sm-6 package-selection-col']//button")));
 					BigDecimal price = new BigDecimal(WEL.fetchPartnerProductPriceInPDP().substring(1));
-					BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchLastPriceInPDPForPartner().substring(1));
+					BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+							WEL.fetchLastPriceInPDPForPartner().substring(1));
 					WEL.clickOnAddToCartButtonOnPDP();
 
 					try {
@@ -6352,16 +6671,23 @@ public class WEL_Test_Suite extends DriverModule {
 												By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-										if (orderprice.contains(",")) 
+										if (orderprice.contains(","))
 											orderprice = orderprice.replace(",", "");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-										if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+										if (firstProductPriceWIthoutDiscount
+												.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+											Reporting.updateTestReport(
+													"The price of first product in PDP: "
+															+ firstProductPriceWIthoutDiscount
+															+ " is same as price in Order Review "
+															+ new BigDecimal(orderprice.substring(1)),
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+											Reporting.updateTestReport(
+													"The price of first product in PDP: "
+															+ firstProductPriceWIthoutDiscount
+															+ " is not same as price in Order Review "
+															+ new BigDecimal(orderprice.substring(1)),
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 										BigDecimal totalprice = orderproductprice.add(tax1);
@@ -6389,8 +6715,7 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Order summary tab was not visible"+ e.getMessage(),
+										Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
@@ -6439,6 +6764,8 @@ public class WEL_Test_Suite extends DriverModule {
 	}
 
 	/*
+	 * @Author: Vishnu
+	 * 
 	 * @Date: 02/02/23
 	 * 
 	 * @Description: Validates that if user comes back and changes the shipping
@@ -6468,7 +6795,8 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+								WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -6568,16 +6896,23 @@ public class WEL_Test_Suite extends DriverModule {
 										if (orderprice.contains(","))
 											orderprice = orderprice.replace(",", "");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-										if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+										if (firstProductPriceWIthoutDiscount
+												.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+											Reporting.updateTestReport(
+													"The price of first product in PDP: "
+															+ firstProductPriceWIthoutDiscount
+															+ " is same as price in Order Review "
+															+ new BigDecimal(orderprice.substring(1)),
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
+											Reporting.updateTestReport(
+													"The price of first product in PDP: "
+															+ firstProductPriceWIthoutDiscount
+															+ " is not same as price in Order Review "
+															+ new BigDecimal(orderprice.substring(1)),
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										String discount = WEL.fetchDiscountInOrderReview();
-										if (discount.contains(",")) 
+										if (discount.contains(","))
 											discount = discount.replace(",", "");
 										BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
@@ -6592,7 +6927,7 @@ public class WEL_Test_Suite extends DriverModule {
 										BigDecimal totalprice = orderproductprice.add(tax).add(ShipchargoneReviewpage)
 												.subtract(discountinorderreview);
 										String totalorderReview = WEL.fetchTotalInOrderReview();
-										if (totalorderReview.contains(",")) 
+										if (totalorderReview.contains(","))
 											totalorderReview = totalorderReview.replace(",", "");
 										BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -6608,8 +6943,7 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Order summary tab was not visible"+ e.getMessage(),
+										Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 									WEL.clickOnShippingDetailsEditIcon();
@@ -6687,27 +7021,38 @@ public class WEL_Test_Suite extends DriverModule {
 															By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 													String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-													if (orderprice.contains(",")) 
+													if (orderprice.contains(","))
 														orderprice = orderprice.replace(",", "");
 													BigDecimal orderproductprice = new BigDecimal(
 															orderprice.substring(1));
-													if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-														Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-																+" is same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+													if (firstProductPriceWIthoutDiscount
+															.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+														Reporting
+																.updateTestReport(
+																		"The price of first product in PDP: "
+																				+ firstProductPriceWIthoutDiscount
+																				+ " is same as price in Order Review "
+																				+ new BigDecimal(
+																						orderprice.substring(1)),
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.PASS);
 													else
-														Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-																+" is not same as price in Order Review "+new BigDecimal(orderprice.substring(1)),
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+														Reporting.updateTestReport(
+																"The price of first product in PDP: "
+																		+ firstProductPriceWIthoutDiscount
+																		+ " is not same as price in Order Review "
+																		+ new BigDecimal(orderprice.substring(1)),
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
 													String discount = WEL.fetchDiscountInOrderReview();
-													if (discount.contains(",")) 
+													if (discount.contains(","))
 														discount = discount.replace(",", "");
 													BigDecimal discountinorderreview = new BigDecimal(
 															discount.substring(1));
 
 													String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
-													if (shippingcharge.contains(",")) 
+													if (shippingcharge.contains(","))
 														shippingcharge = shippingcharge.replace(",", "");
 													BigDecimal ShipchargoneReviewpage = new BigDecimal(
 															shippingcharge.substring(1));
@@ -6718,7 +7063,7 @@ public class WEL_Test_Suite extends DriverModule {
 															.add(ShipchargoneReviewpage)
 															.subtract(discountinorderreview);
 													String totalorderReview = WEL.fetchTotalInOrderReview();
-													if (totalorderReview.contains(",")) 
+													if (totalorderReview.contains(","))
 														totalorderReview = totalorderReview.replace(",", "");
 													BigDecimal orderTotalPrice = new BigDecimal(
 															totalorderReview.substring(1));
@@ -6737,8 +7082,9 @@ public class WEL_Test_Suite extends DriverModule {
 
 												} catch (Exception e) {
 													Reporting.updateTestReport(
-															"Order summary tab was not visible"+ e.getMessage(),
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+															"Order summary tab was not visible" + e.getMessage(),
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
 												}
 											} catch (Exception e) {
 												Reporting.updateTestReport(
@@ -6792,6 +7138,8 @@ public class WEL_Test_Suite extends DriverModule {
 	}
 
 	/*
+	 * @Author: Vishnu
+	 * 
 	 * @Date: 01/02/23
 	 * 
 	 * @Description: Validates that if user comes back and changes the shipping
@@ -6821,7 +7169,8 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+								WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -6918,13 +7267,17 @@ public class WEL_Test_Suite extends DriverModule {
 										if (orderprice.contains(","))
 											orderprice = orderprice.replace(",", "");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-										if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is same as price in Order Review "+orderproductprice,
+										if (firstProductPriceWIthoutDiscount
+												.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+											Reporting.updateTestReport(
+													"The price of first product in PDP: "
+															+ firstProductPriceWIthoutDiscount
+															+ " is same as price in Order Review " + orderproductprice,
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is not same as price in Order Review "+orderproductprice,
+											Reporting.updateTestReport("The price of first product in PDP: "
+													+ firstProductPriceWIthoutDiscount
+													+ " is not same as price in Order Review " + orderproductprice,
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										String discount = WEL.fetchDiscountInOrderReview();
 										if (discount.contains(","))
@@ -6936,7 +7289,7 @@ public class WEL_Test_Suite extends DriverModule {
 												.subtract(discountinorderreview);
 
 										String totalorderReview = WEL.fetchTotalInOrderReview();
-										if (totalorderReview.contains(",")) 
+										if (totalorderReview.contains(","))
 											totalorderReview = totalorderReview.replace(",", "");
 										BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -6952,8 +7305,7 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Order summary tab was not visible"+ e.getMessage(),
+										Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 									WEL.clickOnShippingDetailsEditIcon();
@@ -7038,20 +7390,20 @@ public class WEL_Test_Suite extends DriverModule {
 															By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 													String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-													if (orderprice.contains(",")) 
+													if (orderprice.contains(","))
 														orderprice = orderprice.replace(",", "");
 													BigDecimal orderproductprice = new BigDecimal(
 															orderprice.substring(1));
 
 													String discount = WEL.fetchDiscountInOrderReview();
-													if (discount.contains(",")) 
+													if (discount.contains(","))
 														discount = discount.replace(",", "");
 													BigDecimal discountinorderreview = new BigDecimal(
 															discount.substring(1));
 
 													String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
-													if (shippingcharge.contains(",")) 
+													if (shippingcharge.contains(","))
 														shippingcharge = shippingcharge.replace(",", "");
 													BigDecimal ShipchargoneReviewpage = new BigDecimal(
 															shippingcharge.substring(1));
@@ -7063,7 +7415,7 @@ public class WEL_Test_Suite extends DriverModule {
 															.add(ShipchargoneReviewpage)
 															.subtract(discountinorderreview);
 													String totalorderReview = WEL.fetchTotalInOrderReview();
-													if (totalorderReview.contains(",")) 
+													if (totalorderReview.contains(","))
 														totalorderReview = totalorderReview.replace(",", "");
 													BigDecimal orderTotalPrice = new BigDecimal(
 															totalorderReview.substring(1));
@@ -7083,8 +7435,9 @@ public class WEL_Test_Suite extends DriverModule {
 
 												} catch (Exception e) {
 													Reporting.updateTestReport(
-															"Order summary tab was not visible"+ e.getMessage(),
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+															"Order summary tab was not visible" + e.getMessage(),
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
 												}
 											} catch (Exception e) {
 												Reporting.updateTestReport(
@@ -7138,6 +7491,8 @@ public class WEL_Test_Suite extends DriverModule {
 	}
 
 	/*
+	 * @Author: Vishnu
+	 * 
 	 * @Date: 01/02/23
 	 * 
 	 * @Description: Validates that if user comes back and changes the shipping
@@ -7170,7 +7525,8 @@ public class WEL_Test_Suite extends DriverModule {
 						Thread.sleep(1000);
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+								WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -7261,16 +7617,19 @@ public class WEL_Test_Suite extends DriverModule {
 											By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 									String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-									if (orderprice.contains(",")) 
+									if (orderprice.contains(","))
 										orderprice = orderprice.replace(",", "");
 									BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-									if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-										Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-												+" is same as price in Order Review "+orderproductprice,
+									if (firstProductPriceWIthoutDiscount
+											.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+										Reporting.updateTestReport(
+												"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+														+ " is same as price in Order Review " + orderproductprice,
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 									else
-										Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-												+" is not same as price in Order Review "+orderproductprice,
+										Reporting.updateTestReport(
+												"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+														+ " is not same as price in Order Review " + orderproductprice,
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									String discount = WEL.fetchDiscountInOrderReview();
 									if (discount.contains(","))
@@ -7297,8 +7656,7 @@ public class WEL_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 								} catch (Exception e) {
-									Reporting.updateTestReport(
-											"Order summary tab was not visible"+ e.getMessage(),
+									Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
@@ -7368,7 +7726,7 @@ public class WEL_Test_Suite extends DriverModule {
 													By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 											String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-											if (orderprice.contains(",")) 
+											if (orderprice.contains(","))
 												orderprice = orderprice.replace(",", "");
 											BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
@@ -7399,7 +7757,7 @@ public class WEL_Test_Suite extends DriverModule {
 
 										} catch (Exception e) {
 											Reporting.updateTestReport(
-													"Order summary tab was not visible"+ e.getMessage(),
+													"Order summary tab was not visible" + e.getMessage(),
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 
@@ -7581,19 +7939,19 @@ public class WEL_Test_Suite extends DriverModule {
 											if (orderprice.contains(","))
 												orderprice = orderprice.replace(",", "");
 											BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-											if(price.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-												Reporting.updateTestReport("The price of first product in PDP: "+price
-														+" is same as price in Order Review "+orderproductprice,
+											if (price.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+												Reporting.updateTestReport("The price of first product in PDP: " + price
+														+ " is same as price in Order Review " + orderproductprice,
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 											else
-												Reporting.updateTestReport("The price of first product in PDP: "+price
-														+" is not same as price in Order Review "+orderproductprice,
+												Reporting.updateTestReport("The price of first product in PDP: " + price
+														+ " is not same as price in Order Review " + orderproductprice,
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											BigDecimal tax = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 											BigDecimal totalprice = orderproductprice.add(tax);
 
 											String totalorderReview = WEL.fetchTotalInOrderReview();
-											if (totalorderReview.contains(",")) 
+											if (totalorderReview.contains(","))
 												totalorderReview = totalorderReview.replace(",", "");
 											BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -7610,7 +7968,7 @@ public class WEL_Test_Suite extends DriverModule {
 
 										} catch (Exception e) {
 											Reporting.updateTestReport(
-													"Order summary tab was not visible"+ e.getMessage(),
+													"Order summary tab was not visible" + e.getMessage(),
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 
@@ -7670,6 +8028,12 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the PLace Order for Canada
+	 * Address
+	 */
 	@Test
 	public void TC50_PlaceOrder_CanadaAddress() throws IOException {
 		try {
@@ -7694,7 +8058,8 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+								WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -7804,20 +8169,29 @@ public class WEL_Test_Suite extends DriverModule {
 															By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 													String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-													if (orderprice.contains(",")) 
+													if (orderprice.contains(","))
 														orderprice = orderprice.replace(",", "");
 													BigDecimal orderproductprice = new BigDecimal(
 															orderprice.substring(1));
-													if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-														Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-																+" is same as price in Order Review "+orderproductprice,
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+													if (firstProductPriceWIthoutDiscount
+															.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+														Reporting.updateTestReport(
+																"The price of first product in PDP: "
+																		+ firstProductPriceWIthoutDiscount
+																		+ " is same as price in Order Review "
+																		+ orderproductprice,
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
 													else
-														Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-																+" is not same as price in Order Review "+orderproductprice,
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+														Reporting.updateTestReport(
+																"The price of first product in PDP: "
+																		+ firstProductPriceWIthoutDiscount
+																		+ " is not same as price in Order Review "
+																		+ orderproductprice,
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
 													String discount = WEL.fetchDiscountInOrderReview();
-													if (discount.contains(",")) 
+													if (discount.contains(","))
 														discount = discount.replace(",", "");
 													BigDecimal discountinorderreview = new BigDecimal(
 															discount.substring(1));
@@ -7836,7 +8210,7 @@ public class WEL_Test_Suite extends DriverModule {
 															.add(ShipchargoneReviewpage)
 															.subtract(discountinorderreview);
 													String totalorderReview = WEL.fetchTotalInOrderReview();
-													if (totalorderReview.contains(",")) 
+													if (totalorderReview.contains(","))
 														totalorderReview = totalorderReview.replace(",", "");
 													BigDecimal orderTotalPrice = new BigDecimal(
 															totalorderReview.substring(1));
@@ -7856,8 +8230,9 @@ public class WEL_Test_Suite extends DriverModule {
 
 												} catch (Exception e) {
 													Reporting.updateTestReport(
-															"Order summary tab was not visible"+ e.getMessage(),
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+															"Order summary tab was not visible" + e.getMessage(),
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
 												}
 												WEL.clickOnPlaceOrderButton();
 												String orderID = WEL.fetchOrderId();
@@ -7922,6 +8297,11 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the PLace Order for India Address
+	 */
 	@Test
 	public void TC51_PlaceOrder_IndiaAddress() throws IOException {
 		try {
@@ -7947,7 +8327,8 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+								WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -8064,13 +8445,17 @@ public class WEL_Test_Suite extends DriverModule {
 										if (orderprice.contains(","))
 											orderprice = orderprice.replace(",", "");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-										if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is same as price in Order Review "+orderproductprice,
+										if (firstProductPriceWIthoutDiscount
+												.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+											Reporting.updateTestReport(
+													"The price of first product in PDP: "
+															+ firstProductPriceWIthoutDiscount
+															+ " is same as price in Order Review " + orderproductprice,
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is not same as price in Order Review "+orderproductprice,
+											Reporting.updateTestReport("The price of first product in PDP: "
+													+ firstProductPriceWIthoutDiscount
+													+ " is not same as price in Order Review " + orderproductprice,
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										String discount = WEL.fetchDiscountInOrderReview();
 										if (discount.contains(","))
@@ -8104,8 +8489,7 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Order summary tab was not visible"+ e.getMessage(),
+										Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
@@ -8157,6 +8541,11 @@ public class WEL_Test_Suite extends DriverModule {
 
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the PLace Order for China Address
+	 */
 	@Test
 	public void TC52_PlaceOrder_ChinaAddress() throws IOException {
 		try {
@@ -8182,7 +8571,8 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+								WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -8296,25 +8686,29 @@ public class WEL_Test_Suite extends DriverModule {
 												By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-										if (orderprice.contains(",")) 
+										if (orderprice.contains(","))
 											orderprice = orderprice.replace(",", "");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-										if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is same as price in Order Review "+orderproductprice,
+										if (firstProductPriceWIthoutDiscount
+												.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+											Reporting.updateTestReport(
+													"The price of first product in PDP: "
+															+ firstProductPriceWIthoutDiscount
+															+ " is same as price in Order Review " + orderproductprice,
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is not same as price in Order Review "+orderproductprice,
+											Reporting.updateTestReport("The price of first product in PDP: "
+													+ firstProductPriceWIthoutDiscount
+													+ " is not same as price in Order Review " + orderproductprice,
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										String discount = WEL.fetchDiscountInOrderReview();
-										if (discount.contains(",")) 
+										if (discount.contains(","))
 											discount = discount.replace(",", "");
 										BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 										String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
-										if (shippingcharge.contains(",")) 
+										if (shippingcharge.contains(","))
 											shippingcharge = shippingcharge.replace(",", "");
 										BigDecimal ShipchargoneReviewpage = new BigDecimal(shippingcharge.substring(1));
 
@@ -8323,7 +8717,7 @@ public class WEL_Test_Suite extends DriverModule {
 										BigDecimal totalprice = orderproductprice.add(tax).add(ShipchargoneReviewpage)
 												.subtract(discountinorderreview);
 										String totalorderReview = WEL.fetchTotalInOrderReview();
-										if (totalorderReview.contains(",")) 
+										if (totalorderReview.contains(","))
 											totalorderReview = totalorderReview.replace(",", "");
 										BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -8339,8 +8733,7 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Order summary tab was not visible"+ e.getMessage(),
+										Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
@@ -8392,6 +8785,11 @@ public class WEL_Test_Suite extends DriverModule {
 
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the PLace Order for Japan Address
+	 */
 	@Test
 	public void TC53_PlaceOrder_JapanAddress() throws IOException {
 		try {
@@ -8417,7 +8815,8 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+								WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -8534,13 +8933,17 @@ public class WEL_Test_Suite extends DriverModule {
 										if (orderprice.contains(","))
 											orderprice = orderprice.replace(",", "");
 										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-										if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is same as price in Order Review "+orderproductprice,
+										if (firstProductPriceWIthoutDiscount
+												.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+											Reporting.updateTestReport(
+													"The price of first product in PDP: "
+															+ firstProductPriceWIthoutDiscount
+															+ " is same as price in Order Review " + orderproductprice,
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
-											Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-													+" is not same as price in Order Review "+orderproductprice,
+											Reporting.updateTestReport("The price of first product in PDP: "
+													+ firstProductPriceWIthoutDiscount
+													+ " is not same as price in Order Review " + orderproductprice,
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										String discount = WEL.fetchDiscountInOrderReview();
 										if (discount.contains(","))
@@ -8574,8 +8977,7 @@ public class WEL_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Order summary tab was not visible"+ e.getMessage(),
+										Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
@@ -8628,6 +9030,8 @@ public class WEL_Test_Suite extends DriverModule {
 	}
 
 	/*
+	 * @Author: Vishnu
+	 * 
 	 * @Date: 31/01/23
 	 * 
 	 * @Description: Validates if the cookie management is working fine
@@ -8792,7 +9196,8 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+								WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -8890,16 +9295,19 @@ public class WEL_Test_Suite extends DriverModule {
 													By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 											String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-											if (orderprice.contains(",")) 
+											if (orderprice.contains(","))
 												orderprice = orderprice.replace(",", "");
 											BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-											if(firstProductPriceWIthoutDiscount.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-												Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-														+" is same as price in Order Review "+orderproductprice,
+											if (firstProductPriceWIthoutDiscount
+													.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+												Reporting.updateTestReport("The price of first product in PDP: "
+														+ firstProductPriceWIthoutDiscount
+														+ " is same as price in Order Review " + orderproductprice,
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 											else
-												Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-														+" is not same as price in Order Review "+orderproductprice,
+												Reporting.updateTestReport("The price of first product in PDP: "
+														+ firstProductPriceWIthoutDiscount
+														+ " is not same as price in Order Review " + orderproductprice,
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											String discount = WEL.fetchDiscountInOrderReview();
 											if (discount.contains(","))
@@ -8910,7 +9318,7 @@ public class WEL_Test_Suite extends DriverModule {
 											BigDecimal totalprice = orderproductprice.add(tax)
 													.subtract(discountinorderreview);
 											String totalorderReview = WEL.fetchTotalInOrderReview();
-											if (totalorderReview.contains(",")) 
+											if (totalorderReview.contains(","))
 												totalorderReview = totalorderReview.replace(",", "");
 											BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -8927,7 +9335,7 @@ public class WEL_Test_Suite extends DriverModule {
 
 										} catch (Exception e) {
 											Reporting.updateTestReport(
-													"Order summary tab was not visible"+ e.getMessage(),
+													"Order summary tab was not visible" + e.getMessage(),
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 										WEL.clickOnPlaceOrderButton();
@@ -9004,6 +9412,8 @@ public class WEL_Test_Suite extends DriverModule {
 	}
 
 	/*
+	 * @Author: Vishnu
+	 * 
 	 * @Date: 31/01/23
 	 * 
 	 * @Description: Validates if "we don't ship to PO boxes" message on shipping
@@ -9083,14 +9493,14 @@ public class WEL_Test_Suite extends DriverModule {
 							BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
 							String discount = WEL.fetchDiscountInOrderReview();
-							if (discount.contains(",")) 
+							if (discount.contains(","))
 								discount = discount.replace(",", "");
 							BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 							BigDecimal totalprice = orderproductprice.subtract(discountinorderreview);
 
 							String totalorderReview = WEL.fetchTotalInOrderReview();
-							if (totalorderReview.contains(",")) 
+							if (totalorderReview.contains(","))
 								totalorderReview = totalorderReview.replace(",", "");
 							BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -9105,8 +9515,7 @@ public class WEL_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 						} catch (Exception e) {
-							Reporting.updateTestReport(
-									"Order summary tab was not visible"+ e.getMessage(),
+							Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 						try {
@@ -9138,6 +9547,12 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the Place new user Order for
+	 * Physical product CFA Level I Platinum and validate the tax Address
+	 */
 	@Test
 	public void TC69_PlaceNewUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax() throws IOException {
 		try {
@@ -9178,11 +9593,11 @@ public class WEL_Test_Suite extends DriverModule {
 					}
 
 					BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
-					if (price.compareTo(subtotal) == 0) 
+					if (price.compareTo(subtotal) == 0)
 						Reporting.updateTestReport(
 								"The addition of all the products' price is same as the subtotal in cart page",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					 else
+					else
 						Reporting.updateTestReport(
 								"The addition of all the products' pricedidn't match with the subtotal in cart page",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -9241,16 +9656,18 @@ public class WEL_Test_Suite extends DriverModule {
 								wait.until(ExpectedConditions.visibilityOfElementLocated(
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) 
+								if (orderprice.contains(","))
 									orderprice = orderprice.replace(",", "");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-								if(price.compareTo(new BigDecimal(orderprice.substring(1)))==0)
-									Reporting.updateTestReport("The price of first product in PDP: "+price
-											+" is same as price in Order Review "+orderproductprice,
+								if (price.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
+									Reporting.updateTestReport(
+											"The price of first product in PDP: " + price
+													+ " is same as price in Order Review " + orderproductprice,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
-									Reporting.updateTestReport("The price of first product in PDP: "+price
-											+" is not same as price in Order Review "+orderproductprice,
+									Reporting.updateTestReport(
+											"The price of first product in PDP: " + price
+													+ " is not same as price in Order Review " + orderproductprice,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 								BigDecimal totalprice = orderproductprice.add(tax1);
@@ -9270,8 +9687,7 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								Reporting.updateTestReport(
-										"Order summary tab was not visible"+ e.getMessage(),
+								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 
@@ -9312,6 +9728,12 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the Place Existing user Order for
+	 * Physical product CFA Level I Platinum and validate the tax Address
+	 */
 	@Test
 	public void TC70_PlaceExistingUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax()
 			throws IOException {
@@ -9411,20 +9833,22 @@ public class WEL_Test_Suite extends DriverModule {
 
 								BigDecimal firstproductprice = new BigDecimal(
 										WEL.fetchFirstProductPriceInOrderReview().substring(1));
-								if(price.compareTo(firstproductprice)==0)
-									Reporting.updateTestReport("The price of first product in PDP: "+price
-											+" is same as price in Order Review "+firstproductprice,
+								if (price.compareTo(firstproductprice) == 0)
+									Reporting.updateTestReport(
+											"The price of first product in PDP: " + price
+													+ " is same as price in Order Review " + firstproductprice,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
-									Reporting.updateTestReport("The price of first product in PDP: "+price
-											+" is not same as price in Order Review "+firstproductprice,
+									Reporting.updateTestReport(
+											"The price of first product in PDP: " + price
+													+ " is not same as price in Order Review " + firstproductprice,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 								BigDecimal totalprice = firstproductprice.add(tax1);
 								WEL.fetchShippingChargeInOrderReview();
 
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) 
+								if (totalorderReview.contains(","))
 									totalorderReview = totalorderReview.replace(",", "");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -9440,8 +9864,7 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
-								Reporting.updateTestReport(
-										"Order summary tab was not visible"+ e.getMessage(),
+								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 
@@ -9479,6 +9902,12 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the Place new user Order for
+	 * Digital product CPA Test Bank and validate the tax Address
+	 */
 	@Test
 	public void TC71_PlaceNewUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax() throws IOException {
 		try {
@@ -9601,21 +10030,23 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) 
+								if (orderprice.contains(","))
 									orderprice = orderprice.replace(",", "");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-								if(price.compareTo(orderproductprice)==0)
-									Reporting.updateTestReport("The price of first product in PDP: "+price
-											+" is same as price in Order Review "+orderproductprice,
+								if (price.compareTo(orderproductprice) == 0)
+									Reporting.updateTestReport(
+											"The price of first product in PDP: " + price
+													+ " is same as price in Order Review " + orderproductprice,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
-									Reporting.updateTestReport("The price of first product in PDP: "+price
-											+" is not same as price in Order Review "+orderproductprice,
+									Reporting.updateTestReport(
+											"The price of first product in PDP: " + price
+													+ " is not same as price in Order Review " + orderproductprice,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 								BigDecimal totalprice = orderproductprice.add(tax1);
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) 
+								if (totalorderReview.contains(","))
 									totalorderReview = totalorderReview.replace(",", "");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -9629,8 +10060,7 @@ public class WEL_Test_Suite extends DriverModule {
 													+ " is not equal to Order total in Order Review step",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							} catch (Exception e) {
-								Reporting.updateTestReport(
-										"Order summary tab was not visible"+ e.getMessage(),
+								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							WEL.clickOnPlaceOrderButton();
@@ -9668,6 +10098,12 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the Place existing user Order for
+	 * Digital product CPA Test Bank and validate the tax Address
+	 */
 	@Test
 	public void TC72_PlaceExistingUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax() throws IOException {
 		try {
@@ -9788,21 +10224,23 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-								if (orderprice.contains(",")) 
+								if (orderprice.contains(","))
 									orderprice = orderprice.replace(",", "");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-								if(price.compareTo(orderproductprice)==0)
-									Reporting.updateTestReport("The price of first product in PDP: "+price
-											+" is same as price in Order Review "+orderproductprice,
+								if (price.compareTo(orderproductprice) == 0)
+									Reporting.updateTestReport(
+											"The price of first product in PDP: " + price
+													+ " is same as price in Order Review " + orderproductprice,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
-									Reporting.updateTestReport("The price of first product in PDP: "+price
-											+" is not same as price in Order Review "+orderproductprice,
+									Reporting.updateTestReport(
+											"The price of first product in PDP: " + price
+													+ " is not same as price in Order Review " + orderproductprice,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 								BigDecimal totalprice = orderproductprice.add(tax1);
 								String totalorderReview = WEL.fetchTotalInOrderReview();
-								if (totalorderReview.contains(",")) 
+								if (totalorderReview.contains(","))
 									totalorderReview = totalorderReview.replace(",", "");
 								BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -9816,8 +10254,7 @@ public class WEL_Test_Suite extends DriverModule {
 													+ " is not equal to Order total in Order Review step",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							} catch (Exception e) {
-								Reporting.updateTestReport(
-										"Order summary tab was not visible"+ e.getMessage(),
+								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 
@@ -9855,6 +10292,12 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate the Tax In Indian for Physical
+	 * Order
+	 */
 	@Test
 	public void TC73_ValidateTaxin_IndiaForPhysicalOrder() throws IOException {
 		try {
@@ -9880,7 +10323,8 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+								WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -10000,22 +10444,24 @@ public class WEL_Test_Suite extends DriverModule {
 											if (orderprice.contains(","))
 												orderprice = orderprice.replace(",", "");
 											BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-											if(firstProductPriceWIthoutDiscount.compareTo(orderproductprice)==0)
-												Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-														+" is same as price in Order Review "+orderproductprice,
+											if (firstProductPriceWIthoutDiscount.compareTo(orderproductprice) == 0)
+												Reporting.updateTestReport("The price of first product in PDP: "
+														+ firstProductPriceWIthoutDiscount
+														+ " is same as price in Order Review " + orderproductprice,
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 											else
-												Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-														+" is not same as price in Order Review "+orderproductprice,
+												Reporting.updateTestReport("The price of first product in PDP: "
+														+ firstProductPriceWIthoutDiscount
+														+ " is not same as price in Order Review " + orderproductprice,
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											String discount = WEL.fetchDiscountInOrderReview();
-											if (discount.contains(",")) 
+											if (discount.contains(","))
 												discount = discount.replace(",", "");
 											BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 											String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
-											if (shippingcharge.contains(",")) 
+											if (shippingcharge.contains(","))
 												shippingcharge = shippingcharge.replace(",", "");
 											BigDecimal ShipchargoneReviewpage = new BigDecimal(
 													shippingcharge.substring(1));
@@ -10025,7 +10471,7 @@ public class WEL_Test_Suite extends DriverModule {
 											BigDecimal totalprice = orderproductprice.add(tax)
 													.add(ShipchargoneReviewpage).subtract(discountinorderreview);
 											String totalorderReview = WEL.fetchTotalInOrderReview();
-											if (totalorderReview.contains(",")) 
+											if (totalorderReview.contains(","))
 												totalorderReview = totalorderReview.replace(",", "");
 											BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -10042,9 +10488,9 @@ public class WEL_Test_Suite extends DriverModule {
 
 										} catch (Exception e) {
 											Reporting.updateTestReport(
-													"Order summary tab was not visible"+ e.getMessage(),
+													"Order summary tab was not visible" + e.getMessage(),
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-											}
+										}
 
 										WEL.clickOnPlaceOrderButton();
 										String orderID = WEL.fetchOrderId();
@@ -10100,9 +10546,11 @@ public class WEL_Test_Suite extends DriverModule {
 	}
 
 	/*
+	 * @Author: Vishnu
+	 * 
 	 * @Date: 31/01/23
 	 * 
-	 * @Description: Validates WEL Cart Upsells Summary Line
+	 * @Description: This test case it to Validates WEL Cart Upsells Summary Line
 	 */
 	@Test
 	public void TC74_WEL_Cart_Upsells_Add_Summary_Line() throws IOException {
@@ -10173,6 +10621,8 @@ public class WEL_Test_Suite extends DriverModule {
 	}
 
 	/*
+	 * @Author: Vishnu
+	 * 
 	 * @Date: 31/01/23
 	 * 
 	 * @Description: Validates that the heads up validation is not present for the
@@ -10275,6 +10725,12 @@ public class WEL_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: This test case is to validate Free Trail form for CMA CPA CFA
+	 * Products
+	 */
 	@Test
 	public void TC77_Verify_TheFreeTrail_FormForCMACPACFAProducts() throws IOException {
 		try {
@@ -10398,7 +10854,8 @@ public class WEL_Test_Suite extends DriverModule {
 								.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-						BigDecimal firstProductPriceWIthoutDiscount=new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+								WEL.fetchOldPriceInPDP().substring(1));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
@@ -10497,25 +10954,27 @@ public class WEL_Test_Suite extends DriverModule {
 													By.xpath("//div[@id='orderSummaryProductTotalValue']")));
 
 											String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-											if (orderprice.contains(",")) 
+											if (orderprice.contains(","))
 												orderprice = orderprice.replace(",", "");
 											BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-											if(firstProductPriceWIthoutDiscount.compareTo(orderproductprice)==0)
-												Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-														+" is same as price in Order Review "+orderproductprice,
+											if (firstProductPriceWIthoutDiscount.compareTo(orderproductprice) == 0)
+												Reporting.updateTestReport("The price of first product in PDP: "
+														+ firstProductPriceWIthoutDiscount
+														+ " is same as price in Order Review " + orderproductprice,
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 											else
-												Reporting.updateTestReport("The price of first product in PDP: "+firstProductPriceWIthoutDiscount
-														+" is not same as price in Order Review "+orderproductprice,
+												Reporting.updateTestReport("The price of first product in PDP: "
+														+ firstProductPriceWIthoutDiscount
+														+ " is not same as price in Order Review " + orderproductprice,
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											String discount = WEL.fetchDiscountInOrderReview();
-											if (discount.contains(",")) 
+											if (discount.contains(","))
 												discount = discount.replace(",", "");
 											BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
 
 											String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
-											if (shippingcharge.contains(",")) 
+											if (shippingcharge.contains(","))
 												shippingcharge = shippingcharge.replace(",", "");
 											BigDecimal ShipchargoneReviewpage = new BigDecimal(
 													shippingcharge.substring(1));
@@ -10526,7 +10985,7 @@ public class WEL_Test_Suite extends DriverModule {
 													.add(ShipchargoneReviewpage).subtract(discountinorderreview);
 
 											String totalorderReview = WEL.fetchTotalInOrderReview();
-											if (totalorderReview.contains(",")) 
+											if (totalorderReview.contains(","))
 												totalorderReview = totalorderReview.replace(",", "");
 											BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
 
@@ -10542,7 +11001,8 @@ public class WEL_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 										} catch (Exception e) {
-											Reporting.updateTestReport(e.getMessage(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											Reporting.updateTestReport(e.getMessage(),
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 
 										WEL.clickOnPlaceOrderButton();

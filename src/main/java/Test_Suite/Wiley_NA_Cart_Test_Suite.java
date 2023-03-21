@@ -2091,7 +2091,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 						PaymentGateway.paymentWiley(driver, wiley, "TC12", SS_path);
-						// Thread.sleep(3000);
 						wiley.clickOnSaveAndContinueButton();
 						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
 						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));

@@ -51,9 +51,9 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//span[@class='apply-discount-link']")
 	WebElement ApplyStudentDiscount;
 
-	@FindBy(xpath="(//p[@class='current-price-link']/a)[2]")
+	@FindBy(xpath = "(//p[@class='current-price-link']/a)[2]")
 	WebElement SwitchStudentDsicount;
-	
+
 	@FindBy(xpath = "(//div[@class='col-3 noPadding orderReviewDetailsValue'])[3]")
 	WebElement ThirdProductPriceinReviewPage;
 
@@ -80,14 +80,12 @@ public class app_WEL_Repo {
 
 	@FindBy(xpath = "//p[@class='old-price']")
 	WebElement ProductOldPriceInPDP;
-	
-	@FindBy(xpath="//p[@class='last-price']")
+
+	@FindBy(xpath = "//p[@class='last-price']")
 	WebElement ProductLastPriceForPartner;
 
 	@FindBy(xpath = "//p[@class='your-price']")
 	WebElement PartnerProductPDPPrice;
-
-	
 
 	@FindBy(xpath = "//div[@id='orderSummaryProductTotalValue']")
 	WebElement PriceOfFirstProductInOrderReview;
@@ -645,6 +643,11 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//div[@class='sc-AxjAm bcMPWx my-accounts-header']//ul/li)[3]")
 	WebElement ActivatePIN;
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: This method is used enter username on Login page
+	 */
 	public void EnterUserNameOnLoginPage(String UserName) throws IOException {
 		try {
 			username.sendKeys(UserName);
@@ -657,6 +660,12 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: This method is used to Enter the free trial user name on login
+	 * page
+	 */
 	public void EnterFreeTrailUserNameOnLoginPage(String UserName) throws IOException {
 		try {
 			FreeTrailLoginusername.sendKeys(UserName);
@@ -669,6 +678,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: This method is used to enter the Password on Login Page
+	 */
 	public void EnterPasswordOnLoginPage(String Password) throws IOException {
 		try {
 			passsowrd.sendKeys(Password);
@@ -681,6 +695,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: This method is used to enter thr password on Free Trial Form
+	 */
 	public void EnterFreeTrailPasswordOnLoginPage(String Password) throws IOException {
 		try {
 			FreeTrailLoginpasssowrd.sendKeys(Password);
@@ -693,6 +712,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: This method is used to click on Login Button
+	 */
 	public void ClickingOnLoginButton() throws IOException {
 		try {
 			StandaloneLogin.click();
@@ -705,6 +729,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: This method is used to click on Save and Continue button on Shipping Address section
+	 */
 	public void ShipSaveAndContinueButton() throws IOException {
 		try {
 			ShipSaveAndContinue.click();
@@ -718,6 +747,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ShipAndBillAddressSection() throws IOException {
 		try {
 			// ShippingBillingSameAddress.clear();
@@ -732,6 +766,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void SaveAndContinueCheckOut() throws IOException {
 		try {
 			SaveAndContinueOnCheckOutPage.click();
@@ -745,6 +784,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickOnCreateOne() throws IOException {
 		try {
 			CreateOne.click();
@@ -758,6 +802,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public String enterEmailIdInCreateAccountForm() throws IOException {
 		try {
 			String dateTime = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
@@ -773,6 +822,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void confirmEmailIdInCreateAccountForm(String emailId) throws IOException {
 		try {
 			ConfirmEmailAddress.sendKeys(emailId);
@@ -786,6 +840,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void EnterFirstName(String Fname) throws IOException {
 		try {
 			FirstName.sendKeys(Fname);
@@ -799,6 +858,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void EnterLastName(String Lname) throws IOException {
 		try {
 			LastName.sendKeys(Lname);
@@ -811,6 +875,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void EnterPassword(String password) throws IOException {
 		try {
 			Password.sendKeys(password);
@@ -823,6 +892,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickonTermsCheckBox() throws IOException {
 		try {
 			TermsCheckbox.click();
@@ -836,6 +910,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickonAgreementCheckBox() throws IOException {
 		try {
 			AgreementCheckbox.click();
@@ -849,6 +928,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickingOnCreateAccoutButton() throws IOException {
 		try {
 			CreateAccountButton.click();
@@ -862,6 +946,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickingOnSaveAndContinue() throws IOException {
 		try {
 			CreateAccountButton.click();
@@ -875,6 +964,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public boolean CheckAccountTextAftreLogin() throws IOException {
 		try {
 			AccountText.getText();
@@ -890,6 +984,11 @@ public class app_WEL_Repo {
 
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickonCIAProduct() throws IOException {
 
 		try {
@@ -905,6 +1004,11 @@ public class app_WEL_Repo {
 
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickonCMAProduct() throws IOException {
 
 		try {
@@ -920,6 +1024,11 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonCPAProduct() throws IOException {
 
@@ -935,6 +1044,11 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonCFAProduct() throws IOException {
 
@@ -950,6 +1064,11 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonViewCourseForCMAProduct() throws IOException {
 
@@ -966,6 +1085,11 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonViewCourseForCPAProduct() throws IOException {
 
@@ -982,6 +1106,11 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonViewCourseForCFAProduct() throws IOException {
 
@@ -998,6 +1127,11 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonViewCourseLinkForCFAProduct() throws IOException {
 
@@ -1014,13 +1148,18 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonExploreCourseCMAProduct() throws IOException {
 
 		try {
 			CMAExploreCourse.click();
 			Thread.sleep(2000);
-			Reporting.updateTestReport("Explore Coursee button clicked successfully ",
+			Reporting.updateTestReport("Explore Course button clicked successfully ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		} catch (Exception e) {
@@ -1030,6 +1169,11 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonCMAeBook() throws IOException {
 
@@ -1046,6 +1190,11 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonCMAPrinteBook() throws IOException {
 
@@ -1062,6 +1211,11 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonShopCourse() throws IOException {
 		try {
@@ -1076,6 +1230,11 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonCouponRemove() throws IOException {
 		try {
@@ -1089,6 +1248,11 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonCheckOutOnCartPage() throws IOException {
 		try {
@@ -1103,6 +1267,11 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonLoginButton() throws IOException {
 		try {
@@ -1117,7 +1286,12 @@ public class app_WEL_Repo {
 		}
 
 	}
-	
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
+
 	public void ClickonApplyStudentDiscount() throws IOException {
 		try {
 			ApplyStudentDiscount.click();
@@ -1131,7 +1305,12 @@ public class app_WEL_Repo {
 		}
 
 	}
-	
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
+
 	public void ClickonswitchStudentDiscount() throws IOException {
 		try {
 			SwitchStudentDsicount.click();
@@ -1145,7 +1324,11 @@ public class app_WEL_Repo {
 		}
 
 	}
-	
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonForgotPassword() throws IOException {
 		try {
@@ -1159,6 +1342,11 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void EnterEmailAddressOnForgotPassword(String Email) throws IOException {
 		try {
@@ -1172,6 +1360,11 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickSubmitButtonnForgotPasswordPage() throws IOException {
 		try {
@@ -1186,6 +1379,11 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String EnterGuestUser() throws IOException {
 		try {
@@ -1201,6 +1399,11 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnCreateAccountButton() throws IOException {
 		try {
@@ -1215,6 +1418,11 @@ public class app_WEL_Repo {
 		}
 
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void GuestConfirmEmailId(String emailId) throws IOException {
 		try {
@@ -1228,6 +1436,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void GuestFirstName(String GNAME) throws IOException {
 		try {
@@ -1242,6 +1455,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void GuestLastName(String GLNAME) throws IOException {
 		try {
@@ -1256,6 +1474,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void selectBillCountry(String country) throws IOException {
 		try {
@@ -1269,6 +1492,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void selectShipCountry(String country) throws IOException {
 		try {
@@ -1282,6 +1510,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void AddressLineOne(String ALineOne) throws IOException {
 		try {
@@ -1295,6 +1528,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ShipAddressLineOne(String ALineOne) throws IOException {
 		try {
@@ -1310,6 +1548,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void EnterCity(String City) throws IOException {
 		try {
@@ -1324,6 +1567,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ShipTownCity(String City) throws IOException {
 		try {
@@ -1339,6 +1587,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void EnterZipecode(String postalCode) throws IOException {
 		try {
@@ -1351,6 +1604,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ShipPostCode(String postalCode) throws IOException {
 		try {
@@ -1365,6 +1623,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void EnterPhoneNumber(String pohnenumber) throws IOException {
 		try {
@@ -1379,6 +1642,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ShipPhoneNumber(String pohnenumber) throws IOException {
 		try {
@@ -1394,6 +1662,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void EnterexistingUserName(String username) throws IOException {
 		try {
@@ -1407,6 +1680,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void selectStateFromDropsown(String state) throws IOException {
 		try {
@@ -1420,6 +1698,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void EnterPasswordLoginPage(String Loginpassword) throws IOException {
 		try {
@@ -1433,6 +1716,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void EnterInvalidPasswordLoginPage(String Loginpassword) throws IOException {
 		try {
@@ -1446,6 +1734,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonLoginAndContinue() throws IOException {
 		try {
@@ -1460,6 +1753,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonForgotPasswordOnCheckoutPage() throws IOException {
 		try {
@@ -1472,6 +1770,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonAccountIcon() throws IOException {
 		try {
@@ -1485,6 +1788,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickonSignOut() throws IOException {
 		try {
@@ -1498,6 +1806,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void clickonAcceptButtonOnWileyWELPrivacyAgreement() throws IOException {
 		try {
@@ -1511,6 +1824,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnAddaDiscountCode() throws IOException {
 		try {
@@ -1524,6 +1842,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void EnterDiscountCode(String PromoCode) throws IOException {
 		try {
@@ -1537,6 +1860,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void EnterExtraDiscountCode(String PromoCode) throws IOException {
 		try {
@@ -1550,6 +1878,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void EnterExtraDiscountCodeOnCartPage(String PromoCode) throws IOException {
 		try {
@@ -1563,6 +1896,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void EnterCouponExtraDiscountCode(String PromoCode) throws IOException {
 		try {
@@ -1576,6 +1914,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnDiscountApplyButton() throws IOException {
 		try {
@@ -1589,6 +1932,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnBackTOCart() throws IOException {
 		try {
@@ -1603,6 +1951,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnRemoveOnCartPage() throws IOException {
 		try {
@@ -1617,6 +1970,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickAccountCartPage() throws IOException {
 		try {
 			AccountIconOnCartPage.click();
@@ -1629,6 +1987,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickCartIconOnForgotPasswordPage() throws IOException {
 		try {
@@ -1641,6 +2004,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickWELIconHomePage() throws IOException {
 		try {
@@ -1654,6 +2022,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickWELIconCheckoutPage() throws IOException {
 		try {
@@ -1667,6 +2040,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnCIAProduct() throws IOException {
 		try {
@@ -1679,6 +2057,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnCAIAProduct() throws IOException {
 		try {
@@ -1692,6 +2075,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnShopCourseForCIAProduct() throws IOException {
 		try {
@@ -1705,6 +2093,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnLevel1TestBankForCAIAProduct() throws IOException {
 		try {
@@ -1718,6 +2111,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnViewCourseForCIAProduct() throws IOException {
 		try {
@@ -1731,6 +2129,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnCIAeBook() throws IOException {
 		try {
@@ -1743,6 +2146,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnCIAPrint() throws IOException {
 		try {
@@ -1755,6 +2163,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnSelectQuantity() throws IOException {
 		try {
@@ -1769,6 +2182,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickeBookforCFAProduct() throws IOException {
 		try {
@@ -1783,6 +2201,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickSaveAndContinueOnShippinInfoPage() throws IOException {
 		try {
@@ -1797,6 +2220,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void enterCardHolderName(String cardHolderName) throws IOException {
 		try {
@@ -1809,6 +2237,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void enterCardNumber(String cardNumber) throws IOException {
 		try {
@@ -1821,6 +2254,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void selectExpirationMonthFromDropDown(String month) throws IOException {
 		try {
@@ -1833,6 +2271,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void selectExpirationYearFromDropDown(String year) throws IOException {
 		try {
@@ -1845,6 +2288,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void enterCVV_Number(String CVVNumber) throws IOException {
 		try {
@@ -1856,6 +2304,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void clickOnPlaceOrderButton() throws IOException {
 		try {
@@ -1867,6 +2320,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String fetchOrderId() throws IOException {
 		try {
@@ -1881,6 +2339,11 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String fetchTaxAmount() throws IOException {
 		try {
@@ -1894,6 +2357,11 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String fetchTaxValue() throws IOException {
 		try {
@@ -1907,6 +2375,11 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String fetchOrderTotal() throws IOException {
 		try {
@@ -1920,6 +2393,11 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void SelectingUSEButton() throws IOException {
 		try {
@@ -1931,6 +2409,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void SaveContinueCheckOutPage() throws IOException {
 		try {
@@ -1942,6 +2425,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void clickOnFreeTrialButton() throws IOException {
 		try {
@@ -1953,6 +2441,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void FreeTrailFirstName(String FFName) throws IOException {
 		try {
@@ -1965,6 +2458,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void FreeTrailLastName(String FLName) throws IOException {
 		try {
@@ -1977,6 +2475,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String EnterFreeTrailNewtUser() throws IOException {
 		try {
@@ -1992,6 +2495,11 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void FreeTrailCountry(String country) throws IOException {
 		try {
@@ -2005,6 +2513,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void FreeTrailState(String Fstate) throws IOException {
 		try {
@@ -2018,6 +2531,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void FreeTrailPassword(String FPassword) throws IOException {
 		try {
@@ -2030,6 +2548,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void FreeTrailTermsAndCOndtionsCheckBox() throws IOException {
 		try {
@@ -2043,6 +2566,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void FreeTrailSignUpCheckBox() throws IOException {
 		try {
@@ -2056,6 +2584,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void FreeTrailSignInButton() throws IOException {
 		try {
@@ -2068,6 +2601,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void FreeTrailWELIcon() throws IOException {
 		try {
@@ -2081,6 +2619,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void EnterFreeTrailEmail(String email) throws IOException {
 		try {
@@ -2094,6 +2637,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String FreeTrailCPAText() throws IOException {
 		try {
@@ -2108,6 +2656,11 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String FreeTrailCIAText() throws IOException {
 		try {
@@ -2122,6 +2675,11 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ShippingMethodValidation() throws IOException {
 		try {
@@ -2137,6 +2695,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void FreeTraiModelPopUpLoginButton() throws IOException {
 		try {
@@ -2150,6 +2713,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void FreeTraiModelPopUpSubmitButton() throws IOException {
 		try {
@@ -2163,6 +2731,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnAddNewAddressButton() throws IOException {
 		try {
@@ -2176,6 +2749,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnWELIconOrderConfirmationPage() throws IOException {
 		try {
@@ -2189,6 +2767,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnAccountIconFromOrderConfirmationPage() throws IOException {
 		try {
@@ -2202,6 +2785,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnEnterNewAddressButtonOnShippingPage() throws IOException {
 		try {
@@ -2215,6 +2803,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnEnterNewAddressButtonOnBillingPage() throws IOException {
 		try {
@@ -2228,6 +2821,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void clickOnUseSelectedShippingAddressButtonAddressDoctor() throws IOException {
 		try {
@@ -2239,6 +2837,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void clickOnUseSelectedBillingAddressButtonAddressDoctor() throws IOException {
 		try {
@@ -2250,14 +2853,29 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public WebElement returnUseSelectedShippingAddressButtonAddressDoctorPopUp() {
 		return UseSelectedShippingAddressButtonAddressDoctorPopUp;
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public WebElement returnUseSelectedBillingAddressButtonAddressDoctorPopUp() {
 		return UseSelectedBillingAddressButtonAddressDoctorPopUp;
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void enterState(String state) throws IOException {
 		try {
@@ -2272,6 +2890,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void SelectPayPalOption() throws IOException {
 		try {
@@ -2283,6 +2906,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void SelectPayPalCreditOption() throws IOException {
 		try {
@@ -2294,6 +2922,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnProceedToPayPal() throws IOException {
 		try {
@@ -2305,6 +2938,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnProceedToPayPalCredit() throws IOException {
 		try {
@@ -2316,6 +2954,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void EnterPayPalUserName(String paypalusername) throws IOException {
 		try {
@@ -2328,6 +2971,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnNextButtonPayPalLoginPage() throws IOException {
 		try {
@@ -2340,6 +2988,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void EnterPayPalPassword(String paypalpassword) throws IOException {
 		try {
@@ -2352,6 +3005,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnPaypalLogin() throws IOException {
 		try {
@@ -2365,6 +3023,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnPaypalReviewOrder() throws IOException {
 		try {
@@ -2376,6 +3039,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnPaypalCreditRadioButton() throws IOException {
 		try {
@@ -2701,6 +3369,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void VerificationOfStudentForUS() throws IOException {
 		try {
@@ -2715,6 +3388,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public void ClickOnShowMoreShippingAddress() throws IOException {
 		try {
@@ -2729,6 +3407,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String fetchShippingChargeInOrderReview() throws IOException {
 		try {
@@ -2736,7 +3419,7 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport(
 					"Shipping charge: " + shipping.trim() + " was fetched in order review step successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			if(shipping.equalsIgnoreCase("FREE"))
+			if (shipping.equalsIgnoreCase("FREE"))
 				return "$0.00";
 			return shipping.trim();
 		} catch (Exception e) {
@@ -2747,11 +3430,16 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickOnUseButtonForExistingShippingAddress() throws IOException {
 		try {
 
 			USEbuttonForExistingAddress.click();
-			Reporting.updateTestReport("The use button was clcicked successfully on Shipping Page",
+			Reporting.updateTestReport("The use button was clicked successfully on Shipping Page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		} catch (Exception e) {
@@ -2761,6 +3449,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void VerificationOfStudentForNonUS() throws IOException {
 		try {
 
@@ -2775,6 +3468,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickOnEditIcononShippingPage() throws IOException {
 		try {
 
@@ -2789,6 +3487,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickOnProductdropdown() throws IOException {
 		try {
 			Productdropdown.click();
@@ -2800,6 +3503,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickOnCPATestBank() throws IOException {
 		try {
 			CPATestBank.click();
@@ -2811,6 +3519,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void EnterUniversityName(String universityname) throws IOException {
 		try {
 			PartnerInputSearch.sendKeys(universityname);
@@ -2899,6 +3612,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickOnActiacteCodeIcon() throws IOException {
 		try {
 			ActiavteCodeIcon.click();
@@ -2910,6 +3628,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void EnterPinOnInputField(String pin) throws IOException {
 		try {
 			PinInput.sendKeys(pin);
@@ -2921,6 +3644,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickOnActivateButton() throws IOException {
 		try {
 			ActivateButton.click();
@@ -2932,6 +3660,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickOnPINLoginButton() throws IOException {
 		try {
 			PINLoginButton.click();
@@ -2943,6 +3676,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickOnCreateNewAccountForPIN() throws IOException {
 		try {
 			CreateAccountForPin.click();
@@ -2954,6 +3692,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickOnDeanDortonCPAProduct() throws IOException {
 		try {
 			DeanDortonCPAProduct.click();
@@ -2965,6 +3708,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void EntePINUserName(String username) throws IOException {
 		try {
 			LoginUser.sendKeys(username);
@@ -2976,6 +3724,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void EntePINPassword(String password) throws IOException {
 		try {
 			LoginPassword.sendKeys(password);
@@ -3250,6 +4003,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickOnViewSupplementsforCPA() throws IOException {
 		try {
 			CPASupplements.click();
@@ -3261,6 +4019,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickOnViewSupplementsforCMA() throws IOException {
 		try {
 			CMASupplements.click();
@@ -3272,6 +4035,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickOnViewSupplementsforCFA() throws IOException {
 		try {
 			CFASupplements.click();
@@ -3283,6 +4051,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickOnSupplementsProductforCPA() throws IOException {
 		try {
 			CPASuppelementProduct.click();
@@ -3294,6 +4067,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickOnSupplementsProductforCMA() throws IOException {
 		try {
 			CMASupplementProduct.click();
@@ -3305,6 +4083,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void ClickOnSupplementsProductforCFA() throws IOException {
 		try {
 			CMASupplementProduct.click();
@@ -3317,7 +4100,9 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Description: Enters first name in the free trial form
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
 	 */
 	public String FreeTrialFirstName() throws IOException {
 		try {
@@ -3334,7 +4119,9 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Description: Enters last name in the free trial form
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
 	 */
 	public String FreeTrailLastName() throws IOException {
 		try {
@@ -3351,7 +4138,9 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Description: Enters email id in the free trial form for new user
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
 	 */
 	public String FreeTrailEmail() throws IOException {
 		try {
@@ -3368,7 +4157,9 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Description: Enters password in the free trial form for new user
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
 	 */
 	public String FreeTrailPassword() throws IOException {
 		try {
@@ -3384,6 +4175,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void enteryopmail(String username) throws IOException {
 		try {
 			Enteryopmail.sendKeys(username);
@@ -3396,6 +4192,11 @@ public class app_WEL_Repo {
 
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void clickonbutton() throws IOException {
 		try {
 			clickonbutton.click();
@@ -3408,6 +4209,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void clickOnResetPasswordLink() throws IOException {
 		try {
 			ResetPasswordLink.click();
@@ -3419,6 +4225,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void enterNewPasswordInResetPassword(String password) throws IOException {
 		try {
 			NewPasswordField.sendKeys(password);
@@ -3431,6 +4242,11 @@ public class app_WEL_Repo {
 
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void enterConfirmPasswordInResetPassword(String password) throws IOException {
 		try {
 			ConfirmNewPasswordField.sendKeys(password);
@@ -3442,6 +4258,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public void clickOnResetPasswordSubmit() throws IOException {
 		try {
 			SubmitButtonInResetPasswordPage.click();
@@ -3455,22 +4276,32 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public String fetchFirstProductPriceInOrderSummary() throws IOException {
 		try {
 			String price = PriceOfFirstProductInOrderReview.getText();
 			Reporting.updateTestReport(
-					"First Product Price: " + price.trim() + " was fetched in order review step successfully",
+					"First Product Price: " + price.trim() + " was fetched in order summary step successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 			return price.trim();
 		} catch (Exception e) {
-			Reporting.updateTestReport("First Product Price couldn't be fetched in order review step ",
+			Reporting.updateTestReport("First Product Price couldn't be fetched in order Summary step ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return "";
 
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public String fetchFirstProductPriceInOrderReview() throws IOException {
 		try {
 
@@ -3494,6 +4325,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public String fetchSecondProductPriceInOrderReview() throws IOException {
 		try {
 
@@ -3514,6 +4350,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public String fetchThirdProductPriceInOrderReview() throws IOException {
 		try {
 
@@ -3534,6 +4375,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 	public String fetchTaxInOrderReview() throws IOException {
 		try {
 			String tax = TaxInOrderReview.getText();
@@ -3548,6 +4394,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String fetchTotalInOrderReview() throws IOException {
 		try {
@@ -3563,6 +4414,11 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String fetchOrderTotalOnCartPage() throws IOException {
 		try {
@@ -3585,22 +4441,9 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Description: Clicks on Activate button in the PIN Activation page
-	 */
-	public void ClickOnActiactePIN() throws IOException {
-		try {
-			ActivatePIN.click();
-			Reporting.updateTestReport("ActivatePIN Icon was clicked successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click on ActivateCode" + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
-
-	/*
-	 * @Description: Fetches the shipping charge value when multiple products are
-	 * present in cart
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
 	 */
 	public String ShippingChargeForMultipleProducts() throws IOException {
 		try {
@@ -3615,6 +4458,11 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String fetchOldPriceInPDP() throws IOException {
 		try {
@@ -3624,7 +4472,8 @@ public class app_WEL_Repo {
 				System.out.println("The Product Price without discount in PDP Page" + (pdpoldprice.replace(",", "")));
 				pdpoldprice = pdpoldprice.replace(",", "");
 			}
-			Reporting.updateTestReport("Price of the product without discount in PDP: " + pdpoldprice.trim() + " was returned",
+			Reporting.updateTestReport(
+					"Price of the product without discount in PDP: " + pdpoldprice.trim() + " was returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return pdpoldprice;
 		} catch (Exception e) {
@@ -3633,16 +4482,23 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
-	
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
+
 	public String fetchLastPriceInPDPForPartner() throws IOException {
 		try {
 
 			String pdpoldprice = ProductLastPriceForPartner.getText().trim();
 			if (pdpoldprice.contains(",")) {
-				System.out.println("The Product Price without partner price in PDP Page" + (pdpoldprice.replace(",", "")));
+				System.out.println(
+						"The Product Price without partner price in PDP Page" + (pdpoldprice.replace(",", "")));
 				pdpoldprice = pdpoldprice.replace(",", "");
 			}
-			Reporting.updateTestReport("Price of the product without partner price in PDP: " + pdpoldprice.trim() + " was returned",
+			Reporting.updateTestReport(
+					"Price of the product without partner price in PDP: " + pdpoldprice.trim() + " was returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return pdpoldprice;
 		} catch (Exception e) {
@@ -3651,6 +4507,11 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String fetchPartnerProductPriceInPDP() throws IOException {
 		try {
@@ -3671,8 +4532,11 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
-
-	
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String fetchProductPriceInPDP() throws IOException {
 		try {
@@ -3693,7 +4557,12 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
-	
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
+
 	public String fetchProductPriceInPDPWithoutDiscount() throws IOException {
 		try {
 			String pdpprice = ProductPriceInPDP.getText().trim();
@@ -3713,6 +4582,11 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String fetchOrderSubTotalInCartPage() throws IOException {
 		try {
@@ -3733,13 +4607,17 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String fetchOrderTotalInCartPage() throws IOException {
 		try {
-			Reporting.updateTestReport(
-					"Subtotal of the order: " + OrderTotalOnCartPage.getText() + " was returned",
+			Reporting.updateTestReport("Subtotal of the order: " + OrderTotalOnCartPage.getText() + " was returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			
+
 			return OrderTotalOnCartPage.getText();
 		} catch (Exception e) {
 			Reporting.updateTestReport("Subtotal of the order in cart page could not be returned",
@@ -3747,6 +4625,11 @@ public class app_WEL_Repo {
 			return "";
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:
+	 */
 
 	public String fetchDiscountInOrderReview() throws IOException {
 		try {
