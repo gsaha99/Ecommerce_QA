@@ -640,50 +640,13 @@ public class WEL_Test_Suite extends DriverModule {
 							driver.get(excelOperation.getTestData("Yopmail_URL", "Generic_Dataset", "Data"));
 							WEL.enteryopmail(excelOperation.getTestData("TC07", "WEL_Test_Data", "Email_Address"));
 							WEL.clickonbutton();
-							wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-							int timeOutSeconds = 60;
-							int flag = 0;
-							WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-							WebElement element2 = null;
-							/* The purpose of this loop is to wait for maximum of 60 seconds */
-							for (int i = 0; i < timeOutSeconds / 5; i++) {
-
-								try {
-									driver.switchTo().frame("ifinbox");
-									element2 = wait.until(ExpectedConditions.visibilityOfElementLocated(
-											By.xpath("//div[contains(text(),'Password Reset Request')]")));
-
-									if (element2.isDisplayed() == true) {
-										flag = 1;
-										element2.click();
-										driver.switchTo().defaultContent();
-										break;
-									}
-
-								} catch (Exception e) {
-									driver.switchTo().defaultContent();
-									element1.click();
-								}
-							}
-
+                            int flag=EmailValidation.forgotPasswordEmailForWEL(driver, SS_path, WEL);
 							if (flag == 1) {
-								driver.switchTo().frame("ifmail");
-								Thread.sleep(5000);
-								WEL.clickOnResetPasswordLink();
-								Set<String> allWindowHandles = driver.getWindowHandles();
-								java.util.Iterator<String> iterator = allWindowHandles.iterator();
-								String yopmailHandle = iterator.next();
-								String ChildWindow = iterator.next();
-								driver.switchTo().window(ChildWindow);
 								WEL.enterNewPasswordInResetPassword(
 										excelOperation.getTestData("TC07", "WEL_Test_Data", "Password"));
 								WEL.enterConfirmPasswordInResetPassword(
 										excelOperation.getTestData("TC07", "WEL_Test_Data", "Password"));
 								WEL.clickOnResetPasswordSubmit();
-
-								driver.switchTo().window(yopmailHandle);
-								driver.close();
-								driver.switchTo().window(ChildWindow);
 
 							}
 

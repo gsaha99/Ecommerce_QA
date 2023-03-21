@@ -413,56 +413,7 @@ public class AGS_Test_Suite extends DriverModule {
 					"Generic_Dataset", "Data"));
 			AGS.enterEmailIdInYopmail(excelOperation.getTestData("TC05", "AGS_Test_Data","Email_Id"));
 			AGS.clickOnArrowButton();
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-			int timeOutSeconds=60;
-			int flag=0;
-			WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-			WebElement element2 = null;
-
-			/* The purpose of this loop is to wait for maximum of 60 seconds */
-			for (int i = 0; i < timeOutSeconds / 5; i++) {
-
-				try {
-					driver.switchTo().frame("ifinbox");
-					element2=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Password Reset Request')]")));
-
-					if(element2.isDisplayed()==true)
-					{
-						flag=1;
-						element2.click();
-						driver.switchTo().defaultContent();
-						break;
-					}
-
-				} catch (Exception e) {
-					driver.switchTo().defaultContent();        
-					element1.click();
-				}
-			}
-
-			if(flag==1)
-			{
-				driver.switchTo().frame("ifmail");
-				Thread.sleep(5000);
-				AGS.clickOnResetPasswordLink();
-				Set<String> allWindowHandles = driver.getWindowHandles();
-				java.util.Iterator<String> iterator = allWindowHandles.iterator();
-				String yopmailHandle = iterator.next();
-				String ChildWindow=iterator.next();
-				driver.switchTo().window(ChildWindow);
-				AGS.enterNewPasswordInResetPassword(excelOperation.getTestData("TC05", "AGS_Test_Data", "Password"));
-				AGS.enterConfirmPasswordInResetPassword(excelOperation.getTestData("TC05", "AGS_Test_Data", "Password"));
-				AGS.clickOnResetPasswordSubmit();
-				AGS.checkResetPasswordSuccessMessage();
-				driver.switchTo().window(yopmailHandle);
-				driver.close();
-				driver.switchTo().window(ChildWindow);
-
-			}
-			else {
-				Reporting.updateTestReport("No reset password mail was recieved in yopmail inbox", 
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
+			EmailValidation.forgotPasswordMailForAGS(driver, SS_path, AGS);
 			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {

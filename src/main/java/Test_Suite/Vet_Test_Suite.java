@@ -272,7 +272,7 @@ public class Vet_Test_Suite extends DriverModule {
 
 	/*
 	 * @Author: Anindita
-	 * @Description: 
+	 * @Description: Resets the password in My Account page
 	 */
 	@Test
 	public void TC05_Reset_Password_My_Account() throws IOException {
@@ -320,63 +320,7 @@ public class Vet_Test_Suite extends DriverModule {
 					"Generic_Dataset", "Data"));
 			VET.enteryopmail(excelOperation.getTestData("TC06", "VET_Test_Data","Email_Id"));
 			VET.clickonbutton();
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-			int timeOutSeconds=60;
-			int flag=0;
-			WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-			WebElement element2 = null;
-
-			/* The purpose of this loop is to wait for maximum of 60 seconds */
-			for (int i = 0; i < timeOutSeconds / 5; i++) {
-
-				try {
-					driver.switchTo().frame("ifinbox");
-					element2=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Password Reset Request')]")));
-
-					if(element2.isDisplayed()==true)
-					{
-						flag=1;
-						element2.click();
-						driver.switchTo().defaultContent();
-						break;
-					}
-
-				} catch (Exception e) {
-					driver.switchTo().defaultContent();        
-					element1.click();
-				}
-			}
-
-			if(flag==1)
-			{driver.switchTo().frame("ifmail");
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(
-						driver.findElement(By.xpath("(//main[@class='yscrollbar']"
-								+ "/div/div/div/table/tbody/tr/td/center/table/tbody/tr/td)[2]/p[3]/"
-								+ "a[contains(text(),'Click here to change your password')]"))));
-				VET.clickOnResetPasswordLink();
-				Set<String> allWindowHandles = driver.getWindowHandles();
-				java.util.Iterator<String> iterator = allWindowHandles.iterator();
-				String yopmailHandle = iterator.next();
-				String ChildWindow=iterator.next();
-				driver.switchTo().window(ChildWindow);
-				VET.ResetPwd(excelOperation.getTestData("TC06", "VET_Test_Data", "New_Password"));
-				VET.ResetConfirmPassword(excelOperation.getTestData("TC06", "VET_Test_Data", "Confirm_Password"));
-				VET.ResetPassSubmit();
-				VET.PasswordResetSuccess();
-				driver.switchTo().window(yopmailHandle);
-				driver.close();
-				driver.switchTo().window(ChildWindow);
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Rest password link was not cliackable in the mail", 
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-			}
-			else {
-				Reporting.updateTestReport("No reset password mail was recieved in yopmail inbox", 
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
+			EmailValidation.forgotPasswordMailForVet(driver, SS_path, VET);
 		}
 
 		catch (Exception e) {
@@ -464,82 +408,11 @@ public class Vet_Test_Suite extends DriverModule {
 	}
 
 
+
 	/*
-	 * @Author: Vishnu
-	 * 
-	 * @Desciption: This test cases is verifying the Order in Riskified Check.
-	 * 
+	 * @Author: Anindita
+	 * @Description: Places an order in VET with promo code
 	 */
-	/*
-	@Test
-	public void TC09_Riskifiedcheck() throws IOException {
-		try {
-			Reporting.test = Reporting.extent.createTest("TC09_Riskifiedcheck");
-			driver.get(excelOperation.getTestData("Riskified_URL", "Generic_Dataset", "Data"));
-			RiskRepo.riskifiedemail(excelOperation.getTestData("Riskified_User_ID", "Generic_Dataset", "Data"));
-			RiskRepo.riskifiedpassword(excelOperation.getTestData("Riskified_Password", "Generic_Dataset", "Data"));
-			RiskRepo.riskifiedsubmit();
-			RiskRepo.rorderenter(excelOperation.getTestData("TC09", "VET_Test_Data", "Order_Id"));
-			RiskRepo.enter();
-			RiskRepo.FecthROrderId();
-		} catch (Exception e) {
-			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
-
-		}
-	}
-	 */
-
-	//Backoofice related testcases have been made out of scope and will be tested manually
-	/*
-	 * Author : Arun 
-	 * Description : This flow is using  for refund the amount to customer.
-	 */
-	/*@Test
-	public void TC10_VET_Refund() throws IOException {
-		try {
-
-			Reporting.test = Reporting.extent.createTest("TC10_VET_Refund");
-			driver.get(excelOperation.getTestData("Backoffice_URL", "Generic_Dataset", "Data"));
-			HybrisBO.enterBOUserName(excelOperation.getTestData("Backoffice_CSR_User_ID", "Generic_Dataset", "Data"));
-			HybrisBO.enterBOPassword(excelOperation.getTestData("Backoffice_CSR_Password", "Generic_Dataset", "Data"));
-			HybrisBO.selectBOLanguage();
-			HybrisBO.clickOnBOLoginButton();
-			Thread.sleep(2000);
-			HybrisBO.clickOnProceedButton();
-			Thread.sleep(4000);
-			HybrisBO.clickOnOrdersOption();
-			Thread.sleep(2000);
-			HybrisBO.EnterOrderID(excelOperation.getTestData("TC10", "VET_Test_Data", "Order_Id"));
-			Thread.sleep(1000);
-			HybrisBO.clickOnSearchBtn();
-			Thread.sleep(1000);
-			HybrisBO.clickOnOrderID();
-			HybrisBO.clickOnRefundOrderTab();
-			HybrisBO.SelectRefundReason();
-			Thread.sleep(1000);
-		//	HybrisBO.clickOnRecalculateTaxTab();
-			Thread.sleep(2000);
-			HybrisBO.clickOnConfirmSelectedTab();
-			Thread.sleep(2000);
-			HybrisBO.clickOnYesConfirmationButton();
-			Thread.sleep(3000);
-			HybrisBO.clickOnLogOutButton();
-			driver.get(excelOperation.getTestData("Yopmail_URL", "Generic_Dataset", "Data"));
-			VET.enterYOPUserMailID(excelOperation.getTestData("TC10", "VET_Test_Data", "Email_Id"));
-			VET.clickOnRefreshButton();
-			Thread.sleep(2000);	
-
-		}
-
-		catch (Exception e) {
-			// TODO: handle exception
-			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
-			HybrisBO.clickOnLogOutButton();
-		}
-
-	}*/
-
-
 	@Test
 	public void TC11_Place_Order_With_Promo_Code() throws IOException {
 		try {
@@ -682,248 +555,7 @@ public class Vet_Test_Suite extends DriverModule {
 
 	}
 
-	//Backoofice related testcases have been made out of scope and will be tested manually
 
-	/*@Test
-	public void TC13_Renew_Subscription() throws IOException {
-		try {
-
-			Reporting.test = Reporting.extent.createTest("TC13_Renew_Subscription");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30, 1));
-			driver.get(excelOperation.getTestData("Backoffice_URL", "Generic_Dataset", "Data"));
-			HybrisBO.enterHybrisBOUserName(excelOperation.getTestData("Backoffice_Admin_User_ID", "Generic_Dataset", "Data"));
-			HybrisBO.enterHybrisBOPassword(excelOperation.getTestData("Backoffice_Admin_Password", "Generic_Dataset", "Data"));
-			HybrisBO.clickOnBOLoginButton();
-			HybrisBO.enterSearchText("Wiley");
-			HybrisBO.clickOnWileySubscription();
-			Thread.sleep(3000);
-			HybrisBO.clickOnSwitchSearchMode();
-			HybrisBO.enterCustomerEmailID(excelOperation.getTestData("TC13", "VET_Test_Data", "Email_Id"));
-			Thread.sleep(3000);
-			HybrisBO.clickOnSuggestedmailID();
-			Thread.sleep(4000);
-			HybrisBO.clickOnSearchButton1();
-			Thread.sleep(3000);
-			HybrisBO.clickOnOrderDetails();
-			Thread.sleep(3000);
-			HybrisBO.clearExpirationDateField();
-			Calendar cal = Calendar.getInstance(); // creates calendar
-			cal.setTime(new Date()); // sets calendar time/date
-			cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
-			Date date = cal.getTime();
-			SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy hh:mm:ss aa");
-			String formattedDate = dateFormat.format(date).toString();
-			System.out.println(formattedDate);
-			HybrisBO.enterExpirationDateField(formattedDate);
-			HybrisBO.clickOnSaveButton();
-            Thread.sleep(2000); 
-            HybrisBO.clearFieldInHybrisBO();
-			HybrisBO.searchFieldInHybrisBO("cronjob");            
-            Thread.sleep(2000);
-            HybrisBO.clickOnCronJobs();
-            Thread.sleep(3000);
-            wait.until(ExpectedConditions.elementToBeClickable(HybrisBO.returnSearchButton()));
-			HybrisBO.clickOnSearchButton();
-			wait.until(ExpectedConditions.elementToBeClickable(HybrisBO.returnSearchBar()));
-			HybrisBO.enterInSearchBar("renewal");
-			Thread.sleep(2000);
-			HybrisBO.clickOnSearchButtonBO();
-			Thread.sleep(3000);
-			wait.until(ExpectedConditions.elementToBeClickable(HybrisBO.returnRenewalCronjob()));
-			HybrisBO.clickOnRenewalCronjob();
-			Thread.sleep(2000);
-			wait.until(ExpectedConditions.elementToBeClickable(HybrisBO.returnRunButton()));
-			HybrisBO.runCronJob();
-			Thread.sleep(2000);
-			HybrisBO.clickOnLogOutButton();	
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
-		}
-	}*/
-
-	/*@Test
-	public void TC14_Update_card_details_and_renew_subscription() throws IOException {
-		try {
-			Reporting.test = Reporting.extent.createTest("TC14_Update_card_details_and_renew_subscription");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30, 1));
-			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
-			VET.enterExistingUserId(excelOperation.getTestData("TC14", "VET_Test_Data", "Email_Id"));
-			VET.enterExistingUserPassword(excelOperation.getTestData("TC14", "VET_Test_Data", "Password"));
-			VET.clickOnLoginButton();
-			VET.isMyAccountPage();
-			VET.clickOnEditPayment();
-			VET.isEditPaymentPage();
-			VET.clickOnUpdateCreditCardButton();
-
-			String str = excelOperation.getTestData("Payment_Gateway", "Generic_Dataset", "Data");
-            System.out.println(str);
-            if (str.contains("WPG")) {
-                // WPG Code 
-                driver.switchTo().frame(0);
-                driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-                VET.enterCardNumberWPG(excelOperation.getTestData("TC14", "VET_Test_Data", "Card_Number"));
-                driver.switchTo().parentFrame();
-                driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-                VET.selectExpiryMonthWPG();
-                driver.switchTo().parentFrame();
-                driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-                VET.selectExpiryYearWPG();
-                driver.switchTo().parentFrame();
-                driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='security code']")));
-                VET.enterSecurityCodeWPG(excelOperation.getTestData("TC14", "VET_Test_Data", "CVV"));
-                driver.switchTo().parentFrame();
-                VET.clickOnMakePaymentButtonWPG();
-                driver.switchTo().defaultContent();
-            } else {
-                // WPS Code
-
-               driver.switchTo().frame("tokenFrame");
-                driver.switchTo().frame(0);
-                VET.enterCardNumber(excelOperation.getTestData("TC14", "VET_Test_Data", "Card_Number"));
-                VET.enterExpiryDate(excelOperation.getTestData("TC14", "VET_Test_Data", "Expiry_Date"));
-                VET.enterCVC(excelOperation.getTestData("TC14", "VET_Test_Data", "CVV"));
-                driver.switchTo().parentFrame();
-                VET.paymentDetailsSubmit();
-                driver.switchTo().defaultContent();
-
-            }
-			VET.isUpdatedCardLogoDisplayed();
-			VET.logOut();
-			driver.get(excelOperation.getTestData("Backoffice_URL", "Generic_Dataset", "Data"));
-			HybrisBO.enterHybrisBOUserName(excelOperation.getTestData("Backoffice_Admin_User_ID", "Generic_Dataset", "Data"));
-			HybrisBO.enterHybrisBOPassword(excelOperation.getTestData("Backoffice_Admin_Password", "Generic_Dataset", "Data"));
-			HybrisBO.clickOnHybrisBOLoginButton();
-			HybrisBO.checkIfUserLoggedInHybrisBO();
-			HybrisBO.searchFieldInHybrisBO("wiley");
-			HybrisBO.clickOnWileySubscriptionField();
-			HybrisBO.clickOnSearchButton();
-			HybrisBO.enterCustomerIdInHybrisBO(excelOperation.getTestData("TC14", "VET_Test_Data", "Email_Id"));
-			wait.until(ExpectedConditions.elementToBeClickable(HybrisBO.returnSuggestedCustomerId()));
-			HybrisBO.clickOnSuggestedCustomerId();
-			//HybrisBO.clickOnSuggestedmailID();
-			HybrisBO.clickOnSearchButtonBO();
-			Thread.sleep(3000);
-			wait.until(ExpectedConditions.elementToBeClickable(HybrisBO.returnXpathOfSubscription()));
-			HybrisBO.clickOnSubscription();
-			wait.until(ExpectedConditions.elementToBeClickable(HybrisBO.returnExpiryDateField()));
-			HybrisBO.clearExpirationDateField();
-			Calendar cal = Calendar.getInstance(); // creates calendar
-			cal.setTime(new Date()); // sets calendar time/date
-			cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
-			Date date = cal.getTime();
-			SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy hh:mm:ss aa");
-			String formattedDate = dateFormat.format(date).toString();
-			System.out.println(formattedDate);
-			HybrisBO.enterExpirationDateField(formattedDate);
-			HybrisBO.clickOnSaveButton();
-			HybrisBO.clearFieldInHybrisBO();
-			HybrisBO.searchFieldInHybrisBO("cronjob");
-
-			wait.until(ExpectedConditions.elementToBeClickable(HybrisBO.returnCronJobs()));
-			HybrisBO.clickOnCronjob();
-			wait.until(ExpectedConditions.elementToBeClickable(HybrisBO.returnSearchButton()));
-			HybrisBO.clickOnSearchButton();
-			wait.until(ExpectedConditions.elementToBeClickable(HybrisBO.returnSearchBar()));
-			HybrisBO.enterInSearchBar("renewal");
-			Thread.sleep(2000);
-			HybrisBO.clickOnSearchButtonBO();
-			Thread.sleep(3000);
-			wait.until(ExpectedConditions.elementToBeClickable(HybrisBO.returnRenewalCronjob()));
-			HybrisBO.clickOnRenewalCronjob();
-			wait.until(ExpectedConditions.elementToBeClickable(HybrisBO.returnRunButton()));
-			HybrisBO.runCronJob();
-			Thread.sleep(2000);
-			HybrisBO.clickOnLogOutButton();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
-			HybrisBO.clickOnLogOutButton();
-		}
-	}*/
-
-	//Backoofice related testcases have been made out of scope and will be tested manually
-	/*
-	 * @Author: Vishnu Description: This is to verify the Order in Backoffice and
-	 * Validating the Order
-	 */
-	/*@Test
-	public void TC15_ValidationOrdersinBO() throws IOException {
-		try {
-			Reporting.test = Reporting.extent.createTest("TC15_ValidationOrdersinBO");
-			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("TC11", "VET_Test_Data", "URL"));
-			VET.addSubscriptionToCart();
-			VET.addPromoToCart(excelOperation.getTestData("100_Percent_Coupon", "Generic_Dataset", "Data"));
-			VET.continueToCheckout();
-			VET.enterFirstName(excelOperation.getTestData("TC15", "VET_Test_Data", "First_Name"));
-			VET.enterLastName(excelOperation.getTestData("TC15", "VET_Test_Data", "Last_Name"));
-			VET.enterEmailId();
-			VET.enterPassword(excelOperation.getTestData("TC15", "VET_Test_Data", "Password"));
-			VET.clickCreateAccountButton();
-			if (VET.checkIfOrderPlaced()) {
-				String orderId = VET.fetchOrderId();
-				excelOperation.updateTestData("TC15", "VET_Test_Data", "Order_Id", orderId);
-				Reporting.updateTestReport("Order was placed successfully with Order Id: " + orderId,
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				VET.logOut(driver);
-				driver.get(excelOperation.getTestData("Backoffice_URL", "Generic_Dataset", "Data"));
-				HybrisBO.enterHybrisBOUserName(excelOperation.getTestData("Backoffice_Admin_User_ID", "Generic_Dataset", "Data"));
-				HybrisBO.enterHybrisBOPassword(excelOperation.getTestData("Backoffice_Admin_Password", "Generic_Dataset", "Data"));
-				HybrisBO.clickOnHybrisBOLoginButton();
-				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@class='yw-explorerTree-filterTextbox yw-filter-textbox y-general-textinput z-textbox']")));
-					HybrisBO.OrderSearchInBo();
-					HybrisBO.ClickOnOrders();
-					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='z-div']/span[contains(text(),'No items')]")));
-						HybrisBO.EnterorderId(excelOperation.getTestData("TC15", "VET_Test_Data", "Order_Id"));
-						HybrisBO.OrderSearch();
-						try {
-							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='yw-listview-pagingcontainer z-div']/span[contains(text(),'1 items')]")));
-							HybrisBO.ClickonOrderId();
-							WebDriverWait wait4 = new WebDriverWait(driver, Duration.ofSeconds(60));
-							try {
-								wait4.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='z-div']/span[contains(text(), 'Auto Vet')]")));
-								excelOperation.updateTestData("TC15", "VET_Test_Data", "Order_Status", HybrisBO.OrderStatus());
-								Reporting.updateTestReport("Order Id and Status of the Order is " + HybrisBO.OrderStatus(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								HybrisBO.clickOnLogOutButton();
-							}
-							catch(Exception e) {
-								Reporting.updateTestReport("Order details was not displayed"
-										+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
-										StatusDetails.FAIL);
-							}
-						}
-						catch(Exception e) {
-							Reporting.updateTestReport("Searched Order Id was not clickable"
-									+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
-									StatusDetails.FAIL);
-						}
-					}
-					catch(Exception e) {
-						Reporting.updateTestReport("Order Id search field was not clickable"
-								+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
-								StatusDetails.FAIL);
-					}
-				}
-				catch(Exception e) {
-					Reporting.updateTestReport("Orders could not be searched in the left pane"
-							+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
-							StatusDetails.FAIL);
-				}
-			} else {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
-			HybrisBO.clickOnLogOutButton();	
-		}
-	}*/
 
 	/*
 	 * Author : Arun 
@@ -1029,6 +661,9 @@ public class Vet_Test_Suite extends DriverModule {
 
 	}
 
+	/*
+	 * @Description: This method updates the billing address in my account page
+	 */
 	@Test
 	public void TC20_Edit_Billing_address_in_my_account() throws IOException {
 		try {
@@ -1066,7 +701,10 @@ public class Vet_Test_Suite extends DriverModule {
 		}
 	}
 
-	// Anindita on 13/07/22
+	/*
+	 *  Anindita on 13/07/22
+	 *  @Description: Validates if the orders are reaching Eloqua
+	 */
 	@Test
 	public void TC08_Eloqua_validation() throws IOException {
 		try {
@@ -1136,6 +774,10 @@ public class Vet_Test_Suite extends DriverModule {
 		}
 	}
 
+	/*
+	 * @Author: Anindita
+	 * @Description: Validates the auto renew toggle functionality
+	 */
 	@Test
 	public void TC17_Auto_Renew_Toggle_validation() throws IOException {
 		try {
@@ -1164,43 +806,7 @@ public class Vet_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	//Backoffice related scenarios have been made out of scope
-	// This test case was created to check if subscription was created or not
-	/*@Test
-	public void TC21_Check_If_Subscription_Is_Created() throws IOException {
-		try {
-			Reporting.test = Reporting.extent.createTest("TC21_Check_If_Subscription_Is_Created");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30, 1));
-			driver.get(excelOperation.getTestData("Backoffice_URL", "Generic_Dataset", "Data"));
-			HybrisBO.enterHybrisBOUserName(excelOperation.getTestData("Backoffice_Admin_User_ID", "Generic_Dataset", "Data"));
-			HybrisBO.enterHybrisBOPassword(excelOperation.getTestData("Backoffice_Admin_Password", "Generic_Dataset", "Data"));
-			HybrisBO.clickOnHybrisBOLoginButton();
-			HybrisBO.checkIfUserLoggedInHybrisBO();
-			HybrisBO.clearFieldInHybrisBO();
-			HybrisBO.searchFieldInHybrisBO("wiley");
-			HybrisBO.clickOnWileySubscriptionField();
-			HybrisBO.clickOnSearchButton();
-			HybrisBO.enterCustomerIdInHybrisBO(excelOperation.getTestData("TC14", "VET_Test_Data", "Email_Id"));
-			Thread.sleep(3000);
-			HybrisBO.clickOnSuggestedmailID();
-			HybrisBO.clickOnSearchButtonBO();
-			Thread.sleep(3000);
-			HybrisBO.checkIfTwoItemsDisplayed();
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[text()='Expiration date']")));
-			driver.findElement(By.xpath("//div[text()='Expiration date']")).click();
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[text()='Expiration date']")));
-			driver.findElement(By.xpath("//div[text()='Expiration date']")).click();
-			wait.until(ExpectedConditions.visibilityOf(HybrisBO.returnXpathOfSubscription()));
-			HybrisBO.clickOnSubscription();
-			wait.until(ExpectedConditions.visibilityOf(HybrisBO.returnXpathOfNewRenewedOrderId()));
-			String newOrder = HybrisBO.getNewSubscriptionOrderId();
-			Reporting.updateTestReport("New Subscription OrderID: " + newOrder + " was fetched ",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
-		}
-	}*/
+	
 	//This test case was designed to prepare the data for the data preparation of other test cases
 	@Test
 	public void Data_Preparation() throws IOException {
@@ -1298,7 +904,7 @@ public class Vet_Test_Suite extends DriverModule {
 
 	/*
 	 * @Date: 2/1/23
-	 * @Description: Places an order with last name "RiskifiedDenie" which results in riskified declined  order
+	 * @Description: Places an order with last name "RiskifiedDenied" which results in riskified declined  order
 	 */
 	@Test
 	public void TC21_Riskified_Declined_Order() throws IOException{

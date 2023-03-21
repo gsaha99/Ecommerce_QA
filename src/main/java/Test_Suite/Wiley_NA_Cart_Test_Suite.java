@@ -4655,48 +4655,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							"Generic_Dataset", "Data"));
 					wiley.enterEmailIdInYopmail(excelOperation.getTestData("TC33", "WILEY_NA_Cart_Test_Data", "Email_Id"));
 					wiley.clickOnCheckInboxButton();
+					int flag=EmailValidation.forgotPasswordEmailForWiley(driver, SS_path, wiley);
 
-
-					WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(5));
-					int timeOutSeconds=60;
-					int flag=0;
-					WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-					WebElement element2 = null;
-
-					/* The purpose of this loop is to wait for maximum of 60 seconds */
-					for (int i = 0; i < timeOutSeconds / 5; i++) {
-
-						try {
-							driver.switchTo().frame("ifinbox");
-							element2=wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Reset Password for Wiley.com')]")));
-
-							if(element2.isDisplayed()==true)
-							{
-								flag=1;
-								element2.click();
-								driver.switchTo().defaultContent();
-								break;
-							}
-
-						} catch (Exception e) {
-							driver.switchTo().defaultContent();        
-							element1.click();
-						}
-					}
-
-					if(flag==1)
-					{
-						driver.switchTo().frame("ifmail");
-						driver.findElement(By.xpath("//a[text()='Reset Password']")).click();
-						driver.switchTo().defaultContent();
-
-
-						Set<String> allWindowHandles = driver.getWindowHandles();
-						java.util.Iterator<String> iterator = allWindowHandles.iterator();
-
-						String yopmailHandle = iterator.next();
-						String ChildWindow=iterator.next();
-						driver.switchTo().window(ChildWindow);
+					if(flag==1) {
+					
 						wiley.enterNewPasswordFieldInResetPasswordPage(excelOperation.getTestData("TC33", "WILEY_NA_Cart_Test_Data", "Password"));
 						wiley.enterConfirmPasswordFieldInResetPasswordPage(excelOperation.getTestData("TC33", "WILEY_NA_Cart_Test_Data", "Password"));
 						wiley.clickOnSubmitButtonInResetPasswordPage();
@@ -4710,9 +4672,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("User was not on the cart apge and the login was not successfull with new password", 
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
-						driver.switchTo().window(yopmailHandle);
-						driver.close();
-						driver.switchTo().window(ChildWindow);
 					}
 					else {
 						Reporting.updateTestReport("No reset password mail was recieved in yopmail inbox", 
@@ -4735,6 +4694,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			wiley.WileyLogOut();
 			wiley.removeProductsFromCart(driver);
 		}
+	
 		catch(Exception e) {
 			wiley.wileyLogOutException();
 			System.out.println(e.getMessage());
