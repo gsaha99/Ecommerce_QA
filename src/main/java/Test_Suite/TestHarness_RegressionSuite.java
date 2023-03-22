@@ -1096,7 +1096,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
-			THarness.ClickHttp_TokenAuth();;
+			THarness.ClickHttp_TokenAuth();
 			THarness.Http_Tokenise_EnterClientID(excelOperation.getTestData("TC14", "TestHarness_Test_Data", "Client_ID"));
 			THarness.Http_Tokenise_EnterClientPWD(excelOperation.getTestData("TC14", "TestHarness_Test_Data", "Client_ID_PWD"));
 			THarness.Http_Tokenise_EnterClientDescription(excelOperation.getTestData("TC14", "TestHarness_Test_Data", "Description"));
@@ -1164,7 +1164,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 		catch (Exception e) 
 		{
 			System.out.println("TokenAuth Operation Failed" + e.getMessage());
-			Reporting.updateTestReport("Tokenise Operation Failed" + e.getMessage(),
+			Reporting.updateTestReport("TokenAuth Operation Failed" + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -1185,7 +1185,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
-			THarness.ClickHttp_TokenAuth();;
+			THarness.ClickHttp_TokenAuth();
 			THarness.Http_Tokenise_EnterClientID(excelOperation.getTestData("TC15", "TestHarness_Test_Data", "Client_ID"));
 			THarness.Http_Tokenise_EnterClientPWD(excelOperation.getTestData("TC15", "TestHarness_Test_Data", "Client_ID_PWD"));
 			THarness.Http_Tokenise_EnterClientDescription(excelOperation.getTestData("TC15", "TestHarness_Test_Data", "Description"));
@@ -1251,7 +1251,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 		catch (Exception e) 
 		{
 			System.out.println("TokenAuth Operation Failed" + e.getMessage());
-			Reporting.updateTestReport("Tokenise Operation Failed" + e.getMessage(),
+			Reporting.updateTestReport("TokenAuth Operation Failed" + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -1273,7 +1273,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
-			THarness.ClickHttp_TokenSettle();;
+			THarness.ClickHttp_TokenSettle();
 			THarness.Http_Tokenise_EnterClientID(excelOperation.getTestData("TC16", "TestHarness_Test_Data", "Client_ID"));
 			THarness.Http_Tokenise_EnterClientPWD(excelOperation.getTestData("TC16", "TestHarness_Test_Data", "Client_ID_PWD"));
 			THarness.Http_Tokenise_EnterClientDescription(excelOperation.getTestData("TC16", "TestHarness_Test_Data", "Description"));
@@ -1339,7 +1339,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 		catch (Exception e) 
 		{
 			System.out.println("TokenSettle Operation Failed" + e.getMessage());
-			Reporting.updateTestReport("Tokenise Operation Failed" + e.getMessage(),
+			Reporting.updateTestReport("TokenSettle Operation Failed" + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -1361,7 +1361,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 	
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
-			THarness.ClickHttp_TokenSettle();;
+			THarness.ClickHttp_TokenSettle();
 			THarness.Http_Tokenise_EnterClientID(excelOperation.getTestData("TC17", "TestHarness_Test_Data", "Client_ID"));
 			THarness.Http_Tokenise_EnterClientPWD(excelOperation.getTestData("TC17", "TestHarness_Test_Data", "Client_ID_PWD"));
 			THarness.Http_Tokenise_EnterClientDescription(excelOperation.getTestData("TC17", "TestHarness_Test_Data", "Description"));
@@ -1428,7 +1428,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 		catch (Exception e) 
 		{
 			System.out.println("TokenSettle Operation Failed" + e.getMessage());
-			Reporting.updateTestReport("Tokenise Operation Failed" + e.getMessage(),
+			Reporting.updateTestReport("TokenSettle Operation Failed" + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -1451,7 +1451,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
-			THarness.ClickHttp_TokenAuthSettle();;
+			THarness.ClickHttp_TokenAuthSettle();
 			THarness.Http_Tokenise_EnterClientID(excelOperation.getTestData("TC18", "TestHarness_Test_Data", "Client_ID"));
 			THarness.Http_Tokenise_EnterClientPWD(excelOperation.getTestData("TC18", "TestHarness_Test_Data", "Client_ID_PWD"));
 			THarness.Http_Tokenise_EnterClientDescription(excelOperation.getTestData("TC16", "TestHarness_Test_Data", "Description"));
@@ -1514,7 +1514,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 		catch (Exception e) 
 		{
 			System.out.println("TokenAuthSettle Operation Failed" + e.getMessage());
-			Reporting.updateTestReport("Tokenise Operation Failed" + e.getMessage(),
+			Reporting.updateTestReport("TokenAuthSettle Operation Failed" + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -1535,7 +1535,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 	
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
-			THarness.ClickHttp_TokenAuthSettle();;
+			THarness.ClickHttp_TokenAuthSettle();
 			THarness.Http_Tokenise_EnterClientID(excelOperation.getTestData("TC19", "TestHarness_Test_Data", "Client_ID"));
 			THarness.Http_Tokenise_EnterClientPWD(excelOperation.getTestData("TC19", "TestHarness_Test_Data", "Client_ID_PWD"));
 			THarness.Http_Tokenise_EnterClientDescription(excelOperation.getTestData("TC19", "TestHarness_Test_Data", "Description"));
@@ -1622,7 +1622,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
-			THarness.ClickHttp_VoidAuth();;
+			THarness.ClickHttp_VoidAuth();
 			THarness.Http_Tokenise_EnterClientID(excelOperation.getTestData("TC20", "TestHarness_Test_Data", "Client_ID"));
 			THarness.Http_Tokenise_EnterClientPWD(excelOperation.getTestData("TC20", "TestHarness_Test_Data", "Client_ID_PWD"));
 			THarness.Http_Tokenise_EnterClientDescription(excelOperation.getTestData("TC20", "TestHarness_Test_Data", "Description"));
@@ -3215,6 +3215,94 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 		
+	}
+	
+	/*
+     * @Author: Jayanta
+     * @Description: Validation of HTTP Token Refund operation request and response page data in ES and Stripe
+     */
+	@Test
+	
+        public void TC39_HTTP_TokenRefund_ES_Stripe_Validation() throws IOException
+	{
+		
+		try {
+			Reporting.test = Reporting.extent.createTest("TC39_HTTP Client: "
+					+ "Validate that for Token Refund Operation,"
+					+ "Request page, Response page is displayed successfully with all the required details"
+					+ "and proper data is displayed in elastic as well as Stripe");
+			
+			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
+			THarness.ClickHttp_Interface();
+			THarness.ClickHttp_TokenRefund();
+			THarness.Http_Tokenise_EnterClientID(excelOperation.getTestData("TC39", "TestHarness_Test_Data", "Client_ID"));
+			THarness.Http_Tokenise_EnterClientPWD(excelOperation.getTestData("TC39", "TestHarness_Test_Data", "Client_ID_PWD"));
+			THarness.Http_Tokenise_EnterClientDescription(excelOperation.getTestData("TC39", "TestHarness_Test_Data", "Description"));
+			THarness.Http_Authorise_EnterValue(excelOperation.getTestData("TC39", "TestHarness_Test_Data", "Value"));
+			THarness.Http_Authorise_EnterCurrency(excelOperation.getTestData("TC39", "TestHarness_Test_Data", "Currency_Code"));
+			THarness.Http_Tokenise_SelectRegion();
+			THarness.SOAP_TokenAuthSettle_EnterToken(excelOperation.getTestData("TC39", "TestHarness_Test_Data", "Token_number"));
+			THarness.Http_Tokenise_EnterPostalCode(excelOperation.getTestData("TC39", "TestHarness_Test_Data", "Zip_Code"));
+			THarness.Http_Tokenise_EnterCountryCode(excelOperation.getTestData("TC39", "TestHarness_Test_Data", "Country_Code"));
+		    THarness.Http_Tokenise_ClickContinue();
+		    
+		    try {
+			
+		            WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
+			        pagewait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Token Refund Response')]")));
+			        driver.findElement(By.xpath("//h2[contains(text(),'Token Refund Response')]")).click();
+                    String returnMessage = THarness.Http_Tokenise_FetchReturnMessage();
+				    if(returnMessage.compareTo("SUCCESS")==0) 
+				       {
+					
+					        Reporting.updateTestReport("Return message is: " + returnMessage,
+							     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				       }
+				    else 
+				       {
+					        Reporting.updateTestReport("Return message is not SUCCESS",
+							       CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				       }
+				    excelOperation.updateTestData("TC39", "TestHarness_Test_Data", "Return_Message", returnMessage);
+				    String returnCode = THarness.Http_Tokenise_FetchReturnCode();
+				    if(returnCode.compareTo("0")==0) 
+				       {
+					
+					        Reporting.updateTestReport("Return code is: " + returnCode,
+							      CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				       }
+				    else 
+				       {
+					        Reporting.updateTestReport("Return code is not 0",
+							      CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				       }
+				    excelOperation.updateTestData("TC39", "TestHarness_Test_Data", "Return_Code", returnCode);
+			        excelOperation.updateTestData("TC39", "TestHarness_Test_Data", "Operation", THarness.Http_Tokenise_FetchOperation());
+			        excelOperation.updateTestData("TC39", "TestHarness_Test_Data", "transID", THarness.Http_Tokenise_FetchTransID());
+			        ScrollingWebPage.PageDown(driver,SS_path);
+			        excelOperation.updateTestData("TC39", "TestHarness_Test_Data", "merchantResponse", THarness.Http_Auth_FetchMerchantResponse());
+			        excelOperation.updateTestData("TC39", "TestHarness_Test_Data", "merchantReference", THarness.Http_Auth_FetchMerchantReference());
+			        ScrollingWebPage.PageDown(driver,SS_path);
+			        ScrollingWebPage.PageDown(driver,SS_path);
+			        excelOperation.updateTestData("TC39", "TestHarness_Test_Data", "acquirerID", THarness.SOAP_TokenAuthSettle_FetchAcquirerID());
+			        excelOperation.updateTestData("TC39", "TestHarness_Test_Data", "acquirerName", THarness.SOAP_TokenAuthSettle_FetchAcquirerName());
+			        excelOperation.updateTestData("TC39", "TestHarness_Test_Data", "maskedCardNumber", THarness.SOAP_TokenAuthSettle_FetchMaskedCardNumber());
+			        excelOperation.updateTestData("TC39", "TestHarness_Test_Data", "cardExpiry", THarness.SOAP_TokenAuthSettle_FetchCardExpiry());
+		    }
+			catch (Exception e) 
+		       {
+			        System.out.println("Response page is not displayed after 50 seconds" + e.getMessage());
+			        Reporting.updateTestReport("Response page is not displayed after 50 seconds" + e.getMessage(),
+					        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		       }
+		}
+		
+		catch (Exception e) 
+		{
+			System.out.println("TokenRefund Operation Failed" + e.getMessage());
+			Reporting.updateTestReport("TokenRefund Operation Failed" + e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
 	}
 	
 }

@@ -316,6 +316,14 @@ public class app_TestHarness_Repo {
     @FindBy(xpath = "//a[contains(text(),'Token Refund')]")
     WebElement ClickSOAP_TokenRefund;
     
+    /*
+     * Author : Jayanta
+     * Description : Object repo for HTTP Token Refund operation
+     */
+    
+    @FindBy(xpath = "//a[contains(text(),'Token Refund')]")
+	WebElement ClickHTTP_TokenRefund;
+    
     /* 
 	 * Author : Jayanta
 	 * Description : Object repo to click Embedded in HTTP Client 
@@ -1334,7 +1342,7 @@ public class app_TestHarness_Repo {
 		}
 	}
 	
-	/* 
+	  /* 
 	   * Author - Varisa 
 	   * Description : Methods to click http Token Auth operation
 	   */
@@ -1835,6 +1843,22 @@ public class app_TestHarness_Repo {
 					Reporting.updateTestReport("Acquirer Name is not checked successfully "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					return "";
 				   }
+			}
+
+		  /* 
+		   * Author - Jayanta 
+		   * Description : Methods to click http Token Refund operation
+		   */
+			
+		    public void ClickHttp_TokenRefund() throws IOException {
+		    try {
+					
+		            ClickHTTP_TokenRefund.click();
+			        Reporting.updateTestReport("TokenRefund is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
+				catch(Exception e){
+			        Reporting.updateTestReport("TokenRefund is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
 			}
 		
 }

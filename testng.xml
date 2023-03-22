@@ -3,7 +3,7 @@
 <suite name="WPS_Regression">
   <test thread-count="5" name="Test_Suite">
    <classes>
-	<class name="Test_Suite.ClientPortal_RegressionSuite">
+	<class name="Test_Suite.TestHarness_RegressionSuite">
 	<methods>
 
 		<include name="TC01.*" />
