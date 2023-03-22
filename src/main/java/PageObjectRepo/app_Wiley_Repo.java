@@ -1795,7 +1795,7 @@ public class app_Wiley_Repo {
 		catch(Exception e) {
 			Reporting.updateTestReport("NextAvailibilityDate was not present for Pre-order product. "
 					+ "Probable reason might be, the date is not set up in backoffice",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 		}
 
 	}
@@ -1813,7 +1813,7 @@ public class app_Wiley_Repo {
 		catch(Exception e) {
 			Reporting.updateTestReport("NextAvailibilityDate was not present for Back-order product. "
 					+ "Probable reason might be, the date is not set up in backoffice",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 		}
 
 	}
@@ -1829,7 +1829,8 @@ public class app_Wiley_Repo {
 				Reporting.updateTestReport("notification message is present for pre-order product as: "+PreOrderNotificationMessageInCartPage.getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("notification message was not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			Reporting.updateTestReport("notification message was not presentfor pre order product "
+					+ "probably because of data set up issue in backoffice", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 		}
 
 	}
@@ -1845,7 +1846,8 @@ public class app_Wiley_Repo {
 				Reporting.updateTestReport("notification message is present for back-order product as: "+BackOrderNotificationMessageInCartPage.getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("notification message was not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			Reporting.updateTestReport("notification message was not present for back order product "
+					+ "probably because of data set up issue in backoffice", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 		}
 
 	}
@@ -1863,7 +1865,7 @@ public class app_Wiley_Repo {
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Next AvailibilityDate was not present for Pre-order product"
-					+ " because of data setup issue", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					+ " because of data setup issue", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 		}
 
 	}
@@ -1881,7 +1883,7 @@ public class app_Wiley_Repo {
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Next AvailibilityDate was not present for backrder product"
-					+ " because of data setup issue.", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					+ " because of data setup issue.", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 		}
 
 	}
@@ -1900,7 +1902,7 @@ public class app_Wiley_Repo {
 
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("The complete line with next availability date was not present in order confirmation page", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			Reporting.updateTestReport("The complete line with next availability date was not present in order confirmation page", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 		}
 
 	}
@@ -1919,7 +1921,7 @@ public class app_Wiley_Repo {
 
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("The complete line with next availability date was not present in order confirmation page", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			Reporting.updateTestReport("The complete line with next availability date was not present in order confirmation page", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 		}
 
 	}

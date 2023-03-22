@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -2340,6 +2341,29 @@ public class app_WileyPLUS_Repo {
 		catch(Exception e) {
 			Reporting.updateTestReport("User couldn't be logged out from onboarding my account "+e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 21/03/23
+	 * @Description: Removes all the products from cart
+	 * @Author: Anindita
+	 */
+	public void removeProductsFromCart(WebDriver driver) throws IOException {
+		try {
+			driver.get(excelOperation.getTestData("Wiley_Cart_Page_URL", "Generic_Dataset", "Data"));
+			List<WebElement> removeList = driver.findElements(By.xpath("//a[@class='remove-item remove-entry-button removeCartEntryBtn']"));
+			while(!removeList.isEmpty()){
+			    removeList.get(0).click();
+			    Thread.sleep(200);
+			    removeList = driver.findElements(By.xpath("//a[@class='remove-item remove-entry-button removeCartEntryBtn']"));
+			}
+			Reporting.updateTestReport("Few products were removed from cart",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("No products were present in cart to remove",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 		}
 	}
 	

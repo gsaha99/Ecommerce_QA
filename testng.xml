@@ -5,12 +5,28 @@
 
 
 		<classes>
-			<class name="Test_Suite.WileyPLUS_Test_Suite">
+			<class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
 				<methods>
-					<include name="TC19_.*" />
-					<include name="TC20_.*" />
-					<include name="TC21_.*" />
-					<include name="TC22_.*" />
+					<include name="TC23_.*" />
+					<include name="TC24_.*" />
+					<include name="TC25_.*" />
+					<include name="TC26_.*" />
+					<include name="TC27_.*" />
+					<include name="TC28_.*" />
+					<include name="TC29_.*" />
+					<include name="TC30_.*" />
+					<include name="TC31_.*" />
+					<include name="TC32_.*" />
+					<include name="TC33_.*" />
+					<include name="TC34_.*" />
+					<include name="TC35_.*" />
+					<include name="TC36_.*" />
+					<include name="TC37_.*" />
+					<include name="TC38_.*" />
+					<include name="TC39_.*" />
+					<include name="TC40_.*" />
+					<include name="TC41_.*" />
+					
 					
 					
 					

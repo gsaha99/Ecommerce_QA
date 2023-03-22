@@ -620,6 +620,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			driver.navigate().refresh();
 			WileyPLUS.checkIfUserIsOnCartPage(driver);
 			WileyPLUS.checkBrandNameWileyPLUS();
+			WileyPLUS.removeProductsFromCart(driver);
 			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e){
@@ -650,6 +651,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			WileyPLUS.clickOnSaveAndContinueButton();
 			WileyPLUS.checkIfUserInShippingStep();
 			WileyPLUS.checkGlobalCountryList(driver,excelOperation.getTestData("TC13", "WileyPLUS_Test_Data", "Shipping_Country"));
+			WileyPLUS.removeProductsFromCart(driver);
 			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
@@ -680,6 +682,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			WileyPLUS.clickOnSaveAndContinueButton();
 			WileyPLUS.checkIfUserInBillingStep();
 			WileyPLUS.checkGlobalCountryListBilling(driver,excelOperation.getTestData("TC14", "WileyPLUS_Test_Data", "Bill_Country"));
+			WileyPLUS.removeProductsFromCart(driver);
 			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
@@ -826,6 +829,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						, CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
+			WileyPLUS.removeProductsFromCart(driver);
 			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
@@ -934,6 +938,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						, CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
+			WileyPLUS.removeProductsFromCart(driver);
 			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
@@ -1041,6 +1046,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						+ " and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WileyPLUS.removeProductsFromCart(driver);
 			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
@@ -1242,6 +1248,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Create account form could not be submitted and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WileyPLUS.removeProductsFromCart(driver);
 			WileyPLUS.WileyLogOut();
 			driver.manage().deleteAllCookies();
 		}
@@ -1444,6 +1451,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Create account form could not be submitted and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WileyPLUS.removeProductsFromCart(driver);
 			WileyPLUS.WileyLogOut();
 			driver.manage().deleteAllCookies();
 		}
@@ -1657,6 +1665,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Create account form could not be submitted and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WileyPLUS.removeProductsFromCart(driver);
 			WileyPLUS.WileyLogOut();
 			driver.manage().deleteAllCookies();
 		}
@@ -1884,6 +1893,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Create account form could not be submitted and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WileyPLUS.removeProductsFromCart(driver);
 			WileyPLUS.WileyLogOut();
 			driver.manage().deleteAllCookies();
 		}
