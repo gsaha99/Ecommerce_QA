@@ -16,8 +16,7 @@ import utilities.CaptureScreenshot;
 import utilities.DriverModule;
 import utilities.Reporting;
 import utilities.StatusDetails;
-import utilities.dbConnect;
-import utilities.excelOperation;
+
 
 public class app_ClientPortal_Repo extends DriverModule {
 	
@@ -1526,74 +1525,6 @@ public void ApplicationUser_Click_Back() throws IOException {
 	}
 	catch(Exception e){
 		Reporting.updateTestReport("Back button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-	}
- }
-
-/* 
- * Author : Jayanta
- * Description :  Method to check Promote to prod status
- */
-
-public void appPromotionStatus() throws IOException {
-	try {
-		String DBName=excelOperation.getTestData("TC07", "DB_Query", "DB_Name");
-		String query=excelOperation.getTestData("TC07", "DB_Query", "Query");
-		String datatype=excelOperation.getTestData("TC07", "DB_Query", "Data_Type");
-		String expectedstatusid="";
-		do 
-		{
-		expectedstatusid=dbConnect.DB_Select(DBName,query,datatype);
-		System.out.println(expectedstatusid);
-		}
-		while ((Integer.parseInt(expectedstatusid)!=4)&&(Integer.parseInt(expectedstatusid)!=5));
-		if(expectedstatusid.equalsIgnoreCase(excelOperation.getTestData("Promoted", "Generic_Dataset", "Data")))
-	       {
-		
-		      Reporting.updateTestReport("DB Validation is done, app is promoted to prod and Promotion Status ID: " + expectedstatusid,
-				     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-	       }
-	      else if(expectedstatusid.equalsIgnoreCase(excelOperation.getTestData("Promotion_Failed", "Generic_Dataset", "Data")))
-	       {
-		      Reporting.updateTestReport("Promotion is failed and Promotion Status ID: " + expectedstatusid,
-				     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-	       }
-	}
-	catch(Exception e){
-		Reporting.updateTestReport("Promote to prod not working : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-	}
- }
-
-/* 
- * Author : Jayanta
- * Description :  Method to check Promotion rollback status
- */
-
-public void appPromotionRollbackStatus() throws IOException {
-	try {
-		String DBName=excelOperation.getTestData("TC07", "DB_Query", "DB_Name");
-		String query=excelOperation.getTestData("TC07", "DB_Query", "Query");
-		String datatype=excelOperation.getTestData("TC07", "DB_Query", "Data_Type");
-		String expectedstatusid="";
-		do 
-		{
-		expectedstatusid=dbConnect.DB_Select(DBName,query,datatype);
-		System.out.println(expectedstatusid);
-		}
-		while ((Integer.parseInt(expectedstatusid)!=6));
-		if(expectedstatusid.equalsIgnoreCase(excelOperation.getTestData("Promotion_Rollback", "Generic_Dataset", "Data")))
-	       {
-		
-		      Reporting.updateTestReport("DB Validation is done, Promotion is reverted and Promotion Status ID: " + expectedstatusid,
-				     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-	       }
-	      else if(expectedstatusid.equalsIgnoreCase(excelOperation.getTestData("Promotion_Failed", "Generic_Dataset", "Data")))
-	       {
-		      Reporting.updateTestReport("Promotion is not reverted and Promotion Status ID: " + expectedstatusid,
-				     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-	       }
-	}
-	catch(Exception e){
-		Reporting.updateTestReport("Promotion rollback not working : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 	}
  }
 }

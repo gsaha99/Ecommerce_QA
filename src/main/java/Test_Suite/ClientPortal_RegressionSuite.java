@@ -7,9 +7,6 @@ import java.util.Date;
 import java.util.Random;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -335,7 +332,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			CPortal.WPSAdmin_Click_Promote();
 			CPortal.WPSAdmin_Click_Promote_Confirm();
-			CPortal.appPromotionStatus();
+			dbConnect dbConnect = new dbConnect();
+			dbConnect.appPromotionStatus();
 			CPortal.WPSAdmin_ClickHome();
 			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
 			CPortal.WPSAdmin_ClickEditIcon();
@@ -351,7 +349,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			CPortal.WPSAdmin_Click_Promote();
 			CPortal.WPSAdmin_Click_Promote_Confirm();
-			CPortal.appPromotionStatus();
+			dbConnect.appPromotionStatus();
 			CPortal.WPSAdmin_ClickHome();
 			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
 			CPortal.WPSAdmin_Click_RevertIcon();
@@ -360,7 +358,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			CPortal.WPSAdmin_Click_RevertConfirm();
 			CPortal.WPSAdmin_Click_Promote_Confirm();
-			CPortal.appPromotionRollbackStatus();
+			dbConnect.appPromotionRollbackStatus();
 			CPortal.WPSAdmin_ClickLogOut();
 		    CPortal.WPSAdmin_ClickLogOutImage();
 		}
@@ -1431,7 +1429,6 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					);
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			String emailID1=excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "EmailID");
 			String pwd1=excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "PWD");
 			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
