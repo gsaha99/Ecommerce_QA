@@ -20,7 +20,7 @@ import utilities.DriverModule;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
-import utilities.dbConnect;
+import utilities.dbOperation;
 import utilities.excelOperation;
 
 public class ClientPortal_RegressionSuite extends DriverModule {
@@ -124,7 +124,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			String DBName=excelOperation.getTestData("TC02", "DB_Query", "DB_Name");
 			String query=excelOperation.getTestData("TC02", "DB_Query", "Query");
 			String datatype=excelOperation.getTestData("TC02", "DB_Query", "Data_Type");
-			String clientappname=dbConnect.DB_Select(DBName,query,datatype);
+			String clientappname=dbOperation.DB_Select(DBName,query,datatype);
 			System.out.println(clientappname);
 			if(clientappname.compareTo(ClientAppName)==0)
 		       {
@@ -190,7 +190,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			String DBName=excelOperation.getTestData("TC03", "DB_Query", "DB_Name");
 			String query=excelOperation.getTestData("TC03", "DB_Query", "Query");
 			String datatype=excelOperation.getTestData("TC03", "DB_Query", "Data_Type");
-			String ssoid=dbConnect.DB_Select(DBName,query,datatype);
+			String ssoid=dbOperation.DB_Select(DBName,query,datatype);
 			System.out.println(ssoid);
 			if(ssoid.compareTo(SSOID)==0)
 		       {
@@ -266,7 +266,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			String DBName=excelOperation.getTestData("TC04", "DB_Query", "DB_Name");
 			String query=excelOperation.getTestData("TC04", "DB_Query", "Query");
 			String datatype=excelOperation.getTestData("TC04", "DB_Query", "Data_Type");
-			String expectedStatusID=dbConnect.DB_Select(DBName,query,datatype);
+			String expectedStatusID=dbOperation.DB_Select(DBName,query,datatype);
 			if(expectedStatusID.equalsIgnoreCase(excelOperation.getTestData("Decline", "Generic_Dataset", "Data")))
 		       {
 			
@@ -332,8 +332,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			CPortal.WPSAdmin_Click_Promote();
 			CPortal.WPSAdmin_Click_Promote_Confirm();
-			dbConnect dbConnect = new dbConnect();
-			dbConnect.appPromotionStatus();
+			dbOperation dbOperation = new dbOperation();
+			dbOperation.appPromotionStatus();
 			CPortal.WPSAdmin_ClickHome();
 			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
 			CPortal.WPSAdmin_ClickEditIcon();
@@ -349,7 +349,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			CPortal.WPSAdmin_Click_Promote();
 			CPortal.WPSAdmin_Click_Promote_Confirm();
-			dbConnect.appPromotionStatus();
+			dbOperation.appPromotionStatus();
 			CPortal.WPSAdmin_ClickHome();
 			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
 			CPortal.WPSAdmin_Click_RevertIcon();
@@ -358,7 +358,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			CPortal.WPSAdmin_Click_RevertConfirm();
 			CPortal.WPSAdmin_Click_Promote_Confirm();
-			dbConnect.appPromotionRollbackStatus();
+			dbOperation.appPromotionRollbackStatus();
 			CPortal.WPSAdmin_ClickLogOut();
 		    CPortal.WPSAdmin_ClickLogOutImage();
 		}
@@ -425,7 +425,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			String DBName=excelOperation.getTestData("TC02", "DB_Query", "DB_Name");
 			String query=excelOperation.getTestData("TC02", "DB_Query", "Query");
 			String datatype=excelOperation.getTestData("TC02", "DB_Query", "Data_Type");
-			String clientappname=dbConnect.DB_Select(DBName,query,datatype);
+			String clientappname=dbOperation.DB_Select(DBName,query,datatype);
 			System.out.println(clientappname);
 			if(clientappname.compareTo(NewClientAppName)==0)
 		       {
@@ -907,7 +907,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			String DBName=excelOperation.getTestData("TC13", "DB_Query", "DB_Name");
 			String query=excelOperation.getTestData("TC13", "DB_Query", "Query");
 			String datatype=excelOperation.getTestData("TC13", "DB_Query", "Data_Type");
-			String clientappname=dbConnect.DB_Select(DBName,query,datatype);
+			String clientappname=dbOperation.DB_Select(DBName,query,datatype);
 			System.out.println(clientappname);
 			if(clientappname.compareTo(ClientAppName)==0)
 		       {
@@ -1082,7 +1082,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			String DBName=excelOperation.getTestData("TC16", "DB_Query", "DB_Name");
 			String query=excelOperation.getTestData("TC16", "DB_Query", "Query");
 			String datatype=excelOperation.getTestData("TC16", "DB_Query", "Data_Type");
-			String ssoid=dbConnect.DB_Select(DBName,query,datatype);
+			String ssoid=dbOperation.DB_Select(DBName,query,datatype);
 			System.out.println(ssoid);
 			if(ssoid.compareTo(SSOID)==0)
 		       {
@@ -1451,7 +1451,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			String DBName=excelOperation.getTestData("TC02", "DB_Query", "DB_Name");
 			String query=excelOperation.getTestData("TC02", "DB_Query", "Query");
 			String datatype=excelOperation.getTestData("TC02", "DB_Query", "Data_Type");
-			String clientappname=dbConnect.DB_Select(DBName,query,datatype);
+			String clientappname=dbOperation.DB_Select(DBName,query,datatype);
 			System.out.println(clientappname);
 			if(clientappname.compareTo(ClientAppName)==0)
 		       {
@@ -1522,7 +1522,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			String DBName1=excelOperation.getTestData("TC38", "DB_Query", "DB_Name");
 			String query1=excelOperation.getTestData("TC38", "DB_Query", "Query");
 			String datatype1=excelOperation.getTestData("TC38", "DB_Query", "Data_Type");
-			String expectedBU=dbConnect.DB_Select(DBName1,query1,datatype1);
+			String expectedBU=dbOperation.DB_Select(DBName1,query1,datatype1);
 			if(expectedBU.equalsIgnoreCase(actualBU))
 		       {
 			
@@ -1943,7 +1943,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			String DBName=excelOperation.getTestData("TC03", "DB_Query", "DB_Name");
 			String query=excelOperation.getTestData("TC03", "DB_Query", "Query");
 			String datatype=excelOperation.getTestData("TC03", "DB_Query", "Data_Type");
-			String ssoid=dbConnect.DB_Select(DBName,query,datatype);
+			String ssoid=dbOperation.DB_Select(DBName,query,datatype);
 			System.out.println(ssoid);
 			if(ssoid.compareTo(SSOID)==0)
 		       {

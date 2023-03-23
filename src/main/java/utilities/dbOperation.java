@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 import Test_Suite.ClientPortal_RegressionSuite;
 
-public class dbConnect {
+public class dbOperation {
 	
 	public String SS_path=ClientPortal_RegressionSuite.SS_path;
 	public static String DB_Select(String DBName,String Query,String Parameter) throws InstantiationException, IllegalAccessException
@@ -77,7 +77,7 @@ public class dbConnect {
 			String expectedstatusid="";
 			do 
 			{
-			expectedstatusid=dbConnect.DB_Select(DBName,query,datatype);
+			expectedstatusid=dbOperation.DB_Select(DBName,query,datatype);
 			System.out.println(expectedstatusid);
 			}
 			while ((Integer.parseInt(expectedstatusid)!=4)&&(Integer.parseInt(expectedstatusid)!=5));
@@ -111,7 +111,7 @@ public class dbConnect {
 			String expectedstatusid="";
 			do 
 			{
-			expectedstatusid=dbConnect.DB_Select(DBName,query,datatype);
+			expectedstatusid=dbOperation.DB_Select(DBName,query,datatype);
 			System.out.println(expectedstatusid);
 			}
 			while ((Integer.parseInt(expectedstatusid)!=6));
