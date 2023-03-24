@@ -16,6 +16,7 @@ public class dbOperation {
     
 	{
         String connectionUrl = "jdbc:mysql://wps.c7hepfyiogmn.us-east-1.rds.amazonaws.com:3306/"+DBName;
+        //String connectionUrl = "jdbc:mysql://wps-perf.c7hepfyiogmn.us-east-1.rds.amazonaws.com:3306/"+DBName;
         System.out.println(connectionUrl);
         String columnValue = "";
         try {

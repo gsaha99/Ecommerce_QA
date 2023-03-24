@@ -241,7 +241,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 		WebElement ClickTargetURLErrorMessage;
 		
 		@FindBy(xpath = "//span[contains(text(),'Name can not exceed 35 characters')]")
-		WebElement ClickName1ErrorMessage;
+		WebElement ClickNameSizeErrorMessage;
 		
 		@FindBy(xpath = "//span[contains(text(),'Special character/whitespace is not allowed for application shortname. Please provide another value.')]")
 		WebElement ClickAppShortName1ErrorMessage;
@@ -1448,9 +1448,9 @@ public class app_ClientPortal_Repo extends DriverModule {
 	 * Description :  Method to enter Name in the Name field.
 	 */
 	
-	public String FetchError_RegisterApp_Name1() throws IOException{
+	public String FetchError_RegisterApp_NameSize() throws IOException{
 	      try {
-				String errorType=ClickName1ErrorMessage.getText();
+				String errorType=ClickNameSizeErrorMessage.getText();
 				System.out.println(errorType);
 				Reporting.updateTestReport("Error message for Name1 field is checked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				return errorType;

@@ -802,11 +802,11 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			 driver.findElement(By.xpath("//h1[contains(text(),'Register New Client Application')]")).click();
     		  
 				
-			    String actualErrorName1 = CPortal.FetchError_RegisterApp_Name1();
-		        String expectedErrorName1=excelOperation.getTestData("Name1", "CPortal_Error_Message", "Error_Message");
-		        if(actualErrorName1.equalsIgnoreCase(expectedErrorName1))
+			    String actualErrorNameSize = CPortal.FetchError_RegisterApp_NameSize();
+		        String expectedErrorNameSize=excelOperation.getTestData("Name_Size", "CPortal_Error_Message", "Error_Message");
+		        if(actualErrorNameSize.equalsIgnoreCase(expectedErrorNameSize))
 			     {
-	              Reporting.updateTestReport("Error message for Name1 field is showing and message is: " + actualErrorName1,
+	              Reporting.updateTestReport("Error message for Name1 field is showing and message is: " + actualErrorNameSize,
 					  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				 }
 		         else 
@@ -1644,7 +1644,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			String expectedErrorPaymentMethod=excelOperation.getTestData("Payment_Method", "CPortal_Error_Message", "Error_Message");
 			if(actualErrorPaymentMethod.equalsIgnoreCase(expectedErrorPaymentMethod))
 		     {
-          Reporting.updateTestReport("Error message for payment method field is showing and message is: " + actualErrorPaymentMethod,
+                Reporting.updateTestReport("Error message for payment method field is showing and message is: " + actualErrorPaymentMethod,
 				  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			 }
 	        else 
@@ -1652,6 +1652,34 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		       Reporting.updateTestReport("Error message for payment method field is not showing",
 				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			  }
+			
+			CPortal.WPSAdmin_SelectSOAP();
+			CPortal.WPSAdmin_SelectBusinessUnit();
+			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
+		    CPortal.WPSAdmin_Enter_ClientApp_Name(excelOperation.getTestData("Field_Size", "Generic_Dataset", "Data"));
+		    CPortal.WPSAdmin_Enter_ClientApp_ShortName("CATA"+uuid);
+			CPortal.WPSAdmin_SelectUserID();
+			CPortal.WPSAdmin_Enter_Template(excelOperation.getTestData("Template", "Generic_Dataset", "Data"));
+		    ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
+			ScrollingWebPage.PageDown(driver, SS_path);
+		    ScrollingWebPage.PageScrolldown(driver, 0, 600);
+			CPortal.WPSAdmin_ClickPaymentMethod();
+			CPortal.WPSAdmin_Click_DebitCard();
+		    CPortal.Click_Register_Error();
+			driver.findElement(By.xpath("//h1[contains(text(),'Register New Client Application')]")).click();
+   		    String actualErrorNameSize = CPortal.FetchError_RegisterApp_NameSize();
+		    String expectedErrorNameSize=excelOperation.getTestData("Name_Size", "CPortal_Error_Message", "Error_Message");
+		        if(actualErrorNameSize.equalsIgnoreCase(expectedErrorNameSize))
+			     {
+	              Reporting.updateTestReport("Size Error message for Name field is showing and message is: " + actualErrorNameSize,
+					  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				 }
+		         else 
+			      {
+			       Reporting.updateTestReport("Size Error message for Name field is not showing",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				  }
 			CPortal.WPSAdmin_ClickLogOut();
 		    CPortal.WPSAdmin_ClickLogOutImage();
 		     
