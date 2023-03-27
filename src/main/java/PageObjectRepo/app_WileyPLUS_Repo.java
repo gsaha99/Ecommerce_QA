@@ -20,6 +20,7 @@ import Test_Suite.WileyPLUS_Test_Suite;
 import utilities.CaptureScreenshot;
 import utilities.DriverModule;
 import utilities.Reporting;
+import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
 import utilities.excelOperation;
 
@@ -150,7 +151,7 @@ public class app_WileyPLUS_Repo {
 	WebElement ViewCartButton;
 	@FindBy(xpath="(//button[@id='continue-shopping-button'])[2]")
 	WebElement ContinueShoppingButton;
-	@FindBy(xpath="//a[contains(text(),' Create a new account')]")
+	@FindBy(xpath="//a[@data-testid='create-account__link']")
 	WebElement CreateAccountLinkOnboarding;
 	@FindBy(id="fname")
 	WebElement OnboardingCreateAccountFirstName;
@@ -164,18 +165,20 @@ public class app_WileyPLUS_Repo {
 	WebElement OnboardingPassword;
 	@FindBy(xpath="//input[@type='checkbox']")
 	WebElement OnboardingCreateAccountCheckbox;
-	@FindBy(xpath="//span[contains(text(),'Create Account')]")
+	@FindBy(xpath="//button[@data-testid='create-account__submit-button']")
 	WebElement OnboardingCreateAccountButton;
 	@FindBy(xpath="//a[contains(text(),'Log in to finish registration')]")
 	WebElement FinishRegistrationLinkInMail;
-	@FindBy(xpath="//span[contains(text(),'Log in')]")
+	@FindBy(xpath="//button[@data-testid='login-page__submit-button']")
 	WebElement OnboardingLoginButton;
-	@FindBy(xpath="//span[contains(text(),'add course')]")
+	@FindBy(xpath="//button[@data-testid='add-course_button']")
 	WebElement OnboardingAddCourseButton;
 	@FindBy(id="courseID")
 	WebElement CourseSectionId;
-	@FindBy(xpath="//button/span[contains(text(),'Continue')]")
+	@FindBy(xpath="//button[@data-testid='continue_button'  and @style='margin-bottom: 0px;']")
 	WebElement ContinueButtonInOnboarding;
+	@FindBy(xpath="//button[@data-testid='continue__button' ]")
+	WebElement ContinueButtonInOnboardingInJoinCourse;
 	@FindBy(xpath="//p[contains(text(),'Purchase access for a single term')]")
 	WebElement SingleTermRadioButtonInJoinCourse;
 	@FindBy(xpath="//p[contains(text(),'Purchase access for multiple terms')]")
@@ -1895,7 +1898,7 @@ public class app_WileyPLUS_Repo {
 		try {
 			CourseSectionId.sendKeys(courseId);
 			Thread.sleep(1000);
-			CourseSectionId.sendKeys(Keys.ENTER);
+			//CourseSectionId.sendKeys(Keys.ENTER);
 			Reporting.updateTestReport(courseId+" was entered as Course Section Id",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
@@ -1912,11 +1915,27 @@ public class app_WileyPLUS_Repo {
 	public void clickOnContinueButtonInOnboarding() throws IOException{
 		try {
 			ContinueButtonInOnboarding.click();
-			Reporting.updateTestReport("Continue Button was clicked in onboarding Add Course /Join Course page",
+			Reporting.updateTestReport("Continue Button was clicked in onboarding Add Course ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("Continue Button couldn't be clicked in onboarding Add Course /Join Course page",
+			Reporting.updateTestReport("Continue Button couldn't be clicked in onboarding Add Course",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 27/1/23
+	 * @Description: Clicks on continue button on add course page
+	 */
+	public void clickOnContinueButtonInOnboardingInJoinCourse() throws IOException{
+		try {
+			ContinueButtonInOnboardingInJoinCourse.click();
+			Reporting.updateTestReport("Continue Button was clicked in onboarding Join Course page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Continue Button couldn't be clicked in onboarding Join Course page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -2352,6 +2371,9 @@ public class app_WileyPLUS_Repo {
 	public void removeProductsFromCart(WebDriver driver) throws IOException {
 		try {
 			driver.get(excelOperation.getTestData("Wiley_Cart_Page_URL", "Generic_Dataset", "Data"));
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(5));
+			wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(By.xpath("//a[@class='remove-item remove-entry-button removeCartEntryBtn']"))));
+			ScrollingWebPage.PageScrolldown(driver, 0, 250, SS_path);
 			List<WebElement> removeList = driver.findElements(By.xpath("//a[@class='remove-item remove-entry-button removeCartEntryBtn']"));
 			while(!removeList.isEmpty()){
 			    removeList.get(0).click();

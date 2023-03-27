@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite thread-count="4" parallel="tests" name="Failed suite [PPE_Regression]" guice-stage="DEVELOPMENT">
-  <test thread-count="4" parallel="tests" name="EdgeTest(failed)">
+<suite name="Failed suite [PPE_Regression]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="EdgeTest(failed)">
     <parameter name="browser" value="Edge"/>
     <classes>
       <class name="Test_Suite.AGS_Test_Suite">
         <methods>
           <include name="nameAfter"/>
-          <include name="CloseBrowser"/>
-          <include name="initiate"/>
           <include name="nameBefore"/>
+          <include name="initiate"/>
+          <include name="CloseBrowser"/>
           <include name="initializeRepo"/>
           <include name="TC01_Anonymous_User_Registration"/>
         </methods>

@@ -24,6 +24,7 @@ import Test_Suite.Wiley_NA_Cart_Test_Suite;
 import utilities.CaptureScreenshot;
 import utilities.DriverModule;
 import utilities.Reporting;
+import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
 import utilities.excelOperation;
 
@@ -3879,6 +3880,9 @@ public class app_Wiley_Repo {
 	public void removeProductsFromCart(WebDriver driver) throws IOException {
 		try {
 			driver.get(excelOperation.getTestData("Wiley_Cart_Page_URL", "Generic_Dataset", "Data"));
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(5));
+			wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(By.xpath("//a[@class='remove-item remove-entry-button removeCartEntryBtn']"))));
+			ScrollingWebPage.PageScrolldown(driver, 0, 250, SS_path);
 			List<WebElement> removeList = driver.findElements(By.xpath("//a[@class='remove-item remove-entry-button removeCartEntryBtn']"));
 			while(!removeList.isEmpty()){
 			    removeList.get(0).click();

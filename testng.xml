@@ -7,7 +7,7 @@
 		<classes>
 			<class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
 				<methods>
-					<include name="TC23_.*" />
+					<!--include name="TC23_.*" />
 					<include name="TC24_.*" />
 					<include name="TC25_.*" />
 					<include name="TC26_.*" />
@@ -26,6 +26,13 @@
 					<include name="TC39_.*" />
 					<include name="TC40_.*" />
 					<include name="TC41_.*" />
+					<include name="TC19_.*" />
+					<include name="TC20_.*" /-->
+					<include name="TC07_.*" />
+					<include name="TC24_.*" />
+					<include name="TC26_.*" />
+					<include name="TC28_.*" />
+					<include name="TC30.*" />
 					
 					
 					

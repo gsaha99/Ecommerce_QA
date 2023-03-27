@@ -144,7 +144,7 @@ public class DriverModule {
 				Caps.setCapability("browser", browser);
 				Caps.setCapability("browser_version", "110");
 
-				Caps.setCapability(EdgeOptions.CAPABILITY,options);
+				//Caps.setCapability(EdgeOptions.CAPABILITY,options);
 				//driver= new RemoteWebDriver(new URL(URL), Caps);
 				driver=new EdgeDriver(options);
 

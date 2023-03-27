@@ -164,7 +164,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Order_Id", orderID);
 						excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
 						excelOperation.updateTestData("TC02", "WILEY_NA_Cart_Test_Data", "Email_Id", email);
-						
+
 						ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 						String tax=wiley.fetchTaxAmount();
 						String orderTotal=wiley.fetchOrderTotal();
@@ -295,7 +295,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -447,7 +447,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]"))); 
-							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
@@ -619,7 +619,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
@@ -1105,7 +1105,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.clickOnSaveAndContinueButton();
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-								wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
@@ -1300,7 +1300,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.clickOnSaveAndContinueButton();
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-								wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
@@ -1499,7 +1499,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.clickOnSaveAndContinueButton();
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -1663,7 +1663,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
@@ -1840,7 +1840,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
@@ -1868,7 +1868,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									wiley.clickOnSaveAndContinueButton();
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-											wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+										wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 									}
 									catch(Exception e) {
 										Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -2077,7 +2077,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
@@ -2269,7 +2269,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.clickOnSaveAndContinueButton();
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-								wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
@@ -2433,7 +2433,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
@@ -2624,7 +2624,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.clickOnSaveAndContinueButton();
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -2782,7 +2782,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
@@ -2981,7 +2981,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
@@ -3157,7 +3157,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.clickOnSaveAndContinueButton();
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -3183,7 +3183,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								wiley.clickOnSaveAndContinueButton();
 								try {
 									wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-										wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+									wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 								}
 								catch(Exception e) {
 									Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -3294,7 +3294,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
@@ -3381,7 +3381,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
@@ -3705,7 +3705,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.clickOnSaveAndContinueButton();
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -3871,7 +3871,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.clickOnSaveAndContinueButton();
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-								wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -4324,7 +4324,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+						wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
@@ -4477,7 +4477,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
 					catch(Exception e) {
 						Reporting.updateTestReport("Adress doctor pop up did not appear",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
@@ -4648,7 +4648,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					int flag=EmailValidation.forgotPasswordEmailForWiley(driver, SS_path, wiley);
 
 					if(flag==1) {
-					
+
 						wiley.enterNewPasswordFieldInResetPasswordPage(excelOperation.getTestData("TC33", "WILEY_NA_Cart_Test_Data", "Password"));
 						wiley.enterConfirmPasswordFieldInResetPasswordPage(excelOperation.getTestData("TC33", "WILEY_NA_Cart_Test_Data", "Password"));
 						wiley.clickOnSubmitButtonInResetPasswordPage();
@@ -4684,7 +4684,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			wiley.removeProductsFromCart(driver);
 			wiley.WileyLogOut();
 		}
-	
+
 		catch(Exception e) {
 			wiley.wileyLogOutException();
 			System.out.println(e.getMessage());
@@ -4726,37 +4726,47 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.clickOnSRP_WileyProduct();
 				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 				wiley.clickOnAddToCartButton();
-				wiley.clickOnViewCartButton();
-				BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
-				if(priceOfFirstProduct.add(priceOfSecondProduct).compareTo(ordertotalInCartPage)==0) 
-					Reporting.updateTestReport(
-							"The addition of all the products' price is same as the subtotal in cart page",
+				try {
+					wait.until(ExpectedConditions.
+							elementToBeClickable
+							(By.xpath("//button[contains(text(),'View Cart')]")));
+					wiley.clickOnViewCartButton();
+					BigDecimal ordertotalInCartPage=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+					if(priceOfFirstProduct.add(priceOfSecondProduct).compareTo(ordertotalInCartPage)==0) 
+						Reporting.updateTestReport(
+								"The addition of all the products' price is same as the subtotal in cart page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"The addition of all the products' pricedidn't match with the subtotal in cart page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+					wiley.clickOnProceedToCheckoutButton();
+					if(!wiley.checkIfGuestCheckoutButtonIsPresent()) Reporting.updateTestReport("Guest checkout button was not present in login page when digital product is present in cart",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				else
-					Reporting.updateTestReport(
-							"The addition of all the products' pricedidn't match with the subtotal in cart page",
+					else Reporting.updateTestReport("Guest checkout button is present in login page when digital product is present in cart",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-				wiley.clickOnProceedToCheckoutButton();
-				if(!wiley.checkIfGuestCheckoutButtonIsPresent()) Reporting.updateTestReport("Guest checkout button was not present in login page when digital product is present in cart",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				else Reporting.updateTestReport("Guest checkout button is present in login page when digital product is present in cart",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				wiley.enterEmailIdInCreateAccountFormNotAutoGenerated(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "Email_Id"));
-				wiley.clickOnCreateAccountButton();
-				wiley.checkErrorMessageAfterEnteringExistingUserInCreateAccount();
-				wiley.enterExistingWileyUserMailID(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "Email_Id"));
-				wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "Password"));
-				wiley.clickOnLogInAndContinueButton();
-				wiley.checkErrorMessageAfterEnteringWrongPassword();
+					wiley.enterEmailIdInCreateAccountFormNotAutoGenerated(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "Email_Id"));
+					wiley.clickOnCreateAccountButton();
+					wiley.checkErrorMessageAfterEnteringExistingUserInCreateAccount();
+					wiley.enterExistingWileyUserMailID(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "Email_Id"));
+					wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "Password"));
+					wiley.clickOnLogInAndContinueButton();
+					wiley.checkErrorMessageAfterEnteringWrongPassword();
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
 
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			wiley.WileyLogOut();
 			wiley.removeProductsFromCart(driver);
+			wiley.WileyLogOut();
+			
 
 		}
 		catch(Exception e) {
@@ -5153,7 +5163,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-							}
+						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
@@ -5373,9 +5383,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				else
 					Reporting.updateTestReport("2 day charge has been wrongly calculated for Standard shipping",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				
 
-					}catch(Exception e) {
+
+			}catch(Exception e) {
 				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
@@ -5388,7 +5398,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date:  15/03/23
 	 * @Description: Checks if user is able to create an account with entering password which is not fulfilling the criteria
@@ -5435,7 +5445,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					Reporting.updateTestReport("Password criteria insuffiency message was not displayed",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
-				
+
 				//Second password containing Lowercase letters and special characters with more than 10 characters
 				wiley.enterPasswordInCreateAccountForm(passwords[1]);
 				wiley.checkAtLeast10Characters(driver, "blue");
@@ -5454,7 +5464,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					Reporting.updateTestReport("Password criteria insuffiency message was not displayed",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
-				
+
 				//Third password containing Lowercase letters, Uppercase letters, Numbers, special characters but does not have 10 or more characters(
 				wiley.enterPasswordInCreateAccountForm(passwords[2]);
 				wiley.checkAtLeast10Characters(driver, "red");
@@ -5464,7 +5474,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.checkNumber(driver, "blue");
 				wiley.checkSpecialCharacter(driver, "blue");
 				wiley.clickOnSaveAndContinueButton();	
-				
+
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathOfError)));
 					Reporting.updateTestReport("Password criteria insuffiency message: "+errorMessage+" was displayed",
@@ -5481,7 +5491,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			}
 			wiley.removeProductsFromCart(driver);
 			wiley.WileyLogOut();
-			
+
 		}
 		catch(Exception e) {
 			wiley.wileyLogOutException();

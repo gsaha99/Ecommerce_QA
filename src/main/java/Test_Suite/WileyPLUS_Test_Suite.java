@@ -40,13 +40,13 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	@BeforeMethod
 	public void nameBefore(Method method)
 	{
-	    System.out.println("Test case: " + method.getName()+" execution started");       
+		System.out.println("Test case: " + method.getName()+" execution started");       
 	}
-	
+
 	@AfterMethod
 	public void nameAfter(Method method)
 	{
-	    System.out.println("Test case: " + method.getName()+" execution completed");       
+		System.out.println("Test case: " + method.getName()+" execution completed");       
 	}
 
 	/*
@@ -909,13 +909,14 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						driver.navigate().refresh();
 						WileyPLUS.checkIfUserIsOnCartPage(driver);
 						WileyPLUS.checkBrandNameWileyPLUS();
+						ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 						WileyPLUS.clickOnProceedToCheckoutButton();
 						WileyPLUS.checkIfUserInBillingStep();
 						ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 						String xpathOfGlobalSavedAddress="//*[contains(text(),' "
 								+excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Address_line1")+
 								"')]/following-sibling::div[contains(text(),'"+excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Bill_Country")+"')]";
-						
+
 						WileyPLUS.checkGlobalSavedAddress(driver, xpathOfGlobalSavedAddress);
 					}			
 
@@ -1020,6 +1021,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						driver.navigate().refresh();
 						WileyPLUS.checkIfUserIsOnCartPage(driver);
 						WileyPLUS.checkBrandNameWileyPLUS();
+						ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 						WileyPLUS.clickOnProceedToCheckoutButton();
 						WileyPLUS.checkIfUserInShippingStep();
 						String xpathOfGlobalSavedAddress="//*[contains(text(),' "
@@ -1141,94 +1143,102 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
 					WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Course"));
-					//Thread.sleep(2000);
-					//WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
-						wait.until(ExpectedConditions.presenceOfElementLocated(
-								By.xpath("//h2[contains(text(),'Join your course')]")));
-						WileyPLUS.clickOnSingleTermRadioButtonInJoinCourse();
+						wait.until
+						(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-testid='continue_button']")));
 						WileyPLUS.clickOnContinueButtonInOnboarding();
-						WileyPLUS.clickOnFirstPurchaseOption();
-						WileyPLUS.clickOnContinueToCheckoutButton();
 						try {
-							wait.until(ExpectedConditions.
-									presenceOfElementLocated
-									(By.xpath("//p[contains(text(),' Your Cart')]")));
-							WileyPLUS.checkIfUserIsOnCartPage(driver);
-							ScrollingWebPage.PageScrolldown(driver,0,800,SS_path);
-							wait.until(ExpectedConditions.
-									elementToBeClickable(By.xpath("(//button[@id='continue-shopping-button'])[2]")));
-							WileyPLUS.clickOnContinueShoppingButton();
+							wait.until(ExpectedConditions.presenceOfElementLocated(
+									By.xpath("//h2[contains(text(),'Join your course')]")));
+							WileyPLUS.clickOnSingleTermRadioButtonInJoinCourse();
+							WileyPLUS.clickOnContinueButtonInOnboardingInJoinCourse();
+							WileyPLUS.clickOnFirstPurchaseOption();
+							WileyPLUS.clickOnContinueToCheckoutButton();
 							try {
-								wait.until(ExpectedConditions.presenceOfElementLocated(
-										By.xpath("//input[@id='courseID']")));
-								Reporting.updateTestReport("After clicking on continue shopping button"
-										+ " user was in Add course page when the last added product was WileyPLUS",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								driver.get(WileyPLUS.wileyURLConcatenation("TC01", "WileyPLUS_Test_Data", "URL"));
-								driver.navigate().refresh();								
+								wait.until(ExpectedConditions.
+										presenceOfElementLocated
+										(By.xpath("//p[contains(text(),' Your Cart')]")));
+								WileyPLUS.checkIfUserIsOnCartPage(driver);
+								ScrollingWebPage.PageScrolldown(driver,0,800,SS_path);
+								wait.until(ExpectedConditions.
+										elementToBeClickable(By.xpath("(//button[@id='continue-shopping-button'])[2]")));
+								WileyPLUS.clickOnContinueShoppingButton();
 								try {
-									WileyPLUS.clickOnHomePage();
 									wait.until(ExpectedConditions.presenceOfElementLocated(
-											By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
-													+ " Education and Research')]")));
-									WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC19",
-											"WileyPLUS_Test_Data", "SearchBox_Text"));
-									WileyPLUS.clickOnSRP_WileyProduct();
-									WileyPLUS.clickOnAddToCartButton();
+											By.xpath("//input[@id='courseID']")));
+									Reporting.updateTestReport("After clicking on continue shopping button"
+											+ " user was in Add course page when the last added product was WileyPLUS",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									driver.get(WileyPLUS.wileyURLConcatenation("TC01", "WileyPLUS_Test_Data", "URL"));
+									driver.navigate().refresh();								
 									try {
-										wait.until(ExpectedConditions.
-												elementToBeClickable
-												(By.xpath("//button[contains(text(),'View Cart')]")));
-										WileyPLUS.clickOnViewCartButton();
-										ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-										WileyPLUS.clickOnContinueShoppingButton();
+										WileyPLUS.clickOnHomePage();
+										wait.until(ExpectedConditions.presenceOfElementLocated(
+												By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
+														+ " Education and Research')]")));
+										WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC19",
+												"WileyPLUS_Test_Data", "SearchBox_Text"));
+										WileyPLUS.clickOnSRP_WileyProduct();
+										WileyPLUS.clickOnAddToCartButton();
 										try {
-											wait.until(ExpectedConditions.presenceOfElementLocated(
-													By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing, Education and Research')]")));
-											wait.until(ExpectedConditions.visibilityOfElementLocated(
-													By.xpath("//img[@alt='Wiley Consumer Logo']")));
-											Reporting.updateTestReport("Wiley Storefront homepage was opened after clicking on continue shopping button"
-													+ " when the last added product was wiley.com",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											wait.until(ExpectedConditions.
+													elementToBeClickable
+													(By.xpath("//button[contains(text(),'View Cart')]")));
+											WileyPLUS.clickOnViewCartButton();
+											ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+											WileyPLUS.clickOnContinueShoppingButton();
+											try {
+												wait.until(ExpectedConditions.presenceOfElementLocated(
+														By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing, Education and Research')]")));
+												wait.until(ExpectedConditions.visibilityOfElementLocated(
+														By.xpath("//img[@alt='Wiley Consumer Logo']")));
+												Reporting.updateTestReport("Wiley Storefront homepage was opened after clicking on continue shopping button"
+														+ " when the last added product was wiley.com",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											}
+											catch(Exception e) {
+												Reporting.updateTestReport("Wiley Storefront homepage was not opened after clicking on continue shopping button"
+														+ " when the last added product was wiley.com and caused timeout exception",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											}
+											driver.get(excelOperation.getTestData("Onboarding_My_Account_Page", "Generic_Dataset", "Data"));
+											try {
+												wait.until(ExpectedConditions.visibilityOfElementLocated
+														(By.xpath("//button[@data-testid='dropdown-menu__icon-button']")));
+												WileyPLUS.clickOnProfileIconInOnboardingMyAccount();
+												WileyPLUS.logoutFromOnboardingMyAccount(driver);
+											}
+											catch(Exception e) {
+												Reporting.updateTestReport("Onboarding my account icon was not loaded "
+														+ "and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											}
+
 										}
 										catch(Exception e) {
-											Reporting.updateTestReport("Wiley Storefront homepage was not opened after clicking on continue shopping button"
-													+ " when the last added product was wiley.com and caused timeout exception",
+											Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
-										driver.get(excelOperation.getTestData("Onboarding_My_Account_Page", "Generic_Dataset", "Data"));
-										try {
-											wait.until(ExpectedConditions.visibilityOfElementLocated
-													(By.xpath("//button[@data-testid='dropdown-menu__icon-button']")));
-											WileyPLUS.clickOnProfileIconInOnboardingMyAccount();
-											WileyPLUS.logoutFromOnboardingMyAccount(driver);
-										}
-										catch(Exception e) {
-											Reporting.updateTestReport("Onboarding my account icon was not loaded "
-													+ "and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
-										
 									}
 									catch(Exception e) {
-										Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+										Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 								}
-								catch(Exception e) {
-									Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
+								catch(Exception e){
+									Reporting.updateTestReport("After clicking on continue shopping button"
+											+ " user was not in Add course page when the last added product was WileyPLUS "
+											+ "and caused timeout exception",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 							}
 							catch(Exception e){
-								Reporting.updateTestReport("After clicking on continue shopping button"
-										+ " user was not in Add course page when the last added product was WileyPLUS "
-										+ "and caused timeout exception",
+								Reporting.updateTestReport("User was not on cart page and caused timeout exception",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 						}
 						catch(Exception e){
-							Reporting.updateTestReport("User was not on cart page and caused timeout exception",
+							Reporting.updateTestReport("User couldn't continue the course and caused timeout exception"
+									+ " and caused timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					}
@@ -1299,139 +1309,147 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
 					WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Course"));
-					//Thread.sleep(2000);
-					//WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
-						wait.until(ExpectedConditions.presenceOfElementLocated(
-								By.xpath("//h2[contains(text(),'Join your course')]")));
-						WileyPLUS.clickOnSingleTermRadioButtonInJoinCourse();
+						wait.until
+						(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-testid='continue_button']")));
 						WileyPLUS.clickOnContinueButtonInOnboarding();
-						WileyPLUS.clickOnFirstPurchaseOption();
-						WileyPLUS.clickOnContinueToCheckoutButton();
 						try {
-							wait.until(ExpectedConditions.
-									presenceOfElementLocated
-									(By.xpath("//p[contains(text(),' Your Cart')]")));
-							WileyPLUS.checkIfUserIsOnCartPage(driver);
-							ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-							WileyPLUS.clickOnProceedToCheckoutButton();
-							WileyPLUS.checkIfUserInBillingStep();
-							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+							wait.until(ExpectedConditions.presenceOfElementLocated(
+									By.xpath("//h2[contains(text(),'Join your course')]")));
+							WileyPLUS.clickOnSingleTermRadioButtonInJoinCourse();
+							WileyPLUS.clickOnContinueButtonInOnboardingInJoinCourse();
+							WileyPLUS.clickOnFirstPurchaseOption();
+							WileyPLUS.clickOnContinueToCheckoutButton();
 							try {
-								wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-								PaymentGateway.paymentWileyPLUS(driver, WileyPLUS, "TC20", SS_path)	;		
-								WileyPLUS.enterFirstName(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "First_Name"));
-								WileyPLUS.enterLastName(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Last_Name"));
-								WileyPLUS.selectCountry(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Bill_Country"));
-								try{
-									wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
-									WileyPLUS.enterAddressLine1Billing(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Bill_Address_line1"));
-									WileyPLUS.enterZipBilling(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Bill_Zip_Code"));
-									//wiley.enterCityBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_City"));
-									//wiley.enterState(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_State"));
-									//wiley.selectUState();
-									WileyPLUS.enterPhoneNumberBilling(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Bill_Phone_Number"));
-									WileyPLUS.clickOnSaveAndContinueButton();
-									try {
-										if(WileyPLUS.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-											WileyPLUS.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-									}
-									catch(Exception e) {
-										Reporting.updateTestReport("Adress doctor pop up did not appear",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-									}
-									BigDecimal firstProductPriceInOrderReview=new BigDecimal(WileyPLUS.fetchFirstProductPriceInOrderReview().substring(5));
-									BigDecimal taxInOrderReview=new BigDecimal(WileyPLUS.fetchTaxInOrderReview().substring(5));
-									BigDecimal orderTotalInOrderReview=new BigDecimal(WileyPLUS.fetchTotalInOrderReview().substring(5));
-									if(firstProductPriceInOrderReview
-											.add(taxInOrderReview)
-											.compareTo(orderTotalInOrderReview)==0)
-										Reporting.updateTestReport("First Product price + Tax "
-												+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-									else
-										Reporting.updateTestReport("First Product price + Tax "
-												+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									WileyPLUS.clickOnPlaceOrderButton();
-									String orderconfirmation = driver.getTitle();
-									if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-										WileyPLUS.checkPrintReciept();
-										WileyPLUS.checkTextInOrderConfirmationPage(
-												excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
-										ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-										String orderId = WileyPLUS.fetchOrderId();
-										excelOperation.updateTestData("TC20", "WileyPLUS_Test_Data", "Order_Id", orderId);
-										excelOperation.updateTestData("TC20", "WileyPLUS_Test_Data", "Email_Id", emailId);
-										ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-										String ordertotal = WileyPLUS.fetchOrderTotal();
-										String taxInOrderConfirmation = WileyPLUS.fetchTaxAmount();
-										if(taxInOrderReview.compareTo(new BigDecimal(taxInOrderConfirmation.substring(5)))==0)
-											Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
-													" is same as tax in Order confirmation page: "+taxInOrderConfirmation, 
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										else
-											Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
-													" is not same as tax in Order confirmation page: "+taxInOrderConfirmation, 
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										if(orderTotalInOrderReview.compareTo(new BigDecimal(ordertotal.substring(5)))==0)
-											Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
-													" is same as Order total in Order confirmation page: "+ordertotal, 
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										else
-											Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
-													" is not same as Order total in Order confirmation page: "+ordertotal, 
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										excelOperation.updateTestData("TC20", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
-										excelOperation.updateTestData("TC20", "WileyPLUS_Test_Data", "Tax", taxInOrderConfirmation);
-										driver.get(excelOperation.getTestData("Yopmail_URL",
-												"Generic_Dataset", "Data"));
-										WileyPLUS.enterEmailIdInYopmail(emailId);
-										WileyPLUS.clickOnCheckInboxButton();
-										if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
-											ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
-											Reporting.updateTestReport("Order Confirmation mail was received",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-											//OrderConfirmationMail.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxamount," ",ordertotal);
-										}
-										else {
-											Reporting.updateTestReport("Order Confirmation mail was not received",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
-										driver.get(excelOperation.getTestData("Onboarding_My_Account_Page", "Generic_Dataset", "Data"));
+								wait.until(ExpectedConditions.
+										presenceOfElementLocated
+										(By.xpath("//p[contains(text(),' Your Cart')]")));
+								WileyPLUS.checkIfUserIsOnCartPage(driver);
+								ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+								WileyPLUS.clickOnProceedToCheckoutButton();
+								WileyPLUS.checkIfUserInBillingStep();
+								driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+								try {
+									wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+									PaymentGateway.paymentWileyPLUS(driver, WileyPLUS, "TC20", SS_path)	;		
+									WileyPLUS.enterFirstName(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "First_Name"));
+									WileyPLUS.enterLastName(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Last_Name"));
+									WileyPLUS.selectCountry(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Bill_Country"));
+									try{
+										wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
+										WileyPLUS.enterAddressLine1Billing(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Bill_Address_line1"));
+										WileyPLUS.enterZipBilling(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Bill_Zip_Code"));
+										//wiley.enterCityBilling(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_City"));
+										//wiley.enterState(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Bill_State"));
+										//wiley.selectUState();
+										WileyPLUS.enterPhoneNumberBilling(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Bill_Phone_Number"));
+										WileyPLUS.clickOnSaveAndContinueButton();
 										try {
-											wait.until(ExpectedConditions.visibilityOfElementLocated
-													(By.xpath("//button[@data-testid='dropdown-menu__icon-button']")));
-											WileyPLUS.clickOnProfileIconInOnboardingMyAccount();
-											WileyPLUS.logoutFromOnboardingMyAccount(driver);
+											if(WileyPLUS.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+												WileyPLUS.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 										}
 										catch(Exception e) {
-											Reporting.updateTestReport("Onboarding my account icon was not loaded "
-													+ "and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											Reporting.updateTestReport("Adress doctor pop up did not appear",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 										}
-									}			
+										BigDecimal firstProductPriceInOrderReview=new BigDecimal(WileyPLUS.fetchFirstProductPriceInOrderReview().substring(5));
+										BigDecimal taxInOrderReview=new BigDecimal(WileyPLUS.fetchTaxInOrderReview().substring(5));
+										BigDecimal orderTotalInOrderReview=new BigDecimal(WileyPLUS.fetchTotalInOrderReview().substring(5));
+										if(firstProductPriceInOrderReview
+												.add(taxInOrderReview)
+												.compareTo(orderTotalInOrderReview)==0)
+											Reporting.updateTestReport("First Product price + Tax "
+													+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport("First Product price + Tax "
+													+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										WileyPLUS.clickOnPlaceOrderButton();
+										String orderconfirmation = driver.getTitle();
+										if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+											WileyPLUS.checkPrintReciept();
+											WileyPLUS.checkTextInOrderConfirmationPage(
+													excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
+											ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+											String orderId = WileyPLUS.fetchOrderId();
+											excelOperation.updateTestData("TC20", "WileyPLUS_Test_Data", "Order_Id", orderId);
+											excelOperation.updateTestData("TC20", "WileyPLUS_Test_Data", "Email_Id", emailId);
+											ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+											String ordertotal = WileyPLUS.fetchOrderTotal();
+											String taxInOrderConfirmation = WileyPLUS.fetchTaxAmount();
+											if(taxInOrderReview.compareTo(new BigDecimal(taxInOrderConfirmation.substring(5)))==0)
+												Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
+														" is same as tax in Order confirmation page: "+taxInOrderConfirmation, 
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											else
+												Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
+														" is not same as tax in Order confirmation page: "+taxInOrderConfirmation, 
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											if(orderTotalInOrderReview.compareTo(new BigDecimal(ordertotal.substring(5)))==0)
+												Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
+														" is same as Order total in Order confirmation page: "+ordertotal, 
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											else
+												Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
+														" is not same as Order total in Order confirmation page: "+ordertotal, 
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											excelOperation.updateTestData("TC20", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
+											excelOperation.updateTestData("TC20", "WileyPLUS_Test_Data", "Tax", taxInOrderConfirmation);
+											driver.get(excelOperation.getTestData("Yopmail_URL",
+													"Generic_Dataset", "Data"));
+											WileyPLUS.enterEmailIdInYopmail(emailId);
+											WileyPLUS.clickOnCheckInboxButton();
+											if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+												ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
+												Reporting.updateTestReport("Order Confirmation mail was received",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+												//OrderConfirmationMail.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxamount," ",ordertotal);
+											}
+											else {
+												Reporting.updateTestReport("Order Confirmation mail was not received",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											}
+											driver.get(excelOperation.getTestData("Onboarding_My_Account_Page", "Generic_Dataset", "Data"));
+											try {
+												wait.until(ExpectedConditions.visibilityOfElementLocated
+														(By.xpath("//button[@data-testid='dropdown-menu__icon-button']")));
+												WileyPLUS.clickOnProfileIconInOnboardingMyAccount();
+												WileyPLUS.logoutFromOnboardingMyAccount(driver);
+											}
+											catch(Exception e) {
+												Reporting.updateTestReport("Onboarding my account icon was not loaded "
+														+ "and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											}
+										}			
 
-									else {
-										Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+										else {
+											Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+													StatusDetails.FAIL);
+										}
+
+
+									}
+									catch(Exception e) {
+										Reporting.updateTestReport("Billing address line 1 was not clickable"
+												+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path),
 												StatusDetails.FAIL);
 									}
-
-
 								}
 								catch(Exception e) {
-									Reporting.updateTestReport("Billing address line 1 was not clickable"
-											+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path),
+									Reporting.updateTestReport("Cardholder name field in Card information"
+											+ " section was not clickable and caused timeout exception"
+											, CaptureScreenshot.getScreenshot(SS_path),
 											StatusDetails.FAIL);
 								}
 							}
-							catch(Exception e) {
-								Reporting.updateTestReport("Cardholder name field in Card information"
-										+ " section was not clickable and caused timeout exception"
-										, CaptureScreenshot.getScreenshot(SS_path),
-										StatusDetails.FAIL);
+							catch(Exception e){
+								Reporting.updateTestReport("User was not on cart page and caused timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 						}
 						catch(Exception e){
-							Reporting.updateTestReport("User was not on cart page and caused timeout exception",
+							Reporting.updateTestReport("User couldn't continue the course and caused timeout exception"
+									+ " and caused timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					}
@@ -1502,150 +1520,158 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
 					WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Course"));
-					//Thread.sleep(2000);
-					//WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
-						wait.until(ExpectedConditions.presenceOfElementLocated(
-								By.xpath("//h2[contains(text(),'Join your course')]")));
-						WileyPLUS.clickOnMultiTermRadioButtonInJoinCourse();
+						wait.until
+						(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-testid='continue_button']")));
 						WileyPLUS.clickOnContinueButtonInOnboarding();
-						WileyPLUS.clickOnLooseLeafPurchaseOption();
-						WileyPLUS.clickOnContinueToCheckoutButton();
 						try {
-							wait.until(ExpectedConditions.
-									presenceOfElementLocated
-									(By.xpath("//p[contains(text(),' Your Cart')]")));
-							WileyPLUS.checkIfUserIsOnCartPage(driver);
-							ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-							WileyPLUS.clickOnProceedToCheckoutButton();
-							WileyPLUS.enterFirstName(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "First_Name"));
-							WileyPLUS.enterLastName(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Last_Name"));
-							WileyPLUS.selectCountry(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Shipping_Country"));
-							try{
-								wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
-								WileyPLUS.enterAddressLine1Shipping(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Shipping_Address_line1"));
-								WileyPLUS.enterShippingZIPCode(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Shipping_Zip_Code"));
-								//WileyPLUS.enterShippingCity(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_City"));
-								//WileyPLUS.enterState(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_State"));
-								WileyPLUS.enterPhoneNumberShipping(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Shipping_Phone_Number"));
-								WileyPLUS.clickOnSaveAndContinueButton();
-								try {
-									if(WileyPLUS.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
-										WileyPLUS.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-								catch(Exception e) {
-									Reporting.updateTestReport("Adress doctor pop up did not appear",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-								}
-								WileyPLUS.checkIfUserInBillingStep();
-								driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
-								try {
-									wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-									PaymentGateway.paymentWileyPLUS(driver, WileyPLUS, "TC21", SS_path)	;
+							wait.until(ExpectedConditions.presenceOfElementLocated(
+									By.xpath("//h2[contains(text(),'Join your course')]")));
+							WileyPLUS.clickOnMultiTermRadioButtonInJoinCourse();
+							WileyPLUS.clickOnContinueButtonInOnboardingInJoinCourse();
+							WileyPLUS.clickOnLooseLeafPurchaseOption();
+							WileyPLUS.clickOnContinueToCheckoutButton();
+							try {
+								wait.until(ExpectedConditions.
+										presenceOfElementLocated
+										(By.xpath("//p[contains(text(),' Your Cart')]")));
+								WileyPLUS.checkIfUserIsOnCartPage(driver);
+								ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+								WileyPLUS.clickOnProceedToCheckoutButton();
+								WileyPLUS.enterFirstName(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "First_Name"));
+								WileyPLUS.enterLastName(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Last_Name"));
+								WileyPLUS.selectCountry(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Shipping_Country"));
+								try{
+									wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+									WileyPLUS.enterAddressLine1Shipping(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Shipping_Address_line1"));
+									WileyPLUS.enterShippingZIPCode(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Shipping_Zip_Code"));
+									//WileyPLUS.enterShippingCity(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_City"));
+									//WileyPLUS.enterState(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_State"));
+									WileyPLUS.enterPhoneNumberShipping(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Shipping_Phone_Number"));
 									WileyPLUS.clickOnSaveAndContinueButton();
-									BigDecimal firstProductPriceInOrderReview=new BigDecimal(WileyPLUS.fetchFirstProductPriceInOrderReview().substring(1));
-									BigDecimal taxInOrderReview=new BigDecimal(WileyPLUS.fetchTaxInOrderReview().substring(1));
-									BigDecimal orderTotalInOrderReview=new BigDecimal(WileyPLUS.fetchTotalInOrderReview().substring(1));
-									BigDecimal shippingInOrderReview=new BigDecimal(WileyPLUS.fetchShippingChargeInOrderReview().substring(1));
-									if(firstProductPriceInOrderReview
-											.add(shippingInOrderReview)
-											.add(taxInOrderReview)
-											.compareTo(orderTotalInOrderReview)==0)
-										Reporting.updateTestReport("First Product price + Tax + Shipping charge"
-												+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-									else
-										Reporting.updateTestReport("First Product price + Tax +Shipping charge"
-												+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									WileyPLUS.clickOnPlaceOrderButton();
-									String orderconfirmation = driver.getTitle();
-									if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-										WileyPLUS.checkPrintReciept();
-										WileyPLUS.checkTextInOrderConfirmationPage(
-												excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
-										ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-										String orderId = WileyPLUS.fetchOrderId();
-										excelOperation.updateTestData("TC21", "WileyPLUS_Test_Data", "Order_Id", orderId);
-										excelOperation.updateTestData("TC21", "WileyPLUS_Test_Data", "Email_Id", emailId);
-										ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-										String ordertotal = WileyPLUS.fetchOrderTotal();
-										String taxInOrderConfirmation = WileyPLUS.fetchTaxAmount();
-										String shipingChargeInOrderConfirmation=WileyPLUS.fetchShippingCharge();
-										if(taxInOrderReview.compareTo(new BigDecimal(taxInOrderConfirmation.substring(1)))==0)
-											Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
-													" is same as tax in Order confirmation page: "+taxInOrderConfirmation, 
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									try {
+										if(WileyPLUS.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed()) 
+											WileyPLUS.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+									catch(Exception e) {
+										Reporting.updateTestReport("Adress doctor pop up did not appear",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+									}
+									WileyPLUS.checkIfUserInBillingStep();
+									driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+									try {
+										wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+										PaymentGateway.paymentWileyPLUS(driver, WileyPLUS, "TC21", SS_path)	;
+										WileyPLUS.clickOnSaveAndContinueButton();
+										BigDecimal firstProductPriceInOrderReview=new BigDecimal(WileyPLUS.fetchFirstProductPriceInOrderReview().substring(1));
+										BigDecimal taxInOrderReview=new BigDecimal(WileyPLUS.fetchTaxInOrderReview().substring(1));
+										BigDecimal orderTotalInOrderReview=new BigDecimal(WileyPLUS.fetchTotalInOrderReview().substring(1));
+										BigDecimal shippingInOrderReview=new BigDecimal(WileyPLUS.fetchShippingChargeInOrderReview().substring(1));
+										if(firstProductPriceInOrderReview
+												.add(shippingInOrderReview)
+												.add(taxInOrderReview)
+												.compareTo(orderTotalInOrderReview)==0)
+											Reporting.updateTestReport("First Product price + Tax + Shipping charge"
+													+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
-											Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
-													" is not same as tax in Order confirmation page: "+taxInOrderConfirmation, 
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										if(shippingInOrderReview.compareTo(new BigDecimal(shipingChargeInOrderConfirmation.substring(1)))==0)
-											Reporting.updateTestReport("Shipping charge calculated in Order review step: $"+shippingInOrderReview+
-													" is same as Shipping charge in Order confirmation page: "+shipingChargeInOrderConfirmation, 
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										else
-											Reporting.updateTestReport("Shipping charge calculated in Order review step: $"+shippingInOrderReview+
-													" is not same as Shipping charge in Order confirmation page: "+shipingChargeInOrderConfirmation, 
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										if(orderTotalInOrderReview.compareTo(new BigDecimal(ordertotal.substring(1)))==0)
-											Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
-													" is same as Order total in Order confirmation page: "+ordertotal, 
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										else
-											Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
-													" is not same as Order total in Order confirmation page: "+ordertotal, 
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										excelOperation.updateTestData("TC21", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
-										excelOperation.updateTestData("TC21", "WileyPLUS_Test_Data", "Tax", taxInOrderConfirmation);
-										driver.get(excelOperation.getTestData("Yopmail_URL",
-												"Generic_Dataset", "Data"));
-										WileyPLUS.enterEmailIdInYopmail(emailId);
-										WileyPLUS.clickOnCheckInboxButton();
-										if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
-											ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
-											Reporting.updateTestReport("Order Confirmation mail was received",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-											EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation," ",ordertotal);
-										}
-										else {
-											Reporting.updateTestReport("Order Confirmation mail was not received",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}	
-										driver.get(excelOperation.getTestData("Onboarding_My_Account_Page", "Generic_Dataset", "Data"));
-										try {
-											wait.until(ExpectedConditions.visibilityOfElementLocated
-													(By.xpath("//button[@data-testid='dropdown-menu__icon-button']")));
-											WileyPLUS.clickOnProfileIconInOnboardingMyAccount();
-											WileyPLUS.logoutFromOnboardingMyAccount(driver);
-										}
-										catch(Exception e) {
-											Reporting.updateTestReport("Onboarding my account icon was not loaded "
-													+ "and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
-									}			
+											Reporting.updateTestReport("First Product price + Tax +Shipping charge"
+													+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										WileyPLUS.clickOnPlaceOrderButton();
+										String orderconfirmation = driver.getTitle();
+										if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+											WileyPLUS.checkPrintReciept();
+											WileyPLUS.checkTextInOrderConfirmationPage(
+													excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
+											ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+											String orderId = WileyPLUS.fetchOrderId();
+											excelOperation.updateTestData("TC21", "WileyPLUS_Test_Data", "Order_Id", orderId);
+											excelOperation.updateTestData("TC21", "WileyPLUS_Test_Data", "Email_Id", emailId);
+											ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+											String ordertotal = WileyPLUS.fetchOrderTotal();
+											String taxInOrderConfirmation = WileyPLUS.fetchTaxAmount();
+											String shipingChargeInOrderConfirmation=WileyPLUS.fetchShippingCharge();
+											if(taxInOrderReview.compareTo(new BigDecimal(taxInOrderConfirmation.substring(1)))==0)
+												Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
+														" is same as tax in Order confirmation page: "+taxInOrderConfirmation, 
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											else
+												Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
+														" is not same as tax in Order confirmation page: "+taxInOrderConfirmation, 
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											if(shippingInOrderReview.compareTo(new BigDecimal(shipingChargeInOrderConfirmation.substring(1)))==0)
+												Reporting.updateTestReport("Shipping charge calculated in Order review step: $"+shippingInOrderReview+
+														" is same as Shipping charge in Order confirmation page: "+shipingChargeInOrderConfirmation, 
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											else
+												Reporting.updateTestReport("Shipping charge calculated in Order review step: $"+shippingInOrderReview+
+														" is not same as Shipping charge in Order confirmation page: "+shipingChargeInOrderConfirmation, 
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											if(orderTotalInOrderReview.compareTo(new BigDecimal(ordertotal.substring(1)))==0)
+												Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
+														" is same as Order total in Order confirmation page: "+ordertotal, 
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											else
+												Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
+														" is not same as Order total in Order confirmation page: "+ordertotal, 
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											excelOperation.updateTestData("TC21", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
+											excelOperation.updateTestData("TC21", "WileyPLUS_Test_Data", "Tax", taxInOrderConfirmation);
+											driver.get(excelOperation.getTestData("Yopmail_URL",
+													"Generic_Dataset", "Data"));
+											WileyPLUS.enterEmailIdInYopmail(emailId);
+											WileyPLUS.clickOnCheckInboxButton();
+											if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+												ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
+												Reporting.updateTestReport("Order Confirmation mail was received",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+												EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation," ",ordertotal);
+											}
+											else {
+												Reporting.updateTestReport("Order Confirmation mail was not received",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											}	
+											driver.get(excelOperation.getTestData("Onboarding_My_Account_Page", "Generic_Dataset", "Data"));
+											try {
+												wait.until(ExpectedConditions.visibilityOfElementLocated
+														(By.xpath("//button[@data-testid='dropdown-menu__icon-button']")));
+												WileyPLUS.clickOnProfileIconInOnboardingMyAccount();
+												WileyPLUS.logoutFromOnboardingMyAccount(driver);
+											}
+											catch(Exception e) {
+												Reporting.updateTestReport("Onboarding my account icon was not loaded "
+														+ "and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											}
+										}			
 
-									else {
-										Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+										else {
+											Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+													StatusDetails.FAIL);
+										}
+
+
+
+									}
+									catch(Exception e) {
+										Reporting.updateTestReport("Cardholder name field in Card information"
+												+ " section was not clickable and caused timeout exception"
+												, CaptureScreenshot.getScreenshot(SS_path),
 												StatusDetails.FAIL);
 									}
 
-
-
 								}
 								catch(Exception e) {
-									Reporting.updateTestReport("Cardholder name field in Card information"
-											+ " section was not clickable and caused timeout exception"
-											, CaptureScreenshot.getScreenshot(SS_path),
-											StatusDetails.FAIL);
+									Reporting.updateTestReport("Shipping Address line 1 was not clickable"
+											+ " and caused timeout exception",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
-
 							}
-							catch(Exception e) {
-								Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-										+ " and caused timeout exception",
+							catch(Exception e){
+								Reporting.updateTestReport("User was not on cart page and caused timeout exception",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 						}
 						catch(Exception e){
-							Reporting.updateTestReport("User was not on cart page and caused timeout exception",
+							Reporting.updateTestReport("User couldn't continue the course and caused timeout exception"
+									+ " and caused timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					}
@@ -1716,164 +1742,180 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					Thread.sleep(2000);
 					WileyPLUS.clickOnOnboardingAddCourseButton();
 					WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "Course"));
-					//Thread.sleep(2000);
-					//WileyPLUS.clickOnContinueButtonInOnboarding();
 					try {
-						wait.until(ExpectedConditions.presenceOfElementLocated(
-								By.xpath("//h2[contains(text(),'Join your course')]")));
-						WileyPLUS.clickOnSingleTermRadioButtonInJoinCourse();
+						wait.until
+						(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-testid='continue_button']")));
 						WileyPLUS.clickOnContinueButtonInOnboarding();
-						WileyPLUS.clickOnFirstPurchaseOption();
-						WileyPLUS.clickOnContinueToCheckoutButton();
 						try {
-							wait.until(ExpectedConditions.
-									presenceOfElementLocated
-									(By.xpath("//p[contains(text(),' Your Cart')]")));
-							WileyPLUS.checkIfUserIsOnCartPage(driver);
+							wait.until(ExpectedConditions.presenceOfElementLocated(
+									By.xpath("//h2[contains(text(),'Join your course')]")));
+							WileyPLUS.clickOnSingleTermRadioButtonInJoinCourse();
+							WileyPLUS.clickOnContinueButtonInOnboardingInJoinCourse();
+							WileyPLUS.clickOnFirstPurchaseOption();
+							WileyPLUS.clickOnContinueToCheckoutButton();
 							try {
-								WileyPLUS.clickOnHomePage();
-								wait.until(ExpectedConditions.presenceOfElementLocated(
-										By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
-												+ " Education and Research')]")));
-								WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC19",
-										"WileyPLUS_Test_Data", "SearchBox_Text"));
-								WileyPLUS.clickOnSRP_WileyProduct();
-								WileyPLUS.clickOnAddToCartButton();
+								wait.until(ExpectedConditions.
+										presenceOfElementLocated
+										(By.xpath("//p[contains(text(),' Your Cart')]")));
+								WileyPLUS.checkIfUserIsOnCartPage(driver);
 								try {
-									wait.until(ExpectedConditions.
-											elementToBeClickable
-											(By.xpath("//button[contains(text(),'View Cart')]")));
-									WileyPLUS.clickOnViewCartButton();
+									WileyPLUS.clickOnHomePage();
+									wait.until(ExpectedConditions.presenceOfElementLocated(
+											By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
+													+ " Education and Research')]")));
+									WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC19",
+											"WileyPLUS_Test_Data", "SearchBox_Text"));
+									WileyPLUS.clickOnSRP_WileyProduct();
+									WileyPLUS.clickOnAddToCartButton();
 									try {
-										wait.until(ExpectedConditions.visibilityOf(WileyPLUS.getModalPopUp()));
-										Reporting.updateTestReport("Currency change modal pop up was displayed successfully", 
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										Thread.sleep(1000);
-										WileyPLUS.clickOnContinueButtonOnModalPopUp();
+										wait.until(ExpectedConditions.
+												elementToBeClickable
+												(By.xpath("//button[contains(text(),'View Cart')]")));
+										WileyPLUS.clickOnViewCartButton();
 										try {
-											wait.until(ExpectedConditions.
-													presenceOfElementLocated
-													(By.xpath("//p[contains(text(),' Your Cart')]")));
+											wait.until(ExpectedConditions.visibilityOf(WileyPLUS.getModalPopUp()));
+											Reporting.updateTestReport("Currency change modal pop up was displayed successfully", 
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											Thread.sleep(1000);
+											WileyPLUS.clickOnContinueButtonOnModalPopUp();
 											try {
-												wait.until(ExpectedConditions.presenceOfElementLocated(
-														By.xpath("//div[contains(text(),'USD')]")));
-												Reporting.updateTestReport("Cart was merged successfully in USD", 
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-												WileyPLUS.getFirstProductsPrice();
-												WileyPLUS.getSecondProductsPrice();
-												driver.get(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "URL"));
+												wait.until(ExpectedConditions.
+														presenceOfElementLocated
+														(By.xpath("//p[contains(text(),' Your Cart')]")));
 												try {
-													wait.until(ExpectedConditions.elementToBeClickable(
-															By.xpath("//span[contains(text(),'add course')]")));
-													Thread.sleep(2000);
-													WileyPLUS.clickOnOnboardingAddCourseButton();
-													WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "Course"));
-													//Thread.sleep(2000);
-													//WileyPLUS.clickOnContinueButtonInOnboarding();
+													wait.until(ExpectedConditions.presenceOfElementLocated(
+															By.xpath("//div[contains(text(),'USD')]")));
+													Reporting.updateTestReport("Cart was merged successfully in USD", 
+															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+													WileyPLUS.getFirstProductsPrice();
+													WileyPLUS.getSecondProductsPrice();
+													driver.get(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "URL"));
 													try {
-														wait.until(ExpectedConditions.presenceOfElementLocated(
-																By.xpath("//h2[contains(text(),'Join your course')]")));
-														WileyPLUS.clickOnSingleTermRadioButtonInJoinCourse();
-														WileyPLUS.clickOnContinueButtonInOnboarding();
-														WileyPLUS.clickOnFirstPurchaseOption();
-														WileyPLUS.clickOnContinueToCheckoutButton();
+														wait.until(ExpectedConditions.elementToBeClickable(
+																By.xpath("//span[contains(text(),'add course')]")));
+														Thread.sleep(2000);
+														WileyPLUS.clickOnOnboardingAddCourseButton();
+														WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "Course"));
 														try {
-															wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
-																	(By.id("add-to-cart-error-dialog")));
-															driver.findElement(By.xpath("//span[contains(text(),'View Cart')]")).click();
+															wait.until
+															(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-testid='continue_button']")));
+															WileyPLUS.clickOnContinueButtonInOnboarding();
 															try {
-																wait.until(ExpectedConditions.visibilityOf(WileyPLUS.getModalPopUp()));
-																Reporting.updateTestReport("Currency change modal pop up was displayed successfully", 
-																		CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-																Thread.sleep(1000);
-																WileyPLUS.clickOnContinueButtonOnModalPopUp();
+																wait.until(ExpectedConditions.presenceOfElementLocated(
+																		By.xpath("//h2[contains(text(),'Join your course')]")));
+																WileyPLUS.clickOnSingleTermRadioButtonInJoinCourse();
+																WileyPLUS.clickOnContinueButtonInOnboardingInJoinCourse();
+																WileyPLUS.clickOnFirstPurchaseOption();
+																WileyPLUS.clickOnContinueToCheckoutButton();
 																try {
-																	wait.until(ExpectedConditions.
-																			presenceOfElementLocated
-																			(By.xpath("//p[contains(text(),' Your Cart')]")));
+																	wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
+																			(By.id("add-to-cart-error-dialog")));
+																	driver.findElement(By.xpath("//span[contains(text(),'View Cart')]")).click();
 																	try {
-																		wait.until(ExpectedConditions.presenceOfElementLocated(
-																				By.xpath("//div[contains(text(),'CAD')]")));
-																		Reporting.updateTestReport("Cart was merged successfully in CAD", 
+																		wait.until(ExpectedConditions.visibilityOf(WileyPLUS.getModalPopUp()));
+																		Reporting.updateTestReport("Currency change modal pop up was displayed successfully", 
 																				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-																		WileyPLUS.getFirstProductsPrice();
-																		WileyPLUS.getSecondProductsPrice();
-																		driver.get(excelOperation.getTestData("Onboarding_My_Account_Page", "Generic_Dataset", "Data"));
+																		Thread.sleep(1000);
+																		WileyPLUS.clickOnContinueButtonOnModalPopUp();
 																		try {
-																			wait.until(ExpectedConditions.visibilityOfElementLocated
-																					(By.xpath("//button[@data-testid='dropdown-menu__icon-button']")));
-																			WileyPLUS.clickOnProfileIconInOnboardingMyAccount();
-																			WileyPLUS.logoutFromOnboardingMyAccount(driver);
+																			wait.until(ExpectedConditions.
+																					presenceOfElementLocated
+																					(By.xpath("//p[contains(text(),' Your Cart')]")));
+																			try {
+																				wait.until(ExpectedConditions.presenceOfElementLocated(
+																						By.xpath("//div[contains(text(),'CAD')]")));
+																				Reporting.updateTestReport("Cart was merged successfully in CAD", 
+																						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+																				WileyPLUS.getFirstProductsPrice();
+																				WileyPLUS.getSecondProductsPrice();
+																				driver.get(excelOperation.getTestData("Onboarding_My_Account_Page", "Generic_Dataset", "Data"));
+																				try {
+																					wait.until(ExpectedConditions.visibilityOfElementLocated
+																							(By.xpath("//button[@data-testid='dropdown-menu__icon-button']")));
+																					WileyPLUS.clickOnProfileIconInOnboardingMyAccount();
+																					WileyPLUS.logoutFromOnboardingMyAccount(driver);
+																				}
+																				catch(Exception e) {
+																					Reporting.updateTestReport("Onboarding my account icon was not loaded "
+																							+ "and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+																				}
+																			}
+																			catch(Exception e){
+																				Reporting.updateTestReport("Cart was not merged in CAD", 
+																						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+																			}
 																		}
-																		catch(Exception e) {
-																			Reporting.updateTestReport("Onboarding my account icon was not loaded "
-																					+ "and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+																		catch(Exception e){
+																			Reporting.updateTestReport("User was not on cart page and caused timeout exception",
+																					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 																		}
 																	}
-																	catch(Exception e){
-																		Reporting.updateTestReport("Cart was not merged in CAD", 
+																	catch(Exception e) {
+																		Reporting.updateTestReport("Currency change modal pop up was not displayed ", 
 																				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 																	}
+
 																}
-																catch(Exception e){
-																	Reporting.updateTestReport("User was not on cart page and caused timeout exception",
+																catch(Exception e) {
+																	Reporting.updateTestReport("The cart error dialog box didn't appear"
+																			+ " and caused timeout exception",
 																			CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 																}
 															}
-															catch(Exception e) {
-																Reporting.updateTestReport("Currency change modal pop up was not displayed ", 
+															catch(Exception e){
+																Reporting.updateTestReport("User couldn't continue the course and caused timeout exception"
+																		+ " and caused timeout exception",
 																		CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 															}
-
 														}
-														catch(Exception e) {
-															Reporting.updateTestReport("The cart error dialog box didn't appear"
+														catch(Exception e){
+															Reporting.updateTestReport("User couldn't add course and was not on Join Course page"
 																	+ " and caused timeout exception",
 																	CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 														}
 													}
-													catch(Exception e){
-														Reporting.updateTestReport("User couldn't add course and was not on Join Course page"
+													catch(Exception e) {
+														Reporting.updateTestReport("User was not on my account page"
 																+ " and caused timeout exception",
 																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 													}
+
 												}
-												catch(Exception e) {
-													Reporting.updateTestReport("User was not on my account page"
-															+ " and caused timeout exception",
+												catch(Exception e){
+													Reporting.updateTestReport("Cart was not merged in USD", 
 															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 												}
 
 											}
 											catch(Exception e){
-												Reporting.updateTestReport("Cart was not merged in USD", 
+												Reporting.updateTestReport("User was not on cart page and caused timeout exception",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 
 										}
-										catch(Exception e){
-											Reporting.updateTestReport("User was not on cart page and caused timeout exception",
+										catch(Exception e) {
+											Reporting.updateTestReport("Currency change modal pop up was not displayed ", 
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
-
 									}
 									catch(Exception e) {
-										Reporting.updateTestReport("Currency change modal pop up was not displayed ", 
+										Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 								}
 								catch(Exception e) {
-									Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+									Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 							}
-							catch(Exception e) {
-								Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
+							catch(Exception e){
+								Reporting.updateTestReport("User was not on cart page and caused timeout exception",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 						}
 						catch(Exception e){
-							Reporting.updateTestReport("User was not on cart page and caused timeout exception",
+							Reporting.updateTestReport("User couldn't continue the course and caused timeout exception"
+									+ " and caused timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					}
