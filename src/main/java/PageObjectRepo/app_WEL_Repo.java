@@ -586,8 +586,8 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//form[@id='loginForm']/div[4]/button")
 	WebElement PINLoginButton;
 
-	@FindBy(xpath = "//div[@class='container product-categories-container']//div[2]//dd/a[contains(text(),'CPA')]")
-	WebElement DeanDortonCPAProduct;
+	@FindBy(xpath = "//div[@class='container product-categories-container']//div[2]//dd/a[contains(text(),'CMA')]")
+	WebElement DeanDortonCMAProduct;
 
 	@FindBy(xpath = "//input[@placeholder='Enter your inbox here']")
 	WebElement EnterEmailIdInYopmail;
@@ -3697,13 +3697,13 @@ public class app_WEL_Repo {
 	 * 
 	 * @Description:
 	 */
-	public void ClickOnDeanDortonCPAProduct() throws IOException {
+	public void ClickOnDeanDortonCMAProduct() throws IOException {
 		try {
-			DeanDortonCPAProduct.click();
-			Reporting.updateTestReport("DeanDorton CPA product was clicked successfully",
+			DeanDortonCMAProduct.click();
+			Reporting.updateTestReport("DeanDorton CMA product was clicked successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click on  DeanDorton CPA product" + e.getClass().toString(),
+			Reporting.updateTestReport("Failed to click on  DeanDorton CMPA product" + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
