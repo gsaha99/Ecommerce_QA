@@ -27,10 +27,15 @@ import utilities.excelOperation;
 public class app_WileyPLUS_Repo {
 	public String SS_path = WileyPLUS_Test_Suite.SS_path;
 	
+	//Homepage 
+	
 	@FindBy(xpath = "//a[@href='/']/img[@class='brand-logo']")
 	WebElement WileyLogo;
 	@FindBy(id = "searchbar")
 	WebElement HomePageSearchBar;
+	
+	//Search Result Page
+	
 	@FindBy(xpath="//div[@class='product-date wileyProductDateGroup wileyProductPubDate']")
 	WebElement PublicationDateSRP;
 	@FindBy(xpath="//div[@class='products-list']/section/div/span[contains(text(),'WileyPLUS')]")
@@ -39,8 +44,6 @@ public class app_WileyPLUS_Repo {
 	WebElement PriceInSRP;
 	@FindBy(xpath = "(//div[@class='products-list']//section//div//a//img)//following::div//h3//a")
 	WebElement SRP_WileyProduct;
-	@FindBy(xpath="//span[@class='item-price item-price-value']")
-	WebElement PriceInPDP;
 	@FindBy(xpath="//h3[contains(text(),'FORMAT')]")
 	WebElement FormatFacet;
 	@FindBy(xpath="//div[@data-facet-code='productType']/div/div/span[@class='all js-all-facet-values']/a[contains(text(),'See more')]")
@@ -49,8 +52,13 @@ public class app_WileyPLUS_Repo {
 	WebElement WileyPLUSUnderFormatFacet;
 	@FindBy(xpath="//div[@class='applied-facets']/div/span[contains(text(),'WileyPLUS')]")
 	WebElement WileyPLUSUnderAppliedFormatFacet;
+	
+	//Product details page for WileyPLUS products
+	
 	@FindBy(xpath="//div[contains(text(),'WileyPLUS')]")
 	WebElement WileyPLUSTabPDP;
+	@FindBy(xpath="//span[@class='item-price item-price-value']")
+	WebElement PriceInPDP;
 	@FindBy(xpath="//button[contains(text(),'Single Term')]")
 	WebElement SingleTermWileyPLUSTab;
 	@FindBy(xpath="//button[contains(text(),'Multiple Terms')]")
@@ -65,12 +73,32 @@ public class app_WileyPLUS_Repo {
 	WebElement MultiTermAccessPrice;
 	@FindBy(xpath="//span[text()='Single Term Access to WileyPLUS']/parent::span/parent::div/following-sibling::div/following-sibling::div/span[@class='item-price item-price-value']")
 	WebElement SingleTermAccessPrice;	
-	@FindBy(xpath="//button[contains(text(),'Add to cart')]")
-	WebElement AddToCartButton;
 	@FindBy(xpath="//button[@class='wileyPlusTabLink wileyPlusActive']")
 	WebElement ByDefaultSelecetedWileyPLUSTab;
+	@FindBy(xpath="//p[@class='pr-price']")
+	WebElement ProductPriceInPDP;
+	
+	//Cart page 
+	
+	@FindBy(xpath="//button[contains(text(),'Add to cart')]")
+	WebElement AddToCartButton;
 	@FindBy(xpath="//span[@class='cartItem-brand-blue']")
 	WebElement BrandNameOfProduct;
+	@FindBy(xpath = "//button[contains(text(),'View Cart')]")
+	WebElement ViewCartButton;
+	@FindBy(xpath="(//button[@id='continue-shopping-button'])[2]")
+	WebElement ContinueShoppingButton;
+	@FindBy(xpath="//div[@class='col-xs-6 noPadding price orderDetailCommonVal']")
+	WebElement OrderSubtotalInCartPage;
+	@FindBy(xpath="//a[@class='cartItem-title']")
+	WebElement CartItemTitle;
+	@FindBy(xpath="(//div[@class='productPriceLabel']/span)[1]")
+	WebElement FirstProductsPrice;
+	@FindBy(xpath="(//div[@class='productPriceLabel']/span)[2]")
+	WebElement SecondProductsPrice;
+	
+	//Login or Create account page during checkout
+	
 	@FindBy(xpath = "(//span[contains(text(),'Proceed to Checkout')])[2]")
 	WebElement ProceedToCheckoutButton;
 	@FindBy(id="email")
@@ -81,18 +109,36 @@ public class app_WileyPLUS_Repo {
 	WebElement ConfirmEmailId;
 	@FindBy(id="pwd")
 	WebElement PasswordInCreateAccount;
+	@FindBy(xpath="//div[@class='guestCreateAccountBtnDiv']/button/span[text()='Continue as Guest']")
+	WebElement GuestCheckoutButton;
+	
+	//Shipping information step during checkout
+	
 	@FindBy(xpath = "//span[contains(text(),'Save and Continue')]")
 	WebElement SaveAndContinueButton;
 	@FindBy(id = "address.country")
 	WebElement SelectCountryDropDown;
 	@FindBy(xpath="//span[contains(text(),'Shipping Address')]")
 	WebElement ShippingText;
+	@FindBy(id="line1")
+	WebElement ShippingAddressLine1;	
+	@FindBy(id="phone")
+	WebElement ShippingPhoneNumber;	
+	@FindBy(xpath="(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
+	WebElement UseSelectedShippingAddressButtonAddressDoctorPopUp;
+	@FindBy(xpath = "(//input[@id='postcode'])[1]")
+	WebElement ShippingZIPCode;
+	@FindBy(xpath = "(//input[@id='townCity'])[1]")
+	WebElement ShippingCity;
+	@FindBy(xpath = "(//input[@id='address.region'])[1]")
+	WebElement SelectStateDropDown;
+	
+	//Billing information during checkout
+	
 	@FindBy(xpath="//span[text()='Billing Address']")
 	WebElement BillingText;
 	@FindBy(xpath="//label[@id='sameAsBillingLabel']")
 	WebElement ShippingSameAsBillingCheckBox;
-	@FindBy(xpath="//a[@class='cartItem-title']")
-	WebElement CartItemTitle;
 	@FindBy(id = "number")
 	WebElement CardNumber;
 	@FindBy(id="nameOnCard")
@@ -117,8 +163,38 @@ public class app_WileyPLUS_Repo {
 	WebElement BillingPhoneNumber;	
 	@FindBy(xpath="(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
 	WebElement UseSelectedBillingAddressButtonAddressDoctorPopUp;
-	@FindBy(id = "placeOrder")
-	WebElement Place_OrderButton;
+	
+	//Modal pop related functionality
+	
+	@FindBy(id="customPopupMainBody")
+	WebElement ModalPopUp;
+	@FindBy(id="wileyCartCurrencyContinueBtn")
+	WebElement ModalPopUpContinueButton;
+	@FindBy(xpath="(//span[contains(text(),'Go Back')])[2]")
+	WebElement ModalPopUpGoBackButton;	
+	
+	
+	//Order Review step during checkout
+	
+	@FindBy(xpath="(//div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[1]")
+	WebElement PriceOfFirstProductInOrderReview;
+	@FindBy(xpath="(//div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[2]")
+	WebElement PriceOfSecondProductInOrderReview;
+	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewSummaryTitle' and contains(text(),'Total:')]/following-sibling::div")
+	WebElement TotalInOrderReview;	
+	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Shipping:')]/following-sibling::div")
+	WebElement ShippingChargeInOrderReview;	
+	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Discount:')]/following-sibling::div")
+	WebElement DiscountInOrderReview;
+	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Taxes:')]/following-sibling::div")
+	WebElement TaxInOrderReview;
+	@FindBy(xpath="(//div[@class='col-xs-9 noPadding orderReviewDetailsLabel'])[1]")
+	WebElement ItemTitleOrderReview;
+	
+	//Order Confirmation page
+	
+	@FindBy(xpath="//a[@class='icon-print']/span[@class='glyphicon glyphicon-print']")
+	WebElement PrintRecieptIconInOrderConfirmation;
 	@FindBy(xpath = "(//div[@class='orderConfirmationLabelVal textTransCap marginTop10'])[2]")
 	WebElement OrderId;
 	@FindBy(xpath = "((//div[contains(text(),'Total')])//following::div)[1]")
@@ -127,30 +203,21 @@ public class app_WileyPLUS_Repo {
 	WebElement TotalTax;
 	@FindBy(xpath = "(((//div[contains(text(),'Shipping')])[2])//following::div)[1]")
 	WebElement Shippingcharge;
+	@FindBy(id = "placeOrder")
+	WebElement Place_OrderButton;
 	@FindBy(xpath = "//input[@placeholder='Enter your inbox here']")
 	WebElement EnterEmailIdInYopmail;	
 	@FindBy(xpath = "//button[@title='Check Inbox @yopmail.com']")
 	WebElement clickOnCheckInboxButton;
-	@FindBy(xpath="(//div[@class='col-xs-9 noPadding orderReviewDetailsLabel'])[1]")
-	WebElement ItemTitleOrderReview;
 	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel']")
 	WebElement ItemTitleInConfirmationPage;
-	@FindBy(id="line1")
-	WebElement ShippingAddressLine1;	
-	@FindBy(id="phone")
-	WebElement ShippingPhoneNumber;	
-	@FindBy(xpath="(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
-	WebElement UseSelectedShippingAddressButtonAddressDoctorPopUp;
-	@FindBy(xpath = "(//input[@id='postcode'])[1]")
-	WebElement ShippingZIPCode;
-	@FindBy(xpath = "(//input[@id='townCity'])[1]")
-	WebElement ShippingCity;
-	@FindBy(xpath = "(//input[@id='address.region'])[1]")
-	WebElement SelectStateDropDown;
-	@FindBy(xpath = "//button[contains(text(),'View Cart')]")
-	WebElement ViewCartButton;
-	@FindBy(xpath="(//button[@id='continue-shopping-button'])[2]")
-	WebElement ContinueShoppingButton;
+	
+	//Onboarding page
+	
+	@FindBy(xpath="//button[@data-testid='dropdown-menu__icon-button']")
+	WebElement AccountIconInOnboarding;
+	@FindBy(xpath="//div[@data-testid='logout-menu-item__button']/div/span")
+	WebElement LogOutButtonOnboarding;
 	@FindBy(xpath="//a[@data-testid='create-account__link']")
 	WebElement CreateAccountLinkOnboarding;
 	@FindBy(id="fname")
@@ -189,46 +256,14 @@ public class app_WileyPLUS_Repo {
 	WebElement LooseLeafBundlePurchaseOption;
 	@FindBy(xpath="(//span[contains(text(),'continue to checkout')])[1]")
 	WebElement ContinueToCheckoutInOnboarding;
-	@FindBy(id="customPopupMainBody")
-	WebElement ModalPopUp;
-	@FindBy(id="wileyCartCurrencyContinueBtn")
-	WebElement ModalPopUpContinueButton;
-	@FindBy(xpath="(//span[contains(text(),'Go Back')])[2]")
-	WebElement ModalPopUpGoBackButton;
-	@FindBy(xpath="(//div[@class='productPriceLabel']/span)[1]")
-	WebElement FirstProductsPrice;
-	@FindBy(xpath="(//div[@class='productPriceLabel']/span)[2]")
-	WebElement SecondProductsPrice;
-	@FindBy(xpath="//p[@class='pr-price']")
-	WebElement ProductPriceInPDP;	
-	@FindBy(xpath="//div[@class='col-xs-6 noPadding price orderDetailCommonVal']")
-	WebElement OrderSubtotalInCartPage;
-	@FindBy(xpath="//div[@class='guestCreateAccountBtnDiv']/button/span[text()='Continue as Guest']")
-	WebElement GuestCheckoutButton;
-	@FindBy(xpath="(//div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[1]")
-	WebElement PriceOfFirstProductInOrderReview;
-	@FindBy(xpath="(//div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[2]")
-	WebElement PriceOfSecondProductInOrderReview;
-	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewSummaryTitle' and contains(text(),'Total:')]/following-sibling::div")
-	WebElement TotalInOrderReview;	
-	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Shipping:')]/following-sibling::div")
-	WebElement ShippingChargeInOrderReview;	
-	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Discount:')]/following-sibling::div")
-	WebElement DiscountInOrderReview;
-	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Taxes:')]/following-sibling::div")
-	WebElement TaxInOrderReview;
-	@FindBy(xpath="//a[@class='icon-print']/span[@class='glyphicon glyphicon-print']")
-	WebElement PrintRecieptIconInOrderConfirmation;
-	@FindBy(xpath="//button[@data-testid='dropdown-menu__icon-button']")
-	WebElement AccountIconInOnboarding;
-	@FindBy(xpath="//div[@data-testid='logout-menu-item__button']/div/span")
-	WebElement LogOutButtonOnboarding;
 
 
 	
 	
-	
-	//Description: Concatenates the url with username, password and the env
+	/*
+	 * @Author: Anindita
+	 * @Description: Concatenates the url with username, password and the env
+	 */
 	public String wileyURLConcatenation(String testCaseNumber, String sheetName, String field) throws IOException{
 		try {
 			String userNamePassword=excelOperation.getTestData("WILEY_Username_Password", "Generic_Dataset", "Data");
@@ -243,7 +278,10 @@ public class app_WileyPLUS_Repo {
 		}
 	}
 	
-	//Description: Clicks On homepage logo
+	/*
+	 * @Author: Anindita
+	 * @Description: Clicks On homepage logo
+	 */
 	public void clickOnHomePage() throws IOException {
 		try {
 			WileyLogo.click();
@@ -259,6 +297,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
+	 * @Author: Anindita
 	 * @Description: Enters data in HomePage search bar
 	 */
 	public void searchProductInHomePageSearchBar(String data) throws IOException {
@@ -274,7 +313,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 21/12/22
+	 * @Author: Anindita
 	 * @Description: Checks if the publication date is present or not in the Search Result Page of a WileyPLUS product
 	 */
 	public void checkPublicationDateInSRP_PLP() throws IOException{
@@ -293,7 +332,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 21/12/22
+	 * @Author: Anindita
 	 * @Description: Checks if the WileyPLUS Format is present or not in the Search Result Page of a WileyPLUS product
 	 */
 	public void checkWileyPLUSFormatInSRP_PLP() throws IOException{
@@ -312,7 +351,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 21/12/22
+	 * @Author: Anindita
 	 * @Description: Checks if the Lowest price of the base product variant is present or not in the Search Result Page of a WileyPLUS product
 	 */
 	public String checkPriceInSRP_PLP() throws IOException{
@@ -336,7 +375,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 22/12/22
+	 * @Author: Anindita
 	 * @Description: Logs out the user from wiley.com
 	 */
 	public void WileyLogOut() throws IOException {
@@ -351,7 +390,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 22/12/22
+	 * @Author: Anindita
 	 * @Description: Logs out the user from wiley.com inside the exception block
 	 */
 	public void wileyLogOutException() throws IOException {
@@ -366,7 +405,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 22/12/22
+	 * @Author: Anindita
 	 * @description: This using for Clicking on SRP_WileyProduct
 	 */
 	public void clickOnSRP_WileyProduct() throws IOException {
@@ -384,7 +423,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 22/12/22
+	 * @Author: Anindita
 	 * @Description: Checks if the Lowest price of the base product variant is present or not in the Search Result Page of a WileyPLUS product
 	 */
 	public String checkPriceInPDP() throws IOException{
@@ -407,8 +446,8 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
+	 * @Author: Anindita
 	 * @Description: Clicks on the format facet
-	 * @Date: 23/12/22
 	 */
 	public void clickOnFormatFacet() throws IOException{
 		try {
@@ -423,8 +462,8 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
+	 * @Author: Anindita
 	 * @Description: Clicks on the See more link under the format facet
-	 * @Date: 23/12/22
 	 */
 	public void clickOnSeeMoreLinkUnderFormat() throws IOException{
 		try {
@@ -440,8 +479,8 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
+	 * @Author: Anindita
 	 * @Description: Checks if WileyPLUS is present under format facet
-	 * @Date: 23/12/22
 	 */
 	public Boolean checkWileyPLUSInFormatFacet() throws IOException{
 		try {
@@ -464,8 +503,8 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
+	 * @Author: Anindita
 	 * @Description: Clicks on the WileyPLUS format under facet
-	 * @Date: 23/12/22
 	 */
 	public void clickOnWileyPLUSInFormatFacet() throws IOException{
 		try {
@@ -480,8 +519,8 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
+	 * @Author: Anindita
 	 * @Description: Checks if WileyPLUS is present under applied format facet
-	 * @Date: 23/12/22
 	 */
 	public Boolean checkWileyPLUSInAppliedFacet() throws IOException{
 		try {
@@ -504,7 +543,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 23/12/22
+	 * @Author: Anindita
 	 * @Description: Checks if WileyPLUS tab is present in PDP
 	 */
 	public Boolean checkWileyPLUSTabInPDP() throws IOException{
@@ -528,8 +567,8 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
+	 * @Author: Anindita
 	 * @Description: Clicks on the WileyPLUS tab in PDP
-	 * @Date: 23/12/22
 	 */
 	public void clickOnWileyPLUSTabPDP() throws IOException{
 		try {
@@ -544,7 +583,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 23/12/22
+	 * @Author: Anindita
 	 * @Description: Checks if WileyPLUS tab is present in PDP
 	 */
 	public Boolean checkSingleTermWileyPLUSTab() throws IOException{
@@ -568,7 +607,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 23/12/22
+	 * @Author: Anindita
 	 * @Description: Checks if WileyPLUS tab is present in PDP
 	 */
 	public Boolean checkMultipleTermsWileyPLUSTab() throws IOException{
@@ -592,7 +631,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 27/12/22
+	 * @Author: Anindita
 	 * @Description: Checks if "Standard Pricing" text is present  in WileyPLUS tab 
 	 */
 	public Boolean checkStandardPricicngTextWileyPLUSTab() throws IOException{
@@ -616,7 +655,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 27/12/22
+	 * @Author: Anindita
 	 * @Description: Clicks on Single term WileyPLUS button
 	 */
 	public void clickOnSingleTermWileyPLUSButton() throws IOException{
@@ -632,7 +671,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date:27/12/22
+	 * @Author: Anindita
 	 * @Description: Verfy the Grey box in WileyPLUS PDP
 	 */
 	public void checkGreyBoxWileyPLUSTab(WebDriver driver,String greyBoxText) throws IOException{
@@ -664,7 +703,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 27/12/22
+	 * @Author: Anindita
 	 * @Description: Checks if "Login to WileyPLUS" button is present  in WileyPLUS tab 
 	 */
 	public void checkLoginToWileyPLUSButton() throws IOException{
@@ -684,7 +723,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 27/12/22
+	 * @Author: Anindita
 	 * @Description: Checks if Single Term WileyPLUS Text is present  
 	 */
 	public void checkSingleTermWileyPLUSText(WebDriver driver,String singleTermText) throws IOException{
@@ -706,7 +745,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 27/12/22
+	 * @Author: Anindita
 	 * @Description: Checks if Multiple Term WileyPLUS Text is present  
 	 */
 	public void checkMultipleTermWileyPLUSText(WebDriver driver,String multiTermText) throws IOException{
@@ -728,7 +767,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 27/12/22
+	 * @Author: Anindita
 	 * @Description: Fetches the percentage from Multiterm page
 	 */
 	public String fetchPercentageMultiTerm(WebDriver driver, String multiTermText) throws IOException{
@@ -750,7 +789,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 27/12/22
+	 * @Author: Anindita
 	 * @Description: Fetches the Multiple Term access price from Multiterm page
 	 */
 	public String fetchMultiTermAccessPrice() throws IOException{
@@ -767,7 +806,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 27/12/22
+	 * @Author: Anindita
 	 * @Description: Fetches the Single Term access price from Single term page
 	 */
 	public String fetchSingleTermAccessPrice() throws IOException{
@@ -784,7 +823,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 29/12/22
+	 * @Author: Anindita
 	 * @Description: Checks if the Add to cart button is present or not
 	 */
 	public boolean checkAddToCartButton() throws IOException{
@@ -800,7 +839,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 29/12/22
+	 * @Author: Anindita
 	 * @Description: Checks if the Multi term button is set as default
 	 */
 	public Boolean checkMultiTermDefault() throws IOException{
@@ -817,7 +856,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 29/12/22
+	 * @Author: Anindita
 	 * @Description: Clicks on Login to WileyPLUS button in WileyPLUS PDP
 	 */
 	public void clickOnLoginToWileyPLUSButton() throws IOException{
@@ -833,7 +872,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 29/12/22
+	 * @Author: Anindita
 	 * @Description: Checks if user is on the cart page or not
 	 */
 	public void checkIfUserIsOnCartPage(WebDriver driver) throws IOException{
@@ -852,7 +891,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 29/12/22
+	 * @Author: Anindita
 	 * @Description: Checks if the brand of the product is WileyPLUS 
 	 */
 	public void checkBrandNameWileyPLUS() throws IOException{
@@ -872,7 +911,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 02/02/23
+	 * @Author: Anindita
 	 * 
 	 * @description:This method using for clicking on ProceedToCheckout Button
 	 */
@@ -891,8 +930,8 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
+	 * @Author: Anindita
 	 * @Description: Enters the email id in Create account form
-	 * @Date: 02/01/23
 	 */
 	public String enterEmailIdInCreateAccountForm() throws IOException {
 		try {
@@ -909,7 +948,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * @Description: Clicks on the create account button
 	 */
 	public void clickOnCreateAccountButton() throws IOException {
@@ -928,7 +967,7 @@ public class app_WileyPLUS_Repo {
 	
 	/*
 	 * @Description: Enters the email id in Create account form Confirm email id field
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 */
 	public void confirmEmailIdInCreateAccountForm(String emailId) throws IOException {
 		try {
@@ -943,7 +982,7 @@ public class app_WileyPLUS_Repo {
 	
 	/*
 	 * @Description: Enters the password in Create account form 
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 */
 	public void enterPasswordInCreateAccountForm(String password) throws IOException {
 		try {
@@ -957,7 +996,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * 
 	 * @description:This method using for clicking on ADD To CART Button
 	 */
@@ -976,7 +1015,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * @Description: Clicks on the country drop down in shipping
 	 */
 	public void checkGlobalCountryList(WebDriver driver,String countryList) throws IOException{
@@ -1022,7 +1061,7 @@ public class app_WileyPLUS_Repo {
 	
 
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * @Description: Clicks on the country drop down in billing
 	 */
 	public void checkGlobalCountryListBilling(WebDriver driver,String countryList) throws IOException{
@@ -1067,7 +1106,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 2/1/23
+	 * @Author: Anindita
 	 * @Description: Checks if user is inthe shipping step or not
 	 */
 	public void checkIfUserInShippingStep() throws IOException{
@@ -1086,7 +1125,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 2/1/23
+	 * @Author: Anindita
 	 * @Description: Checks if user is in the Billing Address step or not
 	 */
 	public void checkIfUserInBillingStep() throws IOException{
@@ -1105,7 +1144,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * @Description: Clicks on the billing same as shipping address checkbox
 	 */
 	public void clickOnShippingSameAsBillingCheckBox() throws IOException{
@@ -1121,7 +1160,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 2/1/23
+	 * @Author: Anindita
 	 * @Description: Checks if the course name is present in the cart page or not
 	 */
 	public void checkCourseNameInCartPage(String courseName) throws IOException{
@@ -1141,7 +1180,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * Description : Entering the CardHolder Name 
 	 */
 	public void enterCardHolderName(String cardHolderName) throws IOException {
@@ -1159,7 +1198,7 @@ public class app_WileyPLUS_Repo {
 	
 
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * Description :Description :Selecting Expiration Month From DropDown
 	 */
 	public void selectExpirationMonthFromDropDown(String month) throws IOException {
@@ -1175,7 +1214,7 @@ public class app_WileyPLUS_Repo {
 	}
 
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * Description :Selecting Expiration Year From DropDown
 	 */
 	public void selectExpirationYearFromDropDown(String year) throws IOException {
@@ -1191,7 +1230,7 @@ public class app_WileyPLUS_Repo {
 	}
 
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * @Description : Entering the CVV Number
 	 */
 	public void enterCVV_Number(String CVVNumber) throws IOException {
@@ -1206,7 +1245,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * @Description:This method is used enter the CardNumber on Billing AddressForm
 	 */
 	public void enterCardNumber(String cardNumber) throws IOException {
@@ -1222,7 +1261,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * @Description:This method is used to enter the FirstName
 	 */
 	public void enterFirstName(String Fname) throws IOException {
@@ -1238,7 +1277,7 @@ public class app_WileyPLUS_Repo {
 		}
 	}
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * @Description:This method is used to enter the LastName
 	 */
 	public void enterLastName(String Lname) throws IOException {
@@ -1255,7 +1294,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * Description : Select Country From DropDown in shipping an billing
 	 */
 	public void selectCountry(String country) throws IOException {
@@ -1272,7 +1311,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * @Description: Clears the Address line 1 field if anything is present and then Enters the new value in the billing address form
 	 */
 	public void enterAddressLine1Billing(String line1) throws IOException{
@@ -1286,7 +1325,7 @@ public class app_WileyPLUS_Repo {
 		}
 	}
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * @Description: Clears the City field if anything is present and then Enters the new value in the billing address form
 	 */
 	public void enterCityBilling(String city) throws IOException{
@@ -1302,7 +1341,7 @@ public class app_WileyPLUS_Repo {
 	
 	
 	/*
-	 *@Date: 02/01/23
+	 *@Author: Anindita
 	 * @Description: Clears the Zip code field if anything is present then Enters the value in the billing address form
 	 */
 	public void enterZipBilling(String zip) throws IOException{
@@ -1316,7 +1355,7 @@ public class app_WileyPLUS_Repo {
 		}
 	}
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * @Description: Clears the Phone number if anything is present and then Enters the new value in the billing address form
 	 */
 	public void enterPhoneNumberBilling(String phone) throws IOException{
@@ -1331,7 +1370,7 @@ public class app_WileyPLUS_Repo {
 	}
 	/*
 	 * @Description: Clicks on the Use Selected Address Button in Address Doctor PopUp
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 */
 	public void clickOnUseSelectedBillingAddressButtonAddressDoctor() throws IOException{
 		try {
@@ -1345,7 +1384,7 @@ public class app_WileyPLUS_Repo {
 	
 	/*
 	 * @Description: Returns the Billing address doctor pop up button 
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 */
 	public WebElement returnUseSelectedBillingAddressButtonAddressDoctorPopUp() {
 		return UseSelectedBillingAddressButtonAddressDoctorPopUp;
@@ -1354,7 +1393,7 @@ public class app_WileyPLUS_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the Place Order button 
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 */
 	public void clickOnPlaceOrderButton() throws IOException{
 		try {
@@ -1367,7 +1406,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-     * @Date: 02/01/23
+     * @Author: Anindita
      * @Description:This method is used for fetching the OrderId
      */
 	public String fetchOrderId() throws IOException {
@@ -1387,7 +1426,7 @@ public class app_WileyPLUS_Repo {
 
 	/*
 	 * @Description: Fetches the Order Total
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 */
 	public String fetchOrderTotal() throws IOException{
 		try {
@@ -1402,7 +1441,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * @Description : This Method using for TaxAmount Fetching From Order Confirmation page
 	 */
 	public String fetchTaxAmount() throws IOException {
@@ -1418,7 +1457,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 * @Description : This Method using for Shipping charge Fetching From Order Confirmation page
 	 */
 	public String fetchShippingCharge() throws IOException {
@@ -1438,7 +1477,7 @@ public class app_WileyPLUS_Repo {
 	
 	/*
 	 * @Description: Enters the email id in Yopmail
-	 * @Date: 02/01/23
+	 * @Author: Anindita
 	 */
 	public void enterEmailIdInYopmail(String username) throws IOException {
 		try {
@@ -1454,7 +1493,7 @@ public class app_WileyPLUS_Repo {
 	
 	/*
 	 * @Description: Clicks on check inbox in yopmail after entering user id
-	 *@Date: 02/01/23
+	 *@Author: Anindita
 	 */
 	public void clickOnCheckInboxButton() throws IOException{
 		try {
@@ -1469,7 +1508,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 2/1/23
+	 * @Author: Anindita
 	 * @Description: Checks if the course name is present in the Order Review page or not
 	 */
 	public void checkCourseNameInOrderReviewPage(String courseName) throws IOException{
@@ -1490,7 +1529,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 2/1/23
+	 * @Author: Anindita
 	 * @Description: Checks if the course name is present in the Order Confirmation page or not
 	 */
 	public void checkCourseNameInOrderConfirmationPage(String courseName) throws IOException{
@@ -1510,7 +1549,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 * @Description: Checks if global addresses are getting displayed as a saved address or not
 	 */
 	public void checkGlobalSavedAddress(WebDriver driver, String xpathOfGloablADddress) throws IOException {
@@ -1526,7 +1565,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 * @Description: Clears the Address line 1 field if anything is present and then Enters the new value in the shipping address form
 	 */
 	public void enterAddressLine1Shipping(String line1) throws IOException{
@@ -1542,7 +1581,7 @@ public class app_WileyPLUS_Repo {
 	
 	
 	/*
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 * @Description: Clears the Phone number if anything is present and then Enters the new value in the shipping address form
 	 */
 	public void enterPhoneNumberShipping(String phone) throws IOException{
@@ -1559,7 +1598,7 @@ public class app_WileyPLUS_Repo {
 	
 	/*
 	 * @Description: Clicks on the Use Selected Address Button in Address Doctor PopUp
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 */
 	public void clickOnUseSelectedShippingAddressButtonAddressDoctor() throws IOException{
 		try {
@@ -1572,7 +1611,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 * @Description : Postal code updating in shipping page.
 	 */
 	public void enterShippingZIPCode(String shippingZIPCode) throws IOException {
@@ -1588,7 +1627,7 @@ public class app_WileyPLUS_Repo {
 	}
 
 	/*
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 * @Description : Entering the City in Shipping page.
 	 */
 	public void enterShippingCity(String shippingCity) throws IOException {
@@ -1606,7 +1645,7 @@ public class app_WileyPLUS_Repo {
 	}
 
 	/*
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 * @Description :Selecting country from Dropdpwn in Shipping Page
 	 */
 	public void enterState(String state) throws IOException {
@@ -1624,14 +1663,14 @@ public class app_WileyPLUS_Repo {
 	
 	/*
 	 * @Description: Returns the Shipping address doctor pop up button 
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 */
 	public WebElement returnUseSelectedShippingAddressButtonAddressDoctorPopUp() {
 		return UseSelectedShippingAddressButtonAddressDoctorPopUp;
 	}
 	
 	/*
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 * @Description: Checks if the ISBN is present in PDP or not is present or not
 	 */
 	public boolean checkISBN_InPDP(WebDriver driver,String ISBN) throws IOException{
@@ -1704,7 +1743,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 * @Description: Enters First name in onboarding create account page
 	 */
 	public void enterFirstNameInOnboardingCreateAccount(String firstName) throws IOException {
@@ -1720,7 +1759,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 * @Description: Enters Last name in onboarding create account page
 	 */
 	public void enterLastNameInOnboardingCreateAccount(String lastName) throws IOException {
@@ -1736,7 +1775,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 * @Description: Enters Email Id in onboarding create account page
 	 */
 	public String enterEmailIdInOnboardingCreateAccount() throws IOException {
@@ -1756,7 +1795,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 * @Description: Enters Institution name in onboarding create account page
 	 */
 	public void enterInstitutionNameInOnboardingCreateAccount(WebDriver driver,String institution) throws IOException {
@@ -1776,7 +1815,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 * @Description: Enters password in onboarding create account page
 	 */
 	public void enterPasswordInOnboarding(String password) throws IOException {
@@ -1792,7 +1831,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 * @Description: Clicks on the privacy policy checkbox on onboarding create account page
 	 */
 	public void clickOnOnboardingCreateAccountCheckbox() throws IOException{
@@ -1808,7 +1847,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 * @Description: Clicks on the Onboarding Create Account Button on onboarding create account page
 	 */
 	public void clickOnOnboardingCreateAccountButton() throws IOException{
@@ -1859,7 +1898,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 * @Description: Clicks on the Onboarding Login Button on onboarding login page
 	 */
 	public void clickOnOnboardingLoginButton() throws IOException{
@@ -1875,7 +1914,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 6/1/23
+	 * @Author: Anindita
 	 * @Description: Clicks on the Onboarding Add course Button on onboarding my account page
 	 */
 	public void clickOnOnboardingAddCourseButton() throws IOException{
@@ -1891,7 +1930,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 27/1/23
+	 * @Author: Anindita
 	 * @DEscription: Enters course section id in the add course page
 	 */
 	public void enterCourseSectionId(String courseId) throws IOException{
@@ -1909,7 +1948,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 27/1/23
+	 * @Author: Anindita
 	 * @Description: Clicks on continue button on add course page
 	 */
 	public void clickOnContinueButtonInOnboarding() throws IOException{
@@ -1925,7 +1964,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 27/1/23
+	 * @Author: Anindita
 	 * @Description: Clicks on continue button on add course page
 	 */
 	public void clickOnContinueButtonInOnboardingInJoinCourse() throws IOException{
@@ -1941,7 +1980,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 27/1/23
+	 * @Author: Anindita
 	 * @Description: Clicks on Single Term Radio Button In Join Course page
 	 */
 	public void clickOnSingleTermRadioButtonInJoinCourse() throws IOException{
@@ -1957,7 +1996,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 27/1/23
+	 * @Author: Anindita
 	 * @Description: Clicks on First purchase option in Purchase options page
 	 */
 	public void clickOnFirstPurchaseOption() throws IOException{
@@ -1973,7 +2012,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 27/1/23
+	 * @Author: Anindita
 	 * @Description: Clicks on Continue to checkout button in Purchase options page
 	 */
 	public void clickOnContinueToCheckoutButton() throws IOException{
@@ -1989,7 +2028,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 30/1/23
+	 * @Author: Anindita
 	 * @Description: Clicks on Multi Term Radio Button In Join Course page
 	 */
 	public void clickOnMultiTermRadioButtonInJoinCourse() throws IOException{
@@ -2005,7 +2044,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 30/1/23
+	 * @Author: Anindita
 	 * @Description: Clicks on Loose leaf purchase option in Purchase options page
 	 */
 	public void clickOnLooseLeafPurchaseOption() throws IOException{
@@ -2021,7 +2060,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 30/1/23
+	 * @Author: Anindita
 	 * @Description: Returns the modal pop up element
 	 */
 	public WebElement getModalPopUp(){
@@ -2029,7 +2068,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 30/1/23
+	 * @Author: Anindita
 	 * @Description: Clicks on Continue button on currency change modal pop up
 	 */
 	public void clickOnContinueButtonOnModalPopUp() throws IOException{
@@ -2045,7 +2084,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 30/1/23
+	 * @Author: Anindita
 	 * @Description: Clicks on Go Back button on currency change modal pop up
 	 */
 	public void clickOnGoBackButtonOnModalPopUp() throws IOException{
@@ -2061,7 +2100,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 31/01/23
+	 * @Author: Anindita
 	 * @Description: Fetches the first product's price
 	 */
 	public void getFirstProductsPrice() throws IOException{
@@ -2076,7 +2115,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 31/01/23
+	 * @Author: Anindita
 	 * @Description: Fetches the second product's price
 	 */
 	public void getSecondProductsPrice() throws IOException{
@@ -2091,7 +2130,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 27/02/23
+	 * @Author: Anindita
 	 * @Description: Fetches the product's price from PDP
 	 */
 	public String fetchPriceInPDP() throws IOException {
@@ -2110,7 +2149,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 27/02/23
+	 * @Author: Anindita
 	 * @Description: Fetches the the order subtotal from cart page
 	 */
 	public String fetchOrderSubTotalInCartPage() throws IOException {
@@ -2131,7 +2170,6 @@ public class app_WileyPLUS_Repo {
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Text In Order Summary Tab during checkout
-	 * @Date: 27/02/22
 	 */
 	public void checkTextInOrderSummaryTab(String message, WebDriver driver) throws IOException{
 		try {
@@ -2149,7 +2187,6 @@ public class app_WileyPLUS_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the Guest checkout button is present or not
-	 * @Date: 27/02/23
 	 */
 	public boolean checkIfGuestCheckoutButtonIsPresent() throws IOException{
 		try {
@@ -2170,7 +2207,6 @@ public class app_WileyPLUS_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the First Product's Price from Order Review Step
-	 * @Date: 23/02/23
 	 */
 	public String fetchFirstProductPriceInOrderReview() throws IOException{
 		try {
@@ -2190,7 +2226,6 @@ public class app_WileyPLUS_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the Second Product's Price from Order Review Step
-	 * @Date: 23/02/23
 	 */
 	public String fetchSecondProductPriceInOrderReview() throws IOException{
 		try {
@@ -2210,7 +2245,6 @@ public class app_WileyPLUS_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the shipping charge from Order Review Step
-	 * @Date: 23/02/23
 	 */
 	public String fetchShippingChargeInOrderReview() throws IOException{
 		try {
@@ -2230,7 +2264,6 @@ public class app_WileyPLUS_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the discount from Order Review Step
-	 * @Date: 23/02/23
 	 */
 	public String fetchDiscountInOrderReview() throws IOException{
 		try {
@@ -2251,7 +2284,6 @@ public class app_WileyPLUS_Repo {
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Text in Order confirmation page
-	 * @Date: 23/02/22
 	 */
 	public void checkTextInOrderConfirmationPage(String message, WebDriver driver) throws IOException{
 		try {
@@ -2270,7 +2302,6 @@ public class app_WileyPLUS_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the tax from Order Review Step
-	 * @Date: 7/11/22
 	 */
 	public String fetchTaxInOrderReview() throws IOException{
 		try {
@@ -2290,7 +2321,6 @@ public class app_WileyPLUS_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the total from Order Review Step
-	 * @Date: 23/02/23
 	 */
 	public String fetchTotalInOrderReview() throws IOException{
 		try {
@@ -2310,7 +2340,6 @@ public class app_WileyPLUS_Repo {
 	/*
 	 * Author:Anindita
 	 * @Description: Checks on the print receipt link in order confirmation page
-	 * @Date: 14/11/22
 	 */
 	public void checkPrintReciept() throws IOException{
 		try {
@@ -2329,7 +2358,6 @@ public class app_WileyPLUS_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the account icon in onboarding page
-	 * @Date: 17/03/23
 	 */
 	public void clickOnProfileIconInOnboardingMyAccount() throws IOException{
 		try {
@@ -2346,7 +2374,6 @@ public class app_WileyPLUS_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Logs out user from Onboarding my account page
-	 * @Date: 17/03/23
 	 */
 	public void logoutFromOnboardingMyAccount(WebDriver driver) throws IOException{
 		try {
@@ -2364,7 +2391,6 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 21/03/23
 	 * @Description: Removes all the products from cart
 	 * @Author: Anindita
 	 */

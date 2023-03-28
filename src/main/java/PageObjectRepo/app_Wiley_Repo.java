@@ -30,17 +30,43 @@ public class app_Wiley_Repo {
 
 	WebDriver driver;
 
+	//Home page 
+
+	@FindBy(xpath="//a/span[text()='Shop']")
+	WebElement ShopLinkInHomePageHeader;
+
+	@FindBy(xpath="//a/span[text()='Research Libraries']")
+	WebElement ResearchLibrariesLinkInHomePageHeader;
+
+	@FindBy(xpath="//a/span[text()='Publishing Services']")
+	WebElement PublishingServicesLinkInHomePageHeader;
+
+	@FindBy(xpath="//a/span[text()='Professional Development']")
+	WebElement ProfessionalDevelopmentLinkInHomePageHeader;
+
+	@FindBy(xpath="//a/i[@class='wl-util-nav__icon  wl-icon-cart']")
+	WebElement CartIconHomePage;
+
+	@FindBy(xpath = "//a[@href='/']/img[@class='brand-logo']")
+	WebElement HomePageLogo;
+
+	@FindBy(xpath = "//input[@id='searchbar']")
+	WebElement HomePageSearchBar;
+
+	@FindBy(xpath = "//i[@class='wl-search-bar__icon']")
+	WebElement SearchBarIconHomePage;
+
 	//View cart pop up and Cart page  
-	
+
 	@FindBy(xpath = "//button[contains(text(),'View Cart')]")
 	WebElement ViewCartButton;
 
 	@FindBy(xpath = "(//span[contains(text(),'Proceed to Checkout')])[2]")
 	WebElement ProceedToCheckoutButton;
-	
+
 	@FindBy(xpath = "//select[@class='cartItemBookQty']")
 	WebElement QuantityDropDown;
-	
+
 	@FindBy(xpath = "//span[@id='promoCodeLink']")
 	WebElement PromoCodeLink;
 
@@ -49,7 +75,7 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath = "//span[@class='cartDiscountBtnText']")
 	WebElement ApplyPromoButton;
-	
+
 	@FindBy(xpath="//ul[@class='menu']/li[@class='nav-btn']/a[text()='Shop ']")
 	WebElement ShopLinkInCartPageHeader;
 
@@ -70,18 +96,62 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath="//ul[@id='breadcrumbStyle']")
 	WebElement BreadCrumbCartPage;
-	
+
 	@FindBy(xpath = "//input[@id='search-bar']")
 	WebElement CartPageSearchBar;
 
+	@FindBy(xpath="//div[@class='col-xs-6 noPadding price orderDetailCommonVal']")
+	WebElement OrderSubtotalInCartPage;
+
+	@FindBy(xpath="(//div[@class='col-xs-6 noPadding orderDetailTotalVal'])[2]")
+	WebElement OrderTotalInCartPage;
+
+	@FindBy(xpath="//div[@class='row no-margin cartTotalVoucherApply']/div[@class='col-xs-6 noPadding price navyBlueVal']")
+	WebElement DiscountValue;
+
+	@FindBy(xpath="//a[@id='shoppingCartIcon']")
+	WebElement ShoppingCartIconUAT3;
+
+	// Login or Create Account page during checkout
+
+	@FindBy(xpath = "//input[@id='j_username']")
+	WebElement ExistingWileyUserMailID;
+
+	@FindBy(xpath = "//input[@id='j_password']")
+	WebElement ExistingWileyUserPassword;
+
+	@FindBy(xpath = "//span[contains(text(),'Log In & Continue')]")
+	WebElement LogInAndContinueButton;
+
+	@FindBy(xpath="//input[@id='email']")
+	WebElement EmailIdInCreateAccount;
+
+	@FindBy(xpath="//button/span[text()='CREATE AN ACCOUNT']")
+	WebElement CreateAccountButton;
+
+	@FindBy(xpath="//input[@data-input_description='confirmemail']")
+	WebElement ConfirmEmailId;
+
+	@FindBy(xpath="//input[@id='pwd']")
+	WebElement PasswordInCreateAccount;
+
+	@FindBy(xpath="//div[@class='guestCreateAccountBtnDiv']/button/span[text()='Continue as Guest']")
+	WebElement GuestCheckoutButton;
+
+	@FindBy(xpath="//span[text()='! An account already exists for this email address. Please log in.']")
+	WebElement ErrorMessageAfterEnteringExistingUserInCreateAccount;
+
+	@FindBy(xpath="//form[@id='loginForm']/div[@class='form-cell has-error errorMessage']")
+	WebElement ErrorMessageAfterEnteringWrongPassword;
+
 	// Shipping information during checkout 
-	
+
 	@FindBy(xpath="//input[@id='firstName']")
 	WebElement AddressFirstName;
-	
+
 	@FindBy(xpath="//input[@id='lastName']")
 	WebElement AddressLastName;
-	
+
 	@FindBy(xpath = "//select[@id='address.country']")
 	WebElement SelectCountryDropDown;
 
@@ -96,7 +166,7 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath = "(//input[@name='deliveryMode'])[2]")
 	WebElement ShippingMethod;
-	
+
 	@FindBy(xpath="//input[@id='line1']")
 	WebElement ShippingAddressLine1;
 
@@ -105,27 +175,27 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath="(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
 	WebElement UseSelectedShippingAddressButtonAddressDoctorPopUp;
-	
+
 	@FindBy(xpath = "(//span[contains(text(),'Use')])[2]")
 	WebElement USEOptionForExistingAddress;
-	
+
 	@FindBy(xpath = "//button[@class='button button-main large shipping-button-group']")
 	WebElement EnterNewAddress;
-	
+
 	@FindBy(xpath = "//span[contains(text(),'Save and Continue')]")
 	WebElement SaveAndContinueButton;
-	
+
 	@FindBy(xpath="//div[@class='modal-content']")
 	WebElement CountryRestrictionModal;
 
 	@FindBy(xpath="(//span[@id='deliveryMethodMessage'])[2]/div/h5")
 	WebElement PODMessage;
-	
+
 	@FindBy(xpath="//h5[@id='shippingAddressTitle']/span[text()='Shipping Address']")
 	WebElement ShippingStepText;
 
 	//Card information in billing step during checkout
-	
+
 	@FindBy(xpath = "//select[@id='expiryMonth']")
 	WebElement ExpirationDateForMonth;
 
@@ -134,48 +204,16 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath = "//input[@id='securityCode']")
 	WebElement CVV_Number;
-	
+
 	@FindBy(xpath = "//input[@id='number']")
 	WebElement CardNumber;
 
 	@FindBy(xpath = "//button[@id='placeOrder']")
 	WebElement Place_OrderButton;
-	
+
 	@FindBy(xpath="//input[@id='nameOnCard']")
 	WebElement CardHolderName;
-	
-	// Login or Create Account page during checkout
 
-	@FindBy(xpath = "//input[@id='j_username']")
-	WebElement ExistingWileyUserMailID;
-
-	@FindBy(xpath = "//input[@id='j_password']")
-	WebElement ExistingWileyUserPassword;
-
-	@FindBy(xpath = "//span[contains(text(),'Log In & Continue')]")
-	WebElement LogInAndContinueButton;
-	
-	@FindBy(xpath="//input[@id='email']")
-	WebElement EmailIdInCreateAccount;
-	
-	@FindBy(xpath="//button/span[text()='CREATE AN ACCOUNT']")
-	WebElement CreateAccountButton;
-	
-	@FindBy(xpath="//input[@data-input_description='confirmemail']")
-	WebElement ConfirmEmailId;
-	
-	@FindBy(xpath="//input[@id='pwd']")
-	WebElement PasswordInCreateAccount;
-	
-	@FindBy(xpath="//div[@class='guestCreateAccountBtnDiv']/button/span[text()='Continue as Guest']")
-	WebElement GuestCheckoutButton;
-
-	@FindBy(xpath="//span[text()='! An account already exists for this email address. Please log in.']")
-	WebElement ErrorMessageAfterEnteringExistingUserInCreateAccount;
-
-	@FindBy(xpath="//form[@id='loginForm']/div[@class='form-cell has-error errorMessage']")
-	WebElement ErrorMessageAfterEnteringWrongPassword;
-	
 	//School Information during checkout
 
 	@FindBy(xpath = "//button[@id='yesBtn']")
@@ -186,31 +224,86 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath = "//select[@id='school']")
 	WebElement SchoolDropDown;
-	
+
 	@FindBy(xpath = "//button[@class='btn schoolNoBtn']")
 	WebElement SchoolInfo;
-	
+
+	//Billing address information during checkout
+
+	@FindBy(xpath="//input[@id='street1']")
+	WebElement BillingAddressLine1;
+
+	@FindBy(xpath="//input[@id='city']")
+	WebElement CityBilling;
+
+	@FindBy(xpath="//input[@id='postalCode']")
+	WebElement BillingZipCode;
+
+	@FindBy(xpath="//input[@id='phoneNumber']")
+	WebElement BillingPhoneNumber;
+
+	@FindBy(xpath="(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
+	WebElement UseSelectedBillingAddressButtonAddressDoctorPopUp;
+
+	@FindBy(xpath="(//span[@class='glyphicon glyphicon-pencil editIcon'])[2]")
+	WebElement EditButtonInBilling;
+
+	@FindBy(id="wrongCardValidation")
+	WebElement WrongCardDetailsErrorMessage;
+
+	@FindBy(id="addNewAddressButton")
+	WebElement EnterNewAddressButton;
+
+	@FindBy(xpath="//span[text()='We require an address on file to create your account and place your order']")
+	WebElement TextInZeroDollarFlow;
+
+	@FindBy(xpath="//div[@id='billingMultiPaymentTitle']")
+	WebElement PaymentMethodText;
+
+	//Order Review step during checkout
+
+	@FindBy(xpath="//label[@id='termsCondsCheckbox']")
+	WebElement TermsAndConditionCheckBox;
+
+	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Taxes:')]/following-sibling::div")
+	WebElement TaxInOrderReview;
+
+	@FindBy(xpath="((//div[@class='row no-margin orderReviewDetailsRow'])[1]/div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[1]")
+	WebElement PriceOfFirstProductInOrderReview;
+
+	@FindBy(xpath="((//div[@class='row no-margin orderReviewDetailsRow'])[2]/div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[1]")
+	WebElement PriceOfSecondProductInOrderReview;
+
+	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewSummaryTitle' and contains(text(),'Total:')]/following-sibling::div")
+	WebElement TotalInOrderReview;
+
+	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Shipping:')]/following-sibling::div")
+	WebElement ShippingChargeInOrderReview;
+
+	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Discount:')]/following-sibling::div")
+	WebElement DiscountInOrderReview;
+
 	//Order confirmation page
-	
+
 	@FindBy(xpath = "(//div[@class='orderConfirmationLabelVal textTransCap marginTop10'])[2]")
 	WebElement OrderId;
 
 	@FindBy(xpath = "(((//div[contains(text(),'Shipping')])[2])//following::div)[1]")
 	WebElement Shippingcharge;
-	
+
 	@FindBy(xpath = "((//div[contains(text(),'Total')])//following::div)[1]")
 	WebElement OrderTotalAmount;
-	
+
 	@FindBy(xpath="//span[text()='Thank you for your Order']")
 	WebElement ThankYouText;
 
 	@FindBy(xpath="(//div[contains(text(),'Taxes')]//following::div)[1] ")
 	WebElement TotalTax;
-	
+
 	@FindBy(xpath="//a[@class='icon-print']/span[@class='glyphicon glyphicon-print']")
 	WebElement PrintRecieptIconInOrderConfirmation;
-	
-	//Product details page tabs for selecting variants
+
+	//Product details page tabs for selecting variants and prices
 
 	@FindBy(xpath = "(//input[@name='purchasedProduct'])[1]")
 	WebElement EbookRental;
@@ -220,20 +313,24 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath = "(//span[@class='typeOfProductSpan'])[4]")
 	WebElement SelectingTextbookRental;
-	
+
 	@FindBy(xpath="//button[text()='Add to cart']")
 	WebElement AddToCartButton;
-	
+
 	@FindBy(xpath="//div[@class='productButtonGroupName' and text()='Print']")
 	WebElement PrintTab;
-	
+
 	@FindBy(xpath="//a[contains(text(),'Request Digital Evaluation Copy')]")
 	WebElement RequestDigitalEvaluationCopyLink;
-	
+
 	@FindBy(xpath="//i[@aria-label='Purchase option description']")
 	WebElement GenericHoverInfo;
 
+	@FindBy(xpath="//p[@class='pr-price']")
+	WebElement ProductPriceInPDP;
+
 	// Footer Page
+
 	@FindBy(xpath = "//span[contains(text(),'Site M')]")
 	WebElement SiteMap;
 
@@ -247,22 +344,22 @@ public class app_Wiley_Repo {
 	WebElement TermsofUse;
 
 	// Product details page and product listing Page
-	
+
 	@FindBy(xpath = "//a[@href='/sitemap']")
 	WebElement SitemapPdpPage;
-	
+
 	@FindBy(xpath = "//a[@href='/permissions']")
 	WebElement PermissionsonPdpPage;
-	
+
 	@FindBy(xpath = "//a[@href='/privacy']")
 	WebElement PrivacyonPdpPage;
-	
+
 	@FindBy(xpath = "//a[@href='/terms-of-use']")
 	WebElement TermsofUseonPdpPage;
-	
+
 	@FindBy(xpath = "(//a[@class='area-name'])[4]")
 	WebElement EducationalResources;
-	
+
 	@FindBy(xpath = "//input[@id='searchbar']")
 	WebElement SearchbarHomepage;
 
@@ -274,20 +371,23 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath = "//a[contains(text(),'CONTENT')]")
 	WebElement PlpContectText;
-	
+
+	@FindBy(xpath = "(//a[contains(text(),'Shop')])[2]")
+	WebElement ShopLinkCLPPage;
+
+	@FindBy(xpath = "(//a[@class='link-corner'])[1]")
+	WebElement ViewAllOnCLPPage;
+
 	//Search Result Page
-	
+
 	@FindBy(xpath = "(//div[@class='products-list']//section//div//a//img)//following::div//h3//a")
 	WebElement SRP_WileyProduct;
-	
+
 	@FindBy(xpath = "//a[@class='see-all-results']")
 	WebElement SearchAllResults;
-	
+
 	@FindBy(xpath="//h3[contains(text(),'FORMAT')]")
 	WebElement FormatFacet;
-
-	@FindBy(xpath="//span[contains(text(),'VetConsult')]")
-	WebElement VetConsultUnderFormatFacet;
 
 	@FindBy(xpath="//h3[contains(text(),'SUBJECT')]")
 	WebElement SubjectFacet;
@@ -315,88 +415,72 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath="(//div[@class='facet-list facets-panel-list js-facet-list '])[3]//span[@class='facet-text']")
 	WebElement Facettext;
-	
+
 	@FindBy(xpath = "//form[@id='sortForm']")
 	WebElement ClickonSortBy;
-	
+
 	@FindBy(xpath = "(//header[@class='wiley-product-list-component-header']/h1)[1]")
 	WebElement FeaturedProducts;
-	
+
 	@FindBy(xpath = "(//header[@class='wiley-product-list-component-header']/h1)[2]")
 	WebElement RecentlyReleasesProducts;
-	
+
 	@FindBy(xpath = "(//header[@class='wiley-product-list-component-header']/h1)[3]")
 	WebElement UpcomingProducts;
 
 	@FindBy(xpath = "//div[@class='content cke-content']/h1[contains(text(),'Page')]")
 	WebElement PagenotFoundErrortext;
-	
-	//Vetconsult product details page
 
-	@FindBy(xpath = "//span[@class='search-highlight']")
-	WebElement VetConsultText;
-	
-	@FindBy(xpath = "//span[@class='glyphicon glyphicon-chevron-right']")
-	WebElement ClickingOnVetSoultIcon;
+	@FindBy(xpath="(//li[@class='pagination-quantity-text'])[1]")
+	WebElement TotalNumberOfPages;
 
-	@FindBy(xpath = "(//a[contains(text(),'Shop')])[2]")
-	WebElement ShopLinkCLPPage;
+	@FindBy(id="sortOptions-button")
+	WebElement SortDropDown;
 
-	@FindBy(xpath = "(//a[@class='link-corner'])[1]")
-	WebElement ViewAllOnCLPPage;
-
-
-	@FindBy(xpath = "//a[@href='/']/img[@class='brand-logo']")
-	WebElement HomePageLogo;
-
-	@FindBy(xpath = "//input[@id='searchbar']")
-	WebElement HomePageSearchBar;
-	
-	@FindBy(xpath = "//i[@class='wl-search-bar__icon']")
-	WebElement SearchBarIconHomePage;
-	
-	//Billing address information during checkout
-
-	@FindBy(xpath="//input[@id='street1']")
-	WebElement BillingAddressLine1;
-	
-	@FindBy(xpath="//input[@id='city']")
-	WebElement CityBilling;
-
-	@FindBy(xpath="//input[@id='postalCode']")
-	WebElement BillingZipCode;
-	
-	@FindBy(xpath="//input[@id='phoneNumber']")
-	WebElement BillingPhoneNumber;
-
-	@FindBy(xpath="(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
-	WebElement UseSelectedBillingAddressButtonAddressDoctorPopUp;
-	
-	@FindBy(xpath="(//span[@class='glyphicon glyphicon-pencil editIcon'])[2]")
-	WebElement EditButtonInBilling;
-
-	//Order Review step during checkout
-	
-	@FindBy(xpath="//label[@id='termsCondsCheckbox']")
-	WebElement TermsAndConditionCheckBox;
-
-	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Taxes:')]/following-sibling::div")
-	WebElement TaxInOrderReview;
+	@FindBy(xpath="//div[contains(text(),'Publication Date (newest-oldest)')]")
+	WebElement PublicationDateFromSortDropDown;
 
 	@FindBy(xpath="//div[@class='applied-facets']/div[@class='facets-panel-item']/span[text()='RGuroo']")
 	WebElement RGurooFacet;
 
-	@FindBy(xpath="//div[@id='billingMultiPaymentTitle']")
-	WebElement PaymentMethodText;
+	@FindBy(xpath="(//span[@class='facet-label'])[1]")
+	WebElement FirstFacetItem;
 
-	@FindBy(xpath="//a[@id='shoppingCartIcon']")
-	WebElement ShoppingCartIconUAT3;
+	@FindBy(xpath="(//span[@class='facet-label'])[1]/span[@class='facet-text']")
+	WebElement FirstFacetItemText;
 
-	@FindBy(xpath="//span[text()='We require an address on file to create your account and place your order']")
-	WebElement TextInZeroDollarFlow;
+	@FindBy(xpath="(//span[@class='facet-label'])[1]/span[@class='facet-text']/span[@class='facet-value-count']/i")
+	WebElement FirstFacetItemQuantity;
+
+	@FindBy(xpath="((//span[@class='nav-tabs-results'])[1]/i)[2]")
+	WebElement NumberOfProductsAfterFiltering;
+
+	@FindBy(xpath="//i[@class='clear-facets active']/a")
+	WebElement ResetFilter;
+
+	@FindBy(xpath="//span[contains(text(),'E-Book')]//parent::span[@class='facet-label']")
+	WebElement EBookFormatFacet;
+
+	@FindBy(xpath="//span[contains(text(),'E-Book')]/span[@class='facet-value-count']/i")
+	WebElement EBookFormatFacetQuantity;
+
+	//Vetconsult product details page
+
+	@FindBy(xpath = "//span[@class='search-highlight']")
+	WebElement VetConsultText;
+
+	@FindBy(xpath = "//span[@class='glyphicon glyphicon-chevron-right']")
+	WebElement ClickingOnVetSoultIcon;
+
+	@FindBy(xpath="//span[@class='item-price item-price-value']")
+	WebElement PriceInPDPVetConsult;
+
+	@FindBy(xpath="//span[contains(text(),'VetConsult')]")
+	WebElement VetConsultUnderFormatFacet;
+
 
 	// Pre-Order and Back-Order products' specific xpaths
-	
+
 	@FindBy(xpath="(//span[text()='Next Available Date: '])[1]")
 	WebElement NextAvailabilityDateForPreorderProductInCartPage;
 
@@ -428,7 +512,7 @@ public class app_Wiley_Repo {
 	WebElement BackOrderDateTextOrderConfirmation;
 
 	//Forgot Password functionality
-	
+
 	@FindBy(xpath="(//a[@id='loginForgotPasswordLink'])[2]")
 	WebElement ForgotPasswordLink;
 
@@ -446,7 +530,7 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath = "//button[@title='Check Inbox @yopmail.com']")
 	WebElement clickOnCheckInboxButton;
-	
+
 	@FindBy(xpath="//input[@id='updatePwd.pwd']")
 	WebElement NewPasswordFieldInResetPasswordPage;
 
@@ -455,95 +539,13 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath="//button/span[text()='Submit']")
 	WebElement SubmitButtonInResetPasswordPage;
-	
-	//Home page 
 
-	@FindBy(xpath="//a/span[text()='Shop']")
-	WebElement ShopLinkInHomePageHeader;
 
-	@FindBy(xpath="//a/span[text()='Research Libraries']")
-	WebElement ResearchLibrariesLinkInHomePageHeader;
 
-	@FindBy(xpath="//a/span[text()='Publishing Services']")
-	WebElement PublishingServicesLinkInHomePageHeader;
 
-	@FindBy(xpath="//a/span[text()='Professional Development']")
-	WebElement ProfessionalDevelopmentLinkInHomePageHeader;
-
-	@FindBy(xpath="//a/i[@class='wl-util-nav__icon  wl-icon-cart']")
-	WebElement CartIconHomePage;
-	
-	@FindBy(xpath="//span[@class='item-price item-price-value']")
-	WebElement PriceInPDP;
-	
-	@FindBy(xpath="//p[@class='pr-price']")
-	WebElement ProductPriceInPDP;
-	
-	@FindBy(xpath="//div[@class='col-xs-6 noPadding price orderDetailCommonVal']")
-	WebElement OrderSubtotalInCartPage;
-	
-	@FindBy(xpath="(//div[@class='col-xs-6 noPadding orderDetailTotalVal'])[2]")
-	WebElement OrderTotalInCartPage;
-	
-	@FindBy(xpath="//div[@class='row no-margin cartTotalVoucherApply']/div[@class='col-xs-6 noPadding price navyBlueVal']")
-	WebElement DiscountValue;
-	
-	@FindBy(xpath="((//div[@class='row no-margin orderReviewDetailsRow'])[1]/div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[1]")
-	WebElement PriceOfFirstProductInOrderReview;
-	
-	@FindBy(xpath="((//div[@class='row no-margin orderReviewDetailsRow'])[2]/div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[1]")
-	WebElement PriceOfSecondProductInOrderReview;
-	
-	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewSummaryTitle' and contains(text(),'Total:')]/following-sibling::div")
-	WebElement TotalInOrderReview;
-	
-	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Shipping:')]/following-sibling::div")
-	WebElement ShippingChargeInOrderReview;
-	
-	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Discount:')]/following-sibling::div")
-	WebElement DiscountInOrderReview;
-	
-	@FindBy(xpath="(//span[@class='facet-label'])[1]")
-	WebElement FirstFacetItem;
-	
-	@FindBy(xpath="(//span[@class='facet-label'])[1]/span[@class='facet-text']")
-	WebElement FirstFacetItemText;
-	
-	@FindBy(xpath="(//span[@class='facet-label'])[1]/span[@class='facet-text']/span[@class='facet-value-count']/i")
-	WebElement FirstFacetItemQuantity;
-	
-	@FindBy(xpath="((//span[@class='nav-tabs-results'])[1]/i)[2]")
-	WebElement NumberOfProductsAfterFiltering;
-	
-	@FindBy(xpath="//i[@class='clear-facets active']/a")
-	WebElement ResetFilter;
-	
-	@FindBy(xpath="//span[contains(text(),'E-Book')]//parent::span[@class='facet-label']")
-	WebElement EBookFormatFacet;
-	
-	@FindBy(xpath="//span[contains(text(),'E-Book')]/span[@class='facet-value-count']/i")
-	WebElement EBookFormatFacetQuantity;
-	
-	@FindBy(xpath="(//li[@class='pagination-quantity-text'])[1]")
-	WebElement TotalNumberOfPages;
-	
-	@FindBy(id="wrongCardValidation")
-	WebElement WrongCardDetailsErrorMessage;
-	
-	@FindBy(id="addNewAddressButton")
-	WebElement EnterNewAddressButton;
-	
-	@FindBy(id="sortOptions-button")
-	WebElement SortDropDown;
-	
-	@FindBy(xpath="//div[contains(text(),'Publication Date (newest-oldest)')]")
-	WebElement PublicationDateFromSortDropDown;
-
-	
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters a data in search bar
-	 * @Date: 06/09/22
 	 */
 	public void searchDataInSearchBar(String data) throws IOException {
 		try {
@@ -555,10 +557,10 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Data couldn't be entered in the search bar",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
+	
 	/*
 	 * @Author: Anindita
 	 * @Description:Clicks on the search icon in the search bar
-	 * @Date: 06/09/22
 	 */
 	public void clickOnSearchIcon() throws IOException{
 		try {
@@ -569,10 +571,10 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Search icon couldn't be clicked in the search bar",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
+	
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the Add to cart button in the pdp page
-	 * @Date: 06/09/22
 	 */
 	public void clickOnAddToCartButton() throws IOException{
 		try {
@@ -583,10 +585,10 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Add To Cart couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
+	
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the View Cart button in the pop up
-	 * @Date: 06/09/22
 	 */
 	public void clickOnViewCartButton() throws IOException{
 		try {
@@ -598,10 +600,10 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("View Cart Button couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
+	
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters the email id in Create account form
-	 * @Date: 06/09/22
 	 */
 	public String enterEmailIdInCreateAccountForm() throws IOException {
 		try {
@@ -620,7 +622,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters the email id in Create account form Confirm email id field
-	 * @Date: 06/09/22
 	 */
 	public void confirmEmailIdInCreateAccountForm(String emailId) throws IOException {
 		try {
@@ -635,7 +636,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters the password in Create account form 
-	 * @Date: 06/09/22
 	 */
 	public void enterPasswordInCreateAccountForm(String password) throws IOException {
 		try {
@@ -665,6 +665,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Address line 1 couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
 	/*
 	 * @Author: Anindita
 	 * @Description: Clears the City field if anything is present and then Enters the new value in the billing address form
@@ -712,7 +713,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the Use Selected Address Button in Address Doctor PopUp
-	 * @Date: 07/09/22
 	 */
 	public void clickOnUseSelectedBillingAddressButtonAddressDoctor() throws IOException{
 		try {
@@ -726,7 +726,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the Place Order button 
-	 * @Date: 07/09/22
 	 */
 	public void clickOnPlaceOrderButton() throws IOException{
 		try {
@@ -740,7 +739,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if "Thank you for your order" text is present or not
-	 * @Date: 07/09/22
 	 */
 	public boolean checkIfUserIsInOrderConfirmation() throws IOException {
 		try {
@@ -758,7 +756,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the Order Total
-	 * @Date: 07/09/22
 	 */
 	public String fetchOrderTotal() throws IOException{
 		try {
@@ -771,10 +768,10 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
+	
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the Continue As Guest  button 
-	 * @Date: 07/09/22
 	 */
 	public void clickOnContinueAsGuestButton() throws IOException{
 		try {
@@ -820,7 +817,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the Use Selected Address Button in Address Doctor PopUp
-	 * @Date: 07/09/22
 	 */
 	public void clickOnUseSelectedShippingAddressButtonAddressDoctor() throws IOException{
 		try {
@@ -850,8 +846,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author: Arun
-	 * 
-	 * @description:This method using for clicking on ProceedToCheckout Button
+	 * @Description:This method using for clicking on ProceedToCheckout Button
 	 */
 	public void clickOnProceedToCheckoutButton() throws IOException {
 
@@ -872,7 +867,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author: Arun
-	 * @description:
+	 * @description: Clicks on the create account button in the checkout login page
 	 */
 	public void clickOnCreateAccountButton() throws IOException {
 
@@ -891,8 +886,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author: Arun
-	 * 
-	 * @description:This method using for clicking on ADD To CART Button
+	 * @Description:This method clicks on the save and continue button
 	 */
 	public void clickOnSaveAndContinueButton() throws IOException {
 
@@ -1005,7 +999,7 @@ public class app_Wiley_Repo {
 	 */
 	public void enterCardHolderName(String cardHolderName) throws IOException {
 		try {
-			
+
 			CardHolderName.sendKeys(cardHolderName);
 			Reporting.updateTestReport("Card Holder Name: " + cardHolderName + " was entered successfully ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1052,7 +1046,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * Author : 
-	 * Arun Description : Entering the CVV Number
+	 * Arun Description : Entering the CVV Number in payment information step
 	 */
 	public void enterCVV_Number(String CVVNumber) throws IOException {
 		try {
@@ -1139,8 +1133,8 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * Author : Arun Description :Selecting
-	 * description : THis Method using for clicking on "USE" button for Existing User
+	 * Author : Arun 
+	 * description : This Method using for clicking on "USE" button for Existing User
 	 */
 	public void selectUSEOptionForExistingAddress() throws IOException {
 		try {
@@ -1156,7 +1150,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * Author : Arun Description :Selecting
+	 * Author : Arun
 	 * description : Product Quantity increasing in cart page
 	 */
 	public void selectQuantityDropDown(String quantity) throws IOException {
@@ -1176,8 +1170,8 @@ public class app_Wiley_Repo {
 
 
 	/*
-	 * Author : Arun Description :
-	 * description : THis Method using for TaxAmount Fetching From Order Confirmation page
+	 * Author : Arun  
+	 * Description : THis Method using for TaxAmount Fetching From Order Confirmation page
 	 */
 	public String fetchTaxAmount() throws IOException {
 		try {
@@ -1272,7 +1266,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author:Vishnu
-	 * @Description:This method is used to enter the NewAddress
+	 * @Description:This method is used to click on the NewAddress button
 	 */
 	public void clickOnEnterNewAddress() throws IOException {
 		try {
@@ -1346,23 +1340,22 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Returns the Billing address doctor pop up button 
-	 * @Date: 14/09/22 
 	 */
 	public WebElement returnUseSelectedBillingAddressButtonAddressDoctorPopUp() {
 		return UseSelectedBillingAddressButtonAddressDoctorPopUp;
 	}
+	
 	/*
 	 * @Author: Anindita
 	 * @Description: Returns the Shipping address doctor pop up button 
-	 * @Date: 14/09/22 
 	 */
 	public WebElement returnUseSelectedShippingAddressButtonAddressDoctorPopUp() {
 		return UseSelectedShippingAddressButtonAddressDoctorPopUp;
 	}
+	
 	/*
 	 * @Author: Anindita
-	 * @Description: Clicks on the print tab
-	 * @Date: 15/09/22
+	 * @Description: Clicks on the print tab in PDP
 	 */
 	public void clickOnPrintTab() throws IOException {
 		try {
@@ -1374,6 +1367,10 @@ public class app_Wiley_Repo {
 		}
 	}
 
+	/*
+	 * @Author: Anindita
+	 * @Description: Selects the eBook rental variant in PDP
+	 */
 	public void ebookRentalProduct() throws IOException {
 		try {
 			EbookRental.click();
@@ -1387,6 +1384,10 @@ public class app_Wiley_Repo {
 
 	}
 
+	/*
+	 * @Author: Anindita
+	 * @Description: Clicks on the Promotion code link in cart page
+	 */
 	public void clickOnPromotionCodelink() throws IOException {
 		try {
 			PromoCodeLink.click();
@@ -1400,6 +1401,10 @@ public class app_Wiley_Repo {
 		}
 	}
 
+	/*
+	 * @Author: Anindita
+	 * @Description: Enters the promo code in the cart page
+	 */
 	public void enterPromoCode(String promo) throws IOException {
 		try {
 			EnterPromoCode.sendKeys(promo);
@@ -1411,6 +1416,10 @@ public class app_Wiley_Repo {
 		}
 	}
 
+	/*
+	 * @Author: Anindita
+	 * @Description: Clicks on the Apply button in the cart page
+	 */
 	public void ApplyPromo() throws IOException {
 		try {
 			ApplyPromoButton.click();
@@ -1422,18 +1431,26 @@ public class app_Wiley_Repo {
 		}
 	}
 
+	/*
+	 * @Author: Anindita
+	 * @Description: Selects School information step option yes/ no
+	 */
 	public void selectingSchoolInfo() throws IOException {
 		try {
 			SchoolInfo.click();
 			Reporting.updateTestReport("School Information was selected successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to select t he school Information",
+			Reporting.updateTestReport("Failed to select the school Information",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
 	}
 
+	/*
+	 * @Author: Anindita
+	 * @Description: Selects the textbook rental variant in PDP
+	 */
 	public void SelectingTextBoolRental() throws IOException{
 		try {
 			SelectingTextbookRental.click();
@@ -1448,7 +1465,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the rentalk terms and conditions checkbox
-	 * @Date: 7/11/22
 	 */
 	public void clickOnRentalTermsCheckbox() throws IOException{
 		try {
@@ -1464,7 +1480,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the tax from Order Review Step
-	 * @Date: 7/11/22
 	 */
 	public String fetchTaxInOrderReview() throws IOException{
 		try {
@@ -1484,7 +1499,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the edit button in billing section
-	 * @Date: 7/11/22
 	 */
 	public void clickOnEditButtonInBilling() throws IOException{
 		try {
@@ -1502,7 +1516,6 @@ public class app_Wiley_Repo {
 	 * 
 	 * @Author:Anindita
 	 * @Description: Checks if the country restriction modal was displayed
-	 * @Date: 7/11/22
 	 */
 	public boolean checkIfCountryRestrictrionModalIsDisplayed() throws IOException{
 		try {
@@ -1526,7 +1539,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks and fetches the message in shipping methods for POD Products
-	 * @Date: 8/11/22
 	 */
 	public void validateShippingMethodMessageForPOD() throws IOException{
 		try {
@@ -1548,7 +1560,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if RGuroo has been applied in facet
-	 * @Date: 8/11/22
 	 */
 	public void checkIfRGurooAppliedInFacet() throws IOException{
 		try {
@@ -1566,7 +1577,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks whether user is on payment page
-	 * @Date: 9/11/22
 	 */
 	public void checkIfUserIsInPaymentMethod() throws IOException{
 		try {
@@ -1584,7 +1594,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the cart icon so that user gets redirected to cart page
-	 * @Date: 9/11/22
 	 */
 	public void clickOnShoppingCartIcon() throws IOException{
 		try {
@@ -1595,10 +1604,10 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Shopping cart icon was not clicked", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if user is on shipping page
-	 * @Date: 9/11/22
 	 */
 	public void checkIfUserIsInShippingStep() throws IOException{
 		try {
@@ -1615,7 +1624,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Shop link is present in cart page
-	 * @Date: 9/11/22
 	 */
 	public void checkShopLinkInCartPageHeader() throws IOException{
 		try {
@@ -1632,7 +1640,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Research Libraries link is present in cart page
-	 * @Date: 9/11/22
 	 */
 	public void checkResearchLibrariesLinkInCartPageHeader() throws IOException{
 		try {
@@ -1649,7 +1656,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Publishing Services link is present in cart page
-	 * @Date: 9/11/22
 	 */
 	public void checkPublishingServicesLinkInCartPageHeader() throws IOException{
 		try {
@@ -1666,7 +1672,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Publishing Services link is present in cart page
-	 * @Date: 9/11/22
 	 */
 	public void checkProfessionalDevelopmentLinkInCartPageHeader() throws IOException{
 		try {
@@ -1683,7 +1688,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if CartIcon link is present in cart page
-	 * @Date: 9/11/22
 	 */
 	public void checkCartIcon() throws IOException{
 		try {
@@ -1700,7 +1704,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Cart Item Quantity is present in cart page
-	 * @Date: 9/11/22
 	 */
 	public String checkCartItemQuantity() throws IOException{
 		try {
@@ -1722,7 +1725,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if BreadCrumb is present in cart page
-	 * @Date: 9/11/22
 	 */
 	public boolean checkBreadCrumbCartPage() throws IOException{
 		try {
@@ -1743,7 +1745,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Text In Order Summary Tab during checkout
-	 * @Date: 23/02/22
 	 */
 	public void checkTextInOrderSummaryTab(String message, WebDriver driver) throws IOException{
 		try {
@@ -1761,7 +1762,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Concatenates the parts of URL (devmonkey part, storerfront url with env and the rest of the part specific to some products)
-	 * @Date: 10/11/22
 	 */
 	public String wileyURLConcatenation(String testCaseNumber, String sheetName, String field) throws IOException{
 		try {
@@ -1781,7 +1781,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the address information related text is present or not for zero dollar flow
-	 * @Date: 14/11/22
 	 */
 	public void checkTextInZeroDollarFlow() throws IOException{
 		try {
@@ -1797,7 +1796,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the next availability date for first added pre-order product in cart page
-	 * @Date: 14//11/22
 	 */
 	public void checkNextAvailabilityDatePreorderInCartPage() throws IOException{
 		try {
@@ -1816,7 +1814,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the next availability date for second added back-order product in cart page
-	 * @Date: 14//11/22
 	 */
 	public void checkNextAvailabilityDateBackorderInCartPage() throws IOException{
 		try {
@@ -1835,7 +1832,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the notification message for first added pre-order product in cart page
-	 * @Date: 14//11/22
 	 */
 	public void checkNotificationMessagePreorderInCartPage() throws IOException{
 		try {
@@ -1852,7 +1848,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the notification message for first added back-order product in cart page
-	 * @Date: 14//11/22
 	 */
 	public void checkNotificationMessageBackorderInCartPage() throws IOException{
 		try {
@@ -1869,7 +1864,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the next availability date for second added pre-order product in Order review page
-	 * @Date: 14//11/22
 	 */
 	public void checkNextAvailabilityDatePreorderInOrderReviewPage() throws IOException{
 		try {
@@ -1887,7 +1881,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the next availability date for second added back-order product in Order review page
-	 * @Date: 14//11/22
 	 */
 	public void checkNextAvailabilityDateBackorderInOrderReviewPage() throws IOException{
 		try {
@@ -1905,7 +1898,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the blue pre-order text and the date for second added back-order product in Order review page
-	 * @Date: 14//11/22
 	 */
 	public void checkNextAvailabilityDatePreorderInOrderConfirmationPage() throws IOException{
 		try {
@@ -1924,7 +1916,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks the blue back-order text and the date for second added back-order product in Order review page
-	 * @Date: 14//11/22
 	 */
 	public void checkNextAvailabilityDateBackorderInOrderConfirmationPage() throws IOException{
 		try {
@@ -1943,7 +1934,6 @@ public class app_Wiley_Repo {
 	/*
 	 * Author:Anindita
 	 * @Description: Checks on the print receipt link in order confirmation page
-	 * @Date: 14/11/22
 	 */
 	public void checkPrintReciept() throws IOException{
 		try {
@@ -1962,7 +1952,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on forgot password link in the login checkout page
-	 * @Date: 15/11/22
 	 */
 	public void clickOnForgotPasswordLink() throws IOException{
 		try {
@@ -1977,7 +1966,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters one existing user id in for receiving the reset password mail
-	 * @Date: 15/11/22
 	 */
 	public void entersEmailIdForRecievingResetPasswordMail(String emailId) throws IOException{
 		try {
@@ -1993,7 +1981,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the submit button for receiving the reset password mail
-	 * @Date: 15/11/22
 	 */
 	public void clickOnSubmitButtonForRecievingResetPasswordMail() throws IOException{
 		try {
@@ -2008,7 +1995,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the password reset instructions get displayed or not
-	 * @Date: 15/11/22
 	 */
 	public boolean checkIfResetPasswordInstructionsIsPresent() throws IOException{
 		try {
@@ -2028,7 +2014,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters the email id in Yopmail
-	 * @Date: 15/11/22
 	 */
 	public void enterEmailIdInYopmail(String username) throws IOException {
 		try {
@@ -2045,7 +2030,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on check inbox in yopmail after entering user id
-	 * @Date: 15/11/22
 	 */
 	public void clickOnCheckInboxButton() throws IOException{
 		try {
@@ -2060,11 +2044,8 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Author:Vishnu
-	 * 
+	 * @Author:Vishnu 
 	 * @Description: Checks if Publishing Services link is present in cart page
-	 * 
-	 * @Date: 14/11/22
 	 */
 
 	public void checkEducationResourcesoncartPage() throws IOException {
@@ -2083,12 +2064,8 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author:Vishnu
-	 * 
 	 * @Description: Checks sitemaps in footer
-	 * 
-	 * @Date: 14/11/22
 	 */
-
 	public void checkSiteMaponfooter() throws IOException {
 		try {
 
@@ -2109,10 +2086,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author:Vishnu
-	 * 
 	 * @Description: Checks sitemaps in cart page
-	 * 
-	 * @Date: 15/11/22
 	 */
 	public void clickonsitemap() throws IOException {
 		try {
@@ -2131,10 +2105,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author:Vishnu
-	 * 
-	 * @Description: Checks sitemapsonpdp page
-	 * 
-	 * @Date: 15/11/22
+	 * @Description: Checks sitemaps on pdp page
 	 */
 
 	public void checkSiteMapononpdppage() throws IOException {
@@ -2150,12 +2121,10 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
 	/*
 	 * @Author:Vishnu
-	 * 
 	 * @Description: Checks RightsandPermission on footer
-	 * 
-	 * @Date: 15/11/22
 	 */
 
 	public void checkRighrtAndPermissonsOnFooter() throws IOException {
@@ -2174,10 +2143,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author:Vishnu
-	 * 
 	 * @Description: Checks RightsandPermission on pdp page
-	 * 
-	 * @Date: 15/11/22
 	 */
 
 	public void checkRighrtAndPermissonsononpdppage() throws IOException {
@@ -2195,10 +2161,7 @@ public class app_Wiley_Repo {
 	}
 	/*
 	 * @Author:Vishnu
-	 * 
 	 * @Description: Checks privacy policy on footer
-	 * 
-	 * @Date: 15/11/22
 	 */
 	public void checkPrivacypolicyOnFooter() throws IOException {
 		try {
@@ -2216,10 +2179,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author:Vishnu
-	 * 
 	 * @Description: Checks privacy policy on pdp page
-	 * 
-	 * @Date: 15/11/22
 	 */
 	public void checkPrivacypolicyonpdppage() throws IOException {
 		try {
@@ -2234,12 +2194,10 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
 	/*
 	 * @Author:Vishnu
-	 * 
 	 * @Description: Checks terms of use on footer
-	 * 
-	 * @Date: 15/11/22
 	 */
 	public void checkTermsofuseOnFooter() throws IOException {
 		try {
@@ -2254,12 +2212,10 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
 	/*
 	 * @Author:Vishnu
-	 * 
 	 * @Description: Checks terms of use in pdp page
-	 * 
-	 * @Date: 15/11/22
 	 */
 	public void checkTermsofuseonpdptpage() throws IOException {
 		try {
@@ -2277,7 +2233,6 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author: Vishnu
-	 * 
 	 * @Description: Enter the text in textbox field
 	 * 
 	 */
@@ -2312,7 +2267,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the Guest checkout button is present or not
-	 * @Date: 17/11/22
 	 */
 	public boolean checkIfGuestCheckoutButtonIsPresent() throws IOException{
 		try {
@@ -2333,7 +2287,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the cart icon in header
-	 * @Date: 17/11/22
 	 */
 	public void clickOnCartIcon() throws IOException{
 		try {
@@ -2348,7 +2301,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters the email id in Create account form (It is not auto generating mail id)
-	 * @Date: 17/09/22
 	 */
 	public void enterEmailIdInCreateAccountFormNotAutoGenerated(String emailId) throws IOException {
 		try {
@@ -2366,7 +2318,6 @@ public class app_Wiley_Repo {
 	/*
 	 * Author: Anindita
 	 * @Description: Validates the error message after entering an existing user in create account form
-	 * @Date: 17/11/22
 	 */
 	public void checkErrorMessageAfterEnteringExistingUserInCreateAccount() throws IOException{
 		try {
@@ -2386,7 +2337,6 @@ public class app_Wiley_Repo {
 	/*
 	 * Author: Anindita
 	 * @Description: Validates the error message after entering an wrong password for one user in login form
-	 * @Date: 17/11/22
 	 */
 	public void checkErrorMessageAfterEnteringWrongPassword() throws IOException{
 		try {
@@ -2406,7 +2356,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Shop link is present in Home page
-	 * @Date: 17/11/22
 	 */
 	public void checkShopLinkInHomePageHeader() throws IOException{
 		try {
@@ -2423,7 +2372,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Research Libraries link is present in home page
-	 * @Date: 17/11/22
 	 */
 	public void checkResearchLibrariesLinkInHomePageHeader() throws IOException{
 		try {
@@ -2440,7 +2388,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Publishing Services link is present in home page
-	 * @Date: 17/11/22
 	 */
 	public void checkPublishingServicesLinkInHomePageHeader() throws IOException{
 		try {
@@ -2457,7 +2404,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Publishing Services link is present in Home page
-	 * @Date: 17/11/22
 	 */
 	public void checkProfessionalDevelopmentLinkInHomePageHeader() throws IOException{
 		try {
@@ -2474,7 +2420,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if CartIcon link is present in Home page
-	 * @Date: 17/11/22
 	 */
 	public void checkCartIconHomePage() throws IOException{
 		try {
@@ -2491,7 +2436,6 @@ public class app_Wiley_Repo {
 	/*
 	 * Author: Anindita
 	 * @Description: Enters the new password in reset password page
-	 * @Date: 17/11/22
 	 */
 	public void enterNewPasswordFieldInResetPasswordPage(String password) throws IOException {
 		try {
@@ -2507,8 +2451,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * Author: Anindita
-	 * @Description: Confirms the  password in reset password page
-	 * @Date: 17/11/22
+	 * @Description: Confirms the  password in reset password page	 
 	 */
 	public void enterConfirmPasswordFieldInResetPasswordPage(String password) throws IOException {
 		try {
@@ -2524,8 +2467,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * Author: Anindita
-	 * @Description: Enters the new password in reset password page
-	 * @Date: 17/11/22
+	 * @Description: Enters the new password in reset password page	 
 	 */
 	public void clickOnSubmitButtonInResetPasswordPage() throws IOException {
 		try {
@@ -2541,9 +2483,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author: Vishnu
-	 * 
 	 * @Description: Enter the text in textbox field
-	 * 
 	 */
 
 	public void AboutWileyPage() throws IOException {
@@ -2560,7 +2500,6 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author:Vishnu
-	 * 
 	 * @Description: This method is verifying the text in PLP page
 	 */
 
@@ -2577,12 +2516,11 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
+	
 	/*
 	 * @Author:Vishnu
-	 * 
 	 * @Description: This method is verifying the text in PLP page
 	 */
-
 	public String PlpContentText() throws IOException {
 		try {
 			String plpcontent = PlpContectText.getText();
@@ -2599,7 +2537,6 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author:Vishnu
-	 * 
 	 * @Description: This method is verifying  VetCosultPurchaseOption on PDP page
 	 */
 	public void VetCosultPurchaseOption() throws IOException {
@@ -2617,8 +2554,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Author:Vishnu
-	 * 
+	 * @Author:Vishnu 
 	 * @Description: This method is Clicking on View on VetCosult Option on PDP page
 	 */
 	public void ClikingOnVETSoultIconOnPDPPage() throws IOException {
@@ -2639,7 +2575,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the format facet
-	 * @Date: 25/11/22
 	 */
 	public void clickOnFormatFacet() throws IOException{
 		try {
@@ -2656,7 +2591,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if VetConsult is present under format facet
-	 * @Date: 25/11/22
 	 */
 	public Boolean checkVetConsultInFormatFacet() throws IOException{
 		try {
@@ -2681,7 +2615,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the VetConsult format under facet
-	 * @Date: 25/11/22
 	 */
 	public void clickOnVetConsultInFormatFacet() throws IOException{
 		try {
@@ -2698,7 +2631,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if after searching a term, in the search result, the product names are highlighted with the searched term
-	 * @Date: 25/11/22
 	 */
 	public Boolean checkProductsWithHighlightedSearchedTerm(String text) throws IOException{
 		try {
@@ -2725,7 +2657,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if Subject is present under  facet
-	 * @Date: 25/11/22
 	 */
 	public Boolean checkSubjectFacet() throws IOException{
 		try {
@@ -2750,7 +2681,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if Course is present under  facet
-	 * @Date: 25/11/22
 	 */
 	public Boolean checkCourseFacet() throws IOException{
 		try {
@@ -2775,7 +2705,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if Author is present under  facet
-	 * @Date: 25/11/22
 	 */
 	public Boolean checkAuthorFacet() throws IOException{
 		try {
@@ -2800,7 +2729,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if Format is present under  facet
-	 * @Date: 25/11/22
 	 */
 	public Boolean checkFormatFacet() throws IOException{
 		try {
@@ -2825,7 +2753,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if PublishedDate is present under  facet
-	 * @Date: 25/11/22
 	 */
 	public Boolean checkPublishedDateFacet() throws IOException{
 		try {
@@ -2850,7 +2777,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if Brands is present under  facet
-	 * @Date: 25/11/22
 	 */
 	public Boolean checkBrandsFacet() throws IOException{
 		try {
@@ -2875,7 +2801,6 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if Series is present under  facet
-	 * @Date: 25/11/22
 	 */
 	public Boolean checkSeriesFacet() throws IOException{
 		try {
@@ -2899,9 +2824,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author: Vishnu
-	 * 
-	 * @Description: This method is used to enter the text in textbox field
-	 * 
+	 * @Description: This method is used to enter the text in textbox field 
 	 */
 	public void SearchingFortheProduct() throws IOException {
 		try {
@@ -2916,11 +2839,9 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Author:Vishnu
-	 * 
+	 * @Author:Vishnu 
 	 * @Description: This method is Clicking on content Section in PDP page
 	 */
-
 	public void ClickOnContentSearchOnPDPPage() throws IOException {
 		try {
 			PlpContectText.click();
@@ -2936,10 +2857,8 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author:Vishnu
-	 * 
 	 * @Description: This method is verify ShopLinkHeaderCLPPage
 	 */
-
 	public void ShopLinkHeaderCLPPage() throws IOException {
 		try {
 			String text = ShopLinkCLPPage.getText();
@@ -2956,10 +2875,8 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author:Vishnu
-	 * 
 	 * @Description: This method is verify FeaturedProductsOnCLPPage
 	 */
-
 	public void checkFeaturedProductsOnCLPPage() throws IOException {
 		try {
 			if (FeaturedProducts.isDisplayed())
@@ -2976,9 +2893,9 @@ public class app_Wiley_Repo {
 
 
 	}
+	
 	/*
 	 * @Author:Vishnu
-	 * 
 	 * @Description: This method is verify ViewAllOnCLPPage
 	 */
 	public void ViewAllOnCLPPage() throws IOException {
@@ -2996,10 +2913,8 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author:Vishnu
-	 * 
 	 * @Description: This method is verify ClickingOnHomePage
 	 */
-
 	public void ClickingOnHomePage() throws IOException {
 		try {
 			HomePageLogo.click();
@@ -3016,7 +2931,6 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author: Vishnu
-	 * 
 	 * @Description: Enters a data in HomePage search bar
 	 */
 	public void HomePageSearchBar(String data) throws IOException {
@@ -3033,7 +2947,6 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author:Vishnu
-	 * 
 	 * @Description: This method is verify ClickingSearchAllResults
 	 */
 	public void ClickingSearchAllResults() throws IOException {
@@ -3051,8 +2964,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Author:Vishnu
-	 * 
+	 * @Author:Vishnu 
 	 * @Description: This method is verify ClickSortByOptionPDPPage
 	 */
 	public void ClickSortByOptionPDPPage() throws IOException {
@@ -3070,7 +2982,6 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Date: 6/2/23
 	 * @Author: Anindita
 	 * @Description: Validates that the price for vetconsult standalone is not present in SRP
 	 */
@@ -3090,16 +3001,15 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 	}
-	
+
 	/*
-	 * @Date: 6/2/23
 	 * @Author: Anindita
 	 * @Description: Validates that the price for vetconsult standalone is not present in PDP
 	 */
 	public void checkPriceInPDPForVetConsult() throws IOException{
 		try {
 
-			String price=PriceInPDP.getText();
+			String price=PriceInPDPVetConsult.getText();
 			if(price.equalsIgnoreCase(""))
 				Reporting.updateTestReport("Price for VetConsult standalone product was not present in PDP as expected",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -3112,11 +3022,10 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Concatenates the parts of URL (devmonkey part, storerfront url with env and the rest of the part specific to regions)
-	 * @Date: 10/11/22
 	 */
 	public String wileyURLConcatenationwithRegions(String region, String pdpURL) throws IOException{
 		try {
@@ -3132,10 +3041,9 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
-	 * @Date: 6/2/23
 	 * @Description: Clicks on the the Request digital evaluation copy link
 	 */
 	public void clickOnRequestDigitalEvaluationCopyLink() throws IOException{
@@ -3149,10 +3057,9 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
-	 * @Date:6/2/23
 	 * @Description: Returns the hyperlink for the Request Digital Evaluation copy
 	 */
 	public String fetchHyperlinkForRequestDigitalEvaluationCopy() throws IOException{
@@ -3168,9 +3075,8 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
-	 * @Date:6/2/23
 	 * @Author: Anindita
 	 * @Description: Returns the text shown in the first point upon hovering the generic info for E-Book
 	 */
@@ -3191,9 +3097,9 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
-	 * @Date: 22/02/23
+	 * @Author: Anindita
 	 * @Description: Fetches the product's price from PDP
 	 */
 	public String fetchPriceInPDP() throws IOException {
@@ -3210,9 +3116,9 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
-	 * @Date: 22/02/23
+	 * @Author: Anindita
 	 * @Description: Fetches the the order subtotal from cart page
 	 */
 	public String fetchOrderSubTotalInCartPage() throws IOException {
@@ -3229,9 +3135,9 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
-	 * @Date: 22/02/23
+	 * @Author: Anindita
 	 * @Description: Fetches the Order total in cart page
 	 */
 	public String fetchOrderTotalInCartPage() throws IOException {
@@ -3248,9 +3154,9 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
-	 * @Date: 22/02/23
+	 * @Author: Anindita
 	 * @Description: Fetches the the discount amount from cart page
 	 */
 	public String fetchDiscountAmountInCartPage() throws IOException {
@@ -3267,11 +3173,10 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the total from Order Review Step
-	 * @Date: 23/02/23
 	 */
 	public String fetchTotalInOrderReview() throws IOException{
 		try {
@@ -3287,11 +3192,10 @@ public class app_Wiley_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the First Product's Price from Order Review Step
-	 * @Date: 23/02/23
 	 */
 	public String fetchFirstProductPriceInOrderReview() throws IOException{
 		try {
@@ -3307,11 +3211,10 @@ public class app_Wiley_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the Second Product's Price from Order Review Step
-	 * @Date: 23/02/23
 	 */
 	public String fetchSecondProductPriceInOrderReview() throws IOException{
 		try {
@@ -3327,11 +3230,10 @@ public class app_Wiley_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the shipping charge from Order Review Step
-	 * @Date: 23/02/23
 	 */
 	public String fetchShippingChargeInOrderReview() throws IOException{
 		try {
@@ -3347,11 +3249,10 @@ public class app_Wiley_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the discount from Order Review Step
-	 * @Date: 23/02/23
 	 */
 	public String fetchDiscountInOrderReview() throws IOException{
 		try {
@@ -3367,18 +3268,17 @@ public class app_Wiley_Repo {
 
 		}
 	}
-	
-	
+
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Text in Order confirmation page
-	 * @Date: 23/02/22
 	 */
 	public void checkTextInOrderConfirmationPage(String message, WebDriver driver) throws IOException{
 		try {
 			if(driver.findElement(By.xpath
 					("//div[@id=\"orderConfirmationProgressAboveText\" and contains(text(),\""+message+"\")]")).isDisplayed()) 
-				
+
 				Reporting.updateTestReport("Text: "+message+" In Order confirmation page is present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else 
 				Reporting.updateTestReport("Text: "+message+" In Order confirmation page is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -3387,10 +3287,11 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Text: "+message+" In Order confirmation page is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+
 	
-	/*
+	/* 
+	 * @Author: Anindita
 	 * @Description: Clicks on the format facet
-	 * @Date: 01/03/23
 	 */
 	public void clickOnAuthorFacet() throws IOException{
 		try {
@@ -3403,17 +3304,16 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Selects First Facet Item
-	 * @Date: 01/03/23
 	 */
 	public String clickOnFirstFacetValue() throws IOException{
 		try {
 			FirstFacetItem.click();
 			Reporting.updateTestReport("First Facet Item was clicked with Text: "
-			+FirstFacetItemText.getText().replace(FirstFacetItemQuantity.getText(), "")+" and Quantity of that Filter: "+FirstFacetItemQuantity.getText(),
+					+FirstFacetItemText.getText().replace(FirstFacetItemQuantity.getText(), "")+" and Quantity of that Filter: "+FirstFacetItemQuantity.getText(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return FirstFacetItemText.getText().trim().replace(FirstFacetItemQuantity.getText(), "")+"#"+FirstFacetItemQuantity.getText();
 		}
@@ -3423,37 +3323,35 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks number of items after filtering
-	 * @Date: 01/03/23
 	 */
 	public void checkNumberOfProductsAfterFiltering(String numbers) throws IOException{
 		try {
 			if(NumberOfProductsAfterFiltering.getText().equalsIgnoreCase(numbers)) {
 				Reporting.updateTestReport("The number of products after filtering is correctly shown as: "+numbers,
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				
+
 			}
 			else {
 				Reporting.updateTestReport("The number of products after filtering is: "+NumberOfProductsAfterFiltering.getText()+
 						" which is not matching with: "+numbers,
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				
+
 			}
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("The number of products after filtering couldn't be fetched",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			
+
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetch all the search result web element
-	 * @Date: 1/2/22
 	 */
 	public List<WebElement> getAllFilteredResultProducts() throws IOException{
 		try {
@@ -3461,7 +3359,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("List of filtered products was returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return products;
-			
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("List of filtered products couldn't be returned",
@@ -3469,11 +3367,10 @@ public class app_Wiley_Repo {
 			return null;
 		}
 	}
-	
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Clicks on rest to rest all formats
-	 * @Date: 01/03/23
 	 */
 	public void clickOnResetFilter() throws IOException {
 		try {
@@ -3489,13 +3386,12 @@ public class app_Wiley_Repo {
 	/*
 	 * @Author: Anindita
 	 * @Description: Selects the E-Book format
-	 * @Date: 01/03/23
 	 */
 	public String clickOnEBookFormatFacetValue() throws IOException{
 		try {
 			EBookFormatFacet.click();
 			Reporting.updateTestReport("EBook Format Facet was clicked with Text: "
-			+EBookFormatFacet.getText().replace(EBookFormatFacetQuantity.getText(), "")+" and Quantity of that Filter: "+EBookFormatFacetQuantity.getText(),
+					+EBookFormatFacet.getText().replace(EBookFormatFacetQuantity.getText(), "")+" and Quantity of that Filter: "+EBookFormatFacetQuantity.getText(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return EBookFormatFacet.getText().trim().replace(EBookFormatFacetQuantity.getText(), "")+"#"+EBookFormatFacetQuantity.getText();
 		}
@@ -3505,7 +3401,7 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the total number of pages in pagination
@@ -3524,50 +3420,47 @@ public class app_Wiley_Repo {
 			return 0;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if wrong card details error message is present or not
-	 * @Date: 1/3/23
 	 */
 	public void checkWrongCardErrorMessage() throws IOException{
 		try {
 			Reporting.updateTestReport("Wrong card details error was displayed with message: "
-		+WrongCardDetailsErrorMessage.getText() , CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					+WrongCardDetailsErrorMessage.getText() , CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Wrong card details error was not displayed ", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the shipping charge for shipping methods by passing the shipping method name
-	 * @Date: 3/3/23
 	 */
 	public BigDecimal fetchShippingCharge(WebDriver driver,String shippingMethod) throws IOException{
 		try {
 			String xpathOfShippingCharge="//span[@class='delivery-item-title deliveryItemTitle' and contains(text(),'"+
-		shippingMethod+"')]/following-sibling::span/span[@class='textBold']";
+					shippingMethod+"')]/following-sibling::span/span[@class='textBold']";
 			String xpathOfShippingMethodName="//span[@class='delivery-item-title deliveryItemTitle' and contains(text(),'"+
 					shippingMethod+"')]";
 			String charge=driver.findElement(By.xpath(xpathOfShippingCharge)).getText();
 			Reporting.updateTestReport("Shipping charge value: "+charge+" was returned for shipping method: "+
-			driver.findElement(By.xpath(xpathOfShippingMethodName)).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					driver.findElement(By.xpath(xpathOfShippingMethodName)).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return new BigDecimal(charge.substring(1));
-			
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Shipping charge couldn't be fetched", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return new BigDecimal(0.00);
 		}
 	}
-	
+
 
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on enter new address button in shipping page
-	 * @Date: 3/3/23
 	 */
 	public void clickOnEnterNewAddresButtonInShipping() throws IOException{
 		try {
@@ -3580,11 +3473,10 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on Sorting drop down in search result drop down
-	 * @Date: 3/3/23
 	 */
 	public void clickOnSortDropDown() throws IOException{
 		try {
@@ -3597,11 +3489,10 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on Publication Date From Sort Drop Down
-	 * @Date: 3/3/23
 	 */
 	public void clickOnPublicationDateFromSortDropDown() throws IOException{
 		try {
@@ -3614,11 +3505,10 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks At least 10 characters -> this criteria in password page
-	 * @Date: 15/3/23
 	 */
 	public void checkAtLeast10Characters(WebDriver driver,String colour) throws IOException {
 		try {
@@ -3626,9 +3516,9 @@ public class app_Wiley_Repo {
 			if(colour.equalsIgnoreCase("blue")) {
 				xpathOfCriteria="//span[@id='registerCheckLength']/span[@style='color: rgb(0, 82, 116);']";
 				try {
-				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
-					Reporting.updateTestReport("At least 10 characters was satisfied and was in blue colour",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+						Reporting.updateTestReport("At least 10 characters was satisfied and was in blue colour",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("At least 10 characters was not satisfied",
@@ -3639,27 +3529,26 @@ public class app_Wiley_Repo {
 			{
 				xpathOfCriteria="//span[@id='registerCheckLength']/span[@style='color: rgb(164, 47, 19);']";
 				try {
-				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
-					Reporting.updateTestReport("At least 10 characters was not satisfied and was in red colour",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+						Reporting.updateTestReport("At least 10 characters was not satisfied and was in red colour",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("At least 10 characters was satisfied",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}		
-			
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("At least 10 charactersthis condition couldn't be verified",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks At least 3 of the following: -> this criteria in password page
-	 * @Date: 15/3/23
 	 */
 	public void checkAtLeast3ofTheFollowing(WebDriver driver,String colour) throws IOException {
 		try {
@@ -3667,9 +3556,9 @@ public class app_Wiley_Repo {
 			if(colour.equalsIgnoreCase("blue")) {
 				xpathOfCriteria="//span[@id='registerCheckAttribute']/span[@style='color: rgb(0, 82, 116);']";
 				try {
-				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
-					Reporting.updateTestReport("At least 3 criterias was satisfied and was in blue colour",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+						Reporting.updateTestReport("At least 3 criterias was satisfied and was in blue colour",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("At least  3 criterias was not satisfied",
@@ -3680,27 +3569,26 @@ public class app_Wiley_Repo {
 			{
 				xpathOfCriteria="//span[@id='registerCheckAttribute']/span[@style='color: rgb(164, 47, 19);']";
 				try {
-				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
-					Reporting.updateTestReport("At least  3 criterias was not satisfied and was in red colour",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+						Reporting.updateTestReport("At least  3 criterias was not satisfied and was in red colour",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("At least  3 criterias was satisfied",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}		
-			
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("At least  3 criterias this condition couldn't be verified",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks UpperCase -> this criteria in password page
-	 * @Date: 15/3/23
 	 */
 	public void checkUpperCase(WebDriver driver,String colour) throws IOException {
 		try {
@@ -3708,9 +3596,9 @@ public class app_Wiley_Repo {
 			if(colour.equalsIgnoreCase("blue")) {
 				xpathOfCriteria="//div[@id='registerCheckUpperCaseDiv']/span[@style='color: rgb(0, 82, 116);']";
 				try {
-				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
-					Reporting.updateTestReport("UpperCase was satisfied and was in blue colour",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+						Reporting.updateTestReport("UpperCase was satisfied and was in blue colour",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("UpperCase was not satisfied",
@@ -3721,27 +3609,26 @@ public class app_Wiley_Repo {
 			{
 				xpathOfCriteria="//div[@id='registerCheckUpperCaseDiv']/span[@style='color: rgb(164, 47, 19);']";
 				try {
-				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
-					Reporting.updateTestReport("UpperCase was not satisfied and was in red colour",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+						Reporting.updateTestReport("UpperCase was not satisfied and was in red colour",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("UpperCase was satisfied",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}		
-			
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("UpperCase this condition couldn't be verified",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks Lower Case -> this criteria in password page
-	 * @Date: 15/3/23
 	 */
 	public void checkLowerCase(WebDriver driver,String colour) throws IOException {
 		try {
@@ -3749,9 +3636,9 @@ public class app_Wiley_Repo {
 			if(colour.equalsIgnoreCase("blue")) {
 				xpathOfCriteria="//div[@id='registerCheckLowerCaseDiv']/span[@style='color: rgb(0, 82, 116);']";
 				try {
-				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
-					Reporting.updateTestReport("Lower Case was satisfied and was in blue colour",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+						Reporting.updateTestReport("Lower Case was satisfied and was in blue colour",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Lower Case was not satisfied",
@@ -3762,27 +3649,26 @@ public class app_Wiley_Repo {
 			{
 				xpathOfCriteria="//div[@id='registerCheckLowerCaseDiv']/span[@style='color: rgb(164, 47, 19);']";
 				try {
-				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
-					Reporting.updateTestReport("Lower Case was not satisfied and was in red colour",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+						Reporting.updateTestReport("Lower Case was not satisfied and was in red colour",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Lower Case was satisfied",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}		
-			
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Lower Case this condition couldn't be verified",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks Number -> this criteria in password page
-	 * @Date: 15/3/23
 	 */
 	public void checkNumber(WebDriver driver,String colour) throws IOException {
 		try {
@@ -3790,9 +3676,9 @@ public class app_Wiley_Repo {
 			if(colour.equalsIgnoreCase("blue")) {
 				xpathOfCriteria="//div[@id='registerCheckNumCaseDiv']/span[@style='color: rgb(0, 82, 116);']";
 				try {
-				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
-					Reporting.updateTestReport("Number was satisfied and was in blue colour",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+						Reporting.updateTestReport("Number was satisfied and was in blue colour",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Number was not satisfied",
@@ -3803,27 +3689,26 @@ public class app_Wiley_Repo {
 			{
 				xpathOfCriteria="//div[@id='registerCheckNumCaseDiv']/span[@style='color: rgb(164, 47, 19);']";
 				try {
-				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
-					Reporting.updateTestReport("Number was not satisfied and was in red colour",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+						Reporting.updateTestReport("Number was not satisfied and was in red colour",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Number was satisfied",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}		
-			
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Number this condition couldn't be verified",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks Special Character -> this criteria in password page
-	 * @Date: 15/3/23
 	 */
 	public void checkSpecialCharacter(WebDriver driver,String colour) throws IOException {
 		try {
@@ -3831,9 +3716,9 @@ public class app_Wiley_Repo {
 			if(colour.equalsIgnoreCase("blue")) {
 				xpathOfCriteria="//div[@id='registerCheckSpclCharDiv']/span[@style='color: rgb(0, 82, 116);']";
 				try {
-				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
-					Reporting.updateTestReport("Special Character was satisfied and was in blue colour",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+						Reporting.updateTestReport("Special Character was satisfied and was in blue colour",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Special Character was not satisfied",
@@ -3844,27 +3729,26 @@ public class app_Wiley_Repo {
 			{
 				xpathOfCriteria="//div[@id='registerCheckSpclCharDiv']/span[@style='color: rgb(164, 47, 19);']";
 				try {
-				if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
-					Reporting.updateTestReport("Special Character was not satisfied and was in red colour",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					if(driver.findElement(By.xpath(xpathOfCriteria)).isDisplayed())
+						Reporting.updateTestReport("Special Character was not satisfied and was in red colour",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Special Character was satisfied",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}		
-			
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Special Character this condition couldn't be verified",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 15/3/23
 	 * @Description: Checks the password criteria insuffiency message
-	 * @Author: Anindita
 	 */
 	public void checkPasswordCriteriaInsufficiencyMessage(String message) throws IOException{
 		try {
@@ -3873,23 +3757,21 @@ public class app_Wiley_Repo {
 				if(driver.findElement(By.xpath(xpath)).isDisplayed())
 					Reporting.updateTestReport("Password criteria insuffiency message: "+message+" was displayed",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				}
-				catch(Exception e) {
-					Reporting.updateTestReport("Password criteria insuffiency message was not displayed",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Password criteria insuffiency message was not displayed",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Password criteria insuffiency message was not displayed with exception "+e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
-	 * @Date: 21/03/23
 	 * @Description: Removes all the products from cart
-	 * @Date: 21/03/23
 	 */
 	public void removeProductsFromCart(WebDriver driver) throws IOException {
 		try {
@@ -3899,9 +3781,9 @@ public class app_Wiley_Repo {
 			ScrollingWebPage.PageScrolldown(driver, 0, 250, SS_path);
 			List<WebElement> removeList = driver.findElements(By.xpath("//a[@class='remove-item remove-entry-button removeCartEntryBtn']"));
 			while(!removeList.isEmpty()){
-			    removeList.get(0).click();
-			    Thread.sleep(200);
-			    removeList = driver.findElements(By.xpath("//a[@class='remove-item remove-entry-button removeCartEntryBtn']"));
+				removeList.get(0).click();
+				Thread.sleep(200);
+				removeList = driver.findElements(By.xpath("//a[@class='remove-item remove-entry-button removeCartEntryBtn']"));
 			}
 			Reporting.updateTestReport("Few products were removed from cart",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
