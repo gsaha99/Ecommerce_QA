@@ -29,126 +29,21 @@ public class app_WEL_Repo {
 
 	WEL_Test_Suite WEL_Test;
 	public String SS_path = WEL_Test.SS_path;
+	/*
+	 * @Author : Vishnu
+	 * 
+	 * @Description : Object repo for create new user and forgot password pages for
+	 * WEL Applications
+	 */
 
 	@FindBy(xpath = "//a[@class='icon-color nav-login']")
 	WebElement StandaloneLogin;
 
-	@FindBy(xpath = "//input[@placeholder='Enter your inbox here']")
-	WebElement Enteryopmail;
-
-	@FindBy(xpath = "//button[@title='Check Inbox @yopmail.com']")
-	WebElement clickonbutton;
+	@FindBy(xpath = "//a[contains(text(),'Create')]")
+	WebElement CreateOne;
 
 	@FindBy(id = "updatePwd.pwd")
 	WebElement NewPasswordField;
-
-	@FindBy(xpath = "(//div[@class='col-3 noPadding orderReviewDetailsValue'])[1]")
-	WebElement FirstProductPriceinReviewPage;
-
-	@FindBy(xpath = "(//div[@class='col-3 noPadding orderReviewDetailsValue'])[2]")
-	WebElement SecondProductPriceinReviewPage;
-
-	@FindBy(xpath = "//span[@class='apply-discount-link']")
-	WebElement ApplyStudentDiscount;
-
-	@FindBy(xpath = "(//p[@class='current-price-link']/a)[2]")
-	WebElement SwitchStudentDsicount;
-
-	@FindBy(xpath = "(//div[@class='col-3 noPadding orderReviewDetailsValue'])[3]")
-	WebElement ThirdProductPriceinReviewPage;
-
-	@FindBy(id = "totalPriceValue")
-	WebElement OrderTotaOnCartPage;
-
-	@FindBy(xpath = "(//main[@class='yscrollbar']/div/div/div/table/tbody/tr/td/center/table/tbody/tr/td)[2]//a[contains(text(),'Reset Password')]")
-	WebElement ResetPasswordLink;
-
-	@FindBy(id = "updatePwd.checkPwd")
-	WebElement ConfirmNewPasswordField;
-
-	@FindBy(xpath = "(//button[@type='button'])[5]")
-	WebElement SubmitButtonInResetPasswordPage;
-
-	@FindBy(xpath = "//div[@class='col-6 noPadding orderDetailTotalVal']")
-	WebElement OrderTotalOnCartPage;
-
-	@FindBy(xpath = "//div[@class='cartPageProductCurrentPrice']")
-	WebElement OrderSubtotalInCartPage;
-
-	@FindBy(xpath = "//p[@class='new-price']")
-	WebElement ProductPriceInPDP;
-
-	@FindBy(xpath = "//p[@class='old-price']")
-	WebElement ProductOldPriceInPDP;
-
-	@FindBy(xpath = "//p[@class='last-price']")
-	WebElement ProductLastPriceForPartner;
-
-	@FindBy(xpath = "//p[@class='your-price']")
-	WebElement PartnerProductPDPPrice;
-
-	@FindBy(xpath = "//div[@id='orderSummaryProductTotalValue']")
-	WebElement PriceOfFirstProductInOrderReview;
-
-	@FindBy(xpath = "//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Taxes')]/following-sibling::div")
-	WebElement TaxInOrderReview;
-
-	@FindBy(xpath = "//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Discount')]/following-sibling::div")
-	WebElement DiscountInOrderReview;
-
-	@FindBy(xpath = "//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Shipping')]/following-sibling::div")
-	WebElement ShippingChargeInOrderReview;
-
-	@FindBy(xpath = "//div[@id='totalPriceValue']")
-	WebElement TotalInOrderReview;
-
-	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']/label")
-	WebElement ShipMethod;
-
-	@FindBy(xpath = "//label[@class='deliveryModeLabel']/span")
-	WebElement ShipValue;
-
-	@FindBy(xpath = "(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
-	WebElement UseSelectedShippingAddressButtonAddressDoctorPopUp;
-
-	@FindBy(xpath = "(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
-	WebElement UseSelectedBillingAddressButtonAddressDoctorPopUp;
-
-	@FindBy(xpath = "(//label[@class='deliveryModeLabel deliveryModeLabelExceptFirst']/span)[1]")
-	WebElement SecondShippingCharge;
-
-	@FindBy(xpath = "(//img[@class='js-responsive-image'])[1]")
-	WebElement WELIconOrderConfirmationPage;
-
-	@FindBy(xpath = "//input[@value='LOG IN']")
-	WebElement LoginButton;
-
-	@FindBy(xpath = "(//span[@id='shoppingCartItemsCountNumber'])[1]")
-	WebElement CartIcon;
-
-	@FindBy(xpath = "//button[contains(text(),'SHOP')]")
-	WebElement ClickShopCourses;
-
-	@FindBy(xpath = "(//div[@class='row banner-position']//div[3]//button)[1]")
-	WebElement Level1TestBank;
-
-	@FindBy(id = "nameOnCard")
-	WebElement CardHolderName;
-
-	@FindBy(xpath = "(//a[@href='/my-account'])[1]")
-	WebElement AccountIconOnCartPage;
-
-	@FindBy(xpath = "//a[contains(text(),'ACCOUNT')]")
-	WebElement AccountIconfFromOrderConfifrmationPage;
-
-	@FindBy(xpath = "(//div[@id='welSiteExceptLogoMainDiv']/div[@class='welGlobalHeaderNavbar'])[1]/span[3]/span/a")
-	WebElement BackToCart;
-
-	@FindBy(id = "removeEntry_0")
-	WebElement RemoveIcon;
-
-	@FindBy(xpath = "//a[contains(text(),'Create')]")
-	WebElement CreateOne;
 
 	@FindBy(id = "register.email")
 	WebElement EmailAddress;
@@ -174,32 +69,107 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//span[@class='welCheckoutContBtnText'])[2]")
 	WebElement CreateAccountButton;
 
-	@FindBy(xpath = "//span[contains(text(),'Save and Continue')]")
-	WebElement SaveContinue;
+	@FindBy(xpath = "//input[@value='LOG IN']")
+	WebElement LoginButton;
 
-	@FindBy(xpath = "//a[@aria-label='account']")
-	WebElement AccountIcon;
+	@FindBy(xpath = "(//main[@class='yscrollbar']/div/div/div/table/tbody/tr/td/center/table/tbody/tr/td)[2]//a[contains(text(),'Reset Password')]")
+	WebElement ResetPasswordLink;
 
-	@FindBy(xpath = "//div[@class='account d-none d-lg-inline-block']")
-	WebElement AccountMyIcon;
+	@FindBy(id = "updatePwd.checkPwd")
+	WebElement ConfirmNewPasswordField;
 
-	@FindBy(id = "address.region")
-	WebElement SelectState;
+	@FindBy(xpath = "(//button[@type='button'])[5]")
+	WebElement SubmitButtonInResetPasswordPage;
 
 	@FindBy(xpath = "//button[contains(text(),'I Accept')]")
 	WebElement AcceptButtonOnWileyWELPrivacyAgreement;
 
+	@FindBy(id = "username")
+	WebElement username;
+
+	@FindBy(id = "password")
+	WebElement passsowrd;
+
+	@FindBy(xpath = "//a[@class='recover-password pull-left checkoutForgotPwdLinkCss']")
+	WebElement StandaloneForgotpwd;
+
+	@FindBy(id = "forgottenPwd.email")
+	WebElement EmailOnForgotPassword;
+
+	@FindBy(xpath = "//button[@data-form_id='forgottenPwdForm']")
+	WebElement SubmitbuttonOnForgotPassword;
+
+	@FindBy(id = "guest.email")
+	WebElement GuestUser;
+
+	@FindBy(xpath = "//div[@id='guestCheckoutRegBtn']//span[@class='welCheckoutContBtnText']")
+	WebElement CreateAccount;
+
+	@FindBy(id = "guest.confemail")
+	WebElement GuestConfinmEmail;
+
+	@FindBy(id = "firstName")
+	WebElement GuestFirstName;
+
+	@FindBy(id = "lastName")
+	WebElement GuestLastName;
+
+	@FindBy(id = "j_username")
+	WebElement LoginUser;
+
+	@FindBy(id = "j_password")
+	WebElement LoginPassword;
+
+	@FindBy(xpath = "//button[@data-form_id='loginForm']")
+	WebElement LoginAndContinue;
+
 	@FindBy(xpath = "//div[@class='left-panel']//li[4]/label[contains(text(),'Sign')]")
 	WebElement SingOut;
 
-	@FindBy(xpath = "//a[contains(text(),'ACCOUNT')]")
-	WebElement AccountText;
+	/*
+	 * @Author : Vishnu
+	 * 
+	 * @Description : Object repo for yop mail Application
+	 */
 
-	@FindBy(xpath = "(//div[@id='newAddressBtnDiv']/button[@id='addNewAddressButton'])")
-	WebElement EnterNewAddressButton;
+	@FindBy(xpath = "//input[@placeholder='Enter your inbox here']")
+	WebElement Enteryopmail;
 
-	@FindBy(xpath = "(//div[@id='newAddressBtnDiv']/button[@id='addNewBillingAddressButton'])")
-	WebElement EnterNewAddressButtonOnBillPage;
+	@FindBy(xpath = "//button[@title='Check Inbox @yopmail.com']")
+	WebElement clickonbutton;
+
+	@FindBy(xpath = "//input[@placeholder='Enter your inbox here']")
+	WebElement EnterEmailIdInYopmail;
+
+	@FindBy(xpath = "//th[contains(text(),'Quantity')]")
+	WebElement QuantityInEmailHeader;
+
+	@FindBy(xpath = "//th[contains(text(),'Price')]")
+	WebElement PriceInEmailHeader;
+
+	@FindBy(xpath = "//th[contains(text(),'Order')]/strong")
+	WebElement OrderIdEmailHeader;
+
+	@FindBy(xpath = "//th[contains(text(),'Total')]")
+	WebElement TotalInEmailHeader;
+
+	@FindBy(xpath = "(//b[contains(text(),'Ship to:')]//parent::div/following-sibling::div)[2]")
+	WebElement AddressLine1ShippingInMail;
+
+	@FindBy(xpath = "(//b[contains(text(),'Ship to:')]//parent::div/following-sibling::div)[4]")
+	WebElement CityStateShippingInMail;
+
+	@FindBy(xpath = "//b[contains(text(),'Card No.')]//parent::div/following-sibling::div")
+	WebElement CardNumberLastFourDigitInMail;
+
+	@FindBy(xpath = "//button[@title='Check Inbox @yopmail.com']")
+	WebElement clickOnCheckInboxButton;
+
+	/*
+	 * @Author : Vishnu
+	 * 
+	 * @Description : Object repo for WEL Products
+	 */
 
 	@FindBy(xpath = "//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[3]")
 	WebElement CIAProduct;
@@ -216,12 +186,6 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='col-xs-12 col-sm-6 package-selection-left-col'])[2]//form//label)[1])")
 	WebElement CIAPrint;
 
-	@FindBy(xpath = "//div[@class='helpButton']")
-	WebElement HelpButton;
-
-	@FindBy(id = "addressSubmit")
-	WebElement SaveAndContinueShippingAddressPage;
-
 	@FindBy(xpath = "//select[@id='quantity_0']")
 	WebElement SelectQuantity;
 
@@ -237,6 +201,247 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//button[contains(text(),'EXPLORE COURSES')])[1]")
 	WebElement CMAExploreCourse;
 
+	@FindBy(xpath = "(//div[@class='container-fluid course-pkg-background']//div[@class='card-footer bg-transparent course-pkg-cards-footer'])[1]//button[contains(text(),'VIEW COURSE OPTIONS')]")
+	WebElement ViewCourseOptions;
+
+	@FindBy(xpath = "(//div[@class='container-fluid course-pkg-background']//div[@class='card-footer bg-transparent course-pkg-cards-footer'])[1]//button")
+	WebElement CPAViewCourse;
+
+	@FindBy(xpath = "(//div[@class='container-fluid course-pkg-background']//div[@class='card-footer bg-transparent course-pkg-cards-footer'])[2]//button")
+	WebElement CFAViewCourse;
+
+	@FindBy(xpath = "(//a[@href='/cfa/products/level-2/platinum-cfa-course/'])[3]")
+	WebElement CFAViewCoursePage;
+
+	@FindBy(xpath = "(//div[@class='btn-group btn-group-toggle'])/label[2]")
+	WebElement CFAeBook;
+
+	@FindBy(xpath = "//div[@class='btn-group btn-group-toggle']/label[2]")
+	WebElement CMAeBook;
+
+	@FindBy(xpath = "//div[@class='btn-group btn-group-toggle']/label[1]")
+	WebElement PrintEbook;
+
+	@FindBy(xpath = "//button[contains(text(),'SHOP')]")
+	WebElement ClickShopCourses;
+
+	@FindBy(xpath = "(//div[@class='row banner-position']//div[3]//button)[1]")
+	WebElement Level1TestBank;
+
+	@FindBy(xpath = "(//div[@class='col-3 noPadding orderReviewDetailsValue'])[1]")
+	WebElement FirstProductPriceinReviewPage;
+
+	@FindBy(xpath = "(//div[@class='col-3 noPadding orderReviewDetailsValue'])[2]")
+	WebElement SecondProductPriceinReviewPage;
+
+	@FindBy(xpath = "//span[@class='apply-discount-link']")
+	WebElement ApplyStudentDiscount;
+
+	@FindBy(xpath = "(//p[@class='current-price-link']/a)[2]")
+	WebElement SwitchStudentDsicount;
+
+	@FindBy(xpath = "(//div[@class='col-3 noPadding orderReviewDetailsValue'])[3]")
+	WebElement ThirdProductPriceinReviewPage;
+
+	@FindBy(id = "totalPriceValue")
+	WebElement OrderTotaOnCartPage;
+
+	@FindBy(xpath = "(//div[@class='col dropdown-item product-dropdown-desktop-item item2']/ul/li/a)[1]")
+	WebElement CPASupplements;
+
+	@FindBy(xpath = "(//div[@class='col dropdown-item product-dropdown-desktop-item item3 break-spaces undefined']/ul/li/a)[1]")
+	WebElement CFASupplements;
+
+	@FindBy(xpath = "(//div[@class='col dropdown-item product-dropdown-desktop-item item1']/ul/li/a)[1]")
+	WebElement CMASupplements;
+
+	@FindBy(xpath = "(//div[@class='col-xs-12 col-sm-4 supplements-cards'])[2]/div/a")
+	WebElement CPASuppelementProduct;
+
+	@FindBy(xpath = "(//div[@class='col-xs-12 col-sm-4 supplements-cards'])[1]/div/a")
+	WebElement CMASupplementProduct;
+
+	@FindBy(xpath = "(//div[@class='col-xs-12 col-sm-4 supplements-cards']/div/a)[1]")
+	WebElement CFASupplementProduct;
+
+	@FindBy(xpath = "//label[contains(text(),'Part 1')]")
+	WebElement Part1InCIAPDP;
+
+	@FindBy(xpath = "//div[@class='container product-categories-container']//div[2]//dd/a[contains(text(),'CMA')]")
+	WebElement DeanDortonCMAProduct;
+
+	@FindBy(xpath = "//div[@class='col dropdown-item product-dropdown-desktop-item item1']//li[2]/a")
+	WebElement CPATestBank;
+
+	@FindBy(xpath = "(//div[@class='row navitem-div-medium navitem-div'])[2]//a")
+	WebElement Productdropdown;
+
+	@FindBy(xpath = "//div[@class='form-group']//input[@id='inputPartnerSearch']")
+	WebElement PartnerInputSearch;
+
+	/*
+	 * @Author : Vishnu
+	 * 
+	 * @Description : Object repo for WEL Credit Card and Paypal, PaypalCredit
+	 * Details
+	 */
+
+	@FindBy(id = "nameOnCard")
+	WebElement CardHolderName;
+
+	@FindBy(id = "number")
+	WebElement CardNumber;
+
+	@FindBy(id = "expiryMonth")
+	WebElement ExpirationDateForMonth;
+
+	@FindBy(id = "expiryYear")
+	WebElement ExpirationDateForYear;
+
+	@FindBy(id = "securityCode")
+	WebElement CVV_Number;
+
+	@FindBy(xpath = "//div[@class='welCheckoutBtnDiv multiPaymentPaypalBtn']/button")
+	WebElement ProccedtoPaypal;
+
+	@FindBy(xpath = "//div[@class='welCheckoutBtnDiv multiPaymentPaypalCreditBtn']/button")
+	WebElement ProceedtoPaypalCredit;
+
+	@FindBy(name = "login_email")
+	WebElement PaypalUsername;
+
+	@FindBy(xpath = "//div[@class='actions']/button[@name='btnNext']")
+	WebElement NextButtonOnPaypalPage;
+
+	@FindBy(name = "login_password")
+	WebElement Paypalpassword;
+
+	@FindBy(xpath = "//div[@class='actions']/button[@name='btnLogin']")
+	WebElement PaypalLoginButton;
+
+	@FindBy(xpath = "//div[@class='CheckoutButton_buttonWrapper_2VloF']/button")
+	WebElement PaypalReviewOrderbutton;
+
+	@FindBy(xpath = "((//div[@class='FundingInstrument_container_16IeJ'])[2]//span)[1]")
+	WebElement PaypalCreditRadioButton;
+
+	@FindBy(xpath = "//div[@id='billingMultiPaymentOptionValues']/ul/li[3]/a/span[@class='billingPaymentMultiNavTitle']")
+	WebElement Paypalpayment;
+
+	@FindBy(xpath = "//div[@id='billingMultiPaymentOptionValues']/ul/li[4]/a/span")
+	WebElement PaypalCredit;
+
+	/*
+	 * @Author : Vishnu
+	 * 
+	 * @Description : Object repo for WEL Shipping Details
+	 */
+
+	@FindBy(id = "address.country")
+	WebElement ShipCountry;
+
+	@FindBy(id = "street1")
+	WebElement AddressLine1;
+
+	@FindBy(id = "address.region")
+	WebElement SelectState;
+
+	@FindBy(id = "line1")
+	WebElement ShipAddressLineOne;
+
+	@FindBy(id = "street2")
+	WebElement AddressLine2;
+
+	@FindBy(id = "postalCode")
+	WebElement PostalCode;
+
+	@FindBy(id = "postcode")
+	WebElement ShipPostcode;
+
+	@FindBy(id = "address.region")
+	WebElement EnterState;
+
+	@FindBy(id = "townCity")
+	WebElement TownCity;
+
+	@FindBy(id = "phone")
+	WebElement ShipPhoneNumber;
+
+	@FindBy(id = "addressSubmit")
+	WebElement ShipSaveAndContinue;
+
+	@FindBy(xpath = "//div[@class='deliveryMethodMainFirstDiv']/label")
+	WebElement ShipMethod;
+
+	@FindBy(xpath = "(//div[@id='shippingSavedAddressShowBtn'])[1]")
+	WebElement showmore;
+
+	@FindBy(xpath = "//label[@class='deliveryModeLabel']/span")
+	WebElement ShipValue;
+
+	@FindBy(xpath = "(//label[@class='deliveryModeLabel deliveryModeLabelExceptFirst']/span)[1]")
+	WebElement SecondShippingCharge;
+
+	@FindBy(xpath = "(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
+	WebElement UseSelectedShippingAddressButtonAddressDoctorPopUp;
+
+	@FindBy(id = "addressSubmit")
+	WebElement SaveAndContinueShippingAddressPage;
+
+	@FindBy(xpath = "//a[@href='/checkout/multi/delivery-address/add/']/span[@class='stepEdit']")
+	WebElement ShippingDetailsEditIcon;
+
+	@FindBy(xpath = "(//button[@class='useThisAddressBtn'])[1]")
+	WebElement UseButton;
+
+	@FindBy(xpath = "//i[contains(text(),'(We cannot ship to PO boxes)')]")
+	WebElement DontShipToPOBox;
+
+	@FindBy(xpath = "//div[@id='savedAddressDiv_6']//div[@id='savedAddressButtonsDiv']/button[1]")
+	WebElement USEbuttonForExistingAddress;
+
+	@FindBy(xpath = "//div[@class='step-head checkoutCompletedStep']//div[@class='edit']/a")
+	WebElement EditIcononShippingPage;
+
+	@FindBy(xpath = "//div[contains(text(),'Next Day Shipping - ')]")
+	WebElement NextDayShipping;
+
+	@FindBy(xpath = "(//div[@class='col-6 noPadding price orderDetailCommonVal'])[3]")
+	WebElement ShippingCharge;
+
+	/*
+	 * @Author : Vishnu
+	 * 
+	 * @Description : Object repo for WEL Billing Details
+	 */
+
+	@FindBy(id = "sameAsBillingLabel")
+	WebElement ShippingBillingSameAddress;
+
+	@FindBy(id = "address.country")
+	WebElement SelectCountryDropDown;
+
+	@FindBy(id = "city")
+	WebElement BillCity;
+
+	@FindBy(id = "phoneNumber")
+	WebElement BillPhoneNumber;
+
+	@FindBy(xpath = "(//div[@id='newAddressBtnDiv']/button[@id='addNewAddressButton'])")
+	WebElement EnterNewAddressButton;
+
+	@FindBy(xpath = "(//div[@id='newAddressBtnDiv']/button[@id='addNewBillingAddressButton'])")
+	WebElement EnterNewAddressButtonOnBillPage;
+
+	@FindBy(xpath = "(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
+	WebElement UseSelectedBillingAddressButtonAddressDoctorPopUp;
+
+	/*
+	 * @Author : Vishnu
+	 * 
+	 * @Description : Object repo for WEL Free-Trial product Details
+	 * 
+	 */
 	@FindBy(xpath = "//button[contains(text(),'FREE TRIAL')]")
 	WebElement FreeTrialButton;
 
@@ -270,116 +475,135 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='progress-bar-outer-box']//p[contains(text(),'almost')]")
 	WebElement CPAFreeTrailConfirmationText;
 
-	@FindBy(id = "addNewAddressButton")
-	WebElement AddNewAddress;
-
-	@FindBy(xpath = "(//div[@class='container-fluid course-pkg-background']//div[@class='card-footer bg-transparent course-pkg-cards-footer'])[1]//button[contains(text(),'VIEW COURSE OPTIONS')]")
-	WebElement ViewCourseOptions;
-
-	@FindBy(xpath = "(//div[@class='container-fluid course-pkg-background']//div[@class='card-footer bg-transparent course-pkg-cards-footer'])[1]//button")
-	WebElement CPAViewCourse;
-
-	@FindBy(xpath = "(//div[@class='container-fluid course-pkg-background']//div[@class='card-footer bg-transparent course-pkg-cards-footer'])[2]//button")
-	WebElement CFAViewCourse;
-
-	@FindBy(xpath = "(//a[@href='/cfa/products/level-2/platinum-cfa-course/'])[3]")
-	WebElement CFAViewCoursePage;
-
-	@FindBy(xpath = "(//div[@class='btn-group btn-group-toggle'])/label[2]")
-	WebElement CFAeBook;
-
-	@FindBy(xpath = "//div[@class='btn-group btn-group-toggle']/label[2]")
-	WebElement CMAeBook;
-
-	@FindBy(xpath = "//div[@class='btn-group btn-group-toggle']/label[1]")
-	WebElement PrintEbook;
-
-	@FindBy(xpath = "//button[contains(text(),'SHOP COURSES')]")
-	WebElement ShopCourses;
-
-	@FindBy(id = "voucher-remove-button_0")
-	WebElement CouponRemove;
-
-	@FindBy(xpath = "//button[@id='cartCheckoutBtn']/span")
-	WebElement CheckOutButtonOnCartPage;
-
-	@FindBy(id = "username")
-	WebElement username;
-
-	@FindBy(id = "password")
-	WebElement passsowrd;
-
 	@FindBy(id = "j_username")
 	WebElement FreeTrailLoginusername;
 
 	@FindBy(id = "j_password")
 	WebElement FreeTrailLoginpasssowrd;
 
-	@FindBy(xpath = "//a[@class='recover-password pull-left checkoutForgotPwdLinkCss']")
-	WebElement StandaloneForgotpwd;
+	@FindBy(xpath = "//div[@class='modal-content']//button")
+	WebElement FreeTrailModelPopUpLogin;
 
-	@FindBy(id = "forgottenPwd.email")
-	WebElement EmailOnForgotPassword;
+	@FindBy(xpath = "//button[@class='button form-button welCheckoutBtn submitWelForm width100']")
+	WebElement FreeTrailSubbmit;
 
-	@FindBy(xpath = "//button[@data-form_id='forgottenPwdForm']")
-	WebElement SubmitbuttonOnForgotPassword;
+	/*
+	 * @Author : Vishnu
+	 * 
+	 * @Description : Object repo for WEL Product details On Order Summary Page
+	 * 
+	 */
 
-	@FindBy(id = "guest.email")
-	WebElement GuestUser;
+	@FindBy(id = "orderSummaryProductTotalValue")
+	WebElement PriceOfFirstProductInOrderReview;
 
-	@FindBy(xpath = "//div[@id='guestCheckoutRegBtn']//span[@class='welCheckoutContBtnText']")
-	WebElement CreateAccount;
+	@FindBy(xpath = "//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Taxes')]/following-sibling::div")
+	WebElement TaxInOrderReview;
 
-	@FindBy(id = "guest.confemail")
-	WebElement GuestConfinmEmail;
+	@FindBy(xpath = "//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Discount')]/following-sibling::div")
+	WebElement DiscountInOrderReview;
 
-	@FindBy(id = "firstName")
-	WebElement GuestFirstName;
+	@FindBy(xpath = "//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Shipping')]/following-sibling::div")
+	WebElement ShippingChargeInOrderReview;
 
-	@FindBy(id = "lastName")
-	WebElement GuestLastName;
+	@FindBy(xpath = "//div[@id='totalPriceValue']")
+	WebElement TotalInOrderReview;
 
-	@FindBy(id = "address.country")
-	WebElement SelectCountryDropDown;
+	@FindBy(xpath = "//div[@class='row taxCalculationDetails orderReviewRightPanel']/"
+			+ "div[@class='col-6 noPadding price orderDetailCommonVal']")
+	WebElement TaxInOrderSummaryTab;
 
-	@FindBy(id = "address.country")
-	WebElement ShipCountry;
+	/*
+	 * @Author : Vishnu
+	 * 
+	 * @Description : Object repo for WEL Product details On PDP Page
+	 * 
+	 */
 
-	@FindBy(id = "street1")
-	WebElement AddressLine1;
+	@FindBy(xpath = "//label[@for='eBook0']")
+	WebElement EBookButtonPDP;
 
-	@FindBy(id = "line1")
-	WebElement ShipAddressLineOne;
+	@FindBy(xpath = "//p[@class='new-price']")
+	WebElement ProductPriceInPDP;
 
-	@FindBy(id = "street2")
-	WebElement AddressLine2;
+	@FindBy(xpath = "//p[@class='old-price']")
+	WebElement ProductOldPriceInPDP;
 
-	@FindBy(id = "postalCode")
-	WebElement PostalCode;
+	@FindBy(xpath = "//p[@class='your-price']")
+	WebElement PartnerProductPDPPrice;
 
-	@FindBy(id = "postcode")
-	WebElement ShipPostcode;
+	@FindBy(xpath = "//button[@type='submit' and @class='add-to-cart-btn  ']")
+	WebElement AddToCartButtonOnPDP;
 
-	@FindBy(id = "city")
-	WebElement BillCity;
+	@FindBy(xpath = "//p[contains(text(),'PACKAGE')]")
+	WebElement PackageButtonOnCIAPDP;
 
-	@FindBy(id = "townCity")
-	WebElement TownCity;
+	@FindBy(xpath = "(//a[@class='cart-link'])[2]")
+	WebElement CartIconOnPDP;
 
-	@FindBy(id = "phoneNumber")
-	WebElement BillPhoneNumber;
+	/*
+	 * @Author : Vishnu
+	 * 
+	 * @Description : Object repo for WEL Product Details Cart Page
+	 * 
+	 */
 
-	@FindBy(id = "phone")
-	WebElement ShipPhoneNumber;
+	@FindBy(xpath = "//div[@class='col-6 noPadding orderDetailTotalVal']")
+	WebElement OrderTotalOnCartPage;
 
-	@FindBy(id = "j_username")
-	WebElement LoginUser;
+	@FindBy(xpath = "//div[@class='cartPageProductCurrentPrice']")
+	WebElement OrderSubtotalInCartPage;
 
-	@FindBy(id = "j_password")
-	WebElement LoginPassword;
+	@FindBy(xpath = "(//span[@id='shoppingCartItemsCountNumber'])[1]")
+	WebElement CartIcon;
 
-	@FindBy(xpath = "//button[@data-form_id='loginForm']")
-	WebElement LoginAndContinue;
+	@FindBy(xpath = "(//div[@id='welSiteExceptLogoMainDiv']/div[@class='welGlobalHeaderNavbar'])[1]/span[3]/span/a")
+	WebElement BackToCart;
+
+	@FindBy(xpath = "//a[@class='subscription-title-link']")
+	WebElement ProductLinkOnCartPage;
+
+	@FindBy(xpath = "(//img[@title='Wiley EL'])[1]")
+	WebElement WELHomePageLogoOnCartPage;
+
+	@FindBy(xpath = "(//a[@href='/my-account'])[1]")
+	WebElement AccountIconOnCartPage;
+
+	@FindBy(xpath = "//button[@id='cartCheckoutBtn']/span")
+	WebElement CheckOutButtonOnCartPage;
+
+	@FindBy(id = "removeEntry_0")
+	WebElement RemoveIcon;
+
+	@FindBy(xpath = "//a[contains(text(),'ACCOUNT')]")
+	WebElement AccountIconfFromOrderConfifrmationPage;
+
+	@FindBy(xpath = "//p[@class='last-price']")
+	WebElement ProductLastPriceForPartner;
+
+	@FindBy(xpath = "//span[contains(text(),'Save and Continue')]")
+	WebElement SaveContinue;
+
+	@FindBy(xpath = "//a[@aria-label='account']")
+	WebElement AccountIcon;
+
+	@FindBy(xpath = "//div[@class='account d-none d-lg-inline-block']")
+	WebElement AccountMyIcon;
+
+	@FindBy(xpath = "//a[contains(text(),'ACCOUNT')]")
+	WebElement AccountText;
+
+	@FindBy(xpath = "//div[@class='helpButton']")
+	WebElement HelpButton;
+
+	@FindBy(id = "addNewAddressButton")
+	WebElement AddNewAddress;
+
+	@FindBy(xpath = "//button[contains(text(),'SHOP COURSES')]")
+	WebElement ShopCourses;
+
+	@FindBy(id = "voucher-remove-button_0")
+	WebElement CouponRemove;
 
 	@FindBy(xpath = "//a[@href='/login/pw/request?t=ch']")
 	WebElement ForgotpwdOnCheckoutPage;
@@ -396,6 +620,9 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//input[@id='discountCodeValue'])[3]")
 	WebElement DiscoutnonCartPage;
 
+	@FindBy(xpath = "//div[@class='row pageMainContainer no-margin']//div[@class='checkout-steps']/a[1]")
+	WebElement StudentVerification;
+
 	@FindBy(id = "discountCodeValue")
 	WebElement ExtraDiscountCode;
 
@@ -411,26 +638,17 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "(//div[@class='simple-responsive-banner-component'])[1]/a")
 	WebElement WELIconOnCheckOutPage;
 
-	@FindBy(id = "addressSubmit")
-	WebElement ShipSaveAndContinue;
-
-	@FindBy(id = "number")
-	WebElement CardNumber;
-
-	@FindBy(id = "expiryMonth")
-	WebElement ExpirationDateForMonth;
-
-	@FindBy(id = "expiryYear")
-	WebElement ExpirationDateForYear;
-
-	@FindBy(id = "securityCode")
-	WebElement CVV_Number;
-
 	@FindBy(id = "paymentBilling")
 	WebElement SaveAndContinueOnCheckOutPage;
 
-	@FindBy(id = "sameAsBillingLabel")
-	WebElement ShippingBillingSameAddress;
+	/*
+	 * @Author : Vishnu
+	 * 
+	 * @Description : Object repo for WEL Order Confirmation Page
+	 * 
+	 */
+	@FindBy(xpath = "(//img[@class='js-responsive-image'])[1]")
+	WebElement WELIconOrderConfirmationPage;
 
 	@FindBy(xpath = "(//button[@id='placeOrder'])[1]")
 	WebElement PlaceOrder;
@@ -447,66 +665,18 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='col-md-5 col-6 noPadding orderReviewTotalPrice']")
 	WebElement OrderTotal;
 
-	@FindBy(xpath = "//div[@class='col-6 noPadding orderDetailTotalVal']")
-	WebElement OrderTotalonCartPage;
-
 	@FindBy(xpath = "(//div[contains(text(),'Shipping')])[2]/following-sibling::div")
 	WebElement ShippingChargeInOrderConfirmation;
-
-	@FindBy(xpath = "(//button[@class='useThisAddressBtn'])[1]")
-	WebElement UseButton;
-
-	@FindBy(xpath = "//div[@class='modal-content']//button")
-	WebElement FreeTrailModelPopUpLogin;
-
-	@FindBy(xpath = "//button[@class='button form-button welCheckoutBtn submitWelForm width100']")
-	WebElement FreeTrailSubbmit;
-
-	@FindBy(id = "address.region")
-	WebElement EnterState;
-
-	@FindBy(xpath = "//div[@class='welCheckoutBtnDiv multiPaymentPaypalBtn']/button")
-	WebElement ProccedtoPaypal;
-
-	@FindBy(xpath = "//div[@class='welCheckoutBtnDiv multiPaymentPaypalCreditBtn']/button")
-	WebElement ProceedtoPaypalCredit;
-
-	@FindBy(name = "login_email")
-	WebElement PaypalUsername;
-
-	@FindBy(xpath = "//div[@class='actions']/button[@name='btnNext']")
-	WebElement NextButtonOnPaypalPage;
-
-	@FindBy(name = "login_password")
-	WebElement Paypalpassword;
-
-	@FindBy(xpath = "//div[@class='actions']/button[@name='btnLogin']")
-	WebElement PaypalLoginButton;
-
-	@FindBy(xpath = "//div[@class='CheckoutButton_buttonWrapper_2VloF']/button")
-	WebElement PaypalReviewOrderbutton;
-
-	@FindBy(xpath = "((//div[@class='FundingInstrument_container_16IeJ'])[2]//span)[1]")
-	WebElement PaypalCreditRadioButton;
-
-	@FindBy(xpath = "//div[@id='billingMultiPaymentOptionValues']/ul/li[3]/a/span[@class='billingPaymentMultiNavTitle']")
-	WebElement Paypalpayment;
-
-	@FindBy(xpath = "//div[@id='billingMultiPaymentOptionValues']/ul/li[4]/a/span")
-	WebElement PaypalCredit;
-
-	@FindBy(xpath = "//i[contains(text(),'(We cannot ship to PO boxes)')]")
-	WebElement DontShipToPOBox;
 
 	@FindBy(xpath = "//div[@class='cart']")
 	WebElement CartIconOnMyAccount;
 
-	@FindBy(xpath = "(//img[@title='Wiley EL'])[1]")
-	WebElement WELHomePageLogoOnCartPage;
-
-	@FindBy(xpath = "//button[@type='submit' and @class='add-to-cart-btn  ']")
-	WebElement AddToCartButtonOnPDP;
-
+	/*
+	 * @Author : Vishnu
+	 * 
+	 * @Description : Object repo for WEL Product Recommendation Page
+	 * 
+	 */
 	@FindBy(id = "recommendTitle")
 	WebElement RecommendationTitle;
 
@@ -519,134 +689,19 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//a[contains(text(),'View Product')]")
 	WebElement ViewProductLinkOnRecommendationTitle;
 
-	@FindBy(xpath = "(//a[@class='cart-link'])[2]")
-	WebElement CartIconOnPDP;
-
-	@FindBy(xpath = "//a[@class='subscription-title-link']")
-	WebElement ProductLinkOnCartPage;
-
-	@FindBy(xpath = "//label[@for='eBook0']")
-	WebElement EBookButtonPDP;
-
 	@FindBy(xpath = "(//p[@class='modal-notice'])[2]")
 	WebElement ErrorModal;
 
 	@FindBy(xpath = "//button[contains(text(),'KEEP SHOPPING')]")
 	WebElement KeepShoppingButtonOnErrorModal;
 
-	@FindBy(xpath = "//p[contains(text(),'PACKAGE')]")
-	WebElement PackageButtonOnCIAPDP;
-
-	@FindBy(xpath = "//div[@class='row pageMainContainer no-margin']//div[@class='checkout-steps']/a[1]")
-	WebElement StudentVerification;
-
-	@FindBy(xpath = "(//div[@id='shippingSavedAddressShowBtn'])[1]")
-	WebElement showmore;
-
-	@FindBy(xpath = "//div[@id='savedAddressDiv_6']//div[@id='savedAddressButtonsDiv']/button[1]")
-	WebElement USEbuttonForExistingAddress;
-
-	@FindBy(xpath = "//div[@class='step-head checkoutCompletedStep']//div[@class='edit']/a")
-	WebElement EditIcononShippingPage;
-
-	@FindBy(xpath = "(//div[@class='row navitem-div-medium navitem-div'])[2]//a")
-	WebElement Productdropdown;
-
-	@FindBy(xpath = "//div[@class='col dropdown-item product-dropdown-desktop-item item1']//li[2]/a")
-	WebElement CPATestBank;
-
-	@FindBy(xpath = "//div[@class='form-group']//input[@id='inputPartnerSearch']")
-	WebElement PartnerInputSearch;
-
-	@FindBy(xpath = "//div[@class='row taxCalculationDetails orderReviewRightPanel']/"
-			+ "div[@class='col-6 noPadding price orderDetailCommonVal']")
-	WebElement TaxInOrderSummaryTab;
-
 	@FindBy(xpath = "//a[@href='/checkout/multi/payment-method/add/']/span[@class='stepEdit']")
 	WebElement PaymentDetailsEditIcon;
-
-	@FindBy(xpath = "//a[@href='/checkout/multi/delivery-address/add/']/span[@class='stepEdit']")
-	WebElement ShippingDetailsEditIcon;
-
-	@FindBy(xpath = "//label[contains(text(),'Part 1')]")
-	WebElement Part1InCIAPDP;
-
-	@FindBy(xpath = "//div[@class='navbar-collapse']/ul/li[3]/a")
-	WebElement ActiavteCodeIcon;
-
-	@FindBy(id = "pin")
-	WebElement PinInput;
-
-	@FindBy(xpath = "//div[@class='pinActivationBodyMainDiv']//button")
-	WebElement ActivateButton;
-
-	@FindBy(xpath = "(//div[@id='standaloneLoginMainDiv']//a)[1]")
-	WebElement CreateAccountForPin;
-
-	@FindBy(xpath = "//form[@id='loginForm']/div[4]/button")
-	WebElement PINLoginButton;
-
-	@FindBy(xpath = "//div[@class='container product-categories-container']//div[2]//dd/a[contains(text(),'CMA')]")
-	WebElement DeanDortonCMAProduct;
-
-	@FindBy(xpath = "//input[@placeholder='Enter your inbox here']")
-	WebElement EnterEmailIdInYopmail;
-
-	@FindBy(xpath = "//button[@title='Check Inbox @yopmail.com']")
-	WebElement clickOnCheckInboxButton;
-
-	@FindBy(xpath = "//th[contains(text(),'Quantity')]")
-	WebElement QuantityInEmailHeader;
-
-	@FindBy(xpath = "//th[contains(text(),'Price')]")
-	WebElement PriceInEmailHeader;
-
-	@FindBy(xpath = "//th[contains(text(),'Order')]/strong")
-	WebElement OrderIdEmailHeader;
-
-	@FindBy(xpath = "//th[contains(text(),'Total')]")
-	WebElement TotalInEmailHeader;
-
-	@FindBy(xpath = "(//b[contains(text(),'Ship to:')]//parent::div/following-sibling::div)[2]")
-	WebElement AddressLine1ShippingInMail;
-
-	@FindBy(xpath = "(//b[contains(text(),'Ship to:')]//parent::div/following-sibling::div)[4]")
-	WebElement CityStateShippingInMail;
-
-	@FindBy(xpath = "//b[contains(text(),'Card No.')]//parent::div/following-sibling::div")
-	WebElement CardNumberLastFourDigitInMail;
-
-	@FindBy(xpath = "//div[contains(text(),'Next Day Shipping - ')]")
-	WebElement NextDayShipping;
-
-	@FindBy(xpath = "(//div[@class='col dropdown-item product-dropdown-desktop-item item2']/ul/li/a)[1]")
-	WebElement CPASupplements;
-
-	@FindBy(xpath = "(//div[@class='col dropdown-item product-dropdown-desktop-item item3 break-spaces undefined']/ul/li/a)[1]")
-	WebElement CFASupplements;
-
-	@FindBy(xpath = "(//div[@class='col dropdown-item product-dropdown-desktop-item item1']/ul/li/a)[1]")
-	WebElement CMASupplements;
-
-	@FindBy(xpath = "(//div[@class='col-xs-12 col-sm-4 supplements-cards'])[2]/div/a")
-	WebElement CPASuppelementProduct;
-
-	@FindBy(xpath = "(//div[@class='col-xs-12 col-sm-4 supplements-cards'])[1]/div/a")
-	WebElement CMASupplementProduct;
-
-	@FindBy(xpath = "(//div[@class='col-xs-12 col-sm-4 supplements-cards']/div/a)[1]")
-	WebElement CFASupplementProduct;
-
-	@FindBy(xpath = "(//div[@class='col-6 noPadding price orderDetailCommonVal'])[3]")
-	WebElement ShippingCharge;
-
-	@FindBy(xpath = "(//div[@class='sc-AxjAm bcMPWx my-accounts-header']//ul/li)[3]")
-	WebElement ActivatePIN;
 
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description: This method is used enter username on Login page
+	 * @Description: Method to enter username on Login page
 	 */
 	public void EnterUserNameOnLoginPage(String UserName) throws IOException {
 		try {
@@ -663,8 +718,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description: This method is used to Enter the free trial user name on login
-	 * page
+	 * @Description: Method to Enter the free trial user name on login page
 	 */
 	public void EnterFreeTrailUserNameOnLoginPage(String UserName) throws IOException {
 		try {
@@ -681,7 +735,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description: This method is used to enter the Password on Login Page
+	 * @Description: Method to enter the Password on Login Page
 	 */
 	public void EnterPasswordOnLoginPage(String Password) throws IOException {
 		try {
@@ -698,7 +752,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description: This method is used to enter thr password on Free Trial Form
+	 * @Description: Method to enter the password on Free Trial Form
 	 */
 	public void EnterFreeTrailPasswordOnLoginPage(String Password) throws IOException {
 		try {
@@ -715,7 +769,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description: This method is used to click on Login Button
+	 * @Description: Method to click on Login Button
 	 */
 	public void ClickingOnLoginButton() throws IOException {
 		try {
@@ -732,7 +786,8 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description: This method is used to click on Save and Continue button on Shipping Address section
+	 * @Description: Method to click on Save and Continue button on Shipping Address
+	 * section
 	 */
 	public void ShipSaveAndContinueButton() throws IOException {
 		try {
@@ -750,7 +805,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to uncheck the Shipping and Billing Address page
 	 */
 	public void ShipAndBillAddressSection() throws IOException {
 		try {
@@ -769,7 +824,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to Click on Save and Continue button
 	 */
 	public void SaveAndContinueCheckOut() throws IOException {
 		try {
@@ -787,7 +842,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Create one link on login page
 	 */
 	public void ClickOnCreateOne() throws IOException {
 		try {
@@ -805,7 +860,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the email ID iN cREATE Account Form
 	 */
 	public String enterEmailIdInCreateAccountForm() throws IOException {
 		try {
@@ -825,7 +880,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the confirm email Id on Create Account form
 	 */
 	public void confirmEmailIdInCreateAccountForm(String emailId) throws IOException {
 		try {
@@ -843,7 +898,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the first name
 	 */
 	public void EnterFirstName(String Fname) throws IOException {
 		try {
@@ -861,7 +916,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the last name
 	 */
 	public void EnterLastName(String Lname) throws IOException {
 		try {
@@ -878,7 +933,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the password
 	 */
 	public void EnterPassword(String password) throws IOException {
 		try {
@@ -895,7 +950,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select the checkbox for Terms and Conditions
 	 */
 	public void ClickonTermsCheckBox() throws IOException {
 		try {
@@ -913,7 +968,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select the check box for Agreement
 	 */
 	public void ClickonAgreementCheckBox() throws IOException {
 		try {
@@ -931,7 +986,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Create Account button Create Account form
 	 */
 	public void ClickingOnCreateAccoutButton() throws IOException {
 		try {
@@ -949,7 +1004,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Save And Continue Button
 	 */
 	public void ClickingOnSaveAndContinue() throws IOException {
 		try {
@@ -967,7 +1022,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to verify checking the account Text after login page
 	 */
 	public boolean CheckAccountTextAftreLogin() throws IOException {
 		try {
@@ -987,7 +1042,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on CIA Product
 	 */
 	public void ClickonCIAProduct() throws IOException {
 
@@ -1007,7 +1062,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on CMA Product
 	 */
 	public void ClickonCMAProduct() throws IOException {
 
@@ -1027,7 +1082,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click CPAProduct
 	 */
 
 	public void ClickonCPAProduct() throws IOException {
@@ -1047,7 +1102,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on CFA Product
 	 */
 
 	public void ClickonCFAProduct() throws IOException {
@@ -1067,7 +1122,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on ViewCourse for CMA Product
 	 */
 
 	public void ClickonViewCourseForCMAProduct() throws IOException {
@@ -1088,7 +1143,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on View Course for CPA Product
 	 */
 
 	public void ClickonViewCourseForCPAProduct() throws IOException {
@@ -1109,7 +1164,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click View Course for CFA Product
 	 */
 
 	public void ClickonViewCourseForCFAProduct() throws IOException {
@@ -1130,7 +1185,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on View Course Link for CFA Product
 	 */
 
 	public void ClickonViewCourseLinkForCFAProduct() throws IOException {
@@ -1151,7 +1206,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Explore Course for CMA Product
 	 */
 
 	public void ClickonExploreCourseCMAProduct() throws IOException {
@@ -1172,7 +1227,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on CMA eBook
 	 */
 
 	public void ClickonCMAeBook() throws IOException {
@@ -1193,7 +1248,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Click on CMA PrinteBook
 	 */
 
 	public void ClickonCMAPrinteBook() throws IOException {
@@ -1214,7 +1269,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Shop Course
 	 */
 
 	public void ClickonShopCourse() throws IOException {
@@ -1233,7 +1288,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click Remove Coupon from Cart Page
 	 */
 
 	public void ClickonCouponRemove() throws IOException {
@@ -1251,7 +1306,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on check Out on Cart Page
 	 */
 
 	public void ClickonCheckOutOnCartPage() throws IOException {
@@ -3617,86 +3672,6 @@ public class app_WEL_Repo {
 	 * 
 	 * @Description:
 	 */
-	public void ClickOnActiacteCodeIcon() throws IOException {
-		try {
-			ActiavteCodeIcon.click();
-			Reporting.updateTestReport("ActivateCode Icon was clicked successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click on ActivateCode" + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
-
-	/*
-	 * @Author:Vishnu
-	 * 
-	 * @Description:
-	 */
-	public void EnterPinOnInputField(String pin) throws IOException {
-		try {
-			PinInput.sendKeys(pin);
-			Reporting.updateTestReport("PIN was entered successfully", CaptureScreenshot.getScreenshot(SS_path),
-					StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to enter the PIN" + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
-
-	/*
-	 * @Author:Vishnu
-	 * 
-	 * @Description:
-	 */
-	public void ClickOnActivateButton() throws IOException {
-		try {
-			ActivateButton.click();
-			Reporting.updateTestReport("Activate  button was clicked successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click on Activate button" + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
-
-	/*
-	 * @Author:Vishnu
-	 * 
-	 * @Description:
-	 */
-	public void ClickOnPINLoginButton() throws IOException {
-		try {
-			PINLoginButton.click();
-			Reporting.updateTestReport("Login  button was clicked successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click on Login button" + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
-
-	/*
-	 * @Author:Vishnu
-	 * 
-	 * @Description:
-	 */
-	public void ClickOnCreateNewAccountForPIN() throws IOException {
-		try {
-			CreateAccountForPin.click();
-			Reporting.updateTestReport("CreateNewAccount Link was clicked successfully",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click CreateNewAccount Link" + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
-
-	/*
-	 * @Author:Vishnu
-	 * 
-	 * @Description:
-	 */
 	public void ClickOnDeanDortonCMAProduct() throws IOException {
 		try {
 			DeanDortonCMAProduct.click();
@@ -3704,38 +3679,6 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("Failed to click on  DeanDorton CMPA product" + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
-
-	/*
-	 * @Author:Vishnu
-	 * 
-	 * @Description:
-	 */
-	public void EntePINUserName(String username) throws IOException {
-		try {
-			LoginUser.sendKeys(username);
-			Reporting.updateTestReport("UserName was entered successfully", CaptureScreenshot.getScreenshot(SS_path),
-					StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to enter the UserName" + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
-
-	/*
-	 * @Author:Vishnu
-	 * 
-	 * @Description:
-	 */
-	public void EntePINPassword(String password) throws IOException {
-		try {
-			LoginPassword.sendKeys(password);
-			Reporting.updateTestReport("Password was entered successfully", CaptureScreenshot.getScreenshot(SS_path),
-					StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to enter the UserName" + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}

@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [PPE_Regression]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="EdgeTest(failed)">
-    <parameter name="browser" value="Edge"/>
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Test_Suite.AGS_Test_Suite">
+      <class name="Test_Suite.WEL_Test_Suite">
         <methods>
-          <include name="nameAfter"/>
-          <include name="nameBefore"/>
-          <include name="initiate"/>
-          <include name="CloseBrowser"/>
           <include name="initializeRepo"/>
-          <include name="TC01_Anonymous_User_Registration"/>
+          <include name="CloseBrowser"/>
+          <include name="initiate"/>
+          <include name="nameBefore"/>
+          <include name="TC01_Standalone_UserRegistration"/>
+          <include name="nameAfter"/>
         </methods>
-      </class> <!-- Test_Suite.AGS_Test_Suite -->
+      </class> <!-- Test_Suite.WEL_Test_Suite -->
     </classes>
-  </test> <!-- EdgeTest(failed) -->
-</suite> <!-- Failed suite [PPE_Regression] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

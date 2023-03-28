@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,9 +16,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import Test_Suite.Vet_Test_Suite;
-import Test_Suite.Wiley_NA_Cart_Test_Suite;
 import Test_Suite.Wiley_NA_Cart_Test_Suite;
 import utilities.CaptureScreenshot;
 import utilities.DriverModule;
@@ -34,108 +30,17 @@ public class app_Wiley_Repo {
 
 	WebDriver driver;
 
+	//View cart pop up and Cart page  
+	
 	@FindBy(xpath = "//button[contains(text(),'View Cart')]")
 	WebElement ViewCartButton;
 
 	@FindBy(xpath = "(//span[contains(text(),'Proceed to Checkout')])[2]")
 	WebElement ProceedToCheckoutButton;
-
-	@FindBy(xpath = "//span[contains(text(),'Save and Continue')]")
-	WebElement SaveAndContinueButton;
-
-	@FindBy(xpath = "//select[@id='address.country']")
-	WebElement SelectCountryDropDown;
-
-	@FindBy(xpath = "(//input[@id='postcode'])[1]")
-	WebElement ShippingZIPCode;
-
-	@FindBy(xpath = "(//input[@id='townCity'])[1]")
-	WebElement ShippingCity;
-
-	@FindBy(xpath = "(//input[@id='address.region'])[1]")
-	WebElement SelectStateDropDown;
-
-	@FindBy(xpath = "(//input[@name='deliveryMode'])[2]")
-	WebElement ShippingMethod;
-
-	@FindBy(xpath = "//select[@id='expiryMonth']")
-	WebElement ExpirationDateForMonth;
-
-	@FindBy(xpath = "//select[@id='expiryYear']")
-	WebElement ExpirationDateForYear;
-
-	@FindBy(xpath = "//input[@id='securityCode']")
-	WebElement CVV_Number;
-
-	@FindBy(xpath = "//button[@id='placeOrder']")
-	WebElement Place_OrderButton;
-
-	@FindBy(xpath = "(//div[@class='products-list']//section//div//a//img)//following::div//h3//a")
-	WebElement SRP_WileyProduct;
-
-	@FindBy(xpath = "//input[@id='j_username']")
-	WebElement ExistingWileyUserMailID;
-
-	@FindBy(xpath = "//input[@id='j_password']")
-	WebElement ExistingWileyUserPassword;
-
-	@FindBy(xpath = "//span[contains(text(),'Log In & Continue')]")
-	WebElement LogInAndContinueButton;
-
+	
 	@FindBy(xpath = "//select[@class='cartItemBookQty']")
 	WebElement QuantityDropDown;
-
-	@FindBy(xpath = "(//span[contains(text(),'Use')])[2]")
-	WebElement USEOptionForExistingAddress;
-
-	@FindBy(xpath = "((//div[contains(text(),'Total')])//following::div)[1]")
-	WebElement OrderTotalAmount;
-
-	@FindBy(xpath = "//button[@id='yesBtn']")
-	WebElement YesBtnForSchoolInfo;
-
-	@FindBy(xpath = "//select[@id='region']")
-	WebElement StateDropDownForSchoolInfo;
-
-	@FindBy(xpath = "//select[@id='school']")
-	WebElement SchoolDropDown;
-
-	/*
-	 * @Author:Vishnu
-	 */
-
-	@FindBy(xpath = "//a[@href='/en-us/Job+Ready+Java-p-00099153']")
-	WebElement jobreadyjava;
-
-	@FindBy(xpath = "//input[@id='number']")
-	WebElement CardNumber;
-
-
-
-	/*
-	 * @FindBy(xpath = "//button[@id='placeOrder']") WebElement placeorder;
-	 */
-	@FindBy(xpath = "//button[@class='button button-main large shipping-button-group']")
-	WebElement EnterNewAddress;
-	@FindBy(xpath = "(//div[@class='orderConfirmationLabelVal textTransCap marginTop10'])[2]")
-	WebElement OrderId;
-
-
-	@FindBy(xpath = "(((//div[contains(text(),'Shipping')])[2])//following::div)[1]")
-	WebElement Shippingcharge;
-
-	@FindBy(xpath = "(//input[@name='purchasedProduct'])[1]")
-	WebElement EbookRental;
-
-	@FindBy(xpath = "//button[@class='btn schoolNoBtn']")
-	WebElement SchoolInfo;
-
-	@FindBy(xpath = "(//div[@class='productButtonGroupName'])[2]")
-	WebElement PrintProduct;
-
-	@FindBy(xpath = "(//span[@class='typeOfProductSpan'])[4]")
-	WebElement SelectingTextbookRental;
-
+	
 	@FindBy(xpath = "//span[@id='promoCodeLink']")
 	WebElement PromoCodeLink;
 
@@ -144,178 +49,7 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath = "//span[@class='cartDiscountBtnText']")
 	WebElement ApplyPromoButton;
-
-
-
-	// Footer Page
-	@FindBy(xpath = "//span[contains(text(),'Site M')]")
-	WebElement SiteMap;
-
-
-
-	@FindBy(xpath = "//span[contains(text(),'Rights & Permissions')]")
-	WebElement RightsAndPermissions;
-
-	@FindBy(xpath = "//span[contains(text(),'Privacy Policy')]")
-	WebElement PrivacyPolicy;
-
-	@FindBy(xpath = "//span[contains(text(),'Terms of Use')]")
-	WebElement TermsofUse;
-
-	// PDP Page
-	@FindBy(xpath = "//a[@href='/sitemap']")
-	WebElement SitemapPdpPage;
-	@FindBy(xpath = "//a[@href='/permissions']")
-	WebElement PermissionsonPdpPage;
-	@FindBy(xpath = "//a[@href='/privacy']")
-	WebElement PrivacyonPdpPage;
-	@FindBy(xpath = "//a[@href='/terms-of-use']")
-	WebElement TermsofUseonPdpPage;
-	@FindBy(xpath = "(//a[@class='area-name'])[4]")
-	WebElement EducationalResources;
-	@FindBy(xpath = "//input[@id='searchbar']")
-	WebElement SearchbarHomepage;
-
-	@FindBy(xpath = "(//a[@href='/about'])[2]")
-	WebElement AboutWiley;
-
-	@FindBy(xpath = "//a[contains(text(),'PRODUCTS')]")
-	WebElement PlpProducts;
-
-	@FindBy(xpath = "//a[contains(text(),'CONTENT')]")
-	WebElement PlpContectText;
-
-	@FindBy(xpath="(//div[@class='facet-list facets-panel-list js-facet-list '])[3]//span[@class='facet-text']")
-	WebElement Facettext;
-
-	@FindBy(xpath = "//span[@class='search-highlight']")
-	WebElement VetConsultText;
-	@FindBy(xpath = "//span[@class='glyphicon glyphicon-chevron-right']")
-	WebElement ClickingOnVetSoultIcon;
-
-	@FindBy(xpath = "(//a[contains(text(),'Shop')])[2]")
-	WebElement ShopLinkCLPPage;
-
-	@FindBy(xpath = "(//a[@class='link-corner'])[1]")
-	WebElement ViewAllOnCLPPage;
-
-	@FindBy(xpath = "//form[@id='sortForm']")
-	WebElement ClickonSortBy;
-	@FindBy(xpath = "(//header[@class='wiley-product-list-component-header']/h1)[1]")
-	WebElement FeaturedProducts;
-	@FindBy(xpath = "(//header[@class='wiley-product-list-component-header']/h1)[2]")
-	WebElement RecentlyReleasesProducts;
-	@FindBy(xpath = "(//header[@class='wiley-product-list-component-header']/h1)[3]")
-	WebElement UpcomingProducts;
-
-	@FindBy(xpath = "//div[@class='content cke-content']/h1[contains(text(),'Page')]")
-	WebElement PagenotFoundErrortext;
-
-	@FindBy(xpath = "//a[@href='/']/img[@class='brand-logo']")
-	WebElement HomePageLogo;
-
-	@FindBy(xpath = "//a[@class='see-all-results']")
-	WebElement SearchAllResults;
-
-	//Anindita
-
-	@FindBy(xpath = "//input[@id='searchbar']")
-	WebElement HomePageSearchBar;
-	@FindBy(xpath = "//input[@id='search-bar']")
-	WebElement CartPageSearchBar;
-	@FindBy(xpath = "//i[@class='wl-search-bar__icon']")
-	WebElement SearchBarIconHomePage;
-
-	@FindBy(xpath="//button[text()='Add to cart']")
-	WebElement AddToCartButton;
-	@FindBy(xpath="//div[@class='productButtonGroupName' and text()='Print']")
-	WebElement PrintTab;
-
-	/*
-	 * @FindBy(
-	 * xpath="(//div[@id='checkoutButtonDiv']/button/span[text()='Proceed to Checkout'])[2]"
-	 * ) WebElement ProceedToCheckOutButton;
-	 */
-	@FindBy(xpath="//input[@id='email']")
-	WebElement EmailIdInCreateAccount;
-	@FindBy(xpath="//button/span[text()='CREATE AN ACCOUNT']")
-	WebElement CreateAccountButton;
-	@FindBy(xpath="//input[@data-input_description='confirmemail']")
-	WebElement ConfirmEmailId;
-	@FindBy(xpath="//input[@id='pwd']")
-	WebElement PasswordInCreateAccount;
-
-	@FindBy(xpath="//input[@id='nameOnCard']")
-	WebElement CardHolderName;
-
-
-
-	@FindBy(xpath="//input[@id='firstName']")
-	WebElement AddressFirstName;
-	@FindBy(xpath="//input[@id='lastName']")
-	WebElement AddressLastName;
-
-
-	@FindBy(xpath="//input[@id='street1']")
-	WebElement BillingAddressLine1;
-	@FindBy(xpath="//input[@id='city']")
-	WebElement CityBilling;
-
-
-	@FindBy(xpath="//input[@id='postalCode']")
-	WebElement BillingZipCode;
-	@FindBy(xpath="//input[@id='phoneNumber']")
-	WebElement BillingPhoneNumber;
-
-	@FindBy(xpath="(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
-	WebElement UseSelectedBillingAddressButtonAddressDoctorPopUp;
-	/*
-	 * @FindBy(xpath="//button[@id='placeOrder']") WebElement PlaceOrderButton;
-	 */
-	@FindBy(xpath="//span[text()='Thank you for your Order']")
-	WebElement ThankYouText;
-
-	@FindBy(xpath="(//div[contains(text(),'Taxes')]//following::div)[1] ")
-	WebElement TotalTax;
-	@FindBy(xpath="//button[@class='btn btn-basic checkout-as-guest-btn width488 wileyCommonBtn guestCreateAccountBtn submitWelForm']")
-	WebElement ContinueAsGuestButton;
-	@FindBy(xpath="//input[@id='line1']")
-	WebElement ShippingAddressLine1;
-
-
-	@FindBy(xpath="//input[@id='phone']")
-	WebElement ShippingPhoneNumber;
-
-	@FindBy(xpath="(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
-	WebElement UseSelectedShippingAddressButtonAddressDoctorPopUp;
-
-	@FindBy(xpath="//label[@id='termsCondsCheckbox']")
-	WebElement TermsAndConditionCheckBox;
-
-	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Taxes:')]/following-sibling::div")
-	WebElement TaxInOrderReview;
-
-	@FindBy(xpath="(//span[@class='glyphicon glyphicon-pencil editIcon'])[2]")
-	WebElement EditButtonInBilling;
-
-	@FindBy(xpath="//div[@class='modal-content']")
-	WebElement CountryRestrictionModal;
-
-	@FindBy(xpath="(//span[@id='deliveryMethodMessage'])[2]/div/h5")
-	WebElement PODMessage;
-
-	@FindBy(xpath="//div[@class='applied-facets']/div[@class='facets-panel-item']/span[text()='RGuroo']")
-	WebElement RGurooFacet;
-
-	@FindBy(xpath="//div[@id='billingMultiPaymentTitle']")
-	WebElement PaymentMethodText;
-
-	@FindBy(xpath="//a[@id='shoppingCartIcon']")
-	WebElement ShoppingCartIconUAT3;
-
-	@FindBy(xpath="//h5[@id='shippingAddressTitle']/span[text()='Shipping Address']")
-	WebElement ShippingStepText;
-
+	
 	@FindBy(xpath="//ul[@class='menu']/li[@class='nav-btn']/a[text()='Shop ']")
 	WebElement ShopLinkInCartPageHeader;
 
@@ -337,10 +71,332 @@ public class app_Wiley_Repo {
 	@FindBy(xpath="//ul[@id='breadcrumbStyle']")
 	WebElement BreadCrumbCartPage;
 	
+	@FindBy(xpath = "//input[@id='search-bar']")
+	WebElement CartPageSearchBar;
+
+	// Shipping information during checkout 
+	
+	@FindBy(xpath="//input[@id='firstName']")
+	WebElement AddressFirstName;
+	
+	@FindBy(xpath="//input[@id='lastName']")
+	WebElement AddressLastName;
+	
+	@FindBy(xpath = "//select[@id='address.country']")
+	WebElement SelectCountryDropDown;
+
+	@FindBy(xpath = "(//input[@id='postcode'])[1]")
+	WebElement ShippingZIPCode;
+
+	@FindBy(xpath = "(//input[@id='townCity'])[1]")
+	WebElement ShippingCity;
+
+	@FindBy(xpath = "(//input[@id='address.region'])[1]")
+	WebElement SelectStateDropDown;
+
+	@FindBy(xpath = "(//input[@name='deliveryMode'])[2]")
+	WebElement ShippingMethod;
+	
+	@FindBy(xpath="//input[@id='line1']")
+	WebElement ShippingAddressLine1;
+
+	@FindBy(xpath="//input[@id='phone']")
+	WebElement ShippingPhoneNumber;
+
+	@FindBy(xpath="(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
+	WebElement UseSelectedShippingAddressButtonAddressDoctorPopUp;
+	
+	@FindBy(xpath = "(//span[contains(text(),'Use')])[2]")
+	WebElement USEOptionForExistingAddress;
+	
+	@FindBy(xpath = "//button[@class='button button-main large shipping-button-group']")
+	WebElement EnterNewAddress;
+	
+	@FindBy(xpath = "//span[contains(text(),'Save and Continue')]")
+	WebElement SaveAndContinueButton;
+	
+	@FindBy(xpath="//div[@class='modal-content']")
+	WebElement CountryRestrictionModal;
+
+	@FindBy(xpath="(//span[@id='deliveryMethodMessage'])[2]/div/h5")
+	WebElement PODMessage;
+	
+	@FindBy(xpath="//h5[@id='shippingAddressTitle']/span[text()='Shipping Address']")
+	WebElement ShippingStepText;
+
+	//Card information in billing step during checkout
+	
+	@FindBy(xpath = "//select[@id='expiryMonth']")
+	WebElement ExpirationDateForMonth;
+
+	@FindBy(xpath = "//select[@id='expiryYear']")
+	WebElement ExpirationDateForYear;
+
+	@FindBy(xpath = "//input[@id='securityCode']")
+	WebElement CVV_Number;
+	
+	@FindBy(xpath = "//input[@id='number']")
+	WebElement CardNumber;
+
+	@FindBy(xpath = "//button[@id='placeOrder']")
+	WebElement Place_OrderButton;
+	
+	@FindBy(xpath="//input[@id='nameOnCard']")
+	WebElement CardHolderName;
+	
+	// Login or Create Account page during checkout
+
+	@FindBy(xpath = "//input[@id='j_username']")
+	WebElement ExistingWileyUserMailID;
+
+	@FindBy(xpath = "//input[@id='j_password']")
+	WebElement ExistingWileyUserPassword;
+
+	@FindBy(xpath = "//span[contains(text(),'Log In & Continue')]")
+	WebElement LogInAndContinueButton;
+	
+	@FindBy(xpath="//input[@id='email']")
+	WebElement EmailIdInCreateAccount;
+	
+	@FindBy(xpath="//button/span[text()='CREATE AN ACCOUNT']")
+	WebElement CreateAccountButton;
+	
+	@FindBy(xpath="//input[@data-input_description='confirmemail']")
+	WebElement ConfirmEmailId;
+	
+	@FindBy(xpath="//input[@id='pwd']")
+	WebElement PasswordInCreateAccount;
+	
+	@FindBy(xpath="//div[@class='guestCreateAccountBtnDiv']/button/span[text()='Continue as Guest']")
+	WebElement GuestCheckoutButton;
+
+	@FindBy(xpath="//span[text()='! An account already exists for this email address. Please log in.']")
+	WebElement ErrorMessageAfterEnteringExistingUserInCreateAccount;
+
+	@FindBy(xpath="//form[@id='loginForm']/div[@class='form-cell has-error errorMessage']")
+	WebElement ErrorMessageAfterEnteringWrongPassword;
+	
+	//School Information during checkout
+
+	@FindBy(xpath = "//button[@id='yesBtn']")
+	WebElement YesBtnForSchoolInfo;
+
+	@FindBy(xpath = "//select[@id='region']")
+	WebElement StateDropDownForSchoolInfo;
+
+	@FindBy(xpath = "//select[@id='school']")
+	WebElement SchoolDropDown;
+	
+	@FindBy(xpath = "//button[@class='btn schoolNoBtn']")
+	WebElement SchoolInfo;
+	
+	//Order confirmation page
+	
+	@FindBy(xpath = "(//div[@class='orderConfirmationLabelVal textTransCap marginTop10'])[2]")
+	WebElement OrderId;
+
+	@FindBy(xpath = "(((//div[contains(text(),'Shipping')])[2])//following::div)[1]")
+	WebElement Shippingcharge;
+	
+	@FindBy(xpath = "((//div[contains(text(),'Total')])//following::div)[1]")
+	WebElement OrderTotalAmount;
+	
+	@FindBy(xpath="//span[text()='Thank you for your Order']")
+	WebElement ThankYouText;
+
+	@FindBy(xpath="(//div[contains(text(),'Taxes')]//following::div)[1] ")
+	WebElement TotalTax;
+	
+	@FindBy(xpath="//a[@class='icon-print']/span[@class='glyphicon glyphicon-print']")
+	WebElement PrintRecieptIconInOrderConfirmation;
+	
+	//Product details page tabs for selecting variants
+
+	@FindBy(xpath = "(//input[@name='purchasedProduct'])[1]")
+	WebElement EbookRental;
+
+	@FindBy(xpath = "(//div[@class='productButtonGroupName'])[2]")
+	WebElement PrintProduct;
+
+	@FindBy(xpath = "(//span[@class='typeOfProductSpan'])[4]")
+	WebElement SelectingTextbookRental;
+	
+	@FindBy(xpath="//button[text()='Add to cart']")
+	WebElement AddToCartButton;
+	
+	@FindBy(xpath="//div[@class='productButtonGroupName' and text()='Print']")
+	WebElement PrintTab;
+	
+	@FindBy(xpath="//a[contains(text(),'Request Digital Evaluation Copy')]")
+	WebElement RequestDigitalEvaluationCopyLink;
+	
+	@FindBy(xpath="//i[@aria-label='Purchase option description']")
+	WebElement GenericHoverInfo;
+
+	// Footer Page
+	@FindBy(xpath = "//span[contains(text(),'Site M')]")
+	WebElement SiteMap;
+
+	@FindBy(xpath = "//span[contains(text(),'Rights & Permissions')]")
+	WebElement RightsAndPermissions;
+
+	@FindBy(xpath = "//span[contains(text(),'Privacy Policy')]")
+	WebElement PrivacyPolicy;
+
+	@FindBy(xpath = "//span[contains(text(),'Terms of Use')]")
+	WebElement TermsofUse;
+
+	// Product details page and product listing Page
+	
+	@FindBy(xpath = "//a[@href='/sitemap']")
+	WebElement SitemapPdpPage;
+	
+	@FindBy(xpath = "//a[@href='/permissions']")
+	WebElement PermissionsonPdpPage;
+	
+	@FindBy(xpath = "//a[@href='/privacy']")
+	WebElement PrivacyonPdpPage;
+	
+	@FindBy(xpath = "//a[@href='/terms-of-use']")
+	WebElement TermsofUseonPdpPage;
+	
+	@FindBy(xpath = "(//a[@class='area-name'])[4]")
+	WebElement EducationalResources;
+	
+	@FindBy(xpath = "//input[@id='searchbar']")
+	WebElement SearchbarHomepage;
+
+	@FindBy(xpath = "(//a[@href='/about'])[2]")
+	WebElement AboutWiley;
+
+	@FindBy(xpath = "//a[contains(text(),'PRODUCTS')]")
+	WebElement PlpProducts;
+
+	@FindBy(xpath = "//a[contains(text(),'CONTENT')]")
+	WebElement PlpContectText;
+	
+	//Search Result Page
+	
+	@FindBy(xpath = "(//div[@class='products-list']//section//div//a//img)//following::div//h3//a")
+	WebElement SRP_WileyProduct;
+	
+	@FindBy(xpath = "//a[@class='see-all-results']")
+	WebElement SearchAllResults;
+	
+	@FindBy(xpath="//h3[contains(text(),'FORMAT')]")
+	WebElement FormatFacet;
+
+	@FindBy(xpath="//span[contains(text(),'VetConsult')]")
+	WebElement VetConsultUnderFormatFacet;
+
+	@FindBy(xpath="//h3[contains(text(),'SUBJECT')]")
+	WebElement SubjectFacet;
+
+	@FindBy(xpath="//h3[contains(text(),'COURSE')]")
+	WebElement CourseFacet;
+
+	@FindBy(xpath="//h3[contains(text(),'AUTHOR')]")
+	WebElement AuthorFacet;
+
+	@FindBy(xpath="//h3[contains(text(),'PUBLISHED DATE')]")
+	WebElement PublishedDateFacet;
+
+	@FindBy(xpath="//h3[contains(text(),'BRANDS')]")
+	WebElement BrandsFacet;
+
+	@FindBy(xpath="//h3[contains(text(),'SERIES')]")
+	WebElement SeriesFacet;
+
+	@FindBy(xpath="(//span[@class='search-highlight'])[1]")
+	WebElement HighlightedSearchedTerm;
+
+	@FindBy(xpath="//div[@class='wileyProductPriceFormate']")
+	WebElement PriceInSRP;
+
+	@FindBy(xpath="(//div[@class='facet-list facets-panel-list js-facet-list '])[3]//span[@class='facet-text']")
+	WebElement Facettext;
+	
+	@FindBy(xpath = "//form[@id='sortForm']")
+	WebElement ClickonSortBy;
+	
+	@FindBy(xpath = "(//header[@class='wiley-product-list-component-header']/h1)[1]")
+	WebElement FeaturedProducts;
+	
+	@FindBy(xpath = "(//header[@class='wiley-product-list-component-header']/h1)[2]")
+	WebElement RecentlyReleasesProducts;
+	
+	@FindBy(xpath = "(//header[@class='wiley-product-list-component-header']/h1)[3]")
+	WebElement UpcomingProducts;
+
+	@FindBy(xpath = "//div[@class='content cke-content']/h1[contains(text(),'Page')]")
+	WebElement PagenotFoundErrortext;
+	
+	//Vetconsult product details page
+
+	@FindBy(xpath = "//span[@class='search-highlight']")
+	WebElement VetConsultText;
+	
+	@FindBy(xpath = "//span[@class='glyphicon glyphicon-chevron-right']")
+	WebElement ClickingOnVetSoultIcon;
+
+	@FindBy(xpath = "(//a[contains(text(),'Shop')])[2]")
+	WebElement ShopLinkCLPPage;
+
+	@FindBy(xpath = "(//a[@class='link-corner'])[1]")
+	WebElement ViewAllOnCLPPage;
+
+
+	@FindBy(xpath = "//a[@href='/']/img[@class='brand-logo']")
+	WebElement HomePageLogo;
+
+	@FindBy(xpath = "//input[@id='searchbar']")
+	WebElement HomePageSearchBar;
+	
+	@FindBy(xpath = "//i[@class='wl-search-bar__icon']")
+	WebElement SearchBarIconHomePage;
+	
+	//Billing address information during checkout
+
+	@FindBy(xpath="//input[@id='street1']")
+	WebElement BillingAddressLine1;
+	
+	@FindBy(xpath="//input[@id='city']")
+	WebElement CityBilling;
+
+	@FindBy(xpath="//input[@id='postalCode']")
+	WebElement BillingZipCode;
+	
+	@FindBy(xpath="//input[@id='phoneNumber']")
+	WebElement BillingPhoneNumber;
+
+	@FindBy(xpath="(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
+	WebElement UseSelectedBillingAddressButtonAddressDoctorPopUp;
+	
+	@FindBy(xpath="(//span[@class='glyphicon glyphicon-pencil editIcon'])[2]")
+	WebElement EditButtonInBilling;
+
+	//Order Review step during checkout
+	
+	@FindBy(xpath="//label[@id='termsCondsCheckbox']")
+	WebElement TermsAndConditionCheckBox;
+
+	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel' and contains(text(),'Taxes:')]/following-sibling::div")
+	WebElement TaxInOrderReview;
+
+	@FindBy(xpath="//div[@class='applied-facets']/div[@class='facets-panel-item']/span[text()='RGuroo']")
+	WebElement RGurooFacet;
+
+	@FindBy(xpath="//div[@id='billingMultiPaymentTitle']")
+	WebElement PaymentMethodText;
+
+	@FindBy(xpath="//a[@id='shoppingCartIcon']")
+	WebElement ShoppingCartIconUAT3;
 
 	@FindBy(xpath="//span[text()='We require an address on file to create your account and place your order']")
 	WebElement TextInZeroDollarFlow;
 
+	// Pre-Order and Back-Order products' specific xpaths
+	
 	@FindBy(xpath="(//span[text()='Next Available Date: '])[1]")
 	WebElement NextAvailabilityDateForPreorderProductInCartPage;
 
@@ -371,9 +427,8 @@ public class app_Wiley_Repo {
 	@FindBy(xpath="//span[text()='Back-order. ']/ancestor::div[@class='col-md-9 col-xs-12 noPadding orderReviewDetailsLabel']")
 	WebElement BackOrderDateTextOrderConfirmation;
 
-	@FindBy(xpath="//a[@class='icon-print']/span[@class='glyphicon glyphicon-print']")
-	WebElement PrintRecieptIconInOrderConfirmation;
-
+	//Forgot Password functionality
+	
 	@FindBy(xpath="(//a[@id='loginForgotPasswordLink'])[2]")
 	WebElement ForgotPasswordLink;
 
@@ -391,15 +446,17 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath = "//button[@title='Check Inbox @yopmail.com']")
 	WebElement clickOnCheckInboxButton;
+	
+	@FindBy(xpath="//input[@id='updatePwd.pwd']")
+	WebElement NewPasswordFieldInResetPasswordPage;
 
-	@FindBy(xpath="//div[@class='guestCreateAccountBtnDiv']/button/span[text()='Continue as Guest']")
-	WebElement GuestCheckoutButton;
+	@FindBy(xpath="//input[@id='updatePwd.checkPwd']")
+	WebElement ConfirmPasswordFieldInResetPasswordPage;
 
-	@FindBy(xpath="//span[text()='! An account already exists for this email address. Please log in.']")
-	WebElement ErrorMessageAfterEnteringExistingUserInCreateAccount;
-
-	@FindBy(xpath="//form[@id='loginForm']/div[@class='form-cell has-error errorMessage']")
-	WebElement ErrorMessageAfterEnteringWrongPassword;
+	@FindBy(xpath="//button/span[text()='Submit']")
+	WebElement SubmitButtonInResetPasswordPage;
+	
+	//Home page 
 
 	@FindBy(xpath="//a/span[text()='Shop']")
 	WebElement ShopLinkInHomePageHeader;
@@ -415,54 +472,9 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath="//a/i[@class='wl-util-nav__icon  wl-icon-cart']")
 	WebElement CartIconHomePage;
-
-	@FindBy(xpath="//input[@id='updatePwd.pwd']")
-	WebElement NewPasswordFieldInResetPasswordPage;
-
-	@FindBy(xpath="//input[@id='updatePwd.checkPwd']")
-	WebElement ConfirmPasswordFieldInResetPasswordPage;
-
-	@FindBy(xpath="//button/span[text()='Submit']")
-	WebElement SubmitButtonInResetPasswordPage;
-
-	@FindBy(xpath="//h3[contains(text(),'FORMAT')]")
-	WebElement FormatFacet;
-
-	@FindBy(xpath="//span[contains(text(),'VetConsult')]")
-	WebElement VetConsultUnderFormatFacet;
-
-	@FindBy(xpath="//h3[contains(text(),'SUBJECT')]")
-	WebElement SubjectFacet;
-
-	@FindBy(xpath="//h3[contains(text(),'COURSE')]")
-	WebElement CourseFacet;
-
-	@FindBy(xpath="//h3[contains(text(),'AUTHOR')]")
-	WebElement AuthorFacet;
-
-	@FindBy(xpath="//h3[contains(text(),'PUBLISHED DATE')]")
-	WebElement PublishedDateFacet;
-
-	@FindBy(xpath="//h3[contains(text(),'BRANDS')]")
-	WebElement BrandsFacet;
-
-	@FindBy(xpath="//h3[contains(text(),'SERIES')]")
-	WebElement SeriesFacet;
-
-	@FindBy(xpath="(//span[@class='search-highlight'])[1]")
-	WebElement HighlightedSearchedTerm;
-
-	@FindBy(xpath="//div[@class='wileyProductPriceFormate']")
-	WebElement PriceInSRP;
 	
 	@FindBy(xpath="//span[@class='item-price item-price-value']")
 	WebElement PriceInPDP;
-	
-	@FindBy(xpath="//a[contains(text(),'Request Digital Evaluation Copy')]")
-	WebElement RequestDigitalEvaluationCopyLink;
-	
-	@FindBy(xpath="//i[@aria-label='Purchase option description']")
-	WebElement GenericHoverInfo;
 	
 	@FindBy(xpath="//p[@class='pr-price']")
 	WebElement ProductPriceInPDP;
@@ -527,6 +539,7 @@ public class app_Wiley_Repo {
 	@FindBy(xpath="//div[contains(text(),'Publication Date (newest-oldest)')]")
 	WebElement PublicationDateFromSortDropDown;
 
+	
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters a data in search bar
@@ -765,7 +778,7 @@ public class app_Wiley_Repo {
 	 */
 	public void clickOnContinueAsGuestButton() throws IOException{
 		try {
-			ContinueAsGuestButton.click();
+			GuestCheckoutButton.click();
 			Reporting.updateTestReport("Continue As Guest button  was clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
@@ -3873,9 +3886,10 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
+	 * @Author: Anindita
 	 * @Date: 21/03/23
 	 * @Description: Removes all the products from cart
-	 * @Author: Anindita
+	 * @Date: 21/03/23
 	 */
 	public void removeProductsFromCart(WebDriver driver) throws IOException {
 		try {

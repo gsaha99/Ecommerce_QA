@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="36" total="41" passed="5" failed="0" skipped="0">
+<testng-results ignored="60" total="61" passed="0" failed="0" skipped="1">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-03-27T10:58:14 IST" name="PPE_Regression" finished-at="2023-03-27T11:07:33 IST" duration-ms="559027">
+  <suite started-at="2023-03-28T16:05:41 IST" name="Default suite" finished-at="2023-03-28T16:05:41 IST" duration-ms="297">
     <groups>
     </groups>
-    <test started-at="2023-03-27T10:58:14 IST" name="Wiley_Test_Suite" finished-at="2023-03-27T11:07:33 IST" duration-ms="559027">
-      <class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T10:58:14 IST" name="initiate" finished-at="2023-03-27T10:58:20 IST" duration-ms="5649" status="PASS">
+    <test started-at="2023-03-28T16:05:41 IST" name="Default test" finished-at="2023-03-28T16:05:41 IST" duration-ms="297">
+      <class name="Test_Suite.WEL_Test_Suite">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:Test_Suite.WEL_Test_Suite@305ffe9e]" started-at="2023-03-28T16:05:41 IST" name="initiate" finished-at="2023-03-28T16:05:41 IST" duration-ms="171" status="FAIL">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@4a3bf37c]]>
+                <![CDATA[org.testng.TestRunner@42530531]]>
               </value>
             </param>
             <param index="1">
@@ -20,148 +20,108 @@
               </value>
             </param>
           </params>
+          <exception class="java.lang.NoSuchMethodError">
+            <message>
+              <![CDATA['java.lang.String org.openqa.selenium.manager.SeleniumManager.getDriverPath(org.openqa.selenium.Capabilities)']]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NoSuchMethodError: 'java.lang.String org.openqa.selenium.manager.SeleniumManager.getDriverPath(org.openqa.selenium.Capabilities)'
+at org.openqa.selenium.remote.service.DriverFinder.getPath(DriverFinder.java:26)
+at org.openqa.selenium.edge.EdgeDriver.generateExecutor(EdgeDriver.java:70)
+at org.openqa.selenium.edge.EdgeDriver.<init>(EdgeDriver.java:60)
+at org.openqa.selenium.edge.EdgeDriver.<init>(EdgeDriver.java:56)
+at org.openqa.selenium.edge.EdgeDriver.<init>(EdgeDriver.java:48)
+at utilities.DriverModule.initiate(DriverModule.java:149)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:361)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:296)
+at org.testng.TestRunner.invokeTestConfigurations(TestRunner.java:643)
+at org.testng.TestRunner.beforeRun(TestRunner.java:632)
+at org.testng.TestRunner.run(TestRunner.java:594)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:433)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:427)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:387)
+at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+at org.testng.TestNG.runSuites(TestNG.java:1099)
+at org.testng.TestNG.run(TestNG.java:1067)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NoSuchMethodError -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T10:58:20 IST" name="launchBrowser" finished-at="2023-03-27T10:58:20 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="87" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.WEL_Test_Suite@305ffe9e]" started-at="2023-03-28T16:05:41 IST" name="initializeRepo" finished-at="2023-03-28T16:05:41 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="0" status="SKIP">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- launchBrowser -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T10:58:20 IST" name="nameBefore" finished-at="2023-03-27T10:58:20 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC07_Mixed_Product_Some_Stock_New_User() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
+        </test-method> <!-- initializeRepo -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@305ffe9e]" started-at="2023-03-28T16:05:41 IST" name="nameBefore" finished-at="2023-03-28T16:05:41 IST" duration-ms="0" status="SKIP">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameBefore -->
-        <test-method signature="TC07_Mixed_Product_Some_Stock_New_User()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T10:58:20 IST" name="TC07_Mixed_Product_Some_Stock_New_User" finished-at="2023-03-27T11:01:44 IST" duration-ms="203565" status="PASS">
+        <test-method signature="TC01_Standalone_UserRegistration()[pri:0, instance:Test_Suite.WEL_Test_Suite@305ffe9e]" started-at="2023-03-28T16:05:41 IST" name="TC01_Standalone_UserRegistration" finished-at="2023-03-28T16:05:41 IST" duration-ms="0" status="SKIP">
+          <exception class="java.lang.NoSuchMethodError">
+            <message>
+              <![CDATA['java.lang.String org.openqa.selenium.manager.SeleniumManager.getDriverPath(org.openqa.selenium.Capabilities)']]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NoSuchMethodError: 'java.lang.String org.openqa.selenium.manager.SeleniumManager.getDriverPath(org.openqa.selenium.Capabilities)'
+at org.openqa.selenium.remote.service.DriverFinder.getPath(DriverFinder.java:26)
+at org.openqa.selenium.edge.EdgeDriver.generateExecutor(EdgeDriver.java:70)
+at org.openqa.selenium.edge.EdgeDriver.<init>(EdgeDriver.java:60)
+at org.openqa.selenium.edge.EdgeDriver.<init>(EdgeDriver.java:56)
+at org.openqa.selenium.edge.EdgeDriver.<init>(EdgeDriver.java:48)
+at utilities.DriverModule.initiate(DriverModule.java:149)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:361)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:296)
+at org.testng.TestRunner.invokeTestConfigurations(TestRunner.java:643)
+at org.testng.TestRunner.beforeRun(TestRunner.java:632)
+at org.testng.TestRunner.run(TestRunner.java:594)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:433)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:427)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:387)
+at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+at org.testng.TestNG.runSuites(TestNG.java:1099)
+at org.testng.TestNG.run(TestNG.java:1067)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NoSuchMethodError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC07_Mixed_Product_Some_Stock_New_User -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T11:01:44 IST" name="nameAfter" finished-at="2023-03-27T11:01:44 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC07_Mixed_Product_Some_Stock_New_User() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T11:01:44 IST" name="nameBefore" finished-at="2023-03-27T11:01:44 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC24_Verify_Shipping_Methods_for_POD_Products() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC24_Verify_Shipping_Methods_for_POD_Products()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T11:01:44 IST" name="TC24_Verify_Shipping_Methods_for_POD_Products" finished-at="2023-03-27T11:02:39 IST" duration-ms="55130" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC24_Verify_Shipping_Methods_for_POD_Products -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T11:02:39 IST" name="nameAfter" finished-at="2023-03-27T11:02:39 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC24_Verify_Shipping_Methods_for_POD_Products() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T11:02:39 IST" name="nameBefore" finished-at="2023-03-27T11:02:39 IST" duration-ms="3" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC26_Login_Page_Validation() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC26_Login_Page_Validation()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T11:02:39 IST" name="TC26_Login_Page_Validation" finished-at="2023-03-27T11:04:07 IST" duration-ms="87814" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC26_Login_Page_Validation -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T11:04:07 IST" name="nameAfter" finished-at="2023-03-27T11:04:07 IST" duration-ms="4" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC26_Login_Page_Validation() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
+        </test-method> <!-- TC01_Standalone_UserRegistration -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@305ffe9e]" started-at="2023-03-28T16:05:41 IST" name="nameAfter" finished-at="2023-03-28T16:05:41 IST" duration-ms="0" status="SKIP">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameAfter -->
-        <test-method signature="TC28_Cart_Update_from_Digital_to_Phygital()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T11:04:07 IST" name="TC28_Cart_Update_from_Digital_to_Phygital" finished-at="2023-03-27T11:05:56 IST" duration-ms="109583" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC28_Cart_Update_from_Digital_to_Phygital -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T11:04:07 IST" name="nameBefore" finished-at="2023-03-27T11:04:07 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC28_Cart_Update_from_Digital_to_Phygital() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T11:05:56 IST" name="nameAfter" finished-at="2023-03-27T11:05:56 IST" duration-ms="20" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC28_Cart_Update_from_Digital_to_Phygital() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T11:05:56 IST" name="nameBefore" finished-at="2023-03-27T11:05:56 IST" duration-ms="2" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC30_Cart_Merge_Functionality() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC30_Cart_Merge_Functionality()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T11:05:56 IST" name="TC30_Cart_Merge_Functionality" finished-at="2023-03-27T11:07:31 IST" duration-ms="94893" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC30_Cart_Merge_Functionality -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T11:07:31 IST" name="nameAfter" finished-at="2023-03-27T11:07:31 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC30_Cart_Merge_Functionality() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@7188af83]" started-at="2023-03-27T11:07:31 IST" name="CloseBrowser" finished-at="2023-03-27T11:07:33 IST" duration-ms="2103" status="PASS">
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.WEL_Test_Suite@305ffe9e]" started-at="2023-03-28T16:05:41 IST" name="CloseBrowser" finished-at="2023-03-28T16:05:41 IST" duration-ms="0" status="SKIP">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
-      </class> <!-- Test_Suite.Wiley_NA_Cart_Test_Suite -->
-    </test> <!-- Wiley_Test_Suite -->
-  </suite> <!-- PPE_Regression -->
+      </class> <!-- Test_Suite.WEL_Test_Suite -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>

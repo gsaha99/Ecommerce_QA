@@ -500,7 +500,7 @@ public class EmailValidation {
 	
 	/*
 	 * @Author: Anindita
-	 * @Description: Validates the forgot password email functionality in Wiley
+	 * @Description: Validates the forgot password email functionality in WEL
 	 */
 	public static int forgotPasswordEmailForWEL(WebDriver driver, String SS_path, app_WEL_Repo WEL) throws IOException {
 		try {

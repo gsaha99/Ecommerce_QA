@@ -19,8 +19,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.codoid.products.fillo.Update;
-
 import PageObjectRepo.app_Hybris_BO_Repo;
 import PageObjectRepo.app_WEL_Repo;
 import utilities.CaptureScreenshot;
@@ -1497,6 +1495,28 @@ public class WEL_Test_Suite extends DriverModule {
 							ScrollingWebPage.PageDown(driver, SS_path);
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							WEL.clickOnAddToCartButtonOnPDP();
+							try {
+								wait.until(ExpectedConditions
+										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+
+							} catch (Exception e) {
+								try {
+									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+											.isDisplayed()) {
+										Reporting.updateTestReport(
+												"Server error came in cart page and the page was refreshed",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+										driver.navigate().refresh();
+									}
+								} catch (Exception e1) {
+									Reporting.updateTestReport(
+											"Checkout button was not clickable in the cart page"
+													+ " and caused timeout exception",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+
+							}
+
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
 								Reporting.updateTestReport(
@@ -1839,7 +1859,8 @@ public class WEL_Test_Suite extends DriverModule {
 			BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+				wait.until(ExpectedConditions
+						.visibilityOfElementLocated(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
 			} catch (Exception e) {
 				try {
@@ -1870,7 +1891,8 @@ public class WEL_Test_Suite extends DriverModule {
 			BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			WEL.clickOnAddToCartButtonOnPDP();
 			try {
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+				wait.until(ExpectedConditions
+						.visibilityOfElementLocated(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
 			} catch (Exception e) {
 				try {
@@ -4208,8 +4230,15 @@ public class WEL_Test_Suite extends DriverModule {
 									orderprice = orderprice.replace(",", "");
 								BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
 
+								String shippingcharge = WEL.fetchShippingChargeInOrderReview();
+
+								if (shippingcharge.contains(","))
+									shippingcharge = shippingcharge.replace(",", "");
+								BigDecimal ShipchargoneReviewpage = new BigDecimal(shippingcharge.substring(1));
+
 								BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
-								BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount);
+								BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount)
+										.add(ShipchargoneReviewpage);
 
 								String totalorderReview = WEL.fetchTotalInOrderReview();
 								if (totalorderReview.contains(","))
@@ -4726,7 +4755,8 @@ public class WEL_Test_Suite extends DriverModule {
 						By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[3]")));
 				WEL.ClickOnCIAProduct();
 				try {
-					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'SHOP')]")));
+					wait.until(ExpectedConditions
+							.visibilityOfElementLocated(By.xpath("//button[contains(text(),'SHOP')]")));
 					WEL.ClickOnShopCourseForCIAProduct();
 					try {
 						wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -7047,6 +7077,7 @@ public class WEL_Test_Suite extends DriverModule {
 											"Address Suggestiond page is not appering on Shipping page",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 								}
+
 								try {
 									driver.switchTo()
 											.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
@@ -8986,8 +9017,8 @@ public class WEL_Test_Suite extends DriverModule {
 												.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
 										WEL.SaveAndContinueCheckOut();
 										try {
-											wait.until(ExpectedConditions.visibilityOfElementLocated(
-													By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+											wait.until(ExpectedConditions
+													.presenceOfElementLocated(By.id("orderSummaryProductTotalValue")));
 
 											String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 											if (orderprice.contains(","))
@@ -9509,7 +9540,7 @@ public class WEL_Test_Suite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			try {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(
-						By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[3]\")")));
+						By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[3]")));
 				WEL.ClickOnCIAProduct();
 				try {
 					wait.until(ExpectedConditions
@@ -9695,13 +9726,13 @@ public class WEL_Test_Suite extends DriverModule {
 													"Data"));
 											WEL.enterEmailIdInYopmail(GuestEmail);
 											WEL.clickOnCheckInboxButton();
-											if (EmailValidation.checkIfOrderConfirmationMailReceived(driver,
-													SS_path, EmailConfirmationText)) {
+											if (EmailValidation.checkIfOrderConfirmationMailReceived(driver, SS_path,
+													EmailConfirmationText)) {
 												ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
 												Reporting.updateTestReport("Order Confirmation mail was received",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-												EmailValidation.validateOrderConfirmationMailContent("WEL",
-														driver, SS_path, tax, shippingCharge, orderTotal);
+												EmailValidation.validateOrderConfirmationMailContent("WEL", driver,
+														SS_path, tax, shippingCharge, orderTotal);
 											} else {
 												Reporting.updateTestReport("Order Confirmation mail was not received",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -10005,8 +10036,8 @@ public class WEL_Test_Suite extends DriverModule {
 									.elementToBeClickable(By.xpath("//button[@id='paymentBilling']")));
 							WEL.SaveAndContinueCheckOut();
 							try {
-								wait.until(ExpectedConditions.visibilityOfElementLocated(
-										By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+								wait.until(ExpectedConditions
+										.presenceOfElementLocated(By.id("orderSummaryProductTotalValue")));
 								String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
 								if (orderprice.contains(","))
 									orderprice = orderprice.replace(",", "");
@@ -10930,10 +10961,28 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC74_WEL_Cart_Upsells_Add_Summary_Line");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("TC74", "WEL_Test_Data", "URL"));
+			ScrollingWebPage.PageDown(driver, SS_path);
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
-				ScrollingWebPage.PageDown(driver, SS_path);
 				WEL.clickOnAddToCartButtonOnPDP();
+				try {
+					wait.until(
+							ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+
+				} catch (Exception e) {
+					try {
+						if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
+							Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+							driver.navigate().refresh();
+						}
+					} catch (Exception e1) {
+						Reporting.updateTestReport(
+								"Checkout button was not clickable in the cart page" + " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+
+				}
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cartPageMainTitle")));
 					ScrollingWebPage.PageScrolldown(driver, 0, 500, SS_path);
@@ -10952,6 +11001,27 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cartPageMainTitle")));
 							ScrollingWebPage.PageScrolldown(driver, 0, 500, SS_path);
 							WEL.clickOnAddToCartButtonOnRecommendationTitle();
+							try {
+								wait.until(ExpectedConditions
+										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+
+							} catch (Exception e) {
+								try {
+									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+											.isDisplayed()) {
+										Reporting.updateTestReport(
+												"Server error came in cart page and the page was refreshed",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+										driver.navigate().refresh();
+									}
+								} catch (Exception e1) {
+									Reporting.updateTestReport(
+											"Checkout button was not clickable in the cart page"
+													+ " and caused timeout exception",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+
+							}
 							try {
 								wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cartPageMainTitle")));
 								Reporting.updateTestReport(
@@ -11415,13 +11485,13 @@ public class WEL_Test_Suite extends DriverModule {
 													"Data"));
 											WEL.enterEmailIdInYopmail(GuestEmail);
 											WEL.clickOnCheckInboxButton();
-											if (EmailValidation.checkIfOrderConfirmationMailReceived(driver,
-													SS_path, EmailConfirmationText)) {
+											if (EmailValidation.checkIfOrderConfirmationMailReceived(driver, SS_path,
+													EmailConfirmationText)) {
 												ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
 												Reporting.updateTestReport("Order Confirmation mail was received",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-												EmailValidation.validateOrderConfirmationMailContent("WEL",
-														driver, SS_path, tax, shippingCharge, orderTotal);
+												EmailValidation.validateOrderConfirmationMailContent("WEL", driver,
+														SS_path, tax, shippingCharge, orderTotal);
 												driver.switchTo().frame("ifmail");
 												WEL.checkMailHeaderElements();
 												WEL.validateOrderIdInMail(orderID);
