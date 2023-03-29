@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
+
 public class LogTextFile {
 	public static BufferedWriter wr;
 	/*
@@ -54,21 +57,17 @@ public class LogTextFile {
 	 */
 	public static void writeTestCaseStatus(String TCName,String status) {
 		try {
-			if(status.equalsIgnoreCase("fail")) {
-				wr.write(TCName);
-				wr.write(" --> FAIL");
-			}
-			else if(status.equalsIgnoreCase("pass")) {
-				wr.write(TCName);
-				wr.write(" --> PASS");
-			}
-			else {
+			
+			if(status.equalsIgnoreCase("Test case")) {
 				wr.newLine();
 				wr.newLine();
 				wr.write(TCName);
 				wr.write(" --> Execution started");
 				wr.newLine();
-				
+			}
+			else  {
+				wr.write(TCName);
+				wr.write(" --> "+status);
 			}
 				
 			wr.newLine();
