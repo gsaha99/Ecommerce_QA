@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="15" passed="15" failed="0" skipped="0">
+<testng-results ignored="14" total="15" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-03-29T17:44:26 IST" name="Default suite" finished-at="2023-03-29T18:07:06 IST" duration-ms="1359597">
+  <suite started-at="2023-03-29T18:16:32 IST" name="Default suite" finished-at="2023-03-29T18:18:54 IST" duration-ms="141929">
     <groups>
     </groups>
-    <test started-at="2023-03-29T17:44:26 IST" name="Default test" finished-at="2023-03-29T18:07:06 IST" duration-ms="1359597">
+    <test started-at="2023-03-29T18:16:32 IST" name="Default test" finished-at="2023-03-29T18:18:54 IST" duration-ms="141929">
       <class name="Test_Suite.AGS_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:44:26 IST" name="initiate" finished-at="2023-03-29T17:44:34 IST" duration-ms="8487" status="PASS">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:Test_Suite.AGS_Test_Suite@7ce69770]" started-at="2023-03-29T18:16:32 IST" name="initiate" finished-at="2023-03-29T18:16:40 IST" duration-ms="7875" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@21e72fb2]]>
+                <![CDATA[org.testng.TestRunner@7661e474]]>
               </value>
             </param>
             <param index="1">
@@ -23,245 +23,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:44:34 IST" name="initializeRepo" finished-at="2023-03-29T17:44:35 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="73" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.AGS_Test_Suite@7ce69770]" started-at="2023-03-29T18:16:40 IST" name="initializeRepo" finished-at="2023-03-29T18:16:40 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="97" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeRepo -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:44:35 IST" name="nameBefore" finished-at="2023-03-29T17:44:35 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC01_Anonymous_User_Registration() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC01_Anonymous_User_Registration()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:44:35 IST" name="TC01_Anonymous_User_Registration" finished-at="2023-03-29T17:47:54 IST" duration-ms="199895" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC01_Anonymous_User_Registration -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:47:54 IST" name="nameAfter" finished-at="2023-03-29T17:47:54 IST" duration-ms="2" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC01_Anonymous_User_Registration() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:47:54 IST" name="nameBefore" finished-at="2023-03-29T17:47:54 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC02_User_Submit_Order_Monthly() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC02_User_Submit_Order_Monthly()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:47:54 IST" name="TC02_User_Submit_Order_Monthly" finished-at="2023-03-29T17:51:00 IST" duration-ms="185252" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC02_User_Submit_Order_Monthly -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:51:00 IST" name="nameAfter" finished-at="2023-03-29T17:51:00 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC02_User_Submit_Order_Monthly() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:51:00 IST" name="nameBefore" finished-at="2023-03-29T17:51:00 IST" duration-ms="2" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC03_Standalone_Registration_and_Login() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC03_Standalone_Registration_and_Login()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:51:00 IST" name="TC03_Standalone_Registration_and_Login" finished-at="2023-03-29T17:51:53 IST" duration-ms="53615" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC03_Standalone_Registration_and_Login -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:51:53 IST" name="nameAfter" finished-at="2023-03-29T17:51:53 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC03_Standalone_Registration_and_Login() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method signature="TC04_Reset_Password_My_Account()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:51:53 IST" name="TC04_Reset_Password_My_Account" finished-at="2023-03-29T17:52:09 IST" duration-ms="15757" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC04_Reset_Password_My_Account -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:51:53 IST" name="nameBefore" finished-at="2023-03-29T17:51:53 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC04_Reset_Password_My_Account() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:52:09 IST" name="nameBefore" finished-at="2023-03-29T17:52:09 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC05_ResetPasswordFromLoginPage() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:52:09 IST" name="nameAfter" finished-at="2023-03-29T17:52:09 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC04_Reset_Password_My_Account() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method signature="TC05_ResetPasswordFromLoginPage()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:52:09 IST" name="TC05_ResetPasswordFromLoginPage" finished-at="2023-03-29T17:52:50 IST" duration-ms="40459" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC05_ResetPasswordFromLoginPage -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:52:50 IST" name="nameAfter" finished-at="2023-03-29T17:52:50 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC05_ResetPasswordFromLoginPage() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:52:50 IST" name="nameBefore" finished-at="2023-03-29T17:52:50 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC06_Zero_Dollar_Flow() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC06_Zero_Dollar_Flow()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:52:50 IST" name="TC06_Zero_Dollar_Flow" finished-at="2023-03-29T17:53:14 IST" duration-ms="24421" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC06_Zero_Dollar_Flow -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:53:14 IST" name="nameAfter" finished-at="2023-03-29T17:53:14 IST" duration-ms="3" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC06_Zero_Dollar_Flow() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:53:14 IST" name="nameBefore" finished-at="2023-03-29T17:53:14 IST" duration-ms="2" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC07_Verify_tax_Non_US_Address() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC07_Verify_tax_Non_US_Address()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:53:14 IST" name="TC07_Verify_tax_Non_US_Address" finished-at="2023-03-29T17:56:59 IST" duration-ms="224499" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC07_Verify_tax_Non_US_Address -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:56:59 IST" name="nameAfter" finished-at="2023-03-29T17:56:59 IST" duration-ms="2" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC07_Verify_tax_Non_US_Address() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method signature="TC08_Place_Order_With_Discount_Code()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:56:59 IST" name="TC08_Place_Order_With_Discount_Code" finished-at="2023-03-29T18:00:21 IST" duration-ms="202183" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC08_Place_Order_With_Discount_Code -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T17:56:59 IST" name="nameBefore" finished-at="2023-03-29T17:56:59 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC08_Place_Order_With_Discount_Code() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:00:21 IST" name="nameAfter" finished-at="2023-03-29T18:00:21 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC08_Place_Order_With_Discount_Code() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:00:21 IST" name="nameBefore" finished-at="2023-03-29T18:00:21 IST" duration-ms="4" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC09_Place_Order_With_Existing_User() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC09_Place_Order_With_Existing_User()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:00:21 IST" name="TC09_Place_Order_With_Existing_User" finished-at="2023-03-29T18:01:40 IST" duration-ms="79640" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC09_Place_Order_With_Existing_User -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:01:40 IST" name="nameAfter" finished-at="2023-03-29T18:01:40 IST" duration-ms="5" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC09_Place_Order_With_Existing_User() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:01:40 IST" name="nameBefore" finished-at="2023-03-29T18:01:40 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@7ce69770]" started-at="2023-03-29T18:16:40 IST" name="nameBefore" finished-at="2023-03-29T18:16:40 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -272,11 +38,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameBefore -->
-        <test-method signature="TC10_Place_Order_Non_US_Address()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:01:40 IST" name="TC10_Place_Order_Non_US_Address" finished-at="2023-03-29T18:03:18 IST" duration-ms="97969" status="PASS">
+        <test-method signature="TC10_Place_Order_Non_US_Address()[pri:0, instance:Test_Suite.AGS_Test_Suite@7ce69770]" started-at="2023-03-29T18:16:40 IST" name="TC10_Place_Order_Non_US_Address" finished-at="2023-03-29T18:18:52 IST" duration-ms="131459" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TC10_Place_Order_Non_US_Address -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:03:18 IST" name="nameAfter" finished-at="2023-03-29T18:03:18 IST" duration-ms="4" status="PASS">
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@7ce69770]" started-at="2023-03-29T18:18:52 IST" name="nameAfter" finished-at="2023-03-29T18:18:52 IST" duration-ms="9" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -287,137 +53,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameAfter -->
-        <test-method signature="TC11_Edit_Profile()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:03:18 IST" name="TC11_Edit_Profile" finished-at="2023-03-29T18:03:34 IST" duration-ms="15431" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC11_Edit_Profile -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:03:18 IST" name="nameBefore" finished-at="2023-03-29T18:03:18 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC11_Edit_Profile() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:03:34 IST" name="nameAfter" finished-at="2023-03-29T18:03:34 IST" duration-ms="6" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC11_Edit_Profile() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method signature="TC12_Edit_Billing_Address()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:03:34 IST" name="TC12_Edit_Billing_Address" finished-at="2023-03-29T18:04:16 IST" duration-ms="41924" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC12_Edit_Billing_Address -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:03:34 IST" name="nameBefore" finished-at="2023-03-29T18:03:34 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC12_Edit_Billing_Address() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:04:16 IST" name="nameAfter" finished-at="2023-03-29T18:04:16 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC12_Edit_Billing_Address() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:04:16 IST" name="nameBefore" finished-at="2023-03-29T18:04:16 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC13_Edit_Card_Details() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC13_Edit_Card_Details()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:04:16 IST" name="TC13_Edit_Card_Details" finished-at="2023-03-29T18:04:43 IST" duration-ms="27208" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC13_Edit_Card_Details -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:04:43 IST" name="nameAfter" finished-at="2023-03-29T18:04:43 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC13_Edit_Card_Details() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:04:43 IST" name="nameBefore" finished-at="2023-03-29T18:04:43 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC14_Manage_Subscription_Auto_Renew_Toggle_validation() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC14_Manage_Subscription_Auto_Renew_Toggle_validation()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:04:43 IST" name="TC14_Manage_Subscription_Auto_Renew_Toggle_validation" finished-at="2023-03-29T18:05:08 IST" duration-ms="25120" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC14_Manage_Subscription_Auto_Renew_Toggle_validation -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:05:08 IST" name="nameAfter" finished-at="2023-03-29T18:05:08 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC14_Manage_Subscription_Auto_Renew_Toggle_validation() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method signature="TC15_Riskified_Declined_Order()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:05:08 IST" name="TC15_Riskified_Declined_Order" finished-at="2023-03-29T18:07:03 IST" duration-ms="115223" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC15_Riskified_Declined_Order -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:05:08 IST" name="nameBefore" finished-at="2023-03-29T18:05:08 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC15_Riskified_Declined_Order() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:07:03 IST" name="nameAfter" finished-at="2023-03-29T18:07:03 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.AGS_Test_Suite.TC15_Riskified_Declined_Order() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.AGS_Test_Suite@14028087]" started-at="2023-03-29T18:07:03 IST" name="CloseBrowser" finished-at="2023-03-29T18:07:06 IST" duration-ms="2221" status="PASS">
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.AGS_Test_Suite@7ce69770]" started-at="2023-03-29T18:18:52 IST" name="CloseBrowser" finished-at="2023-03-29T18:18:54 IST" duration-ms="2422" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->

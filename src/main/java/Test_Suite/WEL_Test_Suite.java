@@ -19,6 +19,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.codoid.products.fillo.Update;
+
 import PageObjectRepo.app_Hybris_BO_Repo;
 import PageObjectRepo.app_WEL_Repo;
 import utilities.CaptureScreenshot;
@@ -136,27 +138,34 @@ public class WEL_Test_Suite extends DriverModule {
 								By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 						ScrollingWebPage.PageDown(driver, SS_path);
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-						WEL.clickOnAddToCartButtonOnPDP();
 						try {
-							wait.until(ExpectedConditions
-									.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-						} catch (Exception e) {
+							wait.until(ExpectedConditions.visibilityOfElementLocated(
+									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-										.isDisplayed()) {
-									Reporting.updateTestReport(
-											"Server error came in cart page and the page was refreshed",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-									driver.navigate().refresh();
-								}
-							} catch (Exception e1) {
-								Reporting.updateTestReport(
-										"Checkout button was not clickable in the cart page"
-												+ " and caused timeout exception",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
+								wait.until(ExpectedConditions
+										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+							} catch (Exception e) {
+								try {
+									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+											.isDisplayed()) {
+										Reporting.updateTestReport(
+												"Server error came in cart page and the page was refreshed",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+										driver.navigate().refresh();
+									}
+								} catch (Exception e1) {
+									Reporting.updateTestReport(
+											"Checkout button was not clickable in the cart page"
+													+ " and caused timeout exception",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+
+							}
+						} catch (Exception e) {
+							Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 						if (price.compareTo(subtotal) == 0)
@@ -238,27 +247,37 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 								ScrollingWebPage.PageDown(driver, SS_path);
 								BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									wait.until(ExpectedConditions
-											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-								} catch (Exception e) {
+									wait.until(ExpectedConditions.visibilityOfElementLocated(
+											By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+									WEL.clickOnAddToCartButtonOnPDP();
 									try {
-										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-												.isDisplayed()) {
-											Reporting.updateTestReport(
-													"Server error came in cart page and the page was refreshed",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-											driver.navigate().refresh();
-										}
-									} catch (Exception e1) {
-										Reporting.updateTestReport(
-												"Checkout button was not clickable in the cart page"
-														+ " and caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									}
+										wait.until(ExpectedConditions.elementToBeClickable(
+												By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+									} catch (Exception e) {
+										try {
+											if (driver
+													.findElement(
+															By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+													.isDisplayed()) {
+												Reporting.updateTestReport(
+														"Server error came in cart page and the page was refreshed",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+												driver.navigate().refresh();
+											}
+										} catch (Exception e1) {
+											Reporting.updateTestReport(
+													"Checkout button was not clickable in the cart page"
+															+ " and caused timeout exception",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										}
+
+									}
+								} catch (Exception e) {
+									Reporting.updateTestReport(
+											"Failed to click on Add To Cart button due to timeout exception",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 								BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 								if (price.compareTo(subtotal) == 0)
@@ -439,28 +458,36 @@ public class WEL_Test_Suite extends DriverModule {
 									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
-
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								WEL.clickOnAddToCartButtonOnPDP();
 
-							} catch (Exception e) {
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
@@ -812,29 +839,39 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 								ScrollingWebPage.PageDown(driver, SS_path);
 								BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									wait.until(ExpectedConditions
-											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+									wait.until(ExpectedConditions.visibilityOfElementLocated(
+											By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 
-								} catch (Exception e) {
+									WEL.clickOnAddToCartButtonOnPDP();
 									try {
-										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-												.isDisplayed()) {
+										wait.until(ExpectedConditions.elementToBeClickable(
+												By.xpath("//button[@id='cartCheckoutBtn']/span")));
+
+									} catch (Exception e) {
+										try {
+											if (driver
+													.findElement(
+															By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+													.isDisplayed()) {
+												Reporting.updateTestReport(
+														"Server error came in cart page and the page was refreshed",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+												driver.navigate().refresh();
+											}
+										} catch (Exception e1) {
 											Reporting.updateTestReport(
-													"Server error came in cart page and the page was refreshed",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-											driver.navigate().refresh();
+													"Checkout button was not clickable in the cart page"
+															+ " and caused timeout exception",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
-									} catch (Exception e1) {
-										Reporting.updateTestReport(
-												"Checkout button was not clickable in the cart page"
-														+ " and caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
 									}
-
+								} catch (Exception e) {
+									Reporting.updateTestReport(
+											"Failed to click on Add To Cart button due to timeout exception",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
-
 								WEL.ClickOnAddaDiscountCode();
 								WEL.EnterExtraDiscountCode(
 										excelOperation.getTestData("TC09", "WEL_Test_Data", "PromoCode"));
@@ -916,27 +953,37 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 								ScrollingWebPage.PageDown(driver, SS_path);
 								BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									wait.until(ExpectedConditions
-											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-								} catch (Exception e) {
+									wait.until(ExpectedConditions.visibilityOfElementLocated(
+											By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+									WEL.clickOnAddToCartButtonOnPDP();
 									try {
-										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-												.isDisplayed()) {
-											Reporting.updateTestReport(
-													"Server error came in cart page and the page was refreshed",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-											driver.navigate().refresh();
-										}
-									} catch (Exception e1) {
-										Reporting.updateTestReport(
-												"Checkout button was not clickable in the cart page"
-														+ " and caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									}
+										wait.until(ExpectedConditions.elementToBeClickable(
+												By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+									} catch (Exception e) {
+										try {
+											if (driver
+													.findElement(
+															By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+													.isDisplayed()) {
+												Reporting.updateTestReport(
+														"Server error came in cart page and the page was refreshed",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+												driver.navigate().refresh();
+											}
+										} catch (Exception e1) {
+											Reporting.updateTestReport(
+													"Checkout button was not clickable in the cart page"
+															+ " and caused timeout exception",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										}
+
+									}
+								} catch (Exception e) {
+									Reporting.updateTestReport(
+											"Failed to click on Add To Cart button due to timeout exception",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 								WEL.ClickOnAddaDiscountCode();
 								WEL.EnterExtraDiscountCode(
@@ -1042,27 +1089,37 @@ public class WEL_Test_Suite extends DriverModule {
 										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 								ScrollingWebPage.PageDown(driver, SS_path);
 								BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									wait.until(ExpectedConditions
-											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-								} catch (Exception e) {
+									wait.until(ExpectedConditions.visibilityOfElementLocated(
+											By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+									WEL.clickOnAddToCartButtonOnPDP();
 									try {
-										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-												.isDisplayed()) {
-											Reporting.updateTestReport(
-													"Server error came in cart page and the page was refreshed",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-											driver.navigate().refresh();
-										}
-									} catch (Exception e1) {
-										Reporting.updateTestReport(
-												"Checkout button was not clickable in the cart page"
-														+ " and caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									}
+										wait.until(ExpectedConditions.elementToBeClickable(
+												By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+									} catch (Exception e) {
+										try {
+											if (driver
+													.findElement(
+															By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+													.isDisplayed()) {
+												Reporting.updateTestReport(
+														"Server error came in cart page and the page was refreshed",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+												driver.navigate().refresh();
+											}
+										} catch (Exception e1) {
+											Reporting.updateTestReport(
+													"Checkout button was not clickable in the cart page"
+															+ " and caused timeout exception",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										}
+
+									}
+								} catch (Exception e) {
+									Reporting.updateTestReport(
+											"Failed to click on Add To Cart button due to timeout exception",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 								BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 								if (price.compareTo(subtotal) == 0)
@@ -1143,29 +1200,36 @@ public class WEL_Test_Suite extends DriverModule {
 									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
 										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
 								}
-
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
-
 							try {
 								wait.until(ExpectedConditions
 										.elementToBeClickable(By.xpath("//select[@id='quantity_0']")));
@@ -1282,26 +1346,34 @@ public class WEL_Test_Suite extends DriverModule {
 					BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 					BigDecimal secondProductPriceWIthoutDiscount = new BigDecimal(
 							WEL.fetchOldPriceInPDP().substring(1));
-					WEL.clickOnAddToCartButtonOnPDP();
 					try {
-						wait.until(ExpectedConditions
-								.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-					} catch (Exception e) {
+						wait.until(ExpectedConditions.visibilityOfElementLocated(
+								By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+						WEL.clickOnAddToCartButtonOnPDP();
 						try {
-							if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-									.isDisplayed()) {
-								Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-								driver.navigate().refresh();
-							}
-						} catch (Exception e1) {
-							Reporting.updateTestReport(
-									"Checkout button was not clickable in the cart page"
-											+ " and caused timeout exception",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						}
+							wait.until(ExpectedConditions
+									.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+						} catch (Exception e) {
+							try {
+								if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+										.isDisplayed()) {
+									Reporting.updateTestReport(
+											"Server error came in cart page and the page was refreshed",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+									driver.navigate().refresh();
+								}
+							} catch (Exception e1) {
+								Reporting.updateTestReport(
+										"Checkout button was not clickable in the cart page"
+												+ " and caused timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 					ScrollingWebPage.PageDown(driver, SS_path);
 					WEL.ClickOnAddaDiscountCode();
@@ -1494,29 +1566,36 @@ public class WEL_Test_Suite extends DriverModule {
 									.elementToBeClickable(By.xpath("//button[@class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
 										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
 								}
-
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
-
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
 								Reporting.updateTestReport(
@@ -1594,23 +1673,31 @@ public class WEL_Test_Suite extends DriverModule {
 			BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 			ScrollingWebPage.PageDown(driver, SS_path);
-			WEL.clickOnAddToCartButtonOnPDP();
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-			} catch (Exception e) {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(
+						By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+				WEL.clickOnAddToCartButtonOnPDP();
 				try {
-					if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
-						Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-						driver.navigate().refresh();
-					}
-				} catch (Exception e1) {
-					Reporting.updateTestReport(
-							"Checkout button was not clickable in the cart page" + " and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+					wait.until(
+							ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+				} catch (Exception e) {
+					try {
+						if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
+							Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+							driver.navigate().refresh();
+						}
+					} catch (Exception e1) {
+						Reporting.updateTestReport(
+								"Checkout button was not clickable in the cart page" + " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+
+				}
+			} catch (Exception e) {
+				Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(urls[1]);
 			try {
@@ -1625,23 +1712,31 @@ public class WEL_Test_Suite extends DriverModule {
 			}
 			BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			ScrollingWebPage.PageDown(driver, SS_path);
-			WEL.clickOnAddToCartButtonOnPDP();
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-			} catch (Exception e) {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(
+						By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+				WEL.clickOnAddToCartButtonOnPDP();
 				try {
-					if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
-						Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-						driver.navigate().refresh();
-					}
-				} catch (Exception e1) {
-					Reporting.updateTestReport(
-							"Checkout button was not clickable in the cart page" + " and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+					wait.until(
+							ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+				} catch (Exception e) {
+					try {
+						if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
+							Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+							driver.navigate().refresh();
+						}
+					} catch (Exception e1) {
+						Reporting.updateTestReport(
+								"Checkout button was not clickable in the cart page" + " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+
+				}
+			} catch (Exception e) {
+				Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(urls[2]);
 			try {
@@ -1656,23 +1751,31 @@ public class WEL_Test_Suite extends DriverModule {
 			}
 			BigDecimal thirdproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			ScrollingWebPage.PageDown(driver, SS_path);
-			WEL.clickOnAddToCartButtonOnPDP();
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-			} catch (Exception e) {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(
+						By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+				WEL.clickOnAddToCartButtonOnPDP();
 				try {
-					if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
-						Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-						driver.navigate().refresh();
-					}
-				} catch (Exception e1) {
-					Reporting.updateTestReport(
-							"Checkout button was not clickable in the cart page" + " and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+					wait.until(
+							ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+				} catch (Exception e) {
+					try {
+						if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
+							Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+							driver.navigate().refresh();
+						}
+					} catch (Exception e1) {
+						Reporting.updateTestReport(
+								"Checkout button was not clickable in the cart page" + " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+
+				}
+			} catch (Exception e) {
+				Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			BigDecimal subtotal = new BigDecimal(WEL.fetchOrderTotalOnCartPage().substring(1));
 			if (Firstproductprice.add(secondproductprice).add(thirdproductprice).compareTo(subtotal) == 0)
@@ -1857,24 +1960,31 @@ public class WEL_Test_Suite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
-			WEL.clickOnAddToCartButtonOnPDP();
 			try {
-				wait.until(ExpectedConditions
-						.visibilityOfElementLocated(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-			} catch (Exception e) {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(
+						By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+				WEL.clickOnAddToCartButtonOnPDP();
 				try {
-					if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
-						Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-						driver.navigate().refresh();
-					}
-				} catch (Exception e1) {
-					Reporting.updateTestReport(
-							"Checkout button was not clickable in the cart page" + " and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+					wait.until(ExpectedConditions
+							.visibilityOfElementLocated(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+				} catch (Exception e) {
+					try {
+						if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
+							Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+							driver.navigate().refresh();
+						}
+					} catch (Exception e1) {
+						Reporting.updateTestReport(
+								"Checkout button was not clickable in the cart page" + " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+
+				}
+			} catch (Exception e) {
+				Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(urls[1]);
 			try {
@@ -1889,24 +1999,31 @@ public class WEL_Test_Suite extends DriverModule {
 			}
 			ScrollingWebPage.PageDown(driver, SS_path);
 			BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-			WEL.clickOnAddToCartButtonOnPDP();
 			try {
-				wait.until(ExpectedConditions
-						.visibilityOfElementLocated(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-			} catch (Exception e) {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(
+						By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+				WEL.clickOnAddToCartButtonOnPDP();
 				try {
-					if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
-						Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-						driver.navigate().refresh();
-					}
-				} catch (Exception e1) {
-					Reporting.updateTestReport(
-							"Checkout button was not clickable in the cart page" + " and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+					wait.until(ExpectedConditions
+							.visibilityOfElementLocated(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+				} catch (Exception e) {
+					try {
+						if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
+							Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+							driver.navigate().refresh();
+						}
+					} catch (Exception e1) {
+						Reporting.updateTestReport(
+								"Checkout button was not clickable in the cart page" + " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+
+				}
+			} catch (Exception e) {
+				Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(urls[2]);
 			try {
@@ -1921,23 +2038,32 @@ public class WEL_Test_Suite extends DriverModule {
 			}
 			ScrollingWebPage.PageDown(driver, SS_path);
 			BigDecimal thirdproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-			WEL.clickOnAddToCartButtonOnPDP();
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+				wait.until(ExpectedConditions.visibilityOfElementLocated(
+						By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 
-			} catch (Exception e) {
+				WEL.clickOnAddToCartButtonOnPDP();
 				try {
-					if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
-						Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-						driver.navigate().refresh();
-					}
-				} catch (Exception e1) {
-					Reporting.updateTestReport(
-							"Checkout button was not clickable in the cart page" + " and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+					wait.until(
+							ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+				} catch (Exception e) {
+					try {
+						if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
+							Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+							driver.navigate().refresh();
+						}
+					} catch (Exception e1) {
+						Reporting.updateTestReport(
+								"Checkout button was not clickable in the cart page" + " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+
+				}
+			} catch (Exception e) {
+				Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			BigDecimal subtotal = new BigDecimal(WEL.fetchOrderTotalOnCartPage().substring(1));
 			if (Firstproductprice.add(secondproductprice).add(thirdproductprice).compareTo(subtotal) == 0)
@@ -2121,6 +2247,7 @@ public class WEL_Test_Suite extends DriverModule {
 				ScrollingWebPage.PageDown(driver, SS_path);
 				Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 				firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+
 				WEL.clickOnAddToCartButtonOnPDP();
 			} catch (Exception e) {
 				driver.navigate().refresh();
@@ -2656,64 +2783,88 @@ public class WEL_Test_Suite extends DriverModule {
 			driver.get(urls[0]);
 			ScrollingWebPage.PageDown(driver, SS_path);
 			BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-			WEL.clickOnAddToCartButtonOnPDP();
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-			} catch (Exception e) {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(
+						By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+				WEL.clickOnAddToCartButtonOnPDP();
 				try {
-					if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
-						Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-						driver.navigate().refresh();
-					}
-				} catch (Exception e1) {
-					Reporting.updateTestReport(
-							"Checkout button was not clickable in the cart page" + " and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+					wait.until(
+							ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+				} catch (Exception e) {
+					try {
+						if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
+							Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+							driver.navigate().refresh();
+						}
+					} catch (Exception e1) {
+						Reporting.updateTestReport(
+								"Checkout button was not clickable in the cart page" + " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+
+				}
+			} catch (Exception e) {
+				Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(urls[1]);
 			ScrollingWebPage.PageDown(driver, SS_path);
 			BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-			WEL.clickOnAddToCartButtonOnPDP();
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-			} catch (Exception e) {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(
+						By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+				WEL.clickOnAddToCartButtonOnPDP();
 				try {
-					if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
-						Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-						driver.navigate().refresh();
-					}
-				} catch (Exception e1) {
-					Reporting.updateTestReport(
-							"Checkout button was not clickable in the cart page" + " and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+					wait.until(
+							ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+				} catch (Exception e) {
+					try {
+						if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
+							Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+							driver.navigate().refresh();
+						}
+					} catch (Exception e1) {
+						Reporting.updateTestReport(
+								"Checkout button was not clickable in the cart page" + " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+
+				}
+			} catch (Exception e) {
+				Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(urls[2]);
 			BigDecimal thirdproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-			WEL.clickOnAddToCartButtonOnPDP();
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-			} catch (Exception e) {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(
+						By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+				WEL.clickOnAddToCartButtonOnPDP();
 				try {
-					if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
-						Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-						driver.navigate().refresh();
-					}
-				} catch (Exception e1) {
-					Reporting.updateTestReport(
-							"Checkout button was not clickable in the cart page" + " and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+					wait.until(
+							ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+				} catch (Exception e) {
+					try {
+						if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
+							Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+							driver.navigate().refresh();
+						}
+					} catch (Exception e1) {
+						Reporting.updateTestReport(
+								"Checkout button was not clickable in the cart page" + " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+
+				}
+			} catch (Exception e) {
+				Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			BigDecimal subtotal = new BigDecimal(WEL.fetchOrderTotalOnCartPage().substring(1));
 			if (Firstproductprice.add(secondproductprice).add(thirdproductprice).compareTo(subtotal) == 0)
@@ -2891,197 +3042,224 @@ public class WEL_Test_Suite extends DriverModule {
 							BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 									WEL.fetchOldPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
-							WEL.ClickWELIconCheckoutPage();
-
 							try {
-								wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-										"//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_3']/a[2]")));
-								ScrollingWebPage.PageDown(driver, SS_path);
-								WEL.ClickOnCAIAProduct();
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								WEL.clickOnAddToCartButtonOnPDP();
+								WEL.ClickWELIconCheckoutPage();
+
 								try {
-									wait.until(ExpectedConditions.elementToBeClickable(
-											By.xpath("(//div[@class='row banner-position']//div[3]//button)[1]")));
-									WEL.ClickOnLevel1TestBankForCAIAProduct();
+									wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+											"//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_3']/a[2]")));
+									ScrollingWebPage.PageDown(driver, SS_path);
+									WEL.ClickOnCAIAProduct();
 									try {
-
 										wait.until(ExpectedConditions.elementToBeClickable(
-												By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
-										ScrollingWebPage.PageDown(driver, SS_path);
-										BigDecimal secondproductprice = new BigDecimal(
-												WEL.fetchProductPriceInPDP().substring(1));
-										WEL.clickOnAddToCartButtonOnPDP();
+												By.xpath("(//div[@class='row banner-position']//div[3]//button)[1]")));
+										WEL.ClickOnLevel1TestBankForCAIAProduct();
 										try {
-											wait.until(ExpectedConditions.elementToBeClickable(
-													By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
-										} catch (Exception e) {
+											wait.until(ExpectedConditions.elementToBeClickable(By
+													.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+											ScrollingWebPage.PageDown(driver, SS_path);
+											BigDecimal secondproductprice = new BigDecimal(
+													WEL.fetchProductPriceInPDP().substring(1));
 											try {
-												if (driver
-														.findElement(
-																By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-														.isDisplayed()) {
-													Reporting.updateTestReport(
-															"Server error came in cart page and the page was refreshed",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.INFO);
-													driver.navigate().refresh();
+												wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+														"//button[@type='submit' and @class='add-to-cart-btn  ']")));
+												WEL.clickOnAddToCartButtonOnPDP();
+												try {
+													wait.until(ExpectedConditions.elementToBeClickable(
+															By.xpath("//button[@id='cartCheckoutBtn']/span")));
+
+												} catch (Exception e) {
+													try {
+														if (driver
+																.findElement(By.xpath(
+																		"//h1[contains(text(),'SERVER ERROR (500)')]"))
+																.isDisplayed()) {
+															Reporting.updateTestReport(
+																	"Server error came in cart page and the page was refreshed",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.INFO);
+															driver.navigate().refresh();
+														}
+													} catch (Exception e1) {
+														Reporting.updateTestReport(
+																"Checkout button was not clickable in the cart page"
+																		+ " and caused timeout exception",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+													}
+
 												}
-											} catch (Exception e1) {
+											} catch (Exception e) {
 												Reporting.updateTestReport(
-														"Checkout button was not clickable in the cart page"
-																+ " and caused timeout exception",
+														"Failed to click on Add To Cart button due to timeout exception",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 
-										}
-										BigDecimal subtotal = new BigDecimal(
-												WEL.fetchOrderTotalOnCartPage().substring(1));
-										if (Firstproductprice.add(secondproductprice).compareTo(subtotal) == 0)
-											Reporting.updateTestReport(
-													"The addition of all the products' price is same as the subtotal in cart page",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										else
-											Reporting.updateTestReport(
-													"The addition of all the products' pricedidn't match with the subtotal in cart page",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										WEL.ClickonCheckOutOnCartPage();
-										String GuestEmail = WEL.EnterGuestUser();
-										WEL.ClickingOnCreateAccoutButton();
-										WEL.GuestConfirmEmailId(GuestEmail);
-										WEL.EnterPassword(
-												excelOperation.getTestData("TC15", "WEL_Test_Data", "Password"));
-										WEL.ClickonAgreementCheckBox();
-										WEL.ClickingOnSaveAndContinue();
-										WEL.GuestFirstName(
-												excelOperation.getTestData("TC20", "WEL_Test_Data", "Guest_Fname"));
-										WEL.GuestLastName(
-												excelOperation.getTestData("TC20", "WEL_Test_Data", "Guest_Lname"));
-										WEL.selectShipCountry(
-												excelOperation.getTestData("TC20", "WEL_Test_Data", "Sh_Country"));
-										WEL.ShipAddressLineOne(excelOperation.getTestData("TC20", "WEL_Test_Data",
-												"Sh_Address_line1"));
-										WEL.ShipPostCode(
-												excelOperation.getTestData("TC20", "WEL_Test_Data", "Sh_Zip_Code"));
-										WEL.ShipPhoneNumber(
-												excelOperation.getTestData("TC20", "WEL_Test_Data", "Sh_Phone_Number"));
-										WEL.ShipSaveAndContinueButton();
-										driver.switchTo().frame(
-												driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
-										try {
-											wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-											WEL.enterCardHolderName(
+											BigDecimal subtotal = new BigDecimal(
+													WEL.fetchOrderTotalOnCartPage().substring(1));
+											if (Firstproductprice.add(secondproductprice).compareTo(subtotal) == 0)
+												Reporting.updateTestReport(
+														"The addition of all the products' price is same as the subtotal in cart page",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											else
+												Reporting.updateTestReport(
+														"The addition of all the products' pricedidn't match with the subtotal in cart page",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+											WEL.ClickonCheckOutOnCartPage();
+											String GuestEmail = WEL.EnterGuestUser();
+											WEL.ClickingOnCreateAccoutButton();
+											WEL.GuestConfirmEmailId(GuestEmail);
+											WEL.EnterPassword(
+													excelOperation.getTestData("TC15", "WEL_Test_Data", "Password"));
+											WEL.ClickonAgreementCheckBox();
+											WEL.ClickingOnSaveAndContinue();
+											WEL.GuestFirstName(
 													excelOperation.getTestData("TC20", "WEL_Test_Data", "Guest_Fname"));
-											driver.switchTo().defaultContent();
-											driver.switchTo().frame(
-													driver.findElement(By.xpath(".//iframe[@title='card number']")));
-											WEL.enterCardNumber(
-													excelOperation.getTestData("TC20", "WEL_Test_Data", "Card_Number"));
-											driver.switchTo().defaultContent();
-											driver.switchTo().frame(
-													driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-											WEL.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC20",
-													"WEL_Test_Data", "Expiry_Month"));
-											driver.switchTo().defaultContent();
-											driver.switchTo().frame(
-													driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-											WEL.selectExpirationYearFromDropDown(
-													excelOperation.getTestData("TC20", "WEL_Test_Data", "Expiry_Year"));
-											driver.switchTo().defaultContent();
-											driver.switchTo().frame(
-													driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-											WEL.enterCVV_Number(
-													excelOperation.getTestData("TC20", "WEL_Test_Data", "CVV"));
-											driver.switchTo().defaultContent();
-											WEL.SaveAndContinueCheckOut();
+											WEL.GuestLastName(
+													excelOperation.getTestData("TC20", "WEL_Test_Data", "Guest_Lname"));
+											WEL.selectShipCountry(
+													excelOperation.getTestData("TC20", "WEL_Test_Data", "Sh_Country"));
+											WEL.ShipAddressLineOne(excelOperation.getTestData("TC20", "WEL_Test_Data",
+													"Sh_Address_line1"));
+											WEL.ShipPostCode(
+													excelOperation.getTestData("TC20", "WEL_Test_Data", "Sh_Zip_Code"));
+											WEL.ShipPhoneNumber(excelOperation.getTestData("TC20", "WEL_Test_Data",
+													"Sh_Phone_Number"));
+											WEL.ShipSaveAndContinueButton();
+											driver.switchTo().frame(driver
+													.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 											try {
-												wait.until(ExpectedConditions.visibilityOfElementLocated(
-														By.xpath("//div[@id='orderSummaryProductTotalValue']")));
-												// This statement is we are getting the firstProduct price in Order
-												// Review page
-												// and Storing in String Object
+												wait.until(
+														ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+												WEL.enterCardHolderName(excelOperation.getTestData("TC20",
+														"WEL_Test_Data", "Guest_Fname"));
+												driver.switchTo().defaultContent();
+												driver.switchTo().frame(driver
+														.findElement(By.xpath(".//iframe[@title='card number']")));
+												WEL.enterCardNumber(excelOperation.getTestData("TC20", "WEL_Test_Data",
+														"Card_Number"));
+												driver.switchTo().defaultContent();
+												driver.switchTo().frame(driver
+														.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+												WEL.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC20",
+														"WEL_Test_Data", "Expiry_Month"));
+												driver.switchTo().defaultContent();
+												driver.switchTo().frame(
+														driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+												WEL.selectExpirationYearFromDropDown(excelOperation.getTestData("TC20",
+														"WEL_Test_Data", "Expiry_Year"));
+												driver.switchTo().defaultContent();
+												driver.switchTo().frame(driver
+														.findElement(By.xpath(".//iframe[@title='securityCode']")));
+												WEL.enterCVV_Number(
+														excelOperation.getTestData("TC20", "WEL_Test_Data", "CVV"));
+												driver.switchTo().defaultContent();
+												WEL.SaveAndContinueCheckOut();
+												try {
+													wait.until(ExpectedConditions.visibilityOfElementLocated(
+															By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+													// This statement is we are getting the firstProduct price in Order
+													// Review page
+													// and Storing in String Object
 
-												BigDecimal firstproductprice2 = new BigDecimal(
-														WEL.fetchFirstProductPriceInOrderReview().substring(1));
+													BigDecimal firstproductprice2 = new BigDecimal(
+															WEL.fetchFirstProductPriceInOrderReview().substring(1));
 
-												BigDecimal secondproductprice2 = new BigDecimal(
-														WEL.fetchSecondProductPriceInOrderReview().substring(1));
-												if (firstProductPriceWIthoutDiscount.compareTo(firstproductprice2) == 0)
-													Reporting.updateTestReport("The price of first product in PDP: "
-															+ firstProductPriceWIthoutDiscount
-															+ " is same as price in Order Review " + firstproductprice2,
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
-												else
+													BigDecimal secondproductprice2 = new BigDecimal(
+															WEL.fetchSecondProductPriceInOrderReview().substring(1));
+													if (firstProductPriceWIthoutDiscount
+															.compareTo(firstproductprice2) == 0)
+														Reporting.updateTestReport(
+																"The price of first product in PDP: "
+																		+ firstProductPriceWIthoutDiscount
+																		+ " is same as price in Order Review "
+																		+ firstproductprice2,
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
+													else
+														Reporting.updateTestReport(
+																"The price of first product in PDP: "
+																		+ firstProductPriceWIthoutDiscount
+																		+ " is not same as price in Order Review "
+																		+ firstproductprice2,
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+													if (secondproductprice.compareTo(secondproductprice2) == 0)
+														Reporting.updateTestReport(
+																"The price of second product in PDP: "
+																		+ secondproductprice
+																		+ " is same as price in Order Review "
+																		+ secondproductprice2,
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
+													else
+														Reporting.updateTestReport(
+																"The price of second product in PDP: "
+																		+ secondproductprice
+																		+ " is same not as price in Order Review "
+																		+ secondproductprice2,
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+													BigDecimal tax1 = new BigDecimal(
+															WEL.fetchTaxInOrderReview().substring(1));
+
+													String discount = WEL.fetchDiscountInOrderReview();
+													if (discount.contains(","))
+														discount = discount.replace(",", "");
+													BigDecimal discountinorderreview = new BigDecimal(
+															discount.substring(1));
+
+													BigDecimal totalprice = firstproductprice2.add(secondproductprice2)
+															.add(tax1).subtract(discountinorderreview);
+
+													String totalorderReview = WEL.fetchTotalInOrderReview();
+													if (totalorderReview.contains(","))
+														totalorderReview = totalorderReview.replace(",", "");
+													BigDecimal orderTotalPrice1 = new BigDecimal(
+															totalorderReview.substring(1));
+													if (totalprice.compareTo(orderTotalPrice1) == 0)
+														Reporting.updateTestReport(
+																"First Product price + Second Product price  -discount + Tax "
+																		+ " = Order total in Order Review step",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
+													else
+														Reporting.updateTestReport("First Product price + Tax "
+																+ " is not equal to Order total in Order Review step",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+
+												} catch (Exception e) {
 													Reporting.updateTestReport(
-															"The price of first product in PDP: "
-																	+ firstProductPriceWIthoutDiscount
-																	+ " is not same as price in Order Review "
-																	+ firstproductprice2,
+															"Order summary tab was not visible" + e.getMessage(),
 															CaptureScreenshot.getScreenshot(SS_path),
 															StatusDetails.FAIL);
-												if (secondproductprice.compareTo(secondproductprice2) == 0)
-													Reporting.updateTestReport(
-															"The price of second product in PDP: " + secondproductprice
-																	+ " is same as price in Order Review "
-																	+ secondproductprice2,
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
-												else
-													Reporting.updateTestReport(
-															"The price of second product in PDP: " + secondproductprice
-																	+ " is same not as price in Order Review "
-																	+ secondproductprice2,
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
-												BigDecimal tax1 = new BigDecimal(
-														WEL.fetchTaxInOrderReview().substring(1));
+												}
 
-												String discount = WEL.fetchDiscountInOrderReview();
-												if (discount.contains(","))
-													discount = discount.replace(",", "");
-												BigDecimal discountinorderreview = new BigDecimal(
-														discount.substring(1));
-
-												BigDecimal totalprice = firstproductprice2.add(secondproductprice2)
-														.add(tax1).subtract(discountinorderreview);
-
-												String totalorderReview = WEL.fetchTotalInOrderReview();
-												if (totalorderReview.contains(","))
-													totalorderReview = totalorderReview.replace(",", "");
-												BigDecimal orderTotalPrice1 = new BigDecimal(
-														totalorderReview.substring(1));
-												if (totalprice.compareTo(orderTotalPrice1) == 0)
-													Reporting.updateTestReport(
-															"First Product price + Second Product price  -discount + Tax "
-																	+ " = Order total in Order Review step",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
-												else
-													Reporting.updateTestReport("First Product price + Tax "
-															+ " is not equal to Order total in Order Review step",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
+												WEL.clickOnPlaceOrderButton();
+												String orderID = WEL.fetchOrderId();
+												excelOperation.updateTestData("TC20", "WEL_Test_Data", "Order_Id",
+														orderID);
+												ScrollingWebPage.PageDown(driver, SS_path);
+												String tax = WEL.fetchTaxAmount();
+												excelOperation.updateTestData("TC20", "WEL_Test_Data", "Tax", tax);
+												String orderTotal = WEL.fetchOrderTotal();
+												excelOperation.updateTestData("TC20", "WEL_Test_Data", "Order_Total",
+														orderTotal);
 
 											} catch (Exception e) {
 												Reporting.updateTestReport(
-														"Order summary tab was not visible" + e.getMessage(),
+														"The name field in card information step was not clickable and caused timeout exception",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
-
-											WEL.clickOnPlaceOrderButton();
-											String orderID = WEL.fetchOrderId();
-											excelOperation.updateTestData("TC20", "WEL_Test_Data", "Order_Id", orderID);
-											ScrollingWebPage.PageDown(driver, SS_path);
-											String tax = WEL.fetchTaxAmount();
-											excelOperation.updateTestData("TC20", "WEL_Test_Data", "Tax", tax);
-											String orderTotal = WEL.fetchOrderTotal();
-											excelOperation.updateTestData("TC20", "WEL_Test_Data", "Order_Total",
-													orderTotal);
-
 										} catch (Exception e) {
 											Reporting.updateTestReport(
-													"The name field in card information step was not clickable and caused timeout exception",
+													"Failed to click on Add To Cart button due to timeout exception",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 									} catch (Exception e) {
@@ -3459,200 +3637,216 @@ public class WEL_Test_Suite extends DriverModule {
 						By.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_1']/a[2]")));
 				ScrollingWebPage.PageDown(driver, SS_path);
 				WEL.ClickonCMAProduct();
-			} catch (Exception e) {
-				Reporting.updateTestReport("Failed to click on CMA Product  due to timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
 
-			try {
-				wait.until(ExpectedConditions
-						.elementToBeClickable(By.xpath("(//button[contains(text(),'EXPLORE COURSES')])[1]")));
-				WEL.ClickonExploreCourseCMAProduct();
 				try {
 					wait.until(ExpectedConditions
-							.presenceOfElementLocated(By.xpath("(//div[@class='container-fluid course-pkg-background']"
-									+ "//div[@class='card-footer bg-transparent course-pkg-cards-footer'])[1]//"
-									+ "button[contains(text(),'VIEW COURSE OPTIONS')]")));
-					ScrollingWebPage.PageDown(driver, SS_path);
-					WEL.ClickonViewCourseForCMAProduct();
+							.elementToBeClickable(By.xpath("(//button[contains(text(),'EXPLORE COURSES')])[1]")));
+					WEL.ClickonExploreCourseCMAProduct();
 					try {
-						wait.until(ExpectedConditions
-								.elementToBeClickable(By.xpath("//div[@class='btn-group btn-group-toggle']/label[1]")));
-						WEL.ClickonCMAPrinteBook();
-
+						wait.until(ExpectedConditions.presenceOfElementLocated(
+								By.xpath("(//div[@class='container-fluid course-pkg-background']"
+										+ "//div[@class='card-footer bg-transparent course-pkg-cards-footer'])[1]//"
+										+ "button[contains(text(),'VIEW COURSE OPTIONS')]")));
+						ScrollingWebPage.PageDown(driver, SS_path);
+						WEL.ClickonViewCourseForCMAProduct();
 						try {
-							wait.until(ExpectedConditions.presenceOfElementLocated(
-									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
-							ScrollingWebPage.PageDown(driver, SS_path);
-							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
-									WEL.fetchOldPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
-							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+							wait.until(ExpectedConditions.elementToBeClickable(
+									By.xpath("//div[@class='btn-group btn-group-toggle']/label[1]")));
+							WEL.ClickonCMAPrinteBook();
 
-							} catch (Exception e) {
-								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
-
-							}
-							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
-							if (price.compareTo(subtotal) == 0)
-								Reporting.updateTestReport(
-										"The addition of all the products' price is same as the subtotal in cart page",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							else
-								Reporting.updateTestReport(
-										"The addition of all the products' pricedidn't match with the subtotal in cart page",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							WEL.ClickonCheckOutOnCartPage();
-							WEL.EnterexistingUserName(
-									excelOperation.getTestData("TC16", "WEL_Test_Data", "Email_Address"));
-							WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC16", "WEL_Test_Data", "Password"));
-							WEL.ClickonLoginAndContinue();
-							WEL.ClickOnEnterNewAddressButtonOnShippingPage();
-							WEL.GuestFirstName(excelOperation.getTestData("TC24", "WEL_Test_Data", "Guest_Fname"));
-							WEL.GuestLastName(excelOperation.getTestData("TC24", "WEL_Test_Data", "Guest_Lname"));
-							WEL.selectShipCountry(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_Country"));
-							WEL.ShipAddressLineOne(
-									excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_Address_line1"));
-							WEL.ShipPostCode(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_Zip_Code"));
-							WEL.ShipTownCity(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_City/ Province"));
-							WEL.enterState(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_State"));
-							WEL.ShipPhoneNumber(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_Phone_Number"));
-							WEL.ShipSaveAndContinueButton();
 							try {
-								if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed())
-									WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
-							} catch (Exception e) {
-								Reporting.updateTestReport("Address Suggestiond page is not appering on Shipping page",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-							}
-							driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
-							try {
-								wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-								WEL.enterCardHolderName(
-										excelOperation.getTestData("TC03", "WEL_Test_Data", "Guest_Fname"));
-								driver.switchTo().defaultContent();
-								driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-								WEL.enterCardNumber(excelOperation.getTestData("TC16", "WEL_Test_Data", "Card_Number"));
-								driver.switchTo().defaultContent();
-								driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-								WEL.selectExpirationMonthFromDropDown(
-										excelOperation.getTestData("TC16", "WEL_Test_Data", "Expiry_Month"));
-								driver.switchTo().defaultContent();
-								driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-								WEL.selectExpirationYearFromDropDown(
-										excelOperation.getTestData("TC16", "WEL_Test_Data", "Expiry_Year"));
-								driver.switchTo().defaultContent();
-								driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-								WEL.enterCVV_Number(excelOperation.getTestData("TC16", "WEL_Test_Data", "CVV"));
-								driver.switchTo().defaultContent();
-								WEL.SaveAndContinueCheckOut();
+								wait.until(ExpectedConditions.presenceOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								ScrollingWebPage.PageDown(driver, SS_path);
+								BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+								BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
+										WEL.fetchOldPriceInPDP().substring(1));
 								try {
 									wait.until(ExpectedConditions.visibilityOfElementLocated(
-											By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+											By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+									WEL.clickOnAddToCartButtonOnPDP();
+									try {
+										wait.until(ExpectedConditions.elementToBeClickable(
+												By.xpath("//button[@id='cartCheckoutBtn']/span")));
+
+									} catch (Exception e) {
+										try {
+											if (driver
+													.findElement(
+															By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+													.isDisplayed()) {
+												Reporting.updateTestReport(
+														"Server error came in cart page and the page was refreshed",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+												driver.navigate().refresh();
+											}
+										} catch (Exception e1) {
+											Reporting.updateTestReport(
+													"Checkout button was not clickable in the cart page"
+															+ " and caused timeout exception",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										}
+
+									}
+								} catch (Exception e) {
+									Reporting.updateTestReport(
+											"Failed to click on Add To Cart button due to timeout exception",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+								BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
+								if (price.compareTo(subtotal) == 0)
+									Reporting.updateTestReport(
+											"The addition of all the products' price is same as the subtotal in cart page",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport(
+											"The addition of all the products' pricedidn't match with the subtotal in cart page",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								WEL.ClickonCheckOutOnCartPage();
+								WEL.EnterexistingUserName(
+										excelOperation.getTestData("TC16", "WEL_Test_Data", "Email_Address"));
+								WEL.EnterPasswordLoginPage(
+										excelOperation.getTestData("TC16", "WEL_Test_Data", "Password"));
+								WEL.ClickonLoginAndContinue();
+								WEL.ClickOnEnterNewAddressButtonOnShippingPage();
+								WEL.GuestFirstName(excelOperation.getTestData("TC24", "WEL_Test_Data", "Guest_Fname"));
+								WEL.GuestLastName(excelOperation.getTestData("TC24", "WEL_Test_Data", "Guest_Lname"));
+								WEL.selectShipCountry(
+										excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_Country"));
+								WEL.ShipAddressLineOne(
+										excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_Address_line1"));
+								WEL.ShipPostCode(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_Zip_Code"));
+								WEL.ShipTownCity(
+										excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_City/ Province"));
+								WEL.enterState(excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_State"));
+								WEL.ShipPhoneNumber(
+										excelOperation.getTestData("TC24", "WEL_Test_Data", "Sh_Phone_Number"));
+								WEL.ShipSaveAndContinueButton();
+								try {
+									if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp().isDisplayed())
+										WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+								} catch (Exception e) {
+									Reporting.updateTestReport(
+											"Address Suggestiond page is not appering on Shipping page",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+								}
+								driver.switchTo()
+										.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+								try {
+									wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+									WEL.enterCardHolderName(
+											excelOperation.getTestData("TC03", "WEL_Test_Data", "Guest_Fname"));
+									driver.switchTo().defaultContent();
+									driver.switchTo()
+											.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+									WEL.enterCardNumber(
+											excelOperation.getTestData("TC16", "WEL_Test_Data", "Card_Number"));
+									driver.switchTo().defaultContent();
+									driver.switchTo()
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+									WEL.selectExpirationMonthFromDropDown(
+											excelOperation.getTestData("TC16", "WEL_Test_Data", "Expiry_Month"));
+									driver.switchTo().defaultContent();
+									driver.switchTo()
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+									WEL.selectExpirationYearFromDropDown(
+											excelOperation.getTestData("TC16", "WEL_Test_Data", "Expiry_Year"));
+									driver.switchTo().defaultContent();
+									driver.switchTo()
+											.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+									WEL.enterCVV_Number(excelOperation.getTestData("TC16", "WEL_Test_Data", "CVV"));
+									driver.switchTo().defaultContent();
+									WEL.SaveAndContinueCheckOut();
 									try {
 										wait.until(ExpectedConditions.visibilityOfElementLocated(
 												By.xpath("//div[@id='orderSummaryProductTotalValue']")));
-										String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
-										if (orderprice.contains(","))
-											orderprice = orderprice.replace(",", "");
-										BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
-										if (firstProductPriceWIthoutDiscount.compareTo(orderproductprice) == 0)
+										try {
+											wait.until(ExpectedConditions.visibilityOfElementLocated(
+													By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+											String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
+											if (orderprice.contains(","))
+												orderprice = orderprice.replace(",", "");
+											BigDecimal orderproductprice = new BigDecimal(orderprice.substring(1));
+											if (firstProductPriceWIthoutDiscount.compareTo(orderproductprice) == 0)
+												Reporting.updateTestReport("The price of first product in PDP: "
+														+ firstProductPriceWIthoutDiscount
+														+ " is same as price in Order Review " + orderproductprice,
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											else
+												Reporting.updateTestReport("The price of first product in PDP: "
+														+ firstProductPriceWIthoutDiscount
+														+ " is not same as price in Order Review " + orderproductprice,
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											String discount = WEL.fetchDiscountInOrderReview();
+											if (discount.contains(","))
+												discount = discount.replace(",", "");
+											BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
+
+											BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
+											BigDecimal totalprice = orderproductprice.add(tax1)
+													.subtract(discountinorderreview);
+											String totalorderReview = WEL.fetchTotalInOrderReview();
+											if (totalorderReview.contains(","))
+												totalorderReview = totalorderReview.replace(",", "");
+											BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
+
+											if (totalprice.compareTo(orderTotalPrice) == 0)
+												Reporting.updateTestReport(
+														"First Product price + Tax - Discount"
+																+ " = Order total in Order Review step",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											else
+												Reporting.updateTestReport(
+														"First Product price + Tax "
+																+ " is not equal to Order total in Order Review step",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+										} catch (Exception e) {
 											Reporting.updateTestReport(
-													"The price of first product in PDP: "
-															+ firstProductPriceWIthoutDiscount
-															+ " is same as price in Order Review " + orderproductprice,
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										else
-											Reporting.updateTestReport("The price of first product in PDP: "
-													+ firstProductPriceWIthoutDiscount
-													+ " is not same as price in Order Review " + orderproductprice,
+													"Failed to fetch the first product price on Order Summary page"
+															+ e.getMessage(),
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										String discount = WEL.fetchDiscountInOrderReview();
-										if (discount.contains(","))
-											discount = discount.replace(",", "");
-										BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
-
-										BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-										BigDecimal totalprice = orderproductprice.add(tax1)
-												.subtract(discountinorderreview);
-										String totalorderReview = WEL.fetchTotalInOrderReview();
-										if (totalorderReview.contains(","))
-											totalorderReview = totalorderReview.replace(",", "");
-										BigDecimal orderTotalPrice = new BigDecimal(totalorderReview.substring(1));
-
-										if (totalprice.compareTo(orderTotalPrice) == 0)
-											Reporting.updateTestReport(
-													"First Product price + Tax - Discount"
-															+ " = Order total in Order Review step",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										else
-											Reporting.updateTestReport(
-													"First Product price + Tax "
-															+ " is not equal to Order total in Order Review step",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
+										}
 									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Failed to fetch the first product price on Order Summary page"
-														+ e.getMessage(),
+
+										Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
-								} catch (Exception e) {
 
-									Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
+									ScrollingWebPage.PageDown(driver, SS_path);
+
+									WEL.clickOnPlaceOrderButton();
+									String orderID = WEL.fetchOrderId();
+									excelOperation.updateTestData("TC24", "WEL_Test_Data", "Order_Id", orderID);
+									ScrollingWebPage.PageDown(driver, SS_path);
+									String tax = WEL.fetchTaxValue();
+									excelOperation.updateTestData("TC24", "WEL_Test_Data", "Tax", tax);
+									String orderTotal = WEL.fetchOrderTotal();
+									excelOperation.updateTestData("TC24", "WEL_Test_Data", "Order_Total", orderTotal);
+
+								} catch (Exception e) {
+									Reporting.updateTestReport(
+											"The name field in card information step was not clickable and caused timeout exception",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
-
-								ScrollingWebPage.PageDown(driver, SS_path);
-
-								WEL.clickOnPlaceOrderButton();
-								String orderID = WEL.fetchOrderId();
-								excelOperation.updateTestData("TC24", "WEL_Test_Data", "Order_Id", orderID);
-								ScrollingWebPage.PageDown(driver, SS_path);
-								String tax = WEL.fetchTaxValue();
-								excelOperation.updateTestData("TC24", "WEL_Test_Data", "Tax", tax);
-								String orderTotal = WEL.fetchOrderTotal();
-								excelOperation.updateTestData("TC24", "WEL_Test_Data", "Order_Total", orderTotal);
-
 							} catch (Exception e) {
-								Reporting.updateTestReport(
-										"The name field in card information step was not clickable and caused timeout exception",
+								Reporting.updateTestReport("Failed to AddToCart due to timeout exception",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 						} catch (Exception e) {
-							Reporting.updateTestReport("Failed to AddToCart due to timeout exception",
+							Reporting.updateTestReport("Failed to CMAPrint due to timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					} catch (Exception e) {
-						Reporting.updateTestReport("Failed to CMAPrint due to timeout exception",
+						Reporting.updateTestReport("Failed to click on View course and caused timeout exception",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				} catch (Exception e) {
-					Reporting.updateTestReport("Failed to click on View course and caused timeout exception",
+					Reporting.updateTestReport("Failed to click on Explore CMA Product  due to timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			} catch (Exception e) {
-				Reporting.updateTestReport("Failed to click on Explore CMA Product  due to timeout exception",
+				Reporting.updateTestReport("Failed to click on CMA Product  due to timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
@@ -3698,27 +3892,35 @@ public class WEL_Test_Suite extends DriverModule {
 							wait.until(ExpectedConditions.elementToBeClickable(
 									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
@@ -3845,23 +4047,31 @@ public class WEL_Test_Suite extends DriverModule {
 			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
 			Thread.sleep(2000);
 			BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-			WEL.clickOnAddToCartButtonOnPDP();
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-			} catch (Exception e) {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(
+						By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+				WEL.clickOnAddToCartButtonOnPDP();
 				try {
-					if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
-						Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-						driver.navigate().refresh();
-					}
-				} catch (Exception e1) {
-					Reporting.updateTestReport(
-							"Checkout button was not clickable in the cart page" + " and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+					wait.until(
+							ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+				} catch (Exception e) {
+					try {
+						if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
+							Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+							driver.navigate().refresh();
+						}
+					} catch (Exception e1) {
+						Reporting.updateTestReport(
+								"Checkout button was not clickable in the cart page" + " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+
+				}
+			} catch (Exception e) {
+				Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			BigDecimal subtotal = new BigDecimal(WEL.fetchOrderTotalOnCartPage().substring(1));
 			if (Firstproductprice.add(secondproductprice).compareTo(subtotal) == 0)
@@ -3924,27 +4134,35 @@ public class WEL_Test_Suite extends DriverModule {
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 									WEL.fetchOldPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
@@ -4089,27 +4307,35 @@ public class WEL_Test_Suite extends DriverModule {
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 									WEL.fetchOldPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
@@ -4320,27 +4546,35 @@ public class WEL_Test_Suite extends DriverModule {
 							WEL.ClickonApplyStudentDiscount();
 							WEL.ClickonswitchStudentDiscount();
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
@@ -4770,27 +5004,36 @@ public class WEL_Test_Suite extends DriverModule {
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 									WEL.fetchOldPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 
-							} catch (Exception e) {
+								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
@@ -4957,27 +5200,35 @@ public class WEL_Test_Suite extends DriverModule {
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 									WEL.fetchOldPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
@@ -5171,28 +5422,37 @@ public class WEL_Test_Suite extends DriverModule {
 								wait.until(ExpectedConditions
 										.elementToBeClickable(By.xpath("//button[contains(text(),'ADD TO CART')]")));
 								BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-
-								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									wait.until(ExpectedConditions
-											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-								} catch (Exception e) {
+									wait.until(ExpectedConditions.visibilityOfElementLocated(
+											By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+									WEL.clickOnAddToCartButtonOnPDP();
 									try {
-										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-												.isDisplayed()) {
-											Reporting.updateTestReport(
-													"Server error came in cart page and the page was refreshed",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-											driver.navigate().refresh();
-										}
-									} catch (Exception e1) {
-										Reporting.updateTestReport(
-												"Checkout button was not clickable in the cart page"
-														+ " and caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									}
+										wait.until(ExpectedConditions.elementToBeClickable(
+												By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+									} catch (Exception e) {
+										try {
+											if (driver
+													.findElement(
+															By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+													.isDisplayed()) {
+												Reporting.updateTestReport(
+														"Server error came in cart page and the page was refreshed",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+												driver.navigate().refresh();
+											}
+										} catch (Exception e1) {
+											Reporting.updateTestReport(
+													"Checkout button was not clickable in the cart page"
+															+ " and caused timeout exception",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										}
+
+									}
+								} catch (Exception e) {
+									Reporting.updateTestReport(
+											"Failed to click on Add To Cart button due to timeout exception",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 								BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 								if (price.compareTo(subtotal) == 0)
@@ -5336,27 +5596,35 @@ public class WEL_Test_Suite extends DriverModule {
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 									WEL.fetchOldPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
@@ -5510,27 +5778,36 @@ public class WEL_Test_Suite extends DriverModule {
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 									WEL.fetchOldPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 
-							} catch (Exception e) {
+								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
@@ -5688,27 +5965,35 @@ public class WEL_Test_Suite extends DriverModule {
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 									WEL.fetchOldPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
@@ -5898,27 +6183,35 @@ public class WEL_Test_Suite extends DriverModule {
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 									WEL.fetchOldPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
@@ -6113,27 +6406,35 @@ public class WEL_Test_Suite extends DriverModule {
 									.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
@@ -6434,23 +6735,31 @@ public class WEL_Test_Suite extends DriverModule {
 			BigDecimal price = new BigDecimal(WEL.fetchPartnerProductPriceInPDP().substring(1));
 			BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 					WEL.fetchLastPriceInPDPForPartner().substring(1));
-			WEL.clickOnAddToCartButtonOnPDP();
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-			} catch (Exception e) {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(
+						By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+				WEL.clickOnAddToCartButtonOnPDP();
 				try {
-					if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
-						Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-						driver.navigate().refresh();
-					}
-				} catch (Exception e1) {
-					Reporting.updateTestReport(
-							"Checkout button was not clickable in the cart page" + " and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
+					wait.until(
+							ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+				} catch (Exception e) {
+					try {
+						if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]")).isDisplayed()) {
+							Reporting.updateTestReport("Server error came in cart page and the page was refreshed",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+							driver.navigate().refresh();
+						}
+					} catch (Exception e1) {
+						Reporting.updateTestReport(
+								"Checkout button was not clickable in the cart page" + " and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+
+				}
+			} catch (Exception e) {
+				Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 			if (price.compareTo(subtotal) == 0)
@@ -6619,28 +6928,36 @@ public class WEL_Test_Suite extends DriverModule {
 						BigDecimal price = new BigDecimal(WEL.fetchPartnerProductPriceInPDP().substring(1));
 						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 								WEL.fetchLastPriceInPDPForPartner().substring(1));
-						WEL.clickOnAddToCartButtonOnPDP();
 						try {
+							wait.until(ExpectedConditions.visibilityOfElementLocated(
+									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							String subtotal = WEL.fetchOrderSubTotalInCartPage();
 							if (subtotal.equals("FREE"))
@@ -6795,29 +7112,36 @@ public class WEL_Test_Suite extends DriverModule {
 					BigDecimal price = new BigDecimal(WEL.fetchPartnerProductPriceInPDP().substring(1));
 					BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 							WEL.fetchLastPriceInPDPForPartner().substring(1));
-					WEL.clickOnAddToCartButtonOnPDP();
-
 					try {
+						wait.until(ExpectedConditions.visibilityOfElementLocated(
+								By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+						WEL.clickOnAddToCartButtonOnPDP();
+
 						try {
-							wait.until(ExpectedConditions
-									.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-						} catch (Exception e) {
 							try {
-								if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-										.isDisplayed()) {
-									Reporting.updateTestReport(
-											"Server error came in cart page and the page was refreshed",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-									driver.navigate().refresh();
-								}
-							} catch (Exception e1) {
-								Reporting.updateTestReport(
-										"Checkout button was not clickable in the cart page"
-												+ " and caused timeout exception",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
+								wait.until(ExpectedConditions
+										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+							} catch (Exception e) {
+								try {
+									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+											.isDisplayed()) {
+										Reporting.updateTestReport(
+												"Server error came in cart page and the page was refreshed",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+										driver.navigate().refresh();
+									}
+								} catch (Exception e1) {
+									Reporting.updateTestReport(
+											"Checkout button was not clickable in the cart page"
+													+ " and caused timeout exception",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+
+							}
+						} catch (Exception e) {
+							Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 						if (price.compareTo(subtotal) == 0)
@@ -7015,27 +7339,34 @@ public class WEL_Test_Suite extends DriverModule {
 						BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 								WEL.fetchOldPriceInPDP().substring(1));
-						WEL.clickOnAddToCartButtonOnPDP();
 						try {
-							wait.until(ExpectedConditions
-									.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-						} catch (Exception e) {
+							wait.until(ExpectedConditions.visibilityOfElementLocated(
+									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-										.isDisplayed()) {
-									Reporting.updateTestReport(
-											"Server error came in cart page and the page was refreshed",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-									driver.navigate().refresh();
-								}
-							} catch (Exception e1) {
-								Reporting.updateTestReport(
-										"Checkout button was not clickable in the cart page"
-												+ " and caused timeout exception",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
+								wait.until(ExpectedConditions
+										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+							} catch (Exception e) {
+								try {
+									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+											.isDisplayed()) {
+										Reporting.updateTestReport(
+												"Server error came in cart page and the page was refreshed",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+										driver.navigate().refresh();
+									}
+								} catch (Exception e1) {
+									Reporting.updateTestReport(
+											"Checkout button was not clickable in the cart page"
+													+ " and caused timeout exception",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+
+							}
+						} catch (Exception e) {
+							Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 						if (price.compareTo(subtotal) == 0)
@@ -7395,6 +7726,9 @@ public class WEL_Test_Suite extends DriverModule {
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 									WEL.fetchOldPriceInPDP().substring(1));
+							try {
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
 								wait.until(ExpectedConditions
@@ -7416,6 +7750,11 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
+							}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
