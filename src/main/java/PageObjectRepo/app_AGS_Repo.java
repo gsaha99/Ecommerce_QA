@@ -25,13 +25,24 @@ public class app_AGS_Repo {
 	AGS_Test_Suite AGS_Test;
 	public String SS_path=AGS_Test.SS_path;
 	
-	//XPaths
+	//Subscription option (Monthly / Yearly) page
+	
 	@FindBy(id = "yearly")
 	WebElement YearlySubscriptionButton;
 	@FindBy(id = "monthly")
 	WebElement MonthlySubscriptionButton;
+	
+	//Cart page
+	
 	@FindBy(xpath="(//button[contains(text(),'Continue')])[2]")
 	WebElement ContinueButtonCartPage;
+	@FindBy(id="discountCodeValue")
+	WebElement DiscountCode;
+	@FindBy(xpath="//button[@class='button form-button button-apply discount-code-apply']")
+	WebElement DiscountApply;
+	
+	//Login / Registration page
+	
 	@FindBy(id = "register.firstName")
 	WebElement FirstName;
 	@FindBy(id = "register.lastName")
@@ -46,6 +57,15 @@ public class app_AGS_Repo {
 	WebElement ConfirmPassword;
 	@FindBy(xpath="//button[text()='Create Account'] ")
 	WebElement CreateAccountButton;
+	@FindBy(name="j_username")
+	WebElement ExistingUserId;
+	@FindBy(name="j_password")
+	WebElement ExistingUserPassword;
+	@FindBy(xpath="//*[@id=\"loginForm\"]/div[2]/div/button")
+	WebElement LoginButton;
+	
+	//Billing address page during checkout
+	
 	@FindBy(id="addressFirstName")
 	WebElement AddressFirstName;
 	@FindBy(id="addressSurname")
@@ -66,6 +86,9 @@ public class app_AGS_Repo {
 	WebElement CheckBox;
 	@FindBy(id="saveBilling")
 	WebElement BillingContinue;
+	
+	//Card Information page
+	
 	@FindBy(id="number")
 	WebElement CardNumberWPG;
 	@FindBy(id="expiryMonth")
@@ -88,6 +111,9 @@ public class app_AGS_Repo {
 	WebElement CVC;
 	@FindBy(id="submit")
 	WebElement PaymentSubmit;
+	
+	//Order confirmation page
+	
 	@FindBy(xpath="//div[@class='table-order-row']/div[1]")
 	WebElement Order_Id;
 	@FindBy(xpath="//div[contains(text(),'Tax:')]/following-sibling::div[@class='table-order-cell']")
@@ -96,12 +122,9 @@ public class app_AGS_Repo {
 	WebElement OrderTotal;
 	@FindBy(xpath="//a[@href='/logout']")
 	WebElement LogoutButton;
-	@FindBy(name="j_username")
-	WebElement ExistingUserId;
-	@FindBy(name="j_password")
-	WebElement ExistingUserPassword;
-	@FindBy(xpath="//*[@id=\"loginForm\"]/div[2]/div/button")
-	WebElement LoginButton;
+	
+	//Change password tab in my account
+	
 	@FindBy(xpath="//span[text()=' My Account']")
 	WebElement MyAccountText;
 	@FindBy(xpath="//span[text()='Change Password']")
@@ -118,6 +141,9 @@ public class app_AGS_Repo {
 	WebElement SaveButtonResetPassword;
 	@FindBy(xpath="//div[@class='alert alert-info alert-dismissable']")
 	WebElement PasswordResetAlert;
+	
+	//Reset password from login page
+	
 	@FindBy(xpath = "//a[@class='recover-password']")
 	WebElement ForgotChangePassword;
 	@FindBy(id = "forgottenPwd.email")
@@ -142,10 +168,9 @@ public class app_AGS_Repo {
 	WebElement SubmitButtonInResetPasswordPage;	
 	@FindBy(xpath = "//div[@class='alert alert-info alert-dismissable']")
 	WebElement PasswordResetSuccessMessage;
-	@FindBy(id="discountCodeValue")
-	WebElement DiscountCode;
-	@FindBy(xpath="//button[@class='button form-button button-apply discount-code-apply']")
-	WebElement DiscountApply;
+	
+	//My profile tab in My account
+	
 	@FindBy(name = "firstName")
 	WebElement ProfileFirstName;	
 	@FindBy(name = "lastName")
@@ -154,12 +179,18 @@ public class app_AGS_Repo {
 	WebElement MyAccountPageSaveButton;
 	@FindBy(xpath="//div[@class='alert alert-info alert-dismissable']")
 	WebElement AlertMessageAfterUserDataUpdation;
+	
+	//Edit payment tab in My account
+	
 	@FindBy(xpath="//span[text()='Edit Payment']")
 	WebElement EditPayment;
 	@FindBy(xpath="//button[contains(text(),'Update Credit Card')]")
 	WebElement UpdateCreditCardButton;
 	@FindBy(xpath="//td[@class='card-number']")
 	WebElement CardNumberEditPayment;
+	
+	//Manage subscription tab in My account
+	
 	@FindBy(xpath="//input[@checked='checked']")
 	WebElement AutoRenewToggleOn;
 	@FindBy(id="auto_renew")

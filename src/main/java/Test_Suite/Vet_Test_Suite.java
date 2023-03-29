@@ -84,7 +84,7 @@ public class Vet_Test_Suite extends DriverModule {
 			WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("TC01", "VET_Test_Data", "URL"));
-			VET.clickOnGetStarted();
+			VET.addSubscriptionToCart();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[contains(text(),'Continue')])[2]")));
 				VET.clickOnContinueButton();
@@ -218,7 +218,7 @@ public class Vet_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC04_Login_During_Checkout");
 			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("TC04", "VET_Test_Data", "URL"));
-			VET.clickOnGetStarted();
+			VET.addSubscriptionToCart();
 			VET.clickOnContinueButton();
 			VET.enterExistingUserId(excelOperation.getTestData("TC04", "VET_Test_Data", "Email_Id"));
 			VET.enterExistingUserPassword(excelOperation.getTestData("TC04", "VET_Test_Data", "Password"));
@@ -342,7 +342,7 @@ public class Vet_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC07_Verify_Tax");
 			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("TC07", "VET_Test_Data", "URL"));
-			VET.clickOnGetStarted();
+			VET.addSubscriptionToCart();
 			VET.clickOnContinueButton();
 			VET.enterFirstName(excelOperation.getTestData("TC07", "VET_Test_Data", "First_Name"));
 			VET.enterLastName(excelOperation.getTestData("TC07", "VET_Test_Data", "Last_Name"));
@@ -913,7 +913,7 @@ public class Vet_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("TC21", "VET_Test_Data", "URL"));
-			VET.clickOnGetStarted();
+			VET.addSubscriptionToCart();
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'My Cart')]")));
 				System.out.println("Cart page came");

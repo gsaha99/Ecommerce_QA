@@ -31,6 +31,23 @@ public class app_VET_Repo {
 	Vet_Test_Suite Vet_Test;
 	public String SS_path=Vet_Test.SS_path;
 	
+	//Subscription option page
+	
+	@FindBy(xpath="(//button[@class='button price-box-button null'])[2]")
+	WebElement GetStarted;
+	
+	
+	//Cart page
+	
+	@FindBy(id="discountCodeValue")
+	WebElement DiscountCode;
+	@FindBy(xpath="//button[@class='button form-button button-apply discount-code-apply vet-orange-shade-bg vet-pencil-gray-color']")
+	WebElement DiscountApply;
+	@FindBy(xpath="//button[@class='button form-button button-continue checkoutButton vet-orange-shade-bg vet-pencil-gray-color']")
+	WebElement CartContinue;
+	
+	//Login / Registration page
+	
 	@FindBy(id = "register.firstName")
 	WebElement FirstName;
 	@FindBy(id = "register.lastName")
@@ -51,6 +68,11 @@ public class app_VET_Repo {
 	WebElement ExistingUserPassword;
 	@FindBy(xpath="//*[@id='loginForm']/div[2]/div/button")
 	WebElement LoginButton;
+	@FindBy(id = "submit")
+	WebElement SumbitButton;
+	
+	//Change password tab in my account
+	
 	@FindBy(xpath="//span[text()='Change Password']")
 	WebElement ChangePassword;
 	@FindBy(id="currentPassword")
@@ -64,13 +86,14 @@ public class app_VET_Repo {
 	@FindBy(xpath="//div[@class='alert alert-info alert-dismissable vetAlertBoxInfo']")
 	WebElement PasswordResetAlert;
 	@FindBy(xpath="//a[@href='/logout']")
-	WebElement LogoutButton;	
-	@FindBy(id="discountCodeValue")
-	WebElement DiscountCode;
-	@FindBy(xpath="//button[@class='button form-button button-apply discount-code-apply vet-orange-shade-bg vet-pencil-gray-color']")
-	WebElement DiscountApply;
-	@FindBy(xpath="//button[@class='button form-button button-continue checkoutButton vet-orange-shade-bg vet-pencil-gray-color']")
-	WebElement CartContinue;
+	WebElement LogoutButton;
+	@FindBy(xpath="//span[text()=' My Account']")
+	WebElement MyAccountText;
+	@FindBy(xpath="//span[text()='Change Password']")
+	WebElement ChangePasswordText;
+	
+	//Billing address page during checkout
+	
 	@FindBy(id="addressFirstName")
 	WebElement AddressFirstName;
 	@FindBy(id="addressSurname")
@@ -89,6 +112,13 @@ public class app_VET_Repo {
 	WebElement CheckBox;
 	@FindBy(id="saveBilling")
 	WebElement BillingContinue;
+	@FindBy(id = "address.country")
+	WebElement SelectCountryDropDown;
+	@FindBy(xpath = "(//button[contains(text(),'Continue')])[2]")
+	WebElement clickOnContinueButton;
+	
+	//Card Information page for WPS
+	
 	@FindBy(name="number")
 	WebElement CardNumber;
 	@FindBy(name="expiry")
@@ -97,46 +127,9 @@ public class app_VET_Repo {
 	WebElement CVC;
 	@FindBy(id="submit")
 	WebElement PaymentSubmit;
-	@FindBy(xpath="//div[@class='table-order-row']/div[1]")
-	WebElement OrderId;
-	@FindBy(xpath="//span[text()=' My Account']")
-	WebElement MyAccountText;
-	@FindBy(xpath="//span[text()='Change Password']")
-	WebElement ChangePasswordText;
-	@FindBy(xpath="//*[@id='root']/div/div[1]/div[2]/div[2]/form/button")
-	WebElement GetStarted;
-	@FindBy(xpath="//span[text()='Edit Payment']")
-	WebElement EditPayment;
-	@FindBy(xpath="//button[text()='Update Credit Card']")
-	WebElement UpdateCreditCardButton;
-	@FindBy(xpath="//div[text()='Change the credit card on file by entering a new one ']")
-	WebElement EditCardDetailsText;
-	@FindBy(xpath="//div[@class='edit-payment-card']/table[@class='card-info']/tbody/tr[2]/td/span")
-	WebElement UpdatedCardName;
-	@FindBy(xpath="//input[@name='j_username']")
-	WebElement UserNameHybrisBO;
-	@FindBy(xpath="//input[@name='j_password']")
-	WebElement PasswordHybrisBO;
-	@FindBy(xpath="//button[text()='Login']")
-	WebElement HybrisBOLoginButton;
-	@FindBy(xpath="//input[@placeholder='Filter Tree entries']")
-	WebElement SearchFieldInHybrisBO;
-	@FindBy(xpath="//span[text()='Wiley subscription']")
-	WebElement WileySubscriptionField;
-	@FindBy(xpath="//button[@title='Switch search mode']")
-	WebElement SearchButton;
-	@FindBy(id="saveBilling")
-	WebElement BillingAddressSaveButton;
-	@FindBy(xpath="//div[@class='alert alert-info alert-dismissable vetAlertBoxInfo']")
-	WebElement BillingAddresAltert;
-	@FindBy(xpath="//div[@class='yw-buttons-container z-div']/button[@class='yw-textsearch-searchbutton y-btn-primary z-button']")
-	WebElement SearchButtonBO;
-    @FindBy(xpath="//span[text()='Manage Subscriptions']")
-	WebElement ManageSubscription;
-	@FindBy(xpath="//input[@checked='checked']")
-	WebElement AutoRenewToggleOn;
-	@FindBy(id="auto_renew")
-	WebElement AutoRenewToggleButton;
+	
+	//Card Information page for WPG
+	
 	@FindBy(id="number")
 	WebElement CardNumberWPG;
 	@FindBy(id="expiryMonth")
@@ -151,6 +144,62 @@ public class app_VET_Repo {
 	WebElement SecurityCodeWPG;
 	@FindBy(xpath="//input[@value='Make Payment']")
 	WebElement MakePaymentButtonWPG;
+	
+	//Order confirmation page
+	
+	@FindBy(xpath="//div[@class='table-order-row']/div[1]")
+	WebElement OrderId;
+	@FindBy(xpath="//div[contains(text(),'Tax:')]/following-sibling::div[@class='table-order-cell vet-black-gray-color']")
+	WebElement Tax;
+	@FindBy(xpath="//div[contains(text(),'Total:')]/following-sibling::div[@class='table-order-cell vet-black-gray-color']")
+	WebElement OrderTotal;	
+	
+	//Edit payment tab in My account
+	
+	@FindBy(xpath="//span[text()='Edit Payment']")
+	WebElement EditPayment;
+	@FindBy(xpath="//button[text()='Update Credit Card']")
+	WebElement UpdateCreditCardButton;
+	@FindBy(xpath="//div[text()='Change the credit card on file by entering a new one ']")
+	WebElement EditCardDetailsText;
+	@FindBy(xpath="//div[@class='edit-payment-card']/table[@class='card-info']/tbody/tr[2]/td/span")
+	WebElement UpdatedCardName;
+	
+	//Hybris backoffice
+	
+	@FindBy(xpath="//input[@name='j_username']")
+	WebElement UserNameHybrisBO;
+	@FindBy(xpath="//input[@name='j_password']")
+	WebElement PasswordHybrisBO;
+	@FindBy(xpath="//button[text()='Login']")
+	WebElement HybrisBOLoginButton;
+	@FindBy(xpath="//input[@placeholder='Filter Tree entries']")
+	WebElement SearchFieldInHybrisBO;
+	@FindBy(xpath="//span[text()='Wiley subscription']")
+	WebElement WileySubscriptionField;
+	@FindBy(xpath="//button[@title='Switch search mode']")
+	
+	//Address information editing in My Account tab
+	
+	WebElement SearchButton;
+	@FindBy(id="saveBilling")
+	WebElement BillingAddressSaveButton;
+	@FindBy(xpath="//div[@class='alert alert-info alert-dismissable vetAlertBoxInfo']")
+	WebElement BillingAddresAltert;
+	@FindBy(xpath="//div[@class='yw-buttons-container z-div']/button[@class='yw-textsearch-searchbutton y-btn-primary z-button']")
+	WebElement SearchButtonBO;
+	
+	//Manage subscription tab in My account
+	
+    @FindBy(xpath="//span[text()='Manage Subscriptions']")
+	WebElement ManageSubscription;
+	@FindBy(xpath="//input[@checked='checked']")
+	WebElement AutoRenewToggleOn;
+	@FindBy(id="auto_renew")
+	WebElement AutoRenewToggleButton;
+	
+	//Reset password from login page
+	
 	@FindBy(xpath = "//a[@class='recover-password']")
 	WebElement ForgotChangePassword;
 	@FindBy(id = "forgottenPwd.email")
@@ -171,18 +220,16 @@ public class app_VET_Repo {
 	WebElement Resetsubmit;
 	@FindBy(xpath = "//div[@class='alert alert-info alert-dismissable vetAlertBoxInfo']/button[@type='button']")
 	WebElement PasswordResetMessage;
-	@FindBy(xpath = "(//button[contains(text(),'Get Started')])[2]")
-	WebElement clickOnGetStarted;
-	@FindBy(xpath = "(//button[contains(text(),'Continue')])[2]")
-	WebElement clickOnContinueButton;
-	@FindBy(id = "submit")
-	WebElement SumbitButton;		
+	
+	//My profile tab in My account
+	
 	@FindBy(name = "firstName")
 	WebElement ProfileFirstName;	
 	@FindBy(name = "lastName")
 	WebElement ProfileLastName;	
 	@FindBy(xpath = "//button[@type='submit']")
 	WebElement ProfileSaveButton;	
+	
 	@FindBy(id = "login")
 	WebElement YOPUserMailID;	
 	@FindBy(id = "refreshbut")
@@ -191,18 +238,13 @@ public class app_VET_Repo {
 	WebElement YOPMailLogo;	
 	@FindBy(xpath = "(((((//td[@align='center'])[1]//table//tbody//tr//td//table//tbody//tr//td)//following::td)[1]//table//tbody//tr//td//p)//following::p)[1]")
 	WebElement RefundAmount;
-	@FindBy(xpath="//div[contains(text(),'Tax:')]/following-sibling::div[@class='table-order-cell vet-black-gray-color']")
-	WebElement Tax;
-	@FindBy(xpath="//div[contains(text(),'Total:')]/following-sibling::div[@class='table-order-cell vet-black-gray-color']")
-	WebElement OrderTotal;
 	@FindBy(xpath = "//input[@placeholder='Enter your inbox here']")
 	WebElement YopmailEmailIdField;
 	@FindBy(xpath = "//button[@title='Check Inbox @yopmail.com']")
 	WebElement ArrowButton;
 	@FindBy(xpath = "(//main[@class='yscrollbar']/div/div/div/table/tbody/tr/td/center/table/tbody/tr/td)[2]/p[3]/a[contains(text(),'Click here to change your password')]")
 	WebElement ResetPasswordLink;
-	@FindBy(id = "address.country")
-	WebElement SelectCountryDropDown;
+	
 	
 	
 	/*
@@ -661,7 +703,6 @@ public class app_VET_Repo {
 	
 	/*
 	 * @Author: Anindita
-	 * @Added on 08/07/22
 	 * @Description: Clicks on the Edit payment button in My Account page
 	 */
 	public void clickOnEditPayment() throws IOException{
@@ -676,7 +717,6 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Author: Anindita
-	 * @Added on 08/07/22
 	 * @Description: Checks if user is in Edit payment tab in My Account page
 	 */
 	public void isEditPaymentPage() throws IOException{
@@ -690,7 +730,6 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Author: Anindita
-	 * @Added on 08/07/22
 	 * @Description: Clicks on the edit card details button in Edit payment tab in My Account page
 	 */
 	public void clickOnUpdateCreditCardButton() throws IOException{
@@ -704,7 +743,6 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Author: Anindita
-	 * @Added on 08/07/22
 	 * @Description: Checks if user is on the edit card details page
 	 */
 	public void isEditCardDetailsPage() throws IOException{
@@ -718,7 +756,6 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Author: Anindita
-	 * @Added on 08/07/22
 	 * @Description: Checks if the card details was updated or not
 	 */
 	public void isUpdatedCardLogoDisplayed() throws IOException{
@@ -734,7 +771,6 @@ public class app_VET_Repo {
 	
 	/*
 	 * @Author: Anindita
-	 * @Added on 11/07/22
 	 * @Description: Click on the billing address save button
 	 */
 	public void clickOnBillingSaveButton() throws IOException{
@@ -748,7 +784,6 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Author: Anindita
-	 * @Added on 11/07/22
 	 * @Description: Checks if the billing address updated alert is present or not
 	 */
 	public void checkIfAlertBoxDisplayedOnBillingAddressPage() throws IOException{
@@ -764,7 +799,6 @@ public class app_VET_Repo {
 	
 	/*
 	 * @Author: Anindita
-	 * @Added on 29/07/22
 	 * @Description: Checks if Order Got Placed 
 	 */
 	public boolean checkIfOrderPlaced() throws IOException{
@@ -788,7 +822,6 @@ public class app_VET_Repo {
     
     /*
 	 * @Author: Anindita
-	 * @Added on 01/08/22
 	 * @Description: Clicks on the manage subscription tab in my account page
 	 */
     public void clickOnManageSubscription() throws IOException{
@@ -803,7 +836,6 @@ public class app_VET_Repo {
     }
     /*
    	 * @Author: Anindita
-   	 * @Added on 01/08/22
    	 * @Description: Checks if the auto renew toggle is on in my account page
    	 */
     public boolean checkIfAutoRenewToggleOn() throws IOException{
@@ -824,7 +856,6 @@ public class app_VET_Repo {
     }
     /*
    	 * @Author: Anindita
-   	 * @Added on 01/08/22
    	 * @Description: Clicks on the auto renew toggle button in my account page
    	 */
     public void clickOnAutoRenewToggle() throws IOException{
@@ -919,17 +950,20 @@ public class app_VET_Repo {
     
     /*
 	 * @Author: Vishnu
+	 * @Description: Clicks on the forgot password link in the login page
 	 */
-	public void ForgotchangePassword() {
+	public void ForgotchangePassword() throws IOException {
 		try {
 			ForgotChangePassword.click();
+			Reporting.updateTestReport("The forgot password link was clicked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Fogot password link in login oage couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 	}
 	/*
 	 * @Author: Vishnu
-	 * 
+	 * @Description: Email id will be entered in the forgot password form
 	 */
 	public void RetriveLoginInfo(String forgottememail) throws IOException {
 		try {
@@ -943,7 +977,7 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Author: Vishnu
-	 * 
+	 * @Description: Clicks on the submit button
 	 */
 	public void clickOnSubmit() throws IOException {
 		try {
@@ -957,7 +991,7 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Author: Vishnu
-	 * 
+	 * @Description: Checks if the alert message was displayed after the password is reset
 	 */
 	public String AlertMessage() throws IOException {
 		try {
@@ -976,6 +1010,7 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Author: Vishnu
+	 * @Description: Enters the emailid in yopmail
 	 * 
 	 */
 	public void enteryopmail(String username) throws IOException {
@@ -991,6 +1026,7 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Author: Vishnu
+	 * @Description: Clicks on the Arrow icon after entering the email id in yopmail
 	 * 
 	 */
 	public void clickonbutton() throws IOException {
@@ -1009,6 +1045,7 @@ public class app_VET_Repo {
 	
 	/*
 	 * @Author: Vishnu
+	 * @Description: Enters the new password in reset password form
 	 * 
 	 */
 	public void ResetPwd(String upassword) throws IOException {
@@ -1025,7 +1062,7 @@ public class app_VET_Repo {
 
 	/*
 	 * @Author: Vishnu
-	 * 
+	 * @Description: Enters the new password in reset password confirm box 
 	 */
 	public void ResetConfirmPassword(String cpassword) throws IOException {
 		try {
@@ -1041,7 +1078,7 @@ public class app_VET_Repo {
 	
 	/*
 	 * @Author: Vishnu
-	 * 
+	 * @Description: Clicks on submit button in the reset password form
 	 */
 	public void ResetPassSubmit() throws IOException {
 		try {
@@ -1058,7 +1095,7 @@ public class app_VET_Repo {
 
 	/*
 	 * @Author: Vishnu
-	 * 
+	 * @Description: Checks the reset password success message , if displayed or not
 	 */
 	public String PasswordResetSuccess() throws IOException {
 		try {
@@ -1074,8 +1111,7 @@ public class app_VET_Repo {
 		return "";
 	}
 	
-	
-	//Arun
+
 	/*
 	 * Author : Arun 
 	 * Description :This clicking YOPMailLogo for Entering the New YOP MailID
@@ -1126,9 +1162,6 @@ public class app_VET_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
-	//********End yopmail*********
-	
 	
 
 	/*
@@ -1182,23 +1215,6 @@ public class app_VET_Repo {
 
 		}
 	}
-
-	
-	/*
-	 * Author : Arun 
-	 * Description :This Clicking on GetStartedButton
-	 */
-	public void clickOnGetStarted() throws IOException {
-
-		try {
-			clickOnGetStarted.click();
-			Reporting.updateTestReport("Get Started button was clicked successfully", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		}
-		catch (Exception e) {
-			Reporting.updateTestReport("Get Started button was not licked with the error message " + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
 	
 	/*
 	 * Author : Arun 
@@ -1234,7 +1250,6 @@ public class app_VET_Repo {
 	
 
 	/*
-	 * @Date: 02/01/23
 	 * @Author: Anindita
 	 * @Description: Fetches the tax from Order Confirmation page
 	 */
@@ -1253,7 +1268,6 @@ public class app_VET_Repo {
 	}
 	
 	/*
-	 * @Date: 02/01/23
 	 * @Author: Anindita
 	 * @Description: Fetches the Order total from Order Confirmation page
 	 */
@@ -1272,7 +1286,6 @@ public class app_VET_Repo {
 	}
 	
 	/*
-	 * @Date: 02/01/23
 	 * @Author: Anindita
 	 * @Description: Enters the email id in yopmail
 	 */
@@ -1291,7 +1304,6 @@ public class app_VET_Repo {
 	}
 	
 	/*
-	 * @Date: 02/01/23
 	 * @Author: Anindita
 	 * @Description: Clicks on the arrow button in yopmail
 	 */
@@ -1308,7 +1320,7 @@ public class app_VET_Repo {
 	}
 	
 	/*
-	 * @Date: 16/12/22
+	 * @Author: Anindita
 	 * @Description: Clicks on the reset password link in the mail
 	 */
 	public void clickOnResetPasswordLink() throws IOException {
@@ -1323,7 +1335,7 @@ public class app_VET_Repo {
 	}
 	
 	/*
-	 * @Date: 15/12/22
+	 * @Author: Anindita
 	 * Description : Select Country From DropDown in billing
 	 */
 	public void selectCountry(String country) throws IOException {
@@ -1340,8 +1352,8 @@ public class app_VET_Repo {
 	}
 	
 	/*
-	 * Date: 15/12/22
-	 * Description :Selecting State from Dropdpwn in Shipping Page
+	 * @Author: Anindita
+	 * @2Description :Selecting State from Dropdpwn in Shipping Page
 	 */
 	public void enterState(String state) throws IOException {
 		try {
