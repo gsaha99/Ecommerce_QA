@@ -49,7 +49,7 @@ public class DriverModule {
 			
 			//String browser ="firefox"; // Currently Chrome is hardcoded 
 			
-			String date = new SimpleDateFormat("hhmmss").format(new Date());			
+			String date = new SimpleDateFormat("ddmmyyyyhhmmss").format(new Date());			
 			String testSuiteName=context.getCurrentXmlTest().getClasses().stream()
 		               .findFirst().get().getName().substring(11);
 			
@@ -160,6 +160,7 @@ public class DriverModule {
 				
 				Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_In_"+browserName+"_"+date,
 						browserName,browserVersion,OS_Name);
+				LogTextFile.createTodayLog(testSuiteName+"_"+date);
 			}
 					
 		}
@@ -173,6 +174,7 @@ public class DriverModule {
 	public void CloseBrowser(){	
 
 		Reporting.summaryEndReport();
+		LogTextFile.closeLogFile();
 		driver.close();
 		driver.quit();
 

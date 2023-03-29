@@ -105,27 +105,33 @@ public class Reporting {
 			case FAIL :			
 				//test.log(Status.FAIL, MarkupHelper.createLabel(ObjectName,ExtentColor.RED ));
 				test.log(Status.FAIL, ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
+				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
 				break;
 
 			case PASS :
 				//test.log(Status.PASS, MarkupHelper.createLabel(ObjectName,ExtentColor.GREEN ));	
 				test.log(Status.PASS,ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
+				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
 							
 				break;
 				
 			case INFO :
 				test.log(Status.INFO, ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
+				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
 				break;
 
 			case WARNING :
 				test.log(Status.WARNING,ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
+				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
 				break;
 
 			case ERROR :
 				test.log(Status.SKIP, MarkupHelper.createLabel(ObjectName,ExtentColor.GREY ));
+				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
 				break;
 			default :
 				test.log(Status.INFO,MarkupHelper.createLabel(ObjectName,ExtentColor.BLUE ));
+				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
 			}
 		}catch(Exception e){ System.out.println(e.getMessage()); }
 

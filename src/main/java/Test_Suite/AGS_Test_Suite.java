@@ -24,6 +24,7 @@ import PageObjectRepo.app_AGS_Repo;
 import PageObjectRepo.app_Riskified_Repo;
 import utilities.CaptureScreenshot;
 import utilities.EmailValidation;
+import utilities.LogTextFile;
 import utilities.DriverModule;
 import utilities.PaymentGateway;
 import utilities.Reporting;
@@ -64,6 +65,7 @@ public class AGS_Test_Suite extends DriverModule {
 	public void TC01_Anonymous_User_Registration() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC01_Anonymous_User_Registration");
+			LogTextFile.writeTestCaseStatus("TC01_Anonymous_User_Registration", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
@@ -194,6 +196,7 @@ public class AGS_Test_Suite extends DriverModule {
 	public void TC02_User_Submit_Order_Monthly() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC02_User_Submit_Order_Monthly");
+			LogTextFile.writeTestCaseStatus("TC02_User_Submit_Order_Monthly", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
@@ -316,6 +319,7 @@ public class AGS_Test_Suite extends DriverModule {
 	public void TC03_Standalone_Registration_and_Login() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC03_Standalone_Registration_and_Login");
+			LogTextFile.writeTestCaseStatus("TC03_Standalone_Registration_and_Login", "Test case");
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
@@ -369,6 +373,7 @@ public class AGS_Test_Suite extends DriverModule {
 	public void TC04_Reset_Password_My_Account() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC04_Reset_Password_My_Account");
+			LogTextFile.writeTestCaseStatus("TC04_Reset_Password_My_Account", "Test case");
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
@@ -404,6 +409,7 @@ public class AGS_Test_Suite extends DriverModule {
 	public void TC05_ResetPasswordFromLoginPage() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC05_ResetPasswordFromLoginPage");
+			LogTextFile.writeTestCaseStatus("TC05_ResetPasswordFromLoginPage", "Test case");
 			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
 			AGS.clickOnForgotPassword();
 			AGS.enterEmailIdToGetResetPasswordMail(excelOperation.getTestData("TC05", "AGS_Test_Data", "Email_Id"));
@@ -434,6 +440,7 @@ public class AGS_Test_Suite extends DriverModule {
 	public void TC06_Zero_Dollar_Flow() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC06_Zero_Dollar_Flow");
+			LogTextFile.writeTestCaseStatus("TC06_Zero_Dollar_Flow", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
@@ -502,6 +509,7 @@ public class AGS_Test_Suite extends DriverModule {
 	public void TC07_Verify_tax_Non_US_Address() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC07_Verify_tax_Non_US_Address");
+			LogTextFile.writeTestCaseStatus("TC07_Verify_tax_Non_US_Address", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
@@ -629,6 +637,7 @@ public class AGS_Test_Suite extends DriverModule {
 	public void TC08_Place_Order_With_Discount_Code() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC08_Place_Order_With_Discount_Code");
+			LogTextFile.writeTestCaseStatus("TC08_Place_Order_With_Discount_Code", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
@@ -753,6 +762,7 @@ public class AGS_Test_Suite extends DriverModule {
 	public void TC09_Place_Order_With_Existing_User() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC09_Place_Order_With_Existing_User");
+			LogTextFile.writeTestCaseStatus("TC09_Place_Order_With_Existing_User", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
@@ -867,6 +877,7 @@ public class AGS_Test_Suite extends DriverModule {
 	public void TC10_Place_Order_Non_US_Address() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC10_Place_Order_Non_US_Address");
+			LogTextFile.writeTestCaseStatus("TC10_Place_Order_Non_US_Address", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
@@ -993,6 +1004,7 @@ public class AGS_Test_Suite extends DriverModule {
 	public void TC11_Edit_Profile() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC11_Edit_Profile");
+			LogTextFile.writeTestCaseStatus("TC11_Edit_Profile", "Test case");
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
@@ -1029,6 +1041,7 @@ public class AGS_Test_Suite extends DriverModule {
 	public void TC12_Edit_Billing_Address() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC12_Edit_Billing_Address");
+			LogTextFile.writeTestCaseStatus("TC12_Edit_Billing_Address", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
@@ -1087,6 +1100,7 @@ public class AGS_Test_Suite extends DriverModule {
 	public void TC13_Edit_Card_Details() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC13_Edit_Card_Details");
+			LogTextFile.writeTestCaseStatus("TC13_Edit_Card_Details", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
@@ -1150,6 +1164,7 @@ public class AGS_Test_Suite extends DriverModule {
 	public void TC14_Manage_Subscription_Auto_Renew_Toggle_validation() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC14_Manage_Subscription_Auto_Renew_Toggle_validation");
+			LogTextFile.writeTestCaseStatus("TC14_Manage_Subscription_Auto_Renew_Toggle_validation", "Test case");
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
@@ -1186,6 +1201,7 @@ public class AGS_Test_Suite extends DriverModule {
 	public void TC15_Riskified_Declined_Order() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC15_Riskified_Declined_Order");
+			LogTextFile.writeTestCaseStatus("TC15_Riskified_Declined_Order", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
 			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
