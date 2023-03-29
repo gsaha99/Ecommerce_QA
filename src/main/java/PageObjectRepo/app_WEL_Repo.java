@@ -1325,7 +1325,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Login button
 	 */
 
 	public void ClickonLoginButton() throws IOException {
@@ -1344,7 +1344,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on apply student Discount
 	 */
 
 	public void ClickonApplyStudentDiscount() throws IOException {
@@ -1363,7 +1363,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Apply STUDENT Discount on PDP page
 	 */
 
 	public void ClickonswitchStudentDiscount() throws IOException {
@@ -1382,7 +1382,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on ForgotPassword link
 	 */
 
 	public void ClickonForgotPassword() throws IOException {
@@ -1400,7 +1400,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter email address on ForgotPassword Page
 	 */
 
 	public void EnterEmailAddressOnForgotPassword(String Email) throws IOException {
@@ -1418,7 +1418,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Submit button on ForgotPassword Page
 	 */
 
 	public void ClickSubmitButtonnForgotPasswordPage() throws IOException {
@@ -1437,7 +1437,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the guest user
 	 */
 
 	public String EnterGuestUser() throws IOException {
@@ -1457,7 +1457,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Create Account Button
 	 */
 
 	public void ClickOnCreateAccountButton() throws IOException {
@@ -1476,7 +1476,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter Email address on Guest email page
 	 */
 
 	public void GuestConfirmEmailId(String emailId) throws IOException {
@@ -1494,7 +1494,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the Guest FirstName
 	 */
 
 	public void GuestFirstName(String GNAME) throws IOException {
@@ -1513,7 +1513,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the LastName
 	 */
 
 	public void GuestLastName(String GLNAME) throws IOException {
@@ -1532,7 +1532,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select the Country Billing Address Page
 	 */
 
 	public void selectBillCountry(String country) throws IOException {
@@ -1550,7 +1550,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select the country on Shipping Page
 	 */
 
 	public void selectShipCountry(String country) throws IOException {
@@ -1568,7 +1568,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the Address Line
 	 */
 
 	public void AddressLineOne(String ALineOne) throws IOException {
@@ -1586,7 +1586,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the Addrees Line on Shipping Page
 	 */
 
 	public void ShipAddressLineOne(String ALineOne) throws IOException {
@@ -1606,7 +1606,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter City Shipping Page
 	 */
 
 	public void EnterCity(String City) throws IOException {
@@ -1625,7 +1625,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select the City on Shipping Page
 	 */
 
 	public void ShipTownCity(String City) throws IOException {
@@ -1645,7 +1645,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter Zipcode
 	 */
 
 	public void EnterZipecode(String postalCode) throws IOException {
@@ -1662,7 +1662,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter PostCode on Shipping Page
 	 */
 
 	public void ShipPostCode(String postalCode) throws IOException {
@@ -1681,7 +1681,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter PhoneNumber on Shipping page
 	 */
 
 	public void EnterPhoneNumber(String pohnenumber) throws IOException {
@@ -1700,7 +1700,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter PhoneNumber on Shipping page
 	 */
 
 	public void ShipPhoneNumber(String pohnenumber) throws IOException {
@@ -1720,7 +1720,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter Existing user name on Login Page
 	 */
 
 	public void EnterexistingUserName(String username) throws IOException {
@@ -1738,7 +1738,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select the State from Drop down
 	 */
 
 	public void selectStateFromDropsown(String state) throws IOException {
@@ -1756,7 +1756,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter Password on Login Page
 	 */
 
 	public void EnterPasswordLoginPage(String Loginpassword) throws IOException {
@@ -1774,7 +1774,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter invalid Password on Login Page
 	 */
 
 	public void EnterInvalidPasswordLoginPage(String Loginpassword) throws IOException {
@@ -1792,7 +1792,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Login And Continue
 	 */
 
 	public void ClickonLoginAndContinue() throws IOException {
@@ -1811,7 +1811,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on ForgotPassword on Checkout page
 	 */
 
 	public void ClickonForgotPasswordOnCheckoutPage() throws IOException {
@@ -1828,7 +1828,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Account Icon
 	 */
 
 	public void ClickonAccountIcon() throws IOException {
@@ -1846,7 +1846,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on SignOut link
 	 */
 
 	public void ClickonSignOut() throws IOException {
@@ -1864,7 +1864,8 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Accept button on Wiley Privacy Agreement
+	 * page
 	 */
 
 	public void clickonAcceptButtonOnWileyWELPrivacyAgreement() throws IOException {
@@ -1882,7 +1883,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click Add Discount Code on Cart Page
 	 */
 
 	public void ClickOnAddaDiscountCode() throws IOException {
@@ -1897,12 +1898,13 @@ public class app_WEL_Repo {
 
 		}
 	}
+
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Entering Discount Code/Promo Code on cart
+	 * Page
 	 */
-
 	public void EnterDiscountCode(String PromoCode) throws IOException {
 		try {
 			DiscountLabel.sendKeys(PromoCode);
@@ -1918,7 +1920,8 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Entering Discount Code/Promo Code on cart
+	 * Page
 	 */
 
 	public void EnterExtraDiscountCode(String PromoCode) throws IOException {
@@ -1936,7 +1939,8 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Entering Discount Code/Promo Code on cart
+	 * Page
 	 */
 
 	public void EnterExtraDiscountCodeOnCartPage(String PromoCode) throws IOException {
@@ -1954,7 +1958,8 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Entering Discount Code/Promo Code on cart
+	 * Page
 	 */
 
 	public void EnterCouponExtraDiscountCode(String PromoCode) throws IOException {
@@ -1972,7 +1977,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Apply Discount Code/Promo Code on cart Page
 	 */
 
 	public void ClickOnDiscountApplyButton() throws IOException {
@@ -1990,7 +1995,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Back to Cart on Account Page
 	 */
 
 	public void ClickOnBackTOCart() throws IOException {
@@ -2009,7 +2014,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Removing the product from Cart Page
 	 */
 
 	public void ClickOnRemoveOnCartPage() throws IOException {
@@ -2028,7 +2033,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Account Icon on Cart Page
 	 */
 	public void ClickAccountCartPage() throws IOException {
 		try {
@@ -2045,7 +2050,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Cart Icon on Forgot Password Page
 	 */
 
 	public void ClickCartIconOnForgotPasswordPage() throws IOException {
@@ -2062,7 +2067,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on WEL Icon from Home Page
 	 */
 
 	public void ClickWELIconHomePage() throws IOException {
@@ -2080,7 +2085,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on WE Icon from CheckOut Page
 	 */
 
 	public void ClickWELIconCheckoutPage() throws IOException {
@@ -2098,7 +2103,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select and click on CIA Product
 	 */
 
 	public void ClickOnCIAProduct() throws IOException {
@@ -2115,7 +2120,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click and selecting the CAIA Product
 	 */
 
 	public void ClickOnCAIAProduct() throws IOException {
@@ -2133,7 +2138,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on SHopCourse link for CIA Product
 	 */
 
 	public void ClickOnShopCourseForCIAProduct() throws IOException {
@@ -2151,7 +2156,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Level1TestBank for CAIA Product
 	 */
 
 	public void ClickOnLevel1TestBankForCAIAProduct() throws IOException {
@@ -2169,7 +2174,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on view Course link for CIA product
 	 */
 
 	public void ClickOnViewCourseForCIAProduct() throws IOException {
@@ -2187,7 +2192,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select and click on CIA eBook Product
 	 */
 
 	public void ClickOnCIAeBook() throws IOException {
@@ -2204,7 +2209,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click and selecting the CIA Print product
 	 */
 
 	public void ClickOnCIAPrint() throws IOException {
@@ -2221,7 +2226,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select the Quantity for CIA Product on Cart Page
 	 */
 
 	public void ClickOnSelectQuantity() throws IOException {
@@ -2240,7 +2245,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on eBook for CFA Product
 	 */
 
 	public void ClickeBookforCFAProduct() throws IOException {
@@ -2259,7 +2264,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Save and COntinue button on Shipping Page
 	 */
 
 	public void ClickSaveAndContinueOnShippinInfoPage() throws IOException {
@@ -2278,7 +2283,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the Car holder name on Payment page
 	 */
 
 	public void enterCardHolderName(String cardHolderName) throws IOException {
@@ -2295,7 +2300,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the Card Number on Payment page
 	 */
 
 	public void enterCardNumber(String cardNumber) throws IOException {
@@ -2312,7 +2317,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select exipirationMonth on Payment page
 	 */
 
 	public void selectExpirationMonthFromDropDown(String month) throws IOException {
@@ -2329,7 +2334,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select the Expiration year on payment page
 	 */
 
 	public void selectExpirationYearFromDropDown(String year) throws IOException {
@@ -2346,7 +2351,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the CVV number on Payment page
 	 */
 
 	public void enterCVV_Number(String CVVNumber) throws IOException {
@@ -2362,7 +2367,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Place Order button on Order Summary Page
 	 */
 
 	public void clickOnPlaceOrderButton() throws IOException {
@@ -2378,7 +2383,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on FetchOrder Id on Order Confirmation Page
 	 */
 
 	public String fetchOrderId() throws IOException {
@@ -2397,7 +2402,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch the Tax amount on Order confirmation Page
 	 */
 
 	public String fetchTaxAmount() throws IOException {
@@ -2415,7 +2420,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch the tax value on Order Confirmation Page
 	 */
 
 	public String fetchTaxValue() throws IOException {
@@ -2433,7 +2438,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description:Method to fetch the Order Total On Order Confirmation Page
 	 */
 
 	public String fetchOrderTotal() throws IOException {
@@ -2451,7 +2456,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to selecting the USE existing address link Shipping page
 	 */
 
 	public void SelectingUSEButton() throws IOException {
@@ -2467,7 +2472,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Save and Continue button
 	 */
 
 	public void SaveContinueCheckOutPage() throws IOException {
@@ -2483,7 +2488,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to lick on Free Trial button
 	 */
 
 	public void clickOnFreeTrialButton() throws IOException {
@@ -2499,7 +2504,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Methof to enter the Free Trial FirstName
 	 */
 
 	public void FreeTrailFirstName(String FFName) throws IOException {
@@ -2516,7 +2521,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the last name free frail form
 	 */
 
 	public void FreeTrailLastName(String FLName) throws IOException {
@@ -2533,7 +2538,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter new user on Free trail form
 	 */
 
 	public String EnterFreeTrailNewtUser() throws IOException {
@@ -2553,7 +2558,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select the country on free trial form
 	 */
 
 	public void FreeTrailCountry(String country) throws IOException {
@@ -2571,7 +2576,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select the state from Free Trail form
 	 */
 
 	public void FreeTrailState(String Fstate) throws IOException {
@@ -2589,7 +2594,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the Password on Free Trail form
 	 */
 
 	public void FreeTrailPassword(String FPassword) throws IOException {
@@ -2606,7 +2611,8 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on checkbox for for Free Trail Terms and
+	 * Conditions
 	 */
 
 	public void FreeTrailTermsAndCOndtionsCheckBox() throws IOException {
@@ -2624,7 +2630,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on SignUp check box on Free Trail form
 	 */
 
 	public void FreeTrailSignUpCheckBox() throws IOException {
@@ -2642,7 +2648,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Sign In Button on Free Trail form
 	 */
 
 	public void FreeTrailSignInButton() throws IOException {
@@ -2659,7 +2665,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on WEL Icon on Free Trail form
 	 */
 
 	public void FreeTrailWELIcon() throws IOException {
@@ -2677,7 +2683,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter email address on Free Trail Form
 	 */
 
 	public void EnterFreeTrailEmail(String email) throws IOException {
@@ -2695,7 +2701,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to verify the CPA Text on Free trail form
 	 */
 
 	public String FreeTrailCPAText() throws IOException {
@@ -2714,7 +2720,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to verify the CIA text on Free Trail Form
 	 */
 
 	public String FreeTrailCIAText() throws IOException {
@@ -2733,7 +2739,8 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to validate the Shipping method validation on Shipping
+	 * Page
 	 */
 
 	public void ShippingMethodValidation() throws IOException {
@@ -2753,7 +2760,8 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to validate the model pop up Login button on Free -trail
+	 * form
 	 */
 
 	public void FreeTraiModelPopUpLoginButton() throws IOException {
@@ -2771,7 +2779,8 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Submit button Free Trail mode pop up login
+	 * button
 	 */
 
 	public void FreeTraiModelPopUpSubmitButton() throws IOException {
@@ -2789,7 +2798,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Add New Address Button on Shipping Page
 	 */
 
 	public void ClickOnAddNewAddressButton() throws IOException {
@@ -2807,7 +2816,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on WEL Icon on Order confirmation page
 	 */
 
 	public void ClickOnWELIconOrderConfirmationPage() throws IOException {
@@ -2825,7 +2834,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Account Icon on Order confirmation page
 	 */
 
 	public void ClickOnAccountIconFromOrderConfirmationPage() throws IOException {
@@ -2843,7 +2852,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on add new address on Shipping Page
 	 */
 
 	public void ClickOnEnterNewAddressButtonOnShippingPage() throws IOException {
@@ -2861,7 +2870,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on enter new address on Billing Page
 	 */
 
 	public void ClickOnEnterNewAddressButtonOnBillingPage() throws IOException {
@@ -2879,7 +2888,8 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click Use Selected Shipping Address doctor on button
+	 * Address doctor page
 	 */
 
 	public void clickOnUseSelectedShippingAddressButtonAddressDoctor() throws IOException {
@@ -2895,7 +2905,8 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click Use Selected Billing Address doctor on button
+	 * Address doctor page
 	 */
 
 	public void clickOnUseSelectedBillingAddressButtonAddressDoctor() throws IOException {
@@ -2911,7 +2922,8 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select use selected Shipping address on Address
+	 * doctor page
 	 */
 
 	public WebElement returnUseSelectedShippingAddressButtonAddressDoctorPopUp() {
@@ -2920,7 +2932,8 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select use selected Billing address on Address doctor
+	 * page
 	 */
 
 	public WebElement returnUseSelectedBillingAddressButtonAddressDoctorPopUp() {
@@ -2929,7 +2942,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter state on Shipping Page
 	 */
 
 	public void enterState(String state) throws IOException {
@@ -2948,7 +2961,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select the Paypal Option Payment Page
 	 */
 
 	public void SelectPayPalOption() throws IOException {
@@ -2964,7 +2977,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to select the PaypalCredit Option Payment Page
 	 */
 
 	public void SelectPayPalCreditOption() throws IOException {
@@ -2980,7 +2993,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Proceed to Paypal Option Payment Page
 	 */
 
 	public void ClickOnProceedToPayPal() throws IOException {
@@ -2996,7 +3009,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Proceed to PaypalCredit Option Payment Page
 	 */
 
 	public void ClickOnProceedToPayPalCredit() throws IOException {
@@ -3012,7 +3025,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the user name onPaypal page
 	 */
 
 	public void EnterPayPalUserName(String paypalusername) throws IOException {
@@ -3029,7 +3042,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click Next Button on Paypal lgon Page
 	 */
 
 	public void ClickOnNextButtonPayPalLoginPage() throws IOException {
@@ -3046,7 +3059,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click Paypasl password
 	 */
 
 	public void EnterPayPalPassword(String paypalpassword) throws IOException {
@@ -3063,7 +3076,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click o Paypal Login
 	 */
 
 	public void ClickOnPaypalLogin() throws IOException {
@@ -3081,7 +3094,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Paypal Review Order
 	 */
 
 	public void ClickOnPaypalReviewOrder() throws IOException {
@@ -3097,7 +3110,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Paypal credit Radio button
 	 */
 
 	public void ClickOnPaypalCreditRadioButton() throws IOException {
@@ -3427,7 +3440,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Verification Student for US
 	 */
 
 	public void VerificationOfStudentForUS() throws IOException {
@@ -3446,7 +3459,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Show more Option On Shipping Address Page
 	 */
 
 	public void ClickOnShowMoreShippingAddress() throws IOException {
@@ -3465,7 +3478,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch the Shipping Charge in Order Review Page
 	 */
 
 	public String fetchShippingChargeInOrderReview() throws IOException {
@@ -3488,7 +3501,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click USE button for existing shipping address
 	 */
 	public void ClickOnUseButtonForExistingShippingAddress() throws IOException {
 		try {
@@ -3507,7 +3520,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to validate verification of Student for NON Us Address
 	 */
 	public void VerificationOfStudentForNonUS() throws IOException {
 		try {
@@ -3526,7 +3539,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Edit Icon on Shippnig Page
 	 */
 	public void ClickOnEditIcononShippingPage() throws IOException {
 		try {
@@ -3545,7 +3558,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click Product Drop down
 	 */
 	public void ClickOnProductdropdown() throws IOException {
 		try {
@@ -3561,7 +3574,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on CPA Test Bank
 	 */
 	public void ClickOnCPATestBank() throws IOException {
 		try {
@@ -3577,7 +3590,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the University name on Text field
 	 */
 	public void EnterUniversityName(String universityname) throws IOException {
 		try {
@@ -3670,7 +3683,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on DeanDorton CMA Product
 	 */
 	public void ClickOnDeanDortonCMAProduct() throws IOException {
 		try {
@@ -3949,7 +3962,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click View Supplement for CPA Product
 	 */
 	public void ClickOnViewSupplementsforCPA() throws IOException {
 		try {
@@ -3965,7 +3978,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on View Supplement for CMA Product
 	 */
 	public void ClickOnViewSupplementsforCMA() throws IOException {
 		try {
@@ -3981,7 +3994,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on View Supplement for CFA Product
 	 */
 	public void ClickOnViewSupplementsforCFA() throws IOException {
 		try {
@@ -3997,7 +4010,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click Supplement product for CPA Product
 	 */
 	public void ClickOnSupplementsProductforCPA() throws IOException {
 		try {
@@ -4013,7 +4026,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Supplements for CMA product
 	 */
 	public void ClickOnSupplementsProductforCMA() throws IOException {
 		try {
@@ -4029,7 +4042,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Supplement Product for CFA Product
 	 */
 	public void ClickOnSupplementsProductforCFA() throws IOException {
 		try {
@@ -4045,7 +4058,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the firstname on Free trail form
 	 */
 	public String FreeTrialFirstName() throws IOException {
 		try {
@@ -4064,7 +4077,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the Last name on Free Trail form
 	 */
 	public String FreeTrailLastName() throws IOException {
 		try {
@@ -4083,7 +4096,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the email address on Free trail form
 	 */
 	public String FreeTrailEmail() throws IOException {
 		try {
@@ -4102,7 +4115,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter the password on Free Trail form
 	 */
 	public String FreeTrailPassword() throws IOException {
 		try {
@@ -4121,7 +4134,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter thr yopmail address in yopmail app
 	 */
 	public void enteryopmail(String username) throws IOException {
 		try {
@@ -4138,7 +4151,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to perform click button on yopmail app
 	 */
 	public void clickonbutton() throws IOException {
 		try {
@@ -4155,7 +4168,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Resetpassword link on yop mail app
 	 */
 	public void clickOnResetPasswordLink() throws IOException {
 		try {
@@ -4171,7 +4184,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to enter new password in Reset password page
 	 */
 	public void enterNewPasswordInResetPassword(String password) throws IOException {
 		try {
@@ -4188,7 +4201,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description:Method to enter confirm password in Reset password page
 	 */
 	public void enterConfirmPasswordInResetPassword(String password) throws IOException {
 		try {
@@ -4204,7 +4217,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to click on Submit button on Reset Password Page
 	 */
 	public void clickOnResetPasswordSubmit() throws IOException {
 		try {
@@ -4222,7 +4235,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch the First Product price on Order Summary Page
 	 */
 	public String fetchFirstProductPriceInOrderSummary() throws IOException {
 		try {
@@ -4243,7 +4256,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch the First Product price on Order Review Page
 	 */
 	public String fetchFirstProductPriceInOrderReview() throws IOException {
 		try {
@@ -4271,7 +4284,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch the second Product price on Order Review Page
 	 */
 	public String fetchSecondProductPriceInOrderReview() throws IOException {
 		try {
@@ -4296,7 +4309,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch the Third Product price on Order Review Page
 	 */
 	public String fetchThirdProductPriceInOrderReview() throws IOException {
 		try {
@@ -4321,7 +4334,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch the Tax in Order Review Page
 	 */
 	public String fetchTaxInOrderReview() throws IOException {
 		try {
@@ -4340,7 +4353,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description:Method to fetch the Order Total in Order Review Page
 	 */
 
 	public String fetchTotalInOrderReview() throws IOException {
@@ -4360,7 +4373,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch the Order Total in Cart Page
 	 */
 
 	public String fetchOrderTotalOnCartPage() throws IOException {
@@ -4386,7 +4399,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to validate shipping charge for multiple products
 	 */
 	public String ShippingChargeForMultipleProducts() throws IOException {
 		try {
@@ -4404,7 +4417,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch the Old price PDP Page
 	 */
 
 	public String fetchOldPriceInPDP() throws IOException {
@@ -4428,7 +4441,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch Last price in PDPD for Partner pages
 	 */
 
 	public String fetchLastPriceInPDPForPartner() throws IOException {
@@ -4453,7 +4466,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch the Partner product Price In PDP page
 	 */
 
 	public String fetchPartnerProductPriceInPDP() throws IOException {
@@ -4478,7 +4491,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch the Partner product Price In PDP page
 	 */
 
 	public String fetchProductPriceInPDP() throws IOException {
@@ -4503,7 +4516,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch the product price in PDP without Discount
 	 */
 
 	public String fetchProductPriceInPDPWithoutDiscount() throws IOException {
@@ -4528,7 +4541,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch the Subtotal in Cart Page
 	 */
 
 	public String fetchOrderSubTotalInCartPage() throws IOException {
@@ -4553,7 +4566,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch the Order total in Cart Page
 	 */
 
 	public String fetchOrderTotalInCartPage() throws IOException {
@@ -4571,7 +4584,7 @@ public class app_WEL_Repo {
 	/*
 	 * @Author:Vishnu
 	 * 
-	 * @Description:
+	 * @Description: Method to fetch the discountin Order Review Page
 	 */
 
 	public String fetchDiscountInOrderReview() throws IOException {
