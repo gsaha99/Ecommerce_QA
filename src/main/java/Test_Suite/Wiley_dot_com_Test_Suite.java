@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import PageObjectRepo.app_Wiley_Repo;
 import utilities.CaptureScreenshot;
 import utilities.DriverModule;
+import utilities.LogTextFile;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
@@ -62,7 +63,8 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	@Test
 	public void TC01_MicroSites() throws IOException {
 		try {
-			Reporting.test = Reporting.extent.createTest("TC01_MicroStes");
+			Reporting.test = Reporting.extent.createTest("TC01_MicroSites");
+			LogTextFile.writeTestCaseStatus("TC01_MicroStes", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC01", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			String title = driver.getTitle();
@@ -91,6 +93,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	public void TC02_ProductDetailsPage() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC02_ProductDetailsPage");
+			LogTextFile.writeTestCaseStatus("TC02_ProductDetailsPage", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC02", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.checkShopLinkInCartPageHeader();
@@ -121,6 +124,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	public void TC03_SiteFooter() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC03_SiteFooter");
+			LogTextFile.writeTestCaseStatus("TC03_SiteFooter", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC03", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			ScrollingWebPage.PageScrolldown(driver,0,19000,SS_path);
@@ -146,7 +150,8 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	public void TC04_404_Errorpage() throws IOException {
 		try {
 
-			Reporting.test = Reporting.extent.createTest("TC04_404 Error Page");
+			Reporting.test = Reporting.extent.createTest("TC04_404_Error_Page");
+			LogTextFile.writeTestCaseStatus("TC04_404_Error_Page", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC04", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			String pagenotfound = driver.getTitle();
@@ -173,7 +178,8 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	@Test
 	public void TC05_AboutUsPage() throws IOException {
 		try {
-			Reporting.test = Reporting.extent.createTest("TC05_About Us Page");
+			Reporting.test = Reporting.extent.createTest("TC05_About_Us_Page");
+			LogTextFile.writeTestCaseStatus("TC05_About_Us_Page", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC05", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			ScrollingWebPage.PageScrolldown(driver,0,29000,SS_path);
@@ -203,6 +209,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	public void TC06_SiteMap() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC06_SiteMap");
+			LogTextFile.writeTestCaseStatus("TC06_SiteMap", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 			driver.get(wiley.wileyURLConcatenation("TC06", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -243,6 +250,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 		try {
 
 			Reporting.test = Reporting.extent.createTest("TC07_ProductListPage");
+			LogTextFile.writeTestCaseStatus("TC07_ProductListPage", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC07", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.Entertextonsearcbar(excelOperation.getTestData("TC07", "WILEY_Dot_Com_Test_Data", "SearchBox_Text"));
@@ -284,6 +292,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 		try {
 
 			Reporting.test = Reporting.extent.createTest("TC08_HomePage");
+			LogTextFile.writeTestCaseStatus("TC08_HomePage", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC08", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			String titleofHomepgae = driver.getTitle();
@@ -312,6 +321,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 		try {
 
 			Reporting.test = Reporting.extent.createTest("TC09_SiteHeader");
+			LogTextFile.writeTestCaseStatus("TC09_SiteHeader", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC09", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.checkShopLinkInHomePageHeader();
@@ -338,6 +348,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 		try {
 
 			Reporting.test = Reporting.extent.createTest("TC10_SearchResultEmptyPage");
+			LogTextFile.writeTestCaseStatus("TC10_SearchResultEmptyPage", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC10", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.Entertextonsearcbar(excelOperation.getTestData("TC10", "WILEY_Dot_Com_Test_Data", "SearchBox_Text"));
@@ -368,6 +379,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 		try {
 
 			Reporting.test = Reporting.extent.createTest("TC11_Add_To_PopUp");
+			LogTextFile.writeTestCaseStatus("TC11_Add_To_PopUp", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC11", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.clickOnAddToCartButton();
@@ -389,6 +401,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	public void TC12_Content_Search_ResultPage() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC12_Content_Search_ResultPage");
+			LogTextFile.writeTestCaseStatus("TC12_Content_Search_ResultPage", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC12", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.Entertextonsearcbar(excelOperation.getTestData("TC12", "WILEY_Dot_Com_Test_Data", "SearchBox_Text"));
@@ -412,6 +425,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	public void TC13_Category_LandingPage() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC13_Category_LandingPage");
+			LogTextFile.writeTestCaseStatus("TC13_Category_LandingPage", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC13", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.ShopLinkHeaderCLPPage();
@@ -436,6 +450,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 		try {
 
 			Reporting.test = Reporting.extent.createTest("TC14_SearchBox");
+			LogTextFile.writeTestCaseStatus("TC14_SearchBox", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC14", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.ClickingOnHomePage();
@@ -459,6 +474,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	public void TC15_Product_Search_Results_Page_Facet_Validation() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC15_Product_Search_Results_Page");
+			LogTextFile.writeTestCaseStatus("TC15_Product_Search_Results_Page", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC15", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.Entertextonsearcbar(excelOperation.getTestData("TC15", "WILEY_Dot_Com_Test_Data", "SearchBox_Text"));
@@ -581,6 +597,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 	public void TC16_Sort_Functionality_In_SRP() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC16_Sort_Functionality_In_SRP");
+			LogTextFile.writeTestCaseStatus("TC16_Sort_Functionality_In_SRP", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC16", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.Entertextonsearcbar(excelOperation.getTestData("TC16", "WILEY_Dot_Com_Test_Data", "SearchBox_Text"));

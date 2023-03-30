@@ -21,6 +21,7 @@ import utilities.CaptureScreenshot;
 import utilities.PaymentGateway;
 import utilities.DriverModule;
 import utilities.EmailValidation;
+import utilities.LogTextFile;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
@@ -57,6 +58,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC01_SRP_For_WileyPLUS() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC01_SRP_For_WileyPLUS");
+			LogTextFile.writeTestCaseStatus("TC01_SRP_For_WileyPLUS", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC01", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -107,6 +109,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC02_PLP_For_WileyPLUS() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC02_PLP_For_WileyPLUS");
+			LogTextFile.writeTestCaseStatus("TC02_PLP_For_WileyPLUS", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC02", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -174,6 +177,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC03_EGRIP_Search_For_WileyPLUS() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC03_EGRIP_Search_For_WileyPLUS");
+			LogTextFile.writeTestCaseStatus("TC03_EGRIP_Search_For_WileyPLUS", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC03", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -216,6 +220,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC04_Bundle_Search_For_WileyPLUS() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC04_Bundle_Search_For_WileyPLUS");
+			LogTextFile.writeTestCaseStatus("TC04_Bundle_Search_For_WileyPLUS", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC04", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -258,6 +263,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC05_Check_If_URL_Not_Truncated_For_WileyPLUS() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC05_Check_If_URL_Not_Truncated_For_WileyPLUS");
+			LogTextFile.writeTestCaseStatus("TC05_Check_If_URL_Not_Truncated_For_WileyPLUS", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC05", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -307,6 +313,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC06_Format_Facet_WileyPLUS() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC06_Format_Facet_WileyPLUS");
+			LogTextFile.writeTestCaseStatus("TC06_Format_Facet_WileyPLUS", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC06", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -354,6 +361,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC07_Verify_Additional_UI_Adjustments_WileyPLUS_PDP() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC07_Verify_Additional_UI_Adjustments_WileyPLUS_PDP");
+			LogTextFile.writeTestCaseStatus("TC07_Verify_Additional_UI_Adjustments_WileyPLUS_PDP", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC07", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -404,6 +412,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC08_Validate_Percentage_In_Multiple_Term() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC08_Validate_Percentage_In_Multiple_Term");
+			LogTextFile.writeTestCaseStatus("TC08_Validate_Percentage_In_Multiple_Term", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC08", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -459,6 +468,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC09_PDP_UI_For_WileyPLUS() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC09_PDP_UI_For_WileyPLUS");
+			LogTextFile.writeTestCaseStatus("TC09_PDP_UI_For_WileyPLUS", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC09", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -512,6 +522,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC10_WileyPLUS_Set_To_MultiTerm_Default() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC10_WileyPLUS_Set_To_MultiTerm_Default");
+			LogTextFile.writeTestCaseStatus("TC10_WileyPLUS_Set_To_MultiTerm_Default", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC10", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -557,6 +568,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC11_New_Tab_Opened_After_Clicking_Login_To_WileyPLUS_Button() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC11_New_Tab_Opened_After_Clicking_Login_To_WileyPLUS_Button");
+			LogTextFile.writeTestCaseStatus("TC11_New_Tab_Opened_After_Clicking_Login_To_WileyPLUS_Button", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC11", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -616,6 +628,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC12_Add_WileyPLUS_Product_To_Cart() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC12_Add_WileyPLUS_Product_To_Cart");
+			LogTextFile.writeTestCaseStatus("TC12_Add_WileyPLUS_Product_To_Cart", "Test case");
 			driver.get(WileyPLUS.wileyURLConcatenation("TC12", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
 			WileyPLUS.checkIfUserIsOnCartPage(driver);
@@ -638,6 +651,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC13_Global_Country_List_In_Shipping() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC13_Global_Country_List_In_Shipping");
+			LogTextFile.writeTestCaseStatus("TC13_Global_Country_List_In_Shipping", "Test case");
 			driver.get(WileyPLUS.wileyURLConcatenation("TC13", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
 			WileyPLUS.checkIfUserIsOnCartPage(driver);
@@ -669,6 +683,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC14_Global_Country_List_In_Billing() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC14_Global_Country_List_In_Billing");
+			LogTextFile.writeTestCaseStatus("TC14_Global_Country_List_In_Billing", "Test case");
 			driver.get(WileyPLUS.wileyURLConcatenation("TC14", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
 			WileyPLUS.checkIfUserIsOnCartPage(driver);
@@ -700,6 +715,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC15_Course_Details_During_WileyPLUS_Checkout() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC15_Course_Details_During_WileyPLUS_Checkout");
+			LogTextFile.writeTestCaseStatus("TC15_Course_Details_During_WileyPLUS_Checkout", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC15", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -847,6 +863,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC16_Check_Global_Saved_Billing_Address() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC16_Check_Global_Saved_Billing_Address");
+			LogTextFile.writeTestCaseStatus("TC16_Check_Global_Saved_Billing_Address", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC16", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -957,6 +974,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC17_Check_Global_Saved_Shipping_Address() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC17_Check_Global_Saved_Shipping_Address");
+			LogTextFile.writeTestCaseStatus("TC17_Check_Global_Saved_Shipping_Address", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC17", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -1066,6 +1084,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC18_Check_ISBN_Not_Preset_In_WileyPLUS_PDP() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC18_Check_ISBN_Not_Preset_In_WileyPLUS_PDP");
+			LogTextFile.writeTestCaseStatus("TC18_Check_ISBN_Not_Preset_In_WileyPLUS_PDP", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC18", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -1113,6 +1132,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC19_Validate_Continue_Shopping_Link() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC19_Validate_Continue_Shopping_Link");
+			LogTextFile.writeTestCaseStatus("TC19_Validate_Continue_Shopping_Link", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC01", "WileyPLUS_Test_Data", "URL"));
 			driver.get(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "URL"));
@@ -1279,6 +1299,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC20_Place_WileyPLUS_CAD_Order_From_Frontend() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC20_Place_WileyPLUS_CAD_Order_From_Frontend");
+			LogTextFile.writeTestCaseStatus("TC20_Place_WileyPLUS_CAD_Order_From_Frontend", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC01", "WileyPLUS_Test_Data", "URL"));
 			driver.get(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "URL"));
@@ -1490,6 +1511,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC21_Place_WileyPLUS_USD_Order_From_Frontend() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC21_Place_WileyPLUS_USD_Order_From_Frontend");
+			LogTextFile.writeTestCaseStatus("TC21_Place_WileyPLUS_USD_Order_From_Frontend", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC01", "WileyPLUS_Test_Data", "URL"));
 			driver.get(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "URL"));
@@ -1712,6 +1734,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	public void TC22_Merge_Cart_Functionality() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC22_Merge_Cart_Functionality");
+			LogTextFile.writeTestCaseStatus("TC22_Merge_Cart_Functionality", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC01", "WileyPLUS_Test_Data", "URL"));
 			driver.get(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "URL"));
