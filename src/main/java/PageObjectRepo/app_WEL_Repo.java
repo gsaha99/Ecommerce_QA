@@ -938,7 +938,7 @@ public class app_WEL_Repo {
 	public void EnterPassword(String password) throws IOException {
 		try {
 			Password.sendKeys(password);
-			Reporting.updateTestReport("Password was entered successfully", CaptureScreenshot.getScreenshot(SS_path),
+			Reporting.updateTestReport("Password "+password+" entered successfully", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("Failed to enter the Password with the error message " + e.getClass().toString(),
@@ -1763,7 +1763,7 @@ public class app_WEL_Repo {
 		try {
 			LoginPassword.clear();
 			LoginPassword.sendKeys(Loginpassword);
-			Reporting.updateTestReport("Password  was entered successfully in the Password field",
+			Reporting.updateTestReport("Password  "+Loginpassword+" entered successfully in the Password field",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("Password was not entered with the error message " + e.getClass().toString(),
@@ -3691,7 +3691,7 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport("DeanDorton CMA product was clicked successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click on  DeanDorton CMPA product" + e.getClass().toString(),
+			Reporting.updateTestReport("Failed to click on  DeanDorton CMA product" + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -3705,6 +3705,7 @@ public class app_WEL_Repo {
 	 */
 	public void enterEmailIdInYopmail(String username) throws IOException {
 		try {
+			EnterEmailIdInYopmail.clear();
 			EnterEmailIdInYopmail.sendKeys(username);
 			Reporting.updateTestReport("Email entered : " + username + " was entered successfully ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);

@@ -26,6 +26,7 @@ import PageObjectRepo.app_WEL_Repo;
 import utilities.CaptureScreenshot;
 import utilities.DriverModule;
 import utilities.EmailValidation;
+import utilities.LogTextFile;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
@@ -64,6 +65,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC01_Standalone_UserRegistration() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC01_Standalone_UserRegistration");
+			LogTextFile.writeTestCaseStatus("TC01_Standalone_UserRegistration", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -118,6 +120,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC02_UserRegistration_DuringCheckoutForPhysicalCart() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC02_UserRegistration_DuringCheckoutForPhysicalCart");
+			LogTextFile.writeTestCaseStatus("TC02_UserRegistration_DuringCheckoutForPhysicalCart", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -219,6 +222,8 @@ public class WEL_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent
 					.createTest("TC03_UserRegistration_DuringCheckoutForDigitalCartwith_NonUSBillingAddress");
+			LogTextFile.writeTestCaseStatus(
+					"TC03_UserRegistration_DuringCheckoutForDigitalCartwith_NonUSBillingAddress", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -388,6 +393,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC04_LoginFor_NewlyRegisteredUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC04_LoginFor_NewlyRegisterUser");
+			LogTextFile.writeTestCaseStatus("TC04_LoginFor_NewlyRegisterUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -432,6 +438,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC05_UserLoginDuring_Checkout() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC05_UserLoginDuring_Checkout");
+			LogTextFile.writeTestCaseStatus("TC05_UserLoginDuring_Checkout", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -554,6 +561,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC06_Standalone_ForgotPassword() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC06_Standalone_ForgotPassword");
+			LogTextFile.writeTestCaseStatus("TC06_Standalone_ForgotPassword", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -628,6 +636,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC07_ForgotPasswordDuring_Checkout() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC07_ForgotPasswordDuring_Checkout");
+			LogTextFile.writeTestCaseStatus("TC07_ForgotPasswordDuring_Checkout", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -772,6 +781,8 @@ public class WEL_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent
 					.createTest("TC08_UserRedirection_ToForgotORChangePassword_PageAfter3Failed_AttemptsToLogin");
+			LogTextFile.writeTestCaseStatus(
+					"TC08_UserRedirection_ToForgotORChangePassword_PageAfter3Failed_AttemptsToLogin", "Test case");
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
@@ -811,6 +822,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC09_AddToCart_WithStudentDiscount_InAnonymousCart() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC09_AddToCart_WithStudentDiscount_InAnonymousCart");
+			LogTextFile.writeTestCaseStatus("TC09_AddToCart_WithStudentDiscount_InAnonymousCart", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -926,6 +938,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC10_AddToCart_WithPromoCode_InAnonymousCart() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC10_AddToCart_WithPromoCode_InAnonymousCart");
+			LogTextFile.writeTestCaseStatus("TC10_AddToCart_WithPromoCode_InAnonymousCart", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -1039,6 +1052,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC11_AddToCartFor_LoggedInUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC11_AddToCartFor_LoggedInUser");
+			LogTextFile.writeTestCaseStatus("TC11_AddToCartFor_LoggedInUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -1178,6 +1192,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC12_QunatityRestriction_ForPhysicalProduct() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC12_QunatityRestriction_ForPhysicalProduct");
+			LogTextFile.writeTestCaseStatus("TC12_QunatityRestriction_ForPhysicalProduct", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -1287,6 +1302,8 @@ public class WEL_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent
 					.createTest("TC13_PlaceOrder_WithmultipleProducts_And_PromotionForExistingUser");
+			LogTextFile.writeTestCaseStatus("TC13_PlaceOrder_WithmultipleProducts_And_PromotionForExistingUser",
+					"Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
@@ -1309,8 +1326,8 @@ public class WEL_Test_Suite extends DriverModule {
 				BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 				BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				try {
-					wait.until(ExpectedConditions.visibilityOfElementLocated(
-							By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+					wait.until(ExpectedConditions
+							.elementToBeClickable(By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 					WEL.clickOnAddToCartButtonOnPDP();
 
 					try {
@@ -1340,14 +1357,14 @@ public class WEL_Test_Suite extends DriverModule {
 				driver.get(urls[1]);
 
 				try {
-					wait.until(ExpectedConditions.presenceOfElementLocated(
+					wait.until(ExpectedConditions.visibilityOfElementLocated(
 							By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 					ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
 					BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 					BigDecimal secondProductPriceWIthoutDiscount = new BigDecimal(
 							WEL.fetchOldPriceInPDP().substring(1));
 					try {
-						wait.until(ExpectedConditions.visibilityOfElementLocated(
+						wait.until(ExpectedConditions.elementToBeClickable(
 								By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 						WEL.clickOnAddToCartButtonOnPDP();
 						try {
@@ -1512,7 +1529,6 @@ public class WEL_Test_Suite extends DriverModule {
 						excelOperation.updateTestData("TC13", "WEL_Test_Data", "Tax", tax);
 						String orderTotal = WEL.fetchOrderTotal();
 						excelOperation.updateTestData("TC13", "WEL_Test_Data", "Order_Total", orderTotal);
-
 						WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 					} catch (Exception e) {
 						Reporting.updateTestReport("Failed to click on CPAAdd To cart timeout exception",
@@ -1527,6 +1543,7 @@ public class WEL_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Failed to click on Add to cart button due to  timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -1544,6 +1561,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC14_ExtraDiscount_CouponCodeGOVT() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC14_ExtraDiscount_CouponCodeGOVT");
+			LogTextFile.writeTestCaseStatus("TC14_ExtraDiscount_CouponCodeGOVT", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -1567,7 +1585,7 @@ public class WEL_Test_Suite extends DriverModule {
 							ScrollingWebPage.PageDown(driver, SS_path);
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							try {
-								wait.until(ExpectedConditions.visibilityOfElementLocated(
+								wait.until(ExpectedConditions.elementToBeClickable(
 										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 								WEL.clickOnAddToCartButtonOnPDP();
 								try {
@@ -1655,6 +1673,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC15_PlaceOrder_CMACPACFA_DigitalProducts_ForNewUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC15_PlaceOrder_CMACPACFA_DigitalProducts_ForNewUser");
+			LogTextFile.writeTestCaseStatus("TC15_PlaceOrder_CMACPACFA_DigitalProducts_ForNewUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
@@ -1942,6 +1961,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC16_PlaceOrder_CMACPACFA_DigitalProducts_ForExistingUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC16_PlaceOrder_CMACPACFA_DigitalProducts_ForExistingUser");
+			LogTextFile.writeTestCaseStatus("TC16_PlaceOrder_CMACPACFA_DigitalProducts_ForExistingUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
@@ -2230,6 +2250,9 @@ public class WEL_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest(
 					"TC17_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForNewUser");
+			LogTextFile.writeTestCaseStatus(
+					"TC17_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForNewUser",
+					"Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
 			BigDecimal Firstproductprice;
@@ -2506,6 +2529,9 @@ public class WEL_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest(
 					"TC18_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForExistingUser");
+			LogTextFile.writeTestCaseStatus(
+					"TC18_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForExistingUser",
+					"Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
 			BigDecimal Firstproductprice;
@@ -2777,6 +2803,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC19_PlaceOrderOf_CPACMACFA_SupplementCourse_ForNewUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC19_PlaceOrderOf_CPACMACFA_SupplementCourse_ForNewUser");
+			LogTextFile.writeTestCaseStatus("TC19_PlaceOrderOf_CPACMACFA_SupplementCourse_ForNewUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			String urls[] = excelOperation.getTestData("TC19", "WEL_Test_Data", "URL").split(",");
@@ -3016,6 +3043,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC20_PlaceOrder_OfOther_ProductsCIACAIAFor_NewUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC20_PlaceOrder_OfOther_ProductsCIACAIAFor_NewUser");
+			LogTextFile.writeTestCaseStatus("TC20_PlaceOrder_OfOther_ProductsCIACAIAFor_NewUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -3314,6 +3342,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC21_PlaceOrder_CPACMACFA_FreeTrailFor_NewUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC21_PlaceOrder_CPACMACFA_FreeTrailFor_Newuser");
+			LogTextFile.writeTestCaseStatus("TC21_PlaceOrder_CPACMACFA_FreeTrailFor_Newuser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -3445,6 +3474,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC22_PlaceOrder_CPACMACFA_FreeTrailFor_ExistingUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC22_PlaceOrder_CPACMACFA_FreeTrailFor_ExistingUser");
+			LogTextFile.writeTestCaseStatus("TC22_PlaceOrder_CPACMACFA_FreeTrailFor_ExistingUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -3570,6 +3600,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC23_PlaceOrder_OfOther_ProductsCIA_FreeTrailFor_NewUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC23_PlaceOrder_OfOther_ProductsCIA_FreeTrailFor_NewUser");
+			LogTextFile.writeTestCaseStatus("TC23_PlaceOrder_OfOther_ProductsCIA_FreeTrailFor_NewUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -3628,6 +3659,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC24_PlaceOrder_UsingSavedShippingAddress_ForExistingUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC24_PlaceOrder_UsingSavedShippingAddress_ForExistingUser");
+			LogTextFile.writeTestCaseStatus("TC24_PlaceOrder_UsingSavedShippingAddress_ForExistingUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -3869,6 +3901,7 @@ public class WEL_Test_Suite extends DriverModule {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			Reporting.test = Reporting.extent.createTest("TC25_ShippingMethodfor_USUKAustralia_CanadaIndiaSingapore");
+			LogTextFile.writeTestCaseStatus("TC25_ShippingMethodfor_USUKAustralia_CanadaIndiaSingapore", "Test case");
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
@@ -3999,6 +4032,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC26_ShippingChargeFor_MultipleProducts() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC26_ShippingChargeFor_MultipleProducts");
+			LogTextFile.writeTestCaseStatus("TC26_ShippingChargeFor_MultipleProducts", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
@@ -4017,8 +4051,8 @@ public class WEL_Test_Suite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			BigDecimal Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			try {
-				wait.until(ExpectedConditions.visibilityOfElementLocated(
-						By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+				wait.until(ExpectedConditions
+						.elementToBeClickable(By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 				WEL.clickOnAddToCartButtonOnPDP();
 				try {
 					wait.until(
@@ -4048,8 +4082,8 @@ public class WEL_Test_Suite extends DriverModule {
 			Thread.sleep(2000);
 			BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			try {
-				wait.until(ExpectedConditions.visibilityOfElementLocated(
-						By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+				wait.until(ExpectedConditions
+						.elementToBeClickable(By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 				WEL.clickOnAddToCartButtonOnPDP();
 				try {
 					wait.until(
@@ -4084,6 +4118,7 @@ public class WEL_Test_Suite extends DriverModule {
 						"The addition of all the products' pricedidn't match with the subtotal in cart page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			ScrollingWebPage.PageDown(driver, SS_path);
 			WEL.ClickonCheckOutOnCartPage();
 			WEL.EnterexistingUserName(excelOperation.getTestData("TC26", "WEL_Test_Data", "Email_Address"));
 			WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC26", "WEL_Test_Data", "Password"));
@@ -4109,6 +4144,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC27_AddressSuggestion_ByAddressDoctorInShippingpage() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC27_AddressSuggestion_ByAddressDoctorInShippingpage");
+			LogTextFile.writeTestCaseStatus("TC27_AddressSuggestion_ByAddressDoctorInShippingpage", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -4280,6 +4316,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC28_StudentVerification_ForDigitalCartofUSANDNonUS() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC28_StudentVerification_ForDigitalCartofUSANDNonUS");
+			LogTextFile.writeTestCaseStatus("TC28_StudentVerification_ForDigitalCartofUSANDNonUS", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -4308,7 +4345,7 @@ public class WEL_Test_Suite extends DriverModule {
 							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 									WEL.fetchOldPriceInPDP().substring(1));
 							try {
-								wait.until(ExpectedConditions.visibilityOfElementLocated(
+								wait.until(ExpectedConditions.elementToBeClickable(
 										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 								WEL.clickOnAddToCartButtonOnPDP();
 								try {
@@ -4522,6 +4559,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC29_StudentVerification_ForPhysicalCartofUSANDNonUS() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC29_StudentVerification_ForPhysicalCartofUSANDNonUS");
+			LogTextFile.writeTestCaseStatus("TC29_StudentVerification_ForPhysicalCartofUSANDNonUS", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -4547,7 +4585,7 @@ public class WEL_Test_Suite extends DriverModule {
 							WEL.ClickonswitchStudentDiscount();
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							try {
-								wait.until(ExpectedConditions.visibilityOfElementLocated(
+								wait.until(ExpectedConditions.elementToBeClickable(
 										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 								WEL.clickOnAddToCartButtonOnPDP();
 								try {
@@ -4745,6 +4783,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC30_PlaceOrder_UsingSavedBillingAddress_ForExistingUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC30_PlaceOrder_UsingSavedBillingAddress_ForExistingUser");
+			LogTextFile.writeTestCaseStatus("TC30_PlaceOrder_UsingSavedBillingAddress_ForExistingUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -4979,6 +5018,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC31_ShippingAndBilling_AddressSamefor_NewUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC31_ShippingAndBilling_AddressSamefor_NewUser");
+			LogTextFile.writeTestCaseStatus("TC31_ShippingAndBilling_AddressSamefor_NewUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -5175,6 +5215,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC32_ShippingAndBilling_AddressDifferentfor_NewUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC32_ShippingAndBilling_AddressDifferentfor_NewUser");
+			LogTextFile.writeTestCaseStatus("TC32_ShippingAndBilling_AddressDifferentfor_NewUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -5395,6 +5436,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC33_AddressSuggestion_ByAddressDoctorInBillingpage() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC33_AddressSuggestion_ByAddressDoctorInBillingpage");
+			LogTextFile.writeTestCaseStatus("TC33_AddressSuggestion_ByAddressDoctorInBillingpage", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -5572,6 +5614,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC34_PlaceOrder_withPaypalPayment_OptionForNewUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC34_PlaceOrder_withPaypalPayment_OptionForNewUser");
+			LogTextFile.writeTestCaseStatus("TC34_PlaceOrder_withPaypalPayment_OptionForNewUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -5754,6 +5797,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC35_PlaceOrder_withPaypalPayment_OptionForExistingUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC35_PlaceOrder_withPaypalPayment_OptionForExistingUser");
+			LogTextFile.writeTestCaseStatus("TC35_PlaceOrder_withPaypalPayment_OptionForExistingUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -5941,6 +5985,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC36_PlaceOrder_withPaypalCredit_OptionForExistingUser() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC36_PlaceOrder_withPaypalCredit_OptionForExistingUser");
+			LogTextFile.writeTestCaseStatus("TC36_PlaceOrder_withPaypalCredit_OptionForExistingUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -6158,8 +6203,10 @@ public class WEL_Test_Suite extends DriverModule {
 	@Test
 	public void TC37_PlaceOrder_withPaypalCredit_OptionForNewUser() throws IOException {
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
 			Reporting.test = Reporting.extent.createTest("TC37_PlaceOrder_withPaypalCredit_OptionForNewUser");
+			LogTextFile.writeTestCaseStatus("TC37_PlaceOrder_withPaypalCredit_OptionForNewUser", "Test case");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
@@ -6383,6 +6430,8 @@ public class WEL_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent
 					.createTest("TC38_Multiple_To_And_Fro_Navigation_Between_Shipping_And_Billing");
+			LogTextFile.writeTestCaseStatus("TC38_Multiple_To_And_Fro_Navigation_Between_Shipping_And_Billing",
+					"Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -6726,6 +6775,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC42_Place_order_with_partner_product_having_price() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC42_Place_order_with_partner_product_having_price");
+			LogTextFile.writeTestCaseStatus("TC42_Place_order_with_partner_product_having_price", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("TC42", "WEL_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -6908,6 +6958,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC43_PlaceOrderwith_PartnerProduct_Having100Percent_Discount() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC43_PlaceOrderwith_PartnerProduct_Having100%_Discount");
+			LogTextFile.writeTestCaseStatus("TC43_PlaceOrderwith_PartnerProduct_Having100", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("100%Discount_Product", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -6916,7 +6967,7 @@ public class WEL_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions
 						.elementToBeClickable(By.xpath("//div[@class='form-group']//input[@id='inputPartnerSearch']")));
 				WEL.EnterUniversityName(excelOperation.getTestData("TC43", "WEL_Test_Data", "Partner_Name"));
-				ScrollingWebPage.PageScrolldown(driver, 0, 150, SS_path);
+				ScrollingWebPage.PageScrolldown(driver, 0, 230, SS_path);
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
 							"//div[@class='container product-categories-container']//div[2]//dd/a[contains(text(),'CPA')]")));
@@ -6929,7 +6980,7 @@ public class WEL_Test_Suite extends DriverModule {
 						BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 								WEL.fetchLastPriceInPDPForPartner().substring(1));
 						try {
-							wait.until(ExpectedConditions.visibilityOfElementLocated(
+							wait.until(ExpectedConditions.elementToBeClickable(
 									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 							WEL.clickOnAddToCartButtonOnPDP();
 							try {
@@ -7096,6 +7147,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC44_PlaceOrderFor_UniversityPartner_Product() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC44_PlaceOrderFor_UniversityPartner_Product");
+			LogTextFile.writeTestCaseStatus("TC44_PlaceOrderFor_UniversityPartner_Product", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("University_PartnetProdut_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -7317,6 +7369,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC46_Tax_Recalculation_After_Editing_Shipping_Method() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC46_Tax_Recalculation_After_Editing_Shipping_Method");
+			LogTextFile.writeTestCaseStatus("TC46_Tax_Recalculation_After_Editing_Shipping_Method", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -7701,6 +7754,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC47_Tax_Recalculation_After_Editing_Shipping_Address() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC47_Tax_Recalculation_After_Editing_Shipping_Address");
+			LogTextFile.writeTestCaseStatus("TC47_Tax_Recalculation_After_Editing_Shipping_Address", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -7729,28 +7783,28 @@ public class WEL_Test_Suite extends DriverModule {
 							try {
 								wait.until(ExpectedConditions.visibilityOfElementLocated(
 										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
-							WEL.clickOnAddToCartButtonOnPDP();
-							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
+								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
-							}
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
 							} catch (Exception e) {
 								Reporting.updateTestReport(
 										"Failed to click on Add To Cart button due to timeout exception",
@@ -8076,6 +8130,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC48_Tax_Recalculation_After_Editing_Billing_Address() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC48_Tax_Recalculation_After_Editing_Billing_Address");
+			LogTextFile.writeTestCaseStatus("TC48_Tax_Recalculation_After_Editing_Billing_Address", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -8409,6 +8464,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC49_Place_Order_With_Some_Parts_New_User() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC49_Place_Order_With_Some_Parts_New_User");
+			LogTextFile.writeTestCaseStatus("TC49_Place_Order_With_Some_Parts_New_User", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -8662,6 +8718,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC50_PlaceOrder_CanadaAddress() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC50_PlaceOrder_CanadaAddress");
+			LogTextFile.writeTestCaseStatus("TC50_PlaceOrder_CanadaAddress", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -8942,6 +8999,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC51_PlaceOrder_IndiaAddress() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC51_PlaceOrder_IndiaAddress");
+			LogTextFile.writeTestCaseStatus("TC51_PlaceOrder_IndiaAddress", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
@@ -9217,6 +9275,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC52_PlaceOrder_ChinaAddress() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC52_PlaceOrder_ChinaAddress");
+			LogTextFile.writeTestCaseStatus("TC52_PlaceOrder_ChinaAddress", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
@@ -9475,6 +9534,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC53_PlaceOrder_JapanAddress() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC53_PlaceOrder_JapanAddress");
+			LogTextFile.writeTestCaseStatus("TC53_PlaceOrder_JapanAddress", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
@@ -9736,6 +9796,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC61_Validate_Cookie_Management() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC61_Validate_Cookie_Management");
+			LogTextFile.writeTestCaseStatus("TC61_Validate_Cookie_Management", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -9872,6 +9933,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC62_Email_Verification_For__New_User() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC62_Email_Verification_For__New_User");
+			LogTextFile.writeTestCaseStatus("TC62_Email_Verification_For__New_User", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -9897,27 +9959,35 @@ public class WEL_Test_Suite extends DriverModule {
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							BigDecimal firstProductPriceWIthoutDiscount = new BigDecimal(
 									WEL.fetchOldPriceInPDP().substring(1));
-							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
+								wait.until(ExpectedConditions.visibilityOfElementLocated(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
@@ -10138,6 +10208,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC64_Validate_Dont_Ship_To_PO_Box_Message() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC64_Validate_Dont_Ship_To_PO_Box_Message");
+			LogTextFile.writeTestCaseStatus("TC64_Validate_Dont_Ship_To_PO_Box_Message", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -10280,6 +10351,8 @@ public class WEL_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent
 					.createTest("TC69_PlaceNewUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax");
+			LogTextFile.writeTestCaseStatus(
+					"TC69_PlaceNewUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("TC69", "WEL_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -10462,6 +10535,8 @@ public class WEL_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent
 					.createTest("TC70_PlaceExistingUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax");
+			LogTextFile.writeTestCaseStatus(
+					"TC70_PlaceExistingUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("TC70", "WEL_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -10635,6 +10710,8 @@ public class WEL_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent
 					.createTest("TC71_PlaceNewUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax");
+			LogTextFile.writeTestCaseStatus("TC71_PlaceNewUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax",
+					"Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
@@ -10831,6 +10908,7 @@ public class WEL_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent
 					.createTest("TC72_PlaceExistingUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax");
+			LogTextFile.writeTestCaseStatus("TC72_PlaceExistingUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
@@ -10855,27 +10933,36 @@ public class WEL_Test_Suite extends DriverModule {
 									"//div[@class='package-selection-container platinum-package']//div[2]//button")));
 							BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 							ScrollingWebPage.PageScrolldown(driver, 0, 120, SS_path);
-							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+								wait.until(ExpectedConditions.elementToBeClickable(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 
-							} catch (Exception e) {
+								WEL.clickOnAddToCartButtonOnPDP();
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
 							if (price.compareTo(subtotal) == 0)
@@ -11024,6 +11111,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC73_ValidateTaxin_IndiaForPhysicalOrder() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC73_ValidateTaxin_IndiaForPhysicalOrder");
+			LogTextFile.writeTestCaseStatus("TC73_ValidateTaxin_IndiaForPhysicalOrder", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
@@ -11298,6 +11386,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC74_WEL_Cart_Upsells_Add_Summary_Line() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC74_WEL_Cart_Upsells_Add_Summary_Line");
+			LogTextFile.writeTestCaseStatus("TC74_WEL_Cart_Upsells_Add_Summary_Line", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("TC74", "WEL_Test_Data", "URL"));
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -11415,6 +11504,7 @@ public class WEL_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent
 					.createTest("TC75_Check_Add_To_Cart_Functionality_for_Heads_Up_Validation");
+			LogTextFile.writeTestCaseStatus("TC75_Check_Add_To_Cart_Functionality_for_Heads_Up_Validation", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -11524,6 +11614,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC77_Verify_TheFreeTrail_FormForCMACPACFAProducts() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC77_Verify_TheFreeTrail_FormForCMACPACFAProducts");
+			LogTextFile.writeTestCaseStatus("TC77_Verify_TheFreeTrail_FormForCMACPACFAProducts", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			driver.navigate().refresh();
@@ -11623,6 +11714,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public void TC79_Email_Format_Validation() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC79_Email_Format_Validation");
+			LogTextFile.writeTestCaseStatus("TC79_Email_Format_Validation", "Test case");
 			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.navigate().refresh();
