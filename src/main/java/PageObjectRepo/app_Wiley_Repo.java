@@ -1134,7 +1134,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Author: Vishnu
+	 * @Date: 04/04/23
 	 * @Description: Enters a data in HomePage search bar
 	 */
 	public void HomePageSearchBar(String data) throws IOException {
@@ -1607,7 +1607,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Enters the email id in Create account form
 	 */
 	public String enterEmailIdInCreateAccountForm() throws IOException {
@@ -1625,7 +1625,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Enters the email id in Create account form Confirm email id field
 	 */
 	public void confirmEmailIdInCreateAccountForm(String emailId) throws IOException {
@@ -1639,7 +1639,7 @@ public class app_Wiley_Repo {
 		}
 	}
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Enters the password in Create account form 
 	 */
 	public void enterPasswordInCreateAccountForm(String password) throws IOException {
@@ -1656,7 +1656,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Author: Arun
+	 * @Date: 04/04/23
 	 * @Description:This method clicks on the save and continue button
 	 */
 	public void clickOnSaveAndContinueButton() throws IOException {
@@ -1674,7 +1674,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Author:Vishnu 
+	 * @Date: 04/04/23 
 	 * @Description:This method is used to enter the FirstName
 	 */
 	public void enterFirstName(String Fname) throws IOException {
@@ -1690,7 +1690,7 @@ public class app_Wiley_Repo {
 		}
 	}
 	/*
-	 * @Author:Vishnu 
+	 * @Date: 04/04/23 
 	 * @Description:This method is used to enter the LastName
 	 */
 	public void enterLastName(String Lname) throws IOException {
@@ -1707,7 +1707,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * Author : Arun 
+	 * @Date: 04/04/23 
 	 * Description : Select Country From DropDown in shipping an billing
 	 */
 	public void selectCountry(String country) throws IOException {
@@ -1724,7 +1724,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Clears the Address line 1 field if anything is present and then Enters the new value in the billing address form
 	 */
 	public void enterAddressLine1Billing(String line1) throws IOException{
@@ -1739,7 +1739,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Clears the City field if anything is present and then Enters the new value in the billing address form
 	 */
 	public void enterCityBilling(String city) throws IOException{
@@ -1755,7 +1755,7 @@ public class app_Wiley_Repo {
 
 
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Clears the Zip code field if anything is present then Enters the value in the billing address form
 	 */
 	public void enterZipBilling(String zip) throws IOException{
@@ -1769,7 +1769,7 @@ public class app_Wiley_Repo {
 		}
 	}
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Clears the Phone number if anything is present and then Enters the new value in the billing address form
 	 */
 	public void enterPhoneNumberBilling(String phone) throws IOException{
@@ -1784,7 +1784,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * Author : Arun 
+	 * @Date: 04/04/23 
 	 * Description : Entering the CardHolder Name 
 	 */
 	public void enterCardHolderName(String cardHolderName) throws IOException {
@@ -1803,7 +1803,7 @@ public class app_Wiley_Repo {
 
 
 	/*
-	 * Author : Arun 
+	 * @Date: 04/04/23 
 	 * Description :Description :Selecting Expiration Month From DropDown
 	 */
 	public void selectExpirationMonthFromDropDown(String month) throws IOException {
@@ -1819,7 +1819,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * Author : Arun 
+	 * @Date: 04/04/23 
 	 * Description :Selecting Expiration Year From DropDown
 	 */
 	public void selectExpirationYearFromDropDown(String year) throws IOException {
@@ -1835,8 +1835,8 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * Author : 
-	 * Arun Description : Entering the CVV Number in payment information step
+	 * @Date: 04/04/23
+	 * @Description : Entering the CVV Number in payment information step
 	 */
 	public void enterCVV_Number(String CVVNumber) throws IOException {
 		try {
@@ -1850,7 +1850,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * @Author:Vishnu 
+	 * @Date: 04/04/23 
 	 * @Description:This method is used enter the CardNumber on Billing AddressForm
 	 */
 	public void enterCardNumber(String cardNumber) throws IOException {
@@ -1866,7 +1866,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Clicks on the Continue As Guest  button 
 	 */
 	public void clickOnContinueAsGuestButton() throws IOException{
@@ -1879,7 +1879,7 @@ public class app_Wiley_Repo {
 		}
 	}
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Clears the Address line 1 field if anything is present and then Enters the new value in the shipping address form
 	 */
 	public void enterAddressLine1Shipping(String line1) throws IOException{
@@ -1895,7 +1895,7 @@ public class app_Wiley_Repo {
 
 
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Clears the Phone number if anything is present and then Enters the new value in the shipping address form
 	 */
 	public void enterPhoneNumberShipping(String phone) throws IOException{
@@ -1910,7 +1910,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * Author : Arun 
+	 * @Date: 04/04/23 
 	 * Description : Postal code updating in shipping page.
 	 */
 	public void enterShippingZIPCode(String shippingZIPCode) throws IOException {
@@ -1926,7 +1926,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * Author : Arun 
+	 * @Date: 04/04/23 
 	 * Description : Entering the City in Shipping page.
 	 */
 	public void enterShippingCity(String shippingCity) throws IOException {
@@ -1942,7 +1942,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * Author : Arun 
+	 * @Date: 04/04/23 
 	 * Description :Selecting country from Dropdpwn in Shipping Page
 	 */
 	public void enterState(String state) throws IOException {
@@ -1963,7 +1963,7 @@ public class app_Wiley_Repo {
 
 
 	/*
-	 * Author : Arun 
+	 * @Date: 04/04/23 
 	 * Description : THis Method using for Selecting Shipping Method 
 	 */
 	public void selectShippingMethod() throws IOException {
@@ -1979,7 +1979,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Clicks on the Use Selected Address Button in Address Doctor PopUp
 	 */
 	public void clickOnUseSelectedShippingAddressButtonAddressDoctor() throws IOException{
@@ -1993,7 +1993,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * Author : Arun
+	 * @Date: 04/04/23
 	 * description : Product Quantity increasing in cart page
 	 */
 	public void selectQuantityDropDown(String quantity) throws IOException {
@@ -2010,7 +2010,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Fetches the shipping charge for shipping methods by passing the shipping method name
 	 */
 	public BigDecimal fetchShippingCharge(WebDriver driver,String shippingMethod) throws IOException{
@@ -2032,7 +2032,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Clicks on the Promotion code link in cart page
 	 */
 	public void clickOnPromotionCodelink() throws IOException {
@@ -2049,7 +2049,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Enters the promo code in the cart page
 	 */
 	public void enterPromoCode(String promo) throws IOException {
@@ -2064,7 +2064,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Clicks on the Apply button in the cart page
 	 */
 	public void ApplyPromo() throws IOException {
@@ -2079,7 +2079,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Concatenates the parts of URL (devmonkey part, storerfront url with env and the rest of the part specific to regions)
 	 */
 	public String wileyURLConcatenationwithRegions(String region, String pdpURL) throws IOException{
@@ -2097,7 +2097,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Returns the text shown in the first point upon hovering the generic info for E-Book
 	 */
 	public String fetchGenericHoverInfo(WebDriver driver) throws IOException{

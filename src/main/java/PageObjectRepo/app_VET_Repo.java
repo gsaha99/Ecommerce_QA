@@ -146,7 +146,29 @@ public class app_VET_Repo {
 	WebElement CheckBox;
 	@FindBy(id="saveBilling")
 	WebElement BillingContinue;
+
+	//Card Information page for WPG
+
+	@FindBy(id="number")
+	WebElement CardNumberWPG;
+	@FindBy(id="expiryMonth")
+	WebElement ExpiryMonthDropdownWPG;
+	@FindBy(xpath="//option[@value='09']")
+	WebElement OptionExpiryMonthWPG;
+	@FindBy(id="expiryYear")
+	WebElement ExpiryYearDropdownWPG;
+	@FindBy(xpath="//option[@value='22']")
+	WebElement OptionExpiryYearWPG;
+	@FindBy(id="securityCode")
+	WebElement SecurityCodeWPG;
+	@FindBy(name="number")
+	WebElement CardNumber;
+	@FindBy(name="expiry")
+	WebElement ExpiryDate;
+	@FindBy(name="cvc")
+	WebElement CVC;
 	
+
 
 	/*
 	 * @Date: 31/03/23
@@ -531,7 +553,7 @@ public class app_VET_Repo {
 		}
 
 	}
-	
+
 
 	/*
 	 * @Date: 31/03/23
@@ -735,7 +757,7 @@ public class app_VET_Repo {
 			Reporting.updateTestReport("Phone number couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 31/03/23
 	 * @Description: Clicks on the checkbox in the billing address form
@@ -763,7 +785,7 @@ public class app_VET_Repo {
 			Reporting.updateTestReport("Continue To Card DetailsPage couldn't be clicked with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 3/4/23
 	 * @Description: Enters the new password in reset password form
@@ -796,7 +818,7 @@ public class app_VET_Repo {
 		}
 	}
 
-	
+
 	/*
 	 * @Date: 3/4/23
 	 * @Description: Clicks on submit button in the reset password form
@@ -831,7 +853,7 @@ public class app_VET_Repo {
 		}
 		return "";
 	}
-	
+
 	/*
 	 * @Date: 3/4/23
 	 * @Description: Clicks on the reset password link in the mail
@@ -846,7 +868,7 @@ public class app_VET_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 3/4/23
 	 * @Description: Clicks on the forgot password link in the login page
@@ -874,7 +896,7 @@ public class app_VET_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 	}
-	
+
 	/*
 	 * @Date: 3/4/23
 	 * @Description: Checks if the alert message was displayed after the password is reset
@@ -894,7 +916,7 @@ public class app_VET_Repo {
 		}
 		return "";
 	}
-	
+
 	/*
 	 * @Date: 3/4/23
 	 * @Description: Enters the emailid in yopmail
@@ -927,4 +949,103 @@ public class app_VET_Repo {
 
 		}
 	}
+
+	//WPG Card methods
+	/*
+	 * @Date: 04/04/23
+	 * @Description: Enters the Card Number in WPG iframe
+	 */
+	public void enterCardNumberWPG(String cardNumber) throws IOException{
+		try {
+			CardNumberWPG.sendKeys(cardNumber);
+			Reporting.updateTestReport("Card number: "+cardNumber+" was entered in WPG iframe",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Card number couldn't be entered in WPG iframe.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	/*
+	 * @Date: 04/04/23
+	 * @Description: Selects the Expiry month in WPG iframe
+	 */
+	public void selectExpiryMonthWPG() throws IOException{
+		try {
+			ExpiryMonthDropdownWPG.click();
+			OptionExpiryMonthWPG.click();
+			Reporting.updateTestReport("September was selected in WPG iframe",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Expiry month couldn't be selected in WPG iframe.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	/*
+	 * @Date: 04/04/23
+	 * @Description: Selects the Expiry year in WPG iframe
+	 */
+	public void selectExpiryYearWPG() throws IOException{
+		try {
+			ExpiryYearDropdownWPG.click();
+			OptionExpiryYearWPG.click();
+			Reporting.updateTestReport("2022 was selected in WPG iframe",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Expiry year couldn't be selected in WPG iframe.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	/*
+	 * @Date: 04/04/23
+	 * @Description: Enters the security code in WPG iframe
+	 */
+	public void enterSecurityCodeWPG(String cvv) throws IOException{
+		try {
+			SecurityCodeWPG.sendKeys(cvv);
+			Reporting.updateTestReport(cvv+" Security code was entered in WPG iframe",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Security code couldn't be entered in WPG iframe.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	//WPS Method
+		/*
+		 * @Date: 04/04/23
+		 * @Description: Enters the card number in the card details page in WPS
+		 */
+		public void enterCardNumber(String cardNumber) throws IOException {
+			try {
+				CardNumber.sendKeys(cardNumber);
+				Reporting.updateTestReport("Card Number: "+cardNumber+" was entered", CaptureScreenshot.getScreenshot(SS_path),StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Card Number couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		//WPS Method
+		/*
+		 * @Date: 04/04/23
+		 * @Description: Enters the expiry date in the card details page in WPS
+		 */
+		public void enterExpiryDate(String expiryDate) throws IOException {
+			try {
+				ExpiryDate.sendKeys(expiryDate);
+				Reporting.updateTestReport("Expiry Date: "+expiryDate+" was entered", CaptureScreenshot.getScreenshot(SS_path),StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Expiry Date couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		//WPS Method
+		/*
+		 * @Date: 04/04/23
+		 * @Description: Enters the CVC in the card details page in WPS
+		 */
+		public void enterCVC(String cvc) throws IOException {
+			try {
+				CVC.sendKeys(cvc);
+				Reporting.updateTestReport("CVC: "+cvc+" was entered",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("CVC couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
 }

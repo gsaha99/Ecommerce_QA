@@ -20,6 +20,7 @@ import utilities.CaptureScreenshot;
 import utilities.DriverModule;
 import utilities.EmailValidation;
 import utilities.LogTextFile;
+import utilities.PaymentGateway;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
@@ -277,48 +278,7 @@ public class AGS_Prod_Test_Suite extends DriverModule {
 							AGS.enterPhoneNumber(excelOperation.getTestData("TC06", "AGS_Test_Data", "Phone_Number"));
 							AGS.checkBoxBilling();
 							AGS.continueToCardDetailsPage();
-							driver.switchTo().frame("tokenFrame");
-							driver.switchTo().frame(0);
-							try {
-								wait.until(ExpectedConditions.elementToBeClickable(By.name("number")));
-								Reporting.updateTestReport("Card number field was clickable in the payment page",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							}
-							catch(Exception e) {
-								Reporting.updateTestReport("Card number field was not clickable in the payment page",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							}
-							
-							try {
-								wait.until(ExpectedConditions.elementToBeClickable(By.name("expiry")));
-								Reporting.updateTestReport("Expiry date field was clickable in the payment page",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							}
-							catch(Exception e) {
-								Reporting.updateTestReport("Expiry date field was not clickable in the payment page",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							}
-							
-							try {
-								wait.until(ExpectedConditions.elementToBeClickable(By.name("cvc")));
-								Reporting.updateTestReport("CVV number field was clickable in the payment page",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							}
-							catch(Exception e) {
-								Reporting.updateTestReport("CVV number field was not clickable in the payment page",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							}
-							
-							try {
-								wait.until(ExpectedConditions.elementToBeClickable(By.name("submit")));
-								Reporting.updateTestReport("Submit button was clickable in the payment page",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							}
-							catch(Exception e) {
-								Reporting.updateTestReport("Submit button was not clickable in the payment page",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							}
-							driver.switchTo().defaultContent();
+							PaymentGateway.paymentAGS("WPS", driver, AGS, "TC06", SS_path);
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Address line 1 was not loaded and caused timeout exception",
