@@ -1,0 +1,17 @@
+ET_Prod_Test_Suite_03312023113133 Regression Suite: -
+
+
+TC02_Register_a_New_User_And_Login --> Execution started
+
+First name: New was entered successfully  --> PASS
+Last name: User was entered successfully  --> PASS
+Email Id: autovet20230403113151@yopmail.com was entered successfully  --> PASS
+Password: Password@123 was entered successfully  --> PASS
+Create Account button was clicked successfully  --> PASS
+Account was created successfully --> PASS
+User was logged out successfully  --> PASS
+Existing UserId: autovet20230403113151@yopmail.com was entered successfully  --> PASS
+Existing User Password: Password@123 was entered successfully  --> PASS
+Login button couldn't be clicked with error message class org.openqa.selenium.NoSuchElementException --> FAIL
+User was not able to login with the newly created account --> FAIL
+Couldn't log out with error message class org.openqa.selenium.NoSuchElementException --> FAIL

@@ -1,0 +1,27 @@
+GS_Prod_Test_Suite_31202023052034 Regression Suite: -
+
+
+TC06_Provide_File_Information --> Execution started
+
+Yearly Subscription button was clicked successfully --> PASS
+Continue Button in Cart Page was clicked successfully --> PASS
+First name: New  was entered successfully  --> PASS
+Last name: User was entered successfully  --> PASS
+Email Id: autoags20230331052057@yopmail.com was entered successfully  --> PASS
+Password: Password@123 was entered successfully  --> PASS
+Create Account button was clicked successfully  --> PASS
+First name: New  in billing address form was entered successfully --> PASS
+Last name: User in billing address form was entered successfully --> PASS
+Country has been selected successfully by user --> PASS
+Address line 1: 112 River St. was entered --> PASS
+City: Hoboken was entered --> PASS
+State: New Jersey has been selected successfully by user --> PASS
+Zip code: 07030 was entered --> PASS
+Phone number: 9999888889 was entered --> PASS
+Checkbox in the billing address page was checked successfully --> PASS
+Continue To Card DetailsPage was clicked successfully --> PASS
+Card number field was clickable in the payment page --> PASS
+Expiry date field was clickable in the payment page --> PASS
+CVV number field was clickable in the payment page --> PASS
+Submit button was not clickable in the payment page --> PASS
+User was logged out successfully  --> PASS

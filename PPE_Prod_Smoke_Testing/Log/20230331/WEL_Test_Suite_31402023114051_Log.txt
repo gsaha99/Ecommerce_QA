@@ -1,0 +1,71 @@
+WEL_Test_Suite_31402023114051 Regression Suite: -
+
+
+TC01_Standalone_UserRegistration --> Execution started
+
+Login clicked successfully and login page is opened  --> PASS
+CreateOne link Clicked Successfully on login page --> PASS
+FirsName was entered successfully --> PASS
+LastName was entered successfully --> PASS
+Email Id: autowel20230331114149@yopmail.com was entered successfully  --> PASS
+Email Id: autowel20230331114149@yopmail.com was entered successfully in the Confirm email id section --> PASS
+Perform Page Down --> INFO
+Password Password@123 entered successfully --> PASS
+Terms and Conditions Checbox selected Successfully  --> PASS
+Agreement Checbox selected Successfully  --> PASS
+Create Account button clicked successfully  --> PASS
+Account Link is appearing after successful Login --> PASS
+User was logged out successfully --> PASS
+
+
+TC02_UserRegistration_DuringCheckoutForPhysicalCart --> Execution started
+
+Perform Page Down --> INFO
+CIA Product selected successfully --> PASS
+Shop Courses was selected successfully --> PASS
+Perform Page Down --> INFO
+ViewCourses was selected successfully --> PASS
+Perform Page Down --> INFO
+Price of the product in PDP: $550.00 was returned --> PASS
+The Add To Cart Button On PDP was clicked successfully --> PASS
+Checkout button was not clickable in the cart page and caused timeout exception --> FAIL
+Subtotal of the order in cart page could not be returned --> FAIL
+Add to cart button on CIA PDP was not clickable and caused timeout exception --> FAIL
+User was logged out successfully --> PASS
+
+
+TC03_UserRegistration_DuringCheckoutForDigitalCartwith_NonUSBillingAddress --> Execution started
+
+Perform Page Down --> INFO
+CMA product was selected successfully  --> PASS
+Explore Course button clicked successfully  --> PASS
+Perform Page Down --> INFO
+ViewCourse Options was selected successfully  --> PASS
+CMA e-Book was slected successfully  --> PASS
+Perform Page Down --> INFO
+Price of the product in PDP: $900.00 was returned --> PASS
+The Add To Cart Button On PDP was clicked successfully --> PASS
+Subtotal of the order: $900.00 was returned --> PASS
+The addition of all the products' price is same as the subtotal in cart page --> PASS
+Checkout Button clicked successfully  --> PASS
+Email Id: autowel20230331114440@yopmail.com was entered successfully  --> PASS
+Create Account button clicked successfully  --> PASS
+Email Id: autowel20230331114440@yopmail.com was entered successfully in the Confirm email id section --> PASS
+Password Password@123 entered successfully --> PASS
+Agreement Checbox selected Successfully  --> PASS
+SaveAndContinue button clicked successfully  --> PASS
+First: FNAME was entered successfully in the First Name section --> PASS
+Last: LNAME was entered successfully in LastName section --> PASS
+County Mexico has been selected successfully by user --> PASS
+AddressLine1: JAVIER ROJO GOMEZ was entered successfully in the AddressLine1 section --> PASS
+ZipCode: 42080 was entered successfully in the ZipCode section --> PASS
+City: Hidalgo was entered successfully in the City section --> PASS
+PhoneNumber: 12233445566 was entered successfully in the PhoneNumber section --> PASS
+The page was scrolled down --> INFO
+First Product Price: $1,400.00 was fetched in order summary step successfully --> PASS
+Discount: $500.00 was fetched in order review step successfully --> PASS
+Order total: $900.00 was fetched in order review step successfully --> PASS
+First Product price - Discount  = Order total in Order Review step --> PASS
+Back TO Cart Icon clicked Successfully --> PASS
+Product Removed Successfully from Cart Page --> PASS
+User was logged out successfully --> PASS

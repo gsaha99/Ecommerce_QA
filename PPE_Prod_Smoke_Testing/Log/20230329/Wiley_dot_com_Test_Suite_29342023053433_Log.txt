@@ -1,0 +1,5 @@
+Wiley_dot_com_Test_Suite_29342023053433 Regression Suite: -
+Home Page was landed Successfully --> PASS
+Computers text seached in the search bar --> PASS
+Search All Results successfully clicked on Search Bar Suggestions --> PASS
+Sort By Option was clicked successfully on PDP page --> PASS

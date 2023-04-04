@@ -1,0 +1,89 @@
+GS_Prod_Test_Suite_31162023051615 Regression Suite: -
+
+
+TC01_Open_Homepage --> Execution started
+
+Title: ARCHITECTURAL GRAPHIC STANDARDS ONLINE was present in the homepage --> PASS
+Subscribe now button was present in homepage --> PASS
+Login button was present in homepage --> PASS
+Perform Page Down --> INFO
+Wiley Logo was present in homepage footer --> PASS
+
+
+TC02_Register_a_New_User_And_Login --> Execution started
+
+First name: New was entered successfully  --> PASS
+Last name: User was entered successfully  --> PASS
+Email Id: autoags20230331051643@yopmail.com was entered successfully  --> PASS
+Password: Password@123 was entered successfully  --> PASS
+Create Account button was clicked successfully  --> PASS
+Account was created successfully --> PASS
+User was logged out successfully  --> PASS
+Existing UserId: autoags20230331051643@yopmail.com was entered successfully  --> PASS
+Existing User Password: Password@123 was entered successfully  --> PASS
+Login button was clicked successfully --> PASS
+User was able to login successfully with the newly created account --> PASS
+User was logged out successfully  --> PASS
+
+
+TC03_Reset_Password_My_Account --> Execution started
+
+Existing UserId: autoags20230331051643@yopmail.com was entered successfully  --> PASS
+Existing User Password: Password@123 was entered successfully  --> PASS
+Login button was clicked successfully --> PASS
+User is in My Account page --> PASS
+Change Password button was clicked --> PASS
+User is in Change Password page --> PASS
+Previous Password: Password@123 was entered successfully --> PASS
+New Password: Password@1234 was entered successfully --> PASS
+Password reset save button was clicked successfully --> PASS
+Password reset was successful --> PASS
+User was logged out successfully  --> PASS
+Existing UserId: autoags20230331051643@yopmail.com was entered successfully  --> PASS
+Existing User Password: Password@1234 was entered successfully  --> PASS
+Login button was clicked successfully --> PASS
+User is in My Account page --> PASS
+User was logged out successfully  --> PASS
+
+
+TC04_ResetPasswordFromLoginPage --> Execution started
+
+Forgot password link was clicked successfully --> PASS
+Email: autoags20230331051643@yopmail.com was entered successfully  --> PASS
+Submit button was clicked successfully --> PASS
+×
+Password reset instructions have been sent to your e-mail address. Please contact customer support if you require additional assistance. --> PASS
+Email entered : autoags20230331051643@yopmail.com was entered successfully  --> PASS
+Arrow button clicked successfully  --> PASS
+Reset password link was clicked successfully  --> PASS
+New Password : Welcome@123 was entered successfully --> PASS
+Confirm Password : Welcome@123 was entered successfully --> PASS
+Submit was clicked successfully --> PASS
+×
+Success! You can now login using your new password. --> PASS
+User was logged out successfully  --> PASS
+Existing UserId: autoags20230331051643@yopmail.com was entered successfully  --> PASS
+Existing User Password: Welcome@123 was entered successfully  --> PASS
+Login button was clicked successfully --> PASS
+User is in My Account page --> PASS
+User was logged out successfully  --> PASS
+
+
+TC05_Edit_Profile --> Execution started
+
+Existing UserId: autoags20230331051643@yopmail.com was entered successfully  --> PASS
+Existing User Password: Welcome@123 was entered successfully  --> PASS
+Login button was clicked successfully --> PASS
+User is in My Account page --> PASS
+Profile LastName has been updated to NewLastName successfully --> PASS
+Save Button was clicked successfully in the My account page --> PASS
+The alert message was shown: ×
+Your profile has been updated. --> PASS
+User was logged out successfully  --> PASS
+
+
+TC06_Provide_File_Information --> Execution started
+
+Yearly Subscription button was not clicked --> FAIL
+Cart page was not loaded and caused timeout exception --> FAIL
+User was logged out successfully  --> PASS

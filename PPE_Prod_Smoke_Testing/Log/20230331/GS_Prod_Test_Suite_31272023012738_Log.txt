@@ -1,0 +1,6 @@
+GS_Prod_Test_Suite_31272023012738 Regression Suite: -
+
+
+TC01_Open_Homepage --> Execution started
+
+Title: ARCHITECTURAL GRAPHIC STANDARDS ONLINE was present in the homepage --> PASS

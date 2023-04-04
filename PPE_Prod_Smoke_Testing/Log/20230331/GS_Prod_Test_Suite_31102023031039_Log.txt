@@ -1,0 +1,10 @@
+GS_Prod_Test_Suite_31102023031039 Regression Suite: -
+
+
+TC01_Open_Homepage --> Execution started
+
+Title: ARCHITECTURAL GRAPHIC STANDARDS ONLINE was present in the homepage --> PASS
+Subscribe now button was not present in homepage --> FAIL
+Login button was not present in homepage --> FAIL
+Perform Page Down --> INFO
+Wiley Logo was present in homepage footer --> PASS

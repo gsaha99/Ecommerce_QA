@@ -1,0 +1,131 @@
+iley_Prod_Test_Suite_03272023052732 Regression Suite: -
+
+
+TC01_MicroStes --> Execution started
+
+Micro Sites Pages was loaded Successfully --> PASS
+
+
+TC02_ProductDetailsPage --> Execution started
+
+Shop Link In Cart Page Header is present --> PASS
+Research Libraries Link In Cart Page Header is present --> PASS
+Publishing Services Link In Cart Page Header is present --> PASS
+Professional Development Link In Cart Page Header is present --> PASS
+Education Resources In Cart Page Header is present --> PASS
+The page was scrolled down upto the bottom of the page --> INFO
+sitemaps in pdp Page footer is present --> PASS
+Rights and permissions In pdp Page footer is present --> PASS
+Terms of user In pdp Page footer is present --> PASS
+Privacy Policy In pdp page footer is present --> PASS
+
+
+TC03_SiteFooter --> Execution started
+
+The page was scrolled down upto the bottom of the page --> INFO
+sitemaps in footer is present --> PASS
+Privacy Policy In  footer is present --> PASS
+Terms of user In Cart Page footer is present --> PASS
+Rights and permissions In footer is present --> PASS
+
+
+TC04_404_Error_Page --> Execution started
+
+Page not found(404) is displayed  --> PASS
+
+
+TC05_About_Us_Page --> Execution started
+
+The page was scrolled down upto the bottom of the page --> INFO
+About Wiley was clicked Successfully --> PASS
+The title of the Page : About Wiley | Over 200 Years of Unlocking Human Potential  --> PASS
+
+
+TC06_SiteMap --> Execution started
+
+The page was scrolled down upto the bottom of the page --> INFO
+sitemaps link is clicked successfully --> PASS
+The title of the Page is : Site Map  --> PASS
+
+
+TC07_ProductListPage --> Execution started
+
+Text: Java was entered on Searh Bar --> PASS
+Products landing page was successfully loaded --> PASS
+Product landing page was loaded Successfully and page having text PRODUCTS Headers Section --> PASS
+Products landing page was successfully loaded --> PASS
+Product landing page was loaded Successfully and page having text CONTENT Headers Section --> PASS
+
+
+TC08_HomePage --> Execution started
+
+Home Page was lauched Successfully --> PASS
+
+
+TC09_SiteHeader --> Execution started
+
+Shop Link In Home Page Header is present --> PASS
+Research Libraries Link In Home Page Header is present --> PASS
+Publishing Services Link In Home Page Header is present --> PASS
+Research Libraries Link In Home Page Header is present --> PASS
+Professional Development Link In Home Page Header is present --> PASS
+
+
+TC10_SearchResultEmptyPage --> Execution started
+
+Text: HelloHi was entered on Searh Bar --> PASS
+Your Search didn;t match any results messsage is displayed --> PASS
+
+
+TC11_Add_To_Cart_PopUp --> Execution started
+
+Add To Cart Button was clicked --> PASS
+View Cart Button was clicked --> PASS
+
+
+TC12_Content_Search_ResultPage --> Execution started
+
+Text: Java was entered on Searh Bar --> PASS
+Content section was clicked on PDP Page --> PASS
+The page was scrolled down --> INFO
+
+
+TC13_Category_LandingPage --> Execution started
+
+Category Landing page have Shop header Section --> PASS
+The page was scrolled down --> INFO
+Feature Products header is displayed on Category Landing page --> PASS
+View ALL Option Clicked on Category Landing page have  --> PASS
+
+
+TC14_SearchBox --> Execution started
+
+Home Page was landed Successfully --> PASS
+Computers text seached in the search bar --> PASS
+Search All Results successfully clicked on Search Bar Suggestions --> PASS
+
+
+TC15_Product_Search_Results_Page --> Execution started
+
+Text: Java was entered on Searh Bar --> PASS
+Products With Highlighted Searched Term was present --> PASS
+Subject was present under facet --> PASS
+Course was present under facet --> PASS
+Author was present under facet --> PASS
+Format was present under facet --> PASS
+PublishedDate was present under facet --> PASS
+Brands was present under facet --> PASS
+Series was present under facet --> PASS
+Author under the facet was clicked --> PASS
+First Facet Item was clicked with Text: Andreas Vogel and Quantity of that Filter: 2 --> PASS
+The number of products after filtering is correctly shown as: 2 --> PASS
+Number of total pages: 1 was returned --> PASS
+Pagination funationility is working fine after filtering with Author field --> PASS
+All the filtered products has same Author as: Andreas Vogel --> PASS
+Reset all button for facet was clicked successfully --> PASS
+Format under the facet was clicked --> PASS
+EBook Format Facet was clicked with Text: E-Book and Quantity of that Filter: 88 --> PASS
+The number of products after filtering is correctly shown as: 88 --> PASS
+Number of total pages: 9 was returned --> PASS
+Pagination funationility is working fine after filtering with Format field --> PASS
+All the filtered products has same format as: E-Book --> PASS
