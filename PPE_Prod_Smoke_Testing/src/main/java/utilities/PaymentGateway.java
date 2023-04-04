@@ -15,19 +15,19 @@ public class PaymentGateway {
 	 */
 	public static void paymentWiley(WebDriver driver, app_Wiley_Repo wiley, String tcNo, String path) throws IOException {
 		try{
-			wiley.enterCardHolderName(excelOperation.getTestData(tcNo, "WILEY_NA_Cart_Test_Data", "First_Name"));
+			wiley.enterCardHolderName(excelOperation.getTestData(tcNo, "WILEY_Test_Data", "First_Name"));
 			driver.switchTo().defaultContent();
 			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-			wiley.enterCardNumber(excelOperation.getTestData(tcNo, "WILEY_NA_Cart_Test_Data", "Card_Number"));
+			wiley.enterCardNumber(excelOperation.getTestData(tcNo, "WILEY_Test_Data", "Card_Number"));
 			driver.switchTo().defaultContent();
 			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData(tcNo, "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData(tcNo, "WILEY_Test_Data", "Expiry_Month"));
 			driver.switchTo().defaultContent();
 			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData(tcNo, "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData(tcNo, "WILEY_Test_Data", "Expiry_Year"));
 			driver.switchTo().defaultContent();
 			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData(tcNo, "WILEY_NA_Cart_Test_Data", "CVV"));
+			wiley.enterCVV_Number(excelOperation.getTestData(tcNo, "WILEY_Test_Data", "CVV"));
 			driver.switchTo().defaultContent();			
 		}
 		catch(Exception e) {

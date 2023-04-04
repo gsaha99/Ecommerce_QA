@@ -1,6 +1,7 @@
 package PageObjectRepo;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
@@ -10,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -138,6 +140,8 @@ public class app_Wiley_Repo {
 	WebElement RequestDigitalEvaluationCopyLink;
 	@FindBy(xpath="//i[@aria-label='Purchase option description']")
 	WebElement GenericHoverInfo;
+	@FindBy(xpath="//a[@aria-label='information icon']")
+	WebElement VATTooltip;
 	@FindBy(xpath="//p[@class='pr-price']")
 	WebElement ProductPriceInPDP;
 
@@ -2002,6 +2006,136 @@ public class app_Wiley_Repo {
 		} catch (Exception e) {
 			Reporting.updateTestReport("User failed to select Quantity " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Fetches the shipping charge for shipping methods by passing the shipping method name
+	 */
+	public BigDecimal fetchShippingCharge(WebDriver driver,String shippingMethod) throws IOException{
+		try {
+			String xpathOfShippingCharge="//span[@class='delivery-item-title deliveryItemTitle' and contains(text(),'"+
+					shippingMethod+"')]/following-sibling::span/span[@class='textBold']";
+			String xpathOfShippingMethodName="//span[@class='delivery-item-title deliveryItemTitle' and contains(text(),'"+
+					shippingMethod+"')]";
+			String charge=driver.findElement(By.xpath(xpathOfShippingCharge)).getText();
+			Reporting.updateTestReport("Shipping charge value: "+charge+" was returned for shipping method: "+
+					driver.findElement(By.xpath(xpathOfShippingMethodName)).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return new BigDecimal(charge.substring(1));
+
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Shipping charge couldn't be fetched", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return new BigDecimal(0.00);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Clicks on the Promotion code link in cart page
+	 */
+	public void clickOnPromotionCodelink() throws IOException {
+		try {
+			PromoCodeLink.click();
+			Reporting.updateTestReport("Enter Promocode link was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to clcik on Enter Promo code link",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
+	/*
+	 * @Author: Anindita
+	 * @Description: Enters the promo code in the cart page
+	 */
+	public void enterPromoCode(String promo) throws IOException {
+		try {
+			EnterPromoCode.sendKeys(promo);
+			Reporting.updateTestReport("Promocode " + promo + " was enter successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Enter the PromoCode", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Author: Anindita
+	 * @Description: Clicks on the Apply button in the cart page
+	 */
+	public void ApplyPromo() throws IOException {
+		try {
+			ApplyPromoButton.click();
+			Reporting.updateTestReport("Promocode was applied successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Enter the PromoCode", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Concatenates the parts of URL (devmonkey part, storerfront url with env and the rest of the part specific to regions)
+	 */
+	public String wileyURLConcatenationwithRegions(String region, String pdpURL) throws IOException{
+		try {
+			String envURL="www.wiley.com/en-"+region;
+			Reporting.updateTestReport("Concatenated url was returned as: "+
+					"https://"+envURL+"/"+pdpURL, CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return "https://"+envURL+"/"+pdpURL;
+
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Concatenated url couldn't be returned", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Returns the text shown in the first point upon hovering the generic info for E-Book
+	 */
+	public String fetchGenericHoverInfo(WebDriver driver) throws IOException{
+		try {
+			Actions action = new Actions(driver);
+			action.moveToElement(GenericHoverInfo).perform();
+			Thread.sleep(2000);
+			String A=GenericHoverInfo.getAttribute("data-content").split("<ul>")[1];
+			String B=A.split("<li>")[1].trim();
+			Reporting.updateTestReport("The first line of generic hover info: "+B+" was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return B;
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The first line of generic hover info couldn't be returned"+e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Date: 4/4/23
+	 * @Description: Returns the text shown in the first point upon hovering the generic info VAT Tooltip
+	 */
+	public String checkVAT_Tooltip(WebDriver driver) throws IOException{
+		try {
+			Actions action = new Actions(driver);
+			action.moveToElement(VATTooltip).perform();
+			Thread.sleep(2000);
+			String A=VATTooltip.getAttribute("data-content").trim();
+			Reporting.updateTestReport("The VAT Tooltip info : "+A+" was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+			return A;
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The VAT Tooltip info waws not present",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+			return "";
 		}
 	}
 }

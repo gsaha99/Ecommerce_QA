@@ -1,0 +1,319 @@
+Wiley_Prod_Test_Suite_04472023014746 Regression Suite: -
+
+
+TC16_Cart_Page_UI_Validation --> Execution started
+
+Add To Cart Button was clicked --> PASS
+View Cart Button was clicked --> PASS
+Shop Link In Cart Page Header is present --> PASS
+Research Libraries Link In Cart Page Header is present --> PASS
+Publishing Services Link In Cart Page Header is present --> PASS
+Professional Development Link In Cart Page Header is present --> PASS
+CartIcon Link In Cart Page Header is present --> PASS
+Cart Item Quantity: 1 In Cart Page Header is present --> PASS
+BreadCrumb In Cart Page Header is present --> PASS
+Text: Shipping and Tax will be calculated during checkout In Order Summary Tab is present --> PASS
+The page was scrolled down --> INFO
+Few products were removed from cart --> PASS
+Logged out successfully --> PASS
+
+
+TC17_Login_Page_Validation --> Execution started
+
+Price of the product in PDP: $55.95 was returned --> PASS
+Add To Cart Button was clicked --> PASS
+View Cart Button was clicked --> PASS
+The page was scrolled down --> INFO
+Proceed To Checkout Button was clicked successfully --> PASS
+Guest checkout button is present in login page when only normal physical product is present in cart --> PASS
+Cart Icon was clicked successfully --> PASS
+9781119820994 was seached in the search bar --> PASS
+SRP_WileyProduct was clicked successfully --> PASS
+Price of the product in PDP: $24.00 was returned --> PASS
+Add To Cart Button was clicked --> PASS
+View Cart Button was clicked --> PASS
+Order total in cart page : $79.95 was returned --> PASS
+The addition of all the products' price is same as the subtotal in cart page --> PASS
+The page was scrolled down --> INFO
+Proceed To Checkout Button was clicked successfully --> PASS
+Guest checkout button was not present in login page when digital product is present in cart --> PASS
+Email Id: testuser007788@yopmail.com was entered successfully  --> PASS
+CreateAccountButton was clicked successfully --> PASS
+Error message was displayed after entering existing user in  create account form --> PASS
+ExistingWileyUserMailID: testuser007788@yopmail.com was entered successfully  --> PASS
+WileyUserPassword: Password@1234 was entered successfully  --> PASS
+LogInAndContinueButton was clicked successfully --> PASS
+Error message was displayed after entering wrong password in  login form --> PASS
+The page was scrolled down --> INFO
+Few products were removed from cart --> PASS
+Logged out successfully --> PASS
+
+
+TC18_Add_Digital_Product_to_cart_for_New_User --> Execution started
+
+Price of the product in PDP: $36.00 was returned --> PASS
+Add To Cart Button was clicked --> PASS
+View Cart Button was clicked --> PASS
+Order total in cart page : $36.00 was returned --> PASS
+The addition of all the products' price is same as the subtotal in cart page --> PASS
+Text: Shipping and Tax will be calculated during checkout In Order Summary Tab is present --> PASS
+The page was scrolled down --> INFO
+Proceed To Checkout Button was clicked successfully --> PASS
+Guest checkout button was not present in login page when digital/rental product is present in cart --> PASS
+Email Id: autowiley20230404015122@yopmail.com was entered successfully  --> PASS
+CreateAccountButton was clicked successfully --> PASS
+Text: Shipping and Tax will be calculated during checkout In Order Summary Tab is present --> PASS
+Email Id: autowiley20230404015122@yopmail.com was entered successfully in the Confirm email id section --> PASS
+Password: Password@123 was entered successfully in the Create Account Form --> PASS
+Save And Continue Button was clicked successfully --> PASS
+Text: Tax will be calculated after billing address is provided In Order Summary Tab is present --> PASS
+Card Holder Name:  was entered successfully  --> PASS
+Card Number was entered successfully on paymentpage --> PASS
+ExpirationMonth has been selected successfully by user --> PASS
+ExpirationYear has been selected successfully by user --> PASS
+CVV_Number:  was entered successfully  --> PASS
+First Name was entered successfully on paymentpage --> PASS
+Last Name  was entered successfully on paymentpage --> PASS
+Country has been selected successfully by user --> PASS
+Address line 1: 64108 Doral Dr was entered --> PASS
+Zip code: 92240 was entered --> PASS
+Phone number: 9999988888 was entered --> PASS
+The page was scrolled down --> INFO
+Few products were removed from cart --> PASS
+Logged out successfully --> PASS
+
+
+TC19_Add_Physical_Product_With_Guest_User --> Execution started
+
+Price of the product in PDP: $145.00 was returned --> PASS
+Add To Cart Button was clicked --> PASS
+View Cart Button was clicked --> PASS
+Order total in cart page : $145.00 was returned --> PASS
+The addition of all the products' price is same as the subtotal in cart page --> PASS
+Text: Shipping and Tax will be calculated during checkout In Order Summary Tab is present --> PASS
+The page was scrolled down --> INFO
+Proceed To Checkout Button was clicked successfully --> PASS
+Email Id: autowiley20230404015248@yopmail.com was entered successfully  --> PASS
+Continue As Guest button  was clicked --> PASS
+Text: Tax will be calculated after billing address is provided In Order Summary Tab is present --> PASS
+First Name was entered successfully on paymentpage --> PASS
+Last Name  was entered successfully on paymentpage --> PASS
+Country has been selected successfully by user --> PASS
+Address line 1: 34 Edson St was entered --> PASS
+ShippingAddress: 02302 was entered successfully  --> PASS
+ShippingCity: Brockton was entered successfully  --> PASS
+State: Massachusetts has been selected successfully by user --> PASS
+Phone number: 9000080000 was entered --> PASS
+Save And Continue Button was clicked successfully --> PASS
+Use Selected Address Button in Address Doctor PopUp was clicked --> PASS
+Text: Tax will be calculated after billing address is provided In Order Summary Tab is present --> PASS
+Card Holder Name:  was entered successfully  --> PASS
+Card Number was entered successfully on paymentpage --> PASS
+ExpirationMonth has been selected successfully by user --> PASS
+ExpirationYear has been selected successfully by user --> PASS
+CVV_Number:  was entered successfully  --> PASS
+The page was scrolled down --> INFO
+Few products were removed from cart --> PASS
+Logged out successfully --> PASS
+
+
+TC20_Add_Physical_product_ForExistingUser --> Execution started
+
+Price of the product in PDP: $145.00 was returned --> PASS
+Add To Cart Button was clicked --> PASS
+View Cart Button was clicked --> PASS
+Quantity has been selected successfully by user --> PASS
+Order total in cart page : $580.00 was returned --> PASS
+The addition of all the products' price is same as the subtotal in cart page --> PASS
+Text: Shipping and Tax will be calculated during checkout In Order Summary Tab is present --> PASS
+The page was scrolled down --> INFO
+Proceed To Checkout Button was clicked successfully --> PASS
+ExistingWileyUserMailID: testuser007788@yopmail.com was entered successfully  --> PASS
+WileyUserPassword: Password@123 was entered successfully  --> PASS
+LogInAndContinueButton was clicked successfully --> PASS
+The page was scrolled down --> INFO
+Proceed To Checkout Button was clicked successfully --> PASS
+Text: Tax will be calculated after billing address is provided In Order Summary Tab is present --> PASS
+First Name was entered successfully on paymentpage --> PASS
+Last Name  was entered successfully on paymentpage --> PASS
+Country has been selected successfully by user --> PASS
+Address line 1: 34 Edson St was entered --> PASS
+ShippingAddress: 02302 was entered successfully  --> PASS
+ShippingCity: Brockton was entered successfully  --> PASS
+State: Massachusetts has been selected successfully by user --> PASS
+Phone number: 9000080000 was entered --> PASS
+Save And Continue Button was clicked successfully --> PASS
+Use Selected Address Button in Address Doctor PopUp was clicked --> PASS
+Text: Tax will be calculated after billing address is provided In Order Summary Tab is present --> PASS
+Card Holder Name:  was entered successfully  --> PASS
+Card Number was entered successfully on paymentpage --> PASS
+ExpirationMonth has been selected successfully by user --> PASS
+ExpirationYear has been selected successfully by user --> PASS
+CVV_Number:  was entered successfully  --> PASS
+The page was scrolled down --> INFO
+Few products were removed from cart --> PASS
+Logged out successfully --> PASS
+
+
+TC21_Shipping_Charge_For_Multiple_Products --> Execution started
+
+Price of the product in PDP: $145.00 was returned --> PASS
+Add To Cart Button was clicked --> PASS
+View Cart Button was clicked --> PASS
+Order total in cart page : $145.00 was returned --> PASS
+The addition of all the products' price is same as the subtotal in cart page --> PASS
+Text: Shipping and Tax will be calculated during checkout In Order Summary Tab is present --> PASS
+The page was scrolled down --> INFO
+Proceed To Checkout Button was clicked successfully --> PASS
+ExistingWileyUserMailID: testuser007788@yopmail.com was entered successfully  --> PASS
+WileyUserPassword: Password@123 was entered successfully  --> PASS
+LogInAndContinueButton was clicked successfully --> PASS
+The page was scrolled down --> INFO
+Proceed To Checkout Button was clicked successfully --> PASS
+Text: Tax will be calculated after billing address is provided In Order Summary Tab is present --> PASS
+Shipping charge value: $1.00 was returned for shipping method: Standard Shipping --> PASS
+Shipping charge value: $12.00 was returned for shipping method: Express Shipping --> PASS
+Shipping charge value: $25.00 was returned for shipping method: Next Day Shipping --> PASS
+Country has been selected successfully by user --> PASS
+Shipping charge value: $15.00 was returned for shipping method: Air Mail --> PASS
+Shipping charge value: $40.00 was returned for shipping method: Courier --> PASS
+Country has been selected successfully by user --> PASS
+Shipping charge value: $12.00 was returned for shipping method: 2-Day --> PASS
+Cart Icon was clicked successfully --> PASS
+Quantity has been selected successfully by user --> PASS
+Order total in cart page : $725.00 was returned --> PASS
+The addition of all the products' price is same as the subtotal in cart page --> PASS
+The page was scrolled down --> INFO
+Proceed To Checkout Button was clicked successfully --> PASS
+Shipping charge value: $1.04 was returned for shipping method: Standard Shipping --> PASS
+Shipping charge value: $28.00 was returned for shipping method: Express Shipping --> PASS
+Shipping charge value: $41.00 was returned for shipping method: Next Day Shipping --> PASS
+Shipping charge has been correctly calculated for Standard shipping --> PASS
+Shipping charge has been correctly calculated for Express shipping --> PASS
+Shipping charge has been correctly calculated for Next day shipping --> PASS
+Country has been selected successfully by user --> PASS
+Shipping charge value: $35.00 was returned for shipping method: Air Mail --> PASS
+Shipping charge value: $80.00 was returned for shipping method: Courier --> PASS
+Air mail charge has been correctly calculated for Standard shipping --> PASS
+Courier charge has been correctly calculated for Standard shipping --> PASS
+Country has been selected successfully by user --> PASS
+Shipping charge value: $28.00 was returned for shipping method: 2-Day --> PASS
+2 day charge has been correctly calculated for Standard shipping --> PASS
+The page was scrolled down --> INFO
+Few products were removed from cart --> PASS
+Logged out successfully --> PASS
+
+
+TC22_Shipping_And_BillingAddresses_different --> Execution started
+
+Price of the product in PDP: $49.95 was returned --> PASS
+Add To Cart Button was clicked --> PASS
+View Cart Button was clicked --> PASS
+Order total in cart page : $49.95 was returned --> PASS
+The addition of all the products' price is same as the subtotal in cart page --> PASS
+Text: Shipping and Tax will be calculated during checkout In Order Summary Tab is present --> PASS
+The page was scrolled down --> INFO
+Proceed To Checkout Button was clicked successfully --> PASS
+Email Id: autowiley20230404015855@yopmail.com was entered successfully  --> PASS
+CreateAccountButton was clicked successfully --> PASS
+Text: Shipping and Tax will be calculated during checkout In Order Summary Tab is present --> PASS
+Email Id: autowiley20230404015855@yopmail.com was entered successfully in the Confirm email id section --> PASS
+Password: Password@123 was entered successfully in the Create Account Form --> PASS
+Save And Continue Button was clicked successfully --> PASS
+Text: Tax will be calculated after billing address is provided In Order Summary Tab is present --> PASS
+First Name was entered successfully on paymentpage --> PASS
+Last Name  was entered successfully on paymentpage --> PASS
+Country has been selected successfully by user --> PASS
+Address line 1: 34 Edson St was entered --> PASS
+ShippingAddress: 02302 was entered successfully  --> PASS
+ShippingCity: Brockton was entered successfully  --> PASS
+State: Massachusetts has been selected successfully by user --> PASS
+Phone number: 9000080000 was entered --> PASS
+Save And Continue Button was clicked successfully --> PASS
+Use Selected Address Button in Address Doctor PopUp was clicked --> PASS
+Text: Tax will be calculated after billing address is provided In Order Summary Tab is present --> PASS
+Card Holder Name:  was entered successfully  --> PASS
+Card Number was entered successfully on paymentpage --> PASS
+ExpirationMonth has been selected successfully by user --> PASS
+ExpirationYear has been selected successfully by user --> PASS
+CVV_Number:  was entered successfully  --> PASS
+First Name was entered successfully on paymentpage --> PASS
+Last Name  was entered successfully on paymentpage --> PASS
+Country has been selected successfully by user --> PASS
+Address line 1: 64108 Doral Dr was entered --> PASS
+Zip code: 92240 was entered --> PASS
+City: Desert Hot Springs was entered --> PASS
+Phone number: 9999988888 was entered --> PASS
+The page was scrolled down --> INFO
+Few products were removed from cart --> PASS
+Logged out successfully --> PASS
+
+
+TC23_Add_Coupon_To_Cart --> Execution started
+
+Price of the product in PDP: $49.95 was returned --> PASS
+Add To Cart Button was clicked --> PASS
+View Cart Button was clicked --> PASS
+The page was scrolled down --> INFO
+Enter Promocode link was clicked successfully --> PASS
+Promocode SDP66 was enter successfully --> PASS
+Promocode was applied successfully --> PASS
+Subtotal of the order: $49.95 was returned --> PASS
+Order total in cart page : $32.47 was returned --> PASS
+Discount amount:  $17.48 was returned --> PASS
+The rounded value of :17.4824999999999988908871983994686161167919635772705078125 is not same as the discount value: 17.48 --> FAIL
+The addition of all the products' price and the subtraction of the discount is same as the subtotal in cart page --> PASS
+Text: Shipping and Tax will be calculated during checkout In Order Summary Tab is present --> PASS
+The page was scrolled down --> INFO
+Proceed To Checkout Button was clicked successfully --> PASS
+Email Id: autowiley20230404020144@yopmail.com was entered successfully  --> PASS
+CreateAccountButton was clicked successfully --> PASS
+Text: Shipping and Tax will be calculated during checkout In Order Summary Tab is present --> PASS
+Email Id: autowiley20230404020144@yopmail.com was entered successfully in the Confirm email id section --> PASS
+Password: Password@123 was entered successfully in the Create Account Form --> PASS
+Save And Continue Button was clicked successfully --> PASS
+Text: Tax will be calculated after billing address is provided In Order Summary Tab is present --> PASS
+First Name was entered successfully on paymentpage --> PASS
+Last Name  was entered successfully on paymentpage --> PASS
+Country has been selected successfully by user --> PASS
+Address line 1: 4 Tideview Path was entered --> PASS
+ShippingAddress: 02360 was entered successfully  --> PASS
+ShippingCity: Plymouth was entered successfully  --> PASS
+State: Massachusetts has been selected successfully by user --> PASS
+Phone number: 9000080000 was entered --> PASS
+ShippingMethod has been selected successfully by user --> PASS
+Save And Continue Button was clicked successfully --> PASS
+Use Selected Address Button in Address Doctor PopUp was clicked --> PASS
+Text: Tax will be calculated after billing address is provided In Order Summary Tab is present --> PASS
+Card Holder Name:  was entered successfully  --> PASS
+Card Number was entered successfully on paymentpage --> PASS
+ExpirationMonth has been selected successfully by user --> PASS
+ExpirationYear has been selected successfully by user --> PASS
+CVV_Number:  was entered successfully  --> PASS
+The page was scrolled down --> INFO
+Few products were removed from cart --> PASS
+Logged out successfully --> PASS
+
+
+TC24_VAT_Toltip_For_Asian_Countries --> Execution started
+
+Concatenated url was returned as: https://www.wiley.com/en-cn/First+Farmers:+The+Origins+of+Agricultural+Societies,+2nd+Edition-p-9781119706342 --> PASS
+The VAT Tooltip info : 中国客户请向本地团队咨询中国销售价格 was returned --> INFO
+Correct text was present in VAT Tooltip for China --> PASS
+Concatenated url was returned as: https://www.wiley.com/en-kr/First+Farmers:+The+Origins+of+Agricultural+Societies,+2nd+Edition-p-9781119706342 --> PASS
+The VAT Tooltip info waws not present --> INFO
+Correct text was not present in VAT Tooltip for kr (Asian country other than china) --> PASS
+
+
+TC25_Generic_info_hover_text_EBook_PDP --> Execution started
+
+Concatenated url was returned as: https://www.wiley.com/en-/ --> PASS
+The first line of generic hover info couldn't be returnedjava.lang.reflect.InvocationTargetException
+Build info: version: '4.8.3', revision: 'e5e76298c3'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.5'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Command: [027453279eb3a2adb05b8c86e513672e, actions {actions=[org.openqa.selenium.interactions.Sequence@6f9b5f01]}]
+Capabilities {acceptInsecureCerts: false, browserName: msedge, browserVersion: 111.0.1661.62, ms:edgeOptions: {debuggerAddress: localhost:65378}, msedge: {msedgedriverVersion: 111.0.1661.62 (0a8f453929e6..., userDataDir: C:\Users\arakshit\AppData\L...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:65378/devtoo..., se:cdpVersion: 111.0.1661.62, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 027453279eb3a2adb05b8c86e513672e --> FAIL
+Correct text was present in generic info for eBook --> PASS
+Logged out successfully --> PASS

@@ -1,0 +1,89 @@
+Wiley_Prod_Test_Suite_04472023024749 Regression Suite: -
+
+
+TC23_Add_Coupon_To_Cart --> Execution started
+
+Price of the product in PDP: $49.95 was returned --> PASS
+Add To Cart Button was clicked --> PASS
+View Cart Button was clicked --> PASS
+The page was scrolled down --> INFO
+Enter Promocode link was clicked successfully --> PASS
+Promocode SDP66 was enter successfully --> PASS
+Promocode was applied successfully --> PASS
+Subtotal of the order: $49.95 was returned --> PASS
+Order total in cart page : $32.47 was returned --> PASS
+Discount amount:  $17.48 was returned --> PASS
+The rounded value of :17.4824999999999988908871983994686161167919635772705078125 is same as the discount value: 17.48 --> PASS
+The addition of all the products' price and the subtraction of the discount is same as the subtotal in cart page --> PASS
+Text: Shipping and Tax will be calculated during checkout In Order Summary Tab is present --> PASS
+The page was scrolled down --> INFO
+Proceed To Checkout Button was clicked successfully --> PASS
+Email Id: autowiley20230404024843@yopmail.com was entered successfully  --> PASS
+CreateAccountButton was clicked successfully --> PASS
+Text: Shipping and Tax will be calculated during checkout In Order Summary Tab is present --> PASS
+Email Id: autowiley20230404024843@yopmail.com was entered successfully in the Confirm email id section --> PASS
+Password: Password@123 was entered successfully in the Create Account Form --> PASS
+Save And Continue Button was clicked successfully --> PASS
+Text: Tax will be calculated after billing address is provided In Order Summary Tab is present --> PASS
+First Name was entered successfully on paymentpage --> PASS
+Last Name  was entered successfully on paymentpage --> PASS
+Country has been selected successfully by user --> PASS
+Address line 1: 4 Tideview Path was entered --> PASS
+ShippingAddress: 02360 was entered successfully  --> PASS
+ShippingCity: Plymouth was entered successfully  --> PASS
+State: Massachusetts has been selected successfully by user --> PASS
+Phone number: 9000080000 was entered --> PASS
+ShippingMethod has been selected successfully by user --> PASS
+Save And Continue Button was clicked successfully --> PASS
+Use Selected Address Button in Address Doctor PopUp was clicked --> PASS
+Text: Tax will be calculated after billing address is provided In Order Summary Tab is present --> PASS
+Card Holder Name:  was entered successfully  --> PASS
+Card Number was entered successfully on paymentpage --> PASS
+ExpirationMonth has been selected successfully by user --> PASS
+ExpirationYear has been selected successfully by user --> PASS
+CVV_Number:  was entered successfully  --> PASS
+The page was scrolled down --> INFO
+Few products were removed from cart --> PASS
+Logged out successfully --> PASS
+
+
+TC25_Generic_info_hover_text_EBook_PDP --> Execution started
+
+Concatenated url was returned as: https://www.wiley.com/en-us/A+Companion+to+Ancient+Agriculture-p-9781118970942 --> PASS
+The first line of generic hover info: To download and read E-books offered from Wiley.com, you will access either Wiley Reader or the VitalSource Bookshelf Software.</li> was returned --> PASS
+Correct text was present in generic info for eBook --> PASS
+Concatenated url was returned as: https://www.wiley.com/en-us/A+Companion+to+American+Agricultural+History-p-9781119632245 --> PASS
+The first line of generic hover info: To download and read E-books offered from Wiley.com, you will access either Wiley Reader or the VitalSource Bookshelf Software.</li> was returned --> PASS
+Correct text was present in generic info for eBook --> PASS
+Concatenated url was returned as: https://www.wiley.com/en-us/Dr+Math+Presents+More+Geometry%3A+Learning+Geometry+is+Easy%21+Just+Ask+Dr+Math-p-9780471697107 --> PASS
+The first line of generic hover info: To download and read E-books offered from Wiley.com, you will access either Wiley Reader or the VitalSource Bookshelf Software.</li> was returned --> PASS
+Correct text was present in generic info for eBook --> PASS
+Concatenated url was returned as: https://www.wiley.com/en-us/Coding+with+JavaScript+For+Dummies-p-9781119056065 --> PASS
+The first line of generic hover info couldn't be returnedjava.lang.reflect.InvocationTargetException
+Build info: version: '4.8.3', revision: 'e5e76298c3'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.5'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Command: [3105701a1a52e3db3ed9674591a80cbf, actions {actions=[org.openqa.selenium.interactions.Sequence@afde064]}]
+Capabilities {acceptInsecureCerts: false, browserName: msedge, browserVersion: 111.0.1661.62, ms:edgeOptions: {debuggerAddress: localhost:62736}, msedge: {msedgedriverVersion: 111.0.1661.62 (0a8f453929e6..., userDataDir: C:\Users\arakshit\AppData\L...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:62736/devtoo..., se:cdpVersion: 111.0.1661.62, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 3105701a1a52e3db3ed9674591a80cbf --> FAIL
+The first line of generic hover info couldn't be returnedjava.lang.reflect.InvocationTargetException
+Build info: version: '4.8.3', revision: 'e5e76298c3'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.5'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Command: [3105701a1a52e3db3ed9674591a80cbf, actions {actions=[org.openqa.selenium.interactions.Sequence@43d76a92]}]
+Capabilities {acceptInsecureCerts: false, browserName: msedge, browserVersion: 111.0.1661.62, ms:edgeOptions: {debuggerAddress: localhost:62736}, msedge: {msedgedriverVersion: 111.0.1661.62 (0a8f453929e6..., userDataDir: C:\Users\arakshit\AppData\L...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:62736/devtoo..., se:cdpVersion: 111.0.1661.62, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 3105701a1a52e3db3ed9674591a80cbf --> FAIL
+Correct text was not present in generic info for eBook0 127 --> FAIL
+Concatenated url was returned as: https://www.wiley.com/en-gb/A+Companion+to+Ancient+Agriculture-p-9781118970942 --> PASS
+The first line of generic hover info: To download and read E-books offered from Wiley.com, you will access either Wiley Reader or the VitalSource Bookshelf Software.</li> was returned --> PASS
+Correct text was present in generic info for eBook --> PASS
+Concatenated url was returned as: https://www.wiley.com/en-gb/A+Companion+to+American+Agricultural+History-p-9781119632245 --> PASS
+The first line of generic hover info: To download and read E-books offered from Wiley.com, you will access either Wiley Reader or the VitalSource Bookshelf Software.</li> was returned --> PASS
+Correct text was present in generic info for eBook --> PASS
+Concatenated url was returned as: https://www.wiley.com/en-gb/Dr+Math+Presents+More+Geometry%3A+Learning+Geometry+is+Easy%21+Just+Ask+Dr+Math-p-9780471697107 --> PASS
+The first line of generic hover info: To download and read E-books offered from Wiley.com, you will access either Wiley Reader or the VitalSource Bookshelf Software.</li> was returned --> PASS
+Correct text was present in generic info for eBook --> PASS
+Concatenated url was returned as: https://www.wiley.com/en-gb/Coding+with+JavaScript+For+Dummies-p-9781119056065 --> PASS
+The first line of generic hover info: To download and read E-books offered from Wiley.com, you will access either Wiley Reader or the VitalSource Bookshelf Software.</li> was returned --> PASS
+Correct text was present in generic info for eBook --> PASS
+Logged out successfully --> PASS
