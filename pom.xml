@@ -2,12 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>PPE_Suite</groupId>
-  <artifactId>PPE_Regression</artifactId>
+  <groupId>com.testng.selenium</groupId>
+  <artifactId>PPE_Prod_Smoke_Testing</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>PPE_Regression</name>
+  <name>PPE_Prod_Smoke_Testing</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -32,16 +32,33 @@
 		    <artifactId>commons-io</artifactId>
 		    <version>2.11.0</version>
 	</dependency>    
-    <dependency>
-	    <groupId>org.seleniumhq.selenium</groupId>
-	    <artifactId>selenium-java</artifactId>
-	    <version>4.6.0</version>
+	<dependency>
+		<groupId>org.seleniumhq.selenium</groupId>
+		<artifactId>selenium-java</artifactId>
+		<version>4.8.3</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-manager -->
+	<dependency>
+		<groupId>org.seleniumhq.selenium</groupId>
+		<artifactId>selenium-manager</artifactId>
+		<version>4.8.3</version>
+	</dependency>
+
 	<dependency>
 	    <groupId>com.codoid.products</groupId>
 	    <artifactId>fillo</artifactId>
 	    <version>1.18</version>
 	</dependency>
+	<dependency>
+    	<groupId>org.apache.commons</groupId>
+    	<artifactId>commons-lang3</artifactId>
+    	<version>3.12.0</version>
+	</dependency>
+	<dependency>
+    <groupId>ru.yandex.qatools.ashot</groupId>
+    <artifactId>ashot</artifactId>
+    <version>1.5.4</version>
+    </dependency>
 	
 	
  </dependencies>
@@ -61,3 +78,4 @@
  
  </build>
 </project>
+

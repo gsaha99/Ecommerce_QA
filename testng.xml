@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="PPE_Regression">
-  <test thread-count="5" name="Wiley_Test_Suite">
-    
-    
-    <classes>
-      <class name="Test_Suite.WEL_Test_Suite">
-      <methods>
-		 
-        <include name="TC75_.*" />
-        <include name="TC79_.*" />
-        
-        
-        
-        </methods>
-      </class>
-    </classes>
-  </test> <!-- Test_Regression -->
+	<test  name="VET_Test_Suite">
+
+
+		<classes>
+			<class name="TestSuite.Wiley_Prod_Test_Suite">	
+				<methods>
+					<include name="TC23.*"></include>
+					<include name="TC25.*"></include>
+				</methods>
+			</class>
+			
+		</classes>
+	</test> <!-- Test_Regression -->
 </suite> <!-- PPE Regression -->
