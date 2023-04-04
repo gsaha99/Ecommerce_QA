@@ -143,13 +143,13 @@ public class Vet_Test_Suite extends DriverModule {
 				catch(Exception e)
 				{Reporting.updateTestReport("Order was not placed and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
-				;}
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Continue button on cart page was not clickable"
 						+ " and caused timeout excepion", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			VET.logOut(driver);
+			
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
