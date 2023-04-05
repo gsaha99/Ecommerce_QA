@@ -1,6 +1,0 @@
-GS_Prod_Test_Suite_31262023012658 Regression Suite: -
-
-
-TC01_Open_Homepage --> Execution started
-
-Exception occured: class org.openqa.selenium.InvalidArgumentException --> FAIL
