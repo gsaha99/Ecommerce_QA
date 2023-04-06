@@ -437,7 +437,7 @@ public class app_Wiley_Repo {
 	@FindBy(id="sortOptions-button")
 	WebElement SortDropDown;
 
-	@FindBy(xpath="//div[contains(text(),'Publication Date (newest-oldest)')]")
+	@FindBy(id="ui-id-10")
 	WebElement PublicationDateFromSortDropDown;
 
 	@FindBy(xpath="//div[@class='applied-facets']/div[@class='facets-panel-item']/span[text()='RGuroo']")

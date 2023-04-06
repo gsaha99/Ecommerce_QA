@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="16" total="17" passed="1" failed="0" skipped="0">
+<testng-results ignored="41" total="42" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-04-03T16:34:28 IST" name="Default suite" finished-at="2023-04-03T16:36:23 IST" duration-ms="114232">
+  <suite started-at="2023-04-06T11:30:52 IST" name="Default suite" finished-at="2023-04-06T11:35:49 IST" duration-ms="296468">
     <groups>
     </groups>
-    <test started-at="2023-04-03T16:34:28 IST" name="Default test" finished-at="2023-04-03T16:36:23 IST" duration-ms="114232">
-      <class name="Test_Suite.Vet_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:Test_Suite.Vet_Test_Suite@268f106e]" started-at="2023-04-03T16:34:28 IST" name="initiate" finished-at="2023-04-03T16:34:38 IST" duration-ms="9723" status="PASS">
+    <test started-at="2023-04-06T11:30:52 IST" name="Default test" finished-at="2023-04-06T11:35:49 IST" duration-ms="296468">
+      <class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@59402b8f]" started-at="2023-04-06T11:30:52 IST" name="initiate" finished-at="2023-04-06T11:31:00 IST" duration-ms="8073" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@55222ee9]]>
+                <![CDATA[org.testng.TestRunner@5d37aa0f]]>
               </value>
             </param>
             <param index="1">
@@ -23,41 +23,41 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.Vet_Test_Suite@268f106e]" started-at="2023-04-03T16:34:38 IST" name="initializeRepo" finished-at="2023-04-03T16:34:38 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="102" status="PASS">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@59402b8f]" started-at="2023-04-06T11:31:00 IST" name="launchBrowser" finished-at="2023-04-06T11:31:01 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="97" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- initializeRepo -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@268f106e]" started-at="2023-04-03T16:34:38 IST" name="nameBefore" finished-at="2023-04-03T16:34:38 IST" duration-ms="0" status="PASS">
+        </test-method> <!-- launchBrowser -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@59402b8f]" started-at="2023-04-06T11:31:01 IST" name="nameBefore" finished-at="2023-04-06T11:31:01 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC21_Riskified_Declined_Order() throws java.io.IOException]]>
+                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC42_Purchase_with_Order_Level_Discount() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameBefore -->
-        <test-method signature="TC21_Riskified_Declined_Order()[pri:0, instance:Test_Suite.Vet_Test_Suite@268f106e]" started-at="2023-04-03T16:34:38 IST" name="TC21_Riskified_Declined_Order" finished-at="2023-04-03T16:36:20 IST" duration-ms="102030" status="PASS">
+        <test-method signature="TC42_Purchase_with_Order_Level_Discount()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@59402b8f]" started-at="2023-04-06T11:31:01 IST" name="TC42_Purchase_with_Order_Level_Discount" finished-at="2023-04-06T11:35:44 IST" duration-ms="283506" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC21_Riskified_Declined_Order -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@268f106e]" started-at="2023-04-03T16:36:20 IST" name="nameAfter" finished-at="2023-04-03T16:36:20 IST" duration-ms="15" status="PASS">
+        </test-method> <!-- TC42_Purchase_with_Order_Level_Discount -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@59402b8f]" started-at="2023-04-06T11:35:44 IST" name="nameAfter" finished-at="2023-04-06T11:35:44 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC21_Riskified_Declined_Order() throws java.io.IOException]]>
+                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC42_Purchase_with_Order_Level_Discount() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.Vet_Test_Suite@268f106e]" started-at="2023-04-03T16:36:20 IST" name="CloseBrowser" finished-at="2023-04-03T16:36:23 IST" duration-ms="2290" status="PASS">
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@59402b8f]" started-at="2023-04-06T11:35:44 IST" name="CloseBrowser" finished-at="2023-04-06T11:35:49 IST" duration-ms="4724" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
-      </class> <!-- Test_Suite.Vet_Test_Suite -->
+      </class> <!-- Test_Suite.Wiley_NA_Cart_Test_Suite -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

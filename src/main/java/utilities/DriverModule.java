@@ -46,9 +46,6 @@ public class DriverModule {
 	public void initiate(ITestContext context,@Optional("edge") String browser)
 	{
 		try {
-			
-			//String browser ="firefox"; // Currently Chrome is hardcoded 
-			
 			String date = new SimpleDateFormat("ddmmyyyyhhmmss").format(new Date());			
 			String testSuiteName=context.getCurrentXmlTest().getClasses().stream()
 		               .findFirst().get().getName().substring(11);			
