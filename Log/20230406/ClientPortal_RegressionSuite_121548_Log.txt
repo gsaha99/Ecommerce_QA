@@ -1,0 +1,17 @@
+ClientPortal_RegressionSuite_121548 Regression Suite: -
+
+
+TC01_Client Portal: Validate that the user should be able to see the user name on top right corner, WPS Admin user contains the Home,Create New Application, Register new User, My Work List,Transaction search  options  on header of the page, user should be able to logout from the application on top right corner there is a down arrowon click of that Logout is visible. --> Execution started
+
+Client Portal Log In with WPS Admin Role FailedCannot invoke "org.openqa.selenium.remote.RemoteWebDriver.get(String)" because "this.driver" is null --> FAIL
+Probe Operation FailedCannot invoke "org.openqa.selenium.remote.RemoteWebDriver.get(String)" because "this.driver" is null --> FAIL
+
+
+TC02_Client Portal: Verify whether WPS admin is able to create New Client Application,and verify the filter functionality at home screen --> Execution started
+
+
+
+TC02_HTTP Client: Validate that for Tokenise operation, Request and Result page is displayed successfully with all the required details --> Execution started
+
+Tokenise Operation FailedCannot invoke "org.openqa.selenium.remote.RemoteWebDriver.get(String)" because "this.driver" is null --> FAIL
+Adding new client app with WPS Admin Role FailedCannot invoke "org.openqa.selenium.remote.RemoteWebDriver.get(String)" because "this.driver" is null --> FAIL

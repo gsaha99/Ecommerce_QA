@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="WPS_Regression">
+<suite name="WPS_Regression" parallel ="classes" thread-count ="2">
  <test name="Client Portal_Test_Suite" >
   <parameter name="browser" value="chrome"/>
    <classes>
@@ -26,5 +26,5 @@
 			</methods>
 		</class>
 	</classes>
-  </test>  <!-- Test -->
+  </test> 
 </suite> <!-- Suite -->

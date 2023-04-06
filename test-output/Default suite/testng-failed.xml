@@ -5,10 +5,10 @@
     <classes>
       <class name="Test_Suite.ClientPortal_RegressionSuite">
         <methods>
-          <include name="CloseBrowser"/>
           <include name="initiate"/>
+          <include name="CloseBrowser"/>
+          <include name="TC01_Login_WPSAdmin"/>
           <include name="initializeRepo"/>
-          <include name="TC27_RegisterNewClientApp_Negative_Scenarios_ClientAdmin"/>
         </methods>
       </class> <!-- Test_Suite.ClientPortal_RegressionSuite -->
     </classes>

@@ -1,20 +1,26 @@
 package Test_Suite;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import PageObjectRepo.app_TestHarness_Repo;
 import utilities.CaptureScreenshot;
 import utilities.DriverModule;
+import utilities.LogTextFile;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
@@ -25,12 +31,23 @@ public class TestHarness_RegressionSuite extends DriverModule {
 	app_TestHarness_Repo THarness;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
-	//WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
-		
+
+	
 	@BeforeTest
 	public void initializeRepo() {
 		THarness = PageFactory.initElements(driver, app_TestHarness_Repo.class);
 		
+	}
+	@BeforeMethod
+	public void nameBefore(Method method)
+	{
+	    System.out.println("Test case: " + method.getName()+" execution started");       
+	}
+	
+	@AfterMethod
+	public void nameAfter(Method method)
+	{
+	    System.out.println("Test case: " + method.getName()+" execution completed");       
 	}
     /*
      * @Author: Jayanta
@@ -45,6 +62,11 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that Probe option is available and on clicking perform,"
 					+ " proper response is displayed then click on back button in response page,"
 					+ " check whether user is redirected to the probe page of that interface.");
+			
+			LogTextFile.writeTestCaseStatus("TC01_HTTP Client: "
+					+ "Validate that Probe option is available and on clicking perform,"
+					+ " proper response is displayed then click on back button in response page,"
+					+ " check whether user is redirected to the probe page of that interface.", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -90,6 +112,9 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC02_HTTP Client: "
 					+ "Validate that for Tokenise operation,"
 					+ " Request and Result page is displayed successfully with all the required details");
+			
+			LogTextFile.writeTestCaseStatus("TC02_HTTP Client: Validate that for Tokenise operation,"
+					+ " Request and Result page is displayed successfully with all the required details", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -184,6 +209,9 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for Tokenise,"
 					+ " on clicking on Continue, payment portal is displayed with proper Iframe");
 			
+			LogTextFile.writeTestCaseStatus("TC03_HTTP Client: Validate that for Tokenise,"
+					+ "on clicking on Continue, payment portal is displayed with proper Iframe", "Test case");
+			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
 			THarness.ClickHttp_Tokenise();
@@ -227,6 +255,9 @@ public class TestHarness_RegressionSuite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC04_HTTP Client: "
 					+ "Validate that for Tokenise, proper data is displayed in elastic as well as Stripe");
+			
+			LogTextFile.writeTestCaseStatus("TC04_HTTP Client: "
+					+ "Validate that for Tokenise, proper data is displayed in elastic as well as Stripe","Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();

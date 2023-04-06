@@ -1,15 +1,20 @@
 package Test_Suite;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 import java.util.Random;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -17,6 +22,7 @@ import PageObjectRepo.app_ClientPortal_Repo;
 import utilities.CaptureScreenshot;
 import utilities.CommonPage;
 import utilities.DriverModule;
+import utilities.LogTextFile;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
@@ -28,12 +34,22 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 	app_ClientPortal_Repo CPortal;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
-	//CommonPage commonPage = new CommonPage();
-	//WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		
+
+	
 	@BeforeTest
 	public void initializeRepo() {
 		CPortal = PageFactory.initElements(driver, app_ClientPortal_Repo.class);
+	}
+	@BeforeMethod
+	public void nameBefore(Method method)
+	{
+	    System.out.println("Test case: " + method.getName()+" execution started");       
+	}
+	
+	@AfterMethod
+	public void nameAfter(Method method)
+	{
+	    System.out.println("Test case: " + method.getName()+" execution completed");       
 	}
 	
 	 /*
@@ -51,6 +67,14 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ "Transaction search  options  on header of the page,"
 					+ " user should be able to logout from the application on top right corner there is a down arrow"
 					+ "on click of that Logout is visible.");
+			
+			LogTextFile.writeTestCaseStatus("TC01_Client Portal: "
+					+ "Validate that the user should be able to see the user name on top right corner,"
+					+ " WPS Admin user contains the Home,Create New Application, Register new User, My Work List,"
+					+ "Transaction search  options  on header of the page,"
+					+ " user should be able to logout from the application on top right corner there is a down arrow"
+					+ "on click of that Logout is visible.", "Test case");
+			
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			String emailID=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
@@ -101,6 +125,10 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ "Verify whether WPS admin is able to create New Client Application,"
 					+ "and verify the filter functionality at home screen"
 					);
+			
+			LogTextFile.writeTestCaseStatus("TC02_Client Portal: "
+					+ "Verify whether WPS admin is able to create New Client Application,"
+					+ "and verify the filter functionality at home screen", "Test case");
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			String emailID=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
@@ -174,6 +202,8 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC03_Client Portal: "
 					+ "Verify whether WPS admin able to Register New User"
 					);
+			LogTextFile.writeTestCaseStatus("TC03_Client Portal: "
+					+ "Verify whether WPS admin able to Register New User", "Test case");
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			String emailID=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
@@ -228,6 +258,9 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC04_Client Portal: "
 					+ "Verify whether user can View under the Action option in My Worklist and decline the app"
 					);
+			
+			LogTextFile.writeTestCaseStatus("TC04_Client Portal: "
+					+ "Verify whether user can View under the Action option in My Worklist and decline the app", "Test case");
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			String emailID=excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "EmailID");
@@ -300,8 +333,12 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC05_Client Portal: "
 					+ "Verify whether View under the Action option available in Promote to Production," 
-					+ "and Promote to Prod functionality is working," 
+					+ "and Promote to Prod functionality is working" 
 					);
+			
+			LogTextFile.writeTestCaseStatus("TC05_Client Portal: "
+					+ "Verify whether View under the Action option available in Promote to Production," 
+					+ "and Promote to Prod functionality is working", "Test case");
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			String emailID1=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");

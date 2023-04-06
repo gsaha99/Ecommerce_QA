@@ -1,0 +1,11 @@
+TestHarness_RegressionSuite_031700 Regression Suite: -
+
+
+TC01_HTTP Client: Validate that Probe option is available and on clicking perform, proper response is displayed then click on back button in response page, check whether user is redirected to the probe page of that interface. --> Execution started
+
+Http Interface clicked successfully  --> PASS
+Probe clicked successfully  --> PASS
+Perform button is clicked successfully  --> PASS
+Status is: ONLINE --> PASS
+Back button is clicked successfully  --> PASS
+Back button is checked --> PASS

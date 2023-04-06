@@ -54,7 +54,7 @@ public class Reporting {
 
 	}
 	 
-	public static void summaryReportdesign(String filename,String BrowserName,String BrowserVersion,String OS_Name) 
+	public static void summaryReportdesign(String filename,String BrowserName,String BrowserVersion,String OS_Name,String OS_Version) 
 	{
 		
 		try {
@@ -64,9 +64,7 @@ public class Reporting {
 
 			
 			String Hostname = SystemUtils.getHostName();
-			String Username = SystemUtils.getUserName();
-			String OS_Version = SystemUtils.OS_VERSION.toString();			
-			String Java_Version=SystemUtils.JAVA_VERSION.toString();
+			String Username = SystemUtils.getUserName();			
 							
 			//initialize ExtentReports and attach the HtmlReporter
 			extent = new ExtentReports();
@@ -79,7 +77,6 @@ public class Reporting {
 			extent.setSystemInfo("UserName", Username);
 			extent.setSystemInfo("Browser", BrowserName);
 			extent.setSystemInfo("Browser Version", BrowserVersion);
-			extent.setSystemInfo("JAVA Version", Java_Version);
 			extent.setSystemInfo("Browser Mode","Normal");
 
 			//configuration items to change the look and feel
@@ -104,29 +101,39 @@ public class Reporting {
 			switch(st){
 
 			case FAIL :			
-				//test.log(Status.FAIL, MarkupHelper.createLabel(ObjectName,ExtentColor.RED ));
+				
 				test.log(Status.FAIL, ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
+				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
 				break;
 
 			case PASS :
-				//test.log(Status.PASS, MarkupHelper.createLabel(ObjectName,ExtentColor.GREEN ));	
+					
 				test.log(Status.PASS,ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
+				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
 							
 				break;
 
 			case WARNING :
+				
 				test.log(Status.WARNING, ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
+				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
 				break;
 				
 			case INFO :
+				
 				test.log(Status.INFO, ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
+				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
 				break;	
 
 			case ERROR :
+				
 				test.log(Status.SKIP, MarkupHelper.createLabel(ObjectName,ExtentColor.GREY ));
+				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
 				break;
+				
 			default :
 				test.log(Status.INFO,MarkupHelper.createLabel(ObjectName,ExtentColor.BLUE ));
+				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
 			}
 		}catch(Exception e){ System.out.println(e.getMessage()); }
 
