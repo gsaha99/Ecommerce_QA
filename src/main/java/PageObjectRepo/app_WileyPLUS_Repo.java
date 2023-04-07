@@ -96,6 +96,17 @@ public class app_WileyPLUS_Repo {
 	WebElement FirstProductsPrice;
 	@FindBy(xpath="(//div[@class='productPriceLabel']/span)[2]")
 	WebElement SecondProductsPrice;
+	@FindBy(xpath = "//span[@id='promoCodeLink']")
+	WebElement PromoCodeLink;
+	@FindBy(xpath = "//input[@id='js-voucher-code-text']")
+	WebElement EnterPromoCode;
+	@FindBy(xpath = "//span[@class='cartDiscountBtnText']")
+	WebElement ApplyPromoButton;
+	@FindBy(xpath="(//div[@class='col-xs-6 noPadding orderDetailTotalVal'])[2]")
+	WebElement OrderTotalInCartPage;
+	@FindBy(xpath="//div[@class='row no-margin cartTotalVoucherApply']/div[@class='col-xs-6 noPadding price navyBlueVal']")
+	WebElement DiscountValue;
+	
 	
 	//Login or Create account page during checkout
 	
@@ -2412,6 +2423,91 @@ public class app_WileyPLUS_Repo {
 		catch(Exception e) {
 			Reporting.updateTestReport("No products were present in cart to remove",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Clicks on the Promotion code link in cart page
+	 */
+	public void clickOnPromotionCodelink() throws IOException {
+		try {
+			PromoCodeLink.click();
+			Reporting.updateTestReport("Enter Promocode link was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to clcik on Enter Promo code link",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+
+	/*
+	 * @Author: Anindita
+	 * @Description: Enters the promo code in the cart page
+	 */
+	public void enterPromoCode(String promo) throws IOException {
+		try {
+			EnterPromoCode.sendKeys(promo);
+			Reporting.updateTestReport("Promocode " + promo + " was enter successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Enter the PromoCode", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Author: Anindita
+	 * @Description: Clicks on the Apply button in the cart page
+	 */
+	public void ApplyPromo() throws IOException {
+		try {
+			ApplyPromoButton.click();
+			Reporting.updateTestReport("Promocode was applied successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to Enter the PromoCode", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Fetches the Order total in cart page
+	 */
+	public String fetchOrderTotalInCartPage() throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"Order total in cart page : "+OrderTotalInCartPage.getText().trim()+" was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return OrderTotalInCartPage.getText().trim();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport(
+					"Order total in cart page could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	/*
+	 * @Author: Anindita
+	 * @Description: Fetches the the discount amount from cart page
+	 */
+	public String fetchDiscountAmountInCartPage() throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"Discount amount: "+DiscountValue.getText().split("-")[1]+" was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return DiscountValue.getText().split("-")[1];
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport(
+					"Discount amount in cart page could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
 		}
 	}
 	

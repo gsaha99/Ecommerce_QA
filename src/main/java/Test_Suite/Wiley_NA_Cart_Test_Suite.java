@@ -523,7 +523,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
 							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
-							driver.get(excelOperation.getTestData("Yopmail_URL",
+							/*driver.get(excelOperation.getTestData("Yopmail_URL",
 									"Generic_Dataset", "Data"));
 							wiley.enterEmailIdInYopmail(emailID);
 							wiley.clickOnCheckInboxButton();
@@ -535,7 +535,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}				
+							}*/				
 						}			
 
 						else {
@@ -2943,167 +2943,186 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
-				ScrollingWebPage.PageScrolldown(driver,0,400,SS_path);
-				wiley.clickOnPromotionCodelink();
-				wiley.enterPromoCode(excelOperation.getTestData("WILEY_PROMO_SDP66", "Generic_Dataset", "Data"));
-				wiley.ApplyPromo();
-				BigDecimal subtotal=new BigDecimal(wiley.fetchOrderSubTotalInCartPage().substring(1));
-				BigDecimal ordertotalInCart=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
-				BigDecimal discount=new BigDecimal(wiley.fetchDiscountAmountInCartPage().substring(2));
-				if(subtotal.multiply(new BigDecimal(0.35)).setScale(2, RoundingMode.CEILING).compareTo(discount)==0) 
-					Reporting.updateTestReport(
-							"The rounded value of :"+subtotal.multiply(new BigDecimal(0.35))+
-							" is same as the discount value: "+discount,
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				else
-					Reporting.updateTestReport(
-							"The rounded value of :"+subtotal.multiply(new BigDecimal(0.35))+
-							" is not same as the discount value: "+discount,
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				if(priceOfFirstProduct.subtract(discount).compareTo(ordertotalInCart)==0) 
-					Reporting.updateTestReport(
-							"The addition of all the products' price and the subtraction of the discount"
-									+ " is same as the subtotal in cart page",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				else
-					Reporting.updateTestReport(
-							"The addition of all the products' price and the subtraction of the discount "
-									+ "didn't match with the subtotal in cart page",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
-						("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
-				ScrollingWebPage.PageScrolldown(driver,0,900,SS_path);
-				wiley.clickOnProceedToCheckoutButton();
-				String emailID = wiley.enterEmailIdInCreateAccountForm();
-				wiley.clickOnCreateAccountButton();
-				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
-						("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
-				wiley.confirmEmailIdInCreateAccountForm(emailID);
-				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Password"));
-				wiley.clickOnSaveAndContinueButton();
-				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
-						("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-				wiley.enterFirstName(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "First_Name"));
-				wiley.enterLastName(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-				wiley.selectCountry(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
-				try{
-					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
-					wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
-					wiley.enterShippingZIPCode(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
-					wiley.enterShippingCity(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
-					wiley.enterState(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
-					wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
-					wiley.selectShippingMethod();
+				wiley.searchDataInSearchBar(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "ISBN"));
+				wiley.clickOnSRP_WileyProduct();
+				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
+				wiley.clickOnAddToCartButton();
+				try {
+					wait.until(ExpectedConditions.
+							elementToBeClickable
+							(By.xpath("//button[contains(text(),'View Cart')]")));
+					wiley.clickOnViewCartButton();
+					ScrollingWebPage.PageScrolldown(driver,0,400,SS_path);
+					wiley.selectQuantityDropDown(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Quantity"));
+					wiley.clickOnPromotionCodelink();
+					wiley.enterPromoCode(excelOperation.getTestData("WILEY_PROMO_SDP66", "Generic_Dataset", "Data"));
+					wiley.ApplyPromo();
+					BigDecimal subtotal=new BigDecimal(wiley.fetchOrderSubTotalInCartPage().substring(1));
+					BigDecimal ordertotalInCart=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+					BigDecimal discount=new BigDecimal(wiley.fetchDiscountAmountInCartPage().substring(2));
+					BigDecimal quantity=new BigDecimal(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Quantity"));
+					if(subtotal.multiply(new BigDecimal(0.35)).setScale(2, RoundingMode.HALF_EVEN).compareTo(discount)==0) 
+						Reporting.updateTestReport(
+								"The rounded value of :"+subtotal.multiply(new BigDecimal(0.35))+
+								" is same as the discount value: "+discount,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"The rounded value of :"+subtotal.multiply(new BigDecimal(0.35))+
+								" is not same as the discount value: "+discount,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					if(priceOfFirstProduct.multiply(quantity).add(priceOfSecondProduct).subtract(discount).compareTo(ordertotalInCart)==0) 
+						Reporting.updateTestReport(
+								"The addition of all the products' price and the subtraction of the discount"
+										+ " is same as the subtotal in cart page",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"The addition of all the products' price and the subtraction of the discount "
+										+ "didn't match with the subtotal in cart page",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
+							("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
+					ScrollingWebPage.PageScrolldown(driver,0,900,SS_path);
+					wiley.clickOnProceedToCheckoutButton();
+					String emailID = wiley.enterEmailIdInCreateAccountForm();
+					wiley.clickOnCreateAccountButton();
+					wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
+							("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
+					wiley.confirmEmailIdInCreateAccountForm(emailID);
+					wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Password"));
 					wiley.clickOnSaveAndContinueButton();
-					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-					catch(Exception e) {
-						Reporting.updateTestReport("Adress doctor pop up did not appear",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-					}
 					wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 							("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-					driver.switchTo().frame(0);
-					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-						PaymentGateway.paymentWiley(driver, wiley, "TC17", SS_path);
+					wiley.enterFirstName(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					wiley.enterLastName(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+					wiley.selectCountry(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
+					try{
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+						wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
+						wiley.enterShippingZIPCode(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
+						wiley.enterShippingCity(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
+						wiley.enterState(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
+						wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
+						wiley.selectShippingMethod();
 						wiley.clickOnSaveAndContinueButton();
-						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
-						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
-						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
-						BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
-						BigDecimal discountInOrderReview=new BigDecimal(wiley.fetchDiscountInOrderReview().substring(1));
-						if(firstProductPriceInOrderReview
-								.add(shippingInOrderReview)
-								.add(taxInOrderReview)
-								.subtract(discountInOrderReview)
-								.compareTo(orderTotalInOrderReview)==0)
-							Reporting.updateTestReport("First Product price + Tax + Shipping charge - Discount"
-									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport("First Product price + Tax + Shipping charge - Discount"
-									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
-							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						wiley.clickOnPlaceOrderButton();
-						String orderconfirmation = driver.getTitle();
-						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-							wiley.checkPrintReciept();
-							wiley.checkTextInOrderConfirmationPage(
-									excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
-							ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-							String orderId = wiley.fetchOrderId();
-							excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-							excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
-							excelOperation.updateTestData("TC33", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
-							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-							String ordertotal = wiley.fetchOrderTotal();
-							String taxInOrderConfirmation = wiley.fetchTaxAmount();
-							String shipingChargeInOrderConfirmation=wiley.fetchShippingCharge();
-							if(taxInOrderReview.compareTo(new BigDecimal(taxInOrderConfirmation.substring(1)))==0)
-								Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
-										" is same as tax in Order confirmation page: "+taxInOrderConfirmation, 
+						try {
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						catch(Exception e) {
+							Reporting.updateTestReport("Adress doctor pop up did not appear",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+						}
+						wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
+								("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
+						driver.switchTo().frame(0);
+						try {
+							wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+							PaymentGateway.paymentWiley(driver, wiley, "TC17", SS_path);
+							wiley.clickOnSaveAndContinueButton();
+							BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+							BigDecimal secondProductPriceInOrderReview=new BigDecimal(wiley.fetchSecondProductPriceInOrderReview().substring(1));
+							BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+							BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+							BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
+							BigDecimal discountInOrderReview=new BigDecimal(wiley.fetchDiscountInOrderReview().substring(1));
+							if(firstProductPriceInOrderReview
+									.multiply(quantity)
+									.add(secondProductPriceInOrderReview)
+									.add(shippingInOrderReview)
+									.add(taxInOrderReview)
+									.subtract(discountInOrderReview)
+									.compareTo(orderTotalInOrderReview)==0)
+								Reporting.updateTestReport("First Product price + Tax + Shipping charge - Discount"
+										+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport("First Product price + Tax + Shipping charge - Discount"
+										+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+								Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							else
-								Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
-										" is not same as tax in Order confirmation page: "+taxInOrderConfirmation, 
+								Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							if(shippingInOrderReview.compareTo(new BigDecimal(shipingChargeInOrderConfirmation.substring(1)))==0)
-								Reporting.updateTestReport("Shipping charge calculated in Order review step: $"+shippingInOrderReview+
-										" is same as Shipping charge in Order confirmation page: "+shipingChargeInOrderConfirmation, 
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							else
-								Reporting.updateTestReport("Shipping charge calculated in Order review step: $"+shippingInOrderReview+
-										" is not same as Shipping charge in Order confirmation page: "+shipingChargeInOrderConfirmation, 
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							if(orderTotalInOrderReview.compareTo(new BigDecimal(ordertotal.substring(1)))==0)
-								Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
-										" is same as Order total in Order confirmation page: "+ordertotal, 
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							else
-								Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
-										" is not same as Order total in Order confirmation page: "+ordertotal, 
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-							excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
-							excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
-							/*driver.get("https://yopmail.com/en/");
+							wiley.clickOnPlaceOrderButton();
+							String orderconfirmation = driver.getTitle();
+							if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+								wiley.checkPrintReciept();
+								wiley.checkTextInOrderConfirmationPage(
+										excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
+								ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+								String orderId = wiley.fetchOrderId();
+								excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+								excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
+								excelOperation.updateTestData("TC33", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
+								ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+								String ordertotal = wiley.fetchOrderTotal();
+								String taxInOrderConfirmation = wiley.fetchTaxAmount();
+								String shipingChargeInOrderConfirmation=wiley.fetchShippingCharge();
+								if(taxInOrderReview.compareTo(new BigDecimal(taxInOrderConfirmation.substring(1)))==0)
+									Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
+											" is same as tax in Order confirmation page: "+taxInOrderConfirmation, 
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
+											" is not same as tax in Order confirmation page: "+taxInOrderConfirmation, 
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								if(shippingInOrderReview.compareTo(new BigDecimal(shipingChargeInOrderConfirmation.substring(1)))==0)
+									Reporting.updateTestReport("Shipping charge calculated in Order review step: $"+shippingInOrderReview+
+											" is same as Shipping charge in Order confirmation page: "+shipingChargeInOrderConfirmation, 
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("Shipping charge calculated in Order review step: $"+shippingInOrderReview+
+											" is not same as Shipping charge in Order confirmation page: "+shipingChargeInOrderConfirmation, 
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								if(orderTotalInOrderReview.compareTo(new BigDecimal(ordertotal.substring(1)))==0)
+									Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
+											" is same as Order total in Order confirmation page: "+ordertotal, 
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
+											" is not same as Order total in Order confirmation page: "+ordertotal, 
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+								excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
+								excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
+								driver.get(excelOperation.getTestData("Yopmail_URL",
+										"Generic_Dataset", "Data"));
+								wiley.enterEmailIdInYopmail(emailID);
+								wiley.clickOnCheckInboxButton();
+								if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									Reporting.updateTestReport("Order Confirmation mail was received",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
+								}
+								else {
+									Reporting.updateTestReport("Order Confirmation mail was not received",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}	
 
-							wiley.enterEmailIdInYopmail(emailID);
-							wiley.clickOnCheckInboxButton();
-							if(checkIfOrderConfirmationMailReceived()) {
-								Reporting.updateTestReport("Order Confirmation mail was received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								validateOrderConfirmationMailContent(taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
-							}
+
+							}				
 							else {
-								Reporting.updateTestReport("Order Confirmation mail was not received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}*/
-
-
-						}				
-						else {
-							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-									StatusDetails.FAIL);
+								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+										StatusDetails.FAIL);
+							}
+						}
+						catch(Exception e) {
+							Reporting.updateTestReport("Shipping Address line 1 was not clickable"
+									+ " and caused timeout exception",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					}
 					catch(Exception e) {
-						Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-								+ " and caused timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						Reporting.updateTestReport("Cardholder name ield in Card information"
+								+ " section was not clickable and caused timeout exception"
+								, CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
-					Reporting.updateTestReport("Cardholder name ield in Card information"
-							+ " section was not clickable and caused timeout exception"
-							, CaptureScreenshot.getScreenshot(SS_path),
-							StatusDetails.FAIL);
+					Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
@@ -4797,7 +4816,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			}
 			wiley.removeProductsFromCart(driver);
 			wiley.WileyLogOut();
-			
+
 
 		}
 		catch(Exception e) {
@@ -5538,7 +5557,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 15/03/23
 	 * @Description: Places one order with multi quanitty and adds one order level discount
@@ -5558,174 +5577,190 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						elementToBeClickable
 						(By.xpath("//button[contains(text(),'View Cart')]")));
 				wiley.clickOnViewCartButton();
-				ScrollingWebPage.PageScrolldown(driver,0,400,SS_path);
-				wiley.selectQuantityDropDown(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Quantity"));
-				wiley.clickOnPromotionCodelink();
-				wiley.enterPromoCode(excelOperation.getTestData("Wiley_Order_Level_Discount", "Generic_Dataset", "Data"));
-				wiley.ApplyPromo();
-				BigDecimal subtotal=new BigDecimal(wiley.fetchOrderSubTotalInCartPage().substring(1));
-				BigDecimal ordertotalInCart=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
-				BigDecimal discount=new BigDecimal(wiley.fetchDiscountAmountInCartPage().substring(2));
-				if(subtotal.multiply(new BigDecimal(0.30)).setScale(2, RoundingMode.CEILING).compareTo(discount)==0) 
-					Reporting.updateTestReport(
-							"The rounded value of :"+subtotal.multiply(new BigDecimal(0.30))+
-							" is same as the discount value: "+discount,
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				else
-					Reporting.updateTestReport(
-							"The rounded value of :"+subtotal.multiply(new BigDecimal(0.30))+
-							" is not same as the discount value: "+discount,
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				BigDecimal quantity=new BigDecimal(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Quantity"));
-				if(priceOfFirstProduct.multiply(quantity).subtract(discount).setScale(2, RoundingMode.CEILING).compareTo(ordertotalInCart)==0) 
-					Reporting.updateTestReport(
-							"The addition of all the products' price and the subtraction of the discount"
-									+ " is same as the subtotal in cart page",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				else
-					Reporting.updateTestReport(
-							"The addition of all the products' price and the subtraction of the discount "
-									+ "didn't match with the subtotal in cart page",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
-						("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
-				ScrollingWebPage.PageScrolldown(driver,0,900,SS_path);
-				wiley.clickOnProceedToCheckoutButton();
-				String emailID = wiley.enterEmailIdInCreateAccountForm();
-				wiley.clickOnCreateAccountButton();
-				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
-						("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
-				wiley.confirmEmailIdInCreateAccountForm(emailID);
-				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Password"));
-				wiley.clickOnSaveAndContinueButton();
-				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
-						("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-				wiley.enterFirstName(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "First_Name"));
-				wiley.enterLastName(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Last_Name"));
-				wiley.selectCountry(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
-				try{
-					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
-					wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
-					wiley.enterShippingZIPCode(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
-					wiley.enterShippingCity(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
-					wiley.enterState(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
-					wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
-					wiley.selectShippingMethod();
-					wiley.clickOnSaveAndContinueButton();
-					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
-						wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
-					catch(Exception e) {
-						Reporting.updateTestReport("Adress doctor pop up did not appear",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-					}
+				wiley.searchDataInSearchBar(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "ISBN"));
+				wiley.clickOnSRP_WileyProduct();
+				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
+				wiley.clickOnAddToCartButton();
+				try {
+					wait.until(ExpectedConditions.
+							elementToBeClickable
+							(By.xpath("//button[contains(text(),'View Cart')]")));
+					wiley.clickOnViewCartButton();
+					ScrollingWebPage.PageScrolldown(driver,0,400,SS_path);
+					wiley.selectQuantityDropDown(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Quantity"));
+					wiley.clickOnPromotionCodelink();
+					wiley.enterPromoCode(excelOperation.getTestData("Wiley_Order_Level_Discount", "Generic_Dataset", "Data"));
+					wiley.ApplyPromo();
+					BigDecimal subtotal=new BigDecimal(wiley.fetchOrderSubTotalInCartPage().substring(1));
+					BigDecimal ordertotalInCart=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
+					BigDecimal discount=new BigDecimal(wiley.fetchDiscountAmountInCartPage().substring(2));
+					if(subtotal.multiply(new BigDecimal(0.30)).setScale(2, RoundingMode.CEILING).compareTo(discount)==0) 
+						Reporting.updateTestReport(
+								"The rounded value of :"+subtotal.multiply(new BigDecimal(0.30))+
+								" is same as the discount value: "+discount,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"The rounded value of :"+subtotal.multiply(new BigDecimal(0.30))+
+								" is not same as the discount value: "+discount,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					BigDecimal quantity=new BigDecimal(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Quantity"));
+					if(priceOfFirstProduct.multiply(quantity).add(priceOfSecondProduct).subtract(discount).setScale(2, RoundingMode.CEILING).compareTo(ordertotalInCart)==0) 
+						Reporting.updateTestReport(
+								"The addition of all the products' price and the subtraction of the discount"
+										+ " is same as the subtotal in cart page",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"The addition of all the products' price and the subtraction of the discount "
+										+ "didn't match with the subtotal in cart page",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
-							("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-					wiley.selectSchoolInfo(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "School_State"),excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "School_Name"));
+							("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
+					ScrollingWebPage.PageScrolldown(driver,0,900,SS_path);
+					wiley.clickOnProceedToCheckoutButton();
+					String emailID = wiley.enterEmailIdInCreateAccountForm();
+					wiley.clickOnCreateAccountButton();
+					wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
+							("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
+					wiley.confirmEmailIdInCreateAccountForm(emailID);
+					wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Password"));
 					wiley.clickOnSaveAndContinueButton();
 					wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 							("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-					driver.switchTo().frame(0);
-					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-						PaymentGateway.paymentWiley(driver, wiley, "TC42", SS_path);
+					wiley.enterFirstName(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "First_Name"));
+					wiley.enterLastName(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Last_Name"));
+					wiley.selectCountry(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Shipping_Country"));
+					try{
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+						wiley.enterAddressLine1Shipping(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Shipping_Address_line1"));
+						wiley.enterShippingZIPCode(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Shipping_Zip_Code"));
+						wiley.enterShippingCity(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
+						wiley.enterState(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
+						wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
+						wiley.selectShippingMethod();
 						wiley.clickOnSaveAndContinueButton();
-						wiley.clickOnRentalTermsCheckbox();
-						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
-						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
-						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
-						BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
-						BigDecimal discountInOrderReview=new BigDecimal(wiley.fetchDiscountInOrderReview().substring(1));
-						if(firstProductPriceInOrderReview
-								.multiply(quantity)
-								.add(shippingInOrderReview)
-								.add(taxInOrderReview)
-								.subtract(discountInOrderReview)
-								.compareTo(orderTotalInOrderReview)==0)
-							Reporting.updateTestReport("First Product price + Tax + Shipping charge - Discount"
-									+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport("First Product price + Tax + Shipping charge - Discount"
-									+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
-							Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						wiley.clickOnPlaceOrderButton();
-						String orderconfirmation = driver.getTitle();
-						if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
-							wiley.checkPrintReciept();
-							wiley.checkTextInOrderConfirmationPage(
-									excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
-							ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
-							String orderId = wiley.fetchOrderId();
-							excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
-							excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
-							excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
-							ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
-							String ordertotal = wiley.fetchOrderTotal();
-							String taxInOrderConfirmation = wiley.fetchTaxAmount();
-							String shipingChargeInOrderConfirmation=wiley.fetchShippingCharge();
-							if(taxInOrderReview.compareTo(new BigDecimal(taxInOrderConfirmation.substring(1)))==0)
-								Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
-										" is same as tax in Order confirmation page: "+taxInOrderConfirmation, 
+						try {
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
+							wiley.clickOnUseSelectedShippingAddressButtonAddressDoctor();}
+						catch(Exception e) {
+							Reporting.updateTestReport("Adress doctor pop up did not appear",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+						}
+						wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
+								("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
+						wiley.selectSchoolInfo(excelOperation.getTestData("TC16", "WILEY_NA_Cart_Test_Data", "School_State"),excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "School_Name"));
+						wiley.clickOnSaveAndContinueButton();
+						wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
+								("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
+						driver.switchTo().frame(0);
+						try {
+							wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+							PaymentGateway.paymentWiley(driver, wiley, "TC42", SS_path);
+							wiley.clickOnSaveAndContinueButton();
+							wiley.clickOnRentalTermsCheckbox();
+							BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
+							BigDecimal secondProductPriceInOrderReview=new BigDecimal(wiley.fetchSecondProductPriceInOrderReview().substring(1));
+							BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
+							BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
+							BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
+							BigDecimal discountInOrderReview=new BigDecimal(wiley.fetchDiscountInOrderReview().substring(1));
+							if(firstProductPriceInOrderReview
+									.multiply(quantity)
+									.add(secondProductPriceInOrderReview)
+									.add(shippingInOrderReview)
+									.add(taxInOrderReview)
+									.subtract(discountInOrderReview)
+									.compareTo(orderTotalInOrderReview)==0)
+								Reporting.updateTestReport("First Product price + Tax + Shipping charge - Discount"
+										+ " = Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport("First Product price + Tax + Shipping charge - Discount"
+										+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+								Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							else
-								Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
-										" is not same as tax in Order confirmation page: "+taxInOrderConfirmation, 
+								Reporting.updateTestReport("Price in PDP is not same as the price in Order Review",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							if(shippingInOrderReview.compareTo(new BigDecimal(shipingChargeInOrderConfirmation.substring(1)))==0)
-								Reporting.updateTestReport("Shipping charge calculated in Order review step: $"+shippingInOrderReview+
-										" is same as Shipping charge in Order confirmation page: "+shipingChargeInOrderConfirmation, 
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							else
-								Reporting.updateTestReport("Shipping charge calculated in Order review step: $"+shippingInOrderReview+
-										" is not same as Shipping charge in Order confirmation page: "+shipingChargeInOrderConfirmation, 
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							if(orderTotalInOrderReview.compareTo(new BigDecimal(ordertotal.substring(1)))==0)
-								Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
-										" is same as Order total in Order confirmation page: "+ordertotal, 
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							else
-								Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
-										" is not same as Order total in Order confirmation page: "+ordertotal, 
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
-							excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
-							excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
-							driver.get(excelOperation.getTestData("Yopmail_URL",
-									"Generic_Dataset", "Data"));
-							wiley.enterEmailIdInYopmail(emailID);
-							wiley.clickOnCheckInboxButton();
-							if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
-								Reporting.updateTestReport("Order Confirmation mail was received",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,
-										shipingChargeInOrderConfirmation,ordertotal);
-							}
+							wiley.clickOnPlaceOrderButton();
+							String orderconfirmation = driver.getTitle();
+							if (orderconfirmation.equalsIgnoreCase("orderConfirmation Page | Wiley")) {
+								wiley.checkPrintReciept();
+								wiley.checkTextInOrderConfirmationPage(
+										excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
+								ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+								String orderId = wiley.fetchOrderId();
+								excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
+								excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
+								excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
+								ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
+								String ordertotal = wiley.fetchOrderTotal();
+								String taxInOrderConfirmation = wiley.fetchTaxAmount();
+								String shipingChargeInOrderConfirmation=wiley.fetchShippingCharge();
+								if(taxInOrderReview.compareTo(new BigDecimal(taxInOrderConfirmation.substring(1)))==0)
+									Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
+											" is same as tax in Order confirmation page: "+taxInOrderConfirmation, 
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
+											" is not same as tax in Order confirmation page: "+taxInOrderConfirmation, 
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								if(shippingInOrderReview.compareTo(new BigDecimal(shipingChargeInOrderConfirmation.substring(1)))==0)
+									Reporting.updateTestReport("Shipping charge calculated in Order review step: $"+shippingInOrderReview+
+											" is same as Shipping charge in Order confirmation page: "+shipingChargeInOrderConfirmation, 
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("Shipping charge calculated in Order review step: $"+shippingInOrderReview+
+											" is not same as Shipping charge in Order confirmation page: "+shipingChargeInOrderConfirmation, 
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								if(orderTotalInOrderReview.compareTo(new BigDecimal(ordertotal.substring(1)))==0)
+									Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
+											" is same as Order total in Order confirmation page: "+ordertotal, 
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
+											" is not same as Order total in Order confirmation page: "+ordertotal, 
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
+								excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
+								excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
+								driver.get(excelOperation.getTestData("Yopmail_URL",
+										"Generic_Dataset", "Data"));
+								wiley.enterEmailIdInYopmail(emailID);
+								wiley.clickOnCheckInboxButton();
+								if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									Reporting.updateTestReport("Order Confirmation mail was received",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,
+											shipingChargeInOrderConfirmation,ordertotal);
+								}
+								else {
+									Reporting.updateTestReport("Order Confirmation mail was not received",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+
+
+							}				
 							else {
-								Reporting.updateTestReport("Order Confirmation mail was not received",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+										StatusDetails.FAIL);
 							}
-
-
-						}				
-						else {
-							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
-									StatusDetails.FAIL);
+						}
+						catch(Exception e) {
+							Reporting.updateTestReport("Cardholder name ield in Card information section was not clickable and caused timeout exception",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					}
 					catch(Exception e) {
-						Reporting.updateTestReport("Cardholder name ield in Card information section was not clickable and caused timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						Reporting.updateTestReport("Shipping Address line 1 was not clickable and caused timeout exception"
+								, CaptureScreenshot.getScreenshot(SS_path),
+								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
-					Reporting.updateTestReport("Shipping Address line 1 was not clickable and caused timeout exception"
-							, CaptureScreenshot.getScreenshot(SS_path),
-							StatusDetails.FAIL);
+					Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {

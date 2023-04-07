@@ -1238,11 +1238,11 @@ public class app_Wiley_Repo {
 		try {
 			AddressFirstName.clear();
 			AddressFirstName.sendKeys(Fname);
-			Reporting.updateTestReport("First Name was entered successfully on paymentpage",
+			Reporting.updateTestReport("First Name was entered successfully in checkout",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to enter the First Name with error message " + e.getClass().toString(),
+			Reporting.updateTestReport("Failed to enter the First Name in checkout with error message " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -1254,7 +1254,7 @@ public class app_Wiley_Repo {
 		try {
 			AddressLastName.clear();
 			AddressLastName.sendKeys(Lname);
-			Reporting.updateTestReport("Last Name  was entered successfully on paymentpage",
+			Reporting.updateTestReport("Last Name  was entered successfully in checkout",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("Failed to enter the Last name with error message " + e.getClass().toString(),
