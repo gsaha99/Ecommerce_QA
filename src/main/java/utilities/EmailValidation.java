@@ -28,17 +28,17 @@ public class EmailValidation {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 			int timeOutSeconds=90;
 			int flag=0;
-			WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-			WebElement element2 = null;
+			WebElement RefreshButtonInYopmail = driver.findElement(By.xpath("//button[@id='refresh']"));
+			WebElement OrderConfirmationMail = null;
 
 			/* The purpose of this loop is to wait for maximum of 60 seconds */
 			for (int i = 0; i < timeOutSeconds / 5; i++) {
 
 				try {
 					driver.switchTo().frame("ifinbox");
-					element2=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(expectedElementXapth)));
+					OrderConfirmationMail=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(expectedElementXapth)));
 
-					if(element2.isDisplayed()==true)
+					if(OrderConfirmationMail.isDisplayed()==true)
 					{
 						flag=1;
 						driver.findElement(By.xpath(expectedElementXapth)).click();
@@ -48,7 +48,7 @@ public class EmailValidation {
 
 				} catch (Exception e) {
 					driver.switchTo().defaultContent(); 
-					element1.click();
+					RefreshButtonInYopmail.click();
 					
 				}
 			}
@@ -256,27 +256,27 @@ public class EmailValidation {
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(2));
 			int timeOutSeconds=10;
 			int flag=0;
-			WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-			WebElement element2 = null;
+			WebElement RefreshButtonInYopmail = driver.findElement(By.xpath("//button[@id='refresh']"));
+			WebElement FinishRegistrationMail = null;
 			/* The purpose of this loop is to wait for maximum of 60 seconds */
 			for (int i = 0; i < timeOutSeconds / 5; i++) {
 
 				try {
 					driver.switchTo().frame("ifinbox");
-					element2=wait1.until(ExpectedConditions.visibilityOfElementLocated(
+					FinishRegistrationMail=wait1.until(ExpectedConditions.visibilityOfElementLocated(
 							By.xpath("//div[contains(text(),'Welcome to Wiley')]")));
 
-					if(element2.isDisplayed()==true)
+					if(FinishRegistrationMail.isDisplayed()==true)
 					{
 						flag=1;
-						element2.click();
+						FinishRegistrationMail.click();
 						driver.switchTo().defaultContent();
 						break;
 					}
 
 				} catch (Exception e) {
 					driver.switchTo().defaultContent();        
-					element1.click();
+					RefreshButtonInYopmail.click();
 				}
 			}
 			if(flag==1) {
@@ -311,27 +311,27 @@ public class EmailValidation {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 			int timeOutSeconds=60;
 			int flag=0;
-			WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-			WebElement element2 = null;
+			WebElement RefreshButtonInYopmail = driver.findElement(By.xpath("//button[@id='refresh']"));
+			WebElement ResetPasswordLink = null;
 
 			/* The purpose of this loop is to wait for maximum of 60 seconds */
 			for (int i = 0; i < timeOutSeconds / 5; i++) {
 
 				try {
 					driver.switchTo().frame("ifinbox");
-					element2=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Password Reset Request')]")));
+					ResetPasswordLink=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Password Reset Request')]")));
 
-					if(element2.isDisplayed()==true)
+					if(ResetPasswordLink.isDisplayed()==true)
 					{
 						flag=1;
-						element2.click();
+						ResetPasswordLink.click();
 						driver.switchTo().defaultContent();
 						break;
 					}
 
 				} catch (Exception e) {
 					driver.switchTo().defaultContent();        
-					element1.click();
+					RefreshButtonInYopmail.click();
 				}
 			}
 
@@ -381,27 +381,27 @@ public class EmailValidation {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 			int timeOutSeconds=60;
 			int flag=0;
-			WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-			WebElement element2 = null;
+			WebElement RefreshButtonInYopmail = driver.findElement(By.xpath("//button[@id='refresh']"));
+			WebElement ResetPasswordLink = null;
 
 			/* The purpose of this loop is to wait for maximum of 60 seconds */
 			for (int i = 0; i < timeOutSeconds / 5; i++) {
 
 				try {
 					driver.switchTo().frame("ifinbox");
-					element2=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Password Reset Request')]")));
+					ResetPasswordLink=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Password Reset Request')]")));
 
-					if(element2.isDisplayed()==true)
+					if(ResetPasswordLink.isDisplayed()==true)
 					{
 						flag=1;
-						element2.click();
+						ResetPasswordLink.click();
 						driver.switchTo().defaultContent();
 						break;
 					}
 
 				} catch (Exception e) {
 					driver.switchTo().defaultContent();        
-					element1.click();
+					RefreshButtonInYopmail.click();
 				}
 			}
 
@@ -444,27 +444,27 @@ public class EmailValidation {
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(5));
 			int timeOutSeconds=60;
 			int flag=0;
-			WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-			WebElement element2 = null;
+			WebElement RefreshButtonInYopmail = driver.findElement(By.xpath("//button[@id='refresh']"));
+			WebElement ResetPasswordLink = null;
 
 			/* The purpose of this loop is to wait for maximum of 60 seconds */
 			for (int i = 0; i < timeOutSeconds / 5; i++) {
 
 				try {
 					driver.switchTo().frame("ifinbox");
-					element2=wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Reset Password for Wiley.com')]")));
+					ResetPasswordLink=wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Reset Password for Wiley.com')]")));
 
-					if(element2.isDisplayed()==true)
+					if(ResetPasswordLink.isDisplayed()==true)
 					{
 						flag=1;
-						element2.click();
+						ResetPasswordLink.click();
 						driver.switchTo().defaultContent();
 						break;
 					}
 
 				} catch (Exception e) {
 					driver.switchTo().defaultContent();        
-					element1.click();
+					RefreshButtonInYopmail.click();
 				}
 			}
 
@@ -507,27 +507,27 @@ public class EmailValidation {
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(5));
 			int timeOutSeconds=60;
 			int flag=0;
-			WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-			WebElement element2 = null;
+			WebElement RefreshButtonInYopmail = driver.findElement(By.xpath("//button[@id='refresh']"));
+			WebElement ResetPasswordLink = null;
 
 			/* The purpose of this loop is to wait for maximum of 60 seconds */
 			for (int i = 0; i < timeOutSeconds / 5; i++) {
 
 				try {
 					driver.switchTo().frame("ifinbox");
-					element2 = wait1.until(ExpectedConditions.visibilityOfElementLocated(
+					ResetPasswordLink = wait1.until(ExpectedConditions.visibilityOfElementLocated(
 							By.xpath("//div[contains(text(),'Password Reset Request')]")));
 
-					if (element2.isDisplayed() == true) {
+					if (ResetPasswordLink.isDisplayed() == true) {
 						flag = 1;
-						element2.click();
+						ResetPasswordLink.click();
 						driver.switchTo().defaultContent();
 						break;
 					}
 
 				} catch (Exception e) {
 					driver.switchTo().defaultContent();
-					element1.click();
+					RefreshButtonInYopmail.click();
 				}
 			}
 

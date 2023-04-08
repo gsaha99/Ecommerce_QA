@@ -5693,7 +5693,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								String orderId = wiley.fetchOrderId();
 								excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Order_Id", orderId);
 								excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
-								excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
+								excelOperation.updateTestData("TC43", "WILEY_NA_Cart_Test_Data", "Email_Id", emailID);
 								ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 								String ordertotal = wiley.fetchOrderTotal();
 								String taxInOrderConfirmation = wiley.fetchTaxAmount();
@@ -5770,6 +5770,109 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			wiley.removeProductsFromCart(driver);
 			wiley.WileyLogOut();
 		}
+		catch(Exception e) {
+			wiley.wileyLogOutException();
+			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Validates the reset password functionality 
+	 * @Date: 15/11/22
+	 * The user id for this test case is getting populated from TC42
+	 */
+
+	@Test
+	public void TC43_Forgot_Password_Page_Password_Criteria_Negative_Scenarios() throws IOException{
+		try {
+
+			Reporting.test = Reporting.extent.createTest("TC43_Forgot_Password_Page_Password_Criteria_Negative_Scenarios");
+			LogTextFile.writeTestCaseStatus("TC43_Forgot_Password_Page_Password_Criteria_Negative_Scenarios", "Test case");
+			driver.get(wiley.wileyURLConcatenation("TC43", "WILEY_NA_Cart_Test_Data", "URL"));
+			driver.navigate().refresh();
+			wiley.clickOnAddToCartButton();
+			String[] passwords=excelOperation.getTestData("TC43", "WILEY_NA_Cart_Test_Data", "Password").split(",");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			try {
+				wait.until(ExpectedConditions.
+						elementToBeClickable
+						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
+						("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				wiley.clickOnForgotPasswordLink();
+				wiley.entersEmailIdForRecievingResetPasswordMail(excelOperation.getTestData("TC43", "WILEY_NA_Cart_Test_Data", "Email_Id"));
+				wiley.clickOnSubmitButtonForRecievingResetPasswordMail();
+				if(wiley.checkIfResetPasswordInstructionsIsPresent()) {
+					driver.get(excelOperation.getTestData("Yopmail_URL",
+							"Generic_Dataset", "Data"));
+					wiley.enterEmailIdInYopmail(excelOperation.getTestData("TC43", "WILEY_NA_Cart_Test_Data", "Email_Id"));
+					wiley.clickOnCheckInboxButton();
+					int flag=EmailValidation.forgotPasswordEmailForWiley(driver, SS_path, wiley);
+
+					if(flag==1) {
+						//First password only lower case letters and numbers with less than 10 characters.
+						wiley.enterNewPasswordFieldInResetPasswordPage(passwords[0]);
+						wiley.enterConfirmPasswordFieldInResetPasswordPage(passwords[0]);
+						wiley.checkAtLeast10Characters(driver, "red");
+						wiley.checkAtLeast3ofTheFollowing(driver, "red");
+						wiley.checkUpperCase(driver, "red");
+						wiley.checkLowerCase(driver, "blue");
+						wiley.checkNumber(driver, "blue");
+						wiley.checkSpecialCharacter(driver, "red");
+						wiley.clickOnSubmitButtonInResetPasswordPage();
+
+						//Second password containing Lowercase letters and special characters with more than 10 characters
+						wiley.enterNewPasswordFieldInResetPasswordPage(passwords[1]);
+						wiley.enterConfirmPasswordFieldInResetPasswordPage(passwords[1]);
+						wiley.checkAtLeast10Characters(driver, "blue");
+						wiley.checkAtLeast3ofTheFollowing(driver, "red");
+						wiley.checkUpperCase(driver, "red");
+						wiley.checkLowerCase(driver, "blue");
+						wiley.checkNumber(driver, "red");
+						wiley.checkSpecialCharacter(driver, "blue");
+						wiley.clickOnSubmitButtonInResetPasswordPage();
+						
+						//Third password containing Lowercase letters, Uppercase letters, Numbers, special characters but does not have 10 or more characters(
+						wiley.enterNewPasswordFieldInResetPasswordPage(passwords[2]);
+						wiley.enterConfirmPasswordFieldInResetPasswordPage(passwords[2]);
+						wiley.checkAtLeast10Characters(driver, "red");
+						wiley.checkAtLeast3ofTheFollowing(driver, "blue");
+						wiley.checkUpperCase(driver, "blue");
+						wiley.checkLowerCase(driver, "blue");
+						wiley.checkNumber(driver, "blue");
+						wiley.checkSpecialCharacter(driver, "blue");
+						wiley.clickOnSubmitButtonInResetPasswordPage();
+						
+					
+
+					}
+					else {
+						Reporting.updateTestReport("No reset password mail was recieved in yopmail inbox", 
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+
+
+				}
+				else {
+					Reporting.updateTestReport("As reset password instructions was not displayed, yopmail was not opened", 
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			wiley.removeProductsFromCart(driver);
+			wiley.WileyLogOut();
+		}
+
 		catch(Exception e) {
 			wiley.wileyLogOutException();
 			System.out.println(e.getMessage());

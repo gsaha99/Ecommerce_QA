@@ -2439,6 +2439,8 @@ public class app_Wiley_Repo {
 	 */
 	public void enterNewPasswordFieldInResetPasswordPage(String password) throws IOException {
 		try {
+			NewPasswordFieldInResetPasswordPage.clear();
+			Thread.sleep(1000);
 			NewPasswordFieldInResetPasswordPage.sendKeys(password);
 			Reporting.updateTestReport("New password: "+password+" was entered in reset password page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -2455,6 +2457,8 @@ public class app_Wiley_Repo {
 	 */
 	public void enterConfirmPasswordFieldInResetPasswordPage(String password) throws IOException {
 		try {
+			ConfirmPasswordFieldInResetPasswordPage.clear();
+			Thread.sleep(1000);
 			ConfirmPasswordFieldInResetPasswordPage.sendKeys(password);
 			Reporting.updateTestReport("Password was confirmed "+password+" was entered in reset password page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);

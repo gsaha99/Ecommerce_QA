@@ -661,6 +661,10 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			WileyPLUS.clickOnProceedToCheckoutButton();
 			String email=WileyPLUS.enterEmailIdInCreateAccountForm();
 			WileyPLUS.clickOnCreateAccountButton();
+			if(!WileyPLUS.checkIfGuestCheckoutButtonIsPresent()) Reporting.updateTestReport("Guest checkout button was not present in login page when WileyPLUS product is present in cart",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else Reporting.updateTestReport("Guest checkout button is present in login page when WileyPLUS product is present in cart",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			WileyPLUS.confirmEmailIdInCreateAccountForm(email);
 			WileyPLUS.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC13", "WileyPLUS_Test_Data", "Password"));
 			WileyPLUS.clickOnSaveAndContinueButton();
@@ -691,6 +695,10 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			WileyPLUS.checkBrandNameWileyPLUS();
 			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 			WileyPLUS.clickOnProceedToCheckoutButton();
+			if(!WileyPLUS.checkIfGuestCheckoutButtonIsPresent()) Reporting.updateTestReport("Guest checkout button was not present in login page when WileyPLUS product is present in cart",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else Reporting.updateTestReport("Guest checkout button is present in login page when WileyPLUS product is present in cart",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			String email=WileyPLUS.enterEmailIdInCreateAccountForm();
 			WileyPLUS.clickOnCreateAccountButton();
 			WileyPLUS.confirmEmailIdInCreateAccountForm(email);
