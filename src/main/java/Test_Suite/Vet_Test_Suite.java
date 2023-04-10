@@ -496,7 +496,7 @@ public class Vet_Test_Suite extends DriverModule {
 						+ " not displayed and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
-			VET.logOut(driver);
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
