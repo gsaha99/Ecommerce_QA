@@ -1,1 +1,6 @@
-/target/
+# ignore all .xlsx files in Test Data 
+#Test Data/**/*.xlsx
+target/
+test-output/
+Result/
+Log/

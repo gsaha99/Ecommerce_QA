@@ -12,6 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import PageObjectRepo.app_AGS_Repo;
 import PageObjectRepo.app_VET_Repo;
+import PageObjectRepo.app_WEL_Repo;
+import PageObjectRepo.app_Wiley_Repo;
 
 public class EmailValidation {
 	/*
@@ -144,6 +146,69 @@ public class EmailValidation {
 		catch(Exception e) {
 			Reporting.updateTestReport("Forgot password mail couldn't be validated for VET", 
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Validates the forgot password email functionality in WEL
+	 */
+	public static int forgotPasswordEmailForWEL(WebDriver driver, String SS_path, app_WEL_Repo WEL) throws IOException {
+		try {
+			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(5));
+			int timeOutSeconds=60;
+			int flag=0;
+			WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
+			WebElement element2 = null;
+
+			/* The purpose of this loop is to wait for maximum of 60 seconds */
+			for (int i = 0; i < timeOutSeconds / 5; i++) {
+
+				try {
+					driver.switchTo().frame("ifinbox");
+					element2=wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Password Reset Request')]")));
+
+					if(element2.isDisplayed()==true)
+					{
+						flag=1;
+						element2.click();
+						driver.switchTo().defaultContent();
+						break;
+					}
+
+				} catch (Exception e) {
+					driver.switchTo().defaultContent();        
+					element1.click();
+				}
+			}
+
+			if(flag==1)
+			{
+				driver.switchTo().frame("ifmail");
+				driver.findElement(By.xpath("//a[contains(text(),'Reset Password')]")).click();
+				driver.switchTo().defaultContent();
+
+
+				Set<String> allWindowHandles = driver.getWindowHandles();
+				java.util.Iterator<String> iterator = allWindowHandles.iterator();
+
+				String yopmailHandle = iterator.next();
+				String ChildWindow=iterator.next();
+				driver.switchTo().window(yopmailHandle);
+				driver.close();
+				driver.switchTo().window(ChildWindow);
+				return flag;
+			}
+			else {
+				Reporting.updateTestReport("No reset password mail was recieved in yopmail inbox", 
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return flag;
+			}
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Forgot password mail couldn't be validated", 
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return 0;
 		}
 	}
 
