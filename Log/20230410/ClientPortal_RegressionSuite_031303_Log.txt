@@ -1,0 +1,5 @@
+ClientPortal_RegressionSuite_031303 Regression Suite: -
+
+
+TC01_Client Portal: Validate that the user should be able to see the user name on top right corner, WPS Admin user contains the Home,Create New Application, Register new User, My Work List,Transaction search  options  on header of the page, user should be able to logout from the application on top right corner there is a down arrowon click of that Logout is visible. --> Execution started
+

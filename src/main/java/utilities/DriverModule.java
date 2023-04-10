@@ -2,6 +2,7 @@ package utilities;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -34,7 +35,7 @@ public class DriverModule {
 	
 	@BeforeTest
 	@Parameters("browser")
-	public void initiate(ITestContext context,@Optional("firefox") String browser)
+	public void initiate(ITestContext context,@Optional("chrome") String browser)
 	{
 		try {
 			
@@ -43,7 +44,7 @@ public class DriverModule {
 			String testSuiteName=context.getCurrentXmlTest().getClasses().stream()
 		               .findFirst().get().getName().substring(11);
 			
-			DesiredCapabilities Caps= new DesiredCapabilities();
+		/*	DesiredCapabilities Caps= new DesiredCapabilities();
 			
 			HashMap<String, Object> browserstackOptions = new HashMap<String, Object>();
 			
@@ -61,35 +62,45 @@ public class DriverModule {
 			browserstackOptions.put("consoleLogs", "info"); 
 			browserstackOptions.put("networkLogs", "true"); // to enable network logs to be logged
 			
-			browserstackOptions.put("resolution", "1024x768");		
-		
+			browserstackOptions.put("resolution", "1024x768");	
 			
-			//Set Firefox
+			browserstackOptions.put("idleTimeout", "900");
 			
-			if(browser.equalsIgnoreCase("firefox")) browserstackOptions.put("browser", browser);
+			*/
+					
+			//Set Firefox			
+			if(browser.equalsIgnoreCase("firefox")) 
+				//browserstackOptions.put("browser", browser);
+				driver= new FirefoxDriver();
 			
-			//Set Chrome
-			
-			else if(browser.equalsIgnoreCase("chrome"))	browserstackOptions.put("browser", browser);
+			//Set Chrome		
+			else if(browser.equalsIgnoreCase("chrome"))
+				//browserstackOptions.put("browser", browser);
+				driver= new ChromeDriver();
 							
-			// Set Edge 
+			// Set Edge 			
+			else if(browser.equalsIgnoreCase("Edge")) //browserstackOptions.put("browser", browser);
+							
+			//Caps.setCapability("bstack:options", browserstackOptions);	
 			
-			else if(browser.equalsIgnoreCase("Edge")) browserstackOptions.put("browser", browser);
-				
-			
-			Caps.setCapability("bstack:options", browserstackOptions);	
-			driver= new RemoteWebDriver(new URL(URL), Caps);
+			//driver= new RemoteWebDriver(new URL(URL), Caps);
 		
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);			
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));			
 			
 			//Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
 			
-			String browserName 		= browserstackOptions.get("browser").toString();							
+		/*	String browserName 		= browserstackOptions.get("browser").toString();							
 			String browserVersion 	= browserstackOptions.get("browserVersion").toString();
 			String OS_Name			= browserstackOptions.get("os").toString();
 			String OS_Version 		= browserstackOptions.get("osVersion").toString();
+		*/
+			String browserName 		= "Chrome";							
+			String browserVersion 	= "111.0.5563.147";
+			String OS_Name			= "Windows";
+			String OS_Version 		= "10";
+			
 			
 			Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_In_"+browserName+"_"+date,
 					browserName,browserVersion,OS_Name,OS_Version);
