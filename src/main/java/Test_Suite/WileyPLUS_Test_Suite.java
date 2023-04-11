@@ -161,7 +161,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -204,7 +204,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -247,7 +247,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -297,7 +297,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -345,7 +345,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -396,7 +396,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -451,7 +451,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 
 		}
 		catch(Exception e) {
@@ -506,7 +506,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -553,7 +553,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -611,7 +611,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 
 		}
 		catch(Exception e) {
@@ -635,7 +635,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			WileyPLUS.checkIfUserIsOnCartPage(driver);
 			WileyPLUS.checkBrandNameWileyPLUS();
 			WileyPLUS.removeProductsFromCart(driver);
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 		}
 		catch(Exception e){
 			WileyPLUS.wileyLogOutException();
@@ -671,7 +671,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			WileyPLUS.checkIfUserInShippingStep();
 			WileyPLUS.checkGlobalCountryList(driver,excelOperation.getTestData("TC13", "WileyPLUS_Test_Data", "Shipping_Country"));
 			WileyPLUS.removeProductsFromCart(driver);
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -707,7 +707,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			WileyPLUS.checkIfUserInBillingStep();
 			WileyPLUS.checkGlobalCountryListBilling(driver,excelOperation.getTestData("TC14", "WileyPLUS_Test_Data", "Bill_Country"));
 			WileyPLUS.removeProductsFromCart(driver);
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -793,6 +793,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						WileyPLUS.checkPrintReciept();
 						WileyPLUS.checkTextInOrderConfirmationPage(
 								excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
+						WileyPLUS.getALMTokenCookieValue(driver);
 						ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 						WileyPLUS.checkCourseNameInOrderConfirmationPage(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "Course"));
 						String orderId = WileyPLUS.fetchOrderId();
@@ -837,6 +838,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					else {
 						Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
+						WileyPLUS.getALMTokenCookieValue(driver);
 					}
 
 
@@ -855,7 +857,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						StatusDetails.FAIL);
 			}
 			WileyPLUS.removeProductsFromCart(driver);
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -922,6 +924,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						WileyPLUS.checkPrintReciept();
 						WileyPLUS.checkTextInOrderConfirmationPage(
 								excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
+						WileyPLUS.getALMTokenCookieValue(driver);
 						ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 						String orderId = WileyPLUS.fetchOrderId();
 						excelOperation.updateTestData("TC16", "WileyPLUS_Test_Data", "Order_Id", orderId);
@@ -949,6 +952,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					else {
 						Reporting.updateTestReport("Order was not placed and saved global address couldn't be validated", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
+						WileyPLUS.getALMTokenCookieValue(driver);
 					}
 
 				}
@@ -966,7 +970,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						StatusDetails.FAIL);
 			}
 			WileyPLUS.removeProductsFromCart(driver);
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -1035,6 +1039,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						WileyPLUS.checkPrintReciept();
 						WileyPLUS.checkTextInOrderConfirmationPage(
 								excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
+						WileyPLUS.getALMTokenCookieValue(driver);
 						ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 						String orderId = WileyPLUS.fetchOrderId();
 						excelOperation.updateTestData("TC17", "WileyPLUS_Test_Data", "Order_Id", orderId);
@@ -1060,6 +1065,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					else {
 						Reporting.updateTestReport("Order was not placed and saved global address couldn't be validated", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
+						WileyPLUS.getALMTokenCookieValue(driver);
 					}
 
 				}
@@ -1076,7 +1082,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			WileyPLUS.removeProductsFromCart(driver);
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -1289,7 +1295,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			WileyPLUS.removeProductsFromCart(driver);
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 			driver.manage().deleteAllCookies();
 		}
 		catch(Exception e) {
@@ -1400,6 +1406,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 											WileyPLUS.checkPrintReciept();
 											WileyPLUS.checkTextInOrderConfirmationPage(
 													excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
+											WileyPLUS.getALMTokenCookieValue(driver);
 											ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 											String orderId = WileyPLUS.fetchOrderId();
 											excelOperation.updateTestData("TC20", "WileyPLUS_Test_Data", "Order_Id", orderId);
@@ -1455,6 +1462,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 										else {
 											Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 													StatusDetails.FAIL);
+											WileyPLUS.getALMTokenCookieValue(driver);
 										}
 
 
@@ -1501,8 +1509,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			WileyPLUS.removeProductsFromCart(driver);
-			WileyPLUS.WileyLogOut();
-			driver.manage().deleteAllCookies();
+			WileyPLUS.WileyLogOut(driver);
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();
@@ -1613,6 +1620,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 											WileyPLUS.checkPrintReciept();
 											WileyPLUS.checkTextInOrderConfirmationPage(
 													excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
+											WileyPLUS.getALMTokenCookieValue(driver);
 											ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 											String orderId = WileyPLUS.fetchOrderId();
 											excelOperation.updateTestData("TC21", "WileyPLUS_Test_Data", "Order_Id", orderId);
@@ -1677,6 +1685,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 										else {
 											Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 													StatusDetails.FAIL);
+											WileyPLUS.getALMTokenCookieValue(driver);
 										}
 
 
@@ -1724,7 +1733,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			WileyPLUS.removeProductsFromCart(driver);
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 			driver.manage().deleteAllCookies();
 		}
 		catch(Exception e) {
@@ -1969,7 +1978,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			WileyPLUS.removeProductsFromCart(driver);
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 			driver.manage().deleteAllCookies();
 		}
 		catch(Exception e) {
@@ -2058,6 +2067,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						WileyPLUS.checkTextInOrderConfirmationPage(
 								excelOperation.getTestData("RegisteredUserOrderConfirmationText", "Generic_Messages", "Data"), driver);
 						ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
+						WileyPLUS.getALMTokenCookieValue(driver);
 						String orderId = WileyPLUS.fetchOrderId();
 						excelOperation.updateTestData("TC23", "WileyPLUS_Test_Data", "Order_Id", orderId);
 						excelOperation.updateTestData("TC23", "WileyPLUS_Test_Data", "Email_Id", email);
@@ -2084,6 +2094,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					else {
 						Reporting.updateTestReport("Order was not placed and saved global address couldn't be validated", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
+						WileyPLUS.getALMTokenCookieValue(driver);
 					}
 
 				}
@@ -2101,7 +2112,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						StatusDetails.FAIL);
 			}
 			WileyPLUS.removeProductsFromCart(driver);
-			WileyPLUS.WileyLogOut();
+			WileyPLUS.WileyLogOut(driver);
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();

@@ -3811,7 +3811,7 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("ALM-token cookie was not present",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 		}
 	}
 

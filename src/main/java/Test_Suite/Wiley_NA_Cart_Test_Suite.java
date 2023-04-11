@@ -363,6 +363,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							else {
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
+								wiley.getALMTokenCookieValue(driver);
 							}
 
 						} else {
@@ -544,6 +545,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
+							wiley.getALMTokenCookieValue(driver);
 						}
 
 					}
@@ -716,6 +718,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
+							wiley.getALMTokenCookieValue(driver);
 						}
 
 					}
@@ -867,6 +870,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					else {
 						Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
+						wiley.getALMTokenCookieValue(driver);
 					}
 				}
 				catch(Exception e) {
@@ -1020,6 +1024,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
+							wiley.getALMTokenCookieValue(driver);
 						}
 
 					}
@@ -1217,6 +1222,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							else {
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
+								wiley.getALMTokenCookieValue(driver);
 							}
 
 						}
@@ -1413,6 +1419,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							else {
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
+								wiley.getALMTokenCookieValue(driver);
 							}
 
 
@@ -1591,6 +1598,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
+							wiley.getALMTokenCookieValue(driver);
 						}
 
 					}
@@ -1773,6 +1781,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
+							wiley.getALMTokenCookieValue(driver);
 						}
 
 					}
@@ -1973,6 +1982,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									else {
 										Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 												StatusDetails.FAIL);
+										wiley.getALMTokenCookieValue(driver);
 									}
 
 								}
@@ -2193,6 +2203,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
+							wiley.getALMTokenCookieValue(driver);
 						}
 
 					}
@@ -2368,6 +2379,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
+							wiley.getALMTokenCookieValue(driver);
 						}
 					}
 					catch(Exception e) {
@@ -2553,6 +2565,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
+							wiley.getALMTokenCookieValue(driver);
 						}
 
 					}
@@ -2726,6 +2739,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
+							wiley.getALMTokenCookieValue(driver);
 						}
 
 					}
@@ -2908,6 +2922,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
+							wiley.getALMTokenCookieValue(driver);
 						}
 
 					}
@@ -3122,6 +3137,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							else {
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
+								wiley.getALMTokenCookieValue(driver);
 							}
 						}
 						catch(Exception e) {
@@ -3529,6 +3545,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
+							wiley.getALMTokenCookieValue(driver);
 						}
 
 					}
@@ -3674,6 +3691,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					else {
 						Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
+						wiley.getALMTokenCookieValue(driver);
 					}
 
 				}
@@ -3840,6 +3858,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
+							wiley.getALMTokenCookieValue(driver);
 						}
 
 					}
@@ -3993,6 +4012,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
+							wiley.getALMTokenCookieValue(driver);
 						}
 
 					}
@@ -4651,6 +4671,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						else {
 							Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
+							wiley.getALMTokenCookieValue(driver);
 						}
 
 					}
@@ -5768,6 +5789,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							else {
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
+								wiley.getALMTokenCookieValue(driver);
 							}
 						}
 						catch(Exception e) {
