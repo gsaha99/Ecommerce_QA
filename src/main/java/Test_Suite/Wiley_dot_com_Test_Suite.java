@@ -382,7 +382,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC11_Add_To_PopUp", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC11", "WILEY_Dot_Com_Test_Data", "URL"));
 			driver.navigate().refresh();
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			wiley.clickOnViewCartButton();
 		} catch (Exception e) {
 			wiley.WileyLogOut(driver);

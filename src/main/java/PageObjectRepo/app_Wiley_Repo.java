@@ -576,13 +576,22 @@ public class app_Wiley_Repo {
 	 * @Author: Anindita
 	 * @Description: Clicks on the Add to cart button in the pdp page
 	 */
-	public void clickOnAddToCartButton() throws IOException{
+	public void clickOnAddToCartButton(WebDriver driver) throws IOException{
 		try {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			wait.until(ExpectedConditions.elementToBeClickable(AddToCartButton));
 			AddToCartButton.click();
 			Reporting.updateTestReport("Add To Cart Button was clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
+			try {
+				driver.navigate().refresh();
+				AddToCartButton.click();
+				Reporting.updateTestReport("Add To Cart Button was clicked after refreshing the page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e1) {
 			Reporting.updateTestReport("Add To Cart couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+			}
 		}
 	}
 	

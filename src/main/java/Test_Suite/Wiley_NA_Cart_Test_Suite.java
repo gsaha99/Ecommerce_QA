@@ -79,7 +79,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC01", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -247,7 +247,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -409,7 +409,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -591,7 +591,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC04", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -762,7 +762,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC05", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -902,7 +902,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC06", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -913,7 +913,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.searchDataInSearchBar(excelOperation.getTestData("TC06", "WILEY_NA_Cart_Test_Data", "ISBN"));
 				wiley.clickOnSRP_WileyProduct();
 				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-				wiley.clickOnAddToCartButton();
+				wiley.clickOnAddToCartButton(driver);
 				try {
 					wait.until(ExpectedConditions.
 							elementToBeClickable
@@ -1069,7 +1069,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC07", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -1079,7 +1079,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				//Wiley.clickOnSearchIcon();
 				wiley.clickOnSRP_WileyProduct();
 				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-				wiley.clickOnAddToCartButton();
+				wiley.clickOnAddToCartButton(driver);
 				try {
 					wait.until(ExpectedConditions.
 							elementToBeClickable
@@ -1272,7 +1272,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC08", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -1283,7 +1283,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.clickOnSRP_WileyProduct();
 				wiley.clickOnPrintTab();
 				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-				wiley.clickOnAddToCartButton();
+				wiley.clickOnAddToCartButton(driver);
 				try {
 					wait.until(ExpectedConditions.
 							elementToBeClickable
@@ -1467,7 +1467,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC09", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -1647,7 +1647,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC10", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -1826,7 +1826,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC11", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -2047,7 +2047,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC12", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -2248,7 +2248,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			//driver.navigate().refresh();
 			//wiley.ebookRentalProduct();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -2424,7 +2424,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC14", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -2609,7 +2609,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC15", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -2784,7 +2784,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC16", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -2968,7 +2968,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC17", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -2977,7 +2977,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.searchDataInSearchBar(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "ISBN"));
 				wiley.clickOnSRP_WileyProduct();
 				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-				wiley.clickOnAddToCartButton();
+				wiley.clickOnAddToCartButton(driver);
 				try {
 					wait.until(ExpectedConditions.
 							elementToBeClickable
@@ -3184,7 +3184,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC18", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -3323,7 +3323,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC19", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -3409,7 +3409,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC20", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -3589,7 +3589,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC21", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -3730,7 +3730,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -3904,7 +3904,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC23", "WILEY_NA_Cart_Test_Data", "URL"));			
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -4059,7 +4059,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC24", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -4140,7 +4140,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC28", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -4165,7 +4165,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.clickOnSRP_WileyProduct();
 				wiley.clickOnPrintTab();
 				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-				wiley.clickOnAddToCartButton();
+				wiley.clickOnAddToCartButton(driver);
 				try {
 					wait.until(ExpectedConditions.
 							elementToBeClickable
@@ -4228,7 +4228,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC29_Cart_Page_UI_Validation", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC29", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -4275,7 +4275,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC30", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -4294,7 +4294,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.WileyLogOut(driver);			
 				driver.get(wiley.wileyURLConcatenation("TC30", "WILEY_NA_Cart_Test_Data", "ISBN"));		
 				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-				wiley.clickOnAddToCartButton();
+				wiley.clickOnAddToCartButton(driver);
 				try {
 					wait.until(ExpectedConditions.
 							elementToBeClickable
@@ -4352,7 +4352,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC31", "WILEY_NA_Cart_Test_Data", "URL"));			
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -4501,7 +4501,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC32", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -4518,7 +4518,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			wiley.clickOnSRP_WileyProduct();
 			wiley.clickOnPrintTab();
 			BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -4718,7 +4718,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC33_Forgot_Password_Functionality", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC33", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -4800,7 +4800,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC26", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -4818,7 +4818,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.searchDataInSearchBar(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "ISBN"));
 				wiley.clickOnSRP_WileyProduct();
 				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-				wiley.clickOnAddToCartButton();
+				wiley.clickOnAddToCartButton(driver);
 				try {
 					wait.until(ExpectedConditions.
 							elementToBeClickable
@@ -5116,7 +5116,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC38_Validate_Payment_Status_For_Declined_card", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC38", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -5209,7 +5209,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC39", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
 				wait.until(ExpectedConditions.
@@ -5375,7 +5375,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -5512,7 +5512,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC41", "WILEY_NA_Cart_Test_Data", "URL"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.navigate().refresh();
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			String[] passwords=excelOperation.getTestData("TC41", "WILEY_NA_Cart_Test_Data", "Password").split(",");
 			try {
 				wait.until(ExpectedConditions.
@@ -5614,7 +5614,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC42", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -5623,7 +5623,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.searchDataInSearchBar(excelOperation.getTestData("TC42", "WILEY_NA_Cart_Test_Data", "ISBN"));
 				wiley.clickOnSRP_WileyProduct();
 				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
-				wiley.clickOnAddToCartButton();
+				wiley.clickOnAddToCartButton(driver);
 				try {
 					wait.until(ExpectedConditions.
 							elementToBeClickable
@@ -5837,7 +5837,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC43_Forgot_Password_Page_Password_Criteria_Negative_Scenarios", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC43", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
-			wiley.clickOnAddToCartButton();
+			wiley.clickOnAddToCartButton(driver);
 			String[] passwords=excelOperation.getTestData("TC43", "WILEY_NA_Cart_Test_Data", "Password").split(",");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			try {
