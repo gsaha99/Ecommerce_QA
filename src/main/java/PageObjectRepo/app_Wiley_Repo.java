@@ -832,10 +832,10 @@ public class app_Wiley_Repo {
 	 * @Author: Anindita
 	 * @Description: Logs out the user from wiley.com
 	 */
-	public void WileyLogOut() throws IOException {
+	public void WileyLogOut(WebDriver driver) throws IOException {
 		try {
-			WebDriver driver=DriverModule.getWebDriver();
 			driver.get(excelOperation.getTestData("WILEY_LogOut_URL", "Generic_Dataset", "Data"));
+			driver.manage().deleteAllCookies();
 			if(driver.getTitle().contentEquals("Wiley | Global Leader in Publishing, Education and Research")) Reporting.updateTestReport("Logged out successfully",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.PASS);
 		}
 		catch(Exception e) {
@@ -2017,6 +2017,7 @@ public class app_Wiley_Repo {
 	 */
 	public void enterEmailIdInYopmail(String username) throws IOException {
 		try {
+			EnterEmailIdInYopmail.clear();
 			EnterEmailIdInYopmail.sendKeys(username);
 			Reporting.updateTestReport("Email entered : " + username + " was entered successfully ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -3795,6 +3796,22 @@ public class app_Wiley_Repo {
 		catch(Exception e) {
 			Reporting.updateTestReport("No products were present in cart to remove",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Fetches the cookie value of ALM Token
+	 */
+	public void getALMTokenCookieValue(WebDriver driver) throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"ALM-token cookie was present with value: "
+							+ driver.manage().getCookieNamed("ALM-token").getValue(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("ALM-token cookie was not present",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 

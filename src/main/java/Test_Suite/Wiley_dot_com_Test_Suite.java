@@ -77,7 +77,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			ScrollingWebPage.PageScrolldown(driver,0,19000,SS_path);
 
 		} catch (Exception e) {
-			wiley.WileyLogOut();
+			wiley.WileyLogOut(driver);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -108,7 +108,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			wiley.checkPrivacypolicyonpdppage();
 
 		} catch (Exception e) {
-			wiley.WileyLogOut();
+			wiley.WileyLogOut(driver);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -134,7 +134,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			wiley.checkRighrtAndPermissonsOnFooter();
 
 		} catch (Exception e) {
-			wiley.WileyLogOut();
+			wiley.WileyLogOut(driver);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -163,7 +163,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 						StatusDetails.FAIL);
 
 		} catch (Exception e) {
-			wiley.WileyLogOut();
+			wiley.WileyLogOut(driver);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -193,7 +193,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		} catch (Exception e) {
-			wiley.WileyLogOut();
+			wiley.WileyLogOut(driver);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -233,7 +233,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			}
 
 		} catch (Exception e) {
-			wiley.WileyLogOut();
+			wiley.WileyLogOut(driver);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -275,7 +275,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		} catch (Exception e) {
-			wiley.WileyLogOut();
+			wiley.WileyLogOut(driver);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -304,7 +304,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 						StatusDetails.FAIL);
 
 		} catch (Exception e) {
-			wiley.WileyLogOut();
+			wiley.WileyLogOut(driver);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -330,7 +330,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			wiley.checkResearchLibrariesLinkInHomePageHeader();
 			wiley.checkProfessionalDevelopmentLinkInHomePageHeader();
 		} catch (Exception e) {
-			wiley.WileyLogOut();
+			wiley.WileyLogOut(driver);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -385,7 +385,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			wiley.clickOnAddToCartButton();
 			wiley.clickOnViewCartButton();
 		} catch (Exception e) {
-			wiley.WileyLogOut();
+			wiley.WileyLogOut(driver);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -409,7 +409,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			wiley.ClickOnContentSearchOnPDPPage();
 			ScrollingWebPage.PageScrolldown(driver,0,1700,SS_path);
 		} catch (Exception e) {
-			wiley.WileyLogOut();
+			wiley.WileyLogOut(driver);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -433,7 +433,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			wiley.checkFeaturedProductsOnCLPPage();
 			wiley.ViewAllOnCLPPage();
 		} catch (Exception e) {
-			wiley.WileyLogOut();
+			wiley.WileyLogOut(driver);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -458,7 +458,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 			wiley.ClickingSearchAllResults();
 			wiley.ClickSortByOptionPDPPage();
 		} catch (Exception e) {
-			wiley.WileyLogOut();
+			wiley.WileyLogOut(driver);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
