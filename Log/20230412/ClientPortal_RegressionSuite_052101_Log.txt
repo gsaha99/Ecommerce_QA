@@ -1,0 +1,50 @@
+ClientPortal_RegressionSuite_052101 Regression Suite: -
+
+
+TC01_Client Portal: Validate that the user should be able to see the user name on top right corner, WPS Admin user contains the Home,Create New Application, Register new User, My Work List,Transaction search  options  on header of the page, user should be able to logout from the application on top right corner there is a down arrowon click of that Logout is visible. --> Execution started
+
+Email Address Entered successfully  --> PASS
+Next Button is clicked successfully  --> PASS
+Password Entered successfully  --> PASS
+Next Button is clicked successfully  --> PASS
+Element not found due to timeoutExpected condition failed: waiting for presence of element located by: By.id: otherTileText (tried for 10 second(s) with 500 milliseconds interval) --> FAIL
+Home is clicked successfully  --> PASS
+New Client Application is clicked successfully  --> PASS
+Register New User is clicked successfully  --> PASS
+My Worklist is clicked successfully  --> PASS
+User Name is: JB --> PASS
+Transaction Search is clicked successfully  --> PASS
+Log out is clicked successfully  --> PASS
+Log out Image is clicked successfully  --> PASS
+
+
+TC02_Client Portal: Verify whether WPS admin is able to create New Client Application,and verify the filter functionality at home screen --> Execution started
+
+Use Another account is clicked successfully  --> PASS
+Email Address Entered successfully  --> PASS
+Next Button is clicked successfully  --> PASS
+Password Entered successfully  --> PASS
+Next Button is clicked successfully  --> PASS
+Login with different user IDExpected condition failed: waiting for element to be clickable: By.id: idSIButton9 (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: '4.8.3', revision: 'e5e76298c3'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '18.0.1'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities {appActivity: com.google.android.apps.chr..., appPackage: com.android.chrome, browserName: chrome, chromedriverArgs: [--adb-port=5038], chromedriverPort: 18082, databaseEnabled: false, desired: {browserName: chrome, chromedriverArgs: [--adb-port=5038], chromedriverPort: 18082, deviceName: android, goog:chromeOptions: {args: [--proxy-bypass-list=<-loopb..., test-type, --proxy-server=http://209.1..., --disable-features=Translate]}, newCommandTimeout: 0, platformName: Android, skipServerInstallation: true, systemPort: 8202, udid: RFCW11SCV8E}, deviceApiLevel: 33, deviceManufacturer: samsung, deviceModel: SM-S918B, deviceName: RFCW11SCV8E, deviceScreenDensity: 450, deviceScreenSize: 1080x2316, deviceUDID: RFCW11SCV8E, goog:chromeOptions: {args: [--proxy-bypass-list=<-loopb..., test-type, --proxy-server=http://209.1..., --disable-features=Translate]}, javascriptEnabled: true, locationContextEnabled: false, networkConnectionEnabled: true, newCommandTimeout: 0, pixelRatio: 2.8125, platform: LINUX, platformName: ANDROID, platformVersion: 13, skipServerInstallation: true, statBarHeight: 75, systemPort: 8202, takesScreenshot: true, udid: RFCW11SCV8E, viewportRect: {height: 2031, left: 0, top: 75, width: 1080}, warnings: {}, webStorageEnabled: false}
+Session ID: 89255b4258f0f37b3349442734a364afbbcdf86c --> INFO
+New Client Application is clicked successfully  --> PASS
+SOAP is selected successfully  --> PASS
+Business Unit is selected successfully  --> PASS
+Name TestAuto_490 Entered successfully --> PASS
+App Short Name TA490 Entered successfully --> PASS
+User ID is not selected : class org.openqa.selenium.NoSuchElementException --> FAIL
+Perform Page Down --> INFO
+Perform Page Down --> INFO
+Payment Method is clicked successfully  --> PASS
+Debit/Credit card is clicked successfully  --> PASS
+Add button is not clicked : class org.openqa.selenium.ElementClickInterceptedException --> FAIL
+DB Validation is not done and Client App Name is not: TestAuto_490 --> FAIL
+Name is not Entered : class org.openqa.selenium.NoSuchElementException --> FAIL
+Name is not checked successfully class org.openqa.selenium.NoSuchElementException --> FAIL
+Filtering is working --> FAIL
+Log out is clicked successfully  --> PASS
+Log out Image is clicked successfully  --> PASS

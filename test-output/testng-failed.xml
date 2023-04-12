@@ -1,18 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="Default test(failed)">
+<suite name="Failed suite [WPS_Regression]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Client Portal_Test_Suite(failed)">
+    <parameter name="DeviceType" value="Mobile"/>
+    <parameter name="browser" value="chrome"/>
     <classes>
       <class name="Test_Suite.ClientPortal_RegressionSuite">
         <methods>
+          <include name="TC02_AddNewClientApp_WPSAdmin"/>
           <include name="nameBefore"/>
-          <include name="initiate"/>
           <include name="CloseBrowser"/>
+          <include name="initiate"/>
           <include name="TC01_Login_WPSAdmin"/>
           <include name="initializeRepo"/>
           <include name="nameAfter"/>
         </methods>
       </class> <!-- Test_Suite.ClientPortal_RegressionSuite -->
     </classes>
-  </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- Client Portal_Test_Suite(failed) -->
+  <test thread-count="5" name="TestHarness_Test_Suite(failed)">
+    <parameter name="DeviceType" value="Mobile"/>
+    <parameter name="browser" value="Chrome"/>
+    <classes>
+      <class name="Test_Suite.TestHarness_RegressionSuite">
+        <methods>
+          <include name="TC02_HTTP_Tokenise_Request_Response"/>
+          <include name="nameBefore"/>
+          <include name="initiate"/>
+          <include name="CloseBrowser"/>
+          <include name="nameAfter"/>
+          <include name="TC01_HTTP_Probe"/>
+          <include name="initializeRepo"/>
+        </methods>
+      </class> <!-- Test_Suite.TestHarness_RegressionSuite -->
+    </classes>
+  </test> <!-- TestHarness_Test_Suite(failed) -->
+</suite> <!-- Failed suite [WPS_Regression] -->
