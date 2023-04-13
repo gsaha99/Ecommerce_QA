@@ -477,8 +477,8 @@ public class WEL_Prod_Test_Suite extends DriverModule{
 	@Test
 	public void TC05_Forget_Password_during_Checkout() throws IOException{
 		try {
-			Reporting.test = Reporting.extent.createTest("TC04_User_Login_during_Checkout");
-			LogTextFile.writeTestCaseStatus("TC04_User_Login_during_Checkout", "Test case");
+			Reporting.test = Reporting.extent.createTest("TC05_Forget_Password_during_Checkout");
+			LogTextFile.writeTestCaseStatus("TC05_Forget_Password_during_Checkout", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(WEL_Homepage_URL);
 			try {
@@ -671,8 +671,8 @@ public class WEL_Prod_Test_Suite extends DriverModule{
 	@Test
 	public void TC06_Add_Promo_In_Anonymous_Cart() throws IOException{
 		try {
-			Reporting.test = Reporting.extent.createTest("TC03_Add_Promo_In_Anonymous_Cart");
-			LogTextFile.writeTestCaseStatus("TC03_Add_Promo_In_Anonymous_Cart", "Test case");
+			Reporting.test = Reporting.extent.createTest("TC06_Add_Promo_In_Anonymous_Cart");
+			LogTextFile.writeTestCaseStatus("TC06_Add_Promo_In_Anonymous_Cart", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(WEL_Homepage_URL);
 			try {

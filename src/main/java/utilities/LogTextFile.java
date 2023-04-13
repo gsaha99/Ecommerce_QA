@@ -4,8 +4,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.apache.commons.lang3.SystemUtils;
 
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
@@ -37,11 +40,32 @@ public class LogTextFile {
 	/*
 	 * @Description: Creates the log file
 	 */
-	public static void createTodayLog(String suiteName) {
+	public static void createTodayLog(String suiteName,String browserName,String browserVersion,String OS_Name) {
 		try {
 			String path=createTodayLogFolder();
 			FileWriter file=new FileWriter(path+"\\"+suiteName+"_Log.txt",true);
 			wr=new BufferedWriter(file);
+			String Hostname = SystemUtils.getHostName();
+			String Username = SystemUtils.getUserName();
+			String OS_Version = SystemUtils.OS_VERSION.toString();			
+			wr.write("System Specifications:-");
+			wr.newLine();
+			wr.newLine();
+			wr.write("OS: "+ OS_Name);
+			wr.newLine();
+			wr.write("OS Version: "+ OS_Version);
+			wr.newLine();
+			wr.write("HostName: "+ Hostname);
+			wr.newLine();
+			wr.write("IP Address: "+ InetAddress.getByName(Hostname).getHostAddress());
+			wr.newLine();
+			wr.write("UserName: "+ Username);
+			wr.newLine();
+			wr.write("Browser: "+ browserName);
+			wr.newLine();
+			wr.write("Browser Version: "+ browserVersion);
+			wr.newLine();
+			wr.newLine();
 			wr.write(suiteName+" Regression Suite: -");
 			wr.newLine();
 			wr.flush();
