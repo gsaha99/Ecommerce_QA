@@ -102,7 +102,7 @@ public class DriverModule {
 			
 			Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_In_"+browserName+"_"+date,
 					browserName,browserVersion,OS_Name);
-			LogTextFile.createTodayLog(testSuiteName+"_"+date);
+			LogTextFile.createTodayLog(testSuiteName+"_"+date,browserName,browserVersion,OS_Name);
 					
 		}
 		catch(Exception e){ System.out.println(e.getMessage());}

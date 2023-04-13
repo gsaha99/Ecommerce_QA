@@ -69,7 +69,6 @@ public class Reporting {
 		String Hostname = SystemUtils.getHostName();
 		String Username = SystemUtils.getUserName();
 		String OS_Version = SystemUtils.OS_VERSION.toString();			
-		String Java_Version=SystemUtils.JAVA_VERSION.toString();
 
 		extent.setSystemInfo("OS", OS_Name);
 		extent.setSystemInfo("OS Version", OS_Version);
@@ -78,7 +77,6 @@ public class Reporting {
 		extent.setSystemInfo("UserName", Username);
 		extent.setSystemInfo("Browser", BrowserName);
 		extent.setSystemInfo("Browser Version", BrowserVersion);
-		extent.setSystemInfo("JAVA Version", Java_Version);
 		
 
 		//configuration items to change the look and feel

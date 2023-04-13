@@ -1,47 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="PPE_Regression">
-	<!--test thread-count="5" name="Wiley_Test_Suite">
+	<test thread-count="5" name="Wiley_Test_Suite">
 
 
 		<classes>
-			<class name="Test_Suite.WEL_Test_Suite">
+			<class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
 				<methods>
 					
-					<include name="TC01_.*" />
-					<include name="TC02_.*" />
-					<include name="TC03_.*" />
-					
-					
-					
+					<include name="TC06_.*" />
+					<include name="TC09_.*" />
+					<include name="TC14_.*" />	
+					<include name="TC17_.*" />
+					<include name="TC32_.*" />
+					<include name="TC38_.*" />	
+					<include name="TC39_.*" />	
+					<include name="TC42_.*" />	
+					<include name="TC43_.*" />
 					
 					
 				</methods>
 			</class>
 		</classes>
-	</test--> <!-- Test_Regression -->
-	<test thread-count="5" name="Vet_Test_Suite">
-
-
-		<classes>
-			<class name="Test_Suite.Vet_Test_Suite"/>
-				
-		</classes>
-	</test>
-	<test thread-count="5" name="AGS_Test_Suite">
-
-
-		<classes>
-			<class name="Test_Suite.AGS_Test_Suite"/>
-				
-		</classes>
-	</test>
-	<test thread-count="5" name="Wiley_Test_Suite">
-
-
-		<classes>
-			<class name="Test_Suite.Wiley_dot_com_Test_Suite"/>
-				
-		</classes>
-	</test>
+	</test> <!-- Test_Regression -->
+	
 </suite> <!-- PPE Regression -->

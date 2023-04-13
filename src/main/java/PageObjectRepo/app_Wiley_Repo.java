@@ -1149,6 +1149,7 @@ public class app_Wiley_Repo {
 		try {
 
 			USEOptionForExistingAddress.click();
+			Thread.sleep(1000);
 			Reporting.updateTestReport("USEOptionTForExistingAddress has been selected successfully by user",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
