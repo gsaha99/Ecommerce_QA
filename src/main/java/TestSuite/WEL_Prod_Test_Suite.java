@@ -92,6 +92,7 @@ public class WEL_Prod_Test_Suite extends DriverModule{
 							excelOperation.updateTestData("TC01", "WEL_Test_Data", "Email_Address", emailId);
 							excelOperation.updateTestData("TC02", "WEL_Test_Data", "Email_Address", emailId);
 							excelOperation.updateTestData("TC04", "WEL_Test_Data", "Email_Address", emailId);
+							excelOperation.updateTestData("TC05", "WEL_Test_Data", "Email_Address", emailId);
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Account button in homepage was not visisble and caused timeout exception",
