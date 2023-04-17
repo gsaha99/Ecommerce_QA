@@ -5070,29 +5070,54 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 	 * @Description: Validates the updated hover text for E-Books in Product details page
 	 */
 	@Test
-	public void TC37_Generic_info_hover_text_EBook_PDP() throws IOException{
+	public void TC37_Generic_info_hover_text_EBook_EBookRental_PDP() throws IOException{
 		try {
-			Reporting.test = Reporting.extent.createTest("TC37_Generic_info_hover_text_EBook_PDP");
-			LogTextFile.writeTestCaseStatus("TC37_Generic_info_hover_text_EBook_PDP", "Test case");
+			Reporting.test = Reporting.extent.createTest("TC37_Generic_info_hover_text_EBook_EBookRental_PDP");
+			LogTextFile.writeTestCaseStatus("TC37_Generic_info_hover_text_EBook_EBookRental_PDP", "Test case");
 			String[] regions=excelOperation.getTestData("TC37", "WILEY_NA_Cart_Test_Data", "URL").split(",");
-			String[] products=excelOperation.getTestData("TC37", "WILEY_NA_Cart_Test_Data", "ISBN").split(",");
+			String[] products=excelOperation.getTestData("TC37", "WILEY_NA_Cart_Test_Data", "ISBN").split("_variant_");
+			String[] eBooks=products[0].split(",");
+			String[] eBookRentals=products[1].split(",");
+			
+			//For eBooks
+			
 			for(String region:regions) {
-				for(String product:products) {
-					driver.get(wiley.wileyURLConcatenationwithRegions(region,product));
+				for(String eBook:eBooks) {
+					driver.get(wiley.wileyURLConcatenationwithRegions(region,eBook));
 					driver.navigate().refresh();
 					if(wiley.fetchGenericHoverInfo(driver).
-							contains(excelOperation.getTestData("TC37", "WILEY_NA_Cart_Test_Data", "Expected_Result").trim()))
+							contains(excelOperation.getTestData("GenericHoverInfoTextFistBulletPoint", "Generic_Messages", "Data").trim()))
 						Reporting.updateTestReport("Correct text was present in generic info for eBook",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					else
 						Reporting.updateTestReport("Correct text was not present in generic info for eBook"
 								+wiley.fetchGenericHoverInfo(driver).length()+" "+
-								excelOperation.getTestData("TC37", "WILEY_NA_Cart_Test_Data", "Expected_Result").trim().length(),
+								excelOperation.getTestData("GenericHoverInfoTextFistBulletPoint", "Generic_Messages", "Data").trim().length(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 
 				}
 			}
+			
+			//For eBook Rental products
+			
+			for(String region:regions) {
+				for(String eBookRental:eBookRentals) {
+					driver.get(wiley.wileyURLConcatenationwithRegions(region,eBookRental));
+					if(wiley.fetchGenericHoverInfo(driver).
+							contains(excelOperation.getTestData("GenericHoverInfoTextFistBulletPoint", "Generic_Messages", "Data").trim()))
+						Reporting.updateTestReport("Correct text was present in generic info for eBook Rentals",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport("Correct text was not present in generic info for eBook Rentals"
+								+wiley.fetchGenericHoverInfo(driver).length()+" "+
+								excelOperation.getTestData("GenericHoverInfoTextFistBulletPoint", "Generic_Messages", "Data").trim().length(),
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+
+				}
+			}
+			
 			wiley.WileyLogOut(driver);
 
 		}
@@ -5821,7 +5846,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Validates the reset password functionality 
@@ -5832,7 +5857,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 	@Test
 	public void TC43_Forgot_Password_Page_Password_Criteria_Negative_Scenarios() throws IOException{
 		try {
-
 			Reporting.test = Reporting.extent.createTest("TC43_Forgot_Password_Page_Password_Criteria_Negative_Scenarios");
 			LogTextFile.writeTestCaseStatus("TC43_Forgot_Password_Page_Password_Criteria_Negative_Scenarios", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC43", "WILEY_NA_Cart_Test_Data", "URL"));
@@ -5881,7 +5905,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.checkNumber(driver, "red");
 						wiley.checkSpecialCharacter(driver, "blue");
 						wiley.clickOnSubmitButtonInResetPasswordPage();
-						
+
 						//Third password containing Lowercase letters, Uppercase letters, Numbers, special characters but does not have 10 or more characters(
 						wiley.enterNewPasswordFieldInResetPasswordPage(passwords[2]);
 						wiley.enterConfirmPasswordFieldInResetPasswordPage(passwords[2]);
@@ -5892,8 +5916,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.checkNumber(driver, "blue");
 						wiley.checkSpecialCharacter(driver, "blue");
 						wiley.clickOnSubmitButtonInResetPasswordPage();
-						
-					
+
+
 
 					}
 					else {
@@ -5921,6 +5945,61 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		catch(Exception e) {
 			wiley.wileyLogOutException();
 			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Date: 17/04/23
+	 * @Description: Validate the email Id field's format in checkout login and registration page
+	 */
+	@Test
+	public void TC44_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page() throws IOException {
+		try {
+			Reporting.test = Reporting.extent.createTest("TC44_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page");
+			LogTextFile.writeTestCaseStatus("TC44_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page", "Test case");
+			driver.get(wiley.wileyURLConcatenation("TC44", "WILEY_NA_Cart_Test_Data", "URL"));
+			driver.navigate().refresh();
+			wiley.clickOnAddToCartButton(driver);
+			String[] emailIds=excelOperation.getTestData("TC44", "WILEY_NA_Cart_Test_Data", "Email_Id").split(",");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			try {
+				wait.until(ExpectedConditions.
+						elementToBeClickable
+						(By.xpath("//button[contains(text(),'View Cart')]")));
+				wiley.clickOnViewCartButton();
+				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
+						("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
+				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+				wiley.clickOnProceedToCheckoutButton();
+				
+				//Checking for various invalid email ids in create account email id field
+				for(String email:emailIds) {
+					wiley.enterEmailIdInCreateAccountFormNotAutoGenerated(email);
+					wiley.clickOutsideTheEmailIdField();
+					wiley.checkOnClickErrorMessageInCheckoutLoginRegistrationPage();
+				}
+				
+				driver.navigate().refresh();
+				
+				//Checking for various invalid email ids in existing user email id field
+				for(String email:emailIds) {
+					wiley.enterExistingWileyUserMailID(email);
+					wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC44", "WILEY_NA_Cart_Test_Data", "Password"));
+					wiley.clickOutsideTheEmailIdField();
+					wiley.checkOnClickErrorMessageInCheckoutLoginRegistrationPage();
+				}
+				
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			wiley.removeProductsFromCart(driver);
+			wiley.WileyLogOut(driver);
+		}
+		catch(Exception e) {
+			wiley.wileyLogOutException();
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
