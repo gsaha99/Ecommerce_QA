@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import TestSuite.WEL_Prod_Test_Suite;
@@ -59,18 +60,36 @@ public class app_WEL_Repo {
 	@FindBy(id = "signout")
 	WebElement SignOutButtonInMyAccountPage;
 	
-	//Products on homepage
+	//Products related xpaths
 	
 	@FindBy(xpath="//a[@data-for='productTooltipCMA' and @data-key='1']")
 	WebElement CMALinkOnHomepage;
+	@FindBy(xpath="//a[@data-for='productTooltipCIA' and @data-key='2']")
+	WebElement CIALinkOnHomepage;
+	@FindBy(xpath="//a[@data-for='productTooltipCFA' and @data-key='0']")
+	WebElement CFALinkOnHomepage;
+	@FindBy(xpath="//a[@data-for='productTooltipCPA' and @data-key='0']")
+	WebElement CPALinkOnHomepage;
 	@FindBy(xpath="//button[@class='shop-courses-btn  ']")
 	WebElement ExploreCourseButton;
 	@FindBy(xpath="//a[@href='/cma/products/platinum-cma-review-course/']/button[contains(text(),'VIEW COURSE OPTIONS')]")
 	WebElement CMAViewCourseButton;
+	@FindBy(xpath="(//a[@href='/cia/products/cia-review-course/' and contains(text(),'View Course')])[1]")
+	WebElement CIAViewCourseButton;
 	@FindBy(xpath="(//button[contains(text(),'GET PLATINUM WILEY CMA COURSE')])[2]")
 	WebElement GetCMACourseButton;
 	@FindBy(xpath="//button[@type='submit' and contains(text(),'ADD TO CART')]")
 	WebElement AddToCartButton;
+	@FindBy(xpath="//div[@class='col-xs-12 col-sm-6 col-md-5 col-lg-5 col-xl-4 shop-courses-btn-container']/a/button")
+	WebElement ShopCourseButton;
+	@FindBy(xpath="//span[@class='apply-discount-link']")
+	WebElement ApplyStudentDiscountLink;
+	@FindBy(xpath="//p[@class='current-price-link']/a[contains(text(),'Switch to student discount price')]")
+	WebElement SwitchToStudentDiscountLink;
+	@FindBy(xpath="//a[@href='/cfa/products/']/button[contains(text(),'VIEW COURSE OPTIONS')]")
+	WebElement CFAViewCourseButton;
+	@FindBy(xpath="//a[@href='/cfa/products/level-1/platinum-cfa-course/' and contains(text(),'View Course')]")
+	WebElement CFAViewCourseLink;
 	
 	//Cart page
 	
@@ -121,6 +140,40 @@ public class app_WEL_Repo {
 	WebElement EnterEmailIdInYopmail;
 	@FindBy(xpath = "//button[@title='Check Inbox @yopmail.com']")
 	WebElement clickOnCheckInboxButton;
+	
+	//Free Trial pages
+	@FindBy(xpath = "//button[contains(text(),'FREE TRIAL')]")
+	WebElement FreeTrialButton;
+	@FindBy(name = "firstName")
+	WebElement FreeTrialFname;
+	@FindBy(name = "lastName")
+	WebElement FreeTrialLname;
+	@FindBy(name = "email")
+	WebElement FreeTrialEmail;
+	@FindBy(name = "country")
+	WebElement FreeTrialCountry;
+	@FindBy(name = "region")
+	WebElement FreeTrialState;
+	@FindBy(name = "password")
+	WebElement FreeTrialPassword;
+	@FindBy(name = "termsAndConditions")
+	WebElement FreeTrialTermsAndConditions;
+	@FindBy(name = "signUp")
+	WebElement FreeTrialSignupCheckbox;
+	@FindBy(xpath = "//div[@class='form-box']//button[@class='form-button']")
+	WebElement FreeTrialStartButton;
+	@FindBy(xpath = "//div[@class='progress-bar-outer-box']//p[contains(text(),'almost')]")
+	WebElement CPAFreeTrialConfirmationText;
+	@FindBy(id = "j_username")
+	WebElement FreeTrialLoginusername;
+	@FindBy(id = "j_password")
+	WebElement FreeTrialLoginpasssowrd;
+	@FindBy(xpath = "//div[@class='modal-content']//button")
+	WebElement FreeTrialModelPopUpLogin;
+	@FindBy(xpath = "//button[@class='button form-button welCheckoutBtn submitWelForm width100']")
+	WebElement FreeTrialSubbmit;
+	@FindBy(xpath = "//a[@class='navbar-brand brand-logo-top-desktop']")
+	WebElement WELBrandLogonOnFreeTrialPage;
 	
 	
 	
@@ -232,11 +285,11 @@ public class app_WEL_Repo {
 	public void clickOnCheckboxInRegistrationForm() throws IOException {
 		try {
 			CheckboxInRegistrationForm.click();
-			Reporting.updateTestReport("Terms and conditions checkbox in regostration page was clicked successfully",
+			Reporting.updateTestReport("Terms and conditions checkbox in registration page was clicked successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("Terms and conditions checkbox in regostration page couldn't be clicked ",
+			Reporting.updateTestReport("Terms and conditions checkbox in registration page couldn't be clicked ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -369,7 +422,7 @@ public class app_WEL_Repo {
 	public void clickOnStandaloneLoginButton() throws IOException {
 		try {
 			StandaloneLoginButton.click();
-			Reporting.updateTestReport("Login Button clicked successfully user is on My Account page ",
+			Reporting.updateTestReport("Login Button clicked successfully ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		} catch (Exception e) {
@@ -388,7 +441,7 @@ public class app_WEL_Repo {
 	public void clickOnCMALinkOnHomepage() throws IOException {
 		try {
 			CMALinkOnHomepage.click();
-			Reporting.updateTestReport("CMA Link On Home page clicked successfully user is on My Account page ",
+			Reporting.updateTestReport("CMA Link On Home page clicked successfully ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		} catch (Exception e) {
@@ -407,7 +460,7 @@ public class app_WEL_Repo {
 	public void clickOnExploreCourseButton() throws IOException {
 		try {
 			ExploreCourseButton.click();
-			Reporting.updateTestReport("Explore Course Button was clicked successfully user is on My Account page ",
+			Reporting.updateTestReport("Explore Course Button was clicked successfully ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		} catch (Exception e) {
@@ -426,7 +479,7 @@ public class app_WEL_Repo {
 	public void clickOnCMAViewCourseButton() throws IOException {
 		try {
 			CMAViewCourseButton.click();
-			Reporting.updateTestReport("View Course Button in CMA Product page was clicked successfully user is on My Account page ",
+			Reporting.updateTestReport("View Course Button in CMA Product page was clicked successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		} catch (Exception e) {
@@ -445,7 +498,7 @@ public class app_WEL_Repo {
 	public void clickOnGetCMACourseButton() throws IOException {
 		try {
 			GetCMACourseButton.click();
-			Reporting.updateTestReport("Get CMA Course Button in CMA Product page was clicked successfully user is on My Account page ",
+			Reporting.updateTestReport("Get CMA Course Button in CMA Product page was clicked successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		} catch (Exception e) {
@@ -464,7 +517,7 @@ public class app_WEL_Repo {
 	public void clickOnAddToCartButton() throws IOException {
 		try {
 			AddToCartButton.click();
-			Reporting.updateTestReport("Add to cart button was clicked successfully user is on My Account page ",
+			Reporting.updateTestReport("Add to cart button was clicked successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		} catch (Exception e) {
@@ -834,6 +887,418 @@ public class app_WEL_Repo {
 					StatusDetails.FAIL);
 		}
 	}
+	
+	/*
+	 *@Date: 14/4/23
+	 * @Description: Method to click on CIA Link On Home page
+	 */
+
+	public void clickOnCIALinkOnHomepage() throws IOException {
+		try {
+			CIALinkOnHomepage.click();
+			Reporting.updateTestReport("CIA Link On Home page clicked successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on CIA Link On Home page with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+	
+	/*
+	 *@Date: 14/4/23
+	 * @Description: Method to click on CFA Link On Home page
+	 */
+
+	public void clickOnCFALinkOnHomepage() throws IOException {
+		try {
+			CFALinkOnHomepage.click();
+			Reporting.updateTestReport("CFA Link On Home page clicked successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on CFA Link On Home page with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+	
+	/*
+	 *@Date: 14/4/23
+	 * @Description: Method to click on CPA Link On Home page
+	 */
+
+	public void clickOnCPALinkOnHomepage() throws IOException {
+		try {
+			CPALinkOnHomepage.click();
+			Reporting.updateTestReport("CPA Link On Home page clicked successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on CPA Link On Home page with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+	
+	/*
+	 *@Date: 14/4/23
+	 * @Description: Method to click on Shop courses button in CIA Products
+	 */
+
+	public void clickOnShopCourseButton() throws IOException {
+		try {
+			ShopCourseButton.click();
+			Reporting.updateTestReport("Shop Course Button was clicked successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on Shop Course Button with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+	
+	/*
+	 * @Date: 5/4/23
+	 * @Description: Method to click on View Course Button in CIA Product page
+	 */
+
+	public void clickOnCIAViewCourseButton() throws IOException {
+		try {
+			CIAViewCourseButton.click();
+			Reporting.updateTestReport("View Course Button in CIA Product page was clicked successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on View Course Button in CIA Product page with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+	
+	/*
+	 * @Date: 14/4/23
+	 * @Description: Method to click on Apply student discount link on products' page
+	 */
+
+	public void clickOnApplyStudentDiscountLink() throws IOException {
+		try {
+			ApplyStudentDiscountLink.click();
+			Reporting.updateTestReport("Apply student discount link CIA Product page was clicked successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on Apply student discount link in CIA Product page with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+	
+	/*
+	 * @Date: 14/4/23
+	 * @Description: Method to click on Switch to student discount link on products' page
+	 */
+
+	public void clickOnSwitchToStudentDiscountLink() throws IOException {
+		try {
+			SwitchToStudentDiscountLink.click();
+			Reporting.updateTestReport("Switch to student discount link CIA Product page was clicked successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on Switch to student discount link in CIA Product page with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+	
+	/*
+	 * @Date: 14/4/23
+	 * @Description: Method to click on View Course Button in CFA Product page
+	 */
+
+	public void clickOnCFAViewCourseButton() throws IOException {
+		try {
+			CFAViewCourseButton.click();
+			Reporting.updateTestReport("View Course Button in CFA Product page was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on View Course Button in CFA Product page with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+	
+	/*
+	 * @Date: 14/4/23
+	 * @Description: Method to click on View Course link in CFA Product page
+	 */
+
+	public void clickOnCFAViewCourseLink() throws IOException {
+		try {
+			CFAViewCourseLink.click();
+			Reporting.updateTestReport("View Course link in CFA Product page was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on View Course link in CFA Product page with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+	
+	/*
+	 * @Date: 14/4/23
+	 * @Description: Method to enter the Free Trial FirstName
+	 */
+
+	public void enterFreeTrialFirstName(String FFName) throws IOException {
+		try {
+			FreeTrialFname.sendKeys(FFName);
+			Reporting.updateTestReport("First: " + FFName + " was entered successfully in the First Name section",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("FirstName not entered with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	/*
+	 * @Date: 14/4/23
+	 * @Description: Method to enter the last name free frail form
+	 */
+
+	public void enterFreeTrialLastName(String FLName) throws IOException {
+		try {
+			FreeTrialLname.sendKeys(FLName);
+			Reporting.updateTestReport("Last: " + FLName + " was entered successfully in the First Name section",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("LastName not entered with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	/*
+	 * @Date: 14/4/23
+	 * @Description: Method to enter new user on Free Trial form
+	 */
+
+	public String enterFreeTrialNewUser() throws IOException {
+		try {
+			String dateTime = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+			String gEmail = "autowel" + dateTime + "@yopmail.com";
+			FreeTrialEmail.sendKeys(gEmail);
+			Reporting.updateTestReport("Email Id: " + gEmail + " was entered successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return gEmail;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Email Id was not entered with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	/*
+	 * @Date: 14/4/23 
+	 * @Description: Method to select the country on free trial form
+	 */
+
+	public void selectFreeTrialCountry(String country) throws IOException {
+		try {
+
+			Select freeTrialCountry = new Select(FreeTrialCountry);
+			freeTrialCountry.selectByVisibleText(country);
+			Reporting.updateTestReport("County " + country + " has been selected successfully by user",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("User failed to select country " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	/*
+	 * @Date: 14/4/23
+	 * @Description: Method to select the state from Free Trial form
+	 */
+
+	public void selectFreeTrialState(String Fstate) throws IOException {
+		try {
+
+			Select state = new Select(FreeTrialState);
+			state.selectByVisibleText(Fstate);
+			Reporting.updateTestReport("State " + Fstate + " has been selected successfully by user",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("User failed to select country " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	/*
+	 * @Date: 14/4/23
+	 * @Description: Method to enter the Password on Free Trial form
+	 */
+
+	public void enterFreeTrialPassword(String FPassword) throws IOException {
+		try {
+			FreeTrialPassword.sendKeys(FPassword);
+			Reporting.updateTestReport("Password: " + FPassword + " was entered successfully in the Password section",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Password not entered with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	/*
+	 * @Date: 14/4/23 
+	 * @Description: Method to click on checkbox for for Free Trial Terms and
+	 * Conditions
+	 */
+
+	public void clickOnFreeTrialTermsAndCOndtionsCheckBox() throws IOException {
+		try {
+			FreeTrialTermsAndConditions.click();
+			Reporting.updateTestReport("TermsAndConditions Checbox selected Successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on TermsAndConditions Checbox with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	/*
+	 * @Date: 14/4/23
+	 * @Description: Method to click on SignUp check box on Free Trial form
+	 */
+
+	public void clickFreeTrialSignUpCheckBox() throws IOException {
+		try {
+			FreeTrialSignupCheckbox.click();
+			Reporting.updateTestReport("SignupCheckbox Checbox selected Successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on SignupCheckbox Checbox with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	/*
+	 * @Date: 14/4/23
+	 * @Description: Method to click on Sign In Button on Free Trial form
+	 */
+
+	public void clickOnFreeTrialSignInButton() throws IOException {
+		try {
+			FreeTrialStartButton.click();
+			Reporting.updateTestReport("Start Your Free Trial button clicked Successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on Start Your Free Trial button  with the error message "
+					+ e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	/*
+	 * @Date: 14/4/23 
+	 * @Description: Method to click on WEL Icon on Free Trial form
+	 */
+
+	public void clickOnFreeTrialWELIcon() throws IOException {
+		try {
+			WELBrandLogonOnFreeTrialPage.click();
+			Reporting.updateTestReport("WEL Brand Desktop logo was clicked Successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to click on WEL Brand Desktop logo with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	/*
+	 * @Date: 14/4/23
+	 * @Description: Method to enter email address on Free Trial Form
+	 */
+
+	public void enterFreeTrialEmail(String email) throws IOException {
+		try {
+			FreeTrialEmail.sendKeys(email);
+			Reporting.updateTestReport("existing email Id was entered Successfully ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"Failed to enter the existing email id with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	/*
+	 * @Date: 14/4/23
+	 * @Description: Method to verify the CPA Text on Free Trial form
+	 */
+
+	public String checkFreeTrialCPAText() throws IOException {
+		try {
+
+			String cpaftext = CPAFreeTrialConfirmationText.getText();
+			Reporting.updateTestReport("You’re almost set Pages was successfully loaded",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return cpaftext;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to load the You’re almost set page " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	/*
+	 * @Date: 14/4/23
+	 * @Description: Method to verify the CIA text on Free Trial Form
+	 */
+
+	public String checkFreeTrialCIAText() throws IOException {
+		try {
+
+			String cpaftext = CPAFreeTrialConfirmationText.getText();
+			Reporting.updateTestReport("You’re almost set Pages was successfully loaded",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return cpaftext;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to load the You’re almost set page " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Date: 17/4/23
+	 * @Description: Method to lick on Free Trial button
+	 */
+
+	public void clickOnFreeTrialButton() throws IOException {
+		try {
+			FreeTrialButton.click();
+			Reporting.updateTestReport("Free trial button was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on Free_trail button " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	
 	
 	
 
