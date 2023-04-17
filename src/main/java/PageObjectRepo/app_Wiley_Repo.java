@@ -84,7 +84,7 @@ public class app_Wiley_Repo {
 	WebElement EducationalResources;
 	@FindBy(xpath = "//input[@id='searchbar']")
 	WebElement SearchbarHomepage;
-	@FindBy(xpath = "(//a[@href='/about'])[2]")
+	@FindBy(xpath = "(//a[@href='/en-us/about'])[2]")
 	WebElement AboutWiley;
 	@FindBy(xpath = "//a[contains(text(),'PRODUCTS')]")
 	WebElement PlpProducts;
@@ -275,6 +275,29 @@ public class app_Wiley_Repo {
 	WebElement CardNumber;
 	@FindBy(xpath="//input[@id='nameOnCard']")
 	WebElement CardHolderName;
+	
+	//New Search Result page
+	@FindBy(xpath="//button[@id='nav-products-tab']/span")
+	WebElement PlpProductTabNewSearch;
+	@FindBy(xpath="//div[@id='nav-tab']/a[contains(text(),'Content')]")
+	WebElement PlpContentTabNewSearch;
+	@FindBy(xpath="(//div[@class='product-card'])[1]")
+	WebElement SRP_WileyProductNewSearchPage;
+	@FindBy(xpath="//h2[@class='accordion-header']/button[contains(text(),'format')]")
+	WebElement FormatFacetNewSearchPage;
+	@FindBy(xpath="//h2[@class='accordion-header']/button[contains(text(),'subjects')]")
+	WebElement SubjectFacetNewSearchPage;
+	@FindBy(xpath="//h2[@class='accordion-header']/button[contains(text(),'author')]")
+	WebElement AuthorFacetNewSearchPage;
+	@FindBy(xpath="//h2[@class='accordion-header']/button[contains(text(),'Publish Date')]")
+	WebElement PublishedDateFacetNewSearchPage;
+	@FindBy(xpath="//h2[@class='accordion-header']/button[contains(text(),'featured')]")
+	WebElement FeaturedFacetNewSearchPage;
+	@FindBy(xpath="(//ul[@class='ul-text-author facet-options-list virtualised-facet-options-list']/li/label[@class='facet-option-label'])[1]")
+	WebElement FirstFacetValueNewSearchPage;
+	@FindBy(xpath="(//ul[@class='ul-text-author facet-options-list virtualised-facet-options-list']/li/span[@class='facet-checkbox-wrapper']/label)[1]")
+	WebElement FirstFacetItemQuantityNewSearchPage;
+	
 
 	/*
 	 * @Date: 04/03/23
@@ -2138,4 +2161,259 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
+	
+	//Constructor search result page
+	
+	/*
+	 * @Date: 17/04/23
+	 * @Description: This method is verifying the text in PLP page
+	 */
+
+	public String checkPlpProductTabNewSearch() throws IOException {
+		try {
+
+			String plpproducts = PlpProductTabNewSearch.getText();
+			Reporting.updateTestReport("Products landing page was successfully loaded",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return plpproducts;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to load the Product landing page " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Date: 17/04/23
+	 * @Description: This method is verifying the text in PLP page
+	 */
+
+	public String checkPlpContentTabNewSearch() throws IOException {
+		try {
+
+			String plpContents = PlpContentTabNewSearch.getText();
+			Reporting.updateTestReport("Content landing page was successfully loaded",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return plpContents;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to load the Content landing page " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Date: 17/04/23
+	 * @Description: This method is Clicking on content Section in PDP page
+	 */
+	public void clickOnContentTabNewSearch() throws IOException {
+		try {
+			PlpContentTabNewSearch.click();
+			Reporting.updateTestReport("Content section was clicked on PDP Page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on Content section in PDP page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	
+	/*
+	 * @Date: 03/04/23
+	 * @Description: Checks all the products in the search result page
+	 */
+	public void checkProductsWithSearchedTermNewSearchPage(WebDriver driver,String text) throws IOException {
+		try {
+			List<WebElement> productList = driver.findElements(By.xpath("//div[@class='product-title']/h3/a"));
+			for(WebElement product: productList) {
+				if(product.getText().contains(text))
+					Reporting.updateTestReport(product.getText()+" --> this product contained the searched term : "+text,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport(product.getText()+" --> this product didn't contain the searched term : "+text,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("No products were present in the search result page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+		}
+	}
+	
+	/*
+	 * @Date: 03/04/23
+	 * @description: This using for Clicking on SRP_WileyProduct
+	 */
+	public void clickOnSRP_WileyProductNewSearchPage() throws IOException {
+
+		try {
+			SRP_WileyProductNewSearchPage.click();
+			Reporting.updateTestReport("SRP_WileyProduct was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"SRP_WileyProduct was not Clicked properly with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+	
+	/*
+	 * @Date: 04/03/23
+	 * @Description: Checks if Subject is present under  facet
+	 */
+	public Boolean checkSubjectFacetNewSearchPage() throws IOException{
+		try {
+			if(SubjectFacetNewSearchPage.isDisplayed()) {
+				Reporting.updateTestReport("Subject was present under facet",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return true;
+			}
+			else {
+				Reporting.updateTestReport("Subject was not present under facet",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return false;
+			}
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Subject was not present under facet",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return false;
+		}
+	}
+
+
+	/*
+	 * @Date: 04/03/23
+	 * @Description: Checks if Author is present under  facet
+	 */
+	public Boolean checkAuthorFacetNewSearchPage() throws IOException{
+		try {
+			if(AuthorFacetNewSearchPage.isDisplayed()) {
+				Reporting.updateTestReport("Author was present under facet",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return true;
+			}
+			else {
+				Reporting.updateTestReport("Author was not present under facet",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return false;
+			}
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Author was not present under facet",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return false;
+		}
+	}
+
+	/*
+	 * @Date: 04/03/23
+	 * @Description: Checks if Format is present under  facet
+	 */
+	public Boolean checkFormatFacetNewSearchPage() throws IOException{
+		try {
+			if(FormatFacetNewSearchPage.isDisplayed()) {
+				Reporting.updateTestReport("Format was present under facet",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return true;
+			}
+			else {
+				Reporting.updateTestReport("Format was not present under facet",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return false;
+			}
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Format was not present under facet",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return false;
+		}
+	}
+
+	/*
+	 * @Date: 04/03/23
+	 * @Description: Checks if PublishedDate is present under  facet
+	 */
+	public Boolean checkPublishedDateFacetNewSearchPage() throws IOException{
+		try {
+			if(PublishedDateFacetNewSearchPage.isDisplayed()) {
+				Reporting.updateTestReport("PublishedDate was present under facet",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return true;
+			}
+			else {
+				Reporting.updateTestReport("PublishedDate was not present under facet",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return false;
+			}
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("PublishedDate was not present under facet",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return false;
+		}
+	}
+
+	/*
+	 * @Date: 04/03/23
+	 * @Description: Checks if Brands is present under  facet
+	 */
+	public Boolean checkFeaturedFacetNewSearchPage() throws IOException{
+		try {
+			if(FeaturedFacetNewSearchPage.isDisplayed()) {
+				Reporting.updateTestReport("Brands was present under facet",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return true;
+			}
+			else {
+				Reporting.updateTestReport("Brands was not present under facet",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return false;
+			}
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Brands was not present under facet",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return false;
+		}
+	}
+	
+	/* 
+	 * @Date: 04/03/23
+	 * @Description: Clicks on the format facet
+	 */
+	public void clickOnAuthorFacetNewSearchPage() throws IOException{
+		try {
+			AuthorFacetNewSearchPage.click();
+			Reporting.updateTestReport("Author under the facet was clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Author under the facet couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 04/03/23
+	 * @Description: Selects First Facet Item
+	 */
+	public String clickOnFirstFacetValueNewSearchPage() throws IOException{
+		try {
+			FirstFacetValueNewSearchPage.click();
+			Reporting.updateTestReport("First Facet Item was clicked with Text: "
+					+FirstFacetValueNewSearchPage.getText()+" and Quantity of that Filter: "+FirstFacetItemQuantityNewSearchPage.getText(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return FirstFacetValueNewSearchPage.getText()+"#"+FirstFacetItemQuantityNewSearchPage.getText();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("First Facet Item couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	
 }

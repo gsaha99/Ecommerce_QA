@@ -30,6 +30,7 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
 	public static String EmailConfirmationText="//button/div[contains(text(),'Your Order with Wiley')]";
+	public static String WileyHomepage="https://www.wiley.com/en-us";
 
 	@BeforeTest
 	public void launchBrowser() {
@@ -47,7 +48,7 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 	{
 		System.out.println("Test case: " + method.getName()+" execution completed");       
 	}
-	
+
 	/*
 	 * @Date: 4/4/23
 	 * @Description: Checks the SRP page for WileyPLUS products
@@ -60,30 +61,44 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC01", "WileyPLUS_Test_Data", "URL"));
 			driver.navigate().refresh();
+			String price;
 
 			try {
 				WileyPLUS.clickOnHomePage();
+				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC01", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.checkPublicationDateInSRP_PLP();
-				WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
-				String price=WileyPLUS.checkPriceInSRP_PLP(driver);
-				WileyPLUS.clickOnSRP_WileyProduct();
+				try {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
+					WileyPLUS.checkPublicationDateInSRP_PLPNewSearchPage();
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
+					price=WileyPLUS.checkPriceInSRP_PLPNewSearchPage(driver);
+					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
+
+				}
+				catch(Exception e) {
+					WileyPLUS.checkPublicationDateInSRP_PLP();
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
+					price=WileyPLUS.checkPriceInSRP_PLP(driver);
+					WileyPLUS.clickOnSRP_WileyProduct();
+				}
 				try {
 					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='product-add-to-cart']")));
 					if(price.equalsIgnoreCase(WileyPLUS.checkPriceInPDP()))
 						Reporting.updateTestReport("The price in SRP was same as price in PDP",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					else
-						Reporting.updateTestReport("The price in SRP was not same as price in PDP",
+						Reporting.updateTestReport("The price in SRP: "+price+" was not same as price in PDP: "+WileyPLUS.checkPriceInPDP(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Product details page couldn't be loaded and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
+
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
@@ -109,47 +124,64 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 			LogTextFile.writeTestCaseStatus("TC02_PLP_For_WileyPLUS", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WileyPLUS.wileyURLConcatenation("TC02", "WileyPLUS_Test_Data", "URL"));
+			String price;
 			driver.navigate().refresh();
 			try {
 				WileyPLUS.clickOnHomePage();
+				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC02", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.clickOnFormatFacet();
-				WileyPLUS.clickOnSeeMoreLinkUnderFormat();
 				try {
-					wait.until(ExpectedConditions.presenceOfElementLocated(
-							By.xpath("//div[@class='modal-title']")));
-					if(WileyPLUS.checkWileyPLUSInFormatFacet())
-						WileyPLUS.clickOnWileyPLUSInFormatFacet();
-					else
-						Reporting.updateTestReport("WileyPLUS was not present under format",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					WileyPLUS.checkWileyPLUSInAppliedFacet();			
-					WileyPLUS.checkPublicationDateInSRP_PLP();
-					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
-					String price=WileyPLUS.checkPriceInSRP_PLP(driver);
-					WileyPLUS.clickOnSRP_WileyProduct();
-					try {
-						wait.until(ExpectedConditions.presenceOfElementLocated(
-								By.xpath("//div[@class='product-add-to-cart']")));
-						if(price.equalsIgnoreCase(WileyPLUS.checkPriceInPDP()))
-							Reporting.updateTestReport("The price in PLP was same as price in PDP",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport("The price in PLP was not same as price in PDP",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
-					catch(Exception e) {
-						Reporting.updateTestReport("Product details page couldn't be loaded and caused timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					WileyPLUS.clickOnFormatFacetNewSearchPage();
+					ScrollingWebPage.PageDown(driver, SS_path);
+					WileyPLUS.clickOnWileyPLUSInFormatFacetNewSearchPage();
+					WileyPLUS.checkWileyPLUSInAppliedFacetNewSearchPage();			
+					WileyPLUS.checkPublicationDateInSRP_PLPNewSearchPage();
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
+					price=WileyPLUS.checkPriceInSRP_PLPNewSearchPage(driver);
+					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
 				}
 				catch(Exception e) {
-					Reporting.updateTestReport("Format modal couldn't be loaded and caused timeout exception",
+					WileyPLUS.clickOnFormatFacet();
+					WileyPLUS.clickOnSeeMoreLinkUnderFormat();
+					try {
+						wait.until(ExpectedConditions.presenceOfElementLocated(
+								By.xpath("//div[@class='modal-title']")));
+						if(WileyPLUS.checkWileyPLUSInFormatFacet())
+							WileyPLUS.clickOnWileyPLUSInFormatFacet();
+						else
+							Reporting.updateTestReport("WileyPLUS was not present under format",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						WileyPLUS.checkWileyPLUSInAppliedFacet();			
+						WileyPLUS.checkPublicationDateInSRP_PLP();
+						WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
+						price=WileyPLUS.checkPriceInSRP_PLP(driver);
+						WileyPLUS.clickOnSRP_WileyProduct();
+					}
+					catch(Exception e1) {
+						Reporting.updateTestReport("Format modal couldn't be loaded and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						price="";
+					}
+				}
+				try {
+					wait.until(ExpectedConditions.presenceOfElementLocated(
+							By.xpath("//div[@class='product-add-to-cart']")));
+					if(price.equalsIgnoreCase(WileyPLUS.checkPriceInPDP()))
+						Reporting.updateTestReport("The price in PLP was same as price in PDP",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport("The price in PLP was not same as price in PDP",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Product details page couldn't be loaded and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
+
 
 			}
 			catch(Exception e) {
@@ -179,12 +211,20 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 			driver.navigate().refresh();
 			try {
 				WileyPLUS.clickOnHomePage();
+				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC03", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
-				WileyPLUS.clickOnSRP_WileyProduct();
+				try {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
+					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
+				}
+				catch(Exception e) {
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
+					WileyPLUS.clickOnSRP_WileyProduct();
+				}
 				if(WileyPLUS.checkWileyPLUSTabInPDP()){
 					WileyPLUS.clickOnWileyPLUSTabPDP();
 				}
@@ -221,12 +261,20 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 			driver.navigate().refresh();
 			try {
 				WileyPLUS.clickOnHomePage();
+				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC04", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
-				WileyPLUS.clickOnSRP_WileyProduct();
+				try {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
+					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
+				}
+				catch(Exception e) {
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
+					WileyPLUS.clickOnSRP_WileyProduct();
+				}
 				if(WileyPLUS.checkWileyPLUSTabInPDP()){
 					WileyPLUS.clickOnWileyPLUSTabPDP();
 				}
@@ -263,12 +311,20 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 			driver.navigate().refresh();
 			try {
 				WileyPLUS.clickOnHomePage();
+				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC05", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
-				WileyPLUS.clickOnSRP_WileyProduct();
+				try {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
+					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
+				}
+				catch(Exception e) {
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
+					WileyPLUS.clickOnSRP_WileyProduct();
+				}
 				if(WileyPLUS.checkWileyPLUSTabInPDP()){
 					WileyPLUS.clickOnWileyPLUSTabPDP();
 				}
@@ -312,25 +368,34 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 			driver.navigate().refresh();
 			try {
 				WileyPLUS.clickOnHomePage();
+				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC06", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.clickOnFormatFacet();
-				WileyPLUS.clickOnSeeMoreLinkUnderFormat();
 				try {
-					wait.until(ExpectedConditions.presenceOfElementLocated(
-							By.xpath("//div[@class='modal-title']")));
-					if(WileyPLUS.checkWileyPLUSInFormatFacet())
-						WileyPLUS.clickOnWileyPLUSInFormatFacet();
-					else
-						Reporting.updateTestReport("WileyPLUS was not present under format",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					WileyPLUS.checkWileyPLUSInAppliedFacet();
+					WileyPLUS.clickOnFormatFacetNewSearchPage();
+					ScrollingWebPage.PageDown(driver, SS_path);
+					WileyPLUS.clickOnWileyPLUSInFormatFacetNewSearchPage();
+					WileyPLUS.checkWileyPLUSInAppliedFacetNewSearchPage();	
 				}
 				catch(Exception e) {
-					Reporting.updateTestReport("Format modal couldn't be loaded and caused timeout exception",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					WileyPLUS.clickOnFormatFacet();
+					WileyPLUS.clickOnSeeMoreLinkUnderFormat();
+					try {
+						wait.until(ExpectedConditions.presenceOfElementLocated(
+								By.xpath("//div[@class='modal-title']")));
+						if(WileyPLUS.checkWileyPLUSInFormatFacet())
+							WileyPLUS.clickOnWileyPLUSInFormatFacet();
+						else
+							Reporting.updateTestReport("WileyPLUS was not present under format",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						WileyPLUS.checkWileyPLUSInAppliedFacet();
+					}
+					catch(Exception e1) {
+						Reporting.updateTestReport("Format modal couldn't be loaded and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
 				}			
 			}
 			catch(Exception e) {
@@ -359,12 +424,20 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 			driver.navigate().refresh();
 			try {
 				WileyPLUS.clickOnHomePage();
+				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing, "
 								+ "Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC07", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
-				WileyPLUS.clickOnSRP_WileyProduct();
+				try {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
+					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
+				}
+				catch(Exception e) {
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
+					WileyPLUS.clickOnSRP_WileyProduct();
+				}
 				if(WileyPLUS.checkWileyPLUSTabInPDP()) {
 					WileyPLUS.clickOnWileyPLUSTabPDP();
 					WileyPLUS.checkSingleTermWileyPLUSTab();
@@ -409,12 +482,20 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 			driver.navigate().refresh();
 			try {
 				WileyPLUS.clickOnHomePage();
+				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC08", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
-				WileyPLUS.clickOnSRP_WileyProduct();
+				try {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
+					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
+				}
+				catch(Exception e) {
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
+					WileyPLUS.clickOnSRP_WileyProduct();
+				}
 				if(WileyPLUS.checkWileyPLUSTabInPDP()) {
 					WileyPLUS.clickOnWileyPLUSTabPDP();
 					WileyPLUS.checkSingleTermWileyPLUSTab();
@@ -464,11 +545,18 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 			driver.navigate().refresh();
 			try {
 				WileyPLUS.clickOnHomePage();
+				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC09", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.clickOnSRP_WileyProduct();
+				try {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
+				}
+				catch(Exception e) {
+					WileyPLUS.clickOnSRP_WileyProduct();
+				}
 				if(WileyPLUS.checkAddToCartButton()) {
 					Reporting.updateTestReport("Add to cart button was present in the E-book variant page",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -517,11 +605,20 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 			driver.navigate().refresh();
 			try {
 				WileyPLUS.clickOnHomePage();
+				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC10", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.clickOnSRP_WileyProduct();
+				try {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
+					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
+				}
+				catch(Exception e) {
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
+					WileyPLUS.clickOnSRP_WileyProduct();
+				}
 				if(WileyPLUS.checkWileyPLUSTabInPDP()) {
 					WileyPLUS.clickOnWileyPLUSTabPDP();
 					WileyPLUS.checkSingleTermWileyPLUSTab();
@@ -562,11 +659,20 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 			driver.navigate().refresh();
 			try {
 				WileyPLUS.clickOnHomePage();
+				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC11", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.clickOnSRP_WileyProduct();
+				try {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
+					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
+				}
+				catch(Exception e) {
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
+					WileyPLUS.clickOnSRP_WileyProduct();
+				}
 				if(WileyPLUS.checkWileyPLUSTabInPDP()) {
 					WileyPLUS.clickOnWileyPLUSTabPDP();
 					WileyPLUS.clickOnLoginToWileyPLUSButton();
@@ -690,7 +796,7 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 4/4/23
 	 * @Description: Validates that the ISBN is not present in the WileyPLUS PDP
@@ -705,12 +811,20 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 			driver.navigate().refresh();
 			try {
 				WileyPLUS.clickOnHomePage();
+				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
-				WileyPLUS.clickOnSRP_WileyProduct();
+				try {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
+					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
+				}
+				catch(Exception e) {
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
+					WileyPLUS.clickOnSRP_WileyProduct();
+				}
 				if(WileyPLUS.checkWileyPLUSTabInPDP()){
 					WileyPLUS.clickOnWileyPLUSTabPDP();
 				}

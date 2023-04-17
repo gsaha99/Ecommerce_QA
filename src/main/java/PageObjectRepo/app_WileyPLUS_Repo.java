@@ -43,7 +43,7 @@ public class app_WileyPLUS_Repo {
 	WebElement WileyPLUSFormatInSRP;
 	@FindBy(xpath="(//div[@class='wileyProductPriceFormate'])[2]")
 	WebElement PriceInSRP;
-	@FindBy(xpath = "(//div[@class='products-list']//section//div//a//img)//following::div//h3//a")
+    @FindBy(xpath = "(//div[@class='products-list']//section//div//a//img)//following::div//h3//a")
 	WebElement SRP_WileyProduct;
 	@FindBy(xpath="//h3[contains(text(),'FORMAT')]")
 	WebElement FormatFacet;
@@ -53,6 +53,20 @@ public class app_WileyPLUS_Repo {
 	WebElement WileyPLUSUnderFormatFacet;
 	@FindBy(xpath="//div[@class='applied-facets']/div/span[contains(text(),'WileyPLUS')]")
 	WebElement WileyPLUSUnderAppliedFormatFacet;
+	
+	/*@FindBy(xpath="(//div[@class='product-card'])[1]")
+	WebElement SRP_WileyProduct;
+	@FindBy(xpath="(//div[@class='product-dt'])[1]")
+	WebElement PublicationDateSRP;
+	@FindBy(xpath="(//div[@class='product-options d-none d-md-block' and contains(text(),'WileyPLUS')] )[1]")
+	WebElement WileyPLUSFormatInSRP;
+	@FindBy(xpath="(//div[@class='product-price'] )[1]")
+	WebElement PriceInSRP;
+	@FindBy(xpath="//button[@class='accordion-button collapsed format-button']")
+	WebElement FormatFacet;
+	@FindBy(xpath="//label[@for='format|WileyPlus']")
+	WebElement WileyPLUSUnderFormatFacet;*/
+	
 
 	//Product details page for WileyPLUS products
 
@@ -164,6 +178,22 @@ public class app_WileyPLUS_Repo {
 	WebElement BillingPhoneNumber;	
 	@FindBy(xpath="(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
 	WebElement UseSelectedBillingAddressButtonAddressDoctorPopUp;
+	
+	//New Search Result page
+	@FindBy(xpath="(//div[@class='product-dt'])[1]")
+	WebElement PublicationDateSRPNewSearchPage;
+	@FindBy(xpath="(//div[@class='product-options d-none d-md-block'])[1]")
+	WebElement WileyPLUSFormatInSRPNewSearchPage;
+	@FindBy(xpath="(//div[@class='product-price'])[1]")
+	WebElement PriceInSRPNewSearchPage;
+	@FindBy(xpath="(//div[@class='product-card'])[1]")
+	WebElement SRP_WileyProductNewSearchPage;
+	@FindBy(xpath="//h2[@class='accordion-header']/button[contains(text(),'format')]")
+	WebElement FormatFacetNewSearchPage;
+	@FindBy(xpath="//label[@for='format|WileyPlus']")
+	WebElement WileyPLUSUnderFormatFacetNewSearchPage;
+	@FindBy(xpath="//ul[@class='search-controls-removable_filter_pill']/li/span/span[contains(text(),'WileyPlus')]")
+	WebElement WileyPLUSUnderAppliedFormatFacetNewSearchPage;
 
 	/*
 	 * @Date: 04/04/23
@@ -1080,6 +1110,142 @@ public class app_WileyPLUS_Repo {
 				return false;
 		}
 		catch(Exception e) {
+			return false;
+		}
+	}
+	
+	//New Search page
+	/*
+	 * @Date: 04/04/23
+	 * @Description: Checks if the publication date is present or not in the Search Result Page of a WileyPLUS product
+	 */
+	public void checkPublicationDateInSRP_PLPNewSearchPage() throws IOException{
+		try {
+			if(PublicationDateSRPNewSearchPage.isDisplayed())
+				Reporting.updateTestReport("Publication date: "+PublicationDateSRP.getText() + " was displayed in the Search Result Page WileyPLUS",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport("Publication date was not displayed in the Search Result Page WileyPLUS",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Publication date was not displayed in the Search Result Page WileyPLUS",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Date: 04/04/23
+	 * @Description: Checks if the WileyPLUS Format is present or not in the Search Result Page of a WileyPLUS product
+	 */
+	public void checkWileyPLUSFormatInSRP_PLPNewSearchPage(WebDriver driver) throws IOException{
+		try {
+			WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
+			wait.until(ExpectedConditions.visibilityOf(WileyPLUSFormatInSRPNewSearchPage));
+			if(WileyPLUSFormatInSRPNewSearchPage.getText().contains("WileyPLUS"))
+				Reporting.updateTestReport("WileyPLUS Format was displayed in the Search Result Page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport("WileyPLUS Format was not displayed in the Search Result Page ",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("WileyPLUS Format was not displayed in the Search Result Page "+e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Date: 04/04/23
+	 * @Description: Checks if the Lowest price of the base product variant is present or not in the Search Result Page of a WileyPLUS product
+	 */
+	public String checkPriceInSRP_PLPNewSearchPage(WebDriver driver) throws IOException{
+		try {
+			WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
+			wait.until(ExpectedConditions.visibilityOf(PriceInSRPNewSearchPage));
+			String[] A=PriceInSRPNewSearchPage.getText().split(" ");
+			String price=A[2].trim();
+			Reporting.updateTestReport("Lowest price of the base product variant: "+price+" was displayed in the Search Result Page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return price;
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Lowest price of the base product variant was not displayed in the Search Result Page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Date: 03/04/23
+	 * @description: This using for Clicking on SRP_WileyProduct
+	 */
+	public void clickOnSRP_WileyProductNewSearchPage() throws IOException {
+
+		try {
+			SRP_WileyProductNewSearchPage.click();
+			Reporting.updateTestReport("SRP_WileyProduct was clicked successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport(
+					"SRP_WileyProduct was not Clicked properly with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+	
+	/*
+	 * @Date: 04/04/23
+	 * @Description: Clicks on the format facet
+	 */
+	public void clickOnFormatFacetNewSearchPage() throws IOException{
+		try {
+			FormatFacetNewSearchPage.click();
+			Reporting.updateTestReport("Format under the facet was clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Format under the facet couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 04/04/23
+	 * @Description: Clicks on the WileyPLUS format under facet
+	 */
+	public void clickOnWileyPLUSInFormatFacetNewSearchPage() throws IOException{
+		try {
+			WileyPLUSUnderFormatFacetNewSearchPage.click();
+			Reporting.updateTestReport("WileyPLUS under the format facet was clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("WileyPLUS under the format facet couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 04/04/23
+	 * @Description: Checks if WileyPLUS is present under applied format facet
+	 */
+	public Boolean checkWileyPLUSInAppliedFacetNewSearchPage() throws IOException{
+		try {
+			if(WileyPLUSUnderAppliedFormatFacetNewSearchPage.isDisplayed()) {
+				Reporting.updateTestReport("WileyPLUS was present under applied format facet",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return true;
+			}
+			else {
+				Reporting.updateTestReport("WileyPLUS was not present under applied format facet",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return false;
+			}
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("WileyPLUS was not present under applied format facet",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return false;
 		}
 	}

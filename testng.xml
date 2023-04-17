@@ -5,10 +5,12 @@
 
 
 		<classes>
-			<class name="TestSuite.Wiley_Prod_Test_Suite">	
+			<class name="TestSuite.WileyPLUS_Prod_Test_Suite">	
 				<methods>
-					<include name="TC23.*"></include>
-					<include name="TC25.*"></include>
+					<exclude name="TC12.*"></exclude>
+					<exclude name="TC13.*"></exclude>
+					<exclude name="TC14.*"></exclude>
+					
 				</methods>
 			</class>
 			

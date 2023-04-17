@@ -34,6 +34,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 	app_Wiley_Repo wiley;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
+	public static String Homepage = excelOperation.getTestData("Wiley_Homepage_URL", "Generic_Dataset", "Data");
 
 	@BeforeTest
 	public void launchBrowser() {
@@ -120,7 +121,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC03_SiteFooter");
 			LogTextFile.writeTestCaseStatus("TC03_SiteFooter", "Test case");
-			driver.get(wiley.wileyURLConcatenation("TC03", "WILEY_Test_Data", "URL"));
+			driver.get(Homepage);
 			driver.navigate().refresh();
 			ScrollingWebPage.PageScrollDownUptoBottom(driver, SS_path);
 			wiley.checkSiteMaponFooter();
@@ -173,7 +174,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC05_About_Us_Page");
 			LogTextFile.writeTestCaseStatus("TC05_About_Us_Page", "Test case");
-			driver.get(wiley.wileyURLConcatenation("TC05", "WILEY_Test_Data", "URL"));
+			driver.get(Homepage);
 			driver.navigate().refresh();
 			ScrollingWebPage.PageScrollDownUptoBottom(driver, SS_path);
 			wiley.AboutWileyPage();
@@ -237,30 +238,50 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 	@Test
 	public void TC07_ProductListPage() throws IOException {
 		try {
-
 			Reporting.test = Reporting.extent.createTest("TC07_ProductListPage");
 			LogTextFile.writeTestCaseStatus("TC07_ProductListPage", "Test case");
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC07", "WILEY_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.searchTextInSearchBar(excelOperation.getTestData("TC07", "WILEY_Test_Data", "SearchBox_Text"));
-			String plpproduct = wiley.PlpProductText();
-			String pproduct = plpproduct.substring(0, 8);
-			if (pproduct.equals("PRODUCTS"))
-				Reporting.updateTestReport(
-						"Product landing page was loaded Successfully and page having text PRODUCTS Headers Section",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else
-				Reporting.updateTestReport("Failed to Load the Product Landing Page",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			String plpcontent = wiley.PlpContentText();
-			String pcontent = plpcontent.substring(0, 7);
-			if (pcontent.equals("CONTENT"))
-				Reporting.updateTestReport(
-						"Product landing page was loaded Successfully and page having text CONTENT Headers Section",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			else
-				Reporting.updateTestReport("Failed to Load the Product Landing Page",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			try {
+				wait.until(ExpectedConditions.urlContains("search2?"));
+				if(wiley.checkPlpProductTabNewSearch().trim().equals("Products"))
+					Reporting.updateTestReport(
+							"Product landing page was loaded Successfully and page having text Products Headers Section",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Failed to Load the Product Landing Page "+wiley.checkPlpProductTabNewSearch(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				
+				if (wiley.checkPlpContentTabNewSearch().equals("Content"))
+					Reporting.updateTestReport(
+							"Product landing page was loaded Successfully and page having text Content Headers Section",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Failed to Load the Product Landing Page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					
+			}
+			catch(Exception e) {
+				String plpProductText = wiley.PlpProductText().substring(0, 8);
+				if (plpProductText.equals("PRODUCTS"))
+					Reporting.updateTestReport(
+							"Product landing page was loaded Successfully and page having text PRODUCTS Headers Section",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Failed to Load the Product Landing Page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				String plpContentText = wiley.PlpContentText().substring(0, 7);
+				if (plpContentText.equals("CONTENT"))
+					Reporting.updateTestReport(
+							"Product landing page was loaded Successfully and page having text CONTENT Headers Section",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Failed to Load the Product Landing Page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			
 
 		} catch (Exception e) {
 			wiley.WileyLogOut();
@@ -280,7 +301,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 
 			Reporting.test = Reporting.extent.createTest("TC08_HomePage");
 			LogTextFile.writeTestCaseStatus("TC08_HomePage", "Test case");
-			driver.get(wiley.wileyURLConcatenation("TC08", "WILEY_Test_Data", "URL"));
+			driver.get(Homepage);
 			driver.navigate().refresh();
 			String titleofHomepgae = driver.getTitle();
 			if (titleofHomepgae.equals("Wiley | Global Leader in Publishing, Education and Research"))
@@ -308,7 +329,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 
 			Reporting.test = Reporting.extent.createTest("TC09_SiteHeader");
 			LogTextFile.writeTestCaseStatus("TC09_SiteHeader", "Test case");
-			driver.get(wiley.wileyURLConcatenation("TC09", "WILEY_Test_Data", "URL"));
+			driver.get(Homepage);
 			driver.navigate().refresh();
 			wiley.checkShopLinkInHomePageHeader();
 			wiley.checkResearchLibrariesLinkInHomePageHeader();
@@ -385,11 +406,28 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC12_Content_Search_ResultPage");
 			LogTextFile.writeTestCaseStatus("TC12_Content_Search_ResultPage", "Test case");
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC12", "WILEY_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.searchTextInSearchBar(excelOperation.getTestData("TC12", "WILEY_Test_Data", "SearchBox_Text"));
-			wiley.ClickOnContentSearchOnPDPPage();
-			ScrollingWebPage.PageScrolldown(driver,0,1700,SS_path);
+			try {
+				wait.until(ExpectedConditions.urlContains("search2?"));
+				if (wiley.checkPlpContentTabNewSearch().equals("Content")) {
+					Reporting.updateTestReport(
+							"Product landing page was loaded Successfully and page having text Content Headers Section",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					wiley.clickOnContentTabNewSearch();
+					ScrollingWebPage.PageScrolldown(driver,0,600,SS_path);
+				}
+				else
+					Reporting.updateTestReport("Failed to Load the Product Landing Page",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					
+			}
+			catch(Exception e) {
+				wiley.ClickOnContentSearchOnPDPPage();
+				ScrollingWebPage.PageScrolldown(driver,0,1700,SS_path);
+			}
 		} catch (Exception e) {
 			wiley.WileyLogOut();
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
@@ -457,100 +495,116 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 			String newXpath="(//span[@class='search-highlight' and contains(text(),'"+
 					excelOperation.getTestData("TC15", "WILEY_Test_Data", "SearchBox_Text")+"')])[1]";
 			try {
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(newXpath)));
-				wiley.checkProductsWithHighlightedSearchedTerm(newXpath);
-				wiley.checkSubjectFacet();
-				wiley.checkCourseFacet();
-				wiley.checkAuthorFacet();
-				wiley.checkFormatFacet();
-				wiley.checkPublishedDateFacet();
-				wiley.checkBrandsFacet();
-				wiley.checkSeriesFacet();
+				wait.until(ExpectedConditions.urlContains("search2?"));
+				wiley.checkProductsWithSearchedTermNewSearchPage(driver,
+						excelOperation.getTestData("TC15", "WILEY_Test_Data", "SearchBox_Text"));
+				wiley.checkSubjectFacetNewSearchPage();
+				wiley.checkAuthorFacetNewSearchPage();
+				wiley.checkFormatFacetNewSearchPage();
+				wiley.checkPublishedDateFacetNewSearchPage();
+				wiley.checkFeaturedFacetNewSearchPage();
 				//Validation of Author Facet
-				wiley.clickOnAuthorFacet();
-				String facetTextAndQuantity=wiley.clickOnFirstFacetValue();
-				String authorName=facetTextAndQuantity.split("#")[0];
-				String quantity=facetTextAndQuantity.split("#")[1];
-				wiley.checkNumberOfProductsAfterFiltering(quantity);
-				int numberOfPages;
-				if(Integer.parseInt(quantity)%10==0) 
-					numberOfPages=Integer.parseInt(quantity)/10;
-				else
-					numberOfPages=Integer.parseInt(quantity)/10+1;
-				if(wiley.fetchNumberOfPagesAfterFiltering()==numberOfPages)
-					Reporting.updateTestReport("Pagination funationility is working fine after filtering with Author ffield",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				else
-					Reporting.updateTestReport("Pagination funationility is not working",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				List<WebElement> filteredProducts=driver.findElements(By.className("product-title"));
-				System.out.println(filteredProducts.size());
-				int flag=0;
-				for(int i=1;i<filteredProducts.size()+1;i++) {
-					try {
-						WebElement author=driver.findElement(By.xpath("(//div[@class='product-author'])"+"["+i+"]"));
-						System.out.println(author.getText());
-						if (author.getText().contains(authorName))
-							System.out.println(i+"th iteration");
-						else
-						{flag=1;
-						Reporting.updateTestReport("This product with title : "+
-								driver.findElement(By.xpath("(//h3[@class='product-title']/a)"+"["+i+"]")).getText()
-								+" has different author", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);}
-					}
-					catch(Exception e) {
-						Reporting.updateTestReport("Author name ffield for each product was not found",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
-				}
-				if(flag==0) {
-					Reporting.updateTestReport("All the filtered products has same Author as: "+authorName,
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				}
-				wiley.clickOnResetFilter();
-				//Validation of Format Facet
-				wiley.clickOnFormatFacet();
-				String facetTextAndQuantityForFormat=wiley.clickOnEBookFormatFacetValue();
-				String format=facetTextAndQuantityForFormat.split("#")[0];
-				String quantity1=facetTextAndQuantityForFormat.split("#")[1];
-				wiley.checkNumberOfProductsAfterFiltering(quantity1);
-				int numberOfPages1;
-				if(Integer.parseInt(quantity)%10==0) 
-					numberOfPages1=Integer.parseInt(quantity1)/10;
-				else
-					numberOfPages1=Integer.parseInt(quantity1)/10+1;
-				if(wiley.fetchNumberOfPagesAfterFiltering()==numberOfPages1)
-					Reporting.updateTestReport("Pagination funationility is working fine after filtering with Format ffield",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				else
-					Reporting.updateTestReport("Pagination funationility is not working",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				List<WebElement> filteredProductsForFormat=driver.findElements(By.className("product-title"));
-				int flag1=0;
-				for(int i=1;i<filteredProductsForFormat.size()+1;i++) {
-					try {
-						WebElement formatFacet=driver.findElement(By.xpath("(//div[@class='product-content']/span[1])"+"["+i+"]"));
-						if (formatFacet.getText().compareTo(format)==1)
-						{flag1=1;
-						Reporting.updateTestReport("This product with title : "+
-								driver.findElement(By.xpath("(//h3[@class='product-title']/a)"+"["+i+"]")).getText()
-								+" has different format", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);}
-					}
-					catch(Exception e) {
-						Reporting.updateTestReport("Format  ffield for each product was not found",
-								CaptureScreenshot.getScreenshot(quantity), StatusDetails.FAIL);
-					}
-				}
-				if(flag1==0) {
-					Reporting.updateTestReport("All the filtered products has same format as: "+format,
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				}
-
+				wiley.clickOnAuthorFacetNewSearchPage();
+				ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+				wiley.clickOnFirstFacetValueNewSearchPage();
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("Searched highlighted term was not displayed"
-						+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.FAIL);
+				try {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(newXpath)));
+					wiley.checkProductsWithHighlightedSearchedTerm(newXpath);
+					wiley.checkSubjectFacet();
+					wiley.checkCourseFacet();
+					wiley.checkAuthorFacet();
+					wiley.checkFormatFacet();
+					wiley.checkPublishedDateFacet();
+					wiley.checkBrandsFacet();
+					wiley.checkSeriesFacet();
+					//Validation of Author Facet
+					wiley.clickOnAuthorFacet();
+					String facetTextAndQuantity=wiley.clickOnFirstFacetValue();
+					String authorName=facetTextAndQuantity.split("#")[0];
+					String quantity=facetTextAndQuantity.split("#")[1];
+					wiley.checkNumberOfProductsAfterFiltering(quantity);
+					int numberOfPages;
+					if(Integer.parseInt(quantity)%10==0) 
+						numberOfPages=Integer.parseInt(quantity)/10;
+					else
+						numberOfPages=Integer.parseInt(quantity)/10+1;
+					if(wiley.fetchNumberOfPagesAfterFiltering()==numberOfPages)
+						Reporting.updateTestReport("Pagination funationility is working fine after filtering with Author field",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport("Pagination funationility is not working",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					List<WebElement> filteredProducts=driver.findElements(By.className("product-title"));
+					System.out.println(filteredProducts.size());
+					int flag=0;
+					for(int i=1;i<filteredProducts.size()+1;i++) {
+						try {
+							WebElement author=driver.findElement(By.xpath("(//div[@class='product-author'])"+"["+i+"]"));
+							System.out.println(author.getText());
+							if (author.getText().contains(authorName))
+								System.out.println(i+"th iteration");
+							else
+							{flag=1;
+							Reporting.updateTestReport("This product with title : "+
+									driver.findElement(By.xpath("(//h3[@class='product-title']/a)"+"["+i+"]")).getText()
+									+" has different author", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);}
+						}
+						catch(Exception e1) {
+							Reporting.updateTestReport("Author name ffield for each product was not found",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					}
+					if(flag==0) {
+						Reporting.updateTestReport("All the filtered products has same Author as: "+authorName,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					}
+					wiley.clickOnResetFilter();
+					//Validation of Format Facet
+					wiley.clickOnFormatFacet();
+					String facetTextAndQuantityForFormat=wiley.clickOnEBookFormatFacetValue();
+					String format=facetTextAndQuantityForFormat.split("#")[0];
+					String quantity1=facetTextAndQuantityForFormat.split("#")[1];
+					wiley.checkNumberOfProductsAfterFiltering(quantity1);
+					int numberOfPages1;
+					if(Integer.parseInt(quantity)%10==0) 
+						numberOfPages1=Integer.parseInt(quantity1)/10;
+					else
+						numberOfPages1=Integer.parseInt(quantity1)/10+1;
+					if(wiley.fetchNumberOfPagesAfterFiltering()==numberOfPages1)
+						Reporting.updateTestReport("Pagination funationility is working fine after filtering with Format ffield",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport("Pagination funationility is not working",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					List<WebElement> filteredProductsForFormat=driver.findElements(By.className("product-title"));
+					int flag1=0;
+					for(int i=1;i<filteredProductsForFormat.size()+1;i++) {
+						try {
+							WebElement formatFacet=driver.findElement(By.xpath("(//div[@class='product-content']/span[1])"+"["+i+"]"));
+							if (formatFacet.getText().compareTo(format)==1)
+							{flag1=1;
+							Reporting.updateTestReport("This product with title : "+
+									driver.findElement(By.xpath("(//h3[@class='product-title']/a)"+"["+i+"]")).getText()
+									+" has different format", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);}
+						}
+						catch(Exception e2) {
+							Reporting.updateTestReport("Format  ffield for each product was not found",
+									CaptureScreenshot.getScreenshot(quantity), StatusDetails.FAIL);
+						}
+					}
+					if(flag1==0) {
+						Reporting.updateTestReport("All the filtered products has same format as: "+format,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					}
+
+				}
+				catch(Exception e3) {
+					Reporting.updateTestReport("Searched highlighted term was not displayed"
+							+ " and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 			}
 
 		}
@@ -632,7 +686,13 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				wiley.clickOnCartIcon();
 				wiley.searchDataInSearchBar(excelOperation.getTestData("TC17", "WILEY_Test_Data", "ISBN"));
-				wiley.clickOnSRP_WileyProduct();
+				try {
+					wait.until(ExpectedConditions.urlContains("search2?"));
+					wiley.clickOnSRP_WileyProductNewSearchPage();
+				}
+				catch(Exception e) {
+					wiley.clickOnSRP_WileyProduct();
+				}
 				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 				wiley.clickOnAddToCartButton();
 				try {
@@ -660,6 +720,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 					wiley.checkErrorMessageAfterEnteringExistingUserInCreateAccount();
 					wiley.enterExistingWileyUserMailID(excelOperation.getTestData("TC17", "WILEY_Test_Data", "Email_Id"));
 					wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC17", "WILEY_Test_Data", "Password"));
+					ScrollingWebPage.PageScrolldown(driver, 0, 400, SS_path);
 					wiley.clickOnLogInAndContinueButton();
 					wiley.checkErrorMessageAfterEnteringWrongPassword();
 				}

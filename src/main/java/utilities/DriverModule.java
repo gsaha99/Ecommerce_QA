@@ -4,7 +4,7 @@ package utilities;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
-
+import java.time.Duration;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -89,10 +89,12 @@ public class DriverModule {
 				Caps.setCapability("browser_version", "110");
 			}
 			//driver= new RemoteWebDriver(new URL(URL), Caps);
-			driver=new EdgeDriver(edgeOptions);
+			//driver=new EdgeDriver(edgeOptions);
+			driver=new FirefoxDriver();
+					
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);			
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));			
 			
 			Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
 			

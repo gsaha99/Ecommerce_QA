@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>6/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>1/0/0</td>
 </tr><tr>
-<td>Started on:</td><td>Thu Apr 13 11:54:02 IST 2023</td>
+<td>Started on:</td><td>Mon Apr 17 16:18:11 IST 2023</td>
 </tr>
-<tr><td>Total time:</td><td>424 seconds (424823 ms)</td>
+<tr><td>Total time:</td><td>36 seconds (36683 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,6 +67,65 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED CONFIGURATIONS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='TestSuite.WileyPLUS_Prod_Test_Suite.CloseBrowser()'><b>CloseBrowser</b><br>Test class: TestSuite.WileyPLUS_Prod_Test_Suite</td>
+<td><div><pre>org.openqa.selenium.NoSuchSessionException: Tried to run command without establishing a connection
+Build info: version: &apos;4.8.3&apos;, revision: &apos;e5e76298c3&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.5&apos;
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [777b8ea3-2802-44e3-9eb0-6b3f2e9316d6, quit {}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 111.0.1, moz:accessibilityChecks: false, moz:buildID: 20230321111920, moz:debuggerAddress: 127.0.0.1:5437, moz:geckodriverVersion: 0.33.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 16780, moz:profile: C:\Users\arakshit\AppData\L..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://127.0.0.1:5437/devtool..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 777b8ea3-2802-44e3-9eb0-6b3f2e9316d6
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:193)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:183)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.lambda$execute$1(DriverCommandExecutor.java:121)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+</pre></div><a href='#' onClick='toggleBox("stack-trace51712095", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace51712095'><pre>org.openqa.selenium.NoSuchSessionException: Tried to run command without establishing a connection
+Build info: version: &apos;4.8.3&apos;, revision: &apos;e5e76298c3&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.5&apos;
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [777b8ea3-2802-44e3-9eb0-6b3f2e9316d6, quit {}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 111.0.1, moz:accessibilityChecks: false, moz:buildID: 20230321111920, moz:debuggerAddress: 127.0.0.1:5437, moz:geckodriverVersion: 0.33.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 16780, moz:profile: C:\Users\arakshit\AppData\L..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://127.0.0.1:5437/devtool..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 777b8ea3-2802-44e3-9eb0-6b3f2e9316d6
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:193)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:183)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.lambda$execute$1(DriverCommandExecutor.java:121)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+</pre></div></td>
+<td>3</td>
+<td>TestSuite.WileyPLUS_Prod_Test_Suite@710c2b53</td></tr>
+</table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
@@ -76,35 +135,10 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='TestSuite.WEL_Prod_Test_Suite.TC01_Standalone_User_Registration()'><b>TC01_Standalone_User_Registration</b><br>Test class: TestSuite.WEL_Prod_Test_Suite</td>
+<td title='TestSuite.WileyPLUS_Prod_Test_Suite.TC01_SRP_For_WileyPLUS()'><b>TC01_SRP_For_WileyPLUS</b><br>Test class: TestSuite.WileyPLUS_Prod_Test_Suite</td>
 <td></td>
-<td>43</td>
-<td>TestSuite.WEL_Prod_Test_Suite@422c3c7a</td></tr>
-<tr>
-<td title='TestSuite.WEL_Prod_Test_Suite.TC05_Forget_Password_during_Checkout()'><b>TC05_Forget_Password_during_Checkout</b><br>Test class: TestSuite.WEL_Prod_Test_Suite</td>
-<td></td>
-<td>124</td>
-<td>TestSuite.WEL_Prod_Test_Suite@422c3c7a</td></tr>
-<tr>
-<td title='TestSuite.WEL_Prod_Test_Suite.TC03_User_Registration_During_Checkout_for_Physical_Cart()'><b>TC03_User_Registration_During_Checkout_for_Physical_Cart</b><br>Test class: TestSuite.WEL_Prod_Test_Suite</td>
-<td></td>
-<td>69</td>
-<td>TestSuite.WEL_Prod_Test_Suite@422c3c7a</td></tr>
-<tr>
-<td title='TestSuite.WEL_Prod_Test_Suite.TC06_Add_Promo_In_Anonymous_Cart()'><b>TC06_Add_Promo_In_Anonymous_Cart</b><br>Test class: TestSuite.WEL_Prod_Test_Suite</td>
-<td></td>
-<td>74</td>
-<td>TestSuite.WEL_Prod_Test_Suite@422c3c7a</td></tr>
-<tr>
-<td title='TestSuite.WEL_Prod_Test_Suite.TC04_User_Login_during_Checkout()'><b>TC04_User_Login_during_Checkout</b><br>Test class: TestSuite.WEL_Prod_Test_Suite</td>
-<td></td>
-<td>62</td>
-<td>TestSuite.WEL_Prod_Test_Suite@422c3c7a</td></tr>
-<tr>
-<td title='TestSuite.WEL_Prod_Test_Suite.TC02_Login_With_Newly_Registered_User()'><b>TC02_Login_With_Newly_Registered_User</b><br>Test class: TestSuite.WEL_Prod_Test_Suite</td>
-<td></td>
-<td>39</td>
-<td>TestSuite.WEL_Prod_Test_Suite@422c3c7a</td></tr>
+<td>25</td>
+<td>TestSuite.WileyPLUS_Prod_Test_Suite@710c2b53</td></tr>
 </table><p>
 </body>
 </html>
