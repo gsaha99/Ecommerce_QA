@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="43" total="44" passed="1" failed="0" skipped="0">
+<testng-results ignored="61" total="62" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-04-17T20:38:00 IST" name="Default suite" finished-at="2023-04-17T20:39:35 IST" duration-ms="94311">
+  <suite started-at="2023-04-18T15:26:20 IST" name="Default suite" finished-at="2023-04-18T15:27:58 IST" duration-ms="97896">
     <groups>
     </groups>
-    <test started-at="2023-04-17T20:38:00 IST" name="Default test" finished-at="2023-04-17T20:39:35 IST" duration-ms="94311">
-      <class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@6be968ce]" started-at="2023-04-17T20:38:00 IST" name="initiate" finished-at="2023-04-17T20:38:08 IST" duration-ms="7720" status="PASS">
+    <test started-at="2023-04-18T15:26:20 IST" name="Default test" finished-at="2023-04-18T15:27:58 IST" duration-ms="97896">
+      <class name="Test_Suite.WEL_Test_Suite">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:Test_Suite.WEL_Test_Suite@514646ef]" started-at="2023-04-18T15:26:20 IST" name="initiate" finished-at="2023-04-18T15:26:29 IST" duration-ms="9345" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@39832280]]>
+                <![CDATA[org.testng.TestRunner@b506ed0]]>
               </value>
             </param>
             <param index="1">
@@ -23,41 +23,41 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@6be968ce]" started-at="2023-04-17T20:38:08 IST" name="launchBrowser" finished-at="2023-04-17T20:38:08 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="87" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.WEL_Test_Suite@514646ef]" started-at="2023-04-18T15:26:29 IST" name="initializeRepo" finished-at="2023-04-18T15:26:29 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="105" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- launchBrowser -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@6be968ce]" started-at="2023-04-17T20:38:08 IST" name="nameBefore" finished-at="2023-04-17T20:38:08 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- initializeRepo -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@514646ef]" started-at="2023-04-18T15:26:29 IST" name="nameBefore" finished-at="2023-04-18T15:26:29 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC37_Generic_info_hover_text_EBook_EBookRental_PDP() throws java.io.IOException]]>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC80_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameBefore -->
-        <test-method signature="TC37_Generic_info_hover_text_EBook_EBookRental_PDP()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@6be968ce]" started-at="2023-04-17T20:38:08 IST" name="TC37_Generic_info_hover_text_EBook_EBookRental_PDP" finished-at="2023-04-17T20:39:30 IST" duration-ms="81838" status="PASS">
+        <test-method signature="TC80_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page()[pri:0, instance:Test_Suite.WEL_Test_Suite@514646ef]" started-at="2023-04-18T15:26:29 IST" name="TC80_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page" finished-at="2023-04-18T15:27:55 IST" duration-ms="86064" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC37_Generic_info_hover_text_EBook_EBookRental_PDP -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@6be968ce]" started-at="2023-04-17T20:39:30 IST" name="nameAfter" finished-at="2023-04-17T20:39:30 IST" duration-ms="4" status="PASS">
+        </test-method> <!-- TC80_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.WEL_Test_Suite@514646ef]" started-at="2023-04-18T15:27:55 IST" name="nameAfter" finished-at="2023-04-18T15:27:55 IST" duration-ms="2" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC37_Generic_info_hover_text_EBook_EBookRental_PDP() throws java.io.IOException]]>
+                <![CDATA[public void Test_Suite.WEL_Test_Suite.TC80_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@6be968ce]" started-at="2023-04-17T20:39:30 IST" name="CloseBrowser" finished-at="2023-04-17T20:39:35 IST" duration-ms="4605" status="PASS">
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.WEL_Test_Suite@514646ef]" started-at="2023-04-18T15:27:55 IST" name="CloseBrowser" finished-at="2023-04-18T15:27:58 IST" duration-ms="2267" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
-      </class> <!-- Test_Suite.Wiley_NA_Cart_Test_Suite -->
+      </class> <!-- Test_Suite.WEL_Test_Suite -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
