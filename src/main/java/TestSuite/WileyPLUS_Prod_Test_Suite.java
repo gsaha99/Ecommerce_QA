@@ -30,7 +30,7 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
 	public static String EmailConfirmationText="//button/div[contains(text(),'Your Order with Wiley')]";
-	public static String WileyHomepage="https://www.wiley.com/en-us";
+	public static String WileyHomepage=excelOperation.getTestData("Wiley_Homepage_URL", "Generic_Dataset", "Data");
 
 	@BeforeTest
 	public void launchBrowser() {
@@ -58,20 +58,29 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC01_SRP_For_WileyPLUS");
 			LogTextFile.writeTestCaseStatus("TC01_SRP_For_WileyPLUS", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(WileyPLUS.wileyURLConcatenation("TC01", "WileyPLUS_Test_Data", "URL"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			driver.get(WileyHomepage);
+			int flag=0;
 			driver.navigate().refresh();
 			String price;
 
 			try {
-				WileyPLUS.clickOnHomePage();
-				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC01", "WileyPLUS_Test_Data", "SearchBox_Text"));
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					flag=1;
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+				if(flag==1) {
 					ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
 					WileyPLUS.checkPublicationDateInSRP_PLPNewSearchPage();
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
@@ -79,7 +88,7 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
 
 				}
-				catch(Exception e) {
+				else {
 					WileyPLUS.checkPublicationDateInSRP_PLP();
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
 					price=WileyPLUS.checkPriceInSRP_PLP(driver);
@@ -122,29 +131,38 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC02_PLP_For_WileyPLUS");
 			LogTextFile.writeTestCaseStatus("TC02_PLP_For_WileyPLUS", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(WileyPLUS.wileyURLConcatenation("TC02", "WileyPLUS_Test_Data", "URL"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			int flag=0;
+			driver.get(WileyHomepage);
 			String price;
 			driver.navigate().refresh();
 			try {
-				WileyPLUS.clickOnHomePage();
-				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC02", "WileyPLUS_Test_Data", "SearchBox_Text"));
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					flag=1;
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				if(flag==1) {
 					WileyPLUS.clickOnFormatFacetNewSearchPage();
 					ScrollingWebPage.PageDown(driver, SS_path);
 					WileyPLUS.clickOnWileyPLUSInFormatFacetNewSearchPage();
-					WileyPLUS.checkWileyPLUSInAppliedFacetNewSearchPage();			
+					WileyPLUS.checkWileyPLUSInAppliedFacetNewSearchPage();	
+					ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
 					WileyPLUS.checkPublicationDateInSRP_PLPNewSearchPage();
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
 					price=WileyPLUS.checkPriceInSRP_PLPNewSearchPage(driver);
 					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
 				}
-				catch(Exception e) {
+				else {
 					WileyPLUS.clickOnFormatFacet();
 					WileyPLUS.clickOnSeeMoreLinkUnderFormat();
 					try {
@@ -206,22 +224,30 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC03_EGRIP_Search_For_WileyPLUS");
 			LogTextFile.writeTestCaseStatus("TC03_EGRIP_Search_For_WileyPLUS", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(WileyPLUS.wileyURLConcatenation("TC03", "WileyPLUS_Test_Data", "URL"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			int flag=0;
+			driver.get(WileyHomepage);
 			driver.navigate().refresh();
 			try {
-				WileyPLUS.clickOnHomePage();
-				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC03", "WileyPLUS_Test_Data", "SearchBox_Text"));
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					flag=1;
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				if(flag==1) {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
 					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
 				}
-				catch(Exception e) {
+				else {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
 					WileyPLUS.clickOnSRP_WileyProduct();
 				}
@@ -232,8 +258,8 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 					Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
-				WileyPLUS.checkSingleTermWileyPLUSTab();
-				WileyPLUS.checkMultipleTermsWileyPLUSTab();
+				WileyPLUS.checkSingleTermWileyPLUSTab(driver);
+				WileyPLUS.checkMultipleTermsWileyPLUSTab(driver);
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
@@ -256,22 +282,30 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC04_Bundle_Search_For_WileyPLUS");
 			LogTextFile.writeTestCaseStatus("TC04_Bundle_Search_For_WileyPLUS", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(WileyPLUS.wileyURLConcatenation("TC04", "WileyPLUS_Test_Data", "URL"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			int flag=0;
+			driver.get(WileyHomepage);
 			driver.navigate().refresh();
 			try {
-				WileyPLUS.clickOnHomePage();
-				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC04", "WileyPLUS_Test_Data", "SearchBox_Text"));
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					flag=1;
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				if(flag==1) {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
 					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
 				}
-				catch(Exception e) {
+				else {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
 					WileyPLUS.clickOnSRP_WileyProduct();
 				}
@@ -282,8 +316,8 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 					Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
-				WileyPLUS.checkSingleTermWileyPLUSTab();
-				WileyPLUS.checkMultipleTermsWileyPLUSTab();
+				WileyPLUS.checkSingleTermWileyPLUSTab(driver);
+				WileyPLUS.checkMultipleTermsWileyPLUSTab(driver);
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
@@ -306,22 +340,30 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC05_Check_If_URL_Not_Truncated_For_WileyPLUS");
 			LogTextFile.writeTestCaseStatus("TC05_Check_If_URL_Not_Truncated_For_WileyPLUS", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(WileyPLUS.wileyURLConcatenation("TC05", "WileyPLUS_Test_Data", "URL"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			int flag=0;
+			driver.get(WileyHomepage);
 			driver.navigate().refresh();
 			try {
-				WileyPLUS.clickOnHomePage();
-				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC05", "WileyPLUS_Test_Data", "SearchBox_Text"));
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					flag=1;
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				if(flag==1) {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
 					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
 				}
-				catch(Exception e) {
+				else {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
 					WileyPLUS.clickOnSRP_WileyProduct();
 				}
@@ -363,23 +405,32 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC06_Format_Facet_WileyPLUS");
 			LogTextFile.writeTestCaseStatus("TC06_Format_Facet_WileyPLUS", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(WileyPLUS.wileyURLConcatenation("TC06", "WileyPLUS_Test_Data", "URL"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			int flag=0;
+			driver.get(WileyHomepage);
 			driver.navigate().refresh();
 			try {
-				WileyPLUS.clickOnHomePage();
-				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC06", "WileyPLUS_Test_Data", "SearchBox_Text"));
 				try {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					flag=1;
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				if(flag==1) {
 					WileyPLUS.clickOnFormatFacetNewSearchPage();
 					ScrollingWebPage.PageDown(driver, SS_path);
 					WileyPLUS.clickOnWileyPLUSInFormatFacetNewSearchPage();
 					WileyPLUS.checkWileyPLUSInAppliedFacetNewSearchPage();	
 				}
-				catch(Exception e) {
+				else {
 					WileyPLUS.clickOnFormatFacet();
 					WileyPLUS.clickOnSeeMoreLinkUnderFormat();
 					try {
@@ -419,29 +470,37 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC07_Verify_Additional_UI_Adjustments_WileyPLUS_PDP");
 			LogTextFile.writeTestCaseStatus("TC07_Verify_Additional_UI_Adjustments_WileyPLUS_PDP", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(WileyPLUS.wileyURLConcatenation("TC07", "WileyPLUS_Test_Data", "URL"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			int flag=0;
+			driver.get(WileyHomepage);
 			driver.navigate().refresh();
 			try {
-				WileyPLUS.clickOnHomePage();
-				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing, "
 								+ "Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC07", "WileyPLUS_Test_Data", "SearchBox_Text"));
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					flag=1;
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				if(flag==1) {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
 					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
 				}
-				catch(Exception e) {
+				else {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
 					WileyPLUS.clickOnSRP_WileyProduct();
 				}
 				if(WileyPLUS.checkWileyPLUSTabInPDP()) {
 					WileyPLUS.clickOnWileyPLUSTabPDP();
-					WileyPLUS.checkSingleTermWileyPLUSTab();
-					WileyPLUS.checkMultipleTermsWileyPLUSTab();
+					WileyPLUS.checkSingleTermWileyPLUSTab(driver);
+					WileyPLUS.checkMultipleTermsWileyPLUSTab(driver);
 					WileyPLUS.checkStandardPricicngTextWileyPLUSTab();
 					WileyPLUS.checkMultipleTermWileyPLUSText(driver,excelOperation.getTestData("MultipleTermWileyPLUSText", "Generic_Messages", "Data"));
 					WileyPLUS.clickOnSingleTermWileyPLUSButton();
@@ -477,29 +536,37 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC08_Validate_Percentage_In_Multiple_Term");
 			LogTextFile.writeTestCaseStatus("TC08_Validate_Percentage_In_Multiple_Term", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(WileyPLUS.wileyURLConcatenation("TC08", "WileyPLUS_Test_Data", "URL"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			int flag=0;
+			driver.get(WileyHomepage);
 			driver.navigate().refresh();
 			try {
-				WileyPLUS.clickOnHomePage();
-				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC08", "WileyPLUS_Test_Data", "SearchBox_Text"));
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					flag=1;
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				if(flag==1) {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
 					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
 				}
-				catch(Exception e) {
+				else {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
 					WileyPLUS.clickOnSRP_WileyProduct();
 				}
 				if(WileyPLUS.checkWileyPLUSTabInPDP()) {
 					WileyPLUS.clickOnWileyPLUSTabPDP();
-					WileyPLUS.checkSingleTermWileyPLUSTab();
-					WileyPLUS.checkMultipleTermsWileyPLUSTab();
+					WileyPLUS.checkSingleTermWileyPLUSTab(driver);
+					WileyPLUS.checkMultipleTermsWileyPLUSTab(driver);
 					String multiTermPercentage=WileyPLUS.fetchPercentageMultiTerm(driver,excelOperation.getTestData("MultipleTermWileyPLUSText", "Generic_Messages", "Data"));
 					Double multiTermPrice=Double.valueOf(WileyPLUS.fetchMultiTermAccessPrice());
 					WileyPLUS.clickOnSingleTermWileyPLUSButton();
@@ -540,21 +607,29 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC09_PDP_UI_For_WileyPLUS");
 			LogTextFile.writeTestCaseStatus("TC09_PDP_UI_For_WileyPLUS", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(WileyPLUS.wileyURLConcatenation("TC09", "WileyPLUS_Test_Data", "URL"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			int flag=0;
+			driver.get(WileyHomepage);
 			driver.navigate().refresh();
 			try {
-				WileyPLUS.clickOnHomePage();
-				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC09", "WileyPLUS_Test_Data", "SearchBox_Text"));
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
-					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
+					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					flag=1;
 				}
 				catch(Exception e) {
+					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				if(flag==1) {
+					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
+				}
+				else {
 					WileyPLUS.clickOnSRP_WileyProduct();
 				}
 				if(WileyPLUS.checkAddToCartButton()) {
@@ -576,8 +651,8 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 				else
 					Reporting.updateTestReport("Add to cart button was present in the WileyPLUS PDP",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				WileyPLUS.checkSingleTermWileyPLUSTab();
-				WileyPLUS.checkMultipleTermsWileyPLUSTab();
+				WileyPLUS.checkSingleTermWileyPLUSTab(driver);
+				WileyPLUS.checkMultipleTermsWileyPLUSTab(driver);
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
@@ -600,29 +675,37 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC10_WileyPLUS_Set_To_MultiTerm_Default");
 			LogTextFile.writeTestCaseStatus("TC10_WileyPLUS_Set_To_MultiTerm_Default", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(WileyPLUS.wileyURLConcatenation("TC10", "WileyPLUS_Test_Data", "URL"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			int flag=0;
+			driver.get(WileyHomepage);
 			driver.navigate().refresh();
 			try {
-				WileyPLUS.clickOnHomePage();
-				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC10", "WileyPLUS_Test_Data", "SearchBox_Text"));
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					flag=1;
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				if(flag==1) {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
 					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
 				}
-				catch(Exception e) {
+				else {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
 					WileyPLUS.clickOnSRP_WileyProduct();
 				}
 				if(WileyPLUS.checkWileyPLUSTabInPDP()) {
 					WileyPLUS.clickOnWileyPLUSTabPDP();
-					WileyPLUS.checkSingleTermWileyPLUSTab();
-					WileyPLUS.checkMultipleTermsWileyPLUSTab();
+					WileyPLUS.checkSingleTermWileyPLUSTab(driver);
+					WileyPLUS.checkMultipleTermsWileyPLUSTab(driver);
 					if(WileyPLUS.checkMultiTermDefault())
 						Reporting.updateTestReport("The WileyPLUS Multiple Term was selected by deafult",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -654,22 +737,30 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC11_New_Tab_Opened_After_Clicking_Login_To_WileyPLUS_Button");
 			LogTextFile.writeTestCaseStatus("TC11_New_Tab_Opened_After_Clicking_Login_To_WileyPLUS_Button", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(WileyPLUS.wileyURLConcatenation("TC11", "WileyPLUS_Test_Data", "URL"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			int flag=0;
+			driver.get(WileyHomepage);
 			driver.navigate().refresh();
 			try {
-				WileyPLUS.clickOnHomePage();
-				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC11", "WileyPLUS_Test_Data", "SearchBox_Text"));
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					flag=1;
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				if(flag==1) {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
 					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
 				}
-				catch(Exception e) {
+				else {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
 					WileyPLUS.clickOnSRP_WileyProduct();
 				}
@@ -806,22 +897,30 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC15_Check_ISBN_Not_Preset_In_WileyPLUS_PDP");
 			LogTextFile.writeTestCaseStatus("TC15_Check_ISBN_Not_Preset_In_WileyPLUS_PDP", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(WileyPLUS.wileyURLConcatenation("TC15", "WileyPLUS_Test_Data", "URL"));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			int flag=0;
+			driver.get(WileyHomepage);
 			driver.navigate().refresh();
 			try {
-				WileyPLUS.clickOnHomePage();
-				//driver.get(WileyCAHomepage);
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
 				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC15", "WileyPLUS_Test_Data", "SearchBox_Text"));
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					flag=1;
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				if(flag==1) {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
 					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
 				}
-				catch(Exception e) {
+				else {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLP(driver);
 					WileyPLUS.clickOnSRP_WileyProduct();
 				}

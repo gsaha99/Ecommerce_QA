@@ -515,8 +515,10 @@ public class app_WileyPLUS_Repo {
 	 * @Date: 04/04/23
 	 * @Description: Checks if WileyPLUS tab is present in PDP
 	 */
-	public Boolean checkSingleTermWileyPLUSTab() throws IOException{
+	public Boolean checkSingleTermWileyPLUSTab(WebDriver driver) throws IOException{
 		try {
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
+			wait.until(ExpectedConditions.visibilityOf(SingleTermWileyPLUSTab));
 			if(SingleTermWileyPLUSTab.isDisplayed()) {
 				Reporting.updateTestReport("Single Term WileyPLUS tab was present in PDP",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -539,8 +541,10 @@ public class app_WileyPLUS_Repo {
 	 * @Date: 04/04/23
 	 * @Description: Checks if WileyPLUS tab is present in PDP
 	 */
-	public Boolean checkMultipleTermsWileyPLUSTab() throws IOException{
+	public Boolean checkMultipleTermsWileyPLUSTab(WebDriver driver) throws IOException{
 		try {
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
+			wait.until(ExpectedConditions.visibilityOf(MultipleTermsWileyPLUSTab));
 			if(MultipleTermsWileyPLUSTab.isDisplayed()) {
 				Reporting.updateTestReport("Multiple Terms WileyPLUS tab was present in PDP",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1122,7 +1126,7 @@ public class app_WileyPLUS_Repo {
 	public void checkPublicationDateInSRP_PLPNewSearchPage() throws IOException{
 		try {
 			if(PublicationDateSRPNewSearchPage.isDisplayed())
-				Reporting.updateTestReport("Publication date: "+PublicationDateSRP.getText() + " was displayed in the Search Result Page WileyPLUS",
+				Reporting.updateTestReport("Publication date: "+PublicationDateSRPNewSearchPage.getText() + " was displayed in the Search Result Page WileyPLUS",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else
 				Reporting.updateTestReport("Publication date was not displayed in the Search Result Page WileyPLUS",
