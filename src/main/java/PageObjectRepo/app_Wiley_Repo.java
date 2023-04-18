@@ -297,6 +297,8 @@ public class app_Wiley_Repo {
 	WebElement FirstFacetValueNewSearchPage;
 	@FindBy(xpath="(//ul[@class='ul-text-author facet-options-list virtualised-facet-options-list']/li/span[@class='facet-checkbox-wrapper']/label)[1]")
 	WebElement FirstFacetItemQuantityNewSearchPage;
+	@FindBy(xpath="//span[@class='page-display']")
+	WebElement NumberOfProductsAfterFilteringNewSearchPage;
 	
 
 	/*
@@ -2412,6 +2414,87 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("First Facet Item couldn't be clicked",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return "";
+		}
+	}
+	
+	/*
+	 * @Date: 04/03/23
+	 * @Description: Selects First Facet Item
+	 */
+	public String clickOnMaxFacetValueNewSearchPage(WebDriver driver) throws IOException{
+		try {
+			List<WebElement> quantityList = driver.findElements(By.xpath(
+					"//ul[@class='ul-text-author facet-options-list virtualised-facet-options-list']/li/span/label[1]"));
+			WebElement maxQuantityAuthor=null;
+			WebElement Author=null;
+			int max=0;
+			for(int i=1;i<=quantityList.size();i++) {
+				if(Integer.parseInt(quantityList.get(i-1).getText())>max) {
+					max=Integer.parseInt(quantityList.get(i-1).getText());
+					Author=driver.findElement(By.xpath("//ul[@class='ul-text-author facet-options-list virtualised-facet-options-list']/li["+i+"]/label"));
+					maxQuantityAuthor=driver.findElement(By.xpath("//ul[@class='ul-text-author facet-options-list virtualised-facet-options-list']/li["+i+"]/span/label[1]"));
+				}
+			}
+			String authorName=Author.getText();
+			String quantity=maxQuantityAuthor.getText();
+			Author.click();
+			Reporting.updateTestReport(" Facet Item was clicked with Text: "
+					+authorName+" and Quantity of that Filter: "+quantity,
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return authorName+"#"+quantity;
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Facet Item couldn't be clicked",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Date: 04/03/23
+	 * @Description: Checks number of items after filtering
+	 */
+	public void checkNumberOfProductsAfterFilteringNewSearchPage(String numbers) throws IOException{
+		try {
+			String[] texts=NumberOfProductsAfterFilteringNewSearchPage.getText().split(" of ");
+			System.out.println(texts.toString()+ texts.length);
+			String totalNumber=texts[texts.length-1];
+			if(totalNumber.equalsIgnoreCase(numbers)) {
+				Reporting.updateTestReport("The number of products after filtering is correctly shown as: "+numbers,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+			}
+			else {
+				Reporting.updateTestReport("The number of products after filtering is: "+totalNumber+
+						" which is not matching with: "+numbers,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+			}
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The number of products after filtering couldn't be fetched "+NumberOfProductsAfterFilteringNewSearchPage.getText(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	
+	/*
+	 * @Date: 04/03/23
+	 * @Description: Fetches the total number of pages in pagination
+	 */
+	public int fetchNumberOfPagesAfterFilteringNewSearchPage(WebDriver driver) throws IOException{
+		try {
+			List<WebElement> pages=driver.findElements(By.xpath("//ul[@class='pagination']/li/a"));
+			WebElement totalPage=pages.get(pages.size()-2);
+			String page=totalPage.getText();
+			Reporting.updateTestReport("Number of total pages: "+page+" was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return Integer.parseInt(page);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Number of total pages couldn't be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return 0;
 		}
 	}
 

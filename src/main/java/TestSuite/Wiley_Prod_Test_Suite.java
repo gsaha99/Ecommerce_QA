@@ -241,11 +241,21 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 			Reporting.test = Reporting.extent.createTest("TC07_ProductListPage");
 			LogTextFile.writeTestCaseStatus("TC07_ProductListPage", "Test case");
 			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(15));
+			int flag=0;
 			driver.get(wiley.wileyURLConcatenation("TC07", "WILEY_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.searchTextInSearchBar(excelOperation.getTestData("TC07", "WILEY_Test_Data", "SearchBox_Text"));
 			try {
-				wait.until(ExpectedConditions.urlContains("search2?"));
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+				Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				flag=1;
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			if(flag==1) {
 				if(wiley.checkPlpProductTabNewSearch().trim().equals("Products"))
 					Reporting.updateTestReport(
 							"Product landing page was loaded Successfully and page having text Products Headers Section",
@@ -263,7 +273,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					
 			}
-			catch(Exception e) {
+			else {
 				String plpProductText = wiley.PlpProductText().substring(0, 8);
 				if (plpProductText.equals("PRODUCTS"))
 					Reporting.updateTestReport(
@@ -407,11 +417,21 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 			Reporting.test = Reporting.extent.createTest("TC12_Content_Search_ResultPage");
 			LogTextFile.writeTestCaseStatus("TC12_Content_Search_ResultPage", "Test case");
 			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(15));
+			int flag=0;
 			driver.get(wiley.wileyURLConcatenation("TC12", "WILEY_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.searchTextInSearchBar(excelOperation.getTestData("TC12", "WILEY_Test_Data", "SearchBox_Text"));
 			try {
-				wait.until(ExpectedConditions.urlContains("search2?"));
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+				Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				flag=1;
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			if(flag==1) {
 				if (wiley.checkPlpContentTabNewSearch().equals("Content")) {
 					Reporting.updateTestReport(
 							"Product landing page was loaded Successfully and page having text Content Headers Section",
@@ -424,7 +444,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					
 			}
-			catch(Exception e) {
+			else {
 				wiley.ClickOnContentSearchOnPDPPage();
 				ScrollingWebPage.PageScrolldown(driver,0,1700,SS_path);
 			}
@@ -488,14 +508,25 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC15_Product_Search_Results_Page");
 			LogTextFile.writeTestCaseStatus("TC15_Product_Search_Results_Page", "Test case");
+			int flag=0;
 			driver.get(wiley.wileyURLConcatenation("TC15", "WILEY_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.searchTextInSearchBar(excelOperation.getTestData("TC15", "WILEY_Test_Data", "SearchBox_Text"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 			String newXpath="(//span[@class='search-highlight' and contains(text(),'"+
 					excelOperation.getTestData("TC15", "WILEY_Test_Data", "SearchBox_Text")+"')])[1]";
+			
 			try {
-				wait.until(ExpectedConditions.urlContains("search2?"));
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+				Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				flag=1;
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			if(flag==1) {
 				wiley.checkProductsWithSearchedTermNewSearchPage(driver,
 						excelOperation.getTestData("TC15", "WILEY_Test_Data", "SearchBox_Text"));
 				wiley.checkSubjectFacetNewSearchPage();
@@ -506,9 +537,24 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				//Validation of Author Facet
 				wiley.clickOnAuthorFacetNewSearchPage();
 				ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
-				wiley.clickOnFirstFacetValueNewSearchPage();
+				String facetTextAndQuantity=wiley.clickOnMaxFacetValueNewSearchPage(driver);
+				String authorName=facetTextAndQuantity.split("#")[0];
+				String quantity=facetTextAndQuantity.split("#")[1];
+				ScrollingWebPage.PageScrollDownUptoBottom(driver, SS_path);
+				wiley.checkNumberOfProductsAfterFilteringNewSearchPage(quantity);
+				int numberOfPages;
+				if(Integer.parseInt(quantity)%10==0) 
+					numberOfPages=Integer.parseInt(quantity)/10;
+				else
+					numberOfPages=Integer.parseInt(quantity)/10+1;
+				if(wiley.fetchNumberOfPagesAfterFilteringNewSearchPage(driver)==numberOfPages)
+					Reporting.updateTestReport("Pagination funationility is working fine after filtering with Author field",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Pagination funationility is not working",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			catch(Exception e) {
+			else {
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(newXpath)));
 					wiley.checkProductsWithHighlightedSearchedTerm(newXpath);
@@ -538,7 +584,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					List<WebElement> filteredProducts=driver.findElements(By.className("product-title"));
 					System.out.println(filteredProducts.size());
-					int flag=0;
+					int flagForAuthor=0;
 					for(int i=1;i<filteredProducts.size()+1;i++) {
 						try {
 							WebElement author=driver.findElement(By.xpath("(//div[@class='product-author'])"+"["+i+"]"));
@@ -546,7 +592,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 							if (author.getText().contains(authorName))
 								System.out.println(i+"th iteration");
 							else
-							{flag=1;
+							{flagForAuthor=1;
 							Reporting.updateTestReport("This product with title : "+
 									driver.findElement(By.xpath("(//h3[@class='product-title']/a)"+"["+i+"]")).getText()
 									+" has different author", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);}
@@ -556,7 +602,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					}
-					if(flag==0) {
+					if(flagForAuthor==0) {
 						Reporting.updateTestReport("All the filtered products has same Author as: "+authorName,
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					}
@@ -668,6 +714,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC17_Login_Page_Validation");
 			LogTextFile.writeTestCaseStatus("TC17_Login_Page_Validation", "Test case");
+			int flag=0;
 			driver.get(wiley.wileyURLConcatenation("TC17", "WILEY_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -687,10 +734,19 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				wiley.clickOnCartIcon();
 				wiley.searchDataInSearchBar(excelOperation.getTestData("TC17", "WILEY_Test_Data", "ISBN"));
 				try {
-					wait.until(ExpectedConditions.urlContains("search2?"));
-					wiley.clickOnSRP_WileyProductNewSearchPage();
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					flag=1;
 				}
 				catch(Exception e) {
+					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+				if(flag==1) {
+					wiley.clickOnSRP_WileyProductNewSearchPage();
+				}
+				else {
 					wiley.clickOnSRP_WileyProduct();
 				}
 				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
