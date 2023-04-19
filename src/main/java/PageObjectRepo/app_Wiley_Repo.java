@@ -196,6 +196,15 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath="(//span[@id='deliveryMethodMessage'])[2]/div/h5")
 	WebElement PODMessage;
+	
+	@FindBy(xpath="(//span[@class='delivery-item-description deliveryItemTitleDe'])[1]")
+	WebElement StandardShippingMethodDate;
+	
+	@FindBy(xpath="//div[@class='prevStepDetailsText marginTop10' and contains(text(),'Shipping')]")
+	WebElement StandardShippingMethodDateAfterShipping;
+	
+	@FindBy(xpath="//div[@class='orderConfirmationLabel' and contains(text(),'Estimated Delivery:')]/following-sibling::div")
+	WebElement StandardShippingMethodDateInOrderConfirmation;
 
 	@FindBy(xpath="//h5[@id='shippingAddressTitle']/span[text()='Shipping Address']")
 	WebElement ShippingStepText;
@@ -1572,6 +1581,93 @@ public class app_Wiley_Repo {
 		catch(Exception e) {
 			Reporting.updateTestReport("Shipping method related message was not displayed", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks and fetches the message in shipping methods for POD Products
+	 */
+	public void validateIfOnlyStandardShippingMethodIsPresentForPOD(WebDriver driver) throws IOException{
+		try {
+			List<WebElement> shippingMethods=driver.findElements(By.id("deliveryMethodRow"));
+			if(shippingMethods.size()==1) {
+				if(driver.findElement(By.id("S-Surface-USA")).isDisplayed())
+					Reporting.updateTestReport("Only Standard shipping method was present for Print On Demand product",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("Standard shipping method was not present for Print On Demand product",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			else
+				Reporting.updateTestReport("More than one shipping methods were present for Print On Demand product",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Shipping methods couldn't be fetched", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks and fetches the message in shipping methods for POD Products
+	 */
+	public String fetchStandardShippingMethodDeliveryDateForPOD() throws IOException{
+		try {
+			String dateText=StandardShippingMethodDate.getText();
+			System.out.println("dateText-->"+dateText);
+			String dateTextSecondPart=dateText.split("Arrives")[1].trim();
+			System.out.println("dateTextSecondPart-->"+dateTextSecondPart);
+			String date=dateTextSecondPart.substring(0,dateTextSecondPart.length()-1);
+			System.out.println("date-->"+date);
+			Reporting.updateTestReport("The delivery date : "+date+" was returned", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return date;
+			
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The delivery date couldn't be returned", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks and fetches the message in shipping methods for POD Products
+	 */
+	public String fetchStandardShippingMethodDeliveryDateForPODInOrderConfirmation() throws IOException{
+		try {
+			String dateText=StandardShippingMethodDateInOrderConfirmation.getText();
+			Reporting.updateTestReport("The delivery date : "+dateText+" was returned in Order confirmation page", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return dateText.trim();
+			
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The delivery date couldn't be returned in Order confirmation page", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			return "";
+			
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks and fetches the message in shipping methods for POD Products
+	 */
+	public String fetchStandardShippingMethodDeliveryDateForPODAfterShippingStep() throws IOException{
+		try {
+			String dateText=StandardShippingMethodDateAfterShipping.getText();
+			String dateTextSecondPart=dateText.split("Arrives")[1].trim();
+			String date=dateTextSecondPart.substring(0,dateTextSecondPart.length()-1);
+			Reporting.updateTestReport("The delivery date : "+date+" was returned after shipping step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return date;
+			
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The delivery date couldn't be returned after shipping step", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			return "";
 		}
 	}
 
