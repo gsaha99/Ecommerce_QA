@@ -2,6 +2,8 @@ package TestSuite;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
@@ -19,7 +21,9 @@ import org.testng.annotations.Test;
 import PageObjectRepo.app_WileyPLUS_Repo;
 import utilities.CaptureScreenshot;
 import utilities.DriverModule;
+import utilities.EmailValidation;
 import utilities.LogTextFile;
+import utilities.PaymentGateway;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
@@ -943,6 +947,107 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+		}
+		catch(Exception e) {
+			WileyPLUS.wileyLogOutException();
+			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 19/04/23
+	 * @Description: Adding multiple wileyplus products to cart with coupon
+	 */
+	@Test
+	public void TC16_Adding_Multiple_Wileyplus_Products_With_Coupon_Validating_Guest_User_Option() throws IOException{
+		try {
+			Reporting.test = Reporting.extent.createTest("TC16_Adding_Multiple_Wileyplus_Products_With_Coupon");
+			LogTextFile.writeTestCaseStatus("TC16_Adding_Multiple_Wileyplus_Products_With_Coupon", "Test case");
+			driver.get(WileyPLUS.wileyURLConcatenation("TC16", "WileyPLUS_Test_Data", "URL"));
+			driver.navigate().refresh();
+			WileyPLUS.checkIfUserIsOnCartPage(driver);
+			driver.get(WileyPLUS.wileyURLConcatenation("TC16", "WileyPLUS_Test_Data", "SearchBox_Text"));
+			driver.navigate().refresh();
+			ScrollingWebPage.PageScrolldown(driver,0,400,SS_path);
+			BigDecimal subtotal=new BigDecimal(WileyPLUS.fetchOrderSubTotalInCartPage().substring(1));
+			BigDecimal discount=new BigDecimal(WileyPLUS.fetchDiscountAmountInCartPage().substring(2));
+			if(subtotal.multiply(new BigDecimal(0.35)).setScale(2, RoundingMode.HALF_EVEN).compareTo(discount)==0) 
+				Reporting.updateTestReport(
+						"The rounded value of :"+subtotal.multiply(new BigDecimal(0.35))+
+						" is same as the discount value: "+discount,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport(
+						"The rounded value of :"+subtotal.multiply(new BigDecimal(0.35))+
+						" is not same as the discount value: "+discount,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+			WileyPLUS.clickOnProceedToCheckoutButton();
+			if(!WileyPLUS.checkIfGuestCheckoutButtonIsPresent()) Reporting.updateTestReport("Guest checkout button was not present in login page when WileyPLUS product is present in cart",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else Reporting.updateTestReport("Guest checkout button is present in login page when WileyPLUS product is present in cart",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			String email=WileyPLUS.enterEmailIdInCreateAccountForm();
+			WileyPLUS.clickOnCreateAccountButton();
+			WileyPLUS.confirmEmailIdInCreateAccountForm(email);
+			WileyPLUS.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC16", "WileyPLUS_Test_Data", "Password"));
+			WileyPLUS.clickOnSaveAndContinueButton();
+			WileyPLUS.checkIfUserInBillingStep();
+			WileyPLUS.removeProductsFromCart(driver);
+			WileyPLUS.WileyLogOut();
+		}
+		catch(Exception e) {
+			WileyPLUS.wileyLogOutException();
+			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Date: 19/4/23
+	 * @Description: Checks if the standard shipping is free if textbook rental bundle us present in cart
+	 */
+	@Test
+	public void TC17_Standard_Shipping_Free_For_TextBook_Rental_Bundle() throws IOException{
+		try {
+			Reporting.test = Reporting.extent.createTest("TC17_Standard_Shipping_Free_For_TextBook_Rental_Bundle");
+			LogTextFile.writeTestCaseStatus("TC17_Standard_Shipping_Free_For_TextBook_Rental_Bundle", "Test case");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			driver.get(WileyPLUS.wileyURLConcatenation("TC17", "WileyPLUS_Test_Data", "URL"));
+			driver.navigate().refresh();
+			WileyPLUS.checkIfUserIsOnCartPage(driver);
+			WileyPLUS.checkBrandNameWileyPLUS();
+			ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
+			WileyPLUS.clickOnProceedToCheckoutButton();
+			String email=WileyPLUS.enterEmailIdInCreateAccountForm();
+			WileyPLUS.clickOnCreateAccountButton();
+			WileyPLUS.confirmEmailIdInCreateAccountForm(email);
+			WileyPLUS.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Password"));
+			WileyPLUS.clickOnSaveAndContinueButton();
+			WileyPLUS.checkIfUserInShippingStep();
+			if(WileyPLUS.validateStandardShippingCharge())
+				Reporting.updateTestReport("Standard shipping is free for US when Textbook rental bundle is present in cart",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport("Standard shipping is not free for US when Textbook rental bundle is present in cart",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			
+			WileyPLUS.selectCountry(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_Country"));
+			try{
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
+				if(WileyPLUS.validateStandardShippingCharge())
+					Reporting.updateTestReport("Standard shipping is free for Canada when Textbook rental bundle is present in cart",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				else
+					Reporting.updateTestReport("Standard shipping is not free for Non US country when Textbook rental bundle is present in cart",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Shipping Address line 1 was not clickable"
+						+ " and caused timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			WileyPLUS.removeProductsFromCart(driver);
+			WileyPLUS.WileyLogOut();
 		}
 		catch(Exception e) {
 			WileyPLUS.wileyLogOutException();

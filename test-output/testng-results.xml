@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="24" total="25" passed="1" failed="0" skipped="0">
+<testng-results ignored="16" total="17" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-04-18T17:38:08 IST" name="Default suite" finished-at="2023-04-18T17:38:57 IST" duration-ms="48845">
+  <suite started-at="2023-04-19T16:20:47 IST" name="Default suite" finished-at="2023-04-19T16:22:14 IST" duration-ms="86916">
     <groups>
     </groups>
-    <test started-at="2023-04-18T17:38:08 IST" name="Default test" finished-at="2023-04-18T17:38:57 IST" duration-ms="48845">
-      <class name="TestSuite.Wiley_Prod_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@6f8f9349]" started-at="2023-04-18T17:38:08 IST" name="initiate" finished-at="2023-04-18T17:38:15 IST" duration-ms="7574" status="PASS">
+    <test started-at="2023-04-19T16:20:47 IST" name="Default test" finished-at="2023-04-19T16:22:14 IST" duration-ms="86916">
+      <class name="TestSuite.WileyPLUS_Prod_Test_Suite">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:TestSuite.WileyPLUS_Prod_Test_Suite@3fffff43]" started-at="2023-04-19T16:20:47 IST" name="initiate" finished-at="2023-04-19T16:20:57 IST" duration-ms="9785" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@44e4cb76]]>
+                <![CDATA[org.testng.TestRunner@60dc1a4e]]>
               </value>
             </param>
             <param index="1">
@@ -23,41 +23,41 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@6f8f9349]" started-at="2023-04-18T17:38:15 IST" name="launchBrowser" finished-at="2023-04-18T17:38:16 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="90" status="PASS">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:TestSuite.WileyPLUS_Prod_Test_Suite@3fffff43]" started-at="2023-04-19T16:20:57 IST" name="launchBrowser" finished-at="2023-04-19T16:20:57 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="51" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchBrowser -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@6f8f9349]" started-at="2023-04-18T17:38:16 IST" name="nameBefore" finished-at="2023-04-18T17:38:16 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.WileyPLUS_Prod_Test_Suite@3fffff43]" started-at="2023-04-19T16:20:57 IST" name="nameBefore" finished-at="2023-04-19T16:20:57 IST" duration-ms="0" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC15_Product_Search_Results_Page_Facet_Validation() throws java.io.IOException]]>
+                <![CDATA[public void TestSuite.WileyPLUS_Prod_Test_Suite.TC17_Standard_Shipping_Free_For_TextBook_Rental_Bundle() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameBefore -->
-        <test-method signature="TC15_Product_Search_Results_Page_Facet_Validation()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@6f8f9349]" started-at="2023-04-18T17:38:16 IST" name="TC15_Product_Search_Results_Page_Facet_Validation" finished-at="2023-04-18T17:38:54 IST" duration-ms="38585" status="PASS">
+        <test-method signature="TC17_Standard_Shipping_Free_For_TextBook_Rental_Bundle()[pri:0, instance:TestSuite.WileyPLUS_Prod_Test_Suite@3fffff43]" started-at="2023-04-19T16:20:57 IST" name="TC17_Standard_Shipping_Free_For_TextBook_Rental_Bundle" finished-at="2023-04-19T16:22:11 IST" duration-ms="74118" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC15_Product_Search_Results_Page_Facet_Validation -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@6f8f9349]" started-at="2023-04-18T17:38:54 IST" name="nameAfter" finished-at="2023-04-18T17:38:54 IST" duration-ms="6" status="PASS">
+        </test-method> <!-- TC17_Standard_Shipping_Free_For_TextBook_Rental_Bundle -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.WileyPLUS_Prod_Test_Suite@3fffff43]" started-at="2023-04-19T16:22:11 IST" name="nameAfter" finished-at="2023-04-19T16:22:11 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC15_Product_Search_Results_Page_Facet_Validation() throws java.io.IOException]]>
+                <![CDATA[public void TestSuite.WileyPLUS_Prod_Test_Suite.TC17_Standard_Shipping_Free_For_TextBook_Rental_Bundle() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@6f8f9349]" started-at="2023-04-18T17:38:54 IST" name="CloseBrowser" finished-at="2023-04-18T17:38:57 IST" duration-ms="2510" status="PASS">
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:TestSuite.WileyPLUS_Prod_Test_Suite@3fffff43]" started-at="2023-04-19T16:22:11 IST" name="CloseBrowser" finished-at="2023-04-19T16:22:14 IST" duration-ms="2870" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
-      </class> <!-- TestSuite.Wiley_Prod_Test_Suite -->
+      </class> <!-- TestSuite.WileyPLUS_Prod_Test_Suite -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

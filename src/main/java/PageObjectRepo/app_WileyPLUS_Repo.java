@@ -105,6 +105,8 @@ public class app_WileyPLUS_Repo {
 	WebElement ContinueShoppingButton;
 	@FindBy(xpath="//div[@class='col-xs-6 noPadding price orderDetailCommonVal']")
 	WebElement OrderSubtotalInCartPage;
+	@FindBy(xpath="//div[@class='row no-margin cartTotalVoucherApply']/div[@class='col-xs-6 noPadding price navyBlueVal']")
+	WebElement DiscountValue;
 	@FindBy(xpath="//a[@class='cartItem-title']")
 	WebElement CartItemTitle;
 	@FindBy(xpath="(//div[@class='productPriceLabel']/span)[1]")
@@ -147,6 +149,8 @@ public class app_WileyPLUS_Repo {
 	WebElement ShippingCity;
 	@FindBy(xpath = "(//input[@id='address.region'])[1]")
 	WebElement SelectStateDropDown;
+	@FindBy(xpath="//span[@class='delivery-item-title deliveryItemTitle' and contains(text(),'Standard Shipping')]/following-sibling::span")
+	WebElement StandardShippingCharge;
 
 	//Billing information during checkout
 
@@ -879,6 +883,44 @@ public class app_WileyPLUS_Repo {
 			return "";
 		}
 	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Fetches the the order subtotal from cart page
+	 */
+	public String fetchOrderSubTotalInCartPage() throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"Subtotal of the order: "+OrderSubtotalInCartPage.getText().trim()+" was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return OrderSubtotalInCartPage.getText().trim();
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport(
+					"Subtotal of the order in cart page could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Fetches the the discount amount from cart page
+	 */
+	public String fetchDiscountAmountInCartPage() throws IOException {
+		try {
+			Reporting.updateTestReport(
+					"Discount amount: "+DiscountValue.getText().split("-")[1]+" was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return DiscountValue.getText().split("-")[1];
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport(
+					"Discount amount in cart page could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
 
 	/*
 	 * @Date: 04/04/23
@@ -1083,6 +1125,23 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
+	 * @Author: Anindita
+	 * Description : Select Country From DropDown in shipping an billing
+	 */
+	public void selectCountry(String country) throws IOException {
+		try {
+			
+			Select selExpirationMonth = new Select(SelectCountryDropDown);
+			selExpirationMonth.selectByVisibleText(country);
+			Reporting.updateTestReport("Country has been selected successfully by user",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("User failed to select country " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
 	 * @Date: 04/04/23
 	 * @Description: Checks if user is in the Billing Address step or not
 	 */
@@ -1250,6 +1309,45 @@ public class app_WileyPLUS_Repo {
 		catch(Exception e) {
 			Reporting.updateTestReport("WileyPLUS was not present under applied format facet",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return false;
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks if the Guest checkout button is present or not
+	 */
+	public boolean checkIfGuestCheckoutButtonIsPresent() throws IOException{
+		try {
+			if(GuestCheckoutButton.isDisplayed()) {
+
+				return true;
+			}
+			else {
+
+				return false;
+			}
+		}
+		catch(Exception e) {
+			return false;
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks if the standard shipping is free for US
+	 */
+	public boolean validateStandardShippingCharge() throws IOException{
+		try {
+			String charge=StandardShippingCharge.getText();
+			if(charge.equalsIgnoreCase("FREE"))
+				return true;
+			else
+				return false;
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Standard Shipping charge couldn't be fetched", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
 			return false;
 		}
 	}
