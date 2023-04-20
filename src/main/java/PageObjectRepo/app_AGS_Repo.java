@@ -76,7 +76,7 @@ public class app_AGS_Repo {
 	@FindBy(xpath="//form[@id='updatePasswordForm']/div[2]/div/button")
 	WebElement SaveButtonResetPassword;
 	@FindBy(xpath="//div[@class='alert alert-info alert-dismissable']")
-	WebElement PasswordResetAlert;
+	WebElement PasswordResetSuccessMessageInMyAccount;
 
 	//Reset password from login page
 
@@ -87,7 +87,7 @@ public class app_AGS_Repo {
 	@FindBy(xpath = "//button[@type='submit']")
 	WebElement Submit;
 	@FindBy(xpath = "//div[@class='alert alert-info alert-dismissable']")
-	WebElement AlertMessage;
+	WebElement PasswordResetInstructionMessage;
 	@FindBy(xpath = "//input[@placeholder='Enter your inbox here']")
 	WebElement YopmailEmailIdField;
 	@FindBy(xpath = "//button[@title='Check Inbox @yopmail.com']")
@@ -191,7 +191,7 @@ public class app_AGS_Repo {
 
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Checks if the title is present or not in home page
+	 * @Description: Checks if the Subscribe Now tab is present or not in home page
 	 */
 	public void checkSubScribeNowTabInHomePage() throws IOException {
 		try {
@@ -210,7 +210,7 @@ public class app_AGS_Repo {
 
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Checks if the title is present or not in home page
+	 * @Description: Checks if the Login tab is present or not in home page
 	 */
 	public void checkLoginTabInHomeopage() throws IOException {
 		try {
@@ -229,7 +229,7 @@ public class app_AGS_Repo {
 
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Checks if the title is present or not in home page
+	 * @Description: Checks if the Wiley logo is present or not in home page footer
 	 */
 	public void checkWileyLogoInHomepageFooter() throws IOException {
 		try {
@@ -420,7 +420,7 @@ public class app_AGS_Repo {
 	}
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Clicks on th Edit password tab in MyAccount page
+	 * @Description: Clicks on the Edit password tab in MyAccount page
 	 */
 	public void clickEditPasswordPage() throws IOException{
 		try {
@@ -486,11 +486,11 @@ public class app_AGS_Repo {
 	}
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Checks if the password updation alert is present or not
+	 * @Description: Checks if the password updation success message is present or not in My Account page
 	 */
-	public String isPasswordResetAlertPresent() throws IOException{
+	public String isPasswordResetSuccessMessagePresentInMyAccountPage() throws IOException{
 		try {
-			if(PasswordResetAlert.isDisplayed()) return PasswordResetAlert.getText();
+			if(PasswordResetSuccessMessageInMyAccount.isDisplayed()) return PasswordResetSuccessMessageInMyAccount.getText();
 			else return "";
 		}
 		catch(Exception e){
@@ -500,7 +500,7 @@ public class app_AGS_Repo {
 
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Clicks on the reset password link in the mail
+	 * @Description: Clicks on the reset password link in the mail in forgot password mail
 	 */
 	public void clickOnResetPasswordLink() throws IOException {
 		try {
@@ -516,7 +516,7 @@ public class app_AGS_Repo {
 
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Enters the new password in the reset password page
+	 * @Description: Enters the new password in the reset password page ( Through the forgot password link)
 	 */
 	public void enterNewPasswordInResetPassword(String password) throws IOException {
 		try {
@@ -532,7 +532,7 @@ public class app_AGS_Repo {
 
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Enters the new password in the Confirm password field in reset password page 
+	 * @Description: Enters the new password in the Confirm password field in reset password page ( Through the forgot password link)
 	 */
 	public void enterConfirmPasswordInResetPassword(String password) throws IOException {
 		try {
@@ -548,7 +548,7 @@ public class app_AGS_Repo {
 
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Submits the reset password form by clicking on the submit button
+	 * @Description: Submits the reset password form by clicking on the submit button ( Through the forgot password link)
 	 */
 	public void clickOnResetPasswordSubmit() throws IOException {
 		try {
@@ -565,7 +565,7 @@ public class app_AGS_Repo {
 
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Returns the success message in the reset password page
+	 * @Description: Returns the success message in the reset password page ( Through the forgot password link)
 	 */
 	public void checkResetPasswordSuccessMessage() throws IOException {
 		try {
@@ -599,7 +599,7 @@ public class app_AGS_Repo {
 	}
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Enters the email id to get the reset password mail
+	 * @Description: Enters the email id to get the reset password mail ( Through the forgot password link)
 	 */
 	public void enterEmailIdToGetResetPasswordMail(String forgottememail) throws IOException {
 		try {
@@ -613,7 +613,7 @@ public class app_AGS_Repo {
 	}
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Enters the email id to get the reset password mail
+	 * @Description: Clicks on the submit button to submit the email id to get the reset password mail 
 	 */
 	public void clickOnSubmit() throws IOException {
 		try {
@@ -627,16 +627,17 @@ public class app_AGS_Repo {
 	}
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Checks if the alert message is present after entering the mail id
+	 * @Description: Checks if the message (Like: The password reset instructions has been sent to mail id) 
+	 * is present after submitting the mail id
 	 */
-	public void checkAlertMessage() throws IOException {
+	public void checkPasswordResetInstructionMessage() throws IOException {
 		try {
-			String alertMessage = AlertMessage.getText();
-			Reporting.updateTestReport(alertMessage,
+			String passwordResetInstructionMessage = PasswordResetInstructionMessage.getText();
+			Reporting.updateTestReport(passwordResetInstructionMessage+" --> This message was dispalyed",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		} catch (Exception e) {
-			Reporting.updateTestReport("Invalid Instructions" + e.getClass().toString(),
+			Reporting.updateTestReport("Proper Instructions were not displayed after submitting the email id" + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		}
@@ -644,7 +645,7 @@ public class app_AGS_Repo {
 	}
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Enters the email id in yopmail
+	 * @Description: Enters the email id in yopmail site to check the inbox
 	 */
 	public void enterEmailIdInYopmail(String username) throws IOException {
 		try {
@@ -661,7 +662,7 @@ public class app_AGS_Repo {
 	}
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Clicks on the arrow button in yopmail
+	 * @Description: Clicks on the arrow button in yopmail to proceed to the inbox page
 	 */
 	public void clickOnArrowButton() throws IOException {
 		try {
@@ -676,7 +677,7 @@ public class app_AGS_Repo {
 	}
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Clicks on the refresh button in yopmail
+	 * @Description: Clicks on the refresh button in Yopmail to get new mails
 	 */
 	public void clickOnRefreshButton() throws IOException {
 		try {
@@ -692,7 +693,7 @@ public class app_AGS_Repo {
 
 	/*
 	 * @Date: 31/03/23
-	 * @Description :This flow is used to edit profile LastName
+	 * @Description : Edits the last name in the edit profile section in My Account page
 	 */
 	public void editProfileLastName(String profilelastname) throws IOException {
 
@@ -710,7 +711,7 @@ public class app_AGS_Repo {
 
 	/*
 	 * @Date: 31/03/23
-	 * @Description :Clicks on the Save button after in my account sectio after editing
+	 * @Description :Clicks on the Save button after in my account section after editing
 	 */
 	public void clickOnMyAcountSaveButton() throws IOException {
 
@@ -977,6 +978,7 @@ public class app_AGS_Repo {
 		}
 	}
 
+	//WPS Method
 	/*
 	 * @Date: 15/12/22
 	 * @Description: Enters the card number in the card details page in WPS
@@ -990,6 +992,7 @@ public class app_AGS_Repo {
 			Reporting.updateTestReport("Card Number couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
 	//WPS Method
 	/*
 	 * @Date: 15/12/22

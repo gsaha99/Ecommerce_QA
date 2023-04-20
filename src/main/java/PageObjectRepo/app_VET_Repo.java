@@ -76,7 +76,7 @@ public class app_VET_Repo {
 	@FindBy(xpath="//form[@id='updatePasswordForm']/div[2]/div/button")
 	WebElement SaveButtonResetPassword;
 	@FindBy(xpath="//div[@class='alert alert-info alert-dismissable vetAlertBoxInfo']")
-	WebElement PasswordResetAlert;
+	WebElement PasswordResetSuccessMessage;
 
 	//Reset password from login page
 
@@ -381,26 +381,7 @@ public class app_VET_Repo {
 		}
 	}
 
-	/*
-	 * @Date: 31/03/23
-	 * @Description: Hits the logout url
-	 */
-	public void logOutWithURL(WebDriver driver,String url) throws IOException {
-		try {
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(url);
-			try {
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='header-link current']")));
-				Reporting.updateTestReport("User was logged out successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Couldn't log out with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-		}
-		catch(Exception e) {
-			Reporting.updateTestReport("Couldn't log out with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
+
 
 	/*
 	 * @Date: 31/03/23
@@ -417,7 +398,7 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Clicks on th Edit password tab in MyAccount page
+	 * @Description: Clicks on the Edit password tab in MyAccount page
 	 */
 	public void clickEditPasswordPage() throws IOException{
 		try {
@@ -443,7 +424,7 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Enters the old password for the user in Edit password page
+	 * @Description: Enters the old password for the user in Edit password My Account page 
 	 */
 	public void enterPreviousPassword(String previousPassWord) throws IOException{
 		try {
@@ -456,7 +437,7 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Enters the new password for the user in Edit password page
+	 * @Description: Enters the new password for the user in Edit password My Account page 
 	 */
 	public void enterNewPassword(String newPassWord) throws IOException{
 		try {
@@ -485,9 +466,9 @@ public class app_VET_Repo {
 	 * @Date: 31/03/23
 	 * @Description: Checks if the password updation alert is present or not
 	 */
-	public String isPasswordResetAlertPresent() throws IOException{
+	public String isPasswordResetSuccessMessagePresentInMyAccount() throws IOException{
 		try {
-			if(PasswordResetAlert.isDisplayed()) return PasswordResetAlert.getText();
+			if(PasswordResetSuccessMessage.isDisplayed()) return PasswordResetSuccessMessage.getText();
 			else return "";
 		}
 		catch(Exception e){
@@ -510,7 +491,7 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Enters the email id to get the reset password mail
+	 * @Description: Enters the email id to get the reset password mail 
 	 */
 	public void enterEmailIdToGetResetPasswordMail(String forgottememail) throws IOException {
 		try {
@@ -524,7 +505,7 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Enters the email id to get the reset password mail
+	 * @Description: Clicks on the Submit button to submit the email id to receive the forgot password mail
 	 */
 	public void clickOnSubmit() throws IOException {
 		try {
@@ -538,7 +519,7 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Checks if the alert message is present after entering the mail id
+	 * @Description: Checks if the success message is present after submitting the mail id for forgot password mail
 	 */
 	public void checkAlertMessage() throws IOException {
 		try {
@@ -557,7 +538,7 @@ public class app_VET_Repo {
 
 	/*
 	 * @Date: 31/03/23
-	 * @Description :This flow is used to edit profile LastName
+	 * @Description : Edits the last name in Edit profile My Account section
 	 */
 	public void editProfileLastName(String profilelastname) throws IOException {
 
@@ -575,7 +556,7 @@ public class app_VET_Repo {
 
 	/*
 	 * @Date: 31/03/23
-	 * @Description :Clicks on the Save button after in my account sectio after editing
+	 * @Description :Clicks on the Save button after in my account section after editing
 	 */
 	public void clickOnMyAcountSaveButton() throws IOException {
 
@@ -625,7 +606,7 @@ public class app_VET_Repo {
 
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Clicks on Continue button In Cart Page
+	 * @Description: Clicks on Continue button In Cart Page to go to the next step
 	 */
 	public void clickOnContinueButtonCartPage() throws IOException {
 		try {
@@ -668,7 +649,7 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Date: 31/03/23
-	 * Description : Select Country From DropDown in billing
+	 * Description : Select Country From DropDown in billing information step
 	 */
 	public void selectCountry(String country) throws IOException {
 		try {
@@ -685,7 +666,7 @@ public class app_VET_Repo {
 
 	/*
 	 * Date: 15/12/22
-	 * Description :Selecting State from Dropdpwn in Shipping Page
+	 * Description :Selecting State from Dropdpwn in billing information step
 	 */
 	public void enterState(String state) throws IOException {
 		try {
@@ -788,10 +769,10 @@ public class app_VET_Repo {
 
 	/*
 	 * @Date: 3/4/23
-	 * @Description: Enters the new password in reset password form
+	 * @Description: Enters the new password in reset password form in case of forgot password flow
 	 * 
 	 */
-	public void ResetPwd(String upassword) throws IOException {
+	public void enterNewPassordInForgotPasswordPage(String upassword) throws IOException {
 		try {
 			updatepassword.sendKeys(upassword);
 			Reporting.updateTestReport("Password : " + upassword + " was entered successfully",
@@ -805,9 +786,9 @@ public class app_VET_Repo {
 
 	/*
 	 *@Date: 3/4/23
-	 * @Description: Enters the new password in reset password confirm box 
+	 * @Description: Enters the new password in reset password confirm box in case of forgot password flow
 	 */
-	public void ResetConfirmPassword(String cpassword) throws IOException {
+	public void enterConfirmPassordInForgotPasswordPage(String cpassword) throws IOException {
 		try {
 			ConfirmPasswordInPasswordUpdatePage.sendKeys(cpassword);
 			Reporting.updateTestReport("Confirm Password : " + cpassword + " was entered successfully",
@@ -821,9 +802,9 @@ public class app_VET_Repo {
 
 	/*
 	 * @Date: 3/4/23
-	 * @Description: Clicks on submit button in the reset password form
+	 * @Description: Clicks on submit button in the reset password form in case of forgot password flow
 	 */
-	public void ResetPassSubmit() throws IOException {
+	public void clickOnResetPasswordSubmit() throws IOException {
 		try {
 			Resetsubmit.click();
 			Reporting.updateTestReport("Submit was clicked successfully", CaptureScreenshot.getScreenshot(SS_path),
@@ -840,12 +821,12 @@ public class app_VET_Repo {
 	 * @Date: 3/4/23
 	 * @Description: Checks the reset password success message , if displayed or not
 	 */
-	public String PasswordResetSuccess() throws IOException {
+	public String checkPasswordResetSuccess() throws IOException {
 		try {
-			String rmessage = PasswordResetMessage.getText();
+			String message = PasswordResetMessage.getText();
 			Reporting.updateTestReport("Success! You can login using your new Password",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			return rmessage;
+			return message;
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Failed to updated the Password",
@@ -856,7 +837,7 @@ public class app_VET_Repo {
 
 	/*
 	 * @Date: 3/4/23
-	 * @Description: Clicks on the reset password link in the mail
+	 * @Description: Clicks on the reset password link in the mail in case of forgot password flow
 	 */
 	public void clickOnResetPasswordLink() throws IOException {
 		try {
@@ -899,13 +880,13 @@ public class app_VET_Repo {
 
 	/*
 	 * @Date: 3/4/23
-	 * @Description: Checks if the alert message was displayed after the password is reset
+	 * @Description: Checks if the alert message was displayed after the email id is submitted to get the reset password instruction
 	 */
-	public String AlertMessage() throws IOException {
+	public String checkAlertMessageAfterSubmittingEmailId() throws IOException {
 		try {
 			String str = AlertMessage.getText();
 			Reporting.updateTestReport(
-					"Password reset instructions have been sent to your e-mail address. Please contact customer support if you require additional assistance. ",
+					str+"--> this message was displayed successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return str;
 
@@ -922,7 +903,7 @@ public class app_VET_Repo {
 	 * @Description: Enters the emailid in yopmail
 	 * 
 	 */
-	public void enteryopmail(String username) throws IOException {
+	public void enterEmailIdInYopmail(String username) throws IOException {
 		try {
 			Enteryopmail.sendKeys(username);
 			Reporting.updateTestReport("Email entered : " + username + " was entered successfully ",
@@ -935,10 +916,10 @@ public class app_VET_Repo {
 	}
 	/*
 	 * @Date: 3/4/23
-	 * @Description: Clicks on the Arrow icon after entering the email id in yopmail
+	 * @Description: Clicks on the Arrow icon after entering the email id in yopmail to check the inbox
 	 * 
 	 */
-	public void clickonbutton() throws IOException {
+	public void clickOnArrowButton() throws IOException {
 		try {
 			clickonbutton.click();
 			Reporting.updateTestReport("Arrow button clicked successfully ", CaptureScreenshot.getScreenshot(SS_path),

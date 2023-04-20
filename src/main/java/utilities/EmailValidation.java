@@ -125,10 +125,10 @@ public class EmailValidation {
 				String yopmailHandle = iterator.next();
 				String ChildWindow=iterator.next();
 				driver.switchTo().window(ChildWindow);
-				VET.ResetPwd(excelOperation.getTestData("TC04", "VET_Test_Data", "Password"));
-				VET.ResetConfirmPassword(excelOperation.getTestData("TC04", "VET_Test_Data", "Password"));
-				VET.ResetPassSubmit();
-				VET.PasswordResetSuccess();
+				VET.enterNewPassordInForgotPasswordPage(excelOperation.getTestData("TC04", "VET_Test_Data", "Password"));
+				VET.enterConfirmPassordInForgotPasswordPage(excelOperation.getTestData("TC04", "VET_Test_Data", "Password"));
+				VET.clickOnResetPasswordSubmit();
+				VET.checkPasswordResetSuccess();
 				driver.switchTo().window(yopmailHandle);
 				driver.close();
 				driver.switchTo().window(ChildWindow);

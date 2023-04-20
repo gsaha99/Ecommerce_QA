@@ -54,18 +54,6 @@ public class app_WileyPLUS_Repo {
 	@FindBy(xpath="//div[@class='applied-facets']/div/span[contains(text(),'WileyPLUS')]")
 	WebElement WileyPLUSUnderAppliedFormatFacet;
 	
-	/*@FindBy(xpath="(//div[@class='product-card'])[1]")
-	WebElement SRP_WileyProduct;
-	@FindBy(xpath="(//div[@class='product-dt'])[1]")
-	WebElement PublicationDateSRP;
-	@FindBy(xpath="(//div[@class='product-options d-none d-md-block' and contains(text(),'WileyPLUS')] )[1]")
-	WebElement WileyPLUSFormatInSRP;
-	@FindBy(xpath="(//div[@class='product-price'] )[1]")
-	WebElement PriceInSRP;
-	@FindBy(xpath="//button[@class='accordion-button collapsed format-button']")
-	WebElement FormatFacet;
-	@FindBy(xpath="//label[@for='format|WileyPlus']")
-	WebElement WileyPLUSUnderFormatFacet;*/
 	
 
 	//Product details page for WileyPLUS products
@@ -201,7 +189,7 @@ public class app_WileyPLUS_Repo {
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Concatenates the url with username, password and the env
+	 * @Description: Concatenates the url with username, password and the environment URL
 	 */
 	public String wileyURLConcatenation(String testCaseNumber, String sheetName, String field) throws IOException{
 		try {
@@ -216,27 +204,10 @@ public class app_WileyPLUS_Repo {
 		}
 	}
 
-	/*
-	 * @Date: 04/04/23
-	 * @Description: Clicks On homepage logo
-	 */
-	public void clickOnHomePage() throws IOException {
-		try {
-			WileyLogo.click();
-			Reporting.updateTestReport("Wiley logo was clicked Successfully", CaptureScreenshot.getScreenshot(SS_path),
-					StatusDetails.PASS);
-
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click on the Wiley Logo ", CaptureScreenshot.getScreenshot(SS_path),
-					StatusDetails.FAIL);
-
-		}
-
-	}
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Enters data in HomePage search bar
+	 * @Description: Enters data to be searched in HomePage search bar
 	 */
 	public void searchProductInHomePageSearchBar(String data) throws IOException {
 		try {
@@ -309,7 +280,7 @@ public class app_WileyPLUS_Repo {
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Logs out the user from wiley.com
+	 * @Description: Logs out the user from wiley.com through hitting the logout URL
 	 */
 	public void WileyLogOut() throws IOException {
 		try {
@@ -339,7 +310,7 @@ public class app_WileyPLUS_Repo {
 
 	/*
 	 * @Date: 04/04/23
-	 * @description: This using for Clicking on SRP_WileyProduct
+	 * @description: Clicks on the first product which came in the search Result
 	 */
 	public void clickOnSRP_WileyProduct() throws IOException {
 
@@ -517,7 +488,7 @@ public class app_WileyPLUS_Repo {
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Checks if WileyPLUS tab is present in PDP
+	 * @Description: Checks if Single term option is present in the WileeyPLUS tab
 	 */
 	public Boolean checkSingleTermWileyPLUSTab(WebDriver driver) throws IOException{
 		try {
@@ -543,7 +514,7 @@ public class app_WileyPLUS_Repo {
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Checks if WileyPLUS tab is present in PDP
+	 * @Description: Checks if Multiple term option is present in the WileeyPLUS tab
 	 */
 	public Boolean checkMultipleTermsWileyPLUSTab(WebDriver driver) throws IOException{
 		try {
@@ -609,7 +580,7 @@ public class app_WileyPLUS_Repo {
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Verfy the Grey box in WileyPLUS PDP
+	 * @Description: Verify the Grey box in WileyPLUS PDP containing one message regarding the login to WileyPLUS
 	 */
 	public void checkGreyBoxWileyPLUSTab(WebDriver driver,String greyBoxText) throws IOException{
 		try {
@@ -620,7 +591,7 @@ public class app_WileyPLUS_Repo {
 				Reporting.updateTestReport("The header text in grey box was not present",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			try {
-				WebElement GreyBoxTextWileyPLUSPDP=driver.findElement(By.xpath("//p[contains(text(),\""+greyBoxText+"\")]"));
+				WebElement GreyBoxTextWileyPLUSPDP=driver.findElement(By.xpath("//p[contains(text(),'"+greyBoxText+"')]"));
 				if(GreyBoxTextWileyPLUSPDP.isDisplayed()) 
 					Reporting.updateTestReport("The text: "+GreyBoxTextWileyPLUSPDP.getText()+" was present",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -661,7 +632,7 @@ public class app_WileyPLUS_Repo {
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Checks if Single Term WileyPLUS Text is present  
+	 * @Description: Checks if Single Term WileyPLUS Text (Message regarding the duration of Access) is present  
 	 */
 	public void checkSingleTermWileyPLUSText(WebDriver driver,String singleTermText) throws IOException{
 		try {
@@ -683,7 +654,7 @@ public class app_WileyPLUS_Repo {
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Checks if Multiple Term WileyPLUS Text is present  
+	 * @Description: Checks if Multiple Term WileyPLUS Text (Message regarding the duration of Access and savings as compared to Single term) is present  
 	 */
 	public void checkMultipleTermWileyPLUSText(WebDriver driver,String multiTermText) throws IOException{
 		try {
@@ -705,7 +676,7 @@ public class app_WileyPLUS_Repo {
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Fetches the percentage from Multiterm page
+	 * @Description: Fetches the percentage from Multiple Term WileyPLUS Text 
 	 */
 	public String fetchPercentageMultiTerm(WebDriver driver, String multiTermText) throws IOException{
 		try {
@@ -727,7 +698,7 @@ public class app_WileyPLUS_Repo {
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Fetches the Multiple Term access price from Multiterm page
+	 * @Description: Fetches the price of the Multi term standalone WileyPLUS Product
 	 */
 	public String fetchMultiTermAccessPrice() throws IOException{
 		try {
@@ -744,7 +715,7 @@ public class app_WileyPLUS_Repo {
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Fetches the Single Term access price from Single term page
+	 * @Description: Fetches the price of the Single term standalone WileyPLUS Product
 	 */
 	public String fetchSingleTermAccessPrice() throws IOException{
 		try {
@@ -777,7 +748,7 @@ public class app_WileyPLUS_Repo {
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Checks if the Multi term button is set as default
+	 * @Description: Checks if the Multiple term button is set as default when we open the WileyPLUS tab in Product details page
 	 */
 	public Boolean checkMultiTermDefault() throws IOException{
 		try {
@@ -829,7 +800,7 @@ public class app_WileyPLUS_Repo {
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Checks if the brand of the product is WileyPLUS 
+	 * @Description: Checks if the brand of the product is WileyPLUS in cart page after we add it to cart
 	 */
 	public void checkBrandNameWileyPLUS() throws IOException{
 		try {
@@ -848,9 +819,8 @@ public class app_WileyPLUS_Repo {
 	}
 
 	/*
-	 * @Date: 04/04/23
-	 * 
-	 * @description:This method using for clicking on ProceedToCheckout Button
+	 * @Date: 04/04/23 
+	 * @description: Clicks on the Proceed to checkout button in cart page
 	 */
 	public void clickOnProceedToCheckoutButton() throws IOException {
 
@@ -885,8 +855,8 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Author: Anindita
-	 * @Description: Fetches the the order subtotal from cart page
+	 * @Date: 04/04/23
+	 * @Description: Fetches the the order Subtotal from cart page
 	 */
 	public String fetchOrderSubTotalInCartPage() throws IOException {
 		try {
@@ -904,7 +874,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Author: Anindita
+	 * @Date: 04/04/23
 	 * @Description: Fetches the the discount amount from cart page
 	 */
 	public String fetchDiscountAmountInCartPage() throws IOException {
@@ -1107,7 +1077,7 @@ public class app_WileyPLUS_Repo {
 	
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Checks if user is inthe shipping step or not
+	 * @Description: Checks if user is in the shipping step or not
 	 */
 	public void checkIfUserInShippingStep() throws IOException{
 		try {
@@ -1125,8 +1095,8 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Author: Anindita
-	 * Description : Select Country From DropDown in shipping an billing
+	 * @Date: 04/4/23
+	 * @Description : Select Country From Country drop down in both shipping and billing step during checkout
 	 */
 	public void selectCountry(String country) throws IOException {
 		try {
@@ -1162,7 +1132,7 @@ public class app_WileyPLUS_Repo {
 	
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Checks if the ISBN is present in PDP or not is present or not
+	 * @Description: Checks if the ISBN is present in PDP or not 
 	 */
 	public boolean checkISBN_InPDP(WebDriver driver,String ISBN) throws IOException{
 		try {
@@ -1179,7 +1149,7 @@ public class app_WileyPLUS_Repo {
 	
 	//New Search page
 	/*
-	 * @Date: 04/04/23
+	 * @Date: 20/4/23
 	 * @Description: Checks if the publication date is present or not in the Search Result Page of a WileyPLUS product
 	 */
 	public void checkPublicationDateInSRP_PLPNewSearchPage() throws IOException{
@@ -1198,7 +1168,7 @@ public class app_WileyPLUS_Repo {
 	}
 
 	/*
-	 * @Date: 04/04/23
+	 * @Date: 20/4/23
 	 * @Description: Checks if the WileyPLUS Format is present or not in the Search Result Page of a WileyPLUS product
 	 */
 	public void checkWileyPLUSFormatInSRP_PLPNewSearchPage(WebDriver driver) throws IOException{
@@ -1219,7 +1189,7 @@ public class app_WileyPLUS_Repo {
 	}
 
 	/*
-	 * @Date: 04/04/23
+	 * @Date: 20/4/23
 	 * @Description: Checks if the Lowest price of the base product variant is present or not in the Search Result Page of a WileyPLUS product
 	 */
 	public String checkPriceInSRP_PLPNewSearchPage(WebDriver driver) throws IOException{
@@ -1240,7 +1210,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 03/04/23
+	 * @Date: 20/4/23
 	 * @description: This using for Clicking on SRP_WileyProduct
 	 */
 	public void clickOnSRP_WileyProductNewSearchPage() throws IOException {
@@ -1258,7 +1228,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 04/04/23
+	 * @Date: 20/4/23
 	 * @Description: Clicks on the format facet
 	 */
 	public void clickOnFormatFacetNewSearchPage() throws IOException{
@@ -1274,7 +1244,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 04/04/23
+	 * @Date: 20/4/23
 	 * @Description: Clicks on the WileyPLUS format under facet
 	 */
 	public void clickOnWileyPLUSInFormatFacetNewSearchPage() throws IOException{
@@ -1290,7 +1260,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Date: 04/04/23
+	 * @Date: 20/4/23
 	 * @Description: Checks if WileyPLUS is present under applied format facet
 	 */
 	public Boolean checkWileyPLUSInAppliedFacetNewSearchPage() throws IOException{
@@ -1314,7 +1284,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Author: Anindita
+	 * @Date: 20/4/23
 	 * @Description: Checks if the Guest checkout button is present or not
 	 */
 	public boolean checkIfGuestCheckoutButtonIsPresent() throws IOException{
@@ -1334,7 +1304,7 @@ public class app_WileyPLUS_Repo {
 	}
 	
 	/*
-	 * @Author: Anindita
+	 * @Date: 20/4/23
 	 * @Description: Checks if the standard shipping is free for US
 	 */
 	public boolean validateStandardShippingCharge() throws IOException{

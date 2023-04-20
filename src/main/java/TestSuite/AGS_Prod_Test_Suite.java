@@ -145,7 +145,7 @@ public class AGS_Prod_Test_Suite extends DriverModule {
 			AGS.enterPreviousPassword(excelOperation.getTestData("TC03", "AGS_Test_Data", "Previous_Password"));
 			AGS.enterNewPassword(excelOperation.getTestData("TC03", "AGS_Test_Data", "Password"));
 			AGS.clickPasswordSaveButton();
-			if (!AGS.isPasswordResetAlertPresent().equalsIgnoreCase(""))
+			if (!AGS.isPasswordResetSuccessMessagePresentInMyAccountPage().equalsIgnoreCase(""))
 				Reporting.updateTestReport("Password reset was successful", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.PASS);
 			else
@@ -167,7 +167,7 @@ public class AGS_Prod_Test_Suite extends DriverModule {
 
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Reset the Password From Login Page
+	 * @Description: Reset the Password From Login Page through the forgot password link
 	 */
 	@Test
 	public void TC04_Reset_Password_From_Login_Page() throws IOException {
@@ -178,7 +178,7 @@ public class AGS_Prod_Test_Suite extends DriverModule {
 			AGS.clickOnForgotPassword();
 			AGS.enterEmailIdToGetResetPasswordMail(excelOperation.getTestData("TC04", "AGS_Test_Data", "Email_Id"));
 			AGS.clickOnSubmit();
-			AGS.checkAlertMessage();
+			AGS.checkPasswordResetInstructionMessage();
 			driver.get(excelOperation.getTestData("Yopmail_URL",
 					"Generic_Dataset", "Data"));
 			AGS.enterEmailIdInYopmail(excelOperation.getTestData("TC04", "AGS_Test_Data","Email_Id"));
@@ -200,7 +200,7 @@ public class AGS_Prod_Test_Suite extends DriverModule {
 
 
 	/*
-	 * @Description: Edits the name in edit profile, my account section
+	 * @Description: Edits the name in edit profile, in my account section
 	 */
 	@Test
 	public void TC05_Edit_Profile() throws IOException {
@@ -232,7 +232,7 @@ public class AGS_Prod_Test_Suite extends DriverModule {
 	}
 	
 	/*
-	 * @Description: User proceeds upto the billing information page
+	 * @Description: User adds one subscription to cart and proceeds upto the billing information page
 	 */
 	@Test
 	public void TC06_Provide_Billing_Information() throws IOException{

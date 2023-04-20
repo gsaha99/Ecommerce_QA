@@ -148,7 +148,7 @@ public class VET_Prod_Test_Suite extends DriverModule{
 			VET.enterPreviousPassword(excelOperation.getTestData("TC03", "VET_Test_Data", "Previous_Password"));
 			VET.enterNewPassword(excelOperation.getTestData("TC03", "VET_Test_Data", "Password"));
 			VET.clickPasswordSaveButton();
-			if (!VET.isPasswordResetAlertPresent().equalsIgnoreCase(""))
+			if (!VET.isPasswordResetSuccessMessagePresentInMyAccount().equalsIgnoreCase(""))
 				Reporting.updateTestReport("Password reset was successful", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.PASS);
 			else
@@ -169,7 +169,7 @@ public class VET_Prod_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 31/03/23
-	 * @Description: Reset the Password From Login Page
+	 * @Description: Reset the Password From Login Page through the forgot password link
 	 */
 	@Test
 	public void TC04_Reset_Password_From_Login_Page() throws IOException {
@@ -180,11 +180,11 @@ public class VET_Prod_Test_Suite extends DriverModule{
 			VET.ForgotchangePassword();
 			VET.RetriveLoginInfo(excelOperation.getTestData("TC04", "VET_Test_Data", "Email_Id"));
 			VET.clickOnSubmit();
-			VET.AlertMessage();
+			VET.checkAlertMessageAfterSubmittingEmailId();
 			driver.get(excelOperation.getTestData("Yopmail_URL",
 					"Generic_Dataset", "Data"));
-			VET.enteryopmail(excelOperation.getTestData("TC04", "VET_Test_Data","Email_Id"));
-			VET.clickonbutton();
+			VET.enterEmailIdInYopmail(excelOperation.getTestData("TC04", "VET_Test_Data","Email_Id"));
+			VET.clickOnArrowButton();
 			EmailValidation.forgotPasswordMailForVet(driver, SS_path, VET);
 			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
 			VET.enterExistingUserId(excelOperation.getTestData("TC04", "VET_Test_Data", "Email_Id"));
@@ -231,7 +231,7 @@ public class VET_Prod_Test_Suite extends DriverModule{
 	}
 
 	/*
-	 * @Description: User proceeds upto the billing information page
+	 * @Description: User adds one VET Subscription to cart and proceeds upto the billing information page
 	 */
 	@Test
 	public void TC06_Provide_Billing_Information() throws IOException{

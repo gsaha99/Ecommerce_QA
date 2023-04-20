@@ -335,7 +335,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: Checks if Shop link is present in cart page
+	 * @Description: Checks if Shop link is present in cart page header
 	 */
 	public void checkShopLinkInCartPageHeader() throws IOException{
 		try {
@@ -351,7 +351,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: Checks if Research Libraries link is present in cart page
+	 * @Description: Checks if Research Libraries link is present in cart page header
 	 */
 	public void checkResearchLibrariesLinkInCartPageHeader() throws IOException{
 		try {
@@ -367,7 +367,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: Checks if Publishing Services link is present in cart page
+	 * @Description: Checks if Publishing Services link is present in cart page header
 	 */
 	public void checkPublishingServicesLinkInCartPageHeader() throws IOException{
 		try {
@@ -383,7 +383,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: Checks if Publishing Services link is present in cart page
+	 * @Description: Checks if Publishing Services link is present in cart page header
 	 */
 	public void checkProfessionalDevelopmentLinkInCartPageHeader() throws IOException{
 		try {
@@ -399,7 +399,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23 
-	 * @Description: Checks if Publishing Services link is present in cart page
+	 * @Description: Checks if Publishing Services link is present in cart page header
 	 */
 
 	public void checkEducationResourcesoncartPage() throws IOException {
@@ -418,7 +418,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: Checks sitemaps in footer
+	 * @Description: Checks site maps link in footer 
 	 */
 	public void checkSiteMaponFooter() throws IOException {
 		try {
@@ -440,7 +440,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: Checks sitemaps in cart page
+	 * @Description: Checks site maps link in cart page
 	 */
 	public void clickonsitemap() throws IOException {
 		try {
@@ -459,7 +459,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: Checks sitemaps on pdp page
+	 * @Description: Checks site maps on pdp page footer
 	 */
 
 	public void checkSiteMaponPDP() throws IOException {
@@ -478,7 +478,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: Checks RightsandPermission on footer
+	 * @Description: Checks Rights and Permission on header
 	 */
 
 	public void checkRighrtAndPermissonsOnFooter() throws IOException {
@@ -497,7 +497,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: Checks RightsandPermission on pdp page
+	 * @Description: Checks Rights and Permission on pdp page header
 	 */
 
 	public void checkRighrtAndPermissonsonPDP() throws IOException {
@@ -515,7 +515,7 @@ public class app_Wiley_Repo {
 	}
 	/*
 	 * @Date: 04/03/23
-	 * @Description: Checks privacy policy on footer
+	 * @Description: Checks privacy policy on header
 	 */
 	public void checkPrivacypolicyOnFooter() throws IOException {
 		try {
@@ -533,7 +533,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: Checks privacy policy on pdp page
+	 * @Description: Checks privacy policy on pdp page header
 	 */
 	public void checkPrivacyPolicyonPDP() throws IOException {
 		try {
@@ -569,7 +569,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: Checks terms of use in pdp page
+	 * @Description: Checks terms of use in pdp page footer
 	 */
 	public void checkTermsofUseonPDP() throws IOException {
 		try {
@@ -587,7 +587,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: Enter the text in text box field
+	 * @Description: Enter the text in search box field in cart page
 	 * 
 	 */
 	public void searchTextInSearchBar(String text) throws IOException {
@@ -622,7 +622,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: This method is verifying the text in PLP page
+	 * @Description: To check if the "Products" section is present in product listing page
 	 */
 
 	public String PlpProductText() throws IOException {
@@ -641,7 +641,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: This method is verifying the text in PLP page
+	 * @Description: To check if the "Content" section is present in product listing page
 	 */
 	public String PlpContentText() throws IOException {
 		try {
@@ -659,7 +659,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 03/04/23
-	 * @Description: Checks if Shop link is present in Home page
+	 * @Description: Checks if Shop link is present in Home page header
 	 */
 	public void checkShopLinkInHomePageHeader() throws IOException{
 		try {
@@ -675,7 +675,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 03/04/23
-	 * @Description: Checks if Research Libraries link is present in home page
+	 * @Description: Checks if Research Libraries link is present in home page haeder
 	 */
 	public void checkResearchLibrariesLinkInHomePageHeader() throws IOException{
 		try {
@@ -691,7 +691,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 03/04/23
-	 * @Description: Checks if Publishing Services link is present in home page
+	 * @Description: Checks if Publishing Services link is present in home page haeder
 	 */
 	public void checkPublishingServicesLinkInHomePageHeader() throws IOException{
 		try {
@@ -707,7 +707,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 03/04/23
-	 * @Description: Checks if Publishing Services link is present in Home page
+	 * @Description: Checks if Publishing Services link is present in Home page haeder
 	 */
 	public void checkProfessionalDevelopmentLinkInHomePageHeader() throws IOException{
 		try {
@@ -723,7 +723,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 03/04/23
-	 * @Description: Checks if CartIcon link is present in Home page
+	 * @Description: Checks if Cart Icon link is present in Home page
 	 */
 	public void checkCartIconHomePage() throws IOException{
 		try {
@@ -768,7 +768,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: This method is Clicking on content Section in PDP page
+	 * @Description: Clicks on "Content" in the Search Result page / Product listing page
 	 */
 	public void ClickOnContentSearchOnPDPPage() throws IOException {
 		try {
@@ -860,7 +860,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: Fetch all the search result web element
+	 * @Description: Fetches all the search results in Search result page
 	 */
 	public List<WebElement> getAllFilteredResultProducts(WebDriver driver) throws IOException{
 		try {
@@ -879,7 +879,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 03/04/23
-	 * @Description: Clicks on rest to rest all formats
+	 * @Description: Clicks on reset filter button to clear all the applied filters
 	 */
 	public void clickOnResetFilter() throws IOException {
 		try {
@@ -894,7 +894,7 @@ public class app_Wiley_Repo {
 	}
 	/*
 	 * @Date: 04/03/23
-	 * @Description: Selects the E-Book format
+	 * @Description: Selects the E-Book format from facet section
 	 */
 	public String clickOnEBookFormatFacetValue() throws IOException{
 		try {
@@ -1142,7 +1142,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: This method is verify ClickingOnHomePage
+	 * @Description: Clicks on the Wiley Logo to go to homepage
 	 */
 	public void ClickingOnHomePage() throws IOException {
 		try {
@@ -1176,7 +1176,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: This method is verify ClickingSearchAllResults
+	 * @Description: Click on See all results link in the Search result page
 	 */
 	public void ClickingSearchAllResults() throws IOException {
 		try {
@@ -1194,7 +1194,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: This method is verify ShopLinkHeaderCLPPage
+	 * @Description: Checks if the Shop link is present in the header section in the Category landing page
 	 */
 	public void ShopLinkHeaderCLPPage() throws IOException {
 		try {
@@ -1212,7 +1212,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: This method is verify FeaturedProductsOnCLPPage
+	 * @Description: Checks if the Featured Products link is present in the header section in the Category landing page
 	 */
 	public void checkFeaturedProductsOnCLPPage() throws IOException {
 		try {
@@ -1233,7 +1233,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/03/23
-	 * @Description: This method is verify ViewAllOnCLPPage
+	 * @Description: Clicks on View all link in the Category landing page
 	 */
 	public void ViewAllOnCLPPage() throws IOException {
 		try {
@@ -1250,7 +1250,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 03/04/23
-	 * @Description: Checks if CartIcon link is present in cart page
+	 * @Description: Checks if Cart Icon is present in cart page
 	 */
 	public void checkCartIcon() throws IOException{
 		try {
@@ -1307,7 +1307,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 03/04/23
-	 * @Description: Checks if Text In Order Summary Tab during checkout
+	 * @Description: Checks the Text In Order Summary Tab during checkout
 	 */
 	public void checkTextInOrderSummaryTab(String message, WebDriver driver) throws IOException{
 		try {
@@ -1425,7 +1425,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 03/04/23
-	 * @Description:This method using for clicking on ProceedToCheckout Button
+	 * @Description: Clicks on the Proceed to chekcout button in cart page
 	 */
 	public void clickOnProceedToCheckoutButton() throws IOException {
 
@@ -1492,7 +1492,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 03/04/23
-	 * @description: This using for Clicking on SRP_WileyProduct
+	 * @description: Opens the first product in the Search result page
 	 */
 	public void clickOnSRP_WileyProduct() throws IOException {
 
@@ -1583,7 +1583,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 03/04/23
-	 * @description: This Method for using the ExistingWiley UserMailID for Existing User
+	 * @description: Enters the Existing Wiley User ID for Existing Users
 	 */
 	public void enterExistingWileyUserMailID(String existingWileyUserMailID) throws IOException {
 		try {
@@ -1599,7 +1599,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 03/04/23
-	 * @description: This is for using the Existing Wiley UserPassword for existing User.
+	 * @description: Enters the password for for existing Users.
 	 */
 	public void enterExistingWileyUserPassword(String existingWileyUserPassword) throws IOException {
 		try {
@@ -1615,7 +1615,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 03/04/23
-	 * @description: This is Clicking on LogINContinueButton
+	 * @description: Clicks on Login and continue button in the checkout login page
 	 */
 	public void clickOnLogInAndContinueButton() throws IOException {
 
@@ -1651,7 +1651,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Enters the email id in Create account form Confirm email id field
+	 * @Description: Enters the email id in Confirm email id field in Create account form 
 	 */
 	public void confirmEmailIdInCreateAccountForm(String emailId) throws IOException {
 		try {
@@ -1682,7 +1682,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description:This method clicks on the save and continue button
+	 * @Description: Clicks on the Save and Continue button during checkout
 	 */
 	public void clickOnSaveAndContinueButton() throws IOException {
 
@@ -1700,7 +1700,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/04/23 
-	 * @Description:This method is used to enter the FirstName
+	 * @Description: Enters the first name in both billing and shipping address section
 	 */
 	public void enterFirstName(String Fname) throws IOException {
 		try {
@@ -1716,7 +1716,7 @@ public class app_Wiley_Repo {
 	}
 	/*
 	 * @Date: 04/04/23 
-	 * @Description:This method is used to enter the LastName
+	 * @Description:Enters the last name in both billing and shipping address section
 	 */
 	public void enterLastName(String Lname) throws IOException {
 		try {
@@ -1733,7 +1733,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/04/23 
-	 * Description : Select Country From DropDown in shipping an billing
+	 * Description : Select Country From DropDown in shipping and billing section during checkout
 	 */
 	public void selectCountry(String country) throws IOException {
 		try {
@@ -1810,7 +1810,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/04/23 
-	 * Description : Entering the CardHolder Name 
+	 * Description : Entering the CardHolder Name in the card information step
 	 */
 	public void enterCardHolderName(String cardHolderName) throws IOException {
 		try {
@@ -1829,7 +1829,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/04/23 
-	 * Description :Description :Selecting Expiration Month From DropDown
+	 * Description :Selecting Expiration Month From DropDown in the card information step
 	 */
 	public void selectExpirationMonthFromDropDown(String month) throws IOException {
 		try {
@@ -1845,7 +1845,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/04/23 
-	 * Description :Selecting Expiration Year From DropDown
+	 * Description :Selecting Expiration Year From DropDown in the card information step
 	 */
 	public void selectExpirationYearFromDropDown(String year) throws IOException {
 		try {
@@ -1861,7 +1861,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description : Entering the CVV Number in payment information step
+	 * @Description : Entering the CVV Number in the card information step
 	 */
 	public void enterCVV_Number(String CVVNumber) throws IOException {
 		try {
@@ -1876,7 +1876,7 @@ public class app_Wiley_Repo {
 	
 	/*
 	 * @Date: 04/04/23 
-	 * @Description:This method is used enter the CardNumber on Billing AddressForm
+	 * @Description: Enters the card number in the card information step
 	 */
 	public void enterCardNumber(String cardNumber) throws IOException {
 		try {
@@ -1936,7 +1936,7 @@ public class app_Wiley_Repo {
 	
 	/*
 	 * @Date: 04/04/23 
-	 * Description : Postal code updating in shipping page.
+	 * Description : Enters the Postal code in shipping page.
 	 */
 	public void enterShippingZIPCode(String shippingZIPCode) throws IOException {
 		try {
@@ -1968,7 +1968,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Date: 04/04/23 
-	 * Description :Selecting country from Dropdpwn in Shipping Page
+	 * Description :Selecting State from Dropdpwn in both Shipping and billing  Page
 	 */
 	public void enterState(String state) throws IOException {
 		try {
@@ -2005,7 +2005,7 @@ public class app_Wiley_Repo {
 	
 	/*
 	 * @Date: 04/04/23
-	 * @Description: Clicks on the Use Selected Address Button in Address Doctor PopUp
+	 * @Description: Clicks on the Use Selected Address Button in Address Doctor PopUp in shipping address section
 	 */
 	public void clickOnUseSelectedShippingAddressButtonAddressDoctor() throws IOException{
 		try {
@@ -2019,7 +2019,7 @@ public class app_Wiley_Repo {
 	
 	/*
 	 * @Date: 04/04/23
-	 * description : Product Quantity increasing in cart page
+	 * description : Increasing the Product Quantity in cart page through the dropdown
 	 */
 	public void selectQuantityDropDown(String quantity) throws IOException {
 		try {
@@ -2145,7 +2145,7 @@ public class app_Wiley_Repo {
 	
 	/*
 	 * @Date: 4/4/23
-	 * @Description: Returns the text shown in the first point upon hovering the generic info VAT Tooltip
+	 * @Description: Returns the text shown upon hovering the generic info VAT Tooltip
 	 */
 	public String checkVAT_Tooltip(WebDriver driver) throws IOException{
 		try {
@@ -2205,7 +2205,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * @Date: 17/04/23
+	 * @Date: 19/04/23
 	 * @Description: This method is Clicking on content Section in PDP page
 	 */
 	public void clickOnContentTabNewSearch() throws IOException {
@@ -2222,7 +2222,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * @Date: 03/04/23
+	 * @Date: 19/04/23
 	 * @Description: Checks all the products in the search result page
 	 */
 	public void checkProductsWithSearchedTermNewSearchPage(WebDriver driver,String text) throws IOException {
@@ -2244,7 +2244,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * @Date: 03/04/23
+	 * @Date: 19/04/23
 	 * @description: This using for Clicking on SRP_WileyProduct
 	 */
 	public void clickOnSRP_WileyProductNewSearchPage() throws IOException {
@@ -2262,7 +2262,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * @Date: 04/03/23
+	 * @Date: 19/04/23
 	 * @Description: Checks if Subject is present under  facet
 	 */
 	public Boolean checkSubjectFacetNewSearchPage() throws IOException{
@@ -2287,7 +2287,7 @@ public class app_Wiley_Repo {
 
 
 	/*
-	 * @Date: 04/03/23
+	 * @Date: 19/04/23
 	 * @Description: Checks if Author is present under  facet
 	 */
 	public Boolean checkAuthorFacetNewSearchPage() throws IOException{
@@ -2311,7 +2311,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Date: 04/03/23
+	 * @Date: 19/04/23
 	 * @Description: Checks if Format is present under  facet
 	 */
 	public Boolean checkFormatFacetNewSearchPage() throws IOException{
@@ -2335,7 +2335,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Date: 04/03/23
+	 * @Date: 19/04/23
 	 * @Description: Checks if PublishedDate is present under  facet
 	 */
 	public Boolean checkPublishedDateFacetNewSearchPage() throws IOException{
@@ -2359,7 +2359,7 @@ public class app_Wiley_Repo {
 	}
 
 	/*
-	 * @Date: 04/03/23
+	 * @Date: 19/04/23
 	 * @Description: Checks if Brands is present under  facet
 	 */
 	public Boolean checkFeaturedFacetNewSearchPage() throws IOException{
@@ -2383,7 +2383,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/* 
-	 * @Date: 04/03/23
+	 * @Date: 19/04/23
 	 * @Description: Clicks on the format facet
 	 */
 	public void clickOnAuthorFacetNewSearchPage() throws IOException{
@@ -2399,7 +2399,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * @Date: 04/03/23
+	 * @Date: 19/04/23
 	 * @Description: Selects First Facet Item
 	 */
 	public String clickOnFirstFacetValueNewSearchPage() throws IOException{
@@ -2418,7 +2418,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * @Date: 04/03/23
+	 * @Date: 19/04/23
 	 * @Description: Selects First Facet Item
 	 */
 	public String clickOnMaxFacetValueNewSearchPage(WebDriver driver) throws IOException{
@@ -2451,7 +2451,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * @Date: 04/03/23
+	 * @Date: 19/04/23
 	 * @Description: Checks number of items after filtering
 	 */
 	public void checkNumberOfProductsAfterFilteringNewSearchPage(String numbers) throws IOException{
@@ -2479,7 +2479,7 @@ public class app_Wiley_Repo {
 	}
 	
 	/*
-	 * @Date: 04/03/23
+	 * @Date: 19/04/23
 	 * @Description: Fetches the total number of pages in pagination
 	 */
 	public int fetchNumberOfPagesAfterFilteringNewSearchPage(WebDriver driver) throws IOException{

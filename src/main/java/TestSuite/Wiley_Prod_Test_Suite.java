@@ -57,7 +57,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 03/04/23
-	 * @Description: Validating microsites functionality
+	 * @Description: Validating microsites page if it is opening or not
 	 */
 	@Test
 	public void TC01_MicroSites() throws IOException {
@@ -114,7 +114,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 	/*
 	 * @Date: 03/04/23
 	 * 
-	 * @Description: Validating Site Footer functionality
+	 * @Description: Validating Site Footer by checking all the elements of footer
 	 */
 	@Test
 	public void TC03_SiteFooter() throws IOException {
@@ -139,7 +139,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 	/*
 	 * @Date: 03/04/23
 	 * 
-	 * @Description: Validating 404 error page functionality
+	 * @Description: Validating 404 error page after hitting some invalid URLS
 	 */
 	@Test
 	public void TC04_404_Errorpage() throws IOException {
@@ -167,7 +167,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 	/*
 	 * @Date: 03/04/23
 	 * 
-	 * @Description: Validating About us page functionality
+	 * @Description: Validating the About us page if it is opening or not
 	 */
 	@Test
 	public void TC05_AboutUsPage() throws IOException {
@@ -195,7 +195,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 03/04/23
-	 * @Description: Validating SiteMap functionality
+	 * @Description: Checks the Sitemap link in footer section
 	 */
 	@Test
 	public void TC06_SiteMap() throws IOException {
@@ -233,7 +233,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 	/*
 	 * @Date: 03/04/23
 	 * 
-	 * @Description: Verifying the ProductListingPage Functionality
+	 * @Description: Validates the Product l;isting page functionality
 	 */
 	@Test
 	public void TC07_ProductListPage() throws IOException {
@@ -248,12 +248,12 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 			try {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 				Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				flag=1;
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 			}
 			if(flag==1) {
 				if(wiley.checkPlpProductTabNewSearch().trim().equals("Products"))
@@ -331,7 +331,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 03/04/23 
-	 * @Description: Validating Site Header
+	 * @Description: Validating Site Header in home page
 	 */
 	@Test
 	public void TC09_SiteHeader() throws IOException {
@@ -357,7 +357,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 03/04/23
-	 * @Description: Validating Search Result Empty Page
+	 * @Description: Validating Search Result Empty Page after searching something invalid text
 	 */
 	@Test
 	public void TC10_SearchResultEmptyPage() throws IOException {
@@ -385,7 +385,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 03/04/23
-	 * @Description: Validating Search Result Empty Page
+	 * @Description: Validating the pop up after clicking on Add to cart button
 	 */
 	@Test
 	public void TC11_Add_To_Cart_PopUp() throws IOException {
@@ -409,7 +409,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 	/*
 	 * @Date: 03/04/23
 	 * 
-	 * @Description: Validating Search Result Empty Page
+	 * @Description: Validating the Content Search Result page
 	 */
 	@Test
 	public void TC12_Content_Search_ResultPage() throws IOException {
@@ -424,12 +424,12 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 			try {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 				Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				flag=1;
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 			}
 			if(flag==1) {
 				if (wiley.checkPlpContentTabNewSearch().equals("Content")) {
@@ -479,7 +479,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 03/04/23
-	 * @Description: Validating Category Landing Page
+	 * @Description: Validating the Searchbox in homepage
 	 */
 	@Test
 	public void TC14_SearchBox() throws IOException {
@@ -519,12 +519,12 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 			try {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 				Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				flag=1;
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 			}
 			if(flag==1) {
 				wiley.checkProductsWithSearchedTermNewSearchPage(driver,
@@ -804,7 +804,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 03/04/23
-	 * @Description: This test case is about placing an order with Digital product with new user
+	 * @Description: Adds a Digital product to cart and going upto billing step with new user
 	 */
 	@Test
 	public void TC18_Add_Digital_Product_to_cart_for_New_User() throws IOException {
@@ -890,7 +890,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 04/04/23
-	 * @Description: This test case is about placing an order with Physical product with guest user
+	 * @Description: Adds a Physical product to cart and going upto billing step with guest user
 	 */
 	@Test
 	public void TC19_Add_Physical_Product_With_Guest_User() throws IOException {
@@ -1335,7 +1335,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 4/4/23
-	 * @Description: Place an order with coupon code (SDP66)
+	 * @Description: Adds a product to cart with a promo and proceeds to checkout upto billing step
 	 */
 	@Test
 	public void TC23_Add_Coupon_To_Cart() throws IOException{

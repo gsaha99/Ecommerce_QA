@@ -55,7 +55,7 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 4/4/23
-	 * @Description: Checks the SRP page for WileyPLUS products
+	 * @Description: Checks the Search result page for WileyPLUS products
 	 */
 	@Test
 	public void TC01_SRP_For_WileyPLUS() throws IOException{
@@ -76,12 +76,12 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					flag=1;
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				}
 
 				if(flag==1) {
@@ -128,7 +128,7 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 4/4/23
-	 * @Description: Checks the PLP page for WileyPLUS products
+	 * @Description: Checks the Product listing page for WileyPLUS products
 	 */
 	@Test
 	public void TC02_PLP_For_WileyPLUS() throws IOException{
@@ -148,12 +148,12 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					flag=1;
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				}
 				if(flag==1) {
 					WileyPLUS.clickOnFormatFacetNewSearchPage();
@@ -221,7 +221,7 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 4/4/23
-	 * @Description: Checks if we are able to search WileyPLUS EGRIP or not
+	 * @Description: Checks if we are able to search WileyPLUS EGRIP (Standalone) or not
 	 */
 	@Test
 	public void TC03_EGRIP_Search_For_WileyPLUS() throws IOException {
@@ -240,12 +240,12 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					flag=1;
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				}
 				if(flag==1) {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
@@ -298,12 +298,12 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					flag=1;
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				}
 				if(flag==1) {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
@@ -356,12 +356,12 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					flag=1;
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				}
 				if(flag==1) {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
@@ -421,12 +421,12 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					flag=1;
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				}
 				if(flag==1) {
 					WileyPLUS.clickOnFormatFacetNewSearchPage();
@@ -486,12 +486,12 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					flag=1;
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				}
 				if(flag==1) {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
@@ -552,12 +552,12 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					flag=1;
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				}
 				if(flag==1) {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
@@ -604,7 +604,7 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 4/4/23
-	 * @Description: Checks the PDP UI for WileyPLUS
+	 * @Description: Checks the Product details page UI for WileyPLUS
 	 */
 	@Test
 	public void TC09_PDP_UI_For_WileyPLUS() throws IOException{
@@ -623,12 +623,12 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					flag=1;
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				}
 				if(flag==1) {
 					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
@@ -691,12 +691,12 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					flag=1;
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				}
 				if(flag==1) {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
@@ -753,12 +753,12 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					flag=1;
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				}
 				if(flag==1) {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
@@ -832,7 +832,7 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 4/4/23
-	 * @Description: Checks if Global country list is present in shipping step
+	 * @Description: Checks if Global country list is present in shipping step when WileyPLUS product is present in cart
 	 */
 	@Test
 	public void TC13_Global_Country_List_In_Shipping() throws IOException{
@@ -863,7 +863,7 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 
 	/*
 	 * @Date: 4/4/23
-	 * @Description: Checks if Global country list is present in shipping step
+	 * @Description: Checks if Global country list is present in Billing step when WileyPLUS product is present in cart
 	 */
 	@Test
 	public void TC14_Global_Country_List_In_Billing() throws IOException{
@@ -913,12 +913,12 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					flag=1;
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				}
 				if(flag==1) {
 					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
@@ -1004,7 +1004,7 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 	
 	/*
 	 * @Date: 19/4/23
-	 * @Description: Checks if the standard shipping is free if textbook rental bundle us present in cart
+	 * @Description: Checks if the standard shipping is free if textbook rental bundle is present in cart
 	 */
 	@Test
 	public void TC17_Standard_Shipping_Free_For_TextBook_Rental_Bundle() throws IOException{
