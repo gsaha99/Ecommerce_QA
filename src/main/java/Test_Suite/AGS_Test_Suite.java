@@ -36,6 +36,12 @@ public class AGS_Test_Suite extends DriverModule {
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
 	public static String EmailConfirmationText="//button/div[contains(text(),'Order Confirmation')]";
+	private static String AGS_Subscription_URL_DEV=excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data");
+	private static String AGS_Subscription_URL_UAT3=excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data");
+	private static String AGS_Subscription_URL=excelOperation.getTestData("AGS_Subscription_URL", "Generic_Dataset", "Data");
+	private static String AGS_Login_URL=excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data");
+	private static String AGS_Logout_URL=excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data");
+	
 	app_Riskified_Repo RiskifiedRepo;
 
 	@BeforeTest
@@ -67,9 +73,9 @@ public class AGS_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC01_Anonymous_User_Registration");
 			LogTextFile.writeTestCaseStatus("TC01_Anonymous_User_Registration", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Subscription_URL_DEV);
+			driver.get(AGS_Subscription_URL_UAT3);
+			driver.get(AGS_Subscription_URL);
 			AGS.clickOnYearlySubscriptionButton();
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'My Cart')]")));
@@ -175,13 +181,13 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 
 		}
 	}
@@ -198,9 +204,9 @@ public class AGS_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC02_User_Submit_Order_Monthly");
 			LogTextFile.writeTestCaseStatus("TC02_User_Submit_Order_Monthly", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Subscription_URL_DEV);
+			driver.get(AGS_Subscription_URL_UAT3);
+			driver.get(AGS_Subscription_URL);
 			AGS.clickOnMonthlySubscriptionButton();
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'My Cart')]")));
@@ -299,13 +305,13 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 
 		}
 	}
@@ -320,9 +326,9 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC03_Standalone_Registration_and_Login");
 			LogTextFile.writeTestCaseStatus("TC03_Standalone_Registration_and_Login", "Test case");
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Subscription_URL_DEV);
+			driver.get(AGS_Subscription_URL_UAT3);
+			driver.get(AGS_Login_URL);
 			AGS.enterFirstName(excelOperation.getTestData("TC03", "AGS_Test_Data", "First_Name"));
 			AGS.enterLastName(excelOperation.getTestData("TC03", "AGS_Test_Data", "Last_Name"));
 			String emailId = AGS.enterEmailId();
@@ -336,9 +342,9 @@ public class AGS_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC04", "AGS_Test_Data", "Email_Id", emailId);
 				excelOperation.updateTestData("TC05", "AGS_Test_Data", "Email_Id", emailId);
 				AGS.logOut(driver);
-				driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-				driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-				driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+				driver.get(AGS_Subscription_URL_DEV);
+				driver.get(AGS_Subscription_URL_UAT3);
+				driver.get(AGS_Login_URL);
 				AGS.enterExistingUserId(excelOperation.getTestData("TC03", "AGS_Test_Data", "Email_Id"));
 				AGS.enterExistingUserPassword(excelOperation.getTestData("TC03", "AGS_Test_Data", "Password"));
 				AGS.clickOnLoginButton();
@@ -354,13 +360,13 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Account couldn't be  created", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 		}
 	}
 
@@ -374,9 +380,9 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC04_Reset_Password_My_Account");
 			LogTextFile.writeTestCaseStatus("TC04_Reset_Password_My_Account", "Test case");
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Subscription_URL_DEV);
+			driver.get(AGS_Subscription_URL_UAT3);
+			driver.get(AGS_Login_URL);
 			AGS.enterExistingUserId(excelOperation.getTestData("TC04", "AGS_Test_Data", "Email_Id"));
 			AGS.enterExistingUserPassword(excelOperation.getTestData("TC04", "AGS_Test_Data", "Previous_Password"));
 			AGS.clickOnLoginButton();
@@ -392,9 +398,9 @@ public class AGS_Test_Suite extends DriverModule {
 			else
 				Reporting.updateTestReport("Password reset was not successful",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 		} catch (Exception e) {
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Password reset was not successful with error message " + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -410,7 +416,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC05_ResetPasswordFromLoginPage");
 			LogTextFile.writeTestCaseStatus("TC05_ResetPasswordFromLoginPage", "Test case");
-			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Login_URL);
 			AGS.clickOnForgotPassword();
 			AGS.enterEmailIdToGetResetPasswordMail(excelOperation.getTestData("TC05", "AGS_Test_Data", "Email_Id"));
 			AGS.clickOnSubmit();
@@ -420,10 +426,10 @@ public class AGS_Test_Suite extends DriverModule {
 			AGS.enterEmailIdInYopmail(excelOperation.getTestData("TC05", "AGS_Test_Data","Email_Id"));
 			AGS.clickOnArrowButton();
 			EmailValidation.forgotPasswordMailForAGS(driver, SS_path, AGS);
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 
 		} catch (Exception e) {
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
@@ -442,9 +448,9 @@ public class AGS_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC06_Zero_Dollar_Flow");
 			LogTextFile.writeTestCaseStatus("TC06_Zero_Dollar_Flow", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Subscription_URL_DEV);
+			driver.get(AGS_Subscription_URL_UAT3);
+			driver.get(AGS_Subscription_URL);
 			AGS.clickOnYearlySubscriptionButton();
 
 			try {
@@ -491,10 +497,10 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 		}
 		catch(Exception e) {
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
@@ -511,9 +517,9 @@ public class AGS_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC07_Verify_tax_Non_US_Address");
 			LogTextFile.writeTestCaseStatus("TC07_Verify_tax_Non_US_Address", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Subscription_URL_DEV);
+			driver.get(AGS_Subscription_URL_UAT3);
+			driver.get(AGS_Subscription_URL);
 			AGS.clickOnYearlySubscriptionButton();
 
 			try {
@@ -619,13 +625,13 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 		}
 	}
 
@@ -639,9 +645,9 @@ public class AGS_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC08_Place_Order_With_Discount_Code");
 			LogTextFile.writeTestCaseStatus("TC08_Place_Order_With_Discount_Code", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Subscription_URL_DEV);
+			driver.get(AGS_Subscription_URL_UAT3);
+			driver.get(AGS_Subscription_URL);
 			AGS.clickOnYearlySubscriptionButton();			
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'My Cart')]")));	
@@ -744,13 +750,13 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 		}
 	}
 
@@ -764,9 +770,9 @@ public class AGS_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC09_Place_Order_With_Existing_User");
 			LogTextFile.writeTestCaseStatus("TC09_Place_Order_With_Existing_User", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Subscription_URL_DEV);
+			driver.get(AGS_Subscription_URL_UAT3);
+			driver.get(AGS_Subscription_URL);
 			AGS.clickOnYearlySubscriptionButton();			
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -859,13 +865,13 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 		}}
 
 	/*
@@ -879,9 +885,9 @@ public class AGS_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC10_Place_Order_Non_US_Address");
 			LogTextFile.writeTestCaseStatus("TC10_Place_Order_Non_US_Address", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Subscription_URL_DEV);
+			driver.get(AGS_Subscription_URL_UAT3);
+			driver.get(AGS_Subscription_URL);
 			AGS.clickOnMonthlySubscriptionButton();
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'My Cart')]")));
@@ -984,13 +990,13 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 
 		}
 	}
@@ -1005,9 +1011,9 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC11_Edit_Profile");
 			LogTextFile.writeTestCaseStatus("TC11_Edit_Profile", "Test case");
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Subscription_URL_DEV);
+			driver.get(AGS_Subscription_URL_UAT3);
+			driver.get(AGS_Login_URL);
 			AGS.enterExistingUserId(excelOperation.getTestData("TC11", "AGS_Test_Data", "Email_Id"));
 			AGS.enterExistingUserPassword(excelOperation.getTestData("TC11", "AGS_Test_Data", "Password"));
 			AGS.clickOnLoginButton();
@@ -1021,13 +1027,13 @@ public class AGS_Test_Suite extends DriverModule {
 			}
 			else
 				Reporting.updateTestReport("User was not on edit profile page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 
 		}
 	}
@@ -1043,9 +1049,9 @@ public class AGS_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC12_Edit_Billing_Address");
 			LogTextFile.writeTestCaseStatus("TC12_Edit_Billing_Address", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Subscription_URL_DEV);
+			driver.get(AGS_Subscription_URL_UAT3);
+			driver.get(AGS_Login_URL);
 			AGS.enterExistingUserId(excelOperation.getTestData("TC12", "AGS_Test_Data", "Email_Id"));
 			AGS.enterExistingUserPassword(excelOperation.getTestData("TC12", "AGS_Test_Data", "Password"));
 			AGS.clickOnLoginButton();
@@ -1080,13 +1086,13 @@ public class AGS_Test_Suite extends DriverModule {
 						+ "timeout exception", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 
 		}
 	}
@@ -1102,9 +1108,9 @@ public class AGS_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC13_Edit_Card_Details");
 			LogTextFile.writeTestCaseStatus("TC13_Edit_Card_Details", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Subscription_URL_DEV);
+			driver.get(AGS_Subscription_URL_UAT3);
+			driver.get(AGS_Login_URL);
 			AGS.enterExistingUserId(excelOperation.getTestData("TC13", "AGS_Test_Data", "Email_Id"));
 			AGS.enterExistingUserPassword(excelOperation.getTestData("TC13", "AGS_Test_Data", "Password"));
 			AGS.clickOnLoginButton();
@@ -1145,13 +1151,13 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Edit card details was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 
 		}
 	}
@@ -1165,9 +1171,9 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC14_Manage_Subscription_Auto_Renew_Toggle_validation");
 			LogTextFile.writeTestCaseStatus("TC14_Manage_Subscription_Auto_Renew_Toggle_validation", "Test case");
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Subscription_URL_DEV);
+			driver.get(AGS_Subscription_URL_UAT3);
+			driver.get(AGS_Login_URL);
 			AGS.enterExistingUserId(excelOperation.getTestData("TC14", "AGS_Test_Data", "Email_Id"));
 			AGS.enterExistingUserPassword(excelOperation.getTestData("TC14", "AGS_Test_Data", "Password"));
 			AGS.clickOnLoginButton();
@@ -1185,9 +1191,9 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Auto Renew toggle was successfully switched off",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			}
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 		} catch (Exception e) {
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
@@ -1203,9 +1209,9 @@ public class AGS_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC15_Riskified_Declined_Order");
 			LogTextFile.writeTestCaseStatus("TC15_Riskified_Declined_Order", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Subscription_URL_DEV);
+			driver.get(AGS_Subscription_URL_UAT3);
+			driver.get(AGS_Subscription_URL);
 			AGS.clickOnYearlySubscriptionButton();
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'My Cart')]")));
@@ -1318,14 +1324,14 @@ public class AGS_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Cart page was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
+			AGS.logOutWithURL(driver, AGS_Logout_URL);
 
 		}
 	}

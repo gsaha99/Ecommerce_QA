@@ -51,6 +51,9 @@ public class Vet_Test_Suite extends DriverModule {
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
 	public static String EmailConfirmationText="//button/div[contains(text(),'Order Confirmation')]";
+	public static String VETLoginURL=excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data");
+	public static String VETSubscriptionURLWithCredentials=excelOperation.getTestData("VET_Subscription_URL_With_Password", "Generic_Dataset", "Data");
+	public static String VETSubscriptionURL=excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data");
 
 
 	@BeforeTest
@@ -84,8 +87,8 @@ public class Vet_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC01_Anonymous_User_Registration");
 			LogTextFile.writeTestCaseStatus("TC01_Anonymous_User_Registration", "Test case");
 			WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("TC01", "VET_Test_Data", "URL"));
+			driver.get(VETSubscriptionURLWithCredentials);
+			driver.get(VETSubscriptionURL);
 			VET.addSubscriptionToCart();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[contains(text(),'Continue')])[2]")));
@@ -167,7 +170,7 @@ public class Vet_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC02_Create_Account");
 			LogTextFile.writeTestCaseStatus("TC02_Create_Account", "Test case");
-			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(VETLoginURL);
 			VET.enterFirstName(excelOperation.getTestData("TC02", "VET_Test_Data", "First_Name"));
 			VET.enterLastName(excelOperation.getTestData("TC02", "VET_Test_Data", "Last_Name"));
 			String emailId = VET.enterEmailId();
@@ -201,7 +204,7 @@ public class Vet_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC03_StandaloneLogin");
 			LogTextFile.writeTestCaseStatus("TC03_StandaloneLogin", "Test case");
-			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(VETLoginURL);
 			VET.enterExistingUserId(excelOperation.getTestData("TC03", "VET_Test_Data", "Email_Id"));
 			VET.enterExistingUserPassword(excelOperation.getTestData("TC03", "VET_Test_Data", "Password"));
 			VET.clickOnLoginButton();
@@ -221,8 +224,8 @@ public class Vet_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC04_Login_During_Checkout");
 			LogTextFile.writeTestCaseStatus("TC04_Login_During_Checkout", "Test case");
-			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("TC04", "VET_Test_Data", "URL"));
+			driver.get(VETSubscriptionURLWithCredentials);
+			driver.get(VETSubscriptionURL);
 			VET.addSubscriptionToCart();
 			VET.clickOnContinueButton();
 			VET.enterExistingUserId(excelOperation.getTestData("TC04", "VET_Test_Data", "Email_Id"));
@@ -284,7 +287,7 @@ public class Vet_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC05_Reset_Password_My_Account");
 			LogTextFile.writeTestCaseStatus("TC05_Reset_Password_My_Account", "Test case");
-			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(VETLoginURL);
 			VET.enterExistingUserId(excelOperation.getTestData("TC05", "VET_Test_Data", "Email_Id"));
 			VET.enterExistingUserPassword(excelOperation.getTestData("TC05", "VET_Test_Data", "Previous_Password"));
 			VET.clickOnLoginButton();
@@ -318,7 +321,7 @@ public class Vet_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC06_ResetPasswordFromLoginPage");
 			LogTextFile.writeTestCaseStatus("TC06_ResetPasswordFromLoginPage", "Test case");
-			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(VETLoginURL);
 			VET.ForgotchangePassword();
 			VET.RetriveLoginInfo(excelOperation.getTestData("TC06", "VET_Test_Data", "Email_Id"));
 			VET.clickOnSubmit();
@@ -348,8 +351,8 @@ public class Vet_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC07_Verify_Tax");
 			LogTextFile.writeTestCaseStatus("TC07_Verify_Tax", "Test case");
-			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("TC07", "VET_Test_Data", "URL"));
+			driver.get(VETSubscriptionURLWithCredentials);
+			driver.get(VETSubscriptionURL);
 			VET.addSubscriptionToCart();
 			VET.clickOnContinueButton();
 			VET.enterFirstName(excelOperation.getTestData("TC07", "VET_Test_Data", "First_Name"));
@@ -427,8 +430,8 @@ public class Vet_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC11_Place_Order_With_Promo_Code");
 			LogTextFile.writeTestCaseStatus("TC11_Place_Order_With_Promo_Code", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30, 1));
-			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("TC11", "VET_Test_Data", "URL"));
+			driver.get(VETSubscriptionURLWithCredentials);
+			driver.get(VETSubscriptionURL);
 			VET.addSubscriptionToCart();
 			try {
 				wait.until(ExpectedConditions.visibilityOf(VET.returnDiscountCodeField()));
@@ -513,8 +516,8 @@ public class Vet_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC12_PlaceOrderwithNonUSAddress");
 			LogTextFile.writeTestCaseStatus("TC12_PlaceOrderwithNonUSAddress", "Test case");
-			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("TC12", "VET_Test_Data", "URL"));
+			driver.get(VETSubscriptionURLWithCredentials);
+			driver.get(VETSubscriptionURL);
 			VET.addSubscriptionToCart();
 			VET.continueToCheckout();
 			VET.enterExistingUserId(excelOperation.getTestData("TC12", "VET_Test_Data", "Email_Id"));
@@ -576,7 +579,7 @@ public class Vet_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC16_Manage_Subscription");
 			LogTextFile.writeTestCaseStatus("TC16_Manage_Subscription", "Test case");
-			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(VETLoginURL);
 			VET.enterExistingUserId(excelOperation.getTestData("TC16", "VET_Test_Data", "Email_Id"));
 			VET.enterExistingUserPassword(excelOperation.getTestData("TC16", "VET_Test_Data", "Previous_Password"));
 			VET.clickOnLoginButton();
@@ -610,8 +613,8 @@ public class Vet_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC18_ZeroOrder");
 			LogTextFile.writeTestCaseStatus("TC18_ZeroOrder", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("TC11", "VET_Test_Data", "URL"));
+			driver.get(VETSubscriptionURLWithCredentials);
+			driver.get(VETSubscriptionURL);
 			VET.addSubscriptionToCart();
 			VET.addPromoToCart(excelOperation.getTestData("100_Percent_Coupon", "Generic_Dataset", "Data"));
 			VET.continueToCheckout();
@@ -652,7 +655,7 @@ public class Vet_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC19_Edit_Profile_from_my_account_page");
 			LogTextFile.writeTestCaseStatus("TC19_Edit_Profile_from_my_account_page", "Test case");
-			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(VETLoginURL);
 			VET.enterExistingUserId(excelOperation.getTestData("TC19", "VET_Test_Data", "Email_Id"));
 			VET.enterExistingUserPassword(excelOperation.getTestData("TC19", "VET_Test_Data", "Previous_Password"));
 			VET.clickOnLoginButton();
@@ -682,7 +685,7 @@ public class Vet_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC20_Edit_Billing_address_in_my_account");
 			LogTextFile.writeTestCaseStatus("TC20_Edit_Billing_address_in_my_account", "Test case");
-			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(VETLoginURL);
 			VET.enterExistingUserId(excelOperation.getTestData("TC20", "VET_Test_Data", "Email_Id"));
 			VET.enterExistingUserPassword(excelOperation.getTestData("TC20", "VET_Test_Data", "Password"));
 			VET.clickOnLoginButton();
@@ -798,7 +801,7 @@ public class Vet_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC17_Auto_Renew_Toggle_validation");
 			LogTextFile.writeTestCaseStatus("TC17_Auto_Renew_Toggle_validation", "Test case");
-			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(VETLoginURL);
 			VET.enterExistingUserId(excelOperation.getTestData("TC17", "VET_Test_Data", "Email_Id"));
 			VET.enterExistingUserPassword(excelOperation.getTestData("TC17", "VET_Test_Data", "Password"));
 			VET.clickOnLoginButton();
@@ -830,7 +833,7 @@ public class Vet_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("Data_Preparation");
 			LogTextFile.writeTestCaseStatus("Data_Preparation", "Test case");
 			//Data for TC03_standalone login and TC05_Resetet password from login page
-			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(VETLoginURL);
 			String first = excelOperation.getTestData("TC01", "VET_Test_Data", "First_Name");
 			String last = excelOperation.getTestData("TC01", "VET_Test_Data", "Last_Name");
 			String password = excelOperation.getTestData("TC01", "VET_Test_Data", "Password");
@@ -855,8 +858,8 @@ public class Vet_Test_Suite extends DriverModule {
 			}
 			//Data for Eloqua, Riskified, Auto-renew toggle, edit profile and Update Billing address
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30, 1));
-			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("TC01", "VET_Test_Data", "URL"));
+			driver.get(VETSubscriptionURLWithCredentials);
+			driver.get(VETSubscriptionURL);
 			VET.addSubscriptionToCart();
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'My Cart')]")));
@@ -929,8 +932,8 @@ public class Vet_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC21_Riskified_Declined_Order");
 			LogTextFile.writeTestCaseStatus("TC21_Riskified_Declined_Order", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("TC21", "VET_Test_Data", "URL"));
+			driver.get(VETSubscriptionURLWithCredentials);
+			driver.get(VETSubscriptionURL);
 			VET.addSubscriptionToCart();
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'My Cart')]")));

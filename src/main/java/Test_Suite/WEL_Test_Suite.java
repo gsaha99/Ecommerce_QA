@@ -38,6 +38,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
 	public static String EmailConfirmationText = "//button/div[contains(text(),'Order Confirmation')]";
+	public static String WELHomepageURL=excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data");
 
 	@BeforeTest
 	public void initializeRepo() {
@@ -67,7 +68,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC01_Standalone_UserRegistration");
 			LogTextFile.writeTestCaseStatus("TC01_Standalone_UserRegistration", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			WEL.ClickingOnLoginButton();
@@ -122,7 +123,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC02_UserRegistration_DuringCheckoutForPhysicalCart");
 			LogTextFile.writeTestCaseStatus("TC02_UserRegistration_DuringCheckoutForPhysicalCart", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -225,7 +226,7 @@ public class WEL_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus(
 					"TC03_UserRegistration_DuringCheckoutForDigitalCartwith_NonUSBillingAddress", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -395,7 +396,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC04_LoginFor_NewlyRegisterUser");
 			LogTextFile.writeTestCaseStatus("TC04_LoginFor_NewlyRegisterUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			WEL.ClickingOnLoginButton();
@@ -440,7 +441,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC05_UserLoginDuring_Checkout");
 			LogTextFile.writeTestCaseStatus("TC05_UserLoginDuring_Checkout", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -563,7 +564,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC06_Standalone_ForgotPassword");
 			LogTextFile.writeTestCaseStatus("TC06_Standalone_ForgotPassword", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			WEL.ClickingOnLoginButton();
@@ -638,7 +639,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC07_ForgotPasswordDuring_Checkout");
 			LogTextFile.writeTestCaseStatus("TC07_ForgotPasswordDuring_Checkout", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -783,7 +784,7 @@ public class WEL_Test_Suite extends DriverModule {
 					.createTest("TC08_UserRedirection_ToForgotORChangePassword_PageAfter3Failed_AttemptsToLogin");
 			LogTextFile.writeTestCaseStatus(
 					"TC08_UserRedirection_ToForgotORChangePassword_PageAfter3Failed_AttemptsToLogin", "Test case");
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			driver.get("https://uat.efficientlearning.com/login/checkout");
@@ -824,7 +825,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC09_AddToCart_WithStudentDiscount_InAnonymousCart");
 			LogTextFile.writeTestCaseStatus("TC09_AddToCart_WithStudentDiscount_InAnonymousCart", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -940,7 +941,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC10_AddToCart_WithPromoCode_InAnonymousCart");
 			LogTextFile.writeTestCaseStatus("TC10_AddToCart_WithPromoCode_InAnonymousCart", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -1054,7 +1055,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC11_AddToCartFor_LoggedInUser");
 			LogTextFile.writeTestCaseStatus("TC11_AddToCartFor_LoggedInUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			WEL.ClickingOnLoginButton();
@@ -1194,7 +1195,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC12_QunatityRestriction_ForPhysicalProduct");
 			LogTextFile.writeTestCaseStatus("TC12_QunatityRestriction_ForPhysicalProduct", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -1306,7 +1307,7 @@ public class WEL_Test_Suite extends DriverModule {
 					"Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			String urls[] = excelOperation.getTestData("TC13", "WEL_Test_Data", "URL").split(",");
 			driver.get(urls[0]);
 			try {
@@ -1563,7 +1564,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC14_ExtraDiscount_CouponCodeGOVT");
 			LogTextFile.writeTestCaseStatus("TC14_ExtraDiscount_CouponCodeGOVT", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -1676,7 +1677,7 @@ public class WEL_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC15_PlaceOrder_CMACPACFA_DigitalProducts_ForNewUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			String urls[] = excelOperation.getTestData("TC15", "WEL_Test_Data", "URL").split(",");
 			driver.get(urls[0]);
 			try {
@@ -1964,7 +1965,7 @@ public class WEL_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC16_PlaceOrder_CMACPACFA_DigitalProducts_ForExistingUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			String urls[] = excelOperation.getTestData("TC16", "WEL_Test_Data", "URL").split(",");
 			driver.get(urls[0]);
 			try {
@@ -2261,7 +2262,7 @@ public class WEL_Test_Suite extends DriverModule {
 			BigDecimal firstProductPriceWIthoutDiscount;
 			BigDecimal secondProductPriceWIthoutDiscount;
 
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			String urls[] = excelOperation.getTestData("TC17", "WEL_Test_Data", "URL").split(",");
 			driver.get(urls[0]);
 			try {
@@ -2539,7 +2540,7 @@ public class WEL_Test_Suite extends DriverModule {
 			BigDecimal thirdproductprice;
 			BigDecimal firstProductPriceWIthoutDiscount;
 			BigDecimal secondProductPriceWIthoutDiscount;
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			String urls[] = excelOperation.getTestData("TC17", "WEL_Test_Data", "URL").split(",");
 			driver.get(urls[0]);
 			try {
@@ -2805,7 +2806,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC19_PlaceOrderOf_CPACMACFA_SupplementCourse_ForNewUser");
 			LogTextFile.writeTestCaseStatus("TC19_PlaceOrderOf_CPACMACFA_SupplementCourse_ForNewUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			String urls[] = excelOperation.getTestData("TC19", "WEL_Test_Data", "URL").split(",");
 			driver.get(urls[0]);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -3045,7 +3046,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC20_PlaceOrder_OfOther_ProductsCIACAIAFor_NewUser");
 			LogTextFile.writeTestCaseStatus("TC20_PlaceOrder_OfOther_ProductsCIACAIAFor_NewUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -3344,7 +3345,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC21_PlaceOrder_CPACMACFA_FreeTrailFor_Newuser");
 			LogTextFile.writeTestCaseStatus("TC21_PlaceOrder_CPACMACFA_FreeTrailFor_Newuser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			try {
@@ -3476,7 +3477,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC22_PlaceOrder_CPACMACFA_FreeTrailFor_ExistingUser");
 			LogTextFile.writeTestCaseStatus("TC22_PlaceOrder_CPACMACFA_FreeTrailFor_ExistingUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageScrolldown(driver, 0, 600, SS_path);
@@ -3602,7 +3603,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC23_PlaceOrder_OfOther_ProductsCIA_FreeTrailFor_NewUser");
 			LogTextFile.writeTestCaseStatus("TC23_PlaceOrder_OfOther_ProductsCIA_FreeTrailFor_NewUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageScrolldown(driver, 0, 700, SS_path);
@@ -3661,7 +3662,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC24_PlaceOrder_UsingSavedShippingAddress_ForExistingUser");
 			LogTextFile.writeTestCaseStatus("TC24_PlaceOrder_UsingSavedShippingAddress_ForExistingUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			try {
@@ -3902,7 +3903,7 @@ public class WEL_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			Reporting.test = Reporting.extent.createTest("TC25_ShippingMethodfor_USUKAustralia_CanadaIndiaSingapore");
 			LogTextFile.writeTestCaseStatus("TC25_ShippingMethodfor_USUKAustralia_CanadaIndiaSingapore", "Test case");
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -4035,7 +4036,7 @@ public class WEL_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC26_ShippingChargeFor_MultipleProducts", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			String urls[] = excelOperation.getTestData("TC26", "WEL_Test_Data", "URL").split(",");
 			driver.get(urls[0]);
 			try {
@@ -4146,7 +4147,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC27_AddressSuggestion_ByAddressDoctorInShippingpage");
 			LogTextFile.writeTestCaseStatus("TC27_AddressSuggestion_ByAddressDoctorInShippingpage", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageScrolldown(driver, 0, 250, SS_path);
@@ -4318,7 +4319,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC28_StudentVerification_ForDigitalCartofUSANDNonUS");
 			LogTextFile.writeTestCaseStatus("TC28_StudentVerification_ForDigitalCartofUSANDNonUS", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -4561,7 +4562,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC29_StudentVerification_ForPhysicalCartofUSANDNonUS");
 			LogTextFile.writeTestCaseStatus("TC29_StudentVerification_ForPhysicalCartofUSANDNonUS", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -4785,7 +4786,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC30_PlaceOrder_UsingSavedBillingAddress_ForExistingUser");
 			LogTextFile.writeTestCaseStatus("TC30_PlaceOrder_UsingSavedBillingAddress_ForExistingUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -5020,7 +5021,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC31_ShippingAndBilling_AddressSamefor_NewUser");
 			LogTextFile.writeTestCaseStatus("TC31_ShippingAndBilling_AddressSamefor_NewUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -5217,7 +5218,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC32_ShippingAndBilling_AddressDifferentfor_NewUser");
 			LogTextFile.writeTestCaseStatus("TC32_ShippingAndBilling_AddressDifferentfor_NewUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -5438,7 +5439,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC33_AddressSuggestion_ByAddressDoctorInBillingpage");
 			LogTextFile.writeTestCaseStatus("TC33_AddressSuggestion_ByAddressDoctorInBillingpage", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -5616,7 +5617,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC34_PlaceOrder_withPaypalPayment_OptionForNewUser");
 			LogTextFile.writeTestCaseStatus("TC34_PlaceOrder_withPaypalPayment_OptionForNewUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -5799,7 +5800,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC35_PlaceOrder_withPaypalPayment_OptionForExistingUser");
 			LogTextFile.writeTestCaseStatus("TC35_PlaceOrder_withPaypalPayment_OptionForExistingUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -5987,7 +5988,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC36_PlaceOrder_withPaypalCredit_OptionForExistingUser");
 			LogTextFile.writeTestCaseStatus("TC36_PlaceOrder_withPaypalCredit_OptionForExistingUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -6207,7 +6208,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC37_PlaceOrder_withPaypalCredit_OptionForNewUser");
 			LogTextFile.writeTestCaseStatus("TC37_PlaceOrder_withPaypalCredit_OptionForNewUser", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -6433,7 +6434,7 @@ public class WEL_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC38_Multiple_To_And_Fro_Navigation_Between_Shipping_And_Billing",
 					"Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -7371,7 +7372,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC46_Tax_Recalculation_After_Editing_Shipping_Method");
 			LogTextFile.writeTestCaseStatus("TC46_Tax_Recalculation_After_Editing_Shipping_Method", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -7756,7 +7757,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC47_Tax_Recalculation_After_Editing_Shipping_Address");
 			LogTextFile.writeTestCaseStatus("TC47_Tax_Recalculation_After_Editing_Shipping_Address", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -8132,7 +8133,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC48_Tax_Recalculation_After_Editing_Billing_Address");
 			LogTextFile.writeTestCaseStatus("TC48_Tax_Recalculation_After_Editing_Billing_Address", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -8466,7 +8467,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC49_Place_Order_With_Some_Parts_New_User");
 			LogTextFile.writeTestCaseStatus("TC49_Place_Order_With_Some_Parts_New_User", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -8720,7 +8721,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC50_PlaceOrder_CanadaAddress");
 			LogTextFile.writeTestCaseStatus("TC50_PlaceOrder_CanadaAddress", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -9002,7 +9003,7 @@ public class WEL_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC51_PlaceOrder_IndiaAddress", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -9278,7 +9279,7 @@ public class WEL_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC52_PlaceOrder_ChinaAddress", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -9537,7 +9538,7 @@ public class WEL_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC53_PlaceOrder_JapanAddress", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -9798,7 +9799,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC61_Validate_Cookie_Management");
 			LogTextFile.writeTestCaseStatus("TC61_Validate_Cookie_Management", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			WEL.ClickingOnLoginButton();
@@ -9935,7 +9936,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC62_Email_Verification_For__New_User");
 			LogTextFile.writeTestCaseStatus("TC62_Email_Verification_For__New_User", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -10210,7 +10211,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC64_Validate_Dont_Ship_To_PO_Box_Message");
 			LogTextFile.writeTestCaseStatus("TC64_Validate_Dont_Ship_To_PO_Box_Message", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -10714,7 +10715,7 @@ public class WEL_Test_Suite extends DriverModule {
 					"Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -10911,7 +10912,7 @@ public class WEL_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC72_PlaceExistingUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -11114,7 +11115,7 @@ public class WEL_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC73_ValidateTaxin_IndiaForPhysicalOrder", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -11506,7 +11507,7 @@ public class WEL_Test_Suite extends DriverModule {
 					.createTest("TC75_Check_Add_To_Cart_Functionality_for_Heads_Up_Validation");
 			LogTextFile.writeTestCaseStatus("TC75_Check_Add_To_Cart_Functionality_for_Heads_Up_Validation", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -11616,7 +11617,7 @@ public class WEL_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC77_Verify_TheFreeTrail_FormForCMACPACFAProducts");
 			LogTextFile.writeTestCaseStatus("TC77_Verify_TheFreeTrail_FormForCMACPACFAProducts", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			try {
@@ -11715,7 +11716,7 @@ public class WEL_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC79_Email_Format_Validation");
 			LogTextFile.writeTestCaseStatus("TC79_Email_Format_Validation", "Test case");
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.navigate().refresh();
 			Thread.sleep(1000);
@@ -11998,11 +11999,11 @@ public class WEL_Test_Suite extends DriverModule {
 	@Test
 	public void TC80_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page() throws IOException {
 		try {
-			Reporting.test = Reporting.extent.createTest("TC07_Add_Student_Discount_In_Anonymous_Cart");
-			LogTextFile.writeTestCaseStatus("TC07_Add_Student_Discount_In_Anonymous_Cart", "Test case");
+			Reporting.test = Reporting.extent.createTest("TC80_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page");
+			LogTextFile.writeTestCaseStatus("TC80_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			String[] emailIds=excelOperation.getTestData("TC80", "WEL_Test_Data", "Email_Address").split(",");
-			driver.get(excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data"));
+			driver.get(WELHomepageURL);
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@aria-label='login']")));
 				ScrollingWebPage.PageDown(driver, SS_path);
