@@ -30,6 +30,7 @@ import utilities.LogTextFile;
 import utilities.DriverModule;
 import utilities.PaymentGateway;
 import utilities.Reporting;
+import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
 import utilities.excelOperation;
 
@@ -51,9 +52,9 @@ public class Vet_Test_Suite extends DriverModule {
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
 	public static String EmailConfirmationText="//button/div[contains(text(),'Order Confirmation')]";
-	public static String VETLoginURL=excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data");
-	public static String VETSubscriptionURLWithCredentials=excelOperation.getTestData("VET_Subscription_URL_With_Password", "Generic_Dataset", "Data");
-	public static String VETSubscriptionURL=excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data");
+	private static String VETLoginURL=excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data");
+	private static String VETSubscriptionURLWithCredentials=excelOperation.getTestData("VET_Subscription_URL_With_Password", "Generic_Dataset", "Data");
+	private static String VETSubscriptionURL=excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data");
 
 
 	@BeforeTest
@@ -197,7 +198,7 @@ public class Vet_Test_Suite extends DriverModule {
 	/*
 	 * @Author: Vishnu
 	 * 
-	 * @Description: This is to user StandaloneLogin in vet Application
+	 * @Description: Logs in with a newly created user in Standalone login page
 	 */
 	@Test
 	public void TC03_StandaloneLogin() throws IOException {
@@ -314,7 +315,7 @@ public class Vet_Test_Suite extends DriverModule {
 	/*
 	 * @Author: Vishnu
 	 * 
-	 * @Description: Ability to Rest the Password From Login Page
+	 * @Description: Resets the password from login page through Forgot password link
 	 */
 	@Test
 	public void TC06_ResetPasswordFromLoginPage() throws IOException {
@@ -343,8 +344,7 @@ public class Vet_Test_Suite extends DriverModule {
 
 	/*
 	 * Author : Arun 
-	 * Description : This flow is verify the tax on the order
-	 * confirmation page.
+	 * Description : Verifies if tax value is present after placing order
 	 */
 	@Test
 	public void TC07_Verify_Tax() throws IOException {
@@ -509,7 +509,7 @@ public class Vet_Test_Suite extends DriverModule {
 	/*
 	 * @Author: Vishnu
 	 * 
-	 * @description: This is to verify placing an Order with Non Us Address
+	 * @description: Placing an order with non US billing address
 	 */
 	@Test
 	public void TC12_PlaceOrderwithNonUSAddress() throws IOException {
@@ -605,7 +605,7 @@ public class Vet_Test_Suite extends DriverModule {
 	/*
 	 * @Author: Vishnu
 	 * 
-	 * @Description: This is to placing Zero Order for VEt Application.
+	 * @Description: Places an order with zero dollar amount by applying 100% coupon code
 	 */
 	@Test
 	public void TC18_ZeroOrder() throws IOException {
@@ -648,7 +648,7 @@ public class Vet_Test_Suite extends DriverModule {
 
 	/*
 	 * Author : Arun 
-	 * Description : This flow using for editing the profile from my account page.
+	 * Description : Edits the last name in the Edit profile section in My Account
 	 */
 	@Test
 	public void TC19_Edit_Profile_from_my_account_page() throws IOException {
@@ -1053,6 +1053,37 @@ public class Vet_Test_Suite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			VET.logOut(driver);
 
+		}
+	}
+	
+	/*
+	 * @Description: Opens the Home page and checks the content if everything is present or not
+	 */
+	@Test
+	public void TC22_Open_Homepage() throws IOException {
+		try {
+			Reporting.test = Reporting.extent.createTest("TC22_Open_Homepage");
+			LogTextFile.writeTestCaseStatus("TC22_Open_Homepage", "Test case");
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(20));
+			driver.get(excelOperation.getTestData("VET_Homepage_URL", "Generic_Dataset", "Data"));
+			VET.checkHomePageTitle();
+			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+			VET.checkExploreMoreButtonInHomePage();
+			VET.checkLoginButtonInHomeopage();
+			ScrollingWebPage.PageScrollDownUptoBottom(driver, SS_path);
+			try {
+				wait.until(ExpectedConditions.visibilityOfElementLocated
+						(By.xpath("//img[@src='/static/media/whitewiley.c5a4478a.png']")));
+				VET.checkWileyLogoInHomepageFooter();
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Wiley Logo was not present in homepage footer and caused timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 

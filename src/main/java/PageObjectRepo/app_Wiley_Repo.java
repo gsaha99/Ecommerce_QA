@@ -149,6 +149,17 @@ public class app_Wiley_Repo {
 	
 	@FindBy(xpath="(//div[@class='help-block commonErrorWelStyle'])[1]")
 	WebElement ErrorMessageAfterEnteringInvalidEmailId;
+	
+	@FindBy(xpath="(//div[@id='loginPageHeading']/span[@class='commonTextLoginReg' ])[1]")
+	WebElement CheckoutRegistrationHeader;
+	
+	@FindBy(xpath="//div[@id='checkoutGuestUserRegSubTitle']")
+	WebElement CheckoutRegistrationSubHeader;
+	
+	@FindBy(xpath="(//div[@id='loginPageHeading']/span[@class='commonTextLoginReg'])[2]")
+	WebElement CheckoutLoginHeader;
+	
+	
 
 	// Shipping information during checkout 
 
@@ -3962,6 +3973,63 @@ public class app_Wiley_Repo {
 		catch(Exception e) {
 			Reporting.updateTestReport("Proper error message was not displayed",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks if the header for the new user section in checkout login / Registration page is getting displayed correctly or not
+	 */
+	public void checkCheckoutRegistrationHeader() throws IOException {
+		try {			
+			if(CheckoutRegistrationHeader.getText().
+					equalsIgnoreCase(excelOperation.getTestData("CheckoutRegistrationHeader", "Generic_Messages", "Data")))
+				Reporting.updateTestReport("Correct header text: '"+excelOperation.getTestData("CheckoutRegistrationHeader", "Generic_Messages", "Data")
+				+" ' was present for Checkout Registration new user", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport("Incorrect header text: '"+CheckoutRegistrationHeader.getText()
+				+" ' was present for Checkout Registration new user", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Hedaer in Checkout Registration couldn't be validated", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks if the subheader for the new user section in checkout login / Registration page is getting displayed correctly or not
+	 */
+	public void checkCheckoutRegistrationSubHeader() throws IOException {
+		try {			
+			if(CheckoutRegistrationSubHeader.getText().
+					equalsIgnoreCase(excelOperation.getTestData("CheckoutRegistrationSubHeader", "Generic_Messages", "Data")))
+				Reporting.updateTestReport("Correct Subheader text: '"+excelOperation.getTestData("CheckoutRegistrationSubHeader", "Generic_Messages", "Data")
+				+" ' was present for Checkout Registration new user", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport("Incorrect Subheader text: '"+CheckoutRegistrationSubHeader.getText()
+				+" ' was present for Checkout Registration new user", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Sub headaer in Checkout Registration couldn't be validated", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks if the header for the existing user section in checkout login / Registration page is getting displayed correctly or not
+	 */
+	public void checkCheckoutLoginHeader() throws IOException {
+		try {			
+			if(CheckoutLoginHeader.getText().
+					equalsIgnoreCase(excelOperation.getTestData("CheckoutLoginHeader", "Generic_Messages", "Data")))
+				Reporting.updateTestReport("Correct header text: '"+excelOperation.getTestData("CheckoutLoginHeader", "Generic_Messages", "Data")
+				+" ' was present for login existing user", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport("Incorrect header text: '"+CheckoutLoginHeader.getText()
+				+" ' was present for Checkout login existing user", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Hedaer in Checkout login couldn't be validated", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 

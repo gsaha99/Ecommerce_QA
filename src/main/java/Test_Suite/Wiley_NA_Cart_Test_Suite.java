@@ -4937,6 +4937,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				else Reporting.updateTestReport("Guest checkout button is not present in login page when only normal physical product is present in cart",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+				wiley.checkCheckoutRegistrationHeader();
+				wiley.checkCheckoutRegistrationSubHeader();
+				wiley.checkCheckoutLoginHeader();
 				wiley.clickOnCartIcon();
 				wiley.searchDataInSearchBar(excelOperation.getTestData("TC26", "WILEY_NA_Cart_Test_Data", "ISBN"));
 				wiley.clickOnSRP_WileyProduct();

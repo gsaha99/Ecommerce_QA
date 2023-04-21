@@ -63,4 +63,17 @@ public class ScrollingWebPage {
 					StatusDetails.WARNING);
 		}
 	}
+	
+	public static void PageScrollDownUptoBottom(WebDriver driver,String SS_path) throws IOException {
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+			Thread.sleep(2000);
+			Reporting.updateTestReport("The page was scrolled down upto the bottom of the page", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.INFO);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Unable to Scroll down upto the bottom of the page", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.WARNING);
+		}
+	}
 }

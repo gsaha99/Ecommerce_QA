@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="16" total="17" passed="1" failed="0" skipped="0">
+<testng-results ignored="43" total="44" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-04-20T12:05:20 IST" name="Default suite" finished-at="2023-04-20T12:06:10 IST" duration-ms="50083">
+  <suite started-at="2023-04-21T12:21:27 IST" name="Default suite" finished-at="2023-04-21T12:23:57 IST" duration-ms="150321">
     <groups>
     </groups>
-    <test started-at="2023-04-20T12:05:20 IST" name="Default test" finished-at="2023-04-20T12:06:10 IST" duration-ms="50083">
-      <class name="Test_Suite.Vet_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:Test_Suite.Vet_Test_Suite@6d304f9d]" started-at="2023-04-20T12:05:20 IST" name="initiate" finished-at="2023-04-20T12:05:31 IST" duration-ms="11108" status="PASS">
+    <test started-at="2023-04-21T12:21:27 IST" name="Default test" finished-at="2023-04-21T12:23:57 IST" duration-ms="150321">
+      <class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@6be968ce]" started-at="2023-04-21T12:21:27 IST" name="initiate" finished-at="2023-04-21T12:21:37 IST" duration-ms="9729" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@1c628f6a]]>
+                <![CDATA[org.testng.TestRunner@5333f08f]]>
               </value>
             </param>
             <param index="1">
@@ -23,41 +23,41 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.Vet_Test_Suite@6d304f9d]" started-at="2023-04-20T12:05:31 IST" name="initializeRepo" finished-at="2023-04-20T12:05:31 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="114" status="PASS">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@6be968ce]" started-at="2023-04-21T12:21:37 IST" name="launchBrowser" finished-at="2023-04-21T12:21:37 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="98" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- initializeRepo -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@6d304f9d]" started-at="2023-04-20T12:05:31 IST" name="nameBefore" finished-at="2023-04-20T12:05:31 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- launchBrowser -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@6be968ce]" started-at="2023-04-21T12:21:37 IST" name="nameBefore" finished-at="2023-04-21T12:21:37 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC01_Anonymous_User_Registration() throws java.io.IOException]]>
+                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC26_Login_Page_Validation() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameBefore -->
-        <test-method signature="TC01_Anonymous_User_Registration()[pri:0, instance:Test_Suite.Vet_Test_Suite@6d304f9d]" started-at="2023-04-20T12:05:31 IST" name="TC01_Anonymous_User_Registration" finished-at="2023-04-20T12:06:06 IST" duration-ms="35019" status="PASS">
+        <test-method signature="TC26_Login_Page_Validation()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@6be968ce]" started-at="2023-04-21T12:21:37 IST" name="TC26_Login_Page_Validation" finished-at="2023-04-21T12:23:55 IST" duration-ms="137920" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC01_Anonymous_User_Registration -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Vet_Test_Suite@6d304f9d]" started-at="2023-04-20T12:06:06 IST" name="nameAfter" finished-at="2023-04-20T12:06:06 IST" duration-ms="42" status="PASS">
+        </test-method> <!-- TC26_Login_Page_Validation -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@6be968ce]" started-at="2023-04-21T12:23:55 IST" name="nameAfter" finished-at="2023-04-21T12:23:55 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test_Suite.Vet_Test_Suite.TC01_Anonymous_User_Registration() throws java.io.IOException]]>
+                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC26_Login_Page_Validation() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.Vet_Test_Suite@6d304f9d]" started-at="2023-04-20T12:06:06 IST" name="CloseBrowser" finished-at="2023-04-20T12:06:10 IST" duration-ms="3705" status="PASS">
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@6be968ce]" started-at="2023-04-21T12:23:55 IST" name="CloseBrowser" finished-at="2023-04-21T12:23:57 IST" duration-ms="2499" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
-      </class> <!-- Test_Suite.Vet_Test_Suite -->
+      </class> <!-- Test_Suite.Wiley_NA_Cart_Test_Suite -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

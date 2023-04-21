@@ -26,28 +26,40 @@ import utilities.StatusDetails;
 import utilities.excelOperation;
 
 public class app_VET_Repo {
-	
-	
+
+
 	Vet_Test_Suite Vet_Test;
 	public String SS_path=Vet_Test.SS_path;
-	
+
+
+	//Homepage 
+
+	@FindBy(xpath="//img[@src='/static/media/whiteLogo.768dcaca.png']")
+	WebElement HomepageTitle;
+	@FindBy(xpath="//button[@class='button signup-button null' and text()='Explore More']")
+	WebElement ExploreMoreButtonInHomePage;
+	@FindBy(xpath="(//button[@class='button login-button' and text()='Log in'])[1]")
+	WebElement LoginButtonInHomeopage;
+	@FindBy(xpath="//img[@src='/static/media/whitewiley.c5a4478a.png']")
+	WebElement WileyLogoInHomepageFooter;
+
 	//Subscription option page
-	
+
 	@FindBy(xpath="(//button[@class='button price-box-button null'])[2]")
 	WebElement GetStarted;
-	
-	
+
+
 	//Cart page
-	
+
 	@FindBy(id="discountCodeValue")
 	WebElement DiscountCode;
 	@FindBy(xpath="//button[@class='button form-button button-apply discount-code-apply vet-orange-shade-bg vet-pencil-gray-color']")
 	WebElement DiscountApply;
 	@FindBy(xpath="//button[@class='button form-button button-continue checkoutButton vet-orange-shade-bg vet-pencil-gray-color']")
 	WebElement CartContinue;
-	
+
 	//Login / Registration page
-	
+
 	@FindBy(id = "register.firstName")
 	WebElement FirstName;
 	@FindBy(id = "register.lastName")
@@ -70,9 +82,9 @@ public class app_VET_Repo {
 	WebElement LoginButton;
 	@FindBy(id = "submit")
 	WebElement SumbitButton;
-	
+
 	//Change password tab in my account
-	
+
 	@FindBy(xpath="//span[text()='Change Password']")
 	WebElement ChangePassword;
 	@FindBy(id="currentPassword")
@@ -91,9 +103,9 @@ public class app_VET_Repo {
 	WebElement MyAccountText;
 	@FindBy(xpath="//span[text()='Change Password']")
 	WebElement ChangePasswordText;
-	
+
 	//Billing address page during checkout
-	
+
 	@FindBy(id="addressFirstName")
 	WebElement AddressFirstName;
 	@FindBy(id="addressSurname")
@@ -116,9 +128,9 @@ public class app_VET_Repo {
 	WebElement SelectCountryDropDown;
 	@FindBy(xpath = "(//button[contains(text(),'Continue')])[2]")
 	WebElement clickOnContinueButton;
-	
+
 	//Card Information page for WPS
-	
+
 	@FindBy(name="number")
 	WebElement CardNumber;
 	@FindBy(name="expiry")
@@ -127,9 +139,9 @@ public class app_VET_Repo {
 	WebElement CVC;
 	@FindBy(id="submit")
 	WebElement PaymentSubmit;
-	
+
 	//Card Information page for WPG
-	
+
 	@FindBy(id="number")
 	WebElement CardNumberWPG;
 	@FindBy(id="expiryMonth")
@@ -144,18 +156,18 @@ public class app_VET_Repo {
 	WebElement SecurityCodeWPG;
 	@FindBy(xpath="//input[@value='Make Payment']")
 	WebElement MakePaymentButtonWPG;
-	
+
 	//Order confirmation page
-	
+
 	@FindBy(xpath="//div[@class='table-order-row']/div[1]")
 	WebElement OrderId;
 	@FindBy(xpath="//div[contains(text(),'Tax:')]/following-sibling::div[@class='table-order-cell vet-black-gray-color']")
 	WebElement Tax;
 	@FindBy(xpath="//div[contains(text(),'Total:')]/following-sibling::div[@class='table-order-cell vet-black-gray-color']")
 	WebElement OrderTotal;	
-	
+
 	//Edit payment tab in My account
-	
+
 	@FindBy(xpath="//span[text()='Edit Payment']")
 	WebElement EditPayment;
 	@FindBy(xpath="//button[text()='Update Credit Card']")
@@ -164,9 +176,9 @@ public class app_VET_Repo {
 	WebElement EditCardDetailsText;
 	@FindBy(xpath="//div[@class='edit-payment-card']/table[@class='card-info']/tbody/tr[2]/td/span")
 	WebElement UpdatedCardName;
-	
+
 	//Hybris backoffice
-	
+
 	@FindBy(xpath="//input[@name='j_username']")
 	WebElement UserNameHybrisBO;
 	@FindBy(xpath="//input[@name='j_password']")
@@ -178,9 +190,9 @@ public class app_VET_Repo {
 	@FindBy(xpath="//span[text()='Wiley subscription']")
 	WebElement WileySubscriptionField;
 	@FindBy(xpath="//button[@title='Switch search mode']")
-	
+
 	//Address information editing in My Account tab
-	
+
 	WebElement SearchButton;
 	@FindBy(id="saveBilling")
 	WebElement BillingAddressSaveButton;
@@ -188,18 +200,18 @@ public class app_VET_Repo {
 	WebElement BillingAddresAltert;
 	@FindBy(xpath="//div[@class='yw-buttons-container z-div']/button[@class='yw-textsearch-searchbutton y-btn-primary z-button']")
 	WebElement SearchButtonBO;
-	
+
 	//Manage subscription tab in My account
-	
-    @FindBy(xpath="//span[text()='Manage Subscriptions']")
+
+	@FindBy(xpath="//span[text()='Manage Subscriptions']")
 	WebElement ManageSubscription;
 	@FindBy(xpath="//input[@checked='checked']")
 	WebElement AutoRenewToggleOn;
 	@FindBy(id="auto_renew")
 	WebElement AutoRenewToggleButton;
-	
+
 	//Reset password from login page
-	
+
 	@FindBy(xpath = "//a[@class='recover-password']")
 	WebElement ForgotChangePassword;
 	@FindBy(id = "forgottenPwd.email")
@@ -220,16 +232,16 @@ public class app_VET_Repo {
 	WebElement Resetsubmit;
 	@FindBy(xpath = "//div[@class='alert alert-info alert-dismissable vetAlertBoxInfo']/button[@type='button']")
 	WebElement PasswordResetMessage;
-	
+
 	//My profile tab in My account
-	
+
 	@FindBy(name = "firstName")
 	WebElement ProfileFirstName;	
 	@FindBy(name = "lastName")
 	WebElement ProfileLastName;	
 	@FindBy(xpath = "//button[@type='submit']")
 	WebElement ProfileSaveButton;	
-	
+
 	@FindBy(id = "login")
 	WebElement YOPUserMailID;	
 	@FindBy(id = "refreshbut")
@@ -244,9 +256,9 @@ public class app_VET_Repo {
 	WebElement ArrowButton;
 	@FindBy(xpath = "(//main[@class='yscrollbar']/div/div/div/table/tbody/tr/td/center/table/tbody/tr/td)[2]/p[3]/a[contains(text(),'Click here to change your password')]")
 	WebElement ResetPasswordLink;
-	
-	
-	
+
+
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters the first name in Create account form
@@ -340,7 +352,7 @@ public class app_VET_Repo {
 			Reporting.updateTestReport("Couldn't log out with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters the email id in the login form
@@ -512,7 +524,7 @@ public class app_VET_Repo {
 			Reporting.updateTestReport("Cart continue button was not clicked with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters the first name in the billing address form
@@ -541,7 +553,7 @@ public class app_VET_Repo {
 			Reporting.updateTestReport("First name was not entered in billing address form with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clears the Address line 1 field if anything is present and then Enters the new value in the billing address form
@@ -571,7 +583,7 @@ public class app_VET_Repo {
 			Reporting.updateTestReport("City couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clears the Zip code field if anything is present then Enters the value in the billing address form
@@ -626,7 +638,7 @@ public class app_VET_Repo {
 			Reporting.updateTestReport("Continue To Card DetailsPage couldn't be clicked with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	//WPS Method
 	/*
 	 * @Author: Anindita
@@ -700,7 +712,7 @@ public class app_VET_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the Edit payment button in My Account page
@@ -713,7 +725,7 @@ public class app_VET_Repo {
 		catch(Exception e) {
 			Reporting.updateTestReport("Edit Payment button was not clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
-		
+
 	}
 	/*
 	 * @Author: Anindita
@@ -767,8 +779,8 @@ public class app_VET_Repo {
 			Reporting.updateTestReport("Card Details was not updated "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
-	
+
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Click on the billing address save button
@@ -795,8 +807,8 @@ public class app_VET_Repo {
 			Reporting.updateTestReport("Alert box was not displayed with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
-	
+
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if Order Got Placed 
@@ -806,12 +818,12 @@ public class app_VET_Repo {
 			WebDriver driver=DriverModule.getWebDriver();
 			String title=driver.getTitle();
 			if (title.equalsIgnoreCase("Order Confirmation | VET online Site"))
-                {Reporting.updateTestReport("User was present in the order confirmation page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			{Reporting.updateTestReport("User was present in the order confirmation page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return true;}
-            else
-                {Reporting.updateTestReport("User was not on the order confirmation page" , CaptureScreenshot.getScreenshot(SS_path),
-                        StatusDetails.FAIL);
-                return false;}
+			else
+			{Reporting.updateTestReport("User was not on the order confirmation page" , CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
+			return false;}
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("User was not on the order confirmation page with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -819,136 +831,136 @@ public class app_VET_Repo {
 		}
 	}
 
-    
-    /*
+
+	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the manage subscription tab in my account page
 	 */
-    public void clickOnManageSubscription() throws IOException{
-    	try {
-    		
-    		ManageSubscription.click();
-    		Reporting.updateTestReport("Manage Subscription was successfully clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-    	}
-    	catch(Exception e){
+	public void clickOnManageSubscription() throws IOException{
+		try {
+
+			ManageSubscription.click();
+			Reporting.updateTestReport("Manage Subscription was successfully clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
 			Reporting.updateTestReport("Manage Subscription was not clicked.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
-    }
-    /*
-   	 * @Author: Anindita
-   	 * @Description: Checks if the auto renew toggle is on in my account page
-   	 */
-    public boolean checkIfAutoRenewToggleOn() throws IOException{
-    try {
-    	if(AutoRenewToggleOn.isDisplayed()) {
-    		Reporting.updateTestReport("Auto Renew toggle is on",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-    		return true;
-    	}
-    	else {
-    		Reporting.updateTestReport("Auto Renew toggle is off",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-    		return false;
-    	}
-    }
-    catch(Exception e){
-		Reporting.updateTestReport("There was some error.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		return false;
 	}
-    }
-    /*
-   	 * @Author: Anindita
-   	 * @Description: Clicks on the auto renew toggle button in my account page
-   	 */
-    public void clickOnAutoRenewToggle() throws IOException{
-    	try {
-    		AutoRenewToggleButton.click();
-    		Reporting.updateTestReport("Auto Renew toggle was successfully clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-    	}
-    	catch(Exception e){
-    		Reporting.updateTestReport("Auto Renew toggle couldn't be clicked.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-    	}
-    }
-    //WPG Card methods
-    /*
-     * @Author: Anindita
-     * @Description: Enters the Card Number in WPG iframe
-     */
-    public void enterCardNumberWPG(String cardNumber) throws IOException{
-    	try {
-    		CardNumberWPG.sendKeys(cardNumber);
-    		Reporting.updateTestReport("Card number: "+cardNumber+" was entered in WPG iframe",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-    	}
-    	catch(Exception e){
-    		Reporting.updateTestReport("Card number couldn't be entered in WPG iframe.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-    	}
-    }
-    /*
-     * @Author: Anindita
-     * @Description: Selects the Expiry month in WPG iframe
-     */
-    public void selectExpiryMonthWPG() throws IOException{
-    	try {
-    		ExpiryMonthDropdownWPG.click();
-    		OptionExpiryMonthWPG.click();
-    		Reporting.updateTestReport("September was selected in WPG iframe",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-    	}
-    	catch(Exception e){
-    		Reporting.updateTestReport("Expiry month couldn't be selected in WPG iframe.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-    	}
-    }
-    /*
-     * @Author: Anindita
-     * @Description: Selects the Expiry year in WPG iframe
-     */
-    public void selectExpiryYearWPG() throws IOException{
-    	try {
-    		ExpiryYearDropdownWPG.click();
-    		OptionExpiryYearWPG.click();
-    		Reporting.updateTestReport("2022 was selected in WPG iframe",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-    	}
-    	catch(Exception e){
-    		Reporting.updateTestReport("Expiry year couldn't be selected in WPG iframe.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-    	}
-    }
-    /*
-     * @Author: Anindita
-     * @Description: Enters the security code in WPG iframe
-     */
-    public void enterSecurityCodeWPG(String cvv) throws IOException{
-    	try {
-    		SecurityCodeWPG.sendKeys(cvv);
-    		Reporting.updateTestReport(cvv+" Security code was entered in WPG iframe",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-    	}
-    	catch(Exception e){
-    		Reporting.updateTestReport("Security code couldn't be entered in WPG iframe.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-    	}
-    }
-    /*
-     * @Author: Anindita
-     * @Description: Clicks on the make payment button in WPG iframe
-     */
-    public void clickOnMakePaymentButtonWPG() throws IOException{
-    	try {
-    		MakePaymentButtonWPG.click();
-    		Reporting.updateTestReport("MakePayment Button was clicked in WPG iframe",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-    	}
-    	catch(Exception e){
-    		Reporting.updateTestReport("MakePayment Button couldn't be clicked in WPG iframe.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-    	}
-    }
-    /*
-     * @Author: Anindita
-     * Description: Returns the DiscountCode element
-     */
-    public WebElement returnDiscountCodeField()
-    {
-    	try {
-    		return DiscountCode;
-    	}
-    	catch(Exception e) {
-    	return null;}
-    }
-    
-    /*
+	/*
+	 * @Author: Anindita
+	 * @Description: Checks if the auto renew toggle is on in my account page
+	 */
+	public boolean checkIfAutoRenewToggleOn() throws IOException{
+		try {
+			if(AutoRenewToggleOn.isDisplayed()) {
+				Reporting.updateTestReport("Auto Renew toggle is on",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return true;
+			}
+			else {
+				Reporting.updateTestReport("Auto Renew toggle is off",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return false;
+			}
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("There was some error.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return false;
+		}
+	}
+	/*
+	 * @Author: Anindita
+	 * @Description: Clicks on the auto renew toggle button in my account page
+	 */
+	public void clickOnAutoRenewToggle() throws IOException{
+		try {
+			AutoRenewToggleButton.click();
+			Reporting.updateTestReport("Auto Renew toggle was successfully clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Auto Renew toggle couldn't be clicked.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	//WPG Card methods
+	/*
+	 * @Author: Anindita
+	 * @Description: Enters the Card Number in WPG iframe
+	 */
+	public void enterCardNumberWPG(String cardNumber) throws IOException{
+		try {
+			CardNumberWPG.sendKeys(cardNumber);
+			Reporting.updateTestReport("Card number: "+cardNumber+" was entered in WPG iframe",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Card number couldn't be entered in WPG iframe.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	/*
+	 * @Author: Anindita
+	 * @Description: Selects the Expiry month in WPG iframe
+	 */
+	public void selectExpiryMonthWPG() throws IOException{
+		try {
+			ExpiryMonthDropdownWPG.click();
+			OptionExpiryMonthWPG.click();
+			Reporting.updateTestReport("September was selected in WPG iframe",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Expiry month couldn't be selected in WPG iframe.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	/*
+	 * @Author: Anindita
+	 * @Description: Selects the Expiry year in WPG iframe
+	 */
+	public void selectExpiryYearWPG() throws IOException{
+		try {
+			ExpiryYearDropdownWPG.click();
+			OptionExpiryYearWPG.click();
+			Reporting.updateTestReport("2022 was selected in WPG iframe",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Expiry year couldn't be selected in WPG iframe.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	/*
+	 * @Author: Anindita
+	 * @Description: Enters the security code in WPG iframe
+	 */
+	public void enterSecurityCodeWPG(String cvv) throws IOException{
+		try {
+			SecurityCodeWPG.sendKeys(cvv);
+			Reporting.updateTestReport(cvv+" Security code was entered in WPG iframe",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("Security code couldn't be entered in WPG iframe.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	/*
+	 * @Author: Anindita
+	 * @Description: Clicks on the make payment button in WPG iframe
+	 */
+	public void clickOnMakePaymentButtonWPG() throws IOException{
+		try {
+			MakePaymentButtonWPG.click();
+			Reporting.updateTestReport("MakePayment Button was clicked in WPG iframe",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("MakePayment Button couldn't be clicked in WPG iframe.",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	/*
+	 * @Author: Anindita
+	 * Description: Returns the DiscountCode element
+	 */
+	public WebElement returnDiscountCodeField()
+	{
+		try {
+			return DiscountCode;
+		}
+		catch(Exception e) {
+			return null;}
+	}
+
+	/*
 	 * @Author: Vishnu
 	 * @Description: Clicks on the forgot password link in the login page
 	 */
@@ -1040,9 +1052,9 @@ public class app_VET_Repo {
 
 		}
 	}
-	
 
-	
+
+
 	/*
 	 * @Author: Vishnu
 	 * @Description: Enters the new password in reset password form
@@ -1075,7 +1087,7 @@ public class app_VET_Repo {
 		}
 	}
 
-	
+
 	/*
 	 * @Author: Vishnu
 	 * @Description: Clicks on submit button in the reset password form
@@ -1110,7 +1122,7 @@ public class app_VET_Repo {
 		}
 		return "";
 	}
-	
+
 
 	/*
 	 * Author : Arun 
@@ -1127,7 +1139,7 @@ public class app_VET_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * Author : Arun 
 	 * Description :This clicking the Refresh Button after entered the YOP MailID
@@ -1143,9 +1155,9 @@ public class app_VET_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
-	
-	
+
+
+
 	/*
 	 * Author : Arun 
 	 * Description :Entering the User MailID in YOPMailInbox
@@ -1162,7 +1174,7 @@ public class app_VET_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 
 	/*
 	 * Author : Arun 
@@ -1179,7 +1191,7 @@ public class app_VET_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * Author : Arun 
 	 * Description :This flow used to edit profile LastName
@@ -1197,7 +1209,7 @@ public class app_VET_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * Author : Arun 
 	 * Description :This flow used to edit profile Firstname
@@ -1215,7 +1227,7 @@ public class app_VET_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * Author : Arun 
 	 * Description :clicking On ContinueButton to LoginPage
@@ -1231,8 +1243,8 @@ public class app_VET_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-		
-	
+
+
 	/*
 	 * Author : Arun 
 	 * Description : This clicking On SubmitButton
@@ -1247,7 +1259,7 @@ public class app_VET_Repo {
 			Reporting.updateTestReport("SubmitButton was not licked with the error message "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 
 	/*
 	 * @Author: Anindita
@@ -1257,16 +1269,16 @@ public class app_VET_Repo {
 		try {
 			String tax=Tax.getText();
 			Reporting.updateTestReport("Tax: "+tax+" was fetched successfully", CaptureScreenshot.getScreenshot(SS_path),
-                    StatusDetails.PASS);
+					StatusDetails.PASS);
 			return tax;
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Tax was not fetched with error message " + e.getClass().toString(),
-                    CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-            return "";
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the Order total from Order Confirmation page
@@ -1275,16 +1287,16 @@ public class app_VET_Repo {
 		try {
 			String total=OrderTotal.getText();
 			Reporting.updateTestReport("Order Total: "+total+" was fetched successfully", CaptureScreenshot.getScreenshot(SS_path),
-                    StatusDetails.PASS);
+					StatusDetails.PASS);
 			return total;
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Order Total was not fetched with error message " + e.getClass().toString(),
-                    CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-            return "";
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters the email id in yopmail
@@ -1302,7 +1314,7 @@ public class app_VET_Repo {
 		}
 
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the arrow button in yopmail
@@ -1318,7 +1330,7 @@ public class app_VET_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the reset password link in the mail
@@ -1333,14 +1345,14 @@ public class app_VET_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * Description : Select Country From DropDown in billing
 	 */
 	public void selectCountry(String country) throws IOException {
 		try {
-			
+
 			Select selExpirationMonth = new Select(SelectCountryDropDown);
 			selExpirationMonth.selectByVisibleText(country);
 			Reporting.updateTestReport("Country has been selected successfully by user",
@@ -1350,7 +1362,7 @@ public class app_VET_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @2Description :Selecting State from Dropdpwn in Shipping Page
@@ -1366,15 +1378,87 @@ public class app_VET_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
-		
+
+	/*
+	 * @Date: 31/03/23
+	 * @Description: Checks if the title is present or not in home page
+	 */
+	public void checkHomePageTitle() throws IOException {
+		try {
+			String title=HomepageTitle.getText();
+			Reporting.updateTestReport("Title: "+title+" was present in the homepage", 
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Title was not present in homepage",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Date: 31/03/23
+	 * @Description: Checks if the Explore more button is present or not in home page
+	 */
+	public void checkExploreMoreButtonInHomePage() throws IOException {
+		try {
+			if(ExploreMoreButtonInHomePage.isDisplayed())
+				Reporting.updateTestReport("Explore more  button was present in homepage", 
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport("Explore more button was not present in homepage",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Explore more button was not present in homepage",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Date: 31/03/23
+	 * @Description: Checks if the login button is present or not in home page
+	 */
+	public void checkLoginButtonInHomeopage() throws IOException {
+		try {
+			if(LoginButtonInHomeopage.isDisplayed())
+				Reporting.updateTestReport("Login button was present in homepage", 
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport("Login button was not present in homepage",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Login button was not present in homepage",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Date: 31/03/23
+	 * @Description: Checks if the wiley logo is present or not in home page
+	 */
+	public void checkWileyLogoInHomepageFooter() throws IOException {
+		try {
+			if(WileyLogoInHomepageFooter.isDisplayed())
+				Reporting.updateTestReport("Wiley Logo was present in homepage footer", 
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			else
+				Reporting.updateTestReport("Wiley Logo was not present in homepage footer",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Wiley Logo was not present in homepage footer",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+
 
 }
 
-   
 
 
 
 
 
-	
+

@@ -38,7 +38,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
 	public static String EmailConfirmationText = "//button/div[contains(text(),'Order Confirmation')]";
-	public static String WELHomepageURL=excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data");
+	private static String WELHomepageURL=excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data");
 
 	@BeforeTest
 	public void initializeRepo() {

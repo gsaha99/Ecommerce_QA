@@ -28,6 +28,7 @@ import utilities.LogTextFile;
 import utilities.DriverModule;
 import utilities.PaymentGateway;
 import utilities.Reporting;
+import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
 import utilities.excelOperation;
 
@@ -392,7 +393,7 @@ public class AGS_Test_Suite extends DriverModule {
 			AGS.enterPreviousPassword(excelOperation.getTestData("TC04", "AGS_Test_Data", "Previous_Password"));
 			AGS.enterNewPassword(excelOperation.getTestData("TC04", "AGS_Test_Data", "Password"));
 			AGS.clickPasswordSaveButton();
-			if (!AGS.isPasswordResetAlertPresent().equalsIgnoreCase(""))
+			if (!AGS.isPasswordResetSuccessMessagePresent().equalsIgnoreCase(""))
 				Reporting.updateTestReport("Password reset was successful", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.PASS);
 			else
@@ -420,7 +421,7 @@ public class AGS_Test_Suite extends DriverModule {
 			AGS.clickOnForgotPassword();
 			AGS.enterEmailIdToGetResetPasswordMail(excelOperation.getTestData("TC05", "AGS_Test_Data", "Email_Id"));
 			AGS.clickOnSubmit();
-			AGS.checkAlertMessage();
+			AGS.checkPasswordResetInstructionSentMessage();
 			driver.get(excelOperation.getTestData("Yopmail_URL",
 					"Generic_Dataset", "Data"));
 			AGS.enterEmailIdInYopmail(excelOperation.getTestData("TC05", "AGS_Test_Data","Email_Id"));
@@ -1023,7 +1024,7 @@ public class AGS_Test_Suite extends DriverModule {
 				AGS.editProfileLastName(excelOperation.getTestData("TC11", "AGS_Test_Data", "Last_Name"));
 				AGS.clickOnMyAcountSaveButton();
 				Thread.sleep(1000);
-				AGS.checkAlertMessageAfterUserDataUpdation();
+				AGS.checkSuccessMessageAfterUserDataUpdation();
 			}
 			else
 				Reporting.updateTestReport("User was not on edit profile page",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -1075,7 +1076,7 @@ public class AGS_Test_Suite extends DriverModule {
 				AGS.enterPhoneNumber(excelOperation.getTestData("TC12", "AGS_Test_Data", "Phone_Number"));
 				Thread.sleep(1000);
 				AGS.clickOnMyAcountSaveButton();
-				AGS.checkAlertMessageAfterUserDataUpdation();
+				AGS.checkSuccessMessageAfterUserDataUpdation();
 
 
 
@@ -1333,6 +1334,38 @@ public class AGS_Test_Suite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			AGS.logOutWithURL(driver, AGS_Logout_URL);
 
+		}
+	}
+	
+	/*
+	 * @Description: Opens the Home page and checks the content if everything is present or not
+	 */
+	@Test
+	public void TC16_Open_Homepage() throws IOException {
+		try {
+			Reporting.test = Reporting.extent.createTest("TC16_Open_Homepage");
+			LogTextFile.writeTestCaseStatus("TC16_Open_Homepage", "Test case");
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(20));
+			driver.get(AGS_Subscription_URL_DEV);
+			driver.get(AGS_Subscription_URL_UAT3);
+			driver.get(excelOperation.getTestData("AGS_Homepage_URL", "Generic_Dataset", "Data"));
+			AGS.checkHomePageTitle();
+			AGS.checkSubScribeNowTabInHomePage();
+			AGS.checkLoginTabInHomeopage();
+			ScrollingWebPage.PageScrollDownUptoBottom(driver, SS_path);
+			try {
+				wait.until(ExpectedConditions.visibilityOfElementLocated
+						(By.xpath("//img[@src='https://dev.graphicstandards.com/wp-content/uploads/2016/03/logo.png']")));
+				AGS.checkWileyLogoInHomepageFooter();
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Wiley Logo was not present in homepage footer and caused timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 
