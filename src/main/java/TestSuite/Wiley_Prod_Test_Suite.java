@@ -543,16 +543,39 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				ScrollingWebPage.PageScrollDownUptoBottom(driver, SS_path);
 				wiley.checkNumberOfProductsAfterFilteringNewSearchPage(quantity);
 				int numberOfPages;
-				if(Integer.parseInt(quantity)%10==0) 
-					numberOfPages=Integer.parseInt(quantity)/10;
+				if(Integer.parseInt(quantity)%15==0) 
+					numberOfPages=Integer.parseInt(quantity)/15;
 				else
-					numberOfPages=Integer.parseInt(quantity)/10+1;
+					numberOfPages=Integer.parseInt(quantity)/15+1;
 				if(wiley.fetchNumberOfPagesAfterFilteringNewSearchPage(driver)==numberOfPages)
 					Reporting.updateTestReport("Pagination funationility is working fine after filtering with Author field",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				else
 					Reporting.updateTestReport("Pagination funationility is not working",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				
+				List<WebElement> filteredProducts=driver.findElements(By.className("product-card"));
+				int flagForAuthor=0;
+				for(int i=1;i<filteredProducts.size()+1;i++) {
+					try {
+						WebElement author=driver.findElement(By.xpath("(//div[@class='product-authors'])"+"["+i+"]"));
+						if (author.getText().contains(authorName))
+							System.out.println(i+"th iteration");
+						else
+						{flagForAuthor=1;
+						Reporting.updateTestReport("This product with title : "+
+								driver.findElement(By.xpath("(//h3[@class='product-title']/a)"+"["+i+"]")).getText()
+								+" has different author", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);}
+					}
+					catch(Exception e1) {
+						Reporting.updateTestReport("Author name ffield for each product was not found",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				}
+				if(flagForAuthor==0) {
+					Reporting.updateTestReport("All the filtered products has same Author as: "+authorName,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				}
 			}
 			else {
 				try {
