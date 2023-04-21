@@ -32,6 +32,7 @@ public class VET_Prod_Test_Suite extends DriverModule{
 	app_VET_Repo VET;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
+	private static String VET_Login_URL=excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data");
 
 	@BeforeTest
 	public void initializeRepo() {
@@ -89,7 +90,7 @@ public class VET_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC02_Register_a_New_User_And_Login");
 			LogTextFile.writeTestCaseStatus("TC02_Register_a_New_User_And_Login", "Test case");
-			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(VET_Login_URL);
 			VET.enterFirstName(excelOperation.getTestData("TC02", "VET_Test_Data", "First_Name"));
 			VET.enterLastName(excelOperation.getTestData("TC02", "VET_Test_Data", "Last_Name"));
 			String emailId = VET.enterEmailId();
@@ -104,7 +105,7 @@ public class VET_Prod_Test_Suite extends DriverModule{
 				excelOperation.updateTestData("TC04", "VET_Test_Data", "Email_Id", emailId);
 				excelOperation.updateTestData("TC05", "VET_Test_Data", "Email_Id", emailId);
 				VET.logOut(driver);
-				driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
+				driver.get(VET_Login_URL);
 				VET.enterExistingUserId(excelOperation.getTestData("TC02", "VET_Test_Data", "Email_Id"));
 				VET.enterExistingUserPassword(excelOperation.getTestData("TC02", "VET_Test_Data", "Password"));
 				VET.clickOnLoginButton();
@@ -138,7 +139,7 @@ public class VET_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC03_Reset_Password_My_Account");
 			LogTextFile.writeTestCaseStatus("TC03_Reset_Password_My_Account", "Test case");
-			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(VET_Login_URL);
 			VET.enterExistingUserId(excelOperation.getTestData("TC03", "VET_Test_Data", "Email_Id"));
 			VET.enterExistingUserPassword(excelOperation.getTestData("TC03", "VET_Test_Data", "Previous_Password"));
 			VET.clickOnLoginButton();
@@ -155,7 +156,7 @@ public class VET_Prod_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("Password reset was not successful",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		    VET.logOut(driver);
-			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(VET_Login_URL);
 			VET.enterExistingUserId(excelOperation.getTestData("TC03", "VET_Test_Data", "Email_Id"));
 			VET.enterExistingUserPassword(excelOperation.getTestData("TC03", "VET_Test_Data", "Password"));
 			VET.clickOnLoginButton();
@@ -176,7 +177,7 @@ public class VET_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC04_Reset_Password_From_Login_Page");
 			LogTextFile.writeTestCaseStatus("TC04_Reset_Password_From_Login_Page", "Test case");
-			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(VET_Login_URL);
 			VET.ForgotchangePassword();
 			VET.RetriveLoginInfo(excelOperation.getTestData("TC04", "VET_Test_Data", "Email_Id"));
 			VET.clickOnSubmit();
@@ -186,7 +187,7 @@ public class VET_Prod_Test_Suite extends DriverModule{
 			VET.enterEmailIdInYopmail(excelOperation.getTestData("TC04", "VET_Test_Data","Email_Id"));
 			VET.clickOnArrowButton();
 			EmailValidation.forgotPasswordMailForVet(driver, SS_path, VET);
-			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(VET_Login_URL);
 			VET.enterExistingUserId(excelOperation.getTestData("TC04", "VET_Test_Data", "Email_Id"));
 			VET.enterExistingUserPassword(excelOperation.getTestData("TC04", "VET_Test_Data", "Password"));
 			VET.clickOnLoginButton();
@@ -207,7 +208,7 @@ public class VET_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC05_Edit_Profile");
 			LogTextFile.writeTestCaseStatus("TC05_Edit_Profile", "Test case");
-			driver.get(excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(VET_Login_URL);
 			VET.enterExistingUserId(excelOperation.getTestData("TC05", "VET_Test_Data", "Email_Id"));
 			VET.enterExistingUserPassword(excelOperation.getTestData("TC05", "VET_Test_Data", "Password"));
 			VET.clickOnLoginButton();

@@ -30,6 +30,9 @@ public class AGS_Prod_Test_Suite extends DriverModule {
 	app_AGS_Repo AGS;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
+	private static String AGS_Homepage_URL=excelOperation.getTestData("AGS_Homepage_URL", "Generic_Dataset", "Data");
+	private static String AGS_Login_URL=excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data");
+	private static String AGS_Subscription_URL=excelOperation.getTestData("AGS_Subscription_URL", "Generic_Dataset", "Data");
 
 	@BeforeTest
 	public void initializeRepo() {
@@ -57,7 +60,7 @@ public class AGS_Prod_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC01_Open_Homepage");
 			LogTextFile.writeTestCaseStatus("TC01_Open_Homepage", "Test case");
 			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(20));
-			driver.get(excelOperation.getTestData("AGS_Homepage_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Homepage_URL);
 			AGS.checkHomePageTitle();
 			AGS.checkSubScribeNowTabInHomePage();
 			AGS.checkLoginTabInHomeopage();
@@ -86,7 +89,7 @@ public class AGS_Prod_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC02_Register_a_New_User_And_Login");
 			LogTextFile.writeTestCaseStatus("TC02_Register_a_New_User_And_Login", "Test case");
-			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Login_URL);
 			AGS.enterFirstName(excelOperation.getTestData("TC02", "AGS_Test_Data", "First_Name"));
 			AGS.enterLastName(excelOperation.getTestData("TC02", "AGS_Test_Data", "Last_Name"));
 			String emailId = AGS.enterEmailId();
@@ -101,7 +104,7 @@ public class AGS_Prod_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC04", "AGS_Test_Data", "Email_Id", emailId);
 				excelOperation.updateTestData("TC05", "AGS_Test_Data", "Email_Id", emailId);
 				AGS.logOut(driver);
-				driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+				driver.get(AGS_Login_URL);
 				AGS.enterExistingUserId(excelOperation.getTestData("TC02", "AGS_Test_Data", "Email_Id"));
 				AGS.enterExistingUserPassword(excelOperation.getTestData("TC02", "AGS_Test_Data", "Password"));
 				AGS.clickOnLoginButton();
@@ -135,7 +138,7 @@ public class AGS_Prod_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC03_Reset_Password_My_Account");
 			LogTextFile.writeTestCaseStatus("TC03_Reset_Password_My_Account", "Test case");
-			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Login_URL);
 			AGS.enterExistingUserId(excelOperation.getTestData("TC03", "AGS_Test_Data", "Email_Id"));
 			AGS.enterExistingUserPassword(excelOperation.getTestData("TC03", "AGS_Test_Data", "Previous_Password"));
 			AGS.clickOnLoginButton();
@@ -152,7 +155,7 @@ public class AGS_Prod_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Password reset was not successful",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Login_URL);
 			AGS.enterExistingUserId(excelOperation.getTestData("TC03", "AGS_Test_Data", "Email_Id"));
 			AGS.enterExistingUserPassword(excelOperation.getTestData("TC03", "AGS_Test_Data", "Password"));
 			AGS.clickOnLoginButton();
@@ -174,7 +177,7 @@ public class AGS_Prod_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC04_ResetPasswordFromLoginPage");
 			LogTextFile.writeTestCaseStatus("TC04_ResetPasswordFromLoginPage", "Test case");
-			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Login_URL);
 			AGS.clickOnForgotPassword();
 			AGS.enterEmailIdToGetResetPasswordMail(excelOperation.getTestData("TC04", "AGS_Test_Data", "Email_Id"));
 			AGS.clickOnSubmit();
@@ -185,7 +188,7 @@ public class AGS_Prod_Test_Suite extends DriverModule {
 			AGS.clickOnArrowButton();
 			EmailValidation.forgotPasswordMailForAGS(driver, SS_path, AGS);
 			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
-			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Login_URL);
 			AGS.enterExistingUserId(excelOperation.getTestData("TC04", "AGS_Test_Data", "Email_Id"));
 			AGS.enterExistingUserPassword(excelOperation.getTestData("TC04", "AGS_Test_Data", "Password"));
 			AGS.clickOnLoginButton();
@@ -207,7 +210,7 @@ public class AGS_Prod_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC05_Edit_Profile");
 			LogTextFile.writeTestCaseStatus("TC05_Edit_Profile", "Test case");
-			driver.get(excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Login_URL);
 			AGS.enterExistingUserId(excelOperation.getTestData("TC05", "AGS_Test_Data", "Email_Id"));
 			AGS.enterExistingUserPassword(excelOperation.getTestData("TC05", "AGS_Test_Data", "Password"));
 			AGS.clickOnLoginButton();
@@ -240,7 +243,7 @@ public class AGS_Prod_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC06_Provide_File_Information");
 			LogTextFile.writeTestCaseStatus("TC06_Provide_File_Information", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			driver.get(excelOperation.getTestData("AGS_Subscription_URL", "Generic_Dataset", "Data"));
+			driver.get(AGS_Subscription_URL);
 			AGS.clickOnYearlySubscriptionButton();
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'My Cart')]")));

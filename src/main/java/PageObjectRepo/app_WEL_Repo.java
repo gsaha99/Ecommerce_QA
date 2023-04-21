@@ -105,6 +105,12 @@ public class app_WEL_Repo {
 	WebElement PrintEbook;
 	@FindBy(xpath = "//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_2']/a[1]")
 	WebElement CFAProduct;
+	@FindBy(xpath = "//div[@class='form-group']//input[@id='inputPartnerSearch']")
+	WebElement PartnerInputSearch;
+	@FindBy(xpath = "//div[@class='container product-categories-container']//div[2]//dd/a[contains(text(),'CMA')]")
+	WebElement DeanDortonCMAProduct;
+	@FindBy(xpath = "//div[@class='fe_flex grid_1']/a[1]")
+	WebElement CPALink;
 
 	// Cart page
 
@@ -120,7 +126,7 @@ public class app_WEL_Repo {
 	WebElement Discount;
 	@FindBy(id = "discountApplyBtn")
 	WebElement DiscountApplyButtonInCartPage;
-	@FindBy(id="backTocartNavbarMainId")
+	@FindBy(id = "backTocartNavbarMainId")
 	WebElement BackToCartButton;
 	@FindBy(xpath = "//select[@id='quantity_0']")
 	WebElement SelectQuantityDropdown;
@@ -145,6 +151,22 @@ public class app_WEL_Repo {
 	WebElement ExistingUserPasswordInCheckoutLoginPage;
 	@FindBy(xpath = "//a[@class='recover-password pull-left checkoutForgotPwdLinkCss']")
 	WebElement ForgotPasswordLinkInCheckOutLoginPage;
+	@FindBy(id = "guest.email")
+	WebElement GuestUser;
+	@FindBy(xpath = "//div[@id='guestCheckoutRegBtn']//span[@class='welCheckoutContBtnText']")
+	WebElement CreateAccount;
+	@FindBy(id = "guest.confemail")
+	WebElement GuestConfinmEmail;
+	@FindBy(xpath = "(//div[@id='checkoutGuestUserReg'])[1]")
+	WebElement LoginCheckoutPageHeading;
+	@FindBy(xpath = "(//div[@class='help-block commonErrorWelStyle'])[1]")
+	WebElement ErrorMessageAfterEnteringInvalidEmailId;
+	@FindBy(name = "pwd")
+	WebElement Password;
+	@FindBy(xpath = "//label[@for='agreement']")
+	WebElement AgreementCheckbox;
+	@FindBy(xpath = "(//span[@class='welCheckoutContBtnText'])[2]")
+	WebElement CreateAccountButton;
 
 	// Forgot password page
 	@FindBy(id = "forgottenPwd.email")
@@ -232,94 +254,46 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='row pageMainContainer no-margin']//div[@class='checkout-steps']/a[1]")
 	WebElement StudentVerification;
 
-	// Billing Address Detail
+	// Billing Address and Payment information related xpaths
+	
 	@FindBy(id = "sameAsBillingLabel")
 	WebElement ShippingBillingSameAddress;
-
 	@FindBy(id = "address.country")
 	WebElement SelectCountryDropDown;
 	@FindBy(id = "postalCode")
 	WebElement PostalCode;
-
 	@FindBy(id = "city")
 	WebElement BillCity;
-
 	@FindBy(id = "phoneNumber")
 	WebElement BillPhoneNumber;
-
 	@FindBy(xpath = "(//div[@id='newAddressBtnDiv']/button[@id='addNewBillingAddressButton'])")
 	WebElement EnterNewAddressButtonOnBillPage;
-
 	@FindBy(xpath = "(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
 	WebElement UseSelectedBillingAddressButtonAddressDoctorPopUp;
-
-	// Create New Account x paths
-	@FindBy(id = "guest.email")
-	WebElement GuestUser;
-
-	@FindBy(xpath = "//div[@id='guestCheckoutRegBtn']//span[@class='welCheckoutContBtnText']")
-	WebElement CreateAccount;
-	@FindBy(id = "guest.confemail")
-	WebElement GuestConfinmEmail;
-	@FindBy(xpath="(//div[@id='checkoutGuestUserReg'])[1]")
-	WebElement LoginCheckoutPageHeading;
-	
-	@FindBy(xpath="(//div[@class='help-block commonErrorWelStyle'])[1]")
-	WebElement ErrorMessageAfterEnteringInvalidEmailId;
-
-	@FindBy(name = "pwd")
-	WebElement Password;
-	@FindBy(xpath = "//label[@for='agreement']")
-	WebElement AgreementCheckbox;
-
-	@FindBy(xpath = "(//span[@class='welCheckoutContBtnText'])[2]")
-	WebElement CreateAccountButton;
 	@FindBy(xpath = "//label[contains(text(),'Part 1')]")
 	WebElement Part1InCIAPDP;
-
-	/*
-	 * @Author : Vishnu
-	 * 
-	 * @Description : Object repo for WEL Credit Card and Paypal, PaypalCredit
-	 * Details
-	 */
-
 	@FindBy(id = "nameOnCard")
 	WebElement CardHolderName;
-
 	@FindBy(id = "number")
 	WebElement CardNumber;
-
 	@FindBy(id = "expiryMonth")
 	WebElement ExpirationDateForMonth;
-
 	@FindBy(id = "expiryYear")
 	WebElement ExpirationDateForYear;
-
 	@FindBy(id = "securityCode")
 	WebElement CVV_Number;
 	@FindBy(id = "paymentBilling")
 	WebElement SaveAndContinueOnCheckOutPage;
-
 	@FindBy(xpath = "//div[@id='billingMultiPaymentOptionValues']/ul/li[3]/a/span[@class='billingPaymentMultiNavTitle']")
 	WebElement Paypalpayment;
 	@FindBy(xpath = "//div[@id='billingMultiPaymentOptionValues']/ul/li[4]/a/span")
 	WebElement PaypalCredit;
-
 	@FindBy(xpath = "//div[@id='discountCodeMessage']")
 	WebElement DiscountMessage;
 
-	@FindBy(xpath = "//div[@class='form-group']//input[@id='inputPartnerSearch']")
-	WebElement PartnerInputSearch;
-	@FindBy(xpath = "//div[@class='container product-categories-container']//div[2]//dd/a[contains(text(),'CMA')]")
-	WebElement DeanDortonCMAProduct;
-
-	// Products
-	@FindBy(xpath = "//div[@class='fe_flex grid_1']/a[1]")
-	WebElement CPALink;
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Clicks on the login button in homepage
 	 */
@@ -335,7 +309,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Clicks on the Create One Link In Login Page to do standalone
 	 * registration
@@ -352,7 +326,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Enters the first name in the registration form
 	 */
@@ -368,7 +342,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Enters the last name in the registration form
 	 */
@@ -384,7 +358,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Enters the email id in the registration form
 	 */
@@ -406,7 +380,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Enters the password in the registration form
 	 */
@@ -422,7 +396,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Clicks on the terms and conditions checkbox
 	 */
@@ -438,7 +412,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Clicks on the Create Account button in regsitration page
 	 */
@@ -454,7 +428,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Clicks on the Account button in homepage
 	 */
@@ -470,7 +444,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on Accept button on Wiley Privacy Agreement
 	 * page
@@ -490,7 +464,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on SignOut button
 	 */
@@ -509,7 +483,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 3/2/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Logs out the user from WEL and delete all cookies
 	 */
@@ -529,7 +503,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: User name is entered in standalone login page
 	 */
@@ -546,7 +520,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Password is entered in standalone login page
 	 */
@@ -563,7 +537,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: 5/4/23
 	 * 
 	 * @Description: Method to click on Login button
 	 */
@@ -583,7 +557,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: 5/4/23
 	 * 
 	 * @Description: Method to click on CMA Link On Home page
 	 */
@@ -603,7 +577,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: 5/4/23
 	 * 
 	 * @Description: Method to click on CMA Link On Home page
 	 */
@@ -623,7 +597,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: 5/4/23
 	 * 
 	 * @Description: Method to click on View Course Button in CMA Product page
 	 */
@@ -643,7 +617,11 @@ public class app_WEL_Repo {
 		}
 
 	}
-
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: Method to click on Get CMA Course Button in CMA Product page
+	 */
 	public void clickOnCPAViewCourseButton() throws IOException {
 		try {
 			CPAViewCourse.click();
@@ -661,7 +639,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on Get CMA Course Button in CMA Product page
 	 */
@@ -683,7 +661,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on Add to cart button
 	 */
@@ -703,7 +681,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on check Out on Cart Page
 	 */
@@ -723,7 +701,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Enters the user id in checkout login/ registration page
 	 */
@@ -748,7 +726,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on Create Account button in checkout login/
 	 * registration page
@@ -769,7 +747,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to enter Email address for checkout create account
 	 */
@@ -788,7 +766,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date : 5/4/23
+	 * @Author : Vishnu
 	 * 
 	 * @Description: Method to enter the password for checkout create account
 	 */
@@ -805,7 +783,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Clicks on the Save and Continue button during checkout
 	 */
@@ -821,7 +799,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 6/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to enter Existing user name on checkout Login Page
 	 */
@@ -841,7 +819,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 6/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to enter Existing user password on checkout Login Page
 	 */
@@ -861,7 +839,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 6/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Clicks on Login button in checkout Login Page
 	 */
@@ -880,7 +858,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 6/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Clicks on Forgot password link in checkout Login Page
 	 */
@@ -899,7 +877,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 6/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to enter email address on Forgot Password Page
 	 */
@@ -917,7 +895,7 @@ public class app_WEL_Repo {
 
 	}
 	/*
-	 * @Date: 6/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on Submit button on ForgotPassword Page
 	 */
@@ -936,7 +914,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 6/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to enter new password in Reset password page
 	 */
@@ -953,7 +931,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 6/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description:Method to enter confirm password in Reset password page
 	 */
@@ -969,7 +947,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 6/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on Submit button on Reset Password Page
 	 */
@@ -987,7 +965,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 6/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Enters the email id in Yopmail
 	 */
@@ -1004,7 +982,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 6/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Clicks on check inbox in yopmail after entering user id
 	 */
@@ -1020,7 +998,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 6/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Clicks on Add Discount link in cart page
 	 */
@@ -1036,7 +1014,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 6/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Enters the Discount code in cart page
 	 */
@@ -1053,7 +1031,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 6/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Enters the Discount code in cart page
 	 */
@@ -1070,7 +1048,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 6/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Clicks on Discount Apply button in cart page
 	 */
@@ -1086,7 +1064,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 6/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Clicks on Discount Remove button in cart page
 	 */
@@ -1102,7 +1080,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on CIA Link On Home page
 	 */
@@ -1122,7 +1100,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on CFA Link On Home page
 	 */
@@ -1142,7 +1120,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on CPA Link On Home page
 	 */
@@ -1162,7 +1140,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on Shop courses button in CIA Products
 	 */
@@ -1182,7 +1160,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on View Course Button in CIA Product page
 	 */
@@ -1204,7 +1182,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on Apply student discount link on products'
 	 * page
@@ -1227,7 +1205,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on Switch to student discount link on products'
 	 * page
@@ -1249,7 +1227,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on View Course Button in CFA Product page
 	 */
@@ -1271,7 +1249,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on View Course link in CFA Product page
 	 */
@@ -1290,7 +1268,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to enter the Free Trial FirstName
 	 */
@@ -1307,7 +1285,7 @@ public class app_WEL_Repo {
 		}
 	}
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to enter the last name free frail form
 	 */
@@ -1324,7 +1302,7 @@ public class app_WEL_Repo {
 		}
 	}
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to enter new user on Free Trial form
 	 */
@@ -1344,7 +1322,7 @@ public class app_WEL_Repo {
 		}
 	}
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to select the country on free trial form
 	 */
@@ -1362,7 +1340,7 @@ public class app_WEL_Repo {
 		}
 	}
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to select the state from Free Trial form
 	 */
@@ -1380,7 +1358,7 @@ public class app_WEL_Repo {
 		}
 	}
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to enter the Password on Free Trial form
 	 */
@@ -1397,7 +1375,7 @@ public class app_WEL_Repo {
 		}
 	}
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on checkbox for for Free Trial Terms and
 	 * Conditions
@@ -1416,7 +1394,7 @@ public class app_WEL_Repo {
 		}
 	}
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on SignUp check box on Free Trial form
 	 */
@@ -1434,7 +1412,7 @@ public class app_WEL_Repo {
 		}
 	}
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on Sign In Button on Free Trial form
 	 */
@@ -1451,7 +1429,7 @@ public class app_WEL_Repo {
 		}
 	}
 	/*
-	 * @Date: 14/4/23
+	 * @Author:Vishnu
 	 * 
 	 * @Description: Method to click on WEL Icon on Free Trial form
 	 */
@@ -1469,7 +1447,7 @@ public class app_WEL_Repo {
 		}
 	}
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to enter email address on Free Trial Form
 	 */
@@ -1487,7 +1465,7 @@ public class app_WEL_Repo {
 		}
 	}
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to verify the CPA Text on Free Trial form
 	 */
@@ -1506,7 +1484,7 @@ public class app_WEL_Repo {
 		}
 	}
 	/*
-	 * @Date: 14/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to verify the CIA text on Free Trial Form
 	 */
@@ -1526,7 +1504,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 17/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to lick on Free Trial button
 	 */
@@ -1541,7 +1519,11 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to enter the New Address Button on Shipping page
+	 */
 	public void clickOnEnterNewAddressButtonOnShippingPage() throws IOException {
 		try {
 			EnterNewAddressButton.click();
@@ -1554,7 +1536,11 @@ public class app_WEL_Repo {
 
 		}
 	}
-
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to enter the FirstName
+	 */
 	public void firstName(String GNAME) throws IOException {
 		try {
 			firstName.clear();
@@ -1665,6 +1651,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to enter City on Shipping Page
+	 */
 	public void shipTownCity(String City) throws IOException {
 		try {
 			Thread.sleep(1000);
@@ -1678,11 +1669,12 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
-	}/*
-		 * @Author:Vishnu
-		 * 
-		 * @Description: Method to enter state on Shipping Page
-		 */
+	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to enter state on Shipping Page
+	 */
 
 	public void enterState(String state) throws IOException {
 		try {
@@ -1696,12 +1688,14 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport("User failed to enter State " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
-	}/*
-		 * @Author:Vishnu
-		 * 
-		 * @Description: Method to select use selected Shipping address on Address
-		 * doctor page
-		 */
+	}
+
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to select use selected Shipping address on Address
+	 * doctor page
+	 */
 
 	public WebElement returnUseSelectedShippingAddressButtonAddressDoctorPopUp() {
 		return UseSelectedShippingAddressButtonAddressDoctorPopUp;
@@ -1760,11 +1754,12 @@ public class app_WEL_Repo {
 					+ e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
-	}/*
-		 * @Author:Vishnu
-		 * 
-		 * @Description: Method to select the Country Billing Address Page
-		 */
+	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to select the Country Billing Address Page
+	 */
 
 	public void selectBillCountry(String country) throws IOException {
 		try {
@@ -1777,11 +1772,13 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport("User failed to select country " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
-	}/*
-		 * @Author:Vishnu
-		 * 
-		 * @Description: Method to enter the Address Line
-		 */
+	}
+
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to enter the Address Line
+	 */
 
 	public void addressLineOne(String ALineOne) throws IOException {
 		try {
@@ -1811,11 +1808,12 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
-	}/*
-		 * @Author:Vishnu
-		 * 
-		 * @Description: Method to enter City Shipping Page
-		 */
+	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to enter City Shipping Page
+	 */
 
 	public void enterCity(String City) throws IOException {
 		try {
@@ -1829,11 +1827,12 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
-	}/*
-		 * @Author:Vishnu
-		 * 
-		 * @Description: Method to enter PhoneNumber on Shipping page
-		 */
+	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to enter PhoneNumber on Shipping page
+	 */
 
 	public void enterPhoneNumber(String pohnenumber) throws IOException {
 		try {
@@ -1847,11 +1846,12 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
-	}/*
-		 * @Author:Vishnu
-		 * 
-		 * @Description: Method to enter the guest user
-		 */
+	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to enter the guest user
+	 */
 
 	public String enterGuestuser() throws IOException {
 		try {
@@ -1866,11 +1866,12 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return "";
 		}
-	}/*
-		 * @Author:Vishnu
-		 * 
-		 * @Description: Method to click on Create Account button Create Account form
-		 */
+	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to click on Create Account button Create Account form
+	 */
 
 	public void clickingOnCreateAccoutButton() throws IOException {
 		try {
@@ -1901,11 +1902,12 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
-	}/*
-		 * @Author:Vishnu
-		 * 
-		 * @Description: Method to enter the password
-		 */
+	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to enter the password
+	 */
 
 	public void enterPassword(String password) throws IOException {
 		try {
@@ -1917,11 +1919,12 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
-	}/*
-		 * @Author:Vishnu
-		 * 
-		 * @Description: Method to select the check box for Agreement
-		 */
+	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to select the check box for Agreement
+	 */
 
 	public void clickonAgreementCheckBox() throws IOException {
 		try {
@@ -1952,12 +1955,13 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
-	}/*
-		 * @Author:Vishnu
-		 * 
-		 * @Description: Method to click on Save and Continue button on Shipping Address
-		 * section
-		 */
+	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to click on Save and Continue button on Shipping Address
+	 * section
+	 */
 
 	public void shipSaveAndContinueButton() throws IOException {
 		try {
@@ -1991,13 +1995,12 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 
-	}/*
-		 * @Date: 31/01/23
-		 * 
-		 * @Author: Anindita
-		 * 
-		 * @Description: Clicks on the Add To Cart Button On PDP
-		 */
+	}
+	/*
+	 * @Author: Anindita
+	 * 
+	 * @Description: Clicks on the Add To Cart Button On PDP
+	 */
 
 	public void clickOnAddToCartButtonOnPDP() throws IOException {
 		try {
@@ -2140,6 +2143,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to verify the Paypal Text
+	 */
 	public void verifyPaypaltext() throws IOException {
 		try {
 			Reporting.updateTestReport(
@@ -2151,6 +2159,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to verify the Discount Text
+	 */
 	public void verifyDiscountText() throws IOException {
 		try {
 			Reporting.updateTestReport(DiscountMessage.getText() + " :messages is appeared.",
@@ -2194,11 +2207,12 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
-	}/*
-		 * @Author:Vishnu
-		 * 
-		 * @Description: Method to click on DeanDorton CMA Product
-		 */
+	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to click on DeanDorton CMA Product
+	 */
 
 	public void clickOnDeanDortonCMAProduct() throws IOException {
 		try {
@@ -2247,8 +2261,6 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 31/01/23
-	 * 
 	 * @Author: Vishnu
 	 * 
 	 * @Decription: Checks if "Don't ship to PO Box" message is present or not
@@ -2265,8 +2277,6 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Date: 31/01/23
-	 * 
 	 * @Author: Vishnu
 	 * 
 	 * @Decription: Checks if "Don't ship to PO Box" message is present or not
@@ -2282,6 +2292,11 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: Clicks on CPAPrinteBook
+	 */
 	public void clickonCPAPrinteBook() throws IOException {
 		try {
 			CPAPrinteBook.click();
@@ -2314,6 +2329,11 @@ public class app_WEL_Repo {
 
 	}
 
+	/*
+	 * @Author: Vishnu
+	 * 
+	 * @Description: Clicks on CFA link on HomePage
+	 */
 	public void clickonCFAlinkOnHomePage() throws IOException {
 
 		try {
@@ -2328,23 +2348,26 @@ public class app_WEL_Repo {
 		}
 
 	}
+
 	/*
 	 * @Author: Anindita
+	 * 
 	 * @Description: Clicks on back to cart button
 	 */
-	public void clickOnBackToCartButton() throws IOException{
+	public void clickOnBackToCartButton() throws IOException {
 		try {
 			BackToCartButton.click();
 			Reporting.updateTestReport("Back to cart button was clicked successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+
 		}
-		catch(Exception e) {
-			
-		}Reporting.updateTestReport("Back to cart button couldn't be clicked ",
-				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		Reporting.updateTestReport("Back to cart button couldn't be clicked ", CaptureScreenshot.getScreenshot(SS_path),
+				StatusDetails.PASS);
 	}
 	/*
 	 * @Author:Anindita
+	 * 
 	 * @Description: Method to select the quantity on cart Page
 	 */
 
@@ -2360,84 +2383,99 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+
 	/*
 	 * @Author: Anindita
-	 * @Description: Fetches the shipping charge for shipping methods by passing the shipping method name
+	 * 
+	 * @Description: Fetches the shipping charge for shipping methods by passing the
+	 * shipping method name
 	 */
-	public BigDecimal fetchShippingChargeNonUS(WebDriver driver,String shippingMethod) throws IOException{
+	public BigDecimal fetchShippingChargeNonUS(WebDriver driver, String shippingMethod) throws IOException {
 		try {
-			String xpathOfShippingCharge="//label[@class='deliveryModeLabel' and contains(text(),'"+
-					shippingMethod+"')]/span[@class='textBold']";
-			String xpathOfShippingMethodName="//label[@class='deliveryModeLabel' and contains(text(),'"+
-					shippingMethod+"')]";
-			String charge=driver.findElement(By.xpath(xpathOfShippingCharge)).getText().trim();
-			Reporting.updateTestReport("Shipping charge value: "+charge+" was returned for shipping method: "+
-					driver.findElement(By.xpath(xpathOfShippingMethodName)).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			String xpathOfShippingCharge = "//label[@class='deliveryModeLabel' and contains(text(),'" + shippingMethod
+					+ "')]/span[@class='textBold']";
+			String xpathOfShippingMethodName = "//label[@class='deliveryModeLabel' and contains(text(),'"
+					+ shippingMethod + "')]";
+			String charge = driver.findElement(By.xpath(xpathOfShippingCharge)).getText().trim();
+			Reporting.updateTestReport(
+					"Shipping charge value: " + charge + " was returned for shipping method: "
+							+ driver.findElement(By.xpath(xpathOfShippingMethodName)).getText(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return new BigDecimal(charge.substring(1));
 
-		}
-		catch(Exception e) {
-			Reporting.updateTestReport("Shipping charge couldn't be fetched", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Shipping charge couldn't be fetched", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
 			return new BigDecimal(0.00);
 		}
 	}
+
 	/*
 	 * @Author: Anindita
-	 * @Description: Fetches the shipping charge for shipping methods by passing the shipping method name
+	 * 
+	 * @Description: Fetches the shipping charge for shipping methods by passing the
+	 * shipping method name
 	 */
-	public BigDecimal fetchShippingCharge(WebDriver driver,String shippingMethod) throws IOException{
+	public BigDecimal fetchShippingCharge(WebDriver driver, String shippingMethod) throws IOException {
 		try {
-			String xpathOfShippingCharge="//label[@class='deliveryModeLabel deliveryModeLabelExceptFirst' and contains(text(),'"+
-					shippingMethod+"')]/span[@class='textBold']";
-			String xpathOfShippingMethodName="//label[@class='deliveryModeLabel deliveryModeLabelExceptFirst' and contains(text(),'"+
-					shippingMethod+"')]";
-			String charge=driver.findElement(By.xpath(xpathOfShippingCharge)).getText().trim();
-			System.out.println("*"+charge);
-			Reporting.updateTestReport("Shipping charge value: "+charge+" was returned for shipping method: "+
-					driver.findElement(By.xpath(xpathOfShippingMethodName)).getText(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			String xpathOfShippingCharge = "//label[@class='deliveryModeLabel deliveryModeLabelExceptFirst' and contains(text(),'"
+					+ shippingMethod + "')]/span[@class='textBold']";
+			String xpathOfShippingMethodName = "//label[@class='deliveryModeLabel deliveryModeLabelExceptFirst' and contains(text(),'"
+					+ shippingMethod + "')]";
+			String charge = driver.findElement(By.xpath(xpathOfShippingCharge)).getText().trim();
+			System.out.println("*" + charge);
+			Reporting.updateTestReport(
+					"Shipping charge value: " + charge + " was returned for shipping method: "
+							+ driver.findElement(By.xpath(xpathOfShippingMethodName)).getText(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return new BigDecimal(charge.substring(1));
 
-		}
-		catch(Exception e) {
-			Reporting.updateTestReport("Shipping charge couldn't be fetched", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Shipping charge couldn't be fetched", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.FAIL);
 			return new BigDecimal(0.00);
 		}
 	}
+
 	/*
 	 * @Author: Anindita
+	 * 
 	 * @Description: Clicks outside the email id field in login checkout page
 	 */
-	public void clickOutsideTheEmailIdField() throws IOException{
+	public void clickOutsideTheEmailIdField() throws IOException {
 		try {
 			LoginCheckoutPageHeading.click();
 			Reporting.updateTestReport("Outside the email id field was clicked",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			Reporting.updateTestReport("Outside the email id field couldn't be clicked",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+
 	/*
 	 * @Author: Anindita
-	 * @Description: Checks error message after entering invalid email id in login checkout page
+	 * 
+	 * @Description: Checks error message after entering invalid email id in login
+	 * checkout page
 	 */
-	public void checkOnClickErrorMessageInCheckoutLoginRegistrationPage() throws IOException{
+	public void checkOnClickErrorMessageInCheckoutLoginRegistrationPage() throws IOException {
 		try {
-			if(ErrorMessageAfterEnteringInvalidEmailId.getText().contains(excelOperation.getTestData("OnClickErrorMessageForEmailId", "Generic_Messages", "Data")))
+			if (ErrorMessageAfterEnteringInvalidEmailId.getText()
+					.contains(excelOperation.getTestData("OnClickErrorMessageForEmailId", "Generic_Messages", "Data")))
 				Reporting.updateTestReport("Proper error message was displayed",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else
 				Reporting.updateTestReport("Proper error message was not displayed",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			Reporting.updateTestReport("Proper error message was not displayed",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+
 	/*
-	 * @Date: 01/02/23
+	 * 
 	 * 
 	 * @Author: Anindita
 	 * 
@@ -2455,7 +2493,9 @@ public class app_WEL_Repo {
 	}
 	/*
 	 * @Author: Anindita
-	 * @Description: Method to enter a new user id which is not auto generated and passed from datasheet
+	 * 
+	 * @Description: Method to enter a new user id which is not auto generated and
+	 * passed from datasheet
 	 */
 
 	public void enterNewUserIdInCheckoutLoginRegistrationNonAutoGenerated(String emailId) throws IOException {

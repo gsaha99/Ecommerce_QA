@@ -33,7 +33,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 	app_WEL_Repo WEL;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
-	public static String WEL_Homepage_URL = excelOperation.getTestData("WEL_Homepage_URL", "Generic_Dataset", "Data");
+	private static String WEL_Homepage_URL = excelOperation.getTestData("WEL_Homepage_URL", "Generic_Dataset", "Data");
 
 	@BeforeTest
 	public void initializeRepo() {
@@ -284,7 +284,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														Reporting.updateTestReport(
 																"User was not in shipping step and caused timeout exception",
 																CaptureScreenshot.getScreenshot(SS_path),
-																StatusDetails.PASS);
+																StatusDetails.FAIL);
 													}
 												} catch (Exception e) {
 													Reporting.updateTestReport(
@@ -440,7 +440,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"User was not in shipping step and caused timeout exception",
 															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
+															StatusDetails.FAIL);
 												}
 
 											} catch (Exception e) {
@@ -944,7 +944,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"Student discount was not applied in cart page",
 															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
+															StatusDetails.FAIL);
 												}
 
 											} catch (Exception e) {
@@ -1239,7 +1239,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																																CaptureScreenshot
 																																		.getScreenshot(
 																																				SS_path),
-																																StatusDetails.PASS);
+																																StatusDetails.FAIL);
 																											}
 
 																										} catch (Exception e) {
@@ -1656,8 +1656,6 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									else
 										Reporting.updateTestReport("Failed to Load the CFA FreeTail Page",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									WEL.logOutWEL(driver,
-											excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 								}
 
 								catch (Exception e) {
@@ -1685,7 +1683,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("The homepage was not loaded and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -1772,15 +1770,39 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												try {
 													wait.until(ExpectedConditions.visibilityOfElementLocated(
 															By.xpath("//h5[@id='shippingAddressTitle']/span")));
-													Reporting.updateTestReport(
-															"User was in shipping step after successful registration",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
+													WEL.firstName(excelOperation.getTestData("TC11", "WEL_Test_Data",
+															"First_Name"));
+													WEL.lastName(excelOperation.getTestData("TC11", "WEL_Test_Data",
+															"Last_Name"));
+													WEL.selectShipCountry(excelOperation.getTestData("TC11",
+															"WEL_Test_Data", "Shipping_Country"));
+													WEL.shipAddressLineOne(excelOperation.getTestData("TC11",
+															"WEL_Test_Data", "Shipping_Address_line1"));
+													WEL.shipTownCity(excelOperation.getTestData("TC11", "WEL_Test_Data",
+															"Shipping_City/ Province"));
+													WEL.enterState(excelOperation.getTestData("TC11", "WEL_Test_Data",
+															"Shipping_State"));
+													WEL.shipPostCode(excelOperation.getTestData("TC11", "WEL_Test_Data",
+															"Shipping_Zip_Code"));
+													WEL.shipPhonenumber(excelOperation.getTestData("TC11",
+															"WEL_Test_Data", "Shipping_Phone_Number"));
+													WEL.clickingOnSaveAndContinue();
+													try {
+														if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
+																.isDisplayed())
+															WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+													} catch (Exception e) {
+														Reporting.updateTestReport(
+																"Failed to click Address on Address SUggestion due to timeout exception",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.INFO);
+													}
+													
 												} catch (Exception e) {
 													Reporting.updateTestReport(
 															"User was not in shipping step and caused timeout exception",
 															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
+															StatusDetails.FAIL);
 												}
 
 											} catch (Exception e) {
@@ -1789,32 +1811,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 											// WEL.clickOnEnterNewAddressButtonOnShippingPage();
-											WEL.firstName(
-													excelOperation.getTestData("TC11", "WEL_Test_Data", "First_Name"));
-											WEL.lastName(
-													excelOperation.getTestData("TC11", "WEL_Test_Data", "Last_Name"));
-											WEL.selectShipCountry(excelOperation.getTestData("TC11", "WEL_Test_Data",
-													"Shipping_Country"));
-											WEL.shipAddressLineOne(excelOperation.getTestData("TC11", "WEL_Test_Data",
-													"Shipping_Address_line1"));
-											WEL.shipTownCity(excelOperation.getTestData("TC11", "WEL_Test_Data",
-													"Shipping_City/ Province"));
-											WEL.enterState(excelOperation.getTestData("TC11", "WEL_Test_Data",
-													"Shipping_State"));
-											WEL.shipPostCode(excelOperation.getTestData("TC11", "WEL_Test_Data",
-													"Shipping_Zip_Code"));
-											WEL.shipPhonenumber(excelOperation.getTestData("TC11", "WEL_Test_Data",
-													"Shipping_Phone_Number"));
-											WEL.clickingOnSaveAndContinue();
-											try {
-												if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
-														.isDisplayed())
-													WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
-											} catch (Exception e) {
-												Reporting.updateTestReport(
-														"Failed to click Address on Address SUggestion due to timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-											}
+
 										} catch (Exception e) {
 											Reporting.updateTestReport(
 													"Checkout button was not clickable in cart page and caused timeout exception",
@@ -1946,7 +1943,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"Student discount was not applied in cart page",
 															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
+															StatusDetails.FAIL);
 												}
 												try {
 													wait.until(ExpectedConditions
@@ -1963,6 +1960,33 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														try {
 															wait.until(ExpectedConditions.visibilityOfElementLocated(
 																	By.xpath("//h5[@id='shippingAddressTitle']/span")));
+															WEL.firstName(excelOperation.getTestData("TC12",
+																	"WEL_Test_Data", "First_Name"));
+															WEL.lastName(excelOperation.getTestData("TC12",
+																	"WEL_Test_Data", "Last_Name"));
+															WEL.selectShipCountry(excelOperation.getTestData("TC12",
+																	"WEL_Test_Data", "Shipping_Country"));
+															WEL.shipAddressLineOne(excelOperation.getTestData("TC12",
+																	"WEL_Test_Data", "Shipping_Address_line1"));
+															WEL.shipTownCity(excelOperation.getTestData("TC12",
+																	"WEL_Test_Data", "Shipping_City/ Province"));
+															WEL.enterState(excelOperation.getTestData("TC12",
+																	"WEL_Test_Data", "Shipping_State"));
+															WEL.shipPostCode(excelOperation.getTestData("TC12",
+																	"WEL_Test_Data", "Shipping_Zip_Code"));
+															WEL.shipPhonenumber(excelOperation.getTestData("TC12",
+																	"WEL_Test_Data", "Shipping_Phone_Number"));
+															WEL.clickingOnSaveAndContinue();
+															try {
+																if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
+																		.isDisplayed())
+																	WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+															} catch (Exception e) {
+																Reporting.updateTestReport(
+																		"Failed to click Address on Address SUggestion due to timeout exception",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.INFO);
+															}
 															Reporting.updateTestReport(
 																	"User was in shipping step after successful registration",
 																	CaptureScreenshot.getScreenshot(SS_path),
@@ -1971,7 +1995,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 															Reporting.updateTestReport(
 																	"User was not in shipping step and caused timeout exception",
 																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.PASS);
+																	StatusDetails.FAIL);
 														}
 
 													} catch (Exception e) {
@@ -1981,33 +2005,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																StatusDetails.FAIL);
 													}
 													// WEL.clickOnEnterNewAddressButtonOnShippingPage();
-													WEL.firstName(excelOperation.getTestData("TC12", "WEL_Test_Data",
-															"First_Name"));
-													WEL.lastName(excelOperation.getTestData("TC12", "WEL_Test_Data",
-															"Last_Name"));
-													WEL.selectShipCountry(excelOperation.getTestData("TC12",
-															"WEL_Test_Data", "Shipping_Country"));
-													WEL.shipAddressLineOne(excelOperation.getTestData("TC12",
-															"WEL_Test_Data", "Shipping_Address_line1"));
-													WEL.shipTownCity(excelOperation.getTestData("TC12", "WEL_Test_Data",
-															"Shipping_City/ Province"));
-													WEL.enterState(excelOperation.getTestData("TC12", "WEL_Test_Data",
-															"Shipping_State"));
-													WEL.shipPostCode(excelOperation.getTestData("TC12", "WEL_Test_Data",
-															"Shipping_Zip_Code"));
-													WEL.shipPhonenumber(excelOperation.getTestData("TC12",
-															"WEL_Test_Data", "Shipping_Phone_Number"));
-													WEL.clickingOnSaveAndContinue();
-													try {
-														if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
-																.isDisplayed())
-															WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
-													} catch (Exception e) {
-														Reporting.updateTestReport(
-																"Failed to click Address on Address SUggestion due to timeout exception",
-																CaptureScreenshot.getScreenshot(SS_path),
-																StatusDetails.INFO);
-													}
+
 													WEL.verificationOfStudentForUS();
 													try {
 														wait.until(ExpectedConditions.elementToBeClickable(
@@ -2159,6 +2157,33 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												try {
 													wait.until(ExpectedConditions.visibilityOfElementLocated(
 															By.xpath("//h5[@id='shippingAddressTitle']/span")));
+													WEL.firstName(excelOperation.getTestData("TC13", "WEL_Test_Data",
+															"First_Name"));
+													WEL.lastName(excelOperation.getTestData("TC13", "WEL_Test_Data",
+															"Last_Name"));
+													WEL.selectShipCountry(excelOperation.getTestData("TC13",
+															"WEL_Test_Data", "Shipping_Country"));
+													WEL.shipAddressLineOne(excelOperation.getTestData("TC13",
+															"WEL_Test_Data", "Shipping_Address_line1"));
+													WEL.shipTownCity(excelOperation.getTestData("TC13", "WEL_Test_Data",
+															"Shipping_City/ Province"));
+													WEL.enterState(excelOperation.getTestData("TC13", "WEL_Test_Data",
+															"Shipping_State"));
+													WEL.shipPostCode(excelOperation.getTestData("TC13", "WEL_Test_Data",
+															"Shipping_Zip_Code"));
+													WEL.shipPhonenumber(excelOperation.getTestData("TC13",
+															"WEL_Test_Data", "Shipping_Phone_Number"));
+													WEL.shipSaveAndContinueButton();
+													try {
+														if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
+																.isDisplayed())
+															WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+													} catch (Exception e) {
+														Reporting.updateTestReport(
+																"Failed to click Address on Address SUggestion due to timeout exception",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.INFO);
+													}
 													Reporting.updateTestReport(
 															"User was in shipping step after successful registration",
 															CaptureScreenshot.getScreenshot(SS_path),
@@ -2167,7 +2192,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"User was not in shipping step and caused timeout exception",
 															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
+															StatusDetails.FAIL);
 												}
 
 											} catch (Exception e) {
@@ -2176,32 +2201,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 											// WEL.clickOnEnterNewAddressButtonOnShippingPage();
-											WEL.firstName(
-													excelOperation.getTestData("TC13", "WEL_Test_Data", "First_Name"));
-											WEL.lastName(
-													excelOperation.getTestData("TC13", "WEL_Test_Data", "Last_Name"));
-											WEL.selectShipCountry(excelOperation.getTestData("TC13", "WEL_Test_Data",
-													"Shipping_Country"));
-											WEL.shipAddressLineOne(excelOperation.getTestData("TC13", "WEL_Test_Data",
-													"Shipping_Address_line1"));
-											WEL.shipTownCity(excelOperation.getTestData("TC13", "WEL_Test_Data",
-													"Shipping_City/ Province"));
-											WEL.enterState(excelOperation.getTestData("TC13", "WEL_Test_Data",
-													"Shipping_State"));
-											WEL.shipPostCode(excelOperation.getTestData("TC13", "WEL_Test_Data",
-													"Shipping_Zip_Code"));
-											WEL.shipPhonenumber(excelOperation.getTestData("TC13", "WEL_Test_Data",
-													"Shipping_Phone_Number"));
-											WEL.shipSaveAndContinueButton();
-											try {
-												if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
-														.isDisplayed())
-													WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
-											} catch (Exception e) {
-												Reporting.updateTestReport(
-														"Failed to click Address on Address SUggestion due to timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-											}
+
 											try {
 												wait.until(ExpectedConditions.visibilityOfElementLocated(
 														By.xpath("//div[@class='helpButton']")));
@@ -2375,7 +2375,27 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												WEL.clickOnLoginButtonInCheckoutLoginPage();
 												try {
 													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("//h5[@id='shippingAddressTitle']/span")));
+															By.xpath("//h5[@class='welCommonHeadingTitle']")));
+													WEL.firstName(excelOperation.getTestData("TC14", "WEL_Test_Data",
+															"First_Name"));
+													WEL.lastName(excelOperation.getTestData("TC14", "WEL_Test_Data",
+															"Last_Name"));
+
+													WEL.selectBillCountry(excelOperation.getTestData("TC14",
+															"WEL_Test_Data", "Bill_Country"));
+													WEL.addressLineOne(excelOperation.getTestData("TC14",
+															"WEL_Test_Data", "Bill_Address_line1"));
+													WEL.enterZipcode(excelOperation.getTestData("TC14", "WEL_Test_Data",
+															"Bill_Zip_Code"));
+													WEL.enterState(excelOperation.getTestData("TC14", "WEL_Test_Data",
+															"Bill_State"));
+													WEL.enterCity(excelOperation.getTestData("TC14", "WEL_Test_Data",
+															"Bill_City/ Province"));
+													WEL.enterPhoneNumber(excelOperation.getTestData("TC14",
+															"WEL_Test_Data", "Bill_Phone_Number"));
+
+													// WEL.clickingOnSaveAndContinue();
+
 													Reporting.updateTestReport(
 															"User was in Billing step after successful registration",
 															CaptureScreenshot.getScreenshot(SS_path),
@@ -2384,7 +2404,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"User was not in shipping step and caused timeout exception",
 															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
+															StatusDetails.FAIL);
 												}
 
 											} catch (Exception e) {
@@ -2392,26 +2412,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														"User was not redirected to checkout login/ registration page and caused timeout exception",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
-											// WEL.clickOnEnterNewAddressButtonOnShippingPage();
-											WEL.firstName(
-													excelOperation.getTestData("TC14", "WEL_Test_Data", "First_Name"));
-											WEL.lastName(
-													excelOperation.getTestData("TC14", "WEL_Test_Data", "Last_Name"));
 
-											WEL.selectBillCountry(excelOperation.getTestData("TC14", "WEL_Test_Data",
-													"Bill_Country"));
-											WEL.addressLineOne(excelOperation.getTestData("TC14", "WEL_Test_Data",
-													"Bill_Address_line1"));
-											WEL.enterZipcode(excelOperation.getTestData("TC14", "WEL_Test_Data",
-													"Bill_Zip_Code"));
-											WEL.enterState(
-													excelOperation.getTestData("TC14", "WEL_Test_Data", "Bill_State"));
-											WEL.enterCity(excelOperation.getTestData("TC14", "WEL_Test_Data",
-													"Bill_City/ Province"));
-											WEL.enterPhoneNumber(excelOperation.getTestData("TC14", "WEL_Test_Data",
-													"Bill_Phone_Number"));
-
-											// WEL.clickingOnSaveAndContinue();
 											driver.switchTo().frame(driver
 													.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 											try {
@@ -2569,7 +2570,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									} catch (Exception e) {
 										Reporting.updateTestReport(
 												"Failed to click on CMA eBook caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 									ScrollingWebPage.PageDown(driver, SS_path);
 									try {
@@ -2612,16 +2613,33 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												WEL.clickOnLoginButtonInCheckoutLoginPage();
 												try {
 													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("//h5[@id='shippingAddressTitle']/span")));
+															By.xpath("//h5[@class='welCommonHeadingTitle']")));
+													WEL.firstName(excelOperation.getTestData("TC15", "WEL_Test_Data",
+															"First_Name"));
+													WEL.lastName(excelOperation.getTestData("TC15", "WEL_Test_Data",
+															"Last_Name"));
+													WEL.selectBillCountry(excelOperation.getTestData("TC15",
+															"WEL_Test_Data", "Bill_Country"));
+													WEL.addressLineOne(excelOperation.getTestData("TC15",
+															"WEL_Test_Data", "Bill_Address_line1"));
+													WEL.enterZipcode(excelOperation.getTestData("TC15", "WEL_Test_Data",
+															"Bill_Zip_Code"));
+													WEL.enterState(excelOperation.getTestData("TC15", "WEL_Test_Data",
+															"Bill_State"));
+													WEL.enterCity(excelOperation.getTestData("TC15", "WEL_Test_Data",
+															"Bill_City/ Province"));
+													WEL.enterPhoneNumber(excelOperation.getTestData("TC15",
+															"WEL_Test_Data", "Bill_Phone_Number"));
+													WEL.verifyPaypaltext();
 													Reporting.updateTestReport(
 															"User was in Billing step after successful registration",
 															CaptureScreenshot.getScreenshot(SS_path),
 															StatusDetails.PASS);
 												} catch (Exception e) {
 													Reporting.updateTestReport(
-															"User was not in shipping step and caused timeout exception",
+															"User was not in billing step and caused timeout exception",
 															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
+															StatusDetails.FAIL);
 												}
 
 											} catch (Exception e) {
@@ -2630,23 +2648,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 											// WEL.clickOnEnterNewAddressButtonOnShippingPage();
-											WEL.firstName(
-													excelOperation.getTestData("TC15", "WEL_Test_Data", "First_Name"));
-											WEL.lastName(
-													excelOperation.getTestData("TC15", "WEL_Test_Data", "Last_Name"));
-											WEL.selectBillCountry(excelOperation.getTestData("TC15", "WEL_Test_Data",
-													"Bill_Country"));
-											WEL.addressLineOne(excelOperation.getTestData("TC15", "WEL_Test_Data",
-													"Bill_Address_line1"));
-											WEL.enterZipcode(excelOperation.getTestData("TC15", "WEL_Test_Data",
-													"Bill_Zip_Code"));
-											WEL.enterState(
-													excelOperation.getTestData("TC15", "WEL_Test_Data", "Bill_State"));
-											WEL.enterCity(excelOperation.getTestData("TC15", "WEL_Test_Data",
-													"Bill_City/ Province"));
-											WEL.enterPhoneNumber(excelOperation.getTestData("TC15", "WEL_Test_Data",
-													"Bill_Phone_Number"));
-											WEL.verifyPaypaltext();
+
 										} catch (Exception e) {
 											Reporting.updateTestReport(
 													"Checkout button was not clickable in cart page and caused timeout exception",
@@ -2775,6 +2777,35 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												try {
 													wait.until(ExpectedConditions.visibilityOfElementLocated(
 															By.xpath("//h5[@id='shippingAddressTitle']/span")));
+													WEL.firstName(excelOperation.getTestData("TC16", "WEL_Test_Data",
+															"First_Name"));
+													WEL.lastName(excelOperation.getTestData("TC16", "WEL_Test_Data",
+															"Last_Name"));
+													WEL.selectShipCountry(excelOperation.getTestData("TC16",
+															"WEL_Test_Data", "Shipping_Country"));
+													WEL.shipAddressLineOne(excelOperation.getTestData("TC16",
+															"WEL_Test_Data", "Shipping_Address_line1"));
+													WEL.shipTownCity(excelOperation.getTestData("TC16", "WEL_Test_Data",
+															"Shipping_City/ Province"));
+													WEL.enterState(excelOperation.getTestData("TC16", "WEL_Test_Data",
+															"Shipping_State"));
+													WEL.shipPostCode(excelOperation.getTestData("TC16", "WEL_Test_Data",
+															"Shipping_Zip_Code"));
+													WEL.shipPhonenumber(excelOperation.getTestData("TC16",
+															"WEL_Test_Data", "Shipping_Phone_Number"));
+													WEL.shipSaveAndContinueButton();
+													try {
+														if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
+																.isDisplayed())
+															WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+													} catch (Exception e) {
+														Reporting.updateTestReport(
+																"Failed to click Address on Address SUggestion due to timeout exception",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.INFO);
+													}
+													WEL.clickingOnSaveAndContinue();
+													WEL.verifyPaypalCredittext();
 													Reporting.updateTestReport(
 															"User was in shipping step after successful registration",
 															CaptureScreenshot.getScreenshot(SS_path),
@@ -2783,7 +2814,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"User was not in shipping step and caused timeout exception",
 															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
+															StatusDetails.FAIL);
 												}
 
 											} catch (Exception e) {
@@ -2792,34 +2823,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 											// WEL.clickOnEnterNewAddressButtonOnShippingPage();
-											WEL.firstName(
-													excelOperation.getTestData("TC16", "WEL_Test_Data", "First_Name"));
-											WEL.lastName(
-													excelOperation.getTestData("TC16", "WEL_Test_Data", "Last_Name"));
-											WEL.selectShipCountry(excelOperation.getTestData("TC16", "WEL_Test_Data",
-													"Shipping_Country"));
-											WEL.shipAddressLineOne(excelOperation.getTestData("TC16", "WEL_Test_Data",
-													"Shipping_Address_line1"));
-											WEL.shipTownCity(excelOperation.getTestData("TC16", "WEL_Test_Data",
-													"Shipping_City/ Province"));
-											WEL.enterState(excelOperation.getTestData("TC16", "WEL_Test_Data",
-													"Shipping_State"));
-											WEL.shipPostCode(excelOperation.getTestData("TC16", "WEL_Test_Data",
-													"Shipping_Zip_Code"));
-											WEL.shipPhonenumber(excelOperation.getTestData("TC16", "WEL_Test_Data",
-													"Shipping_Phone_Number"));
-											WEL.shipSaveAndContinueButton();
-											try {
-												if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
-														.isDisplayed())
-													WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
-											} catch (Exception e) {
-												Reporting.updateTestReport(
-														"Failed to click Address on Address SUggestion due to timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-											}
-											WEL.clickingOnSaveAndContinue();
-											WEL.verifyPaypalCredittext();
+
 										} catch (Exception e) {
 											Reporting.updateTestReport(
 													"Checkout button was not clickable in cart page and caused timeout exception",
@@ -3218,57 +3222,59 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												try {
 													wait.until(ExpectedConditions.visibilityOfElementLocated(
 															By.xpath("//h5[@id='shippingAddressTitle']/span")));
-													Reporting.updateTestReport(
-															"User was in shipping step after successful registration",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
-												} catch (Exception e) {
-													Reporting.updateTestReport(
-															"User was not in shipping step and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
-												}
-
-											} catch (Exception e) {
-												Reporting.updateTestReport(
-														"User was not redirected to checkout login/ registration page and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-											}
-											// WEL.clickOnEnterNewAddressButtonOnShippingPage();
-											WEL.firstName(
-													excelOperation.getTestData("TC20", "WEL_Test_Data", "First_Name"));
-											WEL.lastName(
-													excelOperation.getTestData("TC20", "WEL_Test_Data", "Last_Name"));
-											Thread.sleep(500);
-											WEL.selectShipCountry(excelOperation.getTestData("TC20", "WEL_Test_Data",
-													"Shipping_Country"));
-											try {
-												wait.until(ExpectedConditions
-														.visibilityOfElementLocated(By.xpath("//input[@id='line1']")));
-												try {
-													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("//div[@class='helpButton']")));
-													WEL.shipAddressLineOne(excelOperation.getTestData("TC20",
-															"WEL_Test_Data", "Shipping_Address_line1"));
-													WEL.shipTownCity(excelOperation.getTestData("TC20", "WEL_Test_Data",
-															"Shipping_City/ Province"));
-													WEL.enterState(excelOperation.getTestData("TC20", "WEL_Test_Data",
-															"Shipping_State"));
-													WEL.shipPostCode(excelOperation.getTestData("TC20", "WEL_Test_Data",
-															"Shipping_Zip_Code"));
-													WEL.shipPhonenumber(excelOperation.getTestData("TC20",
-															"WEL_Test_Data", "Shipping_Phone_Number"));
-													WEL.clickingOnSaveAndContinue();
+													WEL.firstName(excelOperation.getTestData("TC20", "WEL_Test_Data",
+															"First_Name"));
+													WEL.lastName(excelOperation.getTestData("TC20", "WEL_Test_Data",
+															"Last_Name"));
+													Thread.sleep(500);
+													WEL.selectShipCountry(excelOperation.getTestData("TC20",
+															"WEL_Test_Data", "Shipping_Country"));
 													try {
-														if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
-																.isDisplayed())
-															WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+														wait.until(ExpectedConditions.visibilityOfElementLocated(
+																By.xpath("//input[@id='line1']")));
+														try {
+															wait.until(ExpectedConditions.visibilityOfElementLocated(
+																	By.xpath("//div[@class='helpButton']")));
+															WEL.shipAddressLineOne(excelOperation.getTestData("TC20",
+																	"WEL_Test_Data", "Shipping_Address_line1"));
+															WEL.shipTownCity(excelOperation.getTestData("TC20",
+																	"WEL_Test_Data", "Shipping_City/ Province"));
+															WEL.enterState(excelOperation.getTestData("TC20",
+																	"WEL_Test_Data", "Shipping_State"));
+															WEL.shipPostCode(excelOperation.getTestData("TC20",
+																	"WEL_Test_Data", "Shipping_Zip_Code"));
+															WEL.shipPhonenumber(excelOperation.getTestData("TC20",
+																	"WEL_Test_Data", "Shipping_Phone_Number"));
+															WEL.clickingOnSaveAndContinue();
+															try {
+																if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
+																		.isDisplayed())
+																	WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+															} catch (Exception e) {
+																Reporting.updateTestReport(
+																		"Failed to click Address on Address SUggestion due to timeout exception",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.INFO);
+															}
+
+															Reporting.updateTestReport(
+																	"User was in shipping step after successful registration",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.PASS);
+														} catch (Exception e) {
+															Reporting.updateTestReport(
+																	"User was not in shipping step and caused timeout exception",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
+														}
+
 													} catch (Exception e) {
 														Reporting.updateTestReport(
-																"Failed to click Address on Address SUggestion due to timeout exception",
+																"User was not redirected to checkout login/ registration page and caused timeout exception",
 																CaptureScreenshot.getScreenshot(SS_path),
-																StatusDetails.INFO);
+																StatusDetails.FAIL);
 													}
+													// WEL.clickOnEnterNewAddressButtonOnShippingPage();
 													ScrollingWebPage.PageScrolldown(driver, 0, 350, SS_path);
 												} catch (Exception e) {
 													Reporting.updateTestReport(
@@ -3404,6 +3410,53 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												try {
 													wait.until(ExpectedConditions.visibilityOfElementLocated(
 															By.xpath("//h5[@id='shippingAddressTitle']/span")));
+													WEL.firstName(excelOperation.getTestData("TC21", "WEL_Test_Data",
+															"First_Name"));
+													WEL.lastName(excelOperation.getTestData("TC21", "WEL_Test_Data",
+															"Last_Name"));
+													Thread.sleep(500);
+													WEL.selectShipCountry(excelOperation.getTestData("TC21",
+															"WEL_Test_Data", "Shipping_Country"));
+													try {
+														wait.until(ExpectedConditions.visibilityOfElementLocated(
+																By.xpath("//input[@id='line1']")));
+														try {
+															wait.until(ExpectedConditions.visibilityOfElementLocated(
+																	By.xpath("//div[@class='helpButton']")));
+															WEL.shipAddressLineOne(excelOperation.getTestData("TC21",
+																	"WEL_Test_Data", "Shipping_Address_line1"));
+															WEL.shipTownCity(excelOperation.getTestData("TC21",
+																	"WEL_Test_Data", "Shipping_City/ Province"));
+															WEL.enterState(excelOperation.getTestData("TC21",
+																	"WEL_Test_Data", "Shipping_State"));
+															WEL.shipPostCode(excelOperation.getTestData("TC21",
+																	"WEL_Test_Data", "Shipping_Zip_Code"));
+															WEL.shipPhonenumber(excelOperation.getTestData("TC21",
+																	"WEL_Test_Data", "Shipping_Phone_Number"));
+															WEL.clickingOnSaveAndContinue();
+															try {
+																if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
+																		.isDisplayed())
+																	WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+															} catch (Exception e) {
+																Reporting.updateTestReport(
+																		"Failed to click Address on Address SUggestion due to timeout exception",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.INFO);
+															}
+															ScrollingWebPage.PageScrolldown(driver, 0, 350, SS_path);
+														} catch (Exception e) {
+															Reporting.updateTestReport(
+																	"Help button was not visible and caused timeout exception",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
+														}
+													} catch (Exception e) {
+														Reporting.updateTestReport(
+																"Address line 1 was not clickable and caused timeout exception",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+													}
 													Reporting.updateTestReport(
 															"User was in shipping step after successful registration",
 															CaptureScreenshot.getScreenshot(SS_path),
@@ -3412,7 +3465,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"User was not in shipping step and caused timeout exception",
 															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
+															StatusDetails.FAIL);
 												}
 
 											} catch (Exception e) {
@@ -3421,52 +3474,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 											// WEL.clickOnEnterNewAddressButtonOnShippingPage();
-											WEL.firstName(
-													excelOperation.getTestData("TC21", "WEL_Test_Data", "First_Name"));
-											WEL.lastName(
-													excelOperation.getTestData("TC21", "WEL_Test_Data", "Last_Name"));
-											Thread.sleep(500);
-											WEL.selectShipCountry(excelOperation.getTestData("TC21", "WEL_Test_Data",
-													"Shipping_Country"));
-											try {
-												wait.until(ExpectedConditions
-														.visibilityOfElementLocated(By.xpath("//input[@id='line1']")));
-												try {
-													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("//div[@class='helpButton']")));
-													WEL.shipAddressLineOne(excelOperation.getTestData("TC21",
-															"WEL_Test_Data", "Shipping_Address_line1"));
-													WEL.shipTownCity(excelOperation.getTestData("TC21", "WEL_Test_Data",
-															"Shipping_City/ Province"));
-													WEL.enterState(excelOperation.getTestData("TC21", "WEL_Test_Data",
-															"Shipping_State"));
-													WEL.shipPostCode(excelOperation.getTestData("TC21", "WEL_Test_Data",
-															"Shipping_Zip_Code"));
-													WEL.shipPhonenumber(excelOperation.getTestData("TC21",
-															"WEL_Test_Data", "Shipping_Phone_Number"));
-													WEL.clickingOnSaveAndContinue();
-													try {
-														if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
-																.isDisplayed())
-															WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
-													} catch (Exception e) {
-														Reporting.updateTestReport(
-																"Failed to click Address on Address SUggestion due to timeout exception",
-																CaptureScreenshot.getScreenshot(SS_path),
-																StatusDetails.INFO);
-													}
-													ScrollingWebPage.PageScrolldown(driver, 0, 350, SS_path);
-												} catch (Exception e) {
-													Reporting.updateTestReport(
-															"Help button was not visible and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
-												}
-											} catch (Exception e) {
-												Reporting.updateTestReport(
-														"Address line 1 was not clickable and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-											}
+
 										} catch (Exception e) {
 											Reporting.updateTestReport(
 													"Checkout button was not clickable in cart page and caused timeout exception",
@@ -3590,6 +3598,70 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												try {
 													wait.until(ExpectedConditions.visibilityOfElementLocated(
 															By.xpath("//h5[@id='shippingAddressTitle']/span")));
+													WEL.firstName(excelOperation.getTestData("TC22", "WEL_Test_Data",
+															"First_Name"));
+													WEL.lastName(excelOperation.getTestData("TC22", "WEL_Test_Data",
+															"Last_Name"));
+													Thread.sleep(500);
+													WEL.selectShipCountry(excelOperation.getTestData("TC22",
+															"WEL_Test_Data", "Shipping_Country"));
+													try {
+														wait.until(ExpectedConditions.visibilityOfElementLocated(
+																By.xpath("//input[@id='line1']")));
+														try {
+															wait.until(ExpectedConditions.visibilityOfElementLocated(
+																	By.xpath("//div[@class='helpButton']")));
+															WEL.shipAddressLineOne(excelOperation.getTestData("TC22",
+																	"WEL_Test_Data", "Shipping_Address_line1"));
+															WEL.shipTownCity(excelOperation.getTestData("TC22",
+																	"WEL_Test_Data", "Shipping_City/ Province"));
+															WEL.enterState(excelOperation.getTestData("TC22",
+																	"WEL_Test_Data", "Shipping_State"));
+															WEL.shipPostCode(excelOperation.getTestData("TC22",
+																	"WEL_Test_Data", "Shipping_Zip_Code"));
+															WEL.shipPhonenumber(excelOperation.getTestData("TC22",
+																	"WEL_Test_Data", "Shipping_Phone_Number"));
+															WEL.clickingOnSaveAndContinue();
+															try {
+																if (driver.findElement(By.xpath(
+																		"//h1[contains(text(),'SERVER ERROR (500)')]"))
+																		.isDisplayed()) {
+																	Reporting.updateTestReport(
+																			"Server error came in cart page and the page was refreshed",
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.INFO);
+																	driver.navigate().refresh();
+																}
+															} catch (Exception e1) {
+																Reporting.updateTestReport(
+																		"User was not in the cart page"
+																				+ " and caused timeout exception",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.FAIL);
+															}
+															try {
+																if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
+																		.isDisplayed())
+																	WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+															} catch (Exception e) {
+																Reporting.updateTestReport(
+																		"Failed to click Address on Address SUggestion due to timeout exception",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.INFO);
+															}
+															ScrollingWebPage.PageScrolldown(driver, 0, 350, SS_path);
+														} catch (Exception e) {
+															Reporting.updateTestReport(
+																	"Help button was not visible and caused timeout exception",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
+														}
+													} catch (Exception e) {
+														Reporting.updateTestReport(
+																"Address line 1 was not clickable and caused timeout exception",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+													}
 													Reporting.updateTestReport(
 															"User was in shipping step after successful registration",
 															CaptureScreenshot.getScreenshot(SS_path),
@@ -3598,7 +3670,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"User was not in shipping step and caused timeout exception",
 															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
+															StatusDetails.FAIL);
 												}
 
 											} catch (Exception e) {
@@ -3606,53 +3678,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														"User was not redirected to checkout login/ registration page and caused timeout exception",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
-											// WEL.clickOnEnterNewAddressButtonOnShippingPage();
-											WEL.firstName(
-													excelOperation.getTestData("TC22", "WEL_Test_Data", "First_Name"));
-											WEL.lastName(
-													excelOperation.getTestData("TC22", "WEL_Test_Data", "Last_Name"));
-											Thread.sleep(500);
-											WEL.selectShipCountry(excelOperation.getTestData("TC22", "WEL_Test_Data",
-													"Shipping_Country"));
-											try {
-												wait.until(ExpectedConditions
-														.visibilityOfElementLocated(By.xpath("//input[@id='line1']")));
-												try {
-													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("//div[@class='helpButton']")));
-													WEL.shipAddressLineOne(excelOperation.getTestData("TC22",
-															"WEL_Test_Data", "Shipping_Address_line1"));
-													WEL.shipTownCity(excelOperation.getTestData("TC22", "WEL_Test_Data",
-															"Shipping_City/ Province"));
-													WEL.enterState(excelOperation.getTestData("TC22", "WEL_Test_Data",
-															"Shipping_State"));
-													WEL.shipPostCode(excelOperation.getTestData("TC22", "WEL_Test_Data",
-															"Shipping_Zip_Code"));
-													WEL.shipPhonenumber(excelOperation.getTestData("TC22",
-															"WEL_Test_Data", "Shipping_Phone_Number"));
-													WEL.clickingOnSaveAndContinue();
-													try {
-														if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
-																.isDisplayed())
-															WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
-													} catch (Exception e) {
-														Reporting.updateTestReport(
-																"Failed to click Address on Address SUggestion due to timeout exception",
-																CaptureScreenshot.getScreenshot(SS_path),
-																StatusDetails.INFO);
-													}
-													ScrollingWebPage.PageScrolldown(driver, 0, 350, SS_path);
-												} catch (Exception e) {
-													Reporting.updateTestReport(
-															"Help button was not visible and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
-												}
-											} catch (Exception e) {
-												Reporting.updateTestReport(
-														"Address line 1 was not clickable and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-											}
+											
 										} catch (Exception e) {
 											Reporting.updateTestReport(
 													"Checkout button was not clickable in cart page and caused timeout exception",
@@ -3782,6 +3808,34 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												try {
 													wait.until(ExpectedConditions.visibilityOfElementLocated(
 															By.xpath("//h5[@id='shippingAddressTitle']/span")));
+													WEL.firstName(excelOperation.getTestData("TC23", "WEL_Test_Data",
+															"First_Name"));
+													WEL.lastName(excelOperation.getTestData("TC23", "WEL_Test_Data",
+															"Last_Name"));
+
+													try {
+														wait.until(ExpectedConditions.visibilityOfElementLocated(
+																By.xpath("//input[@id='line1']")));
+														try {
+															wait.until(ExpectedConditions.visibilityOfElementLocated(
+																	By.xpath("//div[@class='helpButton']")));
+															WEL.shipAddressLineOne(excelOperation.getTestData("TC22",
+																	"WEL_Test_Data", "Shipping_Address_line1"));
+
+															WEL.checkDontShipToPOBoxMessage();
+														} catch (Exception e) {
+															Reporting.updateTestReport(
+																	"Help button was not visible and caused timeout exception",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
+														}
+													} catch (Exception e) {
+														Reporting.updateTestReport(
+																"Address line 1 was not clickable and caused timeout exception",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+													}
+
 													Reporting.updateTestReport(
 															"User was in shipping step after successful registration",
 															CaptureScreenshot.getScreenshot(SS_path),
@@ -3790,7 +3844,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"User was not in shipping step and caused timeout exception",
 															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
+															StatusDetails.FAIL);
 												}
 
 											} catch (Exception e) {
@@ -3799,32 +3853,6 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 											// WEL.clickOnEnterNewAddressButtonOnShippingPage();
-											WEL.firstName(
-													excelOperation.getTestData("TC23", "WEL_Test_Data", "First_Name"));
-											WEL.lastName(
-													excelOperation.getTestData("TC23", "WEL_Test_Data", "Last_Name"));
-
-											try {
-												wait.until(ExpectedConditions
-														.visibilityOfElementLocated(By.xpath("//input[@id='line1']")));
-												try {
-													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("//div[@class='helpButton']")));
-													WEL.shipAddressLineOne(excelOperation.getTestData("TC22",
-															"WEL_Test_Data", "Shipping_Address_line1"));
-
-													WEL.checkDontShipToPOBoxMessage();
-												} catch (Exception e) {
-													Reporting.updateTestReport(
-															"Help button was not visible and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
-												}
-											} catch (Exception e) {
-												Reporting.updateTestReport(
-														"Address line 1 was not clickable and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-											}
 										} catch (Exception e) {
 											Reporting.updateTestReport(
 													"Checkout button was not clickable in cart page and caused timeout exception",
@@ -4099,6 +4127,69 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																												.visibilityOfElementLocated(
 																														By.xpath(
 																																"//h5[@id='shippingAddressTitle']/span")));
+																								WEL.firstName(
+																										excelOperation
+																												.getTestData(
+																														"TC24",
+																														"WEL_Test_Data",
+																														"First_Name"));
+																								WEL.lastName(
+																										excelOperation
+																												.getTestData(
+																														"TC24",
+																														"WEL_Test_Data",
+																														"Last_Name"));
+																								WEL.selectShipCountry(
+																										excelOperation
+																												.getTestData(
+																														"TC24",
+																														"WEL_Test_Data",
+																														"Shipping_Country"));
+																								WEL.shipAddressLineOne(
+																										excelOperation
+																												.getTestData(
+																														"TC24",
+																														"WEL_Test_Data",
+																														"Shipping_Address_line1"));
+																								WEL.shipTownCity(
+																										excelOperation
+																												.getTestData(
+																														"TC24",
+																														"WEL_Test_Data",
+																														"Shipping_City/ Province"));
+																								WEL.enterState(
+																										excelOperation
+																												.getTestData(
+																														"TC11",
+																														"WEL_Test_Data",
+																														"Shipping_State"));
+																								WEL.shipPostCode(
+																										excelOperation
+																												.getTestData(
+																														"TC24",
+																														"WEL_Test_Data",
+																														"Shipping_Zip_Code"));
+																								WEL.shipPhonenumber(
+																										excelOperation
+																												.getTestData(
+																														"TC24",
+																														"WEL_Test_Data",
+																														"Shipping_Phone_Number"));
+																								WEL.shipSaveAndContinueButton();
+																								try {
+																									if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
+																											.isDisplayed())
+																										WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+																								} catch (Exception e) {
+																									Reporting
+																											.updateTestReport(
+																													"Failed to click Address on Address SUggestion due to timeout exception",
+																													CaptureScreenshot
+																															.getScreenshot(
+																																	SS_path),
+																													StatusDetails.INFO);
+																								}
+
 																								Reporting
 																										.updateTestReport(
 																												"User was in shipping step after successful registration",
@@ -4113,7 +4204,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																												CaptureScreenshot
 																														.getScreenshot(
 																																SS_path),
-																												StatusDetails.PASS);
+																												StatusDetails.FAIL);
 																							}
 
 																						} catch (Exception e) {
@@ -4125,57 +4216,6 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																									StatusDetails.FAIL);
 																						}
 																						// WEL.clickOnEnterNewAddressButtonOnShippingPage();
-																						WEL.firstName(excelOperation
-																								.getTestData("TC24",
-																										"WEL_Test_Data",
-																										"First_Name"));
-																						WEL.lastName(excelOperation
-																								.getTestData("TC24",
-																										"WEL_Test_Data",
-																										"Last_Name"));
-																						WEL.selectShipCountry(
-																								excelOperation
-																										.getTestData(
-																												"TC24",
-																												"WEL_Test_Data",
-																												"Shipping_Country"));
-																						WEL.shipAddressLineOne(
-																								excelOperation
-																										.getTestData(
-																												"TC24",
-																												"WEL_Test_Data",
-																												"Shipping_Address_line1"));
-																						WEL.shipTownCity(excelOperation
-																								.getTestData("TC24",
-																										"WEL_Test_Data",
-																										"Shipping_City/ Province"));
-																						WEL.enterState(excelOperation
-																								.getTestData("TC11",
-																										"WEL_Test_Data",
-																										"Shipping_State"));
-																						WEL.shipPostCode(excelOperation
-																								.getTestData("TC24",
-																										"WEL_Test_Data",
-																										"Shipping_Zip_Code"));
-																						WEL.shipPhonenumber(
-																								excelOperation
-																										.getTestData(
-																												"TC24",
-																												"WEL_Test_Data",
-																												"Shipping_Phone_Number"));
-																						WEL.shipSaveAndContinueButton();
-																						try {
-																							if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
-																									.isDisplayed())
-																								WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
-																						} catch (Exception e) {
-																							Reporting.updateTestReport(
-																									"Failed to click Address on Address SUggestion due to timeout exception",
-																									CaptureScreenshot
-																											.getScreenshot(
-																													SS_path),
-																									StatusDetails.INFO);
-																						}
 																						WEL.clickingOnSaveAndContinue();
 
 																					} catch (Exception e) {
@@ -4418,10 +4458,12 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}/*
-	 * @Author: Anindita
-	 * @Date: 19/04/23
-	 * @Description: Shipping Charge for Multiple Quantity
-	 */
+		 * @Author: Anindita
+		 * 
+		 * @Date: 19/04/23
+		 * 
+		 * @Description: Shipping Charge for Multiple Quantity
+		 */
 
 	@Test
 	public void TC27_Shipping_Charge_For_Multiple_Quantity() throws IOException {
@@ -4448,7 +4490,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									.visibilityOfElementLocated(By.xpath("//div[@class='col compare-wiley-heading']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							try {
-							wait.until(ExpectedConditions
+								wait.until(ExpectedConditions
 										.elementToBeClickable(By.xpath("(//a[@href='/cia/products/cia-review-course/'"
 												+ " and contains(text(),'View Course')])[1]")));
 								WEL.clickOnCIAViewCourseButton();
@@ -4498,117 +4540,168 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												try {
 													wait.until(ExpectedConditions.visibilityOfElementLocated(
 															By.xpath("//h5[@id='shippingAddressTitle']/span")));
-													//BigDecimal standardShippingChargeForOneUnit=WEL.fetchShippingCharge(driver, "Standard Shipping");
-													/*BigDecimal expressShippingChargeForOneUnit=WEL.fetchShippingCharge(driver, "Express Shipping");
-													BigDecimal nextDayShippingChargeForOneUnit=WEL.fetchShippingCharge(driver, "Next Day Shipping");*/
-													String country1=excelOperation.getTestData("TC27", "WEL_Test_Data", "Shipping_Country").split(",")[0];
-													String country2=excelOperation.getTestData("TC27", "WEL_Test_Data", "Shipping_Country").split(",")[1];
-													
-													//Validation for Brazil
+													// BigDecimal
+													// standardShippingChargeForOneUnit=WEL.fetchShippingCharge(driver,
+													// "Standard Shipping");
+													/*
+													 * BigDecimal
+													 * expressShippingChargeForOneUnit=WEL.fetchShippingCharge(driver,
+													 * "Express Shipping"); BigDecimal
+													 * nextDayShippingChargeForOneUnit=WEL.fetchShippingCharge(driver,
+													 * "Next Day Shipping");
+													 */
+													String country1 = excelOperation
+															.getTestData("TC27", "WEL_Test_Data", "Shipping_Country")
+															.split(",")[0];
+													String country2 = excelOperation
+															.getTestData("TC27", "WEL_Test_Data", "Shipping_Country")
+															.split(",")[1];
+
+													// Validation for Brazil
 													WEL.selectShipCountry(country1);
-													//BigDecimal airMailChargeForOneUnit=WEL.fetchShippingCharge(driver, "Air Mail");
-													BigDecimal courierChargeForOneUnit=WEL.fetchShippingChargeNonUS(driver, "Courier");
-													
-													//Validation for Ameriocan samoa
+													// BigDecimal
+													// airMailChargeForOneUnit=WEL.fetchShippingCharge(driver, "Air
+													// Mail");
+													BigDecimal courierChargeForOneUnit = WEL
+															.fetchShippingChargeNonUS(driver, "Courier");
+
+													// Validation for Ameriocan samoa
 													WEL.selectShipCountry(country2);
-													BigDecimal twoDayChargeForOneUnit=WEL.fetchShippingChargeNonUS(driver, "Standard Shipping");
+													BigDecimal twoDayChargeForOneUnit = WEL
+															.fetchShippingChargeNonUS(driver, "Standard Shipping");
 													ScrollingWebPage.PageScrollDownUptoTop(driver, SS_path);
 													WEL.clickOnBackToCartButton();
 													try {
-														wait.until(ExpectedConditions
-																.elementToBeClickable(By.xpath("//select[@id='quantity_0']")));
-														String quantity=excelOperation.getTestData("TC27", "WEL_Test_Data", "Quantity");
+														wait.until(ExpectedConditions.elementToBeClickable(
+																By.xpath("//select[@id='quantity_0']")));
+														String quantity = excelOperation.getTestData("TC27",
+																"WEL_Test_Data", "Quantity");
 														WEL.selectQuantity(quantity);
 														WEL.clickonCheckOutButtonOnCartPage();
-														String eamilId1=WEL.enterNewUserIdInCheckoutLoginRegistration();
+														String eamilId1 = WEL
+																.enterNewUserIdInCheckoutLoginRegistration();
 														WEL.clickOnCreateAccountButtonInCheckoutLoginRegistration();
 														try {
-															wait.until(ExpectedConditions.presenceOfElementLocated(
-																	By.xpath("//div[@class='welCheckoutJourneyMainDiv']")));
+															wait.until(ExpectedConditions.presenceOfElementLocated(By
+																	.xpath("//div[@class='welCheckoutJourneyMainDiv']")));
 															WEL.enterConfirmEmailIdInCheckout(eamilId1);
-															WEL.enterPasswordInCheckout(excelOperation.getTestData("TC27",
-																	"WEL_Test_Data", "Password"));
+															WEL.enterPasswordInCheckout(excelOperation
+																	.getTestData("TC27", "WEL_Test_Data", "Password"));
 															WEL.clickOnSaveAndContinue();
 															try {
-																wait.until(ExpectedConditions.visibilityOfElementLocated(
-																		By.xpath("//h5[@id='shippingAddressTitle']/span")));
-																//By default the country is selected as US
-																//BigDecimal standardShippingChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Standard Shipping");
-																/*BigDecimal expressShippingChargeForMultiUnit=WEL.fetchShippingCharge(driver, "Express Shipping");
-																BigDecimal nextDayShippingChargeForMultiUnit=WEL.fetchShippingCharge(driver, "Next Day Shipping");
-																if((expressShippingChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
-																		.multiply(new BigDecimal("4")))).setScale(2, RoundingMode.CEILING).compareTo(expressShippingChargeForMultiUnit)==0)
-																	Reporting.updateTestReport("Shipping charge has been correctly calculated for Express shipping",
-																			CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-																else
-																	Reporting.updateTestReport("Shipping charge has been wrongly calculated for Express shipping",
-																			CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-																if((nextDayShippingChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
-																		.multiply(new BigDecimal("4")))).setScale(2, RoundingMode.CEILING).compareTo(nextDayShippingChargeForMultiUnit)==0)
-																	Reporting.updateTestReport("Shipping charge has been correctly calculated for Next day shipping",
-																			CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-																else
-																	Reporting.updateTestReport("Shipping charge has been wrongly calculated for Next day shipping",
-																			CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);*/
-																//wiley.clickOnEnterNewAddresButtonInShipping();
+																wait.until(ExpectedConditions
+																		.visibilityOfElementLocated(By.xpath(
+																				"//h5[@id='shippingAddressTitle']/span")));
+																// By default the country is selected as US
+																// BigDecimal
+																// standardShippingChargeForMultiUnit=wiley.fetchShippingCharge(driver,
+																// "Standard Shipping");
+																/*
+																 * BigDecimal expressShippingChargeForMultiUnit=WEL.
+																 * fetchShippingCharge(driver, "Express Shipping");
+																 * BigDecimal nextDayShippingChargeForMultiUnit=WEL.
+																 * fetchShippingCharge(driver, "Next Day Shipping");
+																 * if((expressShippingChargeForOneUnit.add((new
+																 * BigDecimal(quantity).subtract(new BigDecimal("1")))
+																 * .multiply(new BigDecimal("4")))).setScale(2,
+																 * RoundingMode.CEILING).compareTo(
+																 * expressShippingChargeForMultiUnit)==0) Reporting.
+																 * updateTestReport("Shipping charge has been correctly calculated for Express shipping"
+																 * , CaptureScreenshot.getScreenshot(SS_path),
+																 * StatusDetails.PASS); else Reporting.
+																 * updateTestReport("Shipping charge has been wrongly calculated for Express shipping"
+																 * , CaptureScreenshot.getScreenshot(SS_path),
+																 * StatusDetails.FAIL);
+																 * if((nextDayShippingChargeForOneUnit.add((new
+																 * BigDecimal(quantity).subtract(new BigDecimal("1")))
+																 * .multiply(new BigDecimal("4")))).setScale(2,
+																 * RoundingMode.CEILING).compareTo(
+																 * nextDayShippingChargeForMultiUnit)==0) Reporting.
+																 * updateTestReport("Shipping charge has been correctly calculated for Next day shipping"
+																 * , CaptureScreenshot.getScreenshot(SS_path),
+																 * StatusDetails.PASS); else Reporting.
+																 * updateTestReport("Shipping charge has been wrongly calculated for Next day shipping"
+																 * , CaptureScreenshot.getScreenshot(SS_path),
+																 * StatusDetails.FAIL);
+																 */
+																// wiley.clickOnEnterNewAddresButtonInShipping();
 																WEL.selectShipCountry(country1);
-																//validation for Brzil/ columbia
-																//BigDecimal airMailChargeForMultiUnit=WEL.fetchShippingCharge(driver, "Air Mail");
-																BigDecimal courierChargeForMultiUnit=WEL.fetchShippingChargeNonUS(driver, "Courier");
-																
-																if((courierChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
-																		.multiply(new BigDecimal("10")))).setScale(2, RoundingMode.CEILING).compareTo(courierChargeForMultiUnit)==0)
-																	Reporting.updateTestReport("Courier charge has been correctly calculated ",
-																			CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+																// validation for Brzil/ columbia
+																// BigDecimal
+																// airMailChargeForMultiUnit=WEL.fetchShippingCharge(driver,
+																// "Air Mail");
+																BigDecimal courierChargeForMultiUnit = WEL
+																		.fetchShippingChargeNonUS(driver, "Courier");
+
+																if ((courierChargeForOneUnit.add((new BigDecimal(
+																		quantity).subtract(new BigDecimal("1")))
+																				.multiply(new BigDecimal("10"))))
+																						.setScale(2,
+																								RoundingMode.CEILING)
+																						.compareTo(
+																								courierChargeForMultiUnit) == 0)
+																	Reporting.updateTestReport(
+																			"Courier charge has been correctly calculated ",
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.PASS);
 																else
-																	Reporting.updateTestReport("Courier charge has been wrongly calculated ",
-																			CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+																	Reporting.updateTestReport(
+																			"Courier charge has been wrongly calculated ",
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.FAIL);
 																WEL.selectShipCountry(country2);
-																BigDecimal twoDayChargeForMultiUnit=WEL.fetchShippingChargeNonUS(driver, "Standard Shipping");
-																if((twoDayChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
-																		.multiply(new BigDecimal("4")))).setScale(2, RoundingMode.CEILING).compareTo(twoDayChargeForMultiUnit)==0)
-																	Reporting.updateTestReport("Standard Shipping charge has been correctly calculated ",
-																			CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+																BigDecimal twoDayChargeForMultiUnit = WEL
+																		.fetchShippingChargeNonUS(driver,
+																				"Standard Shipping");
+																if ((twoDayChargeForOneUnit.add((new BigDecimal(
+																		quantity).subtract(new BigDecimal("1")))
+																				.multiply(new BigDecimal("4"))))
+																						.setScale(2,
+																								RoundingMode.CEILING)
+																						.compareTo(
+																								twoDayChargeForMultiUnit) == 0)
+																	Reporting.updateTestReport(
+																			"Standard Shipping charge has been correctly calculated ",
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.PASS);
 																else
-																	Reporting.updateTestReport("Standard Shipping charge has been wrongly calculated ",
-																			CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-															}
-															catch (Exception e) {
+																	Reporting.updateTestReport(
+																			"Standard Shipping charge has been wrongly calculated ",
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.FAIL);
+															} catch (Exception e) {
 																Reporting.updateTestReport(
 																		"User was not in shipping step and caused timeout exception",
 																		CaptureScreenshot.getScreenshot(SS_path),
 																		StatusDetails.FAIL);
 															}
-														}
-														catch(Exception e) {
+														} catch (Exception e) {
 															Reporting.updateTestReport(
 																	"User was not in Checkout login page and caused timeout exception",
 																	CaptureScreenshot.getScreenshot(SS_path),
 																	StatusDetails.FAIL);
 														}
-															
-													}
-													catch (Exception e) {
+
+													} catch (Exception e) {
 														Reporting.updateTestReport(
 																"Quantity dropdown was not clcikable in cart page",
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
 													}
-													
+
 												} catch (Exception e) {
 													Reporting.updateTestReport(
 															"User was not in shipping step and caused timeout exception",
 															CaptureScreenshot.getScreenshot(SS_path),
 															StatusDetails.FAIL);
 												}
-												
-											}
-											catch(Exception e) {
+
+											} catch (Exception e) {
 												Reporting.updateTestReport(
 														"User was not in Checkout login page and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path),
-														StatusDetails.FAIL);
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
-											
+
 										} catch (Exception e) {
 											Reporting.updateTestReport(
 													"Checkout button was not clickable in cart page and caused timeout exception",
@@ -4652,14 +4745,19 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 
 		}
 	}/*
-	 * @Date: 19/04/23
-	 * @Description: Adds one product to cart and navigates to an fro between shipping and billing
-	 */
+		 * @Date: 19/04/23
+		 * 
+		 * @Description: Adds one product to cart and navigates to an fro between
+		 * shipping and billing
+		 */
+
 	@Test
-	public void TC26_Multiple_To_And_Fro_Navigation_Between_Shipping_And_Billing() throws IOException{
+	public void TC26_Multiple_To_And_Fro_Navigation_Between_Shipping_And_Billing() throws IOException {
 		try {
-			Reporting.test = Reporting.extent.createTest("TC26_Multiple_To_And_Fro_Navigation_Between_DShipping_And_Billing");
-			LogTextFile.writeTestCaseStatus("TC26_Multiple_To_And_Fro_Navigation_Between_DShipping_And_Billing", "Test case");
+			Reporting.test = Reporting.extent
+					.createTest("TC26_Multiple_To_And_Fro_Navigation_Between_DShipping_And_Billing");
+			LogTextFile.writeTestCaseStatus("TC26_Multiple_To_And_Fro_Navigation_Between_DShipping_And_Billing",
+					"Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(WEL_Homepage_URL);
 			try {
@@ -4796,22 +4894,22 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 																"//div[@class='step-head checkoutCompletedStep']//div[@class='edit']/a")));
 														WEL.clickOnShippingDetailsEditIcon();
-														WEL.firstName(
-																excelOperation.getTestData("TC26", "WEL_Test_Data", "First_Name"));
-														WEL.lastName(
-																excelOperation.getTestData("TC26", "WEL_Test_Data", "Last_Name"));
-														WEL.selectShipCountry(excelOperation.getTestData("TC26", "WEL_Test_Data",
-																"Shipping_Country"));
-														WEL.shipAddressLineOne(excelOperation.getTestData("TC26", "WEL_Test_Data",
-																"Shipping_Address_line1"));
-														WEL.shipTownCity(excelOperation.getTestData("TC26", "WEL_Test_Data",
-																"Shipping_City/ Province"));
-														WEL.enterState(excelOperation.getTestData("TC26", "WEL_Test_Data",
-																"Shipping_State"));
-														WEL.shipPostCode(excelOperation.getTestData("TC26", "WEL_Test_Data",
-																"Shipping_Zip_Code"));
-														WEL.shipPhonenumber(excelOperation.getTestData("TC26", "WEL_Test_Data",
-																"Shipping_Phone_Number"));
+														WEL.firstName(excelOperation.getTestData("TC26",
+																"WEL_Test_Data", "First_Name"));
+														WEL.lastName(excelOperation.getTestData("TC26", "WEL_Test_Data",
+																"Last_Name"));
+														WEL.selectShipCountry(excelOperation.getTestData("TC26",
+																"WEL_Test_Data", "Shipping_Country"));
+														WEL.shipAddressLineOne(excelOperation.getTestData("TC26",
+																"WEL_Test_Data", "Shipping_Address_line1"));
+														WEL.shipTownCity(excelOperation.getTestData("TC26",
+																"WEL_Test_Data", "Shipping_City/ Province"));
+														WEL.enterState(excelOperation.getTestData("TC26",
+																"WEL_Test_Data", "Shipping_State"));
+														WEL.shipPostCode(excelOperation.getTestData("TC26",
+																"WEL_Test_Data", "Shipping_Zip_Code"));
+														WEL.shipPhonenumber(excelOperation.getTestData("TC26",
+																"WEL_Test_Data", "Shipping_Phone_Number"));
 														WEL.shipSaveAndContinueButton();
 														try {
 															if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
@@ -4820,7 +4918,8 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														} catch (Exception e) {
 															Reporting.updateTestReport(
 																	"Failed to click Address on Address SUggestion due to timeout exception",
-																	CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.INFO);
 														}
 														try {
 															wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -4834,31 +4933,36 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																		"WEL_Test_Data", "Bill_Country"));
 																WEL.addressLineOne(excelOperation.getTestData("TC26",
 																		"WEL_Test_Data", "Bill_Address_line1"));
-																WEL.enterZipcode(excelOperation.getTestData("TC26", "WEL_Test_Data",
-																		"Bill_Zip_Code"));
-																WEL.enterCity(excelOperation.getTestData("TC26", "WEL_Test_Data",
-																		"Bill_City/ Province"));
+																WEL.enterZipcode(excelOperation.getTestData("TC26",
+																		"WEL_Test_Data", "Bill_Zip_Code"));
+																WEL.enterCity(excelOperation.getTestData("TC26",
+																		"WEL_Test_Data", "Bill_City/ Province"));
 																WEL.enterPhoneNumber(excelOperation.getTestData("TC26",
 																		"WEL_Test_Data", "Bill_Phone_Number"));
 																try {
-																	wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-																			"//div[@class='step-head checkoutCompletedStep']//div[@class='edit']/a")));
+																	wait.until(ExpectedConditions
+																			.elementToBeClickable(By.xpath(
+																					"//div[@class='step-head checkoutCompletedStep']//div[@class='edit']/a")));
 																	WEL.clickOnShippingDetailsEditIcon();
-																	WEL.firstName(
-																			excelOperation.getTestData("TC26", "WEL_Test_Data", "First_Name"));
-																	WEL.lastName(
-																			excelOperation.getTestData("TC26", "WEL_Test_Data", "Last_Name"));
-																	WEL.selectShipCountry(excelOperation.getTestData("TC26", "WEL_Test_Data",
+																	WEL.firstName(excelOperation.getTestData("TC26",
+																			"WEL_Test_Data", "First_Name"));
+																	WEL.lastName(excelOperation.getTestData("TC26",
+																			"WEL_Test_Data", "Last_Name"));
+																	WEL.selectShipCountry(excelOperation.getTestData(
+																			"TC26", "WEL_Test_Data",
 																			"Shipping_Country"));
-																	WEL.shipAddressLineOne(excelOperation.getTestData("TC26", "WEL_Test_Data",
+																	WEL.shipAddressLineOne(excelOperation.getTestData(
+																			"TC26", "WEL_Test_Data",
 																			"Shipping_Address_line1"));
-																	WEL.shipTownCity(excelOperation.getTestData("TC26", "WEL_Test_Data",
+																	WEL.shipTownCity(excelOperation.getTestData("TC26",
+																			"WEL_Test_Data",
 																			"Shipping_City/ Province"));
-																	WEL.enterState(excelOperation.getTestData("TC26", "WEL_Test_Data",
-																			"Shipping_State"));
-																	WEL.shipPostCode(excelOperation.getTestData("TC26", "WEL_Test_Data",
-																			"Shipping_Zip_Code"));
-																	WEL.shipPhonenumber(excelOperation.getTestData("TC26", "WEL_Test_Data",
+																	WEL.enterState(excelOperation.getTestData("TC26",
+																			"WEL_Test_Data", "Shipping_State"));
+																	WEL.shipPostCode(excelOperation.getTestData("TC26",
+																			"WEL_Test_Data", "Shipping_Zip_Code"));
+																	WEL.shipPhonenumber(excelOperation.getTestData(
+																			"TC26", "WEL_Test_Data",
 																			"Shipping_Phone_Number"));
 																	WEL.shipSaveAndContinueButton();
 																	try {
@@ -4868,61 +4972,78 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																	} catch (Exception e) {
 																		Reporting.updateTestReport(
 																				"Failed to click Address on Address SUggestion due to timeout exception",
-																				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+																				CaptureScreenshot.getScreenshot(
+																						SS_path),
+																				StatusDetails.INFO);
 																	}
 																	try {
-																		wait.until(ExpectedConditions.visibilityOfElementLocated(
-																				By.xpath("//div[@class='helpButton']")));
-																		ScrollingWebPage.PageScrolldown(driver, 0, 500, SS_path);
+																		wait.until(ExpectedConditions
+																				.visibilityOfElementLocated(By.xpath(
+																						"//div[@class='helpButton']")));
+																		ScrollingWebPage.PageScrolldown(driver, 0, 500,
+																				SS_path);
 																		try {
-																			wait.until(ExpectedConditions.elementToBeClickable(
-																					By.xpath("//label[@id='sameAsBillingLabel']")));
+																			wait.until(ExpectedConditions
+																					.elementToBeClickable(By.xpath(
+																							"//label[@id='sameAsBillingLabel']")));
 																			WEL.shipAndBillAddressSection();
-																			WEL.selectBillCountry(excelOperation.getTestData("TC26",
-																					"WEL_Test_Data", "Bill_Country"));
-																			WEL.addressLineOne(excelOperation.getTestData("TC26",
-																					"WEL_Test_Data", "Bill_Address_line1"));
-																			WEL.enterZipcode(excelOperation.getTestData("TC26", "WEL_Test_Data",
+																			WEL.selectBillCountry(
+																					excelOperation.getTestData("TC26",
+																							"WEL_Test_Data",
+																							"Bill_Country"));
+																			WEL.addressLineOne(
+																					excelOperation.getTestData("TC26",
+																							"WEL_Test_Data",
+																							"Bill_Address_line1"));
+																			WEL.enterZipcode(excelOperation.getTestData(
+																					"TC26", "WEL_Test_Data",
 																					"Bill_Zip_Code"));
-																			WEL.enterCity(excelOperation.getTestData("TC26", "WEL_Test_Data",
+																			WEL.enterCity(excelOperation.getTestData(
+																					"TC26", "WEL_Test_Data",
 																					"Bill_City/ Province"));
-																			WEL.enterPhoneNumber(excelOperation.getTestData("TC26",
-																					"WEL_Test_Data", "Bill_Phone_Number"));
+																			WEL.enterPhoneNumber(
+																					excelOperation.getTestData("TC26",
+																							"WEL_Test_Data",
+																							"Bill_Phone_Number"));
+																		} catch (Exception e) {
+																			Reporting.updateTestReport(
+																					"Billing address line 1 was not clickable",
+																					CaptureScreenshot
+																							.getScreenshot(SS_path),
+																					StatusDetails.FAIL);
 																		}
-																		catch(Exception e) {
-																			Reporting.updateTestReport("Billing address line 1 was not clickable",
-																					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-																		}
-																	}
-																	catch (Exception e) {
+																	} catch (Exception e) {
 																		Reporting.updateTestReport(
 																				"The help button was not visible and caused timeout exception",
-																				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+																				CaptureScreenshot.getScreenshot(
+																						SS_path),
+																				StatusDetails.FAIL);
 																	}
-																		
-																}
-																catch(Exception e) {
+
+																} catch (Exception e) {
 																	Reporting.updateTestReport(
 																			"The shipping address edit icon was not clickable and caused timeout",
-																			CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.FAIL);
 																}
+															} catch (Exception e) {
+																Reporting.updateTestReport(
+																		"Billing address line 1 was not clickable",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.FAIL);
 															}
-															catch(Exception e) {
-																Reporting.updateTestReport("Billing address line 1 was not clickable",
-																		CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-															}
-														}
-														catch (Exception e) {
+														} catch (Exception e) {
 															Reporting.updateTestReport(
 																	"The help button was not visible and caused timeout exception",
-																	CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
 														}
-															
-													}
-													catch(Exception e) {
+
+													} catch (Exception e) {
 														Reporting.updateTestReport(
 																"The shipping address edit icon was not clickable and caused timeout",
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
 													}
 												} catch (Exception e) {
 													Reporting.updateTestReport(
@@ -4975,26 +5096,27 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
-	
-	
+
 	/*
 	 * @Date: 19/04/23
+	 * 
 	 * @Description: Checks the email format in checkout login / registration page
 	 */
 	@Test
 	public void TC28_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page() throws IOException {
 		try {
-			Reporting.test = Reporting.extent.createTest("TC28_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page");
-			LogTextFile.writeTestCaseStatus("TC28_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page", "Test case");
+			Reporting.test = Reporting.extent
+					.createTest("TC28_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page");
+			LogTextFile.writeTestCaseStatus("TC28_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page",
+					"Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-			String[] emailIds=excelOperation.getTestData("TC28", "WEL_Test_Data", "Email_Address").split(",");
+			String[] emailIds = excelOperation.getTestData("TC28", "WEL_Test_Data", "Email_Address").split(",");
 			driver.get(WEL_Homepage_URL);
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@aria-label='login']")));
@@ -5055,25 +5177,28 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 											try {
 												wait.until(ExpectedConditions
 														.visibilityOfElementLocated(By.id("checkoutLogRegPageTitle")));
-												//Checking for various invalid email ids in create account email id field
-												for(String email:emailIds) {
-													WEL.enterNewUserIdInCheckoutLoginRegistrationNonAutoGenerated(email);
+												// Checking for various invalid email ids in create account email id
+												// field
+												for (String email : emailIds) {
+													WEL.enterNewUserIdInCheckoutLoginRegistrationNonAutoGenerated(
+															email);
 													WEL.clickOutsideTheEmailIdField();
 													WEL.checkOnClickErrorMessageInCheckoutLoginRegistrationPage();
 												}
-												
+
 												driver.navigate().refresh();
-												
-												//Checking for various invalid email ids in existing user email id field
-												for(String email:emailIds) {
+
+												// Checking for various invalid email ids in existing user email id
+												// field
+												for (String email : emailIds) {
 													WEL.enterExistingUserNameInCheckoutLoginPage(email);
-													WEL.enterExistingUserPasswordInCheckoutLoginPage(excelOperation.getTestData("TC28", "WEL_Test_Data", "Password"));
+													WEL.enterExistingUserPasswordInCheckoutLoginPage(excelOperation
+															.getTestData("TC28", "WEL_Test_Data", "Password"));
 													WEL.clickOutsideTheEmailIdField();
 													WEL.checkOnClickErrorMessageInCheckoutLoginRegistrationPage();
 												}
-												
-											}
-											catch(Exception e) {
+
+											} catch (Exception e) {
 												Reporting.updateTestReport(
 														"User was not in checkout login / registration page and caused timeout exception",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -5118,8 +5243,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 			}
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));

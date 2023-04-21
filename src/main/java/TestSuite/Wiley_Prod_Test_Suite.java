@@ -34,7 +34,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 	app_Wiley_Repo wiley;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
-	public static String Homepage = excelOperation.getTestData("Wiley_Homepage_URL", "Generic_Dataset", "Data");
+	private static String Homepage = excelOperation.getTestData("Wiley_Homepage_URL", "Generic_Dataset", "Data");
 
 	@BeforeTest
 	public void launchBrowser() {
