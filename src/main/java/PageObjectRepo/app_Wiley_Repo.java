@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -275,7 +276,7 @@ public class app_Wiley_Repo {
 	WebElement CardNumber;
 	@FindBy(xpath="//input[@id='nameOnCard']")
 	WebElement CardHolderName;
-	
+
 	//New Search Result page
 	@FindBy(xpath="//button[@id='nav-products-tab']/span")
 	WebElement PlpProductTabNewSearch;
@@ -299,7 +300,12 @@ public class app_Wiley_Repo {
 	WebElement FirstFacetItemQuantityNewSearchPage;
 	@FindBy(xpath="//span[@class='page-display']")
 	WebElement NumberOfProductsAfterFilteringNewSearchPage;
-	
+	@FindBy(xpath="//select[@id='sortSelect']")
+	WebElement SortDropDown;
+	@FindBy(xpath="//a[@aria-label='Next page']")
+	WebElement NextButonForPaginationInNewSearchPage;
+
+
 
 	/*
 	 * @Date: 04/03/23
@@ -1873,7 +1879,7 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 04/04/23 
 	 * @Description: Enters the card number in the card information step
@@ -1889,7 +1895,7 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 04/04/23
 	 * @Description: Clicks on the Continue As Guest  button 
@@ -1933,7 +1939,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Phone number couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 04/04/23 
 	 * Description : Enters the Postal code in shipping page.
@@ -2002,7 +2008,7 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 04/04/23
 	 * @Description: Clicks on the Use Selected Address Button in Address Doctor PopUp in shipping address section
@@ -2016,7 +2022,7 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 04/04/23
 	 * description : Increasing the Product Quantity in cart page through the dropdown
@@ -2033,7 +2039,7 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 04/04/23
 	 * @Description: Fetches the shipping charge for shipping methods by passing the shipping method name
@@ -2055,7 +2061,7 @@ public class app_Wiley_Repo {
 			return new BigDecimal(0.00);
 		}
 	}
-	
+
 	/*
 	 * @Date: 04/04/23
 	 * @Description: Clicks on the Promotion code link in cart page
@@ -2102,7 +2108,7 @@ public class app_Wiley_Repo {
 					StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 04/04/23
 	 * @Description: Concatenates the parts of URL (devmonkey part, storerfront url with env and the rest of the part specific to regions)
@@ -2120,7 +2126,7 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Date: 04/04/23
 	 * @Description: Returns the text shown in the first point upon hovering the generic info for E-Book
@@ -2142,7 +2148,7 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Date: 4/4/23
 	 * @Description: Returns the text shown upon hovering the generic info VAT Tooltip
@@ -2163,9 +2169,9 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	//Constructor search result page
-	
+
 	/*
 	 * @Date: 17/04/23
 	 * @Description: This method is verifying the text in PLP page
@@ -2184,7 +2190,7 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Date: 17/04/23
 	 * @Description: This method is verifying the text in PLP page
@@ -2203,7 +2209,7 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Date: 19/04/23
 	 * @Description: This method is Clicking on content Section in PDP page
@@ -2220,7 +2226,7 @@ public class app_Wiley_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Date: 19/04/23
 	 * @Description: Checks all the products in the search result page
@@ -2242,7 +2248,7 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 		}
 	}
-	
+
 	/*
 	 * @Date: 19/04/23
 	 * @description: This using for Clicking on SRP_WileyProduct
@@ -2260,7 +2266,7 @@ public class app_Wiley_Repo {
 		}
 
 	}
-	
+
 	/*
 	 * @Date: 19/04/23
 	 * @Description: Checks if Subject is present under  facet
@@ -2381,7 +2387,7 @@ public class app_Wiley_Repo {
 			return false;
 		}
 	}
-	
+
 	/* 
 	 * @Date: 19/04/23
 	 * @Description: Clicks on the format facet
@@ -2397,7 +2403,7 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 19/04/23
 	 * @Description: Selects First Facet Item
@@ -2416,7 +2422,7 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Date: 19/04/23
 	 * @Description: Selects First Facet Item
@@ -2449,7 +2455,7 @@ public class app_Wiley_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Date: 19/04/23
 	 * @Description: Checks number of items after filtering
@@ -2477,7 +2483,7 @@ public class app_Wiley_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Date: 19/04/23
 	 * @Description: Fetches the total number of pages in pagination
@@ -2498,5 +2504,187 @@ public class app_Wiley_Repo {
 		}
 	}
 
+	/*
+	 * @Date: 04/04/23
+	 * @Description: Enters data to be searched in HomePage search bar
+	 */
+	public void searchProductInHomePageSearchBar(String data) throws IOException {
+		try {
+			HomePageSearchBar.sendKeys(data+Keys.ENTER);
+			Thread.sleep(2000);
+			Reporting.updateTestReport(data + " text seached in the search bar",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Data couldn't be entered in the search bar",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	//New Search page method
+	/*
+	 * @Date: 21/04/23
+	 * @Description: Validates if the sort drop down is present or not in the Search result page
+	 */
+	public void checkSortDropDownInSearchResultPageNewSearch(WebDriver driver) throws IOException {
+		try {
+			List<WebElement> SortDropDownOptions=driver.findElements(By.xpath("//select[@id='sortSelect']/option"));
+			String optionString="|";
+			for (int i=0;i<SortDropDownOptions.size();i++) {
+				optionString=optionString+(i+1)+" -> "+SortDropDownOptions.get(i).getText()+"|";
+
+			}
+			Reporting.updateTestReport(optionString+" these options were present in Sort Dropdown",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The Sort Dropdown option scouldn't be validated",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Date: 21/04/23
+	 * @Description: Selects one option from the dropdown through the text passed
+	 */
+	public void selectSortOptionNewSearch(String option) throws IOException {
+		try {		
+			Select selSortOption = new Select(SortDropDown);
+			selSortOption.selectByVisibleText(option);
+			Reporting.updateTestReport(option+" -> this option was selected from Sort dropdown",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport(option+" -> this option couldn't be selected from Sort dropdown",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Date: 21/04/23
+	 * @Description: Fetches the list of products' names from the Search result page
+	 */
+	public List<String> getProductNameListFromNewSearch(WebDriver driver) throws IOException{
+		try {
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(15));
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@class='product-card'])[1]")));
+			String orginalText;
+			List<WebElement> ProductNameList=driver.findElements(By.xpath("//div[@class='product-title']/h3/a"));
+			List<String> productNameList=new ArrayList<String>();
+			for(WebElement i:ProductNameList) {
+				orginalText=i.getText();
+				/*String subElementText=driver.findElement(By.xpath("//div[@class='product-title']/h3/a/sup")).getText();
+				orginalText=orginalText.replace(subElementText,"");*/
+				productNameList.add(orginalText);
+				System.out.println(orginalText);
+			}
+			Reporting.updateTestReport("Product name's list was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return productNameList;
+
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Product name's list couldn't be returned"+e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return null;
+		}
+	}
+
+	/*
+	 * @Date: 21/04/23
+	 * @Description: Fetches the list of authors' names from the Search result page
+	 */
+	public List<String> getAuthorNameListFromNewSearch(WebDriver driver) throws IOException{
+		try {
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(15));
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@class='product-card'])[1]")));
+			List<WebElement> AuthorNameList=driver.findElements(By.xpath("//div[@class='product-authors']"));
+			List<String> authorNameList=new ArrayList<String>();
+			for(WebElement i:AuthorNameList) {
+				authorNameList.add(i.getText());
+				System.out.println(i.getText());
+			}
+			Reporting.updateTestReport("Author name's list was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return authorNameList;
+
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Author name's list couldn't be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return null;
+		}
+	}
+
+	/*
+	 * @Date: 21/04/23
+	 * @Description: Compares the string values of a list if they are sorted or not
+	 */
+	public boolean checkIfStringsAreSortedInAscendingOrder(List<String> stringList) throws IOException{
+		try {
+			int flag=0;
+			for(int i=0;i<stringList.size()-1;i++) {
+				if(stringList.get(i).compareToIgnoreCase(stringList.get(i+1))>0) {
+					flag=1;
+					System.out.println(stringList.get(i)+" wrong-> "+stringList.get(i+1));
+					break;
+				}
+			}
+			if(flag==0) {
+				Reporting.updateTestReport("All the elements are correctly sorted in Ascending order",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return true;
+			}
+			else {
+				Reporting.updateTestReport("All the elements are not sorted in Ascending order",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return false;
+			}
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The string list sorting couldn't be validated",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return false;
+		}
+	}
+
+	/*
+	 * @Date: 24/04/23
+	 * @Description: Clicks on the Next button for pagination in new search page
+	 */
+	public void clickOnNextButtonInNewSearchPage() throws IOException{
+		try {
+			NextButonForPaginationInNewSearchPage.click();
+			Reporting.updateTestReport("The next button was clicked in the new search page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The next button couldn't be clicked in the new search page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 	
+	/*
+	 * @Date: 19/04/23
+	 * @Description: Checks number of items after searching
+	 */
+	public String checkNumberOfProductsInNewSearchPage() throws IOException{
+		try {
+			String[] texts=NumberOfProductsAfterFilteringNewSearchPage.getText().split(" of ");
+			System.out.println(texts.toString()+ texts.length);
+			String totalNumber=texts[texts.length-1];
+				Reporting.updateTestReport("The total number of products after searching was returned as: "+totalNumber,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+			return totalNumber;
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The number of products after searching couldn't be fetched "+NumberOfProductsAfterFilteringNewSearchPage.getText(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+
+
 }

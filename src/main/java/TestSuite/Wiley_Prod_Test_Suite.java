@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -1537,6 +1538,81 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				}
 			}
 			wiley.WileyLogOut();
+
+		}
+		catch(Exception e) {
+			wiley.wileyLogOutException();
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Validate the sorting functionality in search result page
+	 * @Date: 21/04/23
+	 */
+	@Test
+	public void TC26_Sort_Functionality_In_SRP_With_Pagination() throws IOException{
+		try {
+			Reporting.test = Reporting.extent.createTest("TC26_Sort_Functionality_In_SRP");
+			LogTextFile.writeTestCaseStatus("TC26_Sort_Functionality_In_SRP", "Test case");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			driver.get(Homepage);
+			int flag=0;
+			driver.navigate().refresh();
+			try {
+				wait.until(ExpectedConditions.presenceOfElementLocated(
+						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
+								+ " Education and Research')]")));
+				wiley.searchProductInHomePageSearchBar(excelOperation.getTestData("TC26", "WILEY_Test_Data", "SearchBox_Text"));				
+				try {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+					flag=1;
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+				}
+				if(flag==1) {
+					wiley.checkSortDropDownInSearchResultPageNewSearch(driver);
+					int page=wiley.fetchNumberOfPagesAfterFilteringNewSearchPage(driver);
+					
+					//Sort dropdown takes 3 different options: 1)"Relevance", 2)"Author's Name (A-Z)" 3) "Product's Name (A-Z)"
+					wiley.selectSortOptionNewSearch("Product's Name (A-Z)");
+					List<String> productNameListAfterSorting=wiley.getProductNameListFromNewSearch(driver);
+					wiley.checkIfStringsAreSortedInAscendingOrder(productNameListAfterSorting);
+					
+					wiley.selectSortOptionNewSearch("Author's Name (A-Z)");
+					List<String> authorsNameListAfterSorting=wiley.getAuthorNameListFromNewSearch(driver);
+					wiley.checkIfStringsAreSortedInAscendingOrder(authorsNameListAfterSorting);
+					
+					//Checking the number of pages through calculation
+					int numberOfPagesThroughCalculation;
+					String totalProduct=wiley.checkNumberOfProductsInNewSearchPage();
+					if(Integer.parseInt(totalProduct)%15==0) 
+						numberOfPagesThroughCalculation=Integer.parseInt(totalProduct)/15;
+					else
+						numberOfPagesThroughCalculation=Integer.parseInt(totalProduct)/15+1;
+					if(numberOfPagesThroughCalculation==page) {
+						Reporting.updateTestReport("The pagination functionality is working fine",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					}
+					else
+						Reporting.updateTestReport("The pagination functionality is not working fine",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					
+				}
+				
+					
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+
 
 		}
 		catch(Exception e) {
