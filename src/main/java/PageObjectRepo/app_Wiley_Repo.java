@@ -190,6 +190,14 @@ public class app_Wiley_Repo {
 	WebElement TotalNumberOfPages;
 	@FindBy(xpath = "(//header[@class='wiley-product-list-component-header']/h1)[1]")
 	WebElement FeaturedProducts;
+	@FindBy(xpath="//a[contains(text(),'PRODUCTS')]/span/i[2]")
+	WebElement NumberOfProductsInSearchResult;
+	@FindBy(xpath="(//li[@class='pagination-prev disabled'])[1]")
+	WebElement DisbaledPreviousButton;
+	@FindBy(xpath="(//li[@class='pagination-next disabled'])[1]")
+	WebElement DisbaledNextButton;
+	@FindBy(xpath="(//a[@title='Next page'])[1]")
+	WebElement NextButonForPagination;
 
 	// Login or Create Account page during checkout
 
@@ -304,6 +312,10 @@ public class app_Wiley_Repo {
 	WebElement SortDropDown;
 	@FindBy(xpath="//a[@aria-label='Next page']")
 	WebElement NextButonForPaginationInNewSearchPage;
+	@FindBy(xpath="//li[@class='previous disabled']")
+	WebElement DisbaledPreviousButtonInNewSearchPage;
+	@FindBy(xpath="//li[@class='next disabled']")
+	WebElement DisbaledNextButtonInNewSearchPage;
 
 
 
@@ -2510,8 +2522,9 @@ public class app_Wiley_Repo {
 	 */
 	public void searchProductInHomePageSearchBar(String data) throws IOException {
 		try {
+			Thread.sleep(1000);
 			HomePageSearchBar.sendKeys(data+Keys.ENTER);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			Reporting.updateTestReport(data + " text seached in the search bar",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
@@ -2567,7 +2580,7 @@ public class app_Wiley_Repo {
 	public List<String> getProductNameListFromNewSearch(WebDriver driver) throws IOException{
 		try {
 			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(15));
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@class='product-card'])[1]")));
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class='product-title']/h3/a")));
 			String orginalText;
 			List<WebElement> ProductNameList=driver.findElements(By.xpath("//div[@class='product-title']/h3/a"));
 			List<String> productNameList=new ArrayList<String>();
@@ -2597,7 +2610,7 @@ public class app_Wiley_Repo {
 	public List<String> getAuthorNameListFromNewSearch(WebDriver driver) throws IOException{
 		try {
 			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(15));
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@class='product-card'])[1]")));
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class='product-authors']")));
 			List<WebElement> AuthorNameList=driver.findElements(By.xpath("//div[@class='product-authors']"));
 			List<String> authorNameList=new ArrayList<String>();
 			for(WebElement i:AuthorNameList) {
@@ -2616,37 +2629,6 @@ public class app_Wiley_Repo {
 		}
 	}
 
-	/*
-	 * @Date: 21/04/23
-	 * @Description: Compares the string values of a list if they are sorted or not
-	 */
-	public boolean checkIfStringsAreSortedInAscendingOrder(List<String> stringList) throws IOException{
-		try {
-			int flag=0;
-			for(int i=0;i<stringList.size()-1;i++) {
-				if(stringList.get(i).compareToIgnoreCase(stringList.get(i+1))>0) {
-					flag=1;
-					System.out.println(stringList.get(i)+" wrong-> "+stringList.get(i+1));
-					break;
-				}
-			}
-			if(flag==0) {
-				Reporting.updateTestReport("All the elements are correctly sorted in Ascending order",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				return true;
-			}
-			else {
-				Reporting.updateTestReport("All the elements are not sorted in Ascending order",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				return false;
-			}
-		}
-		catch(Exception e) {
-			Reporting.updateTestReport("The string list sorting couldn't be validated",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			return false;
-		}
-	}
 
 	/*
 	 * @Date: 24/04/23
@@ -2659,7 +2641,7 @@ public class app_Wiley_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("The next button couldn't be clicked in the new search page",
+			Reporting.updateTestReport("The next button couldn't be clicked in the new search page "+e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -2685,6 +2667,110 @@ public class app_Wiley_Repo {
 
 		}
 	}
+	
+	/*
+	 * @Date: 24/04/23
+	 * @Description: Checks if the previous button for pagination is disabled
+	 */
+	public void checkIfPreviousButtonDisabledInNewSearchPage() throws IOException{
+		try {
+
+			 if(DisbaledPreviousButtonInNewSearchPage.isDisplayed())
+				Reporting.updateTestReport("Previous button was disabled",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Previous button was not disabled",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		
+	}
+	
+	/*
+	 * @Date: 24/04/23
+	 * @Description: Checks if the Next button for pagination is disabled
+	 */
+	public void checkIfNextButtonDisabledInNewSearchPage() throws IOException{
+		try {
+
+			 if(DisbaledNextButtonInNewSearchPage.isDisplayed())
+				Reporting.updateTestReport("Next button was disabled",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Next button was not disabled",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		
+	}
+	
+	//Old Search Result page methods
+	public String getNumberOfProductsInSearchResult() throws IOException{
+		try {
+			Reporting.updateTestReport("The total number of search result was returned"+NumberOfProductsInSearchResult.getText(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return (NumberOfProductsInSearchResult.getText().trim());
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The total number of search result couldn't be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	
+	/*
+	 * @Date: 24/04/23
+	 * @Description: Checks if the previous button for pagination is disabled
+	 */
+	public void checkIfPreviousButtonDisabled() throws IOException{
+		try {
+
+			 if(DisbaledPreviousButton.isDisplayed())
+				Reporting.updateTestReport("Previous button was disabled",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Previous button was not disabled",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		
+	}
+	
+	/*
+	 * @Date: 24/04/23
+	 * @Description: Checks if the Next button for pagination is disabled
+	 */
+	public void checkIfNextButtonDisabled() throws IOException{
+		try {
+
+			 if(DisbaledNextButton.isDisplayed())
+				Reporting.updateTestReport("Next button was disabled",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("Next button was not disabled",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+		
+	}
+	
+
+	/*
+	 * @Date: 24/04/23
+	 * @Description: Clicks on the Next button for pagination in old search page
+	 */
+	public void clickOnNextButton() throws IOException{
+		try {
+			NextButonForPagination.click();
+			Reporting.updateTestReport("The next button was clicked in the old search page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The next button couldn't be clicked in the old search page "+e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
 
 
 }

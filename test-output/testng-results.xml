@@ -2,16 +2,16 @@
 <testng-results ignored="25" total="26" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-04-24T12:11:24 IST" name="Default suite" finished-at="2023-04-24T12:11:59 IST" duration-ms="34900">
+  <suite started-at="2023-04-25T12:23:22 IST" name="Default suite" finished-at="2023-04-25T12:25:20 IST" duration-ms="118579">
     <groups>
     </groups>
-    <test started-at="2023-04-24T12:11:24 IST" name="Default test" finished-at="2023-04-24T12:11:59 IST" duration-ms="34900">
+    <test started-at="2023-04-25T12:23:22 IST" name="Default test" finished-at="2023-04-25T12:25:20 IST" duration-ms="118579">
       <class name="TestSuite.Wiley_Prod_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@27305e6]" started-at="2023-04-24T12:11:24 IST" name="initiate" finished-at="2023-04-24T12:11:32 IST" duration-ms="7916" status="PASS">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@75c9e76b]" started-at="2023-04-25T12:23:22 IST" name="initiate" finished-at="2023-04-25T12:23:29 IST" duration-ms="7471" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@6467ddc7]]>
+                <![CDATA[org.testng.TestRunner@486bd064]]>
               </value>
             </param>
             <param index="1">
@@ -23,11 +23,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@27305e6]" started-at="2023-04-24T12:11:32 IST" name="launchBrowser" finished-at="2023-04-24T12:11:32 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="61" status="PASS">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@75c9e76b]" started-at="2023-04-25T12:23:29 IST" name="launchBrowser" finished-at="2023-04-25T12:23:29 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="85" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchBrowser -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@27305e6]" started-at="2023-04-24T12:11:32 IST" name="nameBefore" finished-at="2023-04-24T12:11:32 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@75c9e76b]" started-at="2023-04-25T12:23:29 IST" name="nameBefore" finished-at="2023-04-25T12:23:29 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -38,11 +38,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameBefore -->
-        <test-method signature="TC26_Sort_Functionality_In_SRP_With_Pagination()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@27305e6]" started-at="2023-04-24T12:11:32 IST" name="TC26_Sort_Functionality_In_SRP_With_Pagination" finished-at="2023-04-24T12:11:57 IST" duration-ms="24446" status="PASS">
+        <test-method signature="TC26_Sort_Functionality_In_SRP_With_Pagination()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@75c9e76b]" started-at="2023-04-25T12:23:29 IST" name="TC26_Sort_Functionality_In_SRP_With_Pagination" finished-at="2023-04-25T12:25:18 IST" duration-ms="108318" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TC26_Sort_Functionality_In_SRP_With_Pagination -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@27305e6]" started-at="2023-04-24T12:11:57 IST" name="nameAfter" finished-at="2023-04-24T12:11:57 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@75c9e76b]" started-at="2023-04-25T12:25:18 IST" name="nameAfter" finished-at="2023-04-25T12:25:18 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -53,7 +53,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@27305e6]" started-at="2023-04-24T12:11:57 IST" name="CloseBrowser" finished-at="2023-04-24T12:11:59 IST" duration-ms="2409" status="PASS">
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@75c9e76b]" started-at="2023-04-25T12:25:18 IST" name="CloseBrowser" finished-at="2023-04-25T12:25:20 IST" duration-ms="2598" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->

@@ -30,6 +30,7 @@ import utilities.Reporting;
 import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
 import utilities.excelOperation;
+import utilities.CommonFunctions;
 
 public class Wiley_Prod_Test_Suite extends DriverModule{
 	app_Wiley_Repo wiley;
@@ -264,7 +265,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				else
 					Reporting.updateTestReport("Failed to Load the Product Landing Page "+wiley.checkPlpProductTabNewSearch(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				
+
 				if (wiley.checkPlpContentTabNewSearch().equals("Content"))
 					Reporting.updateTestReport(
 							"Product landing page was loaded Successfully and page having text Content Headers Section",
@@ -272,7 +273,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				else
 					Reporting.updateTestReport("Failed to Load the Product Landing Page",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					
+
 			}
 			else {
 				String plpProductText = wiley.PlpProductText().substring(0, 8);
@@ -292,7 +293,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 					Reporting.updateTestReport("Failed to Load the Product Landing Page",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			
+
 
 		} catch (Exception e) {
 			wiley.WileyLogOut();
@@ -443,7 +444,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				else
 					Reporting.updateTestReport("Failed to Load the Product Landing Page",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					
+
 			}
 			else {
 				wiley.ClickOnContentSearchOnPDPPage();
@@ -516,7 +517,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 			String newXpath="(//span[@class='search-highlight' and contains(text(),'"+
 					excelOperation.getTestData("TC15", "WILEY_Test_Data", "SearchBox_Text")+"')])[1]";
-			
+
 			try {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 				Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
@@ -554,7 +555,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				else
 					Reporting.updateTestReport("Pagination funationility is not working",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				
+
 				List<WebElement> filteredProducts=driver.findElements(By.className("product-card"));
 				int flagForAuthor=0;
 				for(int i=1;i<filteredProducts.size()+1;i++) {
@@ -1546,7 +1547,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Validate the sorting functionality in search result page
@@ -1557,7 +1558,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC26_Sort_Functionality_In_SRP");
 			LogTextFile.writeTestCaseStatus("TC26_Sort_Functionality_In_SRP", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
 			driver.get(Homepage);
 			int flag=0;
 			driver.navigate().refresh();
@@ -1579,34 +1580,174 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				if(flag==1) {
 					wiley.checkSortDropDownInSearchResultPageNewSearch(driver);
 					int page=wiley.fetchNumberOfPagesAfterFilteringNewSearchPage(driver);
-					
+
 					//Sort dropdown takes 3 different options: 1)"Relevance", 2)"Author's Name (A-Z)" 3) "Product's Name (A-Z)"
+
+					//Sorting by products' name
 					wiley.selectSortOptionNewSearch("Product's Name (A-Z)");
-					List<String> productNameListAfterSorting=wiley.getProductNameListFromNewSearch(driver);
-					wiley.checkIfStringsAreSortedInAscendingOrder(productNameListAfterSorting);
-					
-					wiley.selectSortOptionNewSearch("Author's Name (A-Z)");
-					List<String> authorsNameListAfterSorting=wiley.getAuthorNameListFromNewSearch(driver);
-					wiley.checkIfStringsAreSortedInAscendingOrder(authorsNameListAfterSorting);
-					
-					//Checking the number of pages through calculation
-					int numberOfPagesThroughCalculation;
-					String totalProduct=wiley.checkNumberOfProductsInNewSearchPage();
-					if(Integer.parseInt(totalProduct)%15==0) 
-						numberOfPagesThroughCalculation=Integer.parseInt(totalProduct)/15;
-					else
-						numberOfPagesThroughCalculation=Integer.parseInt(totalProduct)/15+1;
-					if(numberOfPagesThroughCalculation==page) {
-						Reporting.updateTestReport("The pagination functionality is working fine",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					try {
+						wait.until(ExpectedConditions.visibilityOfElementLocated(
+								By.xpath("//select[@id='sortSelect']/option[@value='item_name_ascending']")));
+						List<String> productNameListAfterSorting=wiley.getProductNameListFromNewSearch(driver);
+						if(CommonFunctions.checkAscendingOrderStringList(productNameListAfterSorting)==1)
+							Reporting.updateTestReport("All the elements are correctly sorted in Ascending order",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else if(CommonFunctions.checkAscendingOrderStringList(productNameListAfterSorting)==0)
+							Reporting.updateTestReport("All the elements are not sorted in Ascending order",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						else
+							Reporting.updateTestReport("The string list sorting couldn't be validated",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+						//Sorting by authors' name
+						try {
+							wait.until(ExpectedConditions.visibilityOfElementLocated(
+									By.xpath("//select[@id='sortSelect']/option[@value='author_ascending']")));
+							wiley.selectSortOptionNewSearch("Author's Name (A-Z)");
+							List<String> authorsNameListAfterSorting=wiley.getAuthorNameListFromNewSearch(driver);
+							if(CommonFunctions.checkAscendingOrderStringList(authorsNameListAfterSorting)==1)
+								Reporting.updateTestReport("All the elements are correctly sorted in Ascending order",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else if(CommonFunctions.checkAscendingOrderStringList(authorsNameListAfterSorting)==0)
+								Reporting.updateTestReport("All the elements are not sorted in Ascending order",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							else
+								Reporting.updateTestReport("The string list sorting couldn't be validated",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+							//Checking the number of pages through calculation
+							String totalSearchedProducts=wiley.checkNumberOfProductsInNewSearchPage();
+							CommonFunctions.checkPaginationFunctionality(flag, totalSearchedProducts, page, SS_path);
+							for(int i=0;i<page;i++) {
+
+								//for last page
+								if(i==page-1) {
+									wiley.checkIfNextButtonDisabledInNewSearchPage();
+									try {
+										wait.until(ExpectedConditions.visibilityOfElementLocated
+												(By.xpath("//div[@class='search-result-page-header']/h1")));
+										List<WebElement> products=driver.findElements(By.xpath("//div[@class='product-card']"));
+										int numberOfProductsInLastPage=products.size();
+										if(Integer.parseInt(totalSearchedProducts)%15==numberOfProductsInLastPage)
+											Reporting.updateTestReport("Correct number of products: "+numberOfProductsInLastPage+" is present in last page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport("Incorrect number of products: "+numberOfProductsInLastPage+" is present in last page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+									catch(Exception e) {
+										Reporting.updateTestReport("The page didn't scrolled up to top",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+								}
+
+								//for other pages except last pages
+								else {									
+									//Extra step for first page
+									if(i==0) 
+										wiley.checkIfPreviousButtonDisabledInNewSearchPage();
+									try {
+										wait.until(ExpectedConditions.visibilityOfElementLocated
+												(By.xpath("//div[@class='search-result-page-header']/h1")));
+										ScrollingWebPage.PageScrollDownUptoBottom(driver, SS_path);
+										try {
+											wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='/terms-of-use']")));
+											ScrollingWebPage.PageScrollUp(driver, 0, -200, SS_path);
+											try {
+												wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@aria-label='Next page']")));
+												wiley.clickOnNextButtonInNewSearchPage();
+												Thread.sleep(1000);
+											}
+											catch(Exception e) {
+												Reporting.updateTestReport("Next button was not clickable and caused timeout exception",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											}
+										}
+										catch(Exception e) {
+											Reporting.updateTestReport("The page didn't scrolled down to bottom",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										}
+									}
+									catch(Exception e) {
+										Reporting.updateTestReport("The page didn't scrolled up to top",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+								}
+							}
+						}
+
+						catch(Exception e) {
+							Reporting.updateTestReport("After sorting the page, the products were not clickable",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
 					}
-					else
-						Reporting.updateTestReport("The pagination functionality is not working fine",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					
+					catch(Exception e) {
+						Reporting.updateTestReport("After sorting the page, the products were not clickable",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+
 				}
 				
+				//This is for old search page
+				else {
+					int page=wiley.fetchNumberOfPagesAfterFiltering();
+					String totalSearchedProducts=wiley.getNumberOfProductsInSearchResult();
+					CommonFunctions.checkPaginationFunctionality(flag, totalSearchedProducts, page, SS_path);
+					for(int i=0;i<page;i++) {
+
+						//for last page
+						if(i==page-1) {
+							wiley.checkIfNextButtonDisabled();
+							try {
+								wait.until(ExpectedConditions.visibilityOfElementLocated
+										(By.xpath("//a[contains(text(),'PRODUCTS')]")));
+								List<WebElement> products=driver.findElements(By.xpath("//section[@class='product-item']"));
+								int numberOfProductsInLastPage=products.size();
+								if(Integer.parseInt(totalSearchedProducts)%10==numberOfProductsInLastPage)
+									Reporting.updateTestReport("Correct number of products: "+numberOfProductsInLastPage+" is present in last page",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("Incorrect number of products: "+numberOfProductsInLastPage+" is present in last page",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+
+							catch(Exception e) {
+								Reporting.updateTestReport("The page didn't scrolled up to top",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+						}
+
+						//for other pages except last pages
+						else {									
+							//Extra step for first page
+							if(i==0) 
+								wiley.checkIfPreviousButtonDisabled();
+							try {
+								wait.until(ExpectedConditions.visibilityOfElementLocated
+										(By.xpath("//a[contains(text(),'PRODUCTS')]")));
+								
+									try {
+										wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//a[@title='Next page'])[1]")));
+										wiley.clickOnNextButton();
+										Thread.sleep(1000);
+									}
+									catch(Exception e) {
+										Reporting.updateTestReport("Next button was not clickable and caused timeout exception",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+								
+							}
+							catch(Exception e) {
+								Reporting.updateTestReport("The page didn't scrolled up to top",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+						}
+					}
 					
+				}
+
+
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
