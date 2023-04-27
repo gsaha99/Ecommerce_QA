@@ -490,6 +490,18 @@ public class app_Wiley_Repo {
 	@FindBy(xpath="//span[contains(text(),'E-Book')]/span[@class='facet-value-count']/i")
 	WebElement EBookFormatFacetQuantity;
 
+	@FindBy(xpath="//a[contains(text(),'PRODUCTS')]/span/i[2]")
+	WebElement NumberOfProductsInSearchResult;
+	
+	@FindBy(xpath="(//li[@class='pagination-prev disabled'])[1]")
+	WebElement DisbaledPreviousButton;
+	
+	@FindBy(xpath="(//li[@class='pagination-next disabled'])[1]")
+	WebElement DisbaledNextButton;
+	
+	@FindBy(xpath="(//a[@title='Next page'])[1]")
+	WebElement NextButonForPagination;
+
 	//Vetconsult product details page
 
 	@FindBy(xpath = "//span[@class='search-highlight']")
@@ -4032,6 +4044,112 @@ public class app_Wiley_Repo {
 			Reporting.updateTestReport("Hedaer in Checkout login couldn't be validated", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+	
+	//Old Search Result page methods
+	
+		/*
+		 * @Date: 25/04/23
+		 * @Description: Fetches the number of products in search result
+		 */
+		public String getNumberOfProductsInSearchResult() throws IOException{
+			try {
+				Reporting.updateTestReport("The total number of search result was returned"+NumberOfProductsInSearchResult.getText(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return (NumberOfProductsInSearchResult.getText().trim());
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The total number of search result couldn't be returned",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "";
+			}
+		}
+		
+		/*
+		 * @Date: 24/04/23
+		 * @Description: Checks if the previous button for pagination is disabled
+		 */
+		public void checkIfPreviousButtonDisabled() throws IOException{
+			try {
+
+				 if(DisbaledPreviousButton.isDisplayed())
+					Reporting.updateTestReport("Previous button was disabled",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Previous button was not disabled",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			
+		}
+		
+		/*
+		 * @Date: 24/04/23
+		 * @Description: Checks if the Next button for pagination is disabled
+		 */
+		public void checkIfNextButtonDisabled() throws IOException{
+			try {
+
+				 if(DisbaledNextButton.isDisplayed())
+					Reporting.updateTestReport("Next button was disabled",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Next button was not disabled",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			
+		}
+		
+
+		/*
+		 * @Date: 24/04/23
+		 * @Description: Clicks on the Next button for pagination in old search page
+		 */
+		public void clickOnNextButton() throws IOException{
+			try {
+				NextButonForPagination.click();
+				Reporting.updateTestReport("The next button was clicked in the old search page",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The next button couldn't be clicked in the old search page "+e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Date: 24/04/23
+		 * @Description: Clicks On homepage logo
+		 */
+		public void clickOnHomePage() throws IOException {
+			try {
+				HomePageLogo.click();
+				Reporting.updateTestReport("Wiley logo was clicked Successfully", CaptureScreenshot.getScreenshot(SS_path),
+						StatusDetails.PASS);
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Failed to click on the Wiley Logo ", CaptureScreenshot.getScreenshot(SS_path),
+						StatusDetails.FAIL);
+
+			}
+
+		}
+		
+		/*
+		 * @Date: 24/04/23
+		 * @Description: Enters data in HomePage search bar
+		 */
+		public void searchProductInHomePageSearchBar(String data) throws IOException {
+			try {
+				HomePageSearchBar.sendKeys(data+Keys.ENTER);
+				Thread.sleep(2000);
+				Reporting.updateTestReport(data + " text seached in the search bar",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			} catch (Exception e) {
+				Reporting.updateTestReport("Data couldn't be entered in the search bar",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
 
 }
 

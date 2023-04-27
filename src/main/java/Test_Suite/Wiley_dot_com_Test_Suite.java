@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import PageObjectRepo.app_Wiley_Repo;
 import utilities.CaptureScreenshot;
+import utilities.CommonFunctions;
 import utilities.DriverModule;
 import utilities.LogTextFile;
 import utilities.Reporting;
@@ -587,7 +588,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Validate the sorting functionality in search result page
@@ -636,7 +637,7 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 							date=publicationDate.getText();
 							previousMonth=date.split(" ")[0];
 							previousYear=date.split(" ")[1];
-							
+
 						}
 						else {
 							String currentdate=publicationDate.getText();
@@ -661,17 +662,17 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 							date=currentdate;
 							previousMonth=currentMonth;
 							previousYear=currentYear;
-								
+
 						}
-						
-						
+
+
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport(e.getMessage()+" Publication date field for each product was not found",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				}
-				
+
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport(e.getMessage()+" Searched highlighted term was not displayed"
@@ -683,6 +684,91 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 		catch(Exception e) {
 			wiley.wileyLogOutException();
 			System.out.println(e.getMessage());
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+
+	/*
+	 * @Date: 27/04/23
+	 * @Description: Checks the pagination functionality
+	 */
+	@Test
+	public void TC17_Pagination_Functionality_In_Search_Result_Page() throws IOException{
+		try {
+			Reporting.test = Reporting.extent.createTest("TC17_Pagination_Functionality_In_Search_Result_Page");
+			LogTextFile.writeTestCaseStatus("TC17_Pagination_Functionality_In_Search_Result_Page", "Test case");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			driver.get(wiley.wileyURLConcatenation("TC17", "WILEY_Dot_Com_Test_Data", "URL"));
+			driver.navigate().refresh();
+			try {
+				wiley.clickOnHomePage();
+				wait.until(ExpectedConditions.presenceOfElementLocated(
+						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
+								+ " Education and Research')]")));
+				wiley.searchProductInHomePageSearchBar(excelOperation.getTestData("TC17", "WILEY_Dot_Com_Test_Data", "SearchBox_Text"));
+				int page=wiley.fetchNumberOfPagesAfterFiltering();
+				String totalSearchedProducts=wiley.getNumberOfProductsInSearchResult();
+				CommonFunctions.checkPaginationFunctionality(0, totalSearchedProducts, page, SS_path);
+				for(int i=0;i<page;i++) {
+					//for last page
+					if(i==page-1) {
+						wiley.checkIfNextButtonDisabled();
+						try {
+							wait.until(ExpectedConditions.visibilityOfElementLocated
+									(By.xpath("//a[contains(text(),'PRODUCTS')]")));
+							List<WebElement> products=driver.findElements(By.xpath("//section[@class='product-item']"));
+							int numberOfProductsInLastPage=products.size();
+							if(Integer.parseInt(totalSearchedProducts)%10==numberOfProductsInLastPage)
+								Reporting.updateTestReport("Correct number of products: "+numberOfProductsInLastPage+" is present in last page",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport("Incorrect number of products: "+numberOfProductsInLastPage+" is present in last page",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+
+						catch(Exception e) {
+							Reporting.updateTestReport("The page didn't scrolled up to top",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					}
+
+					//for other pages except last pages
+					else {									
+						//Extra step for first page
+						if(i==0) 
+							wiley.checkIfPreviousButtonDisabled();
+						try {
+							wait.until(ExpectedConditions.visibilityOfElementLocated
+									(By.xpath("//a[contains(text(),'PRODUCTS')]")));
+
+							try {
+								wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//a[@title='Next page'])[1]")));
+								wiley.clickOnNextButton();
+								Thread.sleep(1000);
+							}
+							catch(Exception e) {
+								Reporting.updateTestReport("Next button was not clickable and caused timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+
+						}
+						catch(Exception e) {
+							Reporting.updateTestReport("The page didn't scrolled up to top",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					}
+				}
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("User was not on homepage and caused timeout exception ",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+
+
+		}
+		catch(Exception e) {
+			wiley.wileyLogOutException();
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}

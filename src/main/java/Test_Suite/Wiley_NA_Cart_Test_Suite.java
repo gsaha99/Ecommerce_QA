@@ -807,7 +807,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
 					BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
 					if(firstProductPriceInOrderReview
-							.multiply(quantity)
 							.add(shippingInOrderReview)
 							.add(taxInOrderReview)
 							.setScale(2, RoundingMode.CEILING)
@@ -817,7 +816,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					else
 						Reporting.updateTestReport("First Product price + Tax +Shipping charge"
 								+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+					if(priceOfFirstProduct.multiply(quantity).setScale(2, RoundingMode.HALF_EVEN).compareTo(firstProductPriceInOrderReview)==0)
 						Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					else
@@ -3058,7 +3057,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
 							BigDecimal discountInOrderReview=new BigDecimal(wiley.fetchDiscountInOrderReview().substring(1));
 							if(firstProductPriceInOrderReview
-									.multiply(quantity)
 									.add(secondProductPriceInOrderReview)
 									.add(shippingInOrderReview)
 									.add(taxInOrderReview)
@@ -3069,7 +3067,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							else
 								Reporting.updateTestReport("First Product price + Tax + Shipping charge - Discount"
 										+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							if(priceOfFirstProduct.multiply(quantity).setScale(2, RoundingMode.HALF_EVEN).compareTo(firstProductPriceInOrderReview)==0)
 								Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							else
@@ -5861,7 +5859,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							BigDecimal shippingInOrderReview=new BigDecimal(wiley.fetchShippingChargeInOrderReview().substring(1));
 							BigDecimal discountInOrderReview=new BigDecimal(wiley.fetchDiscountInOrderReview().substring(1));
 							if(firstProductPriceInOrderReview
-									.multiply(quantity)
 									.add(secondProductPriceInOrderReview)
 									.add(shippingInOrderReview)
 									.add(taxInOrderReview)
@@ -5872,7 +5869,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							else
 								Reporting.updateTestReport("First Product price + Tax + Shipping charge - Discount"
 										+ " is not equal to Order total in Order Review step", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							if(priceOfFirstProduct.compareTo(firstProductPriceInOrderReview)==0)
+							if(priceOfFirstProduct.multiply(quantity).setScale(2, RoundingMode.HALF_EVEN).compareTo(firstProductPriceInOrderReview)==0)
 								Reporting.updateTestReport("Price in PDP is same as the price in Order Review",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							else
