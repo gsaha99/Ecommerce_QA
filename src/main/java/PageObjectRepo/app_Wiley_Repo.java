@@ -2500,7 +2500,7 @@ public class app_Wiley_Repo {
 	 * @Date: 19/04/23
 	 * @Description: Fetches the total number of pages in pagination
 	 */
-	public int fetchNumberOfPagesAfterFilteringNewSearchPage(WebDriver driver) throws IOException{
+	public int fetchTotalNumberOfPagesInNewSearchPage(WebDriver driver) throws IOException{
 		try {
 			List<WebElement> pages=driver.findElements(By.xpath("//ul[@class='pagination']/li/a"));
 			WebElement totalPage=pages.get(pages.size()-2);
@@ -2705,6 +2705,11 @@ public class app_Wiley_Repo {
 	}
 	
 	//Old Search Result page methods
+	
+	/*
+	 * @Date: 25/04/23
+	 * @Description: Fetches the number of products in search result
+	 */
 	public String getNumberOfProductsInSearchResult() throws IOException{
 		try {
 			Reporting.updateTestReport("The total number of search result was returned"+NumberOfProductsInSearchResult.getText(),

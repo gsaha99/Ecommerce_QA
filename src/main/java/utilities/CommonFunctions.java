@@ -35,10 +35,10 @@ public class CommonFunctions {
 	/*
 	 * @Description: Checks if the number of pages calculated and number of pages calculated shown are correct
 	 */
-	public static void checkPaginationFunctionality(int flag,String totalProduct,int page,String SS_path) throws IOException{
+	public static void checkPaginationFunctionality(boolean flag,String totalProduct,int page,String SS_path) throws IOException{
 		try {
 			int numberOfPagesThroughCalculation;
-			if(flag==1) {
+			if(flag) {
 				if(Integer.parseInt(totalProduct)%15==0) 
 					numberOfPagesThroughCalculation=Integer.parseInt(totalProduct)/15;
 				else

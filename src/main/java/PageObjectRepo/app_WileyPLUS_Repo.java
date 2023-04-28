@@ -211,8 +211,9 @@ public class app_WileyPLUS_Repo {
 	 */
 	public void searchProductInHomePageSearchBar(String data) throws IOException {
 		try {
+			Thread.sleep(1000);
 			HomePageSearchBar.sendKeys(data+Keys.ENTER);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			Reporting.updateTestReport(data + " text seached in the search bar",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
@@ -591,7 +592,7 @@ public class app_WileyPLUS_Repo {
 				Reporting.updateTestReport("The header text in grey box was not present",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			try {
-				WebElement GreyBoxTextWileyPLUSPDP=driver.findElement(By.xpath("//p[contains(text(),'"+greyBoxText+"')]"));
+				WebElement GreyBoxTextWileyPLUSPDP=driver.findElement(By.xpath("//p[contains(text(),\""+greyBoxText+"\")]"));
 				if(GreyBoxTextWileyPLUSPDP.isDisplayed()) 
 					Reporting.updateTestReport("The text: "+GreyBoxTextWileyPLUSPDP.getText()+" was present",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1249,6 +1250,7 @@ public class app_WileyPLUS_Repo {
 	 */
 	public void clickOnWileyPLUSInFormatFacetNewSearchPage() throws IOException{
 		try {
+			
 			WileyPLUSUnderFormatFacetNewSearchPage.click();
 			Reporting.updateTestReport("WileyPLUS under the format facet was clicked",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);

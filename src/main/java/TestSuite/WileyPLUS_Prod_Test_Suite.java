@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,6 +29,7 @@ import utilities.Reporting;
 import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
 import utilities.excelOperation;
+import org.openqa.selenium.JavascriptExecutor;
 
 public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 	app_WileyPLUS_Repo WileyPLUS;
@@ -158,13 +160,24 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 				if(flag==1) {
 					WileyPLUS.clickOnFormatFacetNewSearchPage();
 					ScrollingWebPage.PageDown(driver, SS_path);
-					WileyPLUS.clickOnWileyPLUSInFormatFacetNewSearchPage();
-					WileyPLUS.checkWileyPLUSInAppliedFacetNewSearchPage();	
-					ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
-					WileyPLUS.checkPublicationDateInSRP_PLPNewSearchPage();
-					WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
-					price=WileyPLUS.checkPriceInSRP_PLPNewSearchPage(driver);
-					WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
+					WebElement l=driver.findElement(By.xpath("//label[@for='format|WileyPlus']"));
+					// Javascript executor
+					((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", l);
+					try {
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[@for='format|WileyPlus']")));
+						WileyPLUS.clickOnWileyPLUSInFormatFacetNewSearchPage();
+						WileyPLUS.checkWileyPLUSInAppliedFacetNewSearchPage();	
+						ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
+						WileyPLUS.checkPublicationDateInSRP_PLPNewSearchPage();
+						WileyPLUS.checkWileyPLUSFormatInSRP_PLPNewSearchPage(driver);
+						price=WileyPLUS.checkPriceInSRP_PLPNewSearchPage(driver);
+						WileyPLUS.clickOnSRP_WileyProductNewSearchPage();
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("WileyPLUS Format facet couldn't be clicked",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						price="";
+					}
 				}
 				else {
 					WileyPLUS.clickOnFormatFacet();
@@ -431,8 +444,18 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 				if(flag==1) {
 					WileyPLUS.clickOnFormatFacetNewSearchPage();
 					ScrollingWebPage.PageDown(driver, SS_path);
-					WileyPLUS.clickOnWileyPLUSInFormatFacetNewSearchPage();
-					WileyPLUS.checkWileyPLUSInAppliedFacetNewSearchPage();	
+					WebElement l=driver.findElement(By.xpath("//label[@for='format|WileyPlus']"));
+					// Javascript executor
+					((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", l);
+					try {
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[@for='format|WileyPlus']")));
+						WileyPLUS.clickOnWileyPLUSInFormatFacetNewSearchPage();
+						WileyPLUS.checkWileyPLUSInAppliedFacetNewSearchPage();	
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("WileyPLUS Format facet couldn't be clicked",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
 				}
 				else {
 					WileyPLUS.clickOnFormatFacet();
@@ -510,9 +533,10 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 					WileyPLUS.clickOnSingleTermWileyPLUSButton();
 					WileyPLUS.checkSingleTermWileyPLUSText(driver,excelOperation.getTestData("SingleTermWileyPLUSText", "Generic_Messages", "Data"));
 					WileyPLUS.checkStandardPricicngTextWileyPLUSTab();
-					ScrollingWebPage.PageScrolldown(driver, 0, 500, SS_path);
+					ScrollingWebPage.PageScrolldown(driver, 0, 500, SS_path);					
 					WileyPLUS.checkGreyBoxWileyPLUSTab(driver,excelOperation.getTestData("WileyPLUS_Grey_Box_Text", "Generic_Messages", "Data"));
 					WileyPLUS.checkLoginToWileyPLUSButton();
+
 				}
 
 				else 
@@ -953,7 +977,7 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 19/04/23
 	 * @Description: Adding multiple wileyplus products to cart with coupon
@@ -1001,7 +1025,7 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 19/4/23
 	 * @Description: Checks if the standard shipping is free if textbook rental bundle is present in cart
@@ -1030,7 +1054,7 @@ public class WileyPLUS_Prod_Test_Suite extends DriverModule{
 			else
 				Reporting.updateTestReport("Standard shipping is not free for US when Textbook rental bundle is present in cart",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			
+
 			WileyPLUS.selectCountry(excelOperation.getTestData("TC17", "WileyPLUS_Test_Data", "Shipping_Country"));
 			try{
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));

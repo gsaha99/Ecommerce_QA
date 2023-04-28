@@ -549,7 +549,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 					numberOfPages=Integer.parseInt(quantity)/15;
 				else
 					numberOfPages=Integer.parseInt(quantity)/15+1;
-				if(wiley.fetchNumberOfPagesAfterFilteringNewSearchPage(driver)==numberOfPages)
+				if(wiley.fetchTotalNumberOfPagesInNewSearchPage(driver)==numberOfPages)
 					Reporting.updateTestReport("Pagination funationility is working fine after filtering with Author field",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				else
@@ -1560,7 +1560,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 			LogTextFile.writeTestCaseStatus("TC26_Sort_Functionality_In_SRP", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
 			driver.get(Homepage);
-			int flag=0;
+			boolean flag=false;
 			driver.navigate().refresh();
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -1571,15 +1571,15 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-					flag=1;
+					flag=true;
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				}
-				if(flag==1) {
+				if(flag) {
 					wiley.checkSortDropDownInSearchResultPageNewSearch(driver);
-					int page=wiley.fetchNumberOfPagesAfterFilteringNewSearchPage(driver);
+					int page=wiley.fetchTotalNumberOfPagesInNewSearchPage(driver);
 
 					//Sort dropdown takes 3 different options: 1)"Relevance", 2)"Author's Name (A-Z)" 3) "Product's Name (A-Z)"
 
