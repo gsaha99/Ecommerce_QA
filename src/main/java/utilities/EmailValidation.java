@@ -458,6 +458,7 @@ public class EmailValidation {
 					{
 						flag=1;
 						ResetPasswordLink.click();
+						Reporting.updateTestReport("Forgot password mail was received", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						driver.switchTo().defaultContent();
 						break;
 					}
@@ -472,8 +473,8 @@ public class EmailValidation {
 			{
 				driver.switchTo().frame("ifmail");
 				driver.findElement(By.xpath("//a[text()='Reset Password']")).click();
+				Reporting.updateTestReport("Reset password link was clicked successfully in the forgot password mail", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				driver.switchTo().defaultContent();
-
 
 				Set<String> allWindowHandles = driver.getWindowHandles();
 				java.util.Iterator<String> iterator = allWindowHandles.iterator();

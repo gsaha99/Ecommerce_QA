@@ -69,22 +69,28 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
-				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC01", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.checkPublicationDateInSRP_PLP();
-				WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
-				String price=WileyPLUS.checkPriceInSRP_PLP();
-				WileyPLUS.clickOnSRP_WileyProduct();
 				try {
-					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='product-add-to-cart']")));
-					if(price.equalsIgnoreCase(WileyPLUS.checkPriceInPDP()))
-						Reporting.updateTestReport("The price in SRP was same as price in PDP",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					else
-						Reporting.updateTestReport("The price in SRP was not same as price in PDP",
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("searchbar")));
+					WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC01", "WileyPLUS_Test_Data", "SearchBox_Text"));
+					WileyPLUS.checkPublicationDateInSRP_PLP();
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
+					String price=WileyPLUS.checkPriceInSRP_PLP();
+					WileyPLUS.clickOnSRP_WileyProduct();
+					try {
+						wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='product-add-to-cart']")));
+						if(price.equalsIgnoreCase(WileyPLUS.checkPriceInPDP()))
+							Reporting.updateTestReport("The price in SRP was same as price in PDP",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("The price in SRP was not same as price in PDP",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Product details page couldn't be loaded and caused timeout exception",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
-				catch(Exception e) {
-					Reporting.updateTestReport("Product details page couldn't be loaded and caused timeout exception",
+					}
+				}catch(Exception e) {
+					Reporting.updateTestReport("Search bar was not present in home page and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
@@ -119,39 +125,45 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
-				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC02", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.clickOnFormatFacet();
-				WileyPLUS.clickOnSeeMoreLinkUnderFormat();
 				try {
-					wait.until(ExpectedConditions.presenceOfElementLocated(
-							By.xpath("//div[@class='modal-title']")));
-					if(WileyPLUS.checkWileyPLUSInFormatFacet())
-						WileyPLUS.clickOnWileyPLUSInFormatFacet();
-					else
-						Reporting.updateTestReport("WileyPLUS was not present under format",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					WileyPLUS.checkWileyPLUSInAppliedFacet();			
-					WileyPLUS.checkPublicationDateInSRP_PLP();
-					WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
-					String price=WileyPLUS.checkPriceInSRP_PLP();
-					WileyPLUS.clickOnSRP_WileyProduct();
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("searchbar")));
+					WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC02", "WileyPLUS_Test_Data", "SearchBox_Text"));
+					WileyPLUS.clickOnFormatFacet();
+					WileyPLUS.clickOnSeeMoreLinkUnderFormat();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(
-								By.xpath("//div[@class='product-add-to-cart']")));
-						if(price.equalsIgnoreCase(WileyPLUS.checkPriceInPDP()))
-							Reporting.updateTestReport("The price in PLP was same as price in PDP",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								By.xpath("//div[@class='modal-title']")));
+						if(WileyPLUS.checkWileyPLUSInFormatFacet())
+							WileyPLUS.clickOnWileyPLUSInFormatFacet();
 						else
-							Reporting.updateTestReport("The price in PLP was not same as price in PDP",
+							Reporting.updateTestReport("WileyPLUS was not present under format",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						WileyPLUS.checkWileyPLUSInAppliedFacet();			
+						WileyPLUS.checkPublicationDateInSRP_PLP();
+						WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
+						String price=WileyPLUS.checkPriceInSRP_PLP();
+						WileyPLUS.clickOnSRP_WileyProduct();
+						try {
+							wait.until(ExpectedConditions.presenceOfElementLocated(
+									By.xpath("//div[@class='product-add-to-cart']")));
+							if(price.equalsIgnoreCase(WileyPLUS.checkPriceInPDP()))
+								Reporting.updateTestReport("The price in PLP was same as price in PDP",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport("The price in PLP was not same as price in PDP",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+						catch(Exception e) {
+							Reporting.updateTestReport("Product details page couldn't be loaded and caused timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
 					}
 					catch(Exception e) {
-						Reporting.updateTestReport("Product details page couldn't be loaded and caused timeout exception",
+						Reporting.updateTestReport("Format modal couldn't be loaded and caused timeout exception",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
-				}
-				catch(Exception e) {
-					Reporting.updateTestReport("Format modal couldn't be loaded and caused timeout exception",
+				}catch(Exception e) {
+					Reporting.updateTestReport("Search bar was not present in home page and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 
@@ -187,18 +199,25 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
-				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC03", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
-				WileyPLUS.clickOnSRP_WileyProduct();
-				if(WileyPLUS.checkWileyPLUSTabInPDP()){
-					WileyPLUS.clickOnWileyPLUSTabPDP();
-				}
-				else {
-					Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("searchbar")));
+					WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC03", "WileyPLUS_Test_Data", "SearchBox_Text"));
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
+					WileyPLUS.clickOnSRP_WileyProduct();
+					if(WileyPLUS.checkWileyPLUSTabInPDP()){
+						WileyPLUS.clickOnWileyPLUSTabPDP();
+					}
+					else {
+						Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+					WileyPLUS.checkSingleTermWileyPLUSTab();
+					WileyPLUS.checkMultipleTermsWileyPLUSTab();
+
+				}catch(Exception e) {
+					Reporting.updateTestReport("Search bar was not present in home page and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
-				WileyPLUS.checkSingleTermWileyPLUSTab();
-				WileyPLUS.checkMultipleTermsWileyPLUSTab();
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
@@ -230,18 +249,24 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
-				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC04", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
-				WileyPLUS.clickOnSRP_WileyProduct();
-				if(WileyPLUS.checkWileyPLUSTabInPDP()){
-					WileyPLUS.clickOnWileyPLUSTabPDP();
-				}
-				else {
-					Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("searchbar")));
+					WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC04", "WileyPLUS_Test_Data", "SearchBox_Text"));
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
+					WileyPLUS.clickOnSRP_WileyProduct();
+					if(WileyPLUS.checkWileyPLUSTabInPDP()){
+						WileyPLUS.clickOnWileyPLUSTabPDP();
+					}
+					else {
+						Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+					WileyPLUS.checkSingleTermWileyPLUSTab();
+					WileyPLUS.checkMultipleTermsWileyPLUSTab();
+				}catch(Exception e) {
+					Reporting.updateTestReport("Search bar was not present in home page and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
-				WileyPLUS.checkSingleTermWileyPLUSTab();
-				WileyPLUS.checkMultipleTermsWileyPLUSTab();
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
@@ -273,23 +298,29 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
-				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC05", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
-				WileyPLUS.clickOnSRP_WileyProduct();
-				if(WileyPLUS.checkWileyPLUSTabInPDP()){
-					WileyPLUS.clickOnWileyPLUSTabPDP();
-				}
-				else {
-					Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
-				String url=driver.getCurrentUrl();
-				if(url.indexOf(excelOperation.getTestData("TC05", "WileyPLUS_Test_Data", "SearchBox_Text"))!=-1) {
-					Reporting.updateTestReport("URL: "+url+" Contains the prouct ISBN and URL is not truncated",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				}
-				else {
-					Reporting.updateTestReport("URL: "+url+" doesn't contain the prouct ISBN and URL is truncated",
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("searchbar")));
+					WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC05", "WileyPLUS_Test_Data", "SearchBox_Text"));
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
+					WileyPLUS.clickOnSRP_WileyProduct();
+					if(WileyPLUS.checkWileyPLUSTabInPDP()){
+						WileyPLUS.clickOnWileyPLUSTabPDP();
+					}
+					else {
+						Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+					String url=driver.getCurrentUrl();
+					if(url.indexOf(excelOperation.getTestData("TC05", "WileyPLUS_Test_Data", "SearchBox_Text"))!=-1) {
+						Reporting.updateTestReport("URL: "+url+" Contains the prouct ISBN and URL is not truncated",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					}
+					else {
+						Reporting.updateTestReport("URL: "+url+" doesn't contain the prouct ISBN and URL is truncated",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				}catch(Exception e) {
+					Reporting.updateTestReport("Search bar was not present in home page and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
@@ -323,23 +354,29 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
-				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC06", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.clickOnFormatFacet();
-				WileyPLUS.clickOnSeeMoreLinkUnderFormat();
 				try {
-					wait.until(ExpectedConditions.presenceOfElementLocated(
-							By.xpath("//div[@class='modal-title']")));
-					if(WileyPLUS.checkWileyPLUSInFormatFacet())
-						WileyPLUS.clickOnWileyPLUSInFormatFacet();
-					else
-						Reporting.updateTestReport("WileyPLUS was not present under format",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					WileyPLUS.checkWileyPLUSInAppliedFacet();
-				}
-				catch(Exception e) {
-					Reporting.updateTestReport("Format modal couldn't be loaded and caused timeout exception",
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("searchbar")));
+					WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC06", "WileyPLUS_Test_Data", "SearchBox_Text"));
+					WileyPLUS.clickOnFormatFacet();
+					WileyPLUS.clickOnSeeMoreLinkUnderFormat();
+					try {
+						wait.until(ExpectedConditions.presenceOfElementLocated(
+								By.xpath("//div[@class='modal-title']")));
+						if(WileyPLUS.checkWileyPLUSInFormatFacet())
+							WileyPLUS.clickOnWileyPLUSInFormatFacet();
+						else
+							Reporting.updateTestReport("WileyPLUS was not present under format",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						WileyPLUS.checkWileyPLUSInAppliedFacet();
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Format modal couldn't be loaded and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}	
+				}catch(Exception e) {
+					Reporting.updateTestReport("Search bar was not present in home page and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}			
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
@@ -371,26 +408,33 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing, "
 								+ "Education and Research')]")));
-				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC07", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
-				WileyPLUS.clickOnSRP_WileyProduct();
-				if(WileyPLUS.checkWileyPLUSTabInPDP()) {
-					WileyPLUS.clickOnWileyPLUSTabPDP();
-					WileyPLUS.checkSingleTermWileyPLUSTab();
-					WileyPLUS.checkMultipleTermsWileyPLUSTab();
-					WileyPLUS.checkStandardPricicngTextWileyPLUSTab();
-					WileyPLUS.checkMultipleTermWileyPLUSText(driver,excelOperation.getTestData("MultipleTermWileyPLUSText", "Generic_Messages", "Data"));
-					WileyPLUS.clickOnSingleTermWileyPLUSButton();
-					WileyPLUS.checkSingleTermWileyPLUSText(driver,excelOperation.getTestData("SingleTermWileyPLUSText", "Generic_Messages", "Data"));
-					WileyPLUS.checkStandardPricicngTextWileyPLUSTab();
-					ScrollingWebPage.PageScrolldown(driver, 0, 500, SS_path);
-					WileyPLUS.checkGreyBoxWileyPLUSTab(driver,excelOperation.getTestData("WileyPLUS_Grey_Box_Text", "Generic_Messages", "Data"));
-					WileyPLUS.checkLoginToWileyPLUSButton();
-				}
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("searchbar")));
+					WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC07", "WileyPLUS_Test_Data", "SearchBox_Text"));
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
+					WileyPLUS.clickOnSRP_WileyProduct();
+					if(WileyPLUS.checkWileyPLUSTabInPDP()) {
+						WileyPLUS.clickOnWileyPLUSTabPDP();
+						WileyPLUS.checkSingleTermWileyPLUSTab();
+						WileyPLUS.checkMultipleTermsWileyPLUSTab();
+						WileyPLUS.checkStandardPricicngTextWileyPLUSTab();
+						WileyPLUS.checkMultipleTermWileyPLUSText(driver,excelOperation.getTestData("MultipleTermWileyPLUSText", "Generic_Messages", "Data"));
+						WileyPLUS.clickOnSingleTermWileyPLUSButton();
+						WileyPLUS.checkSingleTermWileyPLUSText(driver,excelOperation.getTestData("SingleTermWileyPLUSText", "Generic_Messages", "Data"));
+						WileyPLUS.checkStandardPricicngTextWileyPLUSTab();
+						ScrollingWebPage.PageScrolldown(driver, 0, 500, SS_path);
+						WileyPLUS.checkGreyBoxWileyPLUSTab(driver,excelOperation.getTestData("WileyPLUS_Grey_Box_Text", "Generic_Messages", "Data"));
+						WileyPLUS.checkLoginToWileyPLUSButton();
+					}
 
-				else 
-					Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
+					else 
+						Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+				}catch(Exception e) {
+					Reporting.updateTestReport("Search bar was not present in home page and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
@@ -422,30 +466,36 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
-				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC08", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
-				WileyPLUS.clickOnSRP_WileyProduct();
-				if(WileyPLUS.checkWileyPLUSTabInPDP()) {
-					WileyPLUS.clickOnWileyPLUSTabPDP();
-					WileyPLUS.checkSingleTermWileyPLUSTab();
-					WileyPLUS.checkMultipleTermsWileyPLUSTab();
-					String multiTermPercentage=WileyPLUS.fetchPercentageMultiTerm(driver,excelOperation.getTestData("MultipleTermWileyPLUSText", "Generic_Messages", "Data"));
-					Double multiTermPrice=Double.valueOf(WileyPLUS.fetchMultiTermAccessPrice());
-					WileyPLUS.clickOnSingleTermWileyPLUSButton();
-					Double singleTermPrice=Double.valueOf(WileyPLUS.fetchSingleTermAccessPrice());
-					int calculatedPercentage=(int)Math.round(((2*singleTermPrice-multiTermPrice)/(2*singleTermPrice))*100);
-					String calculatedValue=String.valueOf(calculatedPercentage);
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("searchbar")));
+					WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC08", "WileyPLUS_Test_Data", "SearchBox_Text"));
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
+					WileyPLUS.clickOnSRP_WileyProduct();
+					if(WileyPLUS.checkWileyPLUSTabInPDP()) {
+						WileyPLUS.clickOnWileyPLUSTabPDP();
+						WileyPLUS.checkSingleTermWileyPLUSTab();
+						WileyPLUS.checkMultipleTermsWileyPLUSTab();
+						String multiTermPercentage=WileyPLUS.fetchPercentageMultiTerm(driver,excelOperation.getTestData("MultipleTermWileyPLUSText", "Generic_Messages", "Data"));
+						Double multiTermPrice=Double.valueOf(WileyPLUS.fetchMultiTermAccessPrice());
+						WileyPLUS.clickOnSingleTermWileyPLUSButton();
+						Double singleTermPrice=Double.valueOf(WileyPLUS.fetchSingleTermAccessPrice());
+						int calculatedPercentage=(int)Math.round(((2*singleTermPrice-multiTermPrice)/(2*singleTermPrice))*100);
+						String calculatedValue=String.valueOf(calculatedPercentage);
 
-					if(calculatedValue.equalsIgnoreCase(multiTermPercentage))
-						Reporting.updateTestReport("The calculated percentage value: "+calculatedValue+" was same as the value shown in Multiple Term page: "+multiTermPercentage,
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					else
-						Reporting.updateTestReport("The calculated percentage value: "+calculatedValue+" was not same as the value shown in Multiple Term page: "+multiTermPercentage,
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				}
-				else 
-					Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
+						if(calculatedValue.equalsIgnoreCase(multiTermPercentage))
+							Reporting.updateTestReport("The calculated percentage value: "+calculatedValue+" was same as the value shown in Multiple Term page: "+multiTermPercentage,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("The calculated percentage value: "+calculatedValue+" was not same as the value shown in Multiple Term page: "+multiTermPercentage,
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					}
+					else 
+						Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}catch(Exception e) {
+					Reporting.updateTestReport("Search bar was not present in home page and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
@@ -478,29 +528,35 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
-				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC09", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.clickOnSRP_WileyProduct();
-				if(WileyPLUS.checkAddToCartButton()) {
-					Reporting.updateTestReport("Add to cart button was present in the E-book variant page",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("searchbar")));
+					WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC09", "WileyPLUS_Test_Data", "SearchBox_Text"));
+					WileyPLUS.clickOnSRP_WileyProduct();
+					if(WileyPLUS.checkAddToCartButton()) {
+						Reporting.updateTestReport("Add to cart button was present in the E-book variant page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					}
+					else
+						Reporting.updateTestReport("Add to cart button was not present in the E-book variant page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					if(WileyPLUS.checkWileyPLUSTabInPDP())
+						WileyPLUS.clickOnWileyPLUSTabPDP();
+					else 
+						Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					if(!WileyPLUS.checkAddToCartButton()) {
+						Reporting.updateTestReport("Add to cart button was not present in the WileyPLUS PDP",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					}
+					else
+						Reporting.updateTestReport("Add to cart button was present in the WileyPLUS PDP",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					WileyPLUS.checkSingleTermWileyPLUSTab();
+					WileyPLUS.checkMultipleTermsWileyPLUSTab();
+				}catch(Exception e) {
+					Reporting.updateTestReport("Search bar was not present in home page and caused timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
-				else
-					Reporting.updateTestReport("Add to cart button was not present in the E-book variant page",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				if(WileyPLUS.checkWileyPLUSTabInPDP())
-					WileyPLUS.clickOnWileyPLUSTabPDP();
-				else 
-					Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				if(!WileyPLUS.checkAddToCartButton()) {
-					Reporting.updateTestReport("Add to cart button was not present in the WileyPLUS PDP",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				}
-				else
-					Reporting.updateTestReport("Add to cart button was present in the WileyPLUS PDP",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				WileyPLUS.checkSingleTermWileyPLUSTab();
-				WileyPLUS.checkMultipleTermsWileyPLUSTab();
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
@@ -532,22 +588,28 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
-				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC10", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.clickOnSRP_WileyProduct();
-				if(WileyPLUS.checkWileyPLUSTabInPDP()) {
-					WileyPLUS.clickOnWileyPLUSTabPDP();
-					WileyPLUS.checkSingleTermWileyPLUSTab();
-					WileyPLUS.checkMultipleTermsWileyPLUSTab();
-					if(WileyPLUS.checkMultiTermDefault())
-						Reporting.updateTestReport("The WileyPLUS Multiple Term was selected by deafult",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					else
-						Reporting.updateTestReport("The WileyPLUS Multiple Term was not selected by deafult",
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("searchbar")));
+					WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC10", "WileyPLUS_Test_Data", "SearchBox_Text"));
+					WileyPLUS.clickOnSRP_WileyProduct();
+					if(WileyPLUS.checkWileyPLUSTabInPDP()) {
+						WileyPLUS.clickOnWileyPLUSTabPDP();
+						WileyPLUS.checkSingleTermWileyPLUSTab();
+						WileyPLUS.checkMultipleTermsWileyPLUSTab();
+						if(WileyPLUS.checkMultiTermDefault())
+							Reporting.updateTestReport("The WileyPLUS Multiple Term was selected by deafult",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport("The WileyPLUS Multiple Term was not selected by deafult",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}		
+					else 
+						Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}		
-				else 
-					Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
+				}catch(Exception e) {
+					Reporting.updateTestReport("Search bar was not present in home page and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
@@ -578,34 +640,40 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
-				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC11", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.clickOnSRP_WileyProduct();
-				if(WileyPLUS.checkWileyPLUSTabInPDP()) {
-					WileyPLUS.clickOnWileyPLUSTabPDP();
-					WileyPLUS.clickOnLoginToWileyPLUSButton();
-					try {
-						Set<String> allWindowHandles = driver.getWindowHandles();
-						java.util.Iterator<String> iterator = allWindowHandles.iterator();
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("searchbar")));
+					WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC11", "WileyPLUS_Test_Data", "SearchBox_Text"));
+					WileyPLUS.clickOnSRP_WileyProduct();
+					if(WileyPLUS.checkWileyPLUSTabInPDP()) {
+						WileyPLUS.clickOnWileyPLUSTabPDP();
+						WileyPLUS.clickOnLoginToWileyPLUSButton();
+						try {
+							Set<String> allWindowHandles = driver.getWindowHandles();
+							java.util.Iterator<String> iterator = allWindowHandles.iterator();
 
-						String storefront = iterator.next();
-						String ChildWindow=iterator.next();
-						driver.switchTo().window(ChildWindow);
-						String title=driver.getTitle();
-						if(title.equalsIgnoreCase("WileyPLUS"))
-							Reporting.updateTestReport("One new window was opened with title WileyPLUS after clicking on Login to WileyPLUS Button", 
+							String storefront = iterator.next();
+							String ChildWindow=iterator.next();
+							driver.switchTo().window(ChildWindow);
+							String title=driver.getTitle();
+							if(title.equalsIgnoreCase("WileyPLUS"))
+								Reporting.updateTestReport("One new window was opened with title WileyPLUS after clicking on Login to WileyPLUS Button", 
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							driver.switchTo().window(storefront);
+							driver.close();
+							driver.switchTo().window(ChildWindow);
+						}
+						catch(Exception e) {
+							Reporting.updateTestReport("One new window was not opened after clicking on Login to WileyPLUS Button", 
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						driver.switchTo().window(storefront);
-						driver.close();
-						driver.switchTo().window(ChildWindow);
+						}
 					}
-					catch(Exception e) {
-						Reporting.updateTestReport("One new window was not opened after clicking on Login to WileyPLUS Button", 
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					}
-				}
-				else 
-					Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
+					else 
+						Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}catch(Exception e) {
+					Reporting.updateTestReport("Search bar was not present in home page and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
@@ -1108,23 +1176,29 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 								+ " Education and Research')]")));
-				WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC18", "WileyPLUS_Test_Data", "SearchBox_Text"));
-				WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
-				WileyPLUS.clickOnSRP_WileyProduct();
-				if(WileyPLUS.checkWileyPLUSTabInPDP()){
-					WileyPLUS.clickOnWileyPLUSTabPDP();
-				}
-				else {
-					Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.id("searchbar")));
+					WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC18", "WileyPLUS_Test_Data", "SearchBox_Text"));
+					WileyPLUS.checkWileyPLUSFormatInSRP_PLP();
+					WileyPLUS.clickOnSRP_WileyProduct();
+					if(WileyPLUS.checkWileyPLUSTabInPDP()){
+						WileyPLUS.clickOnWileyPLUSTabPDP();
+					}
+					else {
+						Reporting.updateTestReport("The WileyPLUS tab was not present in PDP",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+					if(!WileyPLUS.checkISBN_InPDP(driver,excelOperation.getTestData("TC18", "WileyPLUS_Test_Data", "SearchBox_Text"))) {
+						Reporting.updateTestReport("Searched WileyPLUS ISBN was not present in the WileyPLUS PDP",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					}
+					else
+						Reporting.updateTestReport("Searched WileyPLUS ISBN was present in the WileyPLUS PDP",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}catch(Exception e) {
+					Reporting.updateTestReport("Search bar was not present in home page and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
-				if(!WileyPLUS.checkISBN_InPDP(driver,excelOperation.getTestData("TC18", "WileyPLUS_Test_Data", "SearchBox_Text"))) {
-					Reporting.updateTestReport("Searched WileyPLUS ISBN was not present in the WileyPLUS PDP",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				}
-				else
-					Reporting.updateTestReport("Searched WileyPLUS ISBN was present in the WileyPLUS PDP",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
@@ -1805,143 +1879,149 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 									wait.until(ExpectedConditions.presenceOfElementLocated(
 											By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
 													+ " Education and Research')]")));
-									WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC19",
-											"WileyPLUS_Test_Data", "SearchBox_Text"));
-									WileyPLUS.clickOnSRP_WileyProduct();
-									WileyPLUS.clickOnAddToCartButton();
 									try {
-										wait.until(ExpectedConditions.
-												elementToBeClickable
-												(By.xpath("//button[contains(text(),'View Cart')]")));
-										WileyPLUS.clickOnViewCartButton();
+										wait.until(ExpectedConditions.elementToBeClickable(By.id("searchbar")));
+										WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC19",
+												"WileyPLUS_Test_Data", "SearchBox_Text"));
+										WileyPLUS.clickOnSRP_WileyProduct();
+										WileyPLUS.clickOnAddToCartButton();
 										try {
-											wait.until(ExpectedConditions.visibilityOf(WileyPLUS.getModalPopUp()));
-											Reporting.updateTestReport("Currency change modal pop up was displayed successfully", 
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-											Thread.sleep(1000);
-											WileyPLUS.clickOnContinueButtonOnModalPopUp();
+											wait.until(ExpectedConditions.
+													elementToBeClickable
+													(By.xpath("//button[contains(text(),'View Cart')]")));
+											WileyPLUS.clickOnViewCartButton();
 											try {
-												wait.until(ExpectedConditions.
-														presenceOfElementLocated
-														(By.xpath("//p[contains(text(),' Your Cart')]")));
+												wait.until(ExpectedConditions.visibilityOf(WileyPLUS.getModalPopUp()));
+												Reporting.updateTestReport("Currency change modal pop up was displayed successfully", 
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+												Thread.sleep(1000);
+												WileyPLUS.clickOnContinueButtonOnModalPopUp();
 												try {
-													wait.until(ExpectedConditions.presenceOfElementLocated(
-															By.xpath("//div[contains(text(),'USD')]")));
-													Reporting.updateTestReport("Cart was merged successfully in USD", 
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-													WileyPLUS.getFirstProductsPrice();
-													WileyPLUS.getSecondProductsPrice();
-													driver.get(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "URL"));
+													wait.until(ExpectedConditions.
+															presenceOfElementLocated
+															(By.xpath("//p[contains(text(),' Your Cart')]")));
 													try {
-														wait.until(ExpectedConditions.elementToBeClickable(
-																By.xpath("//span[contains(text(),'add course')]")));
-														Thread.sleep(2000);
-														WileyPLUS.clickOnOnboardingAddCourseButton();
-														WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "Course"));
+														wait.until(ExpectedConditions.presenceOfElementLocated(
+																By.xpath("//div[contains(text(),'USD')]")));
+														Reporting.updateTestReport("Cart was merged successfully in USD", 
+																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+														WileyPLUS.getFirstProductsPrice();
+														WileyPLUS.getSecondProductsPrice();
+														driver.get(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "URL"));
 														try {
-															wait.until
-															(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-testid='continue_button']")));
-															WileyPLUS.clickOnContinueButtonInOnboarding();
+															wait.until(ExpectedConditions.elementToBeClickable(
+																	By.xpath("//span[contains(text(),'add course')]")));
+															Thread.sleep(2000);
+															WileyPLUS.clickOnOnboardingAddCourseButton();
+															WileyPLUS.enterCourseSectionId(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "Course"));
 															try {
-																wait.until(ExpectedConditions.presenceOfElementLocated(
-																		By.xpath("//h2[contains(text(),'Join your course')]")));
-																WileyPLUS.clickOnSingleTermRadioButtonInJoinCourse();
-																WileyPLUS.clickOnContinueButtonInOnboardingInJoinCourse();
-																WileyPLUS.clickOnFirstPurchaseOption();
-																WileyPLUS.clickOnContinueToCheckoutButton();
+																wait.until
+																(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-testid='continue_button']")));
+																WileyPLUS.clickOnContinueButtonInOnboarding();
 																try {
-																	wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
-																			(By.id("add-to-cart-error-dialog")));
-																	driver.findElement(By.xpath("//span[contains(text(),'View Cart')]")).click();
+																	wait.until(ExpectedConditions.presenceOfElementLocated(
+																			By.xpath("//h2[contains(text(),'Join your course')]")));
+																	WileyPLUS.clickOnSingleTermRadioButtonInJoinCourse();
+																	WileyPLUS.clickOnContinueButtonInOnboardingInJoinCourse();
+																	WileyPLUS.clickOnFirstPurchaseOption();
+																	WileyPLUS.clickOnContinueToCheckoutButton();
 																	try {
-																		wait.until(ExpectedConditions.visibilityOf(WileyPLUS.getModalPopUp()));
-																		Reporting.updateTestReport("Currency change modal pop up was displayed successfully", 
-																				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-																		Thread.sleep(1000);
-																		WileyPLUS.clickOnContinueButtonOnModalPopUp();
+																		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
+																				(By.id("add-to-cart-error-dialog")));
+																		driver.findElement(By.xpath("//span[contains(text(),'View Cart')]")).click();
 																		try {
-																			wait.until(ExpectedConditions.
-																					presenceOfElementLocated
-																					(By.xpath("//p[contains(text(),' Your Cart')]")));
+																			wait.until(ExpectedConditions.visibilityOf(WileyPLUS.getModalPopUp()));
+																			Reporting.updateTestReport("Currency change modal pop up was displayed successfully", 
+																					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+																			Thread.sleep(1000);
+																			WileyPLUS.clickOnContinueButtonOnModalPopUp();
 																			try {
-																				wait.until(ExpectedConditions.presenceOfElementLocated(
-																						By.xpath("//div[contains(text(),'CAD')]")));
-																				Reporting.updateTestReport("Cart was merged successfully in CAD", 
-																						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-																				WileyPLUS.getFirstProductsPrice();
-																				WileyPLUS.getSecondProductsPrice();
-																				driver.get(excelOperation.getTestData("Onboarding_My_Account_Page", "Generic_Dataset", "Data"));
+																				wait.until(ExpectedConditions.
+																						presenceOfElementLocated
+																						(By.xpath("//p[contains(text(),' Your Cart')]")));
 																				try {
-																					wait.until(ExpectedConditions.visibilityOfElementLocated
-																							(By.xpath("//button[@data-testid='dropdown-menu__icon-button']")));
-																					WileyPLUS.clickOnProfileIconInOnboardingMyAccount();
-																					WileyPLUS.logoutFromOnboardingMyAccount(driver);
+																					wait.until(ExpectedConditions.presenceOfElementLocated(
+																							By.xpath("//div[contains(text(),'CAD')]")));
+																					Reporting.updateTestReport("Cart was merged successfully in CAD", 
+																							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+																					WileyPLUS.getFirstProductsPrice();
+																					WileyPLUS.getSecondProductsPrice();
+																					driver.get(excelOperation.getTestData("Onboarding_My_Account_Page", "Generic_Dataset", "Data"));
+																					try {
+																						wait.until(ExpectedConditions.visibilityOfElementLocated
+																								(By.xpath("//button[@data-testid='dropdown-menu__icon-button']")));
+																						WileyPLUS.clickOnProfileIconInOnboardingMyAccount();
+																						WileyPLUS.logoutFromOnboardingMyAccount(driver);
+																					}
+																					catch(Exception e) {
+																						Reporting.updateTestReport("Onboarding my account icon was not loaded "
+																								+ "and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+																					}
 																				}
-																				catch(Exception e) {
-																					Reporting.updateTestReport("Onboarding my account icon was not loaded "
-																							+ "and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+																				catch(Exception e){
+																					Reporting.updateTestReport("Cart was not merged in CAD", 
+																							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 																				}
 																			}
 																			catch(Exception e){
-																				Reporting.updateTestReport("Cart was not merged in CAD", 
+																				Reporting.updateTestReport("User was not on cart page and caused timeout exception",
 																						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 																			}
 																		}
-																		catch(Exception e){
-																			Reporting.updateTestReport("User was not on cart page and caused timeout exception",
+																		catch(Exception e) {
+																			Reporting.updateTestReport("Currency change modal pop up was not displayed ", 
 																					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 																		}
+
 																	}
 																	catch(Exception e) {
-																		Reporting.updateTestReport("Currency change modal pop up was not displayed ", 
+																		Reporting.updateTestReport("The cart error dialog box didn't appear"
+																				+ " and caused timeout exception",
 																				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 																	}
-
 																}
-																catch(Exception e) {
-																	Reporting.updateTestReport("The cart error dialog box didn't appear"
+																catch(Exception e){
+																	Reporting.updateTestReport("User couldn't continue the course and caused timeout exception"
 																			+ " and caused timeout exception",
 																			CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 																}
 															}
 															catch(Exception e){
-																Reporting.updateTestReport("User couldn't continue the course and caused timeout exception"
+																Reporting.updateTestReport("User couldn't add course and was not on Join Course page"
 																		+ " and caused timeout exception",
 																		CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 															}
 														}
-														catch(Exception e){
-															Reporting.updateTestReport("User couldn't add course and was not on Join Course page"
+														catch(Exception e) {
+															Reporting.updateTestReport("User was not on my account page"
 																	+ " and caused timeout exception",
 																	CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 														}
+
 													}
-													catch(Exception e) {
-														Reporting.updateTestReport("User was not on my account page"
-																+ " and caused timeout exception",
+													catch(Exception e){
+														Reporting.updateTestReport("Cart was not merged in USD", 
 																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 													}
 
 												}
 												catch(Exception e){
-													Reporting.updateTestReport("Cart was not merged in USD", 
+													Reporting.updateTestReport("User was not on cart page and caused timeout exception",
 															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 												}
 
 											}
-											catch(Exception e){
-												Reporting.updateTestReport("User was not on cart page and caused timeout exception",
+											catch(Exception e) {
+												Reporting.updateTestReport("Currency change modal pop up was not displayed ", 
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
-
 										}
 										catch(Exception e) {
-											Reporting.updateTestReport("Currency change modal pop up was not displayed ", 
+											Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
-									}
-									catch(Exception e) {
-										Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+									}catch(Exception e) {
+										Reporting.updateTestReport("Search bar was not present in home page and caused timeout exception",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 								}
@@ -1988,7 +2068,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 19/04/23
 	 * @Description: Checks if global saved address is displayed when WileyPLUS product is present in cart

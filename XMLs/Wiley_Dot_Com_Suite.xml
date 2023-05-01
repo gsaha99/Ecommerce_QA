@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="PPE_Regression">
+	<test thread-count="5" name="Wiley_Dot_Com_Test_Suite">
+		<parameter name="browser" value="chrome"/>
+		<classes>
+			<class name="Test_Suite.Wiley_dot_com_Test_Suite">
+				<methods>
+					<include name="TC01_.*" />					
+				</methods>
+			</class>
+		</classes>
+	</test> <!-- Test_Regression -->
+</suite>

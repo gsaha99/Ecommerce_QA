@@ -36,8 +36,8 @@ public class DriverModule {
 
 	public  static WebDriver driver =null;
 	
-	public static final String username="gourabsaha_Nlruz2";
-	public static final String AccessToken ="WUrEEqUxwLoVAJEKWbyh";
+	public static final String username="arakshit_jcH98V";
+	public static final String AccessToken ="snS4qNFU3yjVeMNDfdSy";
 	
 	public static final String URL = "https://"+username+":"+AccessToken+"@hub-cloud.browserstack.com/wd/hub";
 	

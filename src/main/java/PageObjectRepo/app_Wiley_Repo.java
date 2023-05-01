@@ -50,7 +50,7 @@ public class app_Wiley_Repo {
 	@FindBy(xpath = "//a[@href='/']/img[@class='brand-logo']")
 	WebElement HomePageLogo;
 
-	@FindBy(xpath = "//input[@id='searchbar']")
+	@FindBy(id = "searchbar")
 	WebElement HomePageSearchBar;
 
 	@FindBy(xpath = "//i[@class='wl-search-bar__icon']")
@@ -97,7 +97,7 @@ public class app_Wiley_Repo {
 	@FindBy(xpath="//ul[@id='breadcrumbStyle']")
 	WebElement BreadCrumbCartPage;
 
-	@FindBy(xpath = "//input[@id='search-bar']")
+	@FindBy(id = "search-bar")
 	WebElement CartPageSearchBar;
 
 	@FindBy(xpath="//div[@class='col-xs-6 noPadding price orderDetailCommonVal']")
@@ -706,7 +706,7 @@ public class app_Wiley_Repo {
 		try {
 			BillingAddressLine1.clear();
 			BillingAddressLine1.sendKeys(line1);
-			Reporting.updateTestReport("Address line 1: "+line1+" was entered",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			Reporting.updateTestReport("Address line 1: "+line1+" was entered in Billing address section",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Address line 1 couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -719,9 +719,11 @@ public class app_Wiley_Repo {
 	 */
 	public void enterCityBilling(String city) throws IOException{
 		try {
+			String autofilledValue=CityBilling.getAttribute("value");
 			CityBilling.clear();
+			Thread.sleep(1000);
 			CityBilling.sendKeys(city);
-			Reporting.updateTestReport("City: "+city+" was entered",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			Reporting.updateTestReport("City: "+city+" was entered in Billing address section after clearing the auto filled value: "+autofilledValue,CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("City couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -737,7 +739,7 @@ public class app_Wiley_Repo {
 		try {
 			BillingZipCode.clear();
 			BillingZipCode.sendKeys(zip);
-			Reporting.updateTestReport("Zip code: "+zip+" was entered", CaptureScreenshot.getScreenshot(SS_path),StatusDetails.PASS);
+			Reporting.updateTestReport("Zip code: "+zip+" was entered in Billing address section", CaptureScreenshot.getScreenshot(SS_path),StatusDetails.PASS);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Zip code couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -751,7 +753,7 @@ public class app_Wiley_Repo {
 		try {
 			BillingPhoneNumber.clear();
 			BillingPhoneNumber.sendKeys(phone);
-			Reporting.updateTestReport("Phone number: "+phone+" was entered",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			Reporting.updateTestReport("Phone number: "+phone+" was entered in Billing address section",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Phone number couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -764,7 +766,7 @@ public class app_Wiley_Repo {
 	public void clickOnUseSelectedBillingAddressButtonAddressDoctor() throws IOException{
 		try {
 			UseSelectedBillingAddressButtonAddressDoctorPopUp.click();
-			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp was clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp was clicked in Billing address section",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
@@ -1009,12 +1011,12 @@ public class app_Wiley_Repo {
 	 */
 	public void enterState(String state) throws IOException {
 		try {
-
-
+			String autofilledValue=SelectStateDropDown.getAttribute("value");
 			SelectStateDropDown.clear();
+			Thread.sleep(1000);
 			SelectStateDropDown.sendKeys(state);
 			SelectStateDropDown.sendKeys(Keys.ENTER);
-			Reporting.updateTestReport("State: "+state+" has been selected successfully by user",
+			Reporting.updateTestReport("State: "+state+" has been selected successfully by user after clearing the auto filled value: "+autofilledValue,
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("User failed to select State " + e.getClass().toString(),
@@ -1032,7 +1034,7 @@ public class app_Wiley_Repo {
 		try {
 
 			ShippingMethod.click();
-			Reporting.updateTestReport("ShippingMethod has been selected successfully by user",
+			Reporting.updateTestReport("Shipping Method has been selected successfully by user",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("User failed to select ShippingMethod " + e.getClass().toString(),
@@ -2369,23 +2371,6 @@ public class app_Wiley_Repo {
 		}
 	}
 
-	/*
-	 * @Author: Vishnu
-	 * @Description: Enter the text in textbox field
-	 * 
-	 */
-	public void Entertextonsearcbar(String text) throws IOException {
-		try {
-			CartPageSearchBar.sendKeys(text);
-			CartPageSearchBar.sendKeys(Keys.ENTER);
-			Reporting.updateTestReport("Text: " + text + " was entered on Searh Bar",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to enter the random text: " + text + " was entered",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
-		}
-	}
 
 	/*
 	 * @Author: Anindita
@@ -3079,7 +3064,7 @@ public class app_Wiley_Repo {
 		try {
 			HomePageSearchBar.sendKeys(data);
 			Thread.sleep(2000);
-			Reporting.updateTestReport(data + " text seached in the search bar",
+			Reporting.updateTestReport(data + " text searched in the search bar",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("Data couldn't be entered in the search bar",
@@ -3107,7 +3092,7 @@ public class app_Wiley_Repo {
 
 	/*
 	 * @Author:Vishnu 
-	 * @Description: This method is verify ClickSortByOptionPDPPage
+	 * @Description: This method is verify Click on Sort By Option PDPPage
 	 */
 	public void ClickSortByOptionPDPPage() throws IOException {
 		try {
