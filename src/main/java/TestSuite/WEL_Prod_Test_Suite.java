@@ -4688,11 +4688,10 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 					WEL.clickOnCPALinkOnHomepage();
 					try {
 						wait.until(ExpectedConditions
-								.visibilityOfElementLocated(By.xpath("//button[@class='shop-courses-btn  ']")));
+								.elementToBeClickable(By.xpath("//button[@class='shop-courses-btn  ']")));
 						WEL.clickOnExploreCourseButton();
-						ScrollingWebPage.PageScrolldown(driver, 0, 900, SS_path);
+						ScrollingWebPage.PageScrolldown(driver, 0, 990, SS_path);
 						try {
-
 							wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
 									"//a[@href='/cpa/products/platinum-cpa-review-course/']/button[contains(text(),'VIEW COURSE')]")));
 							WEL.clickOnCPAViewCourseButton();
@@ -5325,7 +5324,8 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
-	}/*
+	}
+	/*
 		 * @Author: Anindita
 		 * 
 		 * @Date: 19/04/23
@@ -5333,6 +5333,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 		 * @Description: Shipping Charge for Multiple Quantity
 		 */
 
+	
 	@Test
 	public void TC27_Shipping_Charge_For_Multiple_Quantity() throws IOException {
 		try {
@@ -5589,7 +5590,9 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 			}
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
-
+			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}/*
 		 * @Date: 19/04/23
