@@ -5318,6 +5318,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Login button on homepage was not clickable and caused timeout exception ",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
