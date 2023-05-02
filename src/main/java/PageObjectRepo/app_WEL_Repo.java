@@ -105,12 +105,6 @@ public class app_WEL_Repo {
 	WebElement PrintEbook;
 	@FindBy(xpath = "//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_2']/a[1]")
 	WebElement CFAProduct;
-	@FindBy(xpath = "//div[@class='form-group']//input[@id='inputPartnerSearch']")
-	WebElement PartnerInputSearch;
-	@FindBy(xpath = "//div[@class='container product-categories-container']//div[2]//dd/a[contains(text(),'CMA')]")
-	WebElement DeanDortonCMAProduct;
-	@FindBy(xpath = "//div[@class='fe_flex grid_1']/a[1]")
-	WebElement CPALink;
 
 	// Cart page
 
@@ -151,22 +145,6 @@ public class app_WEL_Repo {
 	WebElement ExistingUserPasswordInCheckoutLoginPage;
 	@FindBy(xpath = "//a[@class='recover-password pull-left checkoutForgotPwdLinkCss']")
 	WebElement ForgotPasswordLinkInCheckOutLoginPage;
-	@FindBy(id = "guest.email")
-	WebElement GuestUser;
-	@FindBy(xpath = "//div[@id='guestCheckoutRegBtn']//span[@class='welCheckoutContBtnText']")
-	WebElement CreateAccount;
-	@FindBy(id = "guest.confemail")
-	WebElement GuestConfinmEmail;
-	@FindBy(xpath = "(//div[@id='checkoutGuestUserReg'])[1]")
-	WebElement LoginCheckoutPageHeading;
-	@FindBy(xpath = "(//div[@class='help-block commonErrorWelStyle'])[1]")
-	WebElement ErrorMessageAfterEnteringInvalidEmailId;
-	@FindBy(name = "pwd")
-	WebElement Password;
-	@FindBy(xpath = "//label[@for='agreement']")
-	WebElement AgreementCheckbox;
-	@FindBy(xpath = "(//span[@class='welCheckoutContBtnText'])[2]")
-	WebElement CreateAccountButton;
 
 	// Forgot password page
 	@FindBy(id = "forgottenPwd.email")
@@ -254,43 +232,115 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//div[@class='row pageMainContainer no-margin']//div[@class='checkout-steps']/a[1]")
 	WebElement StudentVerification;
 
-	// Billing Address and Payment information related xpaths
-	
+	// Billing Address Detail
 	@FindBy(id = "sameAsBillingLabel")
 	WebElement ShippingBillingSameAddress;
+
 	@FindBy(id = "address.country")
 	WebElement SelectCountryDropDown;
 	@FindBy(id = "postalCode")
 	WebElement PostalCode;
+
 	@FindBy(id = "city")
 	WebElement BillCity;
+
 	@FindBy(id = "phoneNumber")
 	WebElement BillPhoneNumber;
+
 	@FindBy(xpath = "(//div[@id='newAddressBtnDiv']/button[@id='addNewBillingAddressButton'])")
 	WebElement EnterNewAddressButtonOnBillPage;
+
 	@FindBy(xpath = "(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
 	WebElement UseSelectedBillingAddressButtonAddressDoctorPopUp;
+
+	// Create New Account x paths
+	@FindBy(id = "guest.email")
+	WebElement GuestUser;
+
+	@FindBy(xpath = "//div[@id='guestCheckoutRegBtn']//span[@class='welCheckoutContBtnText']")
+	WebElement CreateAccount;
+	@FindBy(id = "guest.confemail")
+	WebElement GuestConfinmEmail;
+	@FindBy(xpath = "(//div[@id='checkoutGuestUserReg'])[1]")
+	WebElement LoginCheckoutPageHeading;
+
+	@FindBy(xpath = "(//div[@class='help-block commonErrorWelStyle'])[1]")
+	WebElement ErrorMessageAfterEnteringInvalidEmailId;
+
+	@FindBy(name = "pwd")
+	WebElement Password;
+	@FindBy(xpath = "//label[@for='agreement']")
+	WebElement AgreementCheckbox;
+
+	@FindBy(xpath = "(//span[@class='welCheckoutContBtnText'])[2]")
+	WebElement CreateAccountButton;
 	@FindBy(xpath = "//label[contains(text(),'Part 1')]")
 	WebElement Part1InCIAPDP;
+
+	/*
+	 * @Author : Vishnu
+	 * 
+	 * @Description : Object repo for WEL Credit Card and Paypal, PaypalCredit
+	 * Details
+	 */
+
 	@FindBy(id = "nameOnCard")
 	WebElement CardHolderName;
+
 	@FindBy(id = "number")
 	WebElement CardNumber;
+
 	@FindBy(id = "expiryMonth")
 	WebElement ExpirationDateForMonth;
+
 	@FindBy(id = "expiryYear")
 	WebElement ExpirationDateForYear;
+
 	@FindBy(id = "securityCode")
 	WebElement CVV_Number;
 	@FindBy(id = "paymentBilling")
 	WebElement SaveAndContinueOnCheckOutPage;
+
 	@FindBy(xpath = "//div[@id='billingMultiPaymentOptionValues']/ul/li[3]/a/span[@class='billingPaymentMultiNavTitle']")
 	WebElement Paypalpayment;
 	@FindBy(xpath = "//div[@id='billingMultiPaymentOptionValues']/ul/li[4]/a/span")
 	WebElement PaypalCredit;
+
 	@FindBy(xpath = "//div[@id='discountCodeMessage']")
 	WebElement DiscountMessage;
 
+	@FindBy(xpath = "//div[@class='form-group']//input[@id='inputPartnerSearch']")
+	WebElement PartnerInputSearch;
+	@FindBy(xpath = "//div[@class='container product-categories-container']//div[2]//dd/a[contains(text(),'CMA')]")
+	WebElement DeanDortonCMAProduct;
+
+	// Products
+	@FindBy(xpath = "//div[@class='fe_flex grid_1']/a[1]")
+	WebElement CPALink;
+
+	// Calculation Part
+	@FindBy(xpath = "//div[@class='col-6 noPadding orderDetailTotalVal']")
+	WebElement OrderTotalOnCartPage;
+	@FindBy(xpath = "//div[@class='cartPageProductCurrentPrice']")
+	WebElement OrderSubtotalInCartPage;
+	@FindBy(xpath = "//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Discount')]/following-sibling::div")
+	WebElement DiscountInOrderReview;
+	@FindBy(xpath = "//p[@class='new-price']")
+	WebElement ProductPriceInPDP;
+	@FindBy(xpath = "(//div[@class='col-6 noPadding price orderDetailCommonVal'])[1]")
+	WebElement FirstProductPriceinReviewPage;
+	@FindBy(xpath = "//div[@id='totalPriceValue']")
+	WebElement TotalInOrderReview;
+	@FindBy(id = "orderSummaryProductTotalValue")
+	WebElement PriceOfFirstProductInOrderReview;
+	@FindBy(id = "totalPriceValue")
+	WebElement OrderTotaOnCartPage;
+	@FindBy(xpath = "(//div[@class='col-6 noPadding orderReviewDetailsValue'])[2]")
+	WebElement SecondProductPriceinReviewPage;
+	@FindBy(xpath = "//div[@id='orderDetailsSectionCol']/div//div[contains(text(),'Shipping')]/following-sibling::div")
+	WebElement ShippingChargeInOrderReview;
+	@FindBy(xpath = "(//p[@class='your-price'])[1]")
+	WebElement PartnerProductPDPPrice;
 
 	/*
 	 * @Author: Vishnu
@@ -537,7 +587,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Author: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on Login button
 	 */
@@ -557,7 +607,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Author: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on CMA Link On Home page
 	 */
@@ -577,7 +627,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Author: 5/4/23
+	 * @Author:Vishnu
 	 * 
 	 * @Description: Method to click on CMA Link On Home page
 	 */
@@ -597,7 +647,7 @@ public class app_WEL_Repo {
 	}
 
 	/*
-	 * @Author: 5/4/23
+	 * @Author: Vishnu
 	 * 
 	 * @Description: Method to click on View Course Button in CMA Product page
 	 */
@@ -617,6 +667,7 @@ public class app_WEL_Repo {
 		}
 
 	}
+
 	/*
 	 * @Author: Vishnu
 	 * 
@@ -1519,6 +1570,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+
 	/*
 	 * @Author:Vishnu
 	 * 
@@ -1536,6 +1588,7 @@ public class app_WEL_Repo {
 
 		}
 	}
+
 	/*
 	 * @Author:Vishnu
 	 * 
@@ -2360,10 +2413,10 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport("Back to cart button was clicked successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
-
+			Reporting.updateTestReport("Back to cart button couldn't be clicked ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
-		Reporting.updateTestReport("Back to cart button couldn't be clicked ", CaptureScreenshot.getScreenshot(SS_path),
-				StatusDetails.PASS);
+
 	}
 	/*
 	 * @Author:Anindita
@@ -2510,4 +2563,258 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to fetch the Subtotal in Cart Page
+	 */
+
+	public String fetchOrderSubTotalInCartPage() throws IOException {
+		try {
+
+			String subtotalprice = OrderSubtotalInCartPage.getText().trim();
+			if (subtotalprice.contains(",")) {
+
+				subtotalprice = subtotalprice.replace(",", "");
+			} else
+				System.out.println("order price doesn't have any comma value");
+			Reporting.updateTestReport("Subtotal of the order: " + subtotalprice.trim() + " was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			System.out.println(OrderSubtotalInCartPage.getText().trim());
+			return subtotalprice;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Subtotal of the order in cart page could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to fetch the Order total in Cart Page
+	 */
+
+	public String fetchOrderTotalInCartPage() throws IOException {
+		try {
+			Reporting.updateTestReport("Subtotal of the order: " + OrderTotalOnCartPage.getText() + " was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+			return OrderTotalOnCartPage.getText();
+		} catch (Exception e) {
+			Reporting.updateTestReport("Subtotal of the order in cart page could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to fetch the discountin Order Review Page
+	 */
+
+	public String fetchDiscountInOrderReview() throws IOException {
+		try {
+			String discount = DiscountInOrderReview.getText().split("(-)")[1].substring(1);
+			Reporting.updateTestReport(
+					"Discount: " + discount.trim() + " was fetched in order review step successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return discount.trim();
+		} catch (Exception e) {
+			Reporting.updateTestReport("Discount couldn't be fetched in order review step ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to fetch the Partner product Price In PDP page
+	 */
+
+	public String fetchProductPriceInPDP() throws IOException {
+		try {
+			String pdpprice = ProductPriceInPDP.getText().trim();
+			if (pdpprice.contains(",")) {
+				System.out.println("The Product Price in PDP Page" + (pdpprice.replace(",", "")));
+				pdpprice = pdpprice.replace(",", "");
+			} else
+
+				System.out.println("order price doesn't have any comma value");
+
+			Reporting.updateTestReport("Price of the product in PDP: " + pdpprice.trim() + " was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return pdpprice;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Price of the product in PDP could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to fetch the First Product price on Order Summary Page
+	 */
+	public String fetchFirstProductPriceInOrderSummary() throws IOException {
+		try {
+			String price = PriceOfFirstProductInOrderReview.getText();
+			Reporting.updateTestReport(
+					"First Product Price: " + price.trim() + " was fetched in order summary step successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+			return price.trim();
+		} catch (Exception e) {
+			Reporting.updateTestReport("First Product Price couldn't be fetched in order Summary step ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to fetch the First Product price on Order Review Page
+	 */
+	public String fetchFirstProductPriceInOrderReview() throws IOException {
+		try {
+
+			String firstprice = FirstProductPriceinReviewPage.getText().trim();
+			if (firstprice.contains(",")) {
+
+				firstprice = firstprice.replace(",", "");
+			} else
+
+				System.out.println("order price doesn't have any comma value");
+			Reporting.updateTestReport(
+					"First Product Price: " + firstprice.trim() + " was fetched in order review step successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+			return firstprice.trim();
+		} catch (Exception e) {
+			Reporting.updateTestReport("First Product Price couldn't be fetched in order review step ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description:Method to fetch the Order Total in Order Review Page
+	 */
+
+	public String fetchTotalInOrderReview() throws IOException {
+		try {
+			String total = TotalInOrderReview.getText();
+			Reporting.updateTestReport(
+					"Order total: " + total.trim() + " was fetched in order review step successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return total.trim();
+		} catch (Exception e) {
+			Reporting.updateTestReport("Order total couldn't be fetched in order review step ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+
+		}
+	}/*
+		 * @Author:Vishnu
+		 * 
+		 * @Description: Method to fetch the Order Total in Cart Page
+		 */
+
+	public String fetchOrderTotalOnCartPage() throws IOException {
+		try {
+
+			String ordertottalprice = OrderTotaOnCartPage.getText().trim();
+			if (ordertottalprice.contains(",")) {
+				System.out.println("The Product Price in PDP Page" + (ordertottalprice.replace(",", "")));
+				ordertottalprice = ordertottalprice.replace(",", "");
+			} else
+
+				System.out.println("order price doesn't have any comma value");
+			Reporting.updateTestReport("Order total in cart page : " + ordertottalprice.trim() + " was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return ordertottalprice;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Order total in cart page could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to fetch the second Product price on Order Review Page
+	 */
+	public String fetchSecondProductPriceInOrderReview() throws IOException {
+		try {
+
+			String secondprice = SecondProductPriceinReviewPage.getText().trim();
+			if (secondprice.contains(","))
+
+				secondprice = secondprice.replace(",", "");
+			Reporting.updateTestReport(
+					"Second Product Price: " + secondprice.trim() + " was fetched in order review step successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+			return secondprice.trim();
+		} catch (Exception e) {
+			Reporting.updateTestReport("second Product Price couldn't be fetched in order review step ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to fetch the Shipping Charge in Order Review Page
+	 */
+
+	public String fetchShippingChargeInOrderReview() throws IOException {
+		try {
+			String shipping = ShippingChargeInOrderReview.getText();
+			Reporting.updateTestReport(
+					"Shipping charge: " + shipping.trim() + " was fetched in order review step successfully",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			if (shipping.equalsIgnoreCase("FREE"))
+				return "$0.00";
+			return shipping.trim();
+		} catch (Exception e) {
+			Reporting.updateTestReport("Shipping charge couldn't be fetched in order review step ",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+
+		}
+	}
+	
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to fetch the Partner product Price In PDP page
+	 */
+
+	public String fetchPartnerProductPriceInPDP() throws IOException {
+		try {
+			String partnerpdpprice = PartnerProductPDPPrice.getText().trim();
+			if (partnerpdpprice.contains(",")) {
+				System.out.println("The Product Price in PDP Page" + (partnerpdpprice.replace(",", "")));
+				partnerpdpprice = partnerpdpprice.replace(",", "");
+			} else if(partnerpdpprice.trim().contains("$0.00"))
+				partnerpdpprice = "FREE";
+
+			Reporting.updateTestReport("Price of the product in PDP: " + partnerpdpprice.trim() + " was returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return partnerpdpprice;
+		} catch (Exception e) {
+			Reporting.updateTestReport("Price of the product in PDP could not be returned",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";
+		}
+	}
+
 }

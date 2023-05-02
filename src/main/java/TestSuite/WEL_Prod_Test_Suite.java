@@ -33,7 +33,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 	app_WEL_Repo WEL;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
-	private static String WEL_Homepage_URL = excelOperation.getTestData("WEL_Homepage_URL", "Generic_Dataset", "Data");
+	public static String WEL_Homepage_URL = excelOperation.getTestData("WEL_Homepage_URL", "Generic_Dataset", "Data");
 
 	@BeforeTest
 	public void initializeRepo() {
@@ -231,6 +231,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions
 											.visibilityOfElementLocated(By.xpath("//label[@for='Print + eBook0']")));
 									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By
 												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -257,6 +258,16 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										}
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of all the products' pricedidn't match with the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										try {
 											wait.until(
 													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
@@ -280,6 +291,52 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																"User was in shipping step after successful registration",
 																CaptureScreenshot.getScreenshot(SS_path),
 																StatusDetails.PASS);
+														try {
+															wait.until(ExpectedConditions.visibilityOfElementLocated(By
+																	.xpath("//div[@id='orderSummaryProductTotalValue']")));
+
+															String orderprice = WEL
+																	.fetchFirstProductPriceInOrderSummary();
+															if (orderprice.contains(","))
+																orderprice = orderprice.replace(",", "");
+															BigDecimal orderproductprice = new BigDecimal(
+																	orderprice.substring(1));
+
+															String discount = WEL.fetchDiscountInOrderReview();
+															if (discount.contains(","))
+																discount = discount.replace(",", "");
+															BigDecimal orderpriceafterdiscount = new BigDecimal(
+																	discount.substring(1));
+
+															BigDecimal productpriceafterdiscount = orderproductprice
+																	.subtract(orderpriceafterdiscount);
+
+															String totalorderReview = WEL.fetchTotalInOrderReview();
+															if (totalorderReview.contains(","))
+																totalorderReview = totalorderReview.replace(",", "");
+															BigDecimal orderTotalPrice = new BigDecimal(
+																	totalorderReview.substring(1));
+
+															if (productpriceafterdiscount
+																	.compareTo(orderTotalPrice) == 0)
+																Reporting.updateTestReport(
+																		"First Product price - Discount "
+																				+ " = Order total in Order Review step",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.PASS);
+															else
+																Reporting.updateTestReport("First Product price + Tax "
+																		+ " is not equal to Order total in Order Review step",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.FAIL);
+
+														} catch (Exception e) {
+															Reporting.updateTestReport(
+																	"Order Summary tab was not visible"
+																			+ e.getMessage(),
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
+														}
 													} catch (Exception e) {
 														Reporting.updateTestReport(
 																"User was not in shipping step and caused timeout exception",
@@ -391,6 +448,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions
 											.visibilityOfElementLocated(By.xpath("//label[@for='Print + eBook0']")));
 									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By
 												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -417,6 +475,16 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										}
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of all the products' pricedidn't match with the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										try {
 											wait.until(
 													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
@@ -436,6 +504,50 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 															"User was in shipping step after successful registration",
 															CaptureScreenshot.getScreenshot(SS_path),
 															StatusDetails.PASS);
+													try {
+														wait.until(ExpectedConditions.visibilityOfElementLocated(By
+																.xpath("//div[@id='orderSummaryProductTotalValue']")));
+
+														String orderprice = WEL.fetchFirstProductPriceInOrderSummary();
+														if (orderprice.contains(","))
+															orderprice = orderprice.replace(",", "");
+														BigDecimal orderproductprice = new BigDecimal(
+																orderprice.substring(1));
+
+														String discount = WEL.fetchDiscountInOrderReview();
+														if (discount.contains(","))
+															discount = discount.replace(",", "");
+														BigDecimal orderpriceafterdiscount = new BigDecimal(
+																discount.substring(1));
+
+														BigDecimal productpriceafterdiscount = orderproductprice
+																.subtract(orderpriceafterdiscount);
+
+														String totalorderReview = WEL.fetchTotalInOrderReview();
+														if (totalorderReview.contains(","))
+															totalorderReview = totalorderReview.replace(",", "");
+														BigDecimal orderTotalPrice = new BigDecimal(
+																totalorderReview.substring(1));
+
+														if (productpriceafterdiscount.compareTo(orderTotalPrice) == 0)
+															Reporting.updateTestReport(
+																	"First Product price - Discount "
+																			+ " = Order total in Order Review step",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.PASS);
+														else
+															Reporting.updateTestReport("First Product price + Tax "
+																	+ " is not equal to Order total in Order Review step",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
+
+													} catch (Exception e) {
+														Reporting.updateTestReport(
+																"Order Summary tab was not visible" + e.getMessage(),
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+													}
+
 												} catch (Exception e) {
 													Reporting.updateTestReport(
 															"User was not in shipping step and caused timeout exception",
@@ -541,6 +653,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions
 											.visibilityOfElementLocated(By.xpath("//label[@for='Print + eBook0']")));
 									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By
 												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -567,6 +680,16 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										}
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of all the products' pricedidn't match with the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										try {
 											wait.until(
 													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
@@ -770,6 +893,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions
 											.visibilityOfElementLocated(By.xpath("//label[@for='Print + eBook0']")));
 									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By
 												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -807,6 +931,16 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 										WEL.enterDiscountValueInCartPage(
 												excelOperation.getTestData("WEL_Coupon", "Generic_Dataset", "Data"));
 										WEL.clickOnDiscountApplyButtonInCartPage();
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderTotalOnCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of the price is not match with the subtotal in cart page due to GOVT discount is aplied in Cart Page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 										try {
 											wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
 													By.id("cartPageSuccessCouponDiv")));
@@ -905,6 +1039,8 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 											wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 													"//p[@class='current-price-link']/a[contains(text(),'Switch to student discount price')]")));
 											WEL.clickOnSwitchToStudentDiscountLink();
+											BigDecimal price = new BigDecimal(
+													WEL.fetchProductPriceInPDP().substring(1));
 											try {
 												wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 														"//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -940,6 +1076,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 															"Student discount was applied in cart page",
 															CaptureScreenshot.getScreenshot(SS_path),
 															StatusDetails.PASS);
+
 												} catch (Exception e) {
 													Reporting.updateTestReport(
 															"Student discount was not applied in cart page",
@@ -947,6 +1084,18 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 															StatusDetails.FAIL);
 												}
 
+												BigDecimal subtotal = new BigDecimal(
+														WEL.fetchOrderSubTotalInCartPage().substring(1));
+												if (price.compareTo(subtotal) == 0)
+													Reporting.updateTestReport(
+															"The addition of all the products' price is same as the subtotal in cart page",
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.PASS);
+												else
+													Reporting.updateTestReport(
+															"The addition of the price is not match with the subtotal in cart page due to STUDENT discount is aplied in Cart Page",
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
 											} catch (Exception e) {
 												Reporting.updateTestReport(
 														"Add To Cart button on product page was not clickable and caused timeout exception ",
@@ -1048,6 +1197,8 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 											wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 													"//p[@class='current-price-link']/a[contains(text(),'Switch to student discount price')]")));
 											WEL.clickOnSwitchToStudentDiscountLink();
+											BigDecimal firstproductprice = new BigDecimal(
+													WEL.fetchProductPriceInPDP().substring(1));
 											try {
 												wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 														"//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -1137,6 +1288,10 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																													By.xpath(
 																															"//p[@class='current-price-link']/a[contains(text(),'Switch to student discount price')]")));
 																							WEL.clickOnSwitchToStudentDiscountLink();
+																							BigDecimal secondproductprice = new BigDecimal(
+																									WEL.fetchProductPriceInPDP()
+																											.substring(
+																													1));
 																							try {
 																								wait.until(
 																										ExpectedConditions
@@ -1195,6 +1350,29 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																															.getScreenshot(
 																																	SS_path),
 																													StatusDetails.PASS);
+																									BigDecimal subtotal = new BigDecimal(
+																											WEL.fetchOrderTotalOnCartPage()
+																													.substring(
+																															1));
+																									if (firstproductprice
+																											.add(secondproductprice)
+																											.compareTo(
+																													subtotal) == 0)
+																										Reporting
+																												.updateTestReport(
+																														"The addition of all the products' price is same as the subtotal in cart page",
+																														CaptureScreenshot
+																																.getScreenshot(
+																																		SS_path),
+																														StatusDetails.PASS);
+																									else
+																										Reporting
+																												.updateTestReport(
+																														"The addition of the price is not match with the subtotal in cart page due to STUDENT discount is aplied in Cart Page",
+																														CaptureScreenshot
+																																.getScreenshot(
+																																		SS_path),
+																														StatusDetails.FAIL);
 																									try {
 																										wait.until(
 																												ExpectedConditions
@@ -1236,6 +1414,92 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																												Reporting
 																														.updateTestReport(
 																																"User was not in shipping step and caused timeout exception",
+																																CaptureScreenshot
+																																		.getScreenshot(
+																																				SS_path),
+																																StatusDetails.FAIL);
+																											}
+																											try {
+																												wait.until(
+																														ExpectedConditions
+																																.visibilityOfElementLocated(
+																																		By.xpath(
+																																				"//div[@id='orderSummaryProductTotalValue']")));
+																												// This
+																												// statement
+																												// is we
+																												// are
+																												// getting
+																												// the
+																												// firstProduct
+																												// price
+																												// in
+																												// Order
+																												// Review
+																												// page
+																												// and
+																												// Storing
+																												// in
+																												// String
+																												// Object
+
+																												BigDecimal firstproductprice2 = new BigDecimal(
+																														WEL.fetchFirstProductPriceInOrderReview()
+																																.substring(
+																																		1));
+
+																												String discount = WEL
+																														.fetchDiscountInOrderReview();
+																												if (discount
+																														.contains(
+																																","))
+																													discount = discount
+																															.replace(
+																																	",",
+																																	"");
+																												BigDecimal discountinorderreview = new BigDecimal(
+																														discount.substring(
+																																1));
+																												String totalorderReview = WEL
+																														.fetchTotalInOrderReview();
+																												if (totalorderReview
+																														.contains(
+																																","))
+																													totalorderReview = totalorderReview
+																															.replace(
+																																	",",
+																																	"");
+																												BigDecimal orderTotalPrice1 = new BigDecimal(
+																														totalorderReview
+																																.substring(
+																																		1));
+																												if (firstproductprice2
+																														.subtract(
+																																discountinorderreview)
+																														.compareTo(
+																																orderTotalPrice1) == 0)
+																													Reporting
+																															.updateTestReport(
+																																	"First Product price + Second Product price -discount "
+																																			+ " = Order total in Order Review step",
+																																	CaptureScreenshot
+																																			.getScreenshot(
+																																					SS_path),
+																																	StatusDetails.PASS);
+																												else
+																													Reporting
+																															.updateTestReport(
+																																	"First Product price +second product price- discount is not equal to Order total in Order Review step",
+																																	CaptureScreenshot
+																																			.getScreenshot(
+																																					SS_path),
+																																	StatusDetails.FAIL);
+
+																											} catch (Exception e) {
+																												Reporting
+																														.updateTestReport(
+																																"Order summary tab was not visible"
+																																		+ e.getMessage(),
 																																CaptureScreenshot
 																																		.getScreenshot(
 																																				SS_path),
@@ -1448,7 +1712,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions
 											.visibilityOfElementLocated(By.xpath("//label[@for='Print0']")));
 									ScrollingWebPage.PageDown(driver, SS_path);
-
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By
 												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -1495,7 +1759,16 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 											Reporting.updateTestReport("The coupon code  couldn't be applied",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
-
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of the price is not match with the subtotal in cart page due to STUDENT discount is aplied in Cart Page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 									} catch (Exception e) {
 										Reporting.updateTestReport(
 												"Add To Cart button on product page was not clickable and caused timeout exception ",
@@ -1729,6 +2002,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions
 											.visibilityOfElementLocated(By.xpath("//label[@for='Print0']")));
 									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By
 												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -1755,6 +2029,17 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										}
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of all the products' pricedidn't match with the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
 										try {
 											wait.until(
 													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
@@ -1797,10 +2082,46 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																CaptureScreenshot.getScreenshot(SS_path),
 																StatusDetails.INFO);
 													}
-													
+
 												} catch (Exception e) {
 													Reporting.updateTestReport(
 															"User was not in shipping step and caused timeout exception",
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
+												}
+												try {
+													wait.until(ExpectedConditions.visibilityOfElementLocated(
+															By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+
+													BigDecimal firstproductprice2 = new BigDecimal(
+															WEL.fetchFirstProductPriceInOrderReview().substring(1));
+
+													String discount = WEL.fetchDiscountInOrderReview();
+													if (discount.contains(","))
+														discount = discount.replace(",", "");
+													BigDecimal discountinorderreview = new BigDecimal(
+															discount.substring(1));
+													String totalorderReview = WEL.fetchTotalInOrderReview();
+													if (totalorderReview.contains(","))
+														totalorderReview = totalorderReview.replace(",", "");
+													BigDecimal orderTotalPrice1 = new BigDecimal(
+															totalorderReview.substring(1));
+													if (firstproductprice2.subtract(discountinorderreview)
+															.compareTo(orderTotalPrice1) == 0)
+														Reporting.updateTestReport(
+																"First Product price + Second Product price -discount "
+																		+ " = Order total in Order Review step",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
+													else
+														Reporting.updateTestReport(
+																"First Product price +second product price- discount is not equal to Order total in Order Review step",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+
+												} catch (Exception e) {
+													Reporting.updateTestReport(
+															"Order summary tab was not visible" + e.getMessage(),
 															CaptureScreenshot.getScreenshot(SS_path),
 															StatusDetails.FAIL);
 												}
@@ -2114,6 +2435,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions
 											.visibilityOfElementLocated(By.xpath("//label[@for='Print0']")));
 									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By
 												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -2140,6 +2462,17 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										}
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of all the products' pricedidn't match with the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
 										try {
 											wait.until(
 													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
@@ -2191,6 +2524,42 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												} catch (Exception e) {
 													Reporting.updateTestReport(
 															"User was not in shipping step and caused timeout exception",
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
+												}
+												try {
+													wait.until(ExpectedConditions.visibilityOfElementLocated(
+															By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+
+													BigDecimal firstproductprice2 = new BigDecimal(
+															WEL.fetchFirstProductPriceInOrderReview().substring(1));
+
+													String discount = WEL.fetchDiscountInOrderReview();
+													if (discount.contains(","))
+														discount = discount.replace(",", "");
+													BigDecimal discountinorderreview = new BigDecimal(
+															discount.substring(1));
+													String totalorderReview = WEL.fetchTotalInOrderReview();
+													if (totalorderReview.contains(","))
+														totalorderReview = totalorderReview.replace(",", "");
+													BigDecimal orderTotalPrice1 = new BigDecimal(
+															totalorderReview.substring(1));
+													if (firstproductprice2.subtract(discountinorderreview)
+															.compareTo(orderTotalPrice1) == 0)
+														Reporting.updateTestReport(
+																"First Product price + Second Product price -discount "
+																		+ " = Order total in Order Review step",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
+													else
+														Reporting.updateTestReport(
+																"First Product price +second product price- discount is not equal to Order total in Order Review step",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+
+												} catch (Exception e) {
+													Reporting.updateTestReport(
+															"Order summary tab was not visible" + e.getMessage(),
 															CaptureScreenshot.getScreenshot(SS_path),
 															StatusDetails.FAIL);
 												}
@@ -2335,6 +2704,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 									}
 									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By
 												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -2361,6 +2731,17 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										}
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of all the products' pricedidn't match with the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
 										try {
 											wait.until(
 													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
@@ -2403,6 +2784,42 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												} catch (Exception e) {
 													Reporting.updateTestReport(
 															"User was not in shipping step and caused timeout exception",
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
+												}
+												try {
+													wait.until(ExpectedConditions.visibilityOfElementLocated(
+															By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+
+													BigDecimal firstproductprice2 = new BigDecimal(
+															WEL.fetchFirstProductPriceInOrderReview().substring(1));
+
+													String discount = WEL.fetchDiscountInOrderReview();
+													if (discount.contains(","))
+														discount = discount.replace(",", "");
+													BigDecimal discountinorderreview = new BigDecimal(
+															discount.substring(1));
+													String totalorderReview = WEL.fetchTotalInOrderReview();
+													if (totalorderReview.contains(","))
+														totalorderReview = totalorderReview.replace(",", "");
+													BigDecimal orderTotalPrice1 = new BigDecimal(
+															totalorderReview.substring(1));
+													if (firstproductprice2.subtract(discountinorderreview)
+															.compareTo(orderTotalPrice1) == 0)
+														Reporting.updateTestReport(
+																"First Product price + Second Product price -discount "
+																		+ " = Order total in Order Review step",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
+													else
+														Reporting.updateTestReport(
+																"First Product price +second product price- discount is not equal to Order total in Order Review step",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+
+												} catch (Exception e) {
+													Reporting.updateTestReport(
+															"Order summary tab was not visible" + e.getMessage(),
 															CaptureScreenshot.getScreenshot(SS_path),
 															StatusDetails.FAIL);
 												}
@@ -2573,6 +2990,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By
 												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -2599,6 +3017,16 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										}
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of all the products' pricedidn't match with the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										try {
 											wait.until(
 													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
@@ -2638,6 +3066,42 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												} catch (Exception e) {
 													Reporting.updateTestReport(
 															"User was not in billing step and caused timeout exception",
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
+												}
+												try {
+													wait.until(ExpectedConditions.visibilityOfElementLocated(
+															By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+
+													BigDecimal firstproductprice2 = new BigDecimal(
+															WEL.fetchFirstProductPriceInOrderReview().substring(1));
+
+													String discount = WEL.fetchDiscountInOrderReview();
+													if (discount.contains(","))
+														discount = discount.replace(",", "");
+													BigDecimal discountinorderreview = new BigDecimal(
+															discount.substring(1));
+													String totalorderReview = WEL.fetchTotalInOrderReview();
+													if (totalorderReview.contains(","))
+														totalorderReview = totalorderReview.replace(",", "");
+													BigDecimal orderTotalPrice1 = new BigDecimal(
+															totalorderReview.substring(1));
+													if (firstproductprice2.subtract(discountinorderreview)
+															.compareTo(orderTotalPrice1) == 0)
+														Reporting.updateTestReport(
+																"First Product price + Second Product price -discount "
+																		+ " = Order total in Order Review step",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
+													else
+														Reporting.updateTestReport(
+																"First Product price +second product price- discount is not equal to Order total in Order Review step",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+
+												} catch (Exception e) {
+													Reporting.updateTestReport(
+															"Order summary tab was not visible" + e.getMessage(),
 															CaptureScreenshot.getScreenshot(SS_path),
 															StatusDetails.FAIL);
 												}
@@ -2734,6 +3198,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions
 											.visibilityOfElementLocated(By.xpath("//label[@for='Print0']")));
 									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By
 												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -2760,6 +3225,16 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										}
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of all the products' pricedidn't match with the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										try {
 											wait.until(
 													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
@@ -2813,6 +3288,42 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												} catch (Exception e) {
 													Reporting.updateTestReport(
 															"User was not in shipping step and caused timeout exception",
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
+												}
+												try {
+													wait.until(ExpectedConditions.visibilityOfElementLocated(
+															By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+
+													BigDecimal firstproductprice2 = new BigDecimal(
+															WEL.fetchFirstProductPriceInOrderReview().substring(1));
+
+													String discount = WEL.fetchDiscountInOrderReview();
+													if (discount.contains(","))
+														discount = discount.replace(",", "");
+													BigDecimal discountinorderreview = new BigDecimal(
+															discount.substring(1));
+													String totalorderReview = WEL.fetchTotalInOrderReview();
+													if (totalorderReview.contains(","))
+														totalorderReview = totalorderReview.replace(",", "");
+													BigDecimal orderTotalPrice1 = new BigDecimal(
+															totalorderReview.substring(1));
+													if (firstproductprice2.subtract(discountinorderreview)
+															.compareTo(orderTotalPrice1) == 0)
+														Reporting.updateTestReport(
+																"First Product price + Second Product price -discount "
+																		+ " = Order total in Order Review step",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
+													else
+														Reporting.updateTestReport(
+																"First Product price +second product price- discount is not equal to Order total in Order Review step",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+
+												} catch (Exception e) {
+													Reporting.updateTestReport(
+															"Order summary tab was not visible" + e.getMessage(),
 															CaptureScreenshot.getScreenshot(SS_path),
 															StatusDetails.FAIL);
 												}
@@ -2888,50 +3399,66 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions
 						.elementToBeClickable(By.xpath("//div[@class='form-group']//input[@id='inputPartnerSearch']")));
 				WEL.enterUniversityName(excelOperation.getTestData("TC17", "WEL_Test_Data", "Partner_Name"));
-				ScrollingWebPage.PageDown(driver, SS_path);
+				ScrollingWebPage.PageScrolldown(driver, 0, 230, SS_path);
+				Thread.sleep(100);
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-							"//div[@class='container product-categories-container']//div[2]//dd/a[contains(text(),'CMA')]")));
+							"//div[@class='container product-categories-container']//div[2]//dd/a[contains(text(),'CPA')]")));
 					WEL.clickOnDeanDortonCMAProduct();
 					ScrollingWebPage.PageDown(driver, SS_path);
 					try {
-						wait.until(ExpectedConditions.elementToBeClickable(
+						wait.until(ExpectedConditions.visibilityOfElementLocated(
 								By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
-						WEL.clickOnAddToCartButtonOnPDP();
+						String price = WEL.fetchPartnerProductPriceInPDP();
 						try {
-							try {
-								wait.until(ExpectedConditions
-										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
-
-							} catch (Exception e) {
+							wait.until(ExpectedConditions.elementToBeClickable(
+									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+							WEL.clickOnAddToCartButtonOnPDP();
+							
 								try {
-									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-											.isDisplayed()) {
-										Reporting.updateTestReport(
-												"Server error came in cart page and the page was refreshed",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-										driver.navigate().refresh();
-									}
-								} catch (Exception e1) {
-									Reporting.updateTestReport(
-											"Checkout button was not clickable in the cart page"
-													+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
 
+								} catch (Exception e) {
+									try {
+										if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												.isDisplayed()) {
+											Reporting.updateTestReport(
+													"Server error came in cart page and the page was refreshed",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											driver.navigate().refresh();
+										}
+									} catch (Exception e1) {
+										Reporting.updateTestReport(
+												"Checkout button was not clickable in the cart page"
+														+ " and caused timeout exception",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+
+								}
+								String subtotal = WEL.fetchOrderSubTotalInCartPage();
+								if (subtotal.equals(price))
+									Reporting.updateTestReport("The Subtotal is FREE for DeanDorton Products",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+								else
+									Reporting.updateTestReport(
+											"The addition of all the products' pricedidn't match with the subtotal in cart page",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Failed to click on Add To Cart button due to timeout exception",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
-							WEL.clickonCheckOutButtonOnCartPage();
+							
 						} catch (Exception e) {
 							Reporting.updateTestReport(
-									"Failed to click on CheckOutOn cart Page caused timeout exception",
+									"Add To Cart button was not visible and caused timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
-					} catch (Exception e) {
-						Reporting.updateTestReport("Failed to click on Add To cartProduct caused timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
+							
 				} catch (Exception e) {
-					Reporting.updateTestReport("Failed to click on DeanDorton CPA Product caused timeout exception",
+					Reporting.updateTestReport("Failed to click on DeanDorton CMA Product caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 
@@ -2967,13 +3494,16 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions
 						.elementToBeClickable(By.xpath("//div[@class='form-group']//input[@id='inputPartnerSearch']")));
 				WEL.enteruniversityName(excelOperation.getTestData("TC18", "WEL_Test_Data", "Partner_Name"));
-				// ScrollingWebPage.PageScrolldown(driver, 0,1000, SS_path);
+				ScrollingWebPage.PageDown(driver, SS_path);
 				try {
-					wait.until(ExpectedConditions.visibilityOfElementLocated(
-							By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
-					ScrollingWebPage.PageScrolldown(driver, 0, 800, SS_path);
-					WEL.clickOnAddToCartButtonOnPDP();
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+							"//div[@class='partner-detail partner-list-container']//div[@class='col-xs-12 col-sm-6 package-selection-col']//button")));
+					BigDecimal price = new BigDecimal(WEL.fetchPartnerProductPriceInPDP().substring(1));
 					try {
+						wait.until(ExpectedConditions.elementToBeClickable(
+								By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+
+						WEL.clickOnAddToCartButtonOnPDP();
 						try {
 							wait.until(ExpectedConditions
 									.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -2995,7 +3525,16 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 							}
 
 						}
-						WEL.clickonCheckOutButtonOnCartPage();
+						
+						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
+						if (price.compareTo(subtotal) == 0)
+							Reporting.updateTestReport(
+									"The addition of all the products' price is same as the subtotal in cart page",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						else
+							Reporting.updateTestReport(
+									"The addition of all the products' pricedidn't match with the subtotal in cart page",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					} catch (Exception e) {
 						Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -3052,7 +3591,10 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 								wait.until(ExpectedConditions
 										.visibilityOfElementLocated(By.xpath("//button[@class='add-to-cart-btn  ']")));
 								Thread.sleep(1000);
+								// ScrollingWebPage.PageDown(driver, SS_path);
+
 								WEL.clickOnPart1InCIAPDP();
+								BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 								Thread.sleep(1000);
 								ScrollingWebPage.PageDown(driver, SS_path);
 
@@ -3077,6 +3619,15 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 								}
+								BigDecimal subtotal = new BigDecimal(WEL.fetchOrderTotalOnCartPage().substring(1));
+								if (price.compareTo(subtotal) == 0)
+									Reporting.updateTestReport(
+											"The addition of all the products' price is same as the subtotal in cart page",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport(
+											"The addition of all the products' pricedidn't match with the subtotal in cart page",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								try {
 									wait.until(ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
 									WEL.clickonCheckOutButtonOnCartPage();
@@ -3181,6 +3732,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions
 											.visibilityOfElementLocated(By.xpath("//label[@for='Print0']")));
 									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By
 												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -3207,6 +3759,16 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										}
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of all the products' pricedidn't match with the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										try {
 											wait.until(
 													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
@@ -3264,6 +3826,53 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														} catch (Exception e) {
 															Reporting.updateTestReport(
 																	"User was not in shipping step and caused timeout exception",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
+														}
+														try {
+															wait.until(ExpectedConditions.visibilityOfElementLocated(By
+																	.xpath("//div[@id='orderSummaryProductTotalValue']")));
+
+															BigDecimal firstproductprice2 = new BigDecimal(
+																	WEL.fetchFirstProductPriceInOrderReview()
+																			.substring(1));
+
+															String discount = WEL.fetchDiscountInOrderReview();
+															if (discount.contains(","))
+																discount = discount.replace(",", "");
+															BigDecimal discountinorderreview = new BigDecimal(
+																	discount.substring(1));
+															String totalorderReview = WEL.fetchTotalInOrderReview();
+															if (totalorderReview.contains(","))
+																totalorderReview = totalorderReview.replace(",", "");
+															String shippingcharge = WEL
+																	.fetchShippingChargeInOrderReview();
+
+															if (shippingcharge.contains(","))
+																shippingcharge = shippingcharge.replace(",", "");
+															BigDecimal ShipchargoneReviewpage = new BigDecimal(
+																	shippingcharge.substring(1));
+
+															BigDecimal orderTotalPrice1 = new BigDecimal(
+																	totalorderReview.substring(1));
+															if (firstproductprice2.subtract(discountinorderreview)
+																	.add(ShipchargoneReviewpage)
+																	.compareTo(orderTotalPrice1) == 0)
+																Reporting.updateTestReport(
+																		"First Product price + shippingcharge -discount "
+																				+ " = Order total in Order Review step",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.PASS);
+															else
+																Reporting.updateTestReport(
+																		"First Product price +shipping charge- discount is not equal to Order total in Order Review step",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.FAIL);
+
+														} catch (Exception e) {
+															Reporting.updateTestReport(
+																	"Order summary tab was not visible"
+																			+ e.getMessage(),
 																	CaptureScreenshot.getScreenshot(SS_path),
 																	StatusDetails.FAIL);
 														}
@@ -3369,6 +3978,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions
 											.visibilityOfElementLocated(By.xpath("//label[@for='Print0']")));
 									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By
 												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -3395,6 +4005,17 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										}
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of all the products' pricedidn't match with the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
 										try {
 											wait.until(
 													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
@@ -3464,6 +4085,50 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												} catch (Exception e) {
 													Reporting.updateTestReport(
 															"User was not in shipping step and caused timeout exception",
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
+												}
+												try {
+													wait.until(ExpectedConditions.visibilityOfElementLocated(
+															By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+
+													BigDecimal firstproductprice2 = new BigDecimal(
+															WEL.fetchFirstProductPriceInOrderReview().substring(1));
+
+													String discount = WEL.fetchDiscountInOrderReview();
+													if (discount.contains(","))
+														discount = discount.replace(",", "");
+													BigDecimal discountinorderreview = new BigDecimal(
+															discount.substring(1));
+													String totalorderReview = WEL.fetchTotalInOrderReview();
+													if (totalorderReview.contains(","))
+														totalorderReview = totalorderReview.replace(",", "");
+													String shippingcharge = WEL.fetchShippingChargeInOrderReview();
+
+													if (shippingcharge.contains(","))
+														shippingcharge = shippingcharge.replace(",", "");
+													BigDecimal ShipchargoneReviewpage = new BigDecimal(
+															shippingcharge.substring(1));
+
+													BigDecimal orderTotalPrice1 = new BigDecimal(
+															totalorderReview.substring(1));
+													if (firstproductprice2.subtract(discountinorderreview)
+															.add(ShipchargoneReviewpage)
+															.compareTo(orderTotalPrice1) == 0)
+														Reporting.updateTestReport(
+																"First Product price + shippingcharge -discount "
+																		+ " = Order total in Order Review step",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
+													else
+														Reporting.updateTestReport(
+																"First Product price +shipping charge- discount is not equal to Order total in Order Review step",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+
+												} catch (Exception e) {
+													Reporting.updateTestReport(
+															"Order summary tab was not visible" + e.getMessage(),
 															CaptureScreenshot.getScreenshot(SS_path),
 															StatusDetails.FAIL);
 												}
@@ -3557,6 +4222,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions
 											.visibilityOfElementLocated(By.xpath("//label[@for='Print0']")));
 									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By
 												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -3583,6 +4249,16 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										}
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of all the products' pricedidn't match with the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										try {
 											wait.until(
 													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
@@ -3621,24 +4297,8 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																	"WEL_Test_Data", "Shipping_Zip_Code"));
 															WEL.shipPhonenumber(excelOperation.getTestData("TC22",
 																	"WEL_Test_Data", "Shipping_Phone_Number"));
+
 															WEL.clickingOnSaveAndContinue();
-															try {
-																if (driver.findElement(By.xpath(
-																		"//h1[contains(text(),'SERVER ERROR (500)')]"))
-																		.isDisplayed()) {
-																	Reporting.updateTestReport(
-																			"Server error came in cart page and the page was refreshed",
-																			CaptureScreenshot.getScreenshot(SS_path),
-																			StatusDetails.INFO);
-																	driver.navigate().refresh();
-																}
-															} catch (Exception e1) {
-																Reporting.updateTestReport(
-																		"User was not in the cart page"
-																				+ " and caused timeout exception",
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.FAIL);
-															}
 															try {
 																if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
 																		.isDisplayed())
@@ -3649,6 +4309,57 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																		CaptureScreenshot.getScreenshot(SS_path),
 																		StatusDetails.INFO);
 															}
+
+															try {
+																wait.until(ExpectedConditions
+																		.visibilityOfElementLocated(By.xpath(
+																				"//div[@id='orderSummaryProductTotalValue']")));
+
+																BigDecimal firstproductprice2 = new BigDecimal(
+																		WEL.fetchFirstProductPriceInOrderReview()
+																				.substring(1));
+
+																String discount = WEL.fetchDiscountInOrderReview();
+																if (discount.contains(","))
+																	discount = discount.replace(",", "");
+																BigDecimal discountinorderreview = new BigDecimal(
+																		discount.substring(1));
+																String totalorderReview = WEL.fetchTotalInOrderReview();
+																if (totalorderReview.contains(","))
+																	totalorderReview = totalorderReview.replace(",",
+																			"");
+																String shippingcharge = WEL
+																		.fetchShippingChargeInOrderReview();
+
+																if (shippingcharge.contains(","))
+																	shippingcharge = shippingcharge.replace(",", "");
+																BigDecimal ShipchargoneReviewpage = new BigDecimal(
+																		shippingcharge.substring(1));
+
+																BigDecimal orderTotalPrice1 = new BigDecimal(
+																		totalorderReview.substring(1));
+																if (firstproductprice2.subtract(discountinorderreview)
+																		.add(ShipchargoneReviewpage)
+																		.compareTo(orderTotalPrice1) == 0)
+																	Reporting.updateTestReport(
+																			"First Product price + shippingcharge -discount "
+																					+ " = Order total in Order Review step",
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.PASS);
+																else
+																	Reporting.updateTestReport(
+																			"First Product price +shipping charge- discount is not equal to Order total in Order Review step",
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.FAIL);
+
+															} catch (Exception e) {
+																Reporting.updateTestReport(
+																		"Order summary tab was not visible"
+																				+ e.getMessage(),
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.FAIL);
+															}
+
 															ScrollingWebPage.PageScrolldown(driver, 0, 350, SS_path);
 														} catch (Exception e) {
 															Reporting.updateTestReport(
@@ -3678,7 +4389,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														"User was not redirected to checkout login/ registration page and caused timeout exception",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
-											
+
 										} catch (Exception e) {
 											Reporting.updateTestReport(
 													"Checkout button was not clickable in cart page and caused timeout exception",
@@ -3767,6 +4478,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions
 											.visibilityOfElementLocated(By.xpath("//label[@for='Print0']")));
 									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By
 												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -3793,6 +4505,16 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										}
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of all the products' pricedidn't match with the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										try {
 											wait.until(
 													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
@@ -3823,6 +4545,47 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																	"WEL_Test_Data", "Shipping_Address_line1"));
 
 															WEL.checkDontShipToPOBoxMessage();
+															try {
+																wait.until(ExpectedConditions
+																		.visibilityOfElementLocated(By.xpath(
+																				"//div[@id='orderSummaryProductTotalValue']")));
+
+																BigDecimal firstproductprice2 = new BigDecimal(
+																		WEL.fetchFirstProductPriceInOrderReview()
+																				.substring(1));
+
+																String discount = WEL.fetchDiscountInOrderReview();
+																if (discount.contains(","))
+																	discount = discount.replace(",", "");
+																BigDecimal discountinorderreview = new BigDecimal(
+																		discount.substring(1));
+																String totalorderReview = WEL.fetchTotalInOrderReview();
+																if (totalorderReview.contains(","))
+																	totalorderReview = totalorderReview.replace(",",
+																			"");
+																BigDecimal orderTotalPrice1 = new BigDecimal(
+																		totalorderReview.substring(1));
+																if (firstproductprice2.subtract(discountinorderreview)
+																		.compareTo(orderTotalPrice1) == 0)
+																	Reporting.updateTestReport(
+																			"First Product price + Second Product price -discount "
+																					+ " = Order total in Order Review step",
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.PASS);
+																else
+																	Reporting.updateTestReport(
+																			"First Product price +second product price- discount is not equal to Order total in Order Review step",
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.FAIL);
+
+															} catch (Exception e) {
+																Reporting.updateTestReport(
+																		"Order summary tab was not visible"
+																				+ e.getMessage(),
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.FAIL);
+															}
+
 														} catch (Exception e) {
 															Reporting.updateTestReport(
 																	"Help button was not visible and caused timeout exception",
@@ -3923,12 +4686,11 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 					wait.until(ExpectedConditions
 							.visibilityOfElementLocated(By.xpath("//div[@class='fe_flex grid_1']/a[1]")));
 					WEL.clickOnCPALinkOnHomepage();
-
 					try {
 						wait.until(ExpectedConditions
 								.visibilityOfElementLocated(By.xpath("//button[@class='shop-courses-btn  ']")));
 						WEL.clickOnExploreCourseButton();
-						ScrollingWebPage.PageScrolldown(driver, 0, 880, SS_path);
+						ScrollingWebPage.PageScrolldown(driver, 0, 900, SS_path);
 						try {
 
 							wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
@@ -3940,6 +4702,8 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 								WEL.clickonCPAPrinteBook();
 								driver.navigate().refresh();
 								ScrollingWebPage.PageDown(driver, SS_path);
+								BigDecimal firstproductprice = new BigDecimal(
+										WEL.fetchProductPriceInPDP().substring(1));
 								try {
 									wait.until(ExpectedConditions.elementToBeClickable(
 											By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
@@ -3993,6 +4757,8 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 															WEL.clickonCMAPrinteBook();
 															driver.navigate().refresh();
 															ScrollingWebPage.PageDown(driver, SS_path);
+															BigDecimal secondproductprice = new BigDecimal(
+																	WEL.fetchProductPriceInPDP().substring(1));
 															try {
 																wait.until(ExpectedConditions.elementToBeClickable(By
 																		.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
@@ -4064,6 +4830,9 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																				driver.navigate().refresh();
 																				ScrollingWebPage.PageDown(driver,
 																						SS_path);
+																				BigDecimal thirdproductprice = new BigDecimal(
+																						WEL.fetchProductPriceInPDP()
+																								.substring(1));
 																				try {
 																					wait.until(ExpectedConditions
 																							.elementToBeClickable(By
@@ -4098,6 +4867,26 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																									StatusDetails.FAIL);
 																						}
 																					}
+																					BigDecimal subtotal = new BigDecimal(
+																							WEL.fetchOrderSubTotalInCartPage()
+																									.substring(1));
+																					if (firstproductprice
+																							.add(secondproductprice)
+																							.add(thirdproductprice)
+																							.compareTo(subtotal) == 0)
+																						Reporting.updateTestReport(
+																								"The addition of all the products' price is same as the subtotal in cart page",
+																								CaptureScreenshot
+																										.getScreenshot(
+																												SS_path),
+																								StatusDetails.PASS);
+																					else
+																						Reporting.updateTestReport(
+																								"The addition of the price is not match with the subtotal in cart page due to multiple coupons was aplied in Cart Page",
+																								CaptureScreenshot
+																										.getScreenshot(
+																												SS_path),
+																								StatusDetails.INFO);
 																					try {
 																						wait.until(ExpectedConditions
 																								.elementToBeClickable(By
@@ -4121,6 +4910,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																													"Password"));
 																							WEL.clickonAgreementCheckBox();
 																							WEL.clickingOnSaveAndContinue();
+
 																							try {
 																								wait.until(
 																										ExpectedConditions
@@ -4201,6 +4991,73 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																								Reporting
 																										.updateTestReport(
 																												"User was not in shipping step and caused timeout exception",
+																												CaptureScreenshot
+																														.getScreenshot(
+																																SS_path),
+																												StatusDetails.FAIL);
+																							}
+																							try {
+																								wait.until(
+																										ExpectedConditions
+																												.visibilityOfElementLocated(
+																														By.xpath(
+																																"//div[@id='orderSummaryProductTotalValue']")));
+
+																								BigDecimal firstproductprice2 = new BigDecimal(
+																										WEL.fetchFirstProductPriceInOrderReview()
+																												.substring(
+																														1));
+
+																								String discount = WEL
+																										.fetchDiscountInOrderReview();
+																								if (discount
+																										.contains(","))
+																									discount = discount
+																											.replace(
+																													",",
+																													"");
+																								BigDecimal discountinorderreview = new BigDecimal(
+																										discount.substring(
+																												1));
+																								String totalorderReview = WEL
+																										.fetchTotalInOrderReview();
+																								if (totalorderReview
+																										.contains(","))
+																									totalorderReview = totalorderReview
+																											.replace(
+																													",",
+																													"");
+																								BigDecimal orderTotalPrice1 = new BigDecimal(
+																										totalorderReview
+																												.substring(
+																														1));
+																								if (firstproductprice2
+																										.subtract(
+																												discountinorderreview)
+																										.compareTo(
+																												orderTotalPrice1) == 0)
+																									Reporting
+																											.updateTestReport(
+																													"First Product price + Second Product price -discount "
+																															+ " = Order total in Order Review step",
+																													CaptureScreenshot
+																															.getScreenshot(
+																																	SS_path),
+																													StatusDetails.PASS);
+																								else
+																									Reporting
+																											.updateTestReport(
+																													"First Product price +second product price- discount is not equal to Order total in Order Review step",
+																													CaptureScreenshot
+																															.getScreenshot(
+																																	SS_path),
+																													StatusDetails.FAIL);
+
+																							} catch (Exception e) {
+																								Reporting
+																										.updateTestReport(
+																												"Order summary tab was not visible"
+																														+ e.getMessage(),
 																												CaptureScreenshot
 																														.getScreenshot(
 																																SS_path),
@@ -4376,6 +5233,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									WEL.clickonCMAPrinteBook();
 									driver.navigate().refresh();
 									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(
 												By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
@@ -4402,6 +5260,16 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										}
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of all the products' pricedidn't match with the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										ScrollingWebPage.PageScrollDownUptoTop(driver, SS_path);
 										WEL.clickOnAddDiscountLink();
 										WEL.enterDiscountValue(
@@ -4498,6 +5366,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions
 											.visibilityOfElementLocated(By.xpath("//label[@for='Print0']")));
 									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By
 												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -4524,6 +5393,16 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										}
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of all the products' pricedidn't match with the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										try {
 											wait.until(
 													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
@@ -4540,16 +5419,6 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 												try {
 													wait.until(ExpectedConditions.visibilityOfElementLocated(
 															By.xpath("//h5[@id='shippingAddressTitle']/span")));
-													// BigDecimal
-													// standardShippingChargeForOneUnit=WEL.fetchShippingCharge(driver,
-													// "Standard Shipping");
-													/*
-													 * BigDecimal
-													 * expressShippingChargeForOneUnit=WEL.fetchShippingCharge(driver,
-													 * "Express Shipping"); BigDecimal
-													 * nextDayShippingChargeForOneUnit=WEL.fetchShippingCharge(driver,
-													 * "Next Day Shipping");
-													 */
 													String country1 = excelOperation
 															.getTestData("TC27", "WEL_Test_Data", "Shipping_Country")
 															.split(",")[0];
@@ -4559,9 +5428,6 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 
 													// Validation for Brazil
 													WEL.selectShipCountry(country1);
-													// BigDecimal
-													// airMailChargeForOneUnit=WEL.fetchShippingCharge(driver, "Air
-													// Mail");
 													BigDecimal courierChargeForOneUnit = WEL
 															.fetchShippingChargeNonUS(driver, "Courier");
 
@@ -4570,123 +5436,104 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 													BigDecimal twoDayChargeForOneUnit = WEL
 															.fetchShippingChargeNonUS(driver, "Standard Shipping");
 													ScrollingWebPage.PageScrollDownUptoTop(driver, SS_path);
-													WEL.clickOnBackToCartButton();
 													try {
-														wait.until(ExpectedConditions.elementToBeClickable(
-																By.xpath("//select[@id='quantity_0']")));
-														String quantity = excelOperation.getTestData("TC27",
-																"WEL_Test_Data", "Quantity");
-														WEL.selectQuantity(quantity);
-														WEL.clickonCheckOutButtonOnCartPage();
-														String eamilId1 = WEL
-																.enterNewUserIdInCheckoutLoginRegistration();
-														WEL.clickOnCreateAccountButtonInCheckoutLoginRegistration();
+														wait.until(ExpectedConditions
+																.elementToBeClickable(By.id("backTocartNavbarMainId")));
+														WEL.clickOnBackToCartButton();
+
 														try {
-															wait.until(ExpectedConditions.presenceOfElementLocated(By
-																	.xpath("//div[@class='welCheckoutJourneyMainDiv']")));
-															WEL.enterConfirmEmailIdInCheckout(eamilId1);
-															WEL.enterPasswordInCheckout(excelOperation
-																	.getTestData("TC27", "WEL_Test_Data", "Password"));
-															WEL.clickOnSaveAndContinue();
+															wait.until(ExpectedConditions.elementToBeClickable(
+																	By.xpath("//select[@id='quantity_0']")));
+															String quantity = excelOperation.getTestData("TC27",
+																	"WEL_Test_Data", "Quantity");
+															WEL.selectQuantity(quantity);
+															WEL.clickonCheckOutButtonOnCartPage();
+															String eamilId1 = WEL
+																	.enterNewUserIdInCheckoutLoginRegistration();
+															WEL.clickOnCreateAccountButtonInCheckoutLoginRegistration();
 															try {
 																wait.until(ExpectedConditions
-																		.visibilityOfElementLocated(By.xpath(
-																				"//h5[@id='shippingAddressTitle']/span")));
-																// By default the country is selected as US
-																// BigDecimal
-																// standardShippingChargeForMultiUnit=wiley.fetchShippingCharge(driver,
-																// "Standard Shipping");
-																/*
-																 * BigDecimal expressShippingChargeForMultiUnit=WEL.
-																 * fetchShippingCharge(driver, "Express Shipping");
-																 * BigDecimal nextDayShippingChargeForMultiUnit=WEL.
-																 * fetchShippingCharge(driver, "Next Day Shipping");
-																 * if((expressShippingChargeForOneUnit.add((new
-																 * BigDecimal(quantity).subtract(new BigDecimal("1")))
-																 * .multiply(new BigDecimal("4")))).setScale(2,
-																 * RoundingMode.CEILING).compareTo(
-																 * expressShippingChargeForMultiUnit)==0) Reporting.
-																 * updateTestReport("Shipping charge has been correctly calculated for Express shipping"
-																 * , CaptureScreenshot.getScreenshot(SS_path),
-																 * StatusDetails.PASS); else Reporting.
-																 * updateTestReport("Shipping charge has been wrongly calculated for Express shipping"
-																 * , CaptureScreenshot.getScreenshot(SS_path),
-																 * StatusDetails.FAIL);
-																 * if((nextDayShippingChargeForOneUnit.add((new
-																 * BigDecimal(quantity).subtract(new BigDecimal("1")))
-																 * .multiply(new BigDecimal("4")))).setScale(2,
-																 * RoundingMode.CEILING).compareTo(
-																 * nextDayShippingChargeForMultiUnit)==0) Reporting.
-																 * updateTestReport("Shipping charge has been correctly calculated for Next day shipping"
-																 * , CaptureScreenshot.getScreenshot(SS_path),
-																 * StatusDetails.PASS); else Reporting.
-																 * updateTestReport("Shipping charge has been wrongly calculated for Next day shipping"
-																 * , CaptureScreenshot.getScreenshot(SS_path),
-																 * StatusDetails.FAIL);
-																 */
-																// wiley.clickOnEnterNewAddresButtonInShipping();
-																WEL.selectShipCountry(country1);
-																// validation for Brzil/ columbia
-																// BigDecimal
-																// airMailChargeForMultiUnit=WEL.fetchShippingCharge(driver,
-																// "Air Mail");
-																BigDecimal courierChargeForMultiUnit = WEL
-																		.fetchShippingChargeNonUS(driver, "Courier");
+																		.presenceOfElementLocated(By.xpath(
+																				"//div[@class='welCheckoutJourneyMainDiv']")));
+																WEL.enterConfirmEmailIdInCheckout(eamilId1);
+																WEL.enterPasswordInCheckout(excelOperation.getTestData(
+																		"TC27", "WEL_Test_Data", "Password"));
+																WEL.clickOnSaveAndContinue();
+																try {
+																	wait.until(ExpectedConditions
+																			.visibilityOfElementLocated(By.xpath(
+																					"//h5[@id='shippingAddressTitle']/span")));
+																	WEL.selectShipCountry(country1);
+																	// validation for Brzil/ columbia
+																	BigDecimal courierChargeForMultiUnit = WEL
+																			.fetchShippingChargeNonUS(driver,
+																					"Courier");
 
-																if ((courierChargeForOneUnit.add((new BigDecimal(
-																		quantity).subtract(new BigDecimal("1")))
-																				.multiply(new BigDecimal("10"))))
-																						.setScale(2,
-																								RoundingMode.CEILING)
-																						.compareTo(
-																								courierChargeForMultiUnit) == 0)
+																	if ((courierChargeForOneUnit.add((new BigDecimal(
+																			quantity).subtract(new BigDecimal("1")))
+																					.multiply(new BigDecimal("10"))))
+																							.setScale(2,
+																									RoundingMode.CEILING)
+																							.compareTo(
+																									courierChargeForMultiUnit) == 0)
+																		Reporting.updateTestReport(
+																				"Courier charge has been correctly calculated ",
+																				CaptureScreenshot.getScreenshot(
+																						SS_path),
+																				StatusDetails.PASS);
+																	else
+																		Reporting.updateTestReport(
+																				"Courier charge has been wrongly calculated as: "+(courierChargeForOneUnit.add((new BigDecimal(
+																						quantity).subtract(new BigDecimal("1")))
+																						.multiply(new BigDecimal("10"))))
+																								.setScale(2,RoundingMode.CEILING),CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+																	WEL.selectShipCountry(country2);
+																	BigDecimal twoDayChargeForMultiUnit = WEL
+																			.fetchShippingChargeNonUS(driver,
+																					"Standard Shipping");
+																	if ((twoDayChargeForOneUnit.add((new BigDecimal(
+																			quantity).subtract(new BigDecimal("1")))
+																					.multiply(new BigDecimal("4"))))
+																							.setScale(2,
+																									RoundingMode.CEILING)
+																							.compareTo(
+																									twoDayChargeForMultiUnit) == 0)
+																		Reporting.updateTestReport(
+																				"Standard Shipping charge has been correctly calculated ",
+																				CaptureScreenshot.getScreenshot(
+																						SS_path),
+																				StatusDetails.PASS);
+																	else
+																		Reporting.updateTestReport(
+																				"Standard Shipping charge has been wrongly calculated ",
+																				CaptureScreenshot.getScreenshot(
+																						SS_path),
+																				StatusDetails.FAIL);
+																} catch (Exception e) {
 																	Reporting.updateTestReport(
-																			"Courier charge has been correctly calculated ",
-																			CaptureScreenshot.getScreenshot(SS_path),
-																			StatusDetails.PASS);
-																else
-																	Reporting.updateTestReport(
-																			"Courier charge has been wrongly calculated ",
+																			"User was not in shipping step and caused timeout exception",
 																			CaptureScreenshot.getScreenshot(SS_path),
 																			StatusDetails.FAIL);
-																WEL.selectShipCountry(country2);
-																BigDecimal twoDayChargeForMultiUnit = WEL
-																		.fetchShippingChargeNonUS(driver,
-																				"Standard Shipping");
-																if ((twoDayChargeForOneUnit.add((new BigDecimal(
-																		quantity).subtract(new BigDecimal("1")))
-																				.multiply(new BigDecimal("4"))))
-																						.setScale(2,
-																								RoundingMode.CEILING)
-																						.compareTo(
-																								twoDayChargeForMultiUnit) == 0)
-																	Reporting.updateTestReport(
-																			"Standard Shipping charge has been correctly calculated ",
-																			CaptureScreenshot.getScreenshot(SS_path),
-																			StatusDetails.PASS);
-																else
-																	Reporting.updateTestReport(
-																			"Standard Shipping charge has been wrongly calculated ",
-																			CaptureScreenshot.getScreenshot(SS_path),
-																			StatusDetails.FAIL);
+																}
 															} catch (Exception e) {
 																Reporting.updateTestReport(
-																		"User was not in shipping step and caused timeout exception",
+																		"User was not in Checkout login page and caused timeout exception",
 																		CaptureScreenshot.getScreenshot(SS_path),
 																		StatusDetails.FAIL);
 															}
+
 														} catch (Exception e) {
 															Reporting.updateTestReport(
-																	"User was not in Checkout login page and caused timeout exception",
+																	"Quantity dropdown was not clcikable in cart page",
 																	CaptureScreenshot.getScreenshot(SS_path),
 																	StatusDetails.FAIL);
 														}
-
 													} catch (Exception e) {
 														Reporting.updateTestReport(
-																"Quantity dropdown was not clcikable in cart page",
+																"Back To Cart button not clickbale and caused timeout exception",
 																CaptureScreenshot.getScreenshot(SS_path),
 																StatusDetails.FAIL);
+
 													}
 
 												} catch (Exception e) {
@@ -4786,6 +5633,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions
 											.visibilityOfElementLocated(By.xpath("//label[@for='Print0']")));
 									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By
 												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
@@ -4812,6 +5660,16 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										}
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
+											Reporting.updateTestReport(
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of all the products' pricedidn't match with the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										try {
 											wait.until(
 													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
@@ -4838,6 +5696,42 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 															"User was not in shipping step and caused timeout exception",
 															CaptureScreenshot.getScreenshot(SS_path),
 															StatusDetails.PASS);
+												}
+												try {
+													wait.until(ExpectedConditions.visibilityOfElementLocated(
+															By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+
+													BigDecimal firstproductprice2 = new BigDecimal(
+															WEL.fetchFirstProductPriceInOrderReview().substring(1));
+
+													String discount = WEL.fetchDiscountInOrderReview();
+													if (discount.contains(","))
+														discount = discount.replace(",", "");
+													BigDecimal discountinorderreview = new BigDecimal(
+															discount.substring(1));
+													String totalorderReview = WEL.fetchTotalInOrderReview();
+													if (totalorderReview.contains(","))
+														totalorderReview = totalorderReview.replace(",", "");
+													BigDecimal orderTotalPrice1 = new BigDecimal(
+															totalorderReview.substring(1));
+													if (firstproductprice2.subtract(discountinorderreview)
+															.compareTo(orderTotalPrice1) == 0)
+														Reporting.updateTestReport(
+																"First Product price + Second Product price -discount "
+																		+ " = Order total in Order Review step",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
+													else
+														Reporting.updateTestReport(
+																"First Product price +second product price- discount is not equal to Order total in Order Review step",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+
+												} catch (Exception e) {
+													Reporting.updateTestReport(
+															"Order summary tab was not visible" + e.getMessage(),
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
 												}
 
 											} catch (Exception e) {
