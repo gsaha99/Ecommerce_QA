@@ -84,7 +84,7 @@ public class DriverModule {
 			}
 			else if(browser.equalsIgnoreCase("Edge")){				
 				Caps.setCapability("os", "windows");
-				Caps.setCapability("os_version", "11");
+				Caps.setCapability("os_version", "10");
 				Caps.setCapability("browser", browser);
 				Caps.setCapability("browser_version", "110");
 			}

@@ -209,6 +209,8 @@ public class app_AGS_Repo {
 	@FindBy(xpath="//span[text()='Manage Subscriptions']")
 	WebElement ManageSubscription;
 
+	
+
 	//Methods
 	/*
 	 * @Description: Clicks on Yearly Subscription button
@@ -274,7 +276,7 @@ public class app_AGS_Repo {
 	public String enterEmailId() throws IOException {
 		try {
 			String dateTime= new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-			String emailId="autoags"+dateTime+"@yopmail.com";
+			String emailId="autoags"+dateTime+"@mailinator.com";
 			EmailId.sendKeys(emailId);
 			ConfirmEmailId.sendKeys(emailId);
 			Reporting.updateTestReport("Email Id: "+emailId+" was entered successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -895,7 +897,7 @@ public class app_AGS_Repo {
 	 * @Date: 16/12/22
 	 * @Description: Enters the email id in yopmail to check the inbox
 	 */
-	public void enterEmailIdInYopmail(String username) throws IOException {
+	/*public void enterEmailIdInYopmail(String username) throws IOException {
 		try {
 			YopmailEmailIdField.clear();
 			Thread.sleep(1000);
@@ -907,12 +909,12 @@ public class app_AGS_Repo {
 					StatusDetails.PASS);
 		}
 
-	}
+	}*/
 	/*
 	 * @Date: 16/12/22
 	 * @Description: Clicks on the arrow button in yopmail to check the mail
 	 */
-	public void clickOnArrowButton() throws IOException {
+	/*public void clickOnArrowButton() throws IOException {
 		try {
 			ArrowButton.click();
 			Reporting.updateTestReport("Arrow button clicked successfully ", CaptureScreenshot.getScreenshot(SS_path),
@@ -922,12 +924,12 @@ public class app_AGS_Repo {
 					StatusDetails.FAIL);
 
 		}
-	}
+	}*/
 	/*
 	 * @Date: 16/12/22
 	 * @Description: Clicks on the refresh button in yopmail to get the new mail
 	 */
-	public void clickOnRefreshButton() throws IOException {
+	/*public void clickOnRefreshButton() throws IOException {
 		try {
 			RefreshButton.click();
 			Reporting.updateTestReport("mail box refreshed successfully ", CaptureScreenshot.getScreenshot(SS_path),
@@ -937,7 +939,7 @@ public class app_AGS_Repo {
 			Reporting.updateTestReport("Failed to refresh", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.FAIL);
 		}
-	}
+	}*/
 	/*
 	 * @Date: 16/12/22
 	 * @Description: Clicks on the reset password link in the mail for forgot password scenario
@@ -1269,5 +1271,7 @@ public class app_AGS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+
+	
 
 }

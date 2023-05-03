@@ -36,12 +36,13 @@ public class AGS_Test_Suite extends DriverModule {
 	app_AGS_Repo AGS;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
-	public static String EmailConfirmationText="//button/div[contains(text(),'Order Confirmation')]";
+	public static String EmailConfirmationText="//td[contains(text(),'Order Confirmation')]";
 	private static String AGS_Subscription_URL_DEV=excelOperation.getTestData("AGS_Subscription_URL_DEV", "Generic_Dataset", "Data");
 	private static String AGS_Subscription_URL_UAT3=excelOperation.getTestData("AGS_Subscription_URL_UAT3", "Generic_Dataset", "Data");
 	private static String AGS_Subscription_URL=excelOperation.getTestData("AGS_Subscription_URL", "Generic_Dataset", "Data");
 	private static String AGS_Login_URL=excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data");
 	private static String AGS_Logout_URL=excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data");
+	
 	
 	app_Riskified_Repo RiskifiedRepo;
 
@@ -138,11 +139,7 @@ public class AGS_Test_Suite extends DriverModule {
 									excelOperation.updateTestData("TC11", "AGS_Test_Data", "Email_Id", email);
 									excelOperation.updateTestData("TC12", "AGS_Test_Data", "Email_Id", email);
 									AGS.logOut(driver);
-									driver.get(excelOperation.getTestData("Yopmail_URL",
-											"Generic_Dataset", "Data"));
-									AGS.enterEmailIdInYopmail(email);
-									AGS.clickOnArrowButton();
-									if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 										Reporting.updateTestReport("Order Confirmation mail was received",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										EmailValidation.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
@@ -265,11 +262,7 @@ public class AGS_Test_Suite extends DriverModule {
 									excelOperation.updateTestData("TC02", "AGS_Test_Data", "Total", total);
 									excelOperation.updateTestData("TC02", "AGS_Test_Data", "Email_Id", email);
 									AGS.logOut(driver);
-									driver.get(excelOperation.getTestData("Yopmail_URL",
-											"Generic_Dataset", "Data"));
-									AGS.enterEmailIdInYopmail(email);
-									AGS.clickOnArrowButton();
-									if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 										Reporting.updateTestReport("Order Confirmation mail was received",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										EmailValidation.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
@@ -417,16 +410,15 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC05_ResetPasswordFromLoginPage");
 			LogTextFile.writeTestCaseStatus("TC05_ResetPasswordFromLoginPage", "Test case");
+			driver.get(AGS_Subscription_URL_DEV);
+			driver.get(AGS_Subscription_URL_UAT3);
 			driver.get(AGS_Login_URL);
 			AGS.clickOnForgotPassword();
 			AGS.enterEmailIdToGetResetPasswordMail(excelOperation.getTestData("TC05", "AGS_Test_Data", "Email_Id"));
 			AGS.clickOnSubmit();
 			AGS.checkPasswordResetInstructionSentMessage();
-			driver.get(excelOperation.getTestData("Yopmail_URL",
-					"Generic_Dataset", "Data"));
-			AGS.enterEmailIdInYopmail(excelOperation.getTestData("TC05", "AGS_Test_Data","Email_Id"));
-			AGS.clickOnArrowButton();
-			EmailValidation.forgotPasswordMailForAGS(driver, SS_path, AGS);
+			EmailValidation.forgotPasswordMailForAGS(excelOperation.getTestData("TC05", "AGS_Test_Data","Email_Id"),
+					driver, SS_path, AGS);
 			AGS.logOutWithURL(driver, AGS_Logout_URL);
 
 		} catch (Exception e) {
@@ -582,11 +574,7 @@ public class AGS_Test_Suite extends DriverModule {
 									excelOperation.updateTestData("TC07", "AGS_Test_Data", "Email_Id", email);
 									excelOperation.updateTestData("TC14", "AGS_Test_Data", "Email_Id", email);
 									AGS.logOut(driver);
-									driver.get(excelOperation.getTestData("Yopmail_URL",
-											"Generic_Dataset", "Data"));
-									AGS.enterEmailIdInYopmail(email);
-									AGS.clickOnArrowButton();
-									if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 										Reporting.updateTestReport("Order Confirmation mail was received",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										EmailValidation.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
@@ -710,11 +698,7 @@ public class AGS_Test_Suite extends DriverModule {
 									excelOperation.updateTestData("TC08", "AGS_Test_Data", "Email_Id", email);
 									excelOperation.updateTestData("TC13", "AGS_Test_Data", "Email_Id", email);
 									AGS.logOut(driver);
-									driver.get(excelOperation.getTestData("Yopmail_URL",
-											"Generic_Dataset", "Data"));
-									AGS.enterEmailIdInYopmail(email);
-									AGS.clickOnArrowButton();
-									if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 										Reporting.updateTestReport("Order Confirmation mail was received",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										EmailValidation.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
@@ -946,11 +930,7 @@ public class AGS_Test_Suite extends DriverModule {
 									excelOperation.updateTestData("TC10", "AGS_Test_Data", "Total", total);
 									excelOperation.updateTestData("TC10", "AGS_Test_Data", "Email_Id", email);
 									AGS.logOut(driver);
-									driver.get(excelOperation.getTestData("Yopmail_URL",
-											"Generic_Dataset", "Data"));
-									AGS.enterEmailIdInYopmail(email);
-									AGS.clickOnArrowButton();
-									if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 										Reporting.updateTestReport("Order Confirmation mail was received",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										EmailValidation.validateOrderConfirmationMailContent("AGS",driver,SS_path,tax,"",total);
@@ -1368,10 +1348,7 @@ public class AGS_Test_Suite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-
-
-
-
+	
 
 
 }

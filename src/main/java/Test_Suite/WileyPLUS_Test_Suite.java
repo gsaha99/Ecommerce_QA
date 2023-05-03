@@ -32,7 +32,8 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 	app_WileyPLUS_Repo WileyPLUS;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
-	public static String EmailConfirmationText="//button/div[contains(text(),'Your Order with Wiley')]";
+	//public static String EmailConfirmationText="//button/div[contains(text(),'Your Order with Wiley')]";
+	public static String EmailConfirmationText="//td[contains(text(),'Your Order with Wiley')]";
 
 	@BeforeTest
 	public void launchBrowser() {
@@ -888,11 +889,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						excelOperation.updateTestData("TC15", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
 						excelOperation.updateTestData("TC15", "WileyPLUS_Test_Data", "Tax", taxInOrderConfirmation);
-						driver.get(excelOperation.getTestData("Yopmail_URL",
-								"Generic_Dataset", "Data"));
-						WileyPLUS.enterEmailIdInYopmail(email);
-						WileyPLUS.clickOnCheckInboxButton();
-						if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+						if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 							Reporting.updateTestReport("Order Confirmation mail was received",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation," ",ordertotal);
@@ -1239,11 +1236,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Check Your Email')]")));
-				driver.get(excelOperation.getTestData("Yopmail_URL",
-						"Generic_Dataset", "Data"));
-				WileyPLUS.enterEmailIdInYopmail(emailId);
-				WileyPLUS.clickOnCheckInboxButton();
-				EmailValidation.clickOnFinishRegistrationMail(driver, SS_path, WileyPLUS);
+				EmailValidation.clickOnFinishRegistrationMail(emailId,driver, SS_path, WileyPLUS);
 				WileyPLUS.enterEmailIdInOnboardingLogin(emailId);
 				WileyPLUS.enterPasswordInOnboarding(excelOperation.getTestData("TC19", "WileyPLUS_Test_Data", "Password"));
 				WileyPLUS.clickOnOnboardingLoginButton();
@@ -1406,11 +1399,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Check Your Email')]")));
-				driver.get(excelOperation.getTestData("Yopmail_URL",
-						"Generic_Dataset", "Data"));
-				WileyPLUS.enterEmailIdInYopmail(emailId);
-				WileyPLUS.clickOnCheckInboxButton();
-				EmailValidation.clickOnFinishRegistrationMail(driver, SS_path, WileyPLUS);
+				EmailValidation.clickOnFinishRegistrationMail(emailId,driver, SS_path, WileyPLUS);
 				WileyPLUS.enterEmailIdInOnboardingLogin(emailId);
 				WileyPLUS.enterPasswordInOnboarding(excelOperation.getTestData("TC20", "WileyPLUS_Test_Data", "Password"));
 				WileyPLUS.clickOnOnboardingLoginButton();
@@ -1506,11 +1495,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											excelOperation.updateTestData("TC20", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
 											excelOperation.updateTestData("TC20", "WileyPLUS_Test_Data", "Tax", taxInOrderConfirmation);
-											driver.get(excelOperation.getTestData("Yopmail_URL",
-													"Generic_Dataset", "Data"));
-											WileyPLUS.enterEmailIdInYopmail(emailId);
-											WileyPLUS.clickOnCheckInboxButton();
-											if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+											if(EmailValidation.checkIfOrderConfirmationMailReceived(emailId,driver,SS_path,EmailConfirmationText)) {
 												ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
 												Reporting.updateTestReport("Order Confirmation mail was received",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1619,11 +1604,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Check Your Email')]")));
-				driver.get(excelOperation.getTestData("Yopmail_URL",
-						"Generic_Dataset", "Data"));
-				WileyPLUS.enterEmailIdInYopmail(emailId);
-				WileyPLUS.clickOnCheckInboxButton();
-				EmailValidation.clickOnFinishRegistrationMail(driver, SS_path, WileyPLUS);
+				EmailValidation.clickOnFinishRegistrationMail(emailId,driver, SS_path, WileyPLUS);
 				WileyPLUS.enterEmailIdInOnboardingLogin(emailId);
 				WileyPLUS.enterPasswordInOnboarding(excelOperation.getTestData("TC21", "WileyPLUS_Test_Data", "Password"));
 				WileyPLUS.clickOnOnboardingLoginButton();
@@ -1729,11 +1710,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											excelOperation.updateTestData("TC21", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
 											excelOperation.updateTestData("TC21", "WileyPLUS_Test_Data", "Tax", taxInOrderConfirmation);
-											driver.get(excelOperation.getTestData("Yopmail_URL",
-													"Generic_Dataset", "Data"));
-											WileyPLUS.enterEmailIdInYopmail(emailId);
-											WileyPLUS.clickOnCheckInboxButton();
-											if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+											if(EmailValidation.checkIfOrderConfirmationMailReceived(emailId,driver,SS_path,EmailConfirmationText)) {
 												ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
 												Reporting.updateTestReport("Order Confirmation mail was received",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1844,11 +1821,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//title[contains(text(),'Check Your Email')]")));
-				driver.get(excelOperation.getTestData("Yopmail_URL",
-						"Generic_Dataset", "Data"));
-				WileyPLUS.enterEmailIdInYopmail(emailId);
-				WileyPLUS.clickOnCheckInboxButton();
-				EmailValidation.clickOnFinishRegistrationMail(driver, SS_path, WileyPLUS);
+				EmailValidation.clickOnFinishRegistrationMail(emailId,driver, SS_path, WileyPLUS);
 				WileyPLUS.enterEmailIdInOnboardingLogin(emailId);
 				WileyPLUS.enterPasswordInOnboarding(excelOperation.getTestData("TC22", "WileyPLUS_Test_Data", "Password"));
 				WileyPLUS.clickOnOnboardingLoginButton();
@@ -2156,11 +2129,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						String taxInOrderConfirmation = WileyPLUS.fetchTaxAmount();
 						excelOperation.updateTestData("TC23", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
 						excelOperation.updateTestData("TC23", "WileyPLUS_Test_Data", "Tax", taxInOrderConfirmation);
-						driver.get(excelOperation.getTestData("Yopmail_URL",
-								"Generic_Dataset", "Data"));
-						WileyPLUS.enterEmailIdInYopmail(email);
-						WileyPLUS.clickOnCheckInboxButton();
-						if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+						if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 							Reporting.updateTestReport("Order Confirmation mail was received",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation," ",ordertotal);

@@ -37,8 +37,9 @@ public class WEL_Test_Suite extends DriverModule {
 	app_Hybris_BO_Repo HybrisBO;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
-	public static String EmailConfirmationText = "//button/div[contains(text(),'Order Confirmation')]";
+	public static String EmailConfirmationText = "//td[contains(text(),'Order Confirmation')]";
 	private static String WELHomepageURL=excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data");
+	
 
 	@BeforeTest
 	public void initializeRepo() {
@@ -10132,11 +10133,7 @@ public class WEL_Test_Suite extends DriverModule {
 													orderTotal);
 											WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL",
 													"Generic_Dataset", "Data"));
-											driver.get(excelOperation.getTestData("Yopmail_URL", "Generic_Dataset",
-													"Data"));
-											WEL.enterEmailIdInYopmail(GuestEmail);
-											WEL.clickOnCheckInboxButton();
-											if (EmailValidation.checkIfOrderConfirmationMailReceived(driver, SS_path,
+											if (EmailValidation.checkIfOrderConfirmationMailReceived(GuestEmail,driver, SS_path,
 													EmailConfirmationText)) {
 												ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
 												Reporting.updateTestReport("Order Confirmation mail was received",
@@ -11913,18 +11910,14 @@ public class WEL_Test_Suite extends DriverModule {
 													orderTotal);
 											WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL",
 													"Generic_Dataset", "Data"));
-											driver.get(excelOperation.getTestData("Yopmail_URL", "Generic_Dataset",
-													"Data"));
-											WEL.enterEmailIdInYopmail(GuestEmail);
-											WEL.clickOnCheckInboxButton();
-											if (EmailValidation.checkIfOrderConfirmationMailReceived(driver, SS_path,
+											if (EmailValidation.checkIfOrderConfirmationMailReceived(GuestEmail,driver, SS_path,
 													EmailConfirmationText)) {
 												ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
 												Reporting.updateTestReport("Order Confirmation mail was received",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 												EmailValidation.validateOrderConfirmationMailContent("WEL", driver,
 														SS_path, tax, shippingCharge, orderTotal);
-												driver.switchTo().frame("ifmail");
+												driver.switchTo().frame("html_msg_body");
 												WEL.checkMailHeaderElements();
 												WEL.validateOrderIdInMail(orderID);
 												WEL.validateShippingAddressLine1InMail(excelOperation

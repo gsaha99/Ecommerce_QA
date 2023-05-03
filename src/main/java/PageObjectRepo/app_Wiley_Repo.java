@@ -577,6 +577,7 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath="//button/span[text()='Submit']")
 	WebElement SubmitButtonInResetPasswordPage;
+	
 
 
 
@@ -655,7 +656,7 @@ public class app_Wiley_Repo {
 	public String enterEmailIdInCreateAccountForm() throws IOException {
 		try {
 			String dateTime= new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-			String emailId="autowiley"+dateTime+"@yopmail.com";
+			String emailId="autowiley"+dateTime+"@mailinator.com";
 			EmailIdInCreateAccount.sendKeys(emailId);
 			Reporting.updateTestReport("Email Id: "+emailId+" was entered successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return emailId;
@@ -4135,6 +4136,8 @@ public class app_Wiley_Repo {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 		}
+		
+		
 
 }
 

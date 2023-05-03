@@ -254,8 +254,10 @@ public class app_VET_Repo {
 	WebElement YopmailEmailIdField;
 	@FindBy(xpath = "//button[@title='Check Inbox @yopmail.com']")
 	WebElement ArrowButton;
-	@FindBy(xpath = "(//main[@class='yscrollbar']/div/div/div/table/tbody/tr/td/center/table/tbody/tr/td)[2]/p[3]/a[contains(text(),'Click here to change your password')]")
+	@FindBy(xpath = "//a[contains(text(),'Click here to change your password')]")
 	WebElement ResetPasswordLink;
+
+	
 
 
 
@@ -292,7 +294,7 @@ public class app_VET_Repo {
 	public String enterEmailId() throws IOException {
 		try {
 			String dateTime= new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-			String emailId="autovet"+dateTime+"@yopmail.com";
+			String emailId="autovet"+dateTime+"@mailinator.com";
 			EmailId.sendKeys(emailId);
 			ConfirmEmailId.sendKeys(emailId);
 			Reporting.updateTestReport("Email Id: "+emailId+" was entered successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1020,38 +1022,6 @@ public class app_VET_Repo {
 		}
 		return "";
 	}
-	/*
-	 * @Author: Vishnu
-	 * @Description: Enters the emailid in yopmail
-	 * 
-	 */
-	public void enteryopmail(String username) throws IOException {
-		try {
-			Enteryopmail.sendKeys(username);
-			Reporting.updateTestReport("Email entered : " + username + " was entered successfully ",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to enter Email Id", CaptureScreenshot.getScreenshot(SS_path),
-					StatusDetails.PASS);
-		}
-
-	}
-	/*
-	 * @Author: Vishnu
-	 * @Description: Clicks on the Arrow icon after entering the email id in yopmail
-	 * 
-	 */
-	public void clickonbutton() throws IOException {
-		try {
-			clickonbutton.click();
-			Reporting.updateTestReport("Arrow button clicked successfully ", CaptureScreenshot.getScreenshot(SS_path),
-					StatusDetails.PASS);
-		} catch (Exception e) {
-			Reporting.updateTestReport("Failed to click on arrowbutton", CaptureScreenshot.getScreenshot(SS_path),
-					StatusDetails.FAIL);
-
-		}
-	}
 
 
 
@@ -1451,6 +1421,8 @@ public class app_VET_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+
+	
 
 
 

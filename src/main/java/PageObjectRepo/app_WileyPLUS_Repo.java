@@ -26,16 +26,16 @@ import utilities.excelOperation;
 
 public class app_WileyPLUS_Repo {
 	public String SS_path = WileyPLUS_Test_Suite.SS_path;
-	
+
 	//Homepage 
-	
+
 	@FindBy(xpath = "//a[@href='/']/img[@class='brand-logo']")
 	WebElement WileyLogo;
 	@FindBy(id = "searchbar")
 	WebElement HomePageSearchBar;
-	
+
 	//Search Result Page
-	
+
 	@FindBy(xpath="//div[@class='product-date wileyProductDateGroup wileyProductPubDate']")
 	WebElement PublicationDateSRP;
 	@FindBy(xpath="//div[@class='products-list']/section/div/span[contains(text(),'WileyPLUS')]")
@@ -52,9 +52,9 @@ public class app_WileyPLUS_Repo {
 	WebElement WileyPLUSUnderFormatFacet;
 	@FindBy(xpath="//div[@class='applied-facets']/div/span[contains(text(),'WileyPLUS')]")
 	WebElement WileyPLUSUnderAppliedFormatFacet;
-	
+
 	//Product details page for WileyPLUS products
-	
+
 	@FindBy(xpath="//div[contains(text(),'WileyPLUS')]")
 	WebElement WileyPLUSTabPDP;
 	@FindBy(xpath="//span[@class='item-price item-price-value']")
@@ -77,9 +77,9 @@ public class app_WileyPLUS_Repo {
 	WebElement ByDefaultSelecetedWileyPLUSTab;
 	@FindBy(xpath="//p[@class='pr-price']")
 	WebElement ProductPriceInPDP;
-	
+
 	//Cart page 
-	
+
 	@FindBy(xpath="//button[contains(text(),'Add to cart')]")
 	WebElement AddToCartButton;
 	@FindBy(xpath="//span[@class='cartItem-brand-blue']")
@@ -106,10 +106,10 @@ public class app_WileyPLUS_Repo {
 	WebElement OrderTotalInCartPage;
 	@FindBy(xpath="//div[@class='row no-margin cartTotalVoucherApply']/div[@class='col-xs-6 noPadding price navyBlueVal']")
 	WebElement DiscountValue;
-	
-	
+
+
 	//Login or Create account page during checkout
-	
+
 	@FindBy(xpath = "(//span[contains(text(),'Proceed to Checkout')])[2]")
 	WebElement ProceedToCheckoutButton;
 	@FindBy(id="email")
@@ -122,9 +122,9 @@ public class app_WileyPLUS_Repo {
 	WebElement PasswordInCreateAccount;
 	@FindBy(xpath="//div[@class='guestCreateAccountBtnDiv']/button/span[text()='Continue as Guest']")
 	WebElement GuestCheckoutButton;
-	
+
 	//Shipping information step during checkout
-	
+
 	@FindBy(xpath = "//span[contains(text(),'Save and Continue')]")
 	WebElement SaveAndContinueButton;
 	@FindBy(id = "address.country")
@@ -143,9 +143,9 @@ public class app_WileyPLUS_Repo {
 	WebElement ShippingCity;
 	@FindBy(xpath = "(//input[@id='address.region'])[1]")
 	WebElement SelectStateDropDown;
-	
+
 	//Billing information during checkout
-	
+
 	@FindBy(xpath="//span[text()='Billing Address']")
 	WebElement BillingText;
 	@FindBy(xpath="//label[@id='sameAsBillingLabel']")
@@ -174,19 +174,19 @@ public class app_WileyPLUS_Repo {
 	WebElement BillingPhoneNumber;	
 	@FindBy(xpath="(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")
 	WebElement UseSelectedBillingAddressButtonAddressDoctorPopUp;
-	
+
 	//Modal pop related functionality
-	
+
 	@FindBy(id="customPopupMainBody")
 	WebElement ModalPopUp;
 	@FindBy(id="wileyCartCurrencyContinueBtn")
 	WebElement ModalPopUpContinueButton;
 	@FindBy(xpath="(//span[contains(text(),'Go Back')])[2]")
 	WebElement ModalPopUpGoBackButton;	
-	
-	
+
+
 	//Order Review step during checkout
-	
+
 	@FindBy(xpath="(//div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[1]")
 	WebElement PriceOfFirstProductInOrderReview;
 	@FindBy(xpath="(//div[@class='col-xs-3 noPadding textRight orderReviewDetailsValue'])[2]")
@@ -201,9 +201,9 @@ public class app_WileyPLUS_Repo {
 	WebElement TaxInOrderReview;
 	@FindBy(xpath="(//div[@class='col-xs-9 noPadding orderReviewDetailsLabel'])[1]")
 	WebElement ItemTitleOrderReview;
-	
+
 	//Order Confirmation page
-	
+
 	@FindBy(xpath="//a[@class='icon-print']/span[@class='glyphicon glyphicon-print']")
 	WebElement PrintRecieptIconInOrderConfirmation;
 	@FindBy(xpath = "(//div[@class='orderConfirmationLabelVal textTransCap marginTop10'])[2]")
@@ -222,9 +222,9 @@ public class app_WileyPLUS_Repo {
 	WebElement clickOnCheckInboxButton;
 	@FindBy(xpath="//div[@class='col-xs-9 noPadding orderReviewDetailsLabel']")
 	WebElement ItemTitleInConfirmationPage;
-	
+
 	//Onboarding page
-	
+
 	@FindBy(xpath="//button[@data-testid='dropdown-menu__icon-button']")
 	WebElement AccountIconInOnboarding;
 	@FindBy(xpath="//div[@data-testid='logout-menu-item__button']/div/span")
@@ -268,9 +268,11 @@ public class app_WileyPLUS_Repo {
 	@FindBy(xpath="(//span[contains(text(),'continue to checkout')])[1]")
 	WebElement ContinueToCheckoutInOnboarding;
 
+	
 
-	
-	
+
+
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Concatenates the url with username, password and the env
@@ -281,14 +283,14 @@ public class app_WileyPLUS_Repo {
 			String envURL=excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data");
 			String pdp=excelOperation.getTestData(testCaseNumber, sheetName,field);
 			return "https://"+userNamePassword+"@"+envURL+"/"+pdp;
-			
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Concatenated url was returned", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks On homepage logo
@@ -306,7 +308,7 @@ public class app_WileyPLUS_Repo {
 		}
 
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters data in HomePage search bar
@@ -322,7 +324,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the publication date is present or not in the Search Result Page of a WileyPLUS product
@@ -341,7 +343,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the WileyPLUS Format is present or not in the Search Result Page of a WileyPLUS product
@@ -360,7 +362,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the Lowest price of the base product variant is present or not in the Search Result Page of a WileyPLUS product
@@ -368,15 +370,15 @@ public class app_WileyPLUS_Repo {
 	public String checkPriceInSRP_PLP() throws IOException{
 		try {
 			if(PriceInSRP.isDisplayed())
-				{String[] A=PriceInSRP.getText().split(" ");
-				String price=A[1].trim();
-				Reporting.updateTestReport("Lowest price of the base product variant: "+price+" was displayed in the Search Result Page",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				return price;}
+			{String[] A=PriceInSRP.getText().split(" ");
+			String price=A[1].trim();
+			Reporting.updateTestReport("Lowest price of the base product variant: "+price+" was displayed in the Search Result Page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return price;}
 			else
-				{Reporting.updateTestReport("Lowest price of the base product variant was not displayed in the Search Result Page",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				return "";}
+			{Reporting.updateTestReport("Lowest price of the base product variant was not displayed in the Search Result Page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";}
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Lowest price of the base product variant was not displayed in the Search Result Page",
@@ -384,7 +386,7 @@ public class app_WileyPLUS_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Logs out the user from wiley.com
@@ -399,7 +401,7 @@ public class app_WileyPLUS_Repo {
 			Reporting.updateTestReport("Couldn't logout",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Logs out the user from wiley.com inside the exception block
@@ -408,13 +410,13 @@ public class app_WileyPLUS_Repo {
 		try {
 			WebDriver driver=DriverModule.getWebDriver();
 			driver.get(excelOperation.getTestData("WILEY_LogOut_URL", "Generic_Dataset", "Data"));
-			
+
 		}
 		catch(Exception e) {
-		    System.out.println("Log out was unsuccessful in exception"+e.getMessage());
+			System.out.println("Log out was unsuccessful in exception"+e.getMessage());
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @description: This using for Clicking on SRP_WileyProduct
@@ -432,7 +434,7 @@ public class app_WileyPLUS_Repo {
 		}
 
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the Lowest price of the base product variant is present or not in the Search Result Page of a WileyPLUS product
@@ -440,14 +442,14 @@ public class app_WileyPLUS_Repo {
 	public String checkPriceInPDP() throws IOException{
 		try {
 			if(PriceInPDP.isDisplayed())
-				{String price=PriceInPDP.getText().trim();
-				Reporting.updateTestReport("Lowest price of the base product variant: "+price+" was displayed in the Product Details Page",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				return price;}
+			{String price=PriceInPDP.getText().trim();
+			Reporting.updateTestReport("Lowest price of the base product variant: "+price+" was displayed in the Product Details Page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return price;}
 			else
-				{Reporting.updateTestReport("Lowest price of the base product variant was not displayed in the Product Details Page",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				return "";}
+			{Reporting.updateTestReport("Lowest price of the base product variant was not displayed in the Product Details Page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			return "";}
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Lowest price of the base product variant was not displayed in the Product Details Page",
@@ -455,7 +457,7 @@ public class app_WileyPLUS_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the format facet
@@ -471,7 +473,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the See more link under the format facet
@@ -488,7 +490,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if WileyPLUS is present under format facet
@@ -512,7 +514,7 @@ public class app_WileyPLUS_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the WileyPLUS format under facet
@@ -528,7 +530,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if WileyPLUS is present under applied format facet
@@ -552,7 +554,7 @@ public class app_WileyPLUS_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if WileyPLUS tab is present in PDP
@@ -576,7 +578,7 @@ public class app_WileyPLUS_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the WileyPLUS tab in PDP
@@ -592,7 +594,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if WileyPLUS tab is present in PDP
@@ -616,7 +618,7 @@ public class app_WileyPLUS_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if WileyPLUS tab is present in PDP
@@ -640,7 +642,7 @@ public class app_WileyPLUS_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if "Standard Pricing" text is present  in WileyPLUS tab 
@@ -664,7 +666,7 @@ public class app_WileyPLUS_Repo {
 			return true;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on Single term WileyPLUS button
@@ -680,7 +682,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Verfy the Grey box in WileyPLUS PDP
@@ -712,7 +714,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if "Login to WileyPLUS" button is present  in WileyPLUS tab 
@@ -732,7 +734,7 @@ public class app_WileyPLUS_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if Single Term WileyPLUS Text is present  
@@ -740,7 +742,7 @@ public class app_WileyPLUS_Repo {
 	public void checkSingleTermWileyPLUSText(WebDriver driver,String singleTermText) throws IOException{
 		try {
 			WebElement SingleTermWileyPLUSText=driver.findElement(By.xpath("//p[contains(text(),'"
-		+singleTermText+"')]"));
+					+singleTermText+"')]"));
 			if(SingleTermWileyPLUSText.isDisplayed()) 
 				Reporting.updateTestReport("Single Term WileyPLUS Text: "+SingleTermWileyPLUSText.getText()+" was present in WileyPLUS tab ",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -754,7 +756,7 @@ public class app_WileyPLUS_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if Multiple Term WileyPLUS Text is present  
@@ -776,7 +778,7 @@ public class app_WileyPLUS_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the percentage from Multiterm page
@@ -798,7 +800,7 @@ public class app_WileyPLUS_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the Multiple Term access price from Multiterm page
@@ -815,7 +817,7 @@ public class app_WileyPLUS_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the Single Term access price from Single term page
@@ -832,7 +834,7 @@ public class app_WileyPLUS_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the Add to cart button is present or not
@@ -848,7 +850,7 @@ public class app_WileyPLUS_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the Multi term button is set as default
@@ -865,7 +867,7 @@ public class app_WileyPLUS_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on Login to WileyPLUS button in WileyPLUS PDP
@@ -881,7 +883,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if user is on the cart page or not
@@ -900,7 +902,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the brand of the product is WileyPLUS 
@@ -920,7 +922,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * 
@@ -939,7 +941,7 @@ public class app_WileyPLUS_Repo {
 		}
 
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters the email id in Create account form
@@ -947,7 +949,7 @@ public class app_WileyPLUS_Repo {
 	public String enterEmailIdInCreateAccountForm() throws IOException {
 		try {
 			String dateTime= new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-			String emailId="autowiley"+dateTime+"@yopmail.com";
+			String emailId="autowiley"+dateTime+"@mailinator.com";
 			EmailIdInCreateAccount.sendKeys(emailId);
 			Reporting.updateTestReport("Email Id: "+emailId+" was entered successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return emailId;
@@ -957,7 +959,7 @@ public class app_WileyPLUS_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the create account button
@@ -975,7 +977,7 @@ public class app_WileyPLUS_Repo {
 		}
 
 	}
-	
+
 	/*
 	 * @Description: Enters the email id in Create account form Confirm email id field
 	 * @Author: Anindita
@@ -987,10 +989,10 @@ public class app_WileyPLUS_Repo {
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Email Id was not entered with the error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			
+
 		}
 	}
-	
+
 	/*
 	 * @Description: Enters the password in Create account form 
 	 * @Author: Anindita
@@ -1002,10 +1004,10 @@ public class app_WileyPLUS_Repo {
 		}
 		catch(Exception e){
 			Reporting.updateTestReport("Password couldn't be entered with the error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			
+
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * 
@@ -1024,7 +1026,7 @@ public class app_WileyPLUS_Repo {
 		}
 
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the country drop down in shipping
@@ -1042,7 +1044,7 @@ public class app_WileyPLUS_Repo {
 						{
 							Select countryDropDown = new Select(SelectCountryDropDown);
 							countryDropDown.selectByVisibleText(country);
-						    /*WebElement selectedOption = countryDropDown.getFirstSelectedOption();
+							/*WebElement selectedOption = countryDropDown.getFirstSelectedOption();
 							wait.until(ExpectedConditions.textToBePresentInElement(selectedOption, country));*/
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
 							Reporting.updateTestReport(country+" was present in the country dropdown and was selected",
@@ -1062,14 +1064,14 @@ public class app_WileyPLUS_Repo {
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
-			
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Global country list couldn't be validated ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 
 	/*
 	 * @Author: Anindita
@@ -1088,7 +1090,7 @@ public class app_WileyPLUS_Repo {
 						{
 							Select countryDropDown = new Select(SelectCountryDropDown);
 							countryDropDown.selectByVisibleText(country);
-						    /*WebElement selectedOption = countryDropDown.getFirstSelectedOption();
+							/*WebElement selectedOption = countryDropDown.getFirstSelectedOption();
 							wait.until(ExpectedConditions.textToBePresentInElement(selectedOption, country));*/
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='street1']")));
 							Reporting.updateTestReport(country+" was present in the country dropdown and was selected",
@@ -1108,14 +1110,14 @@ public class app_WileyPLUS_Repo {
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
-			
+
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Global country list couldn't be validated ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if user is inthe shipping step or not
@@ -1134,7 +1136,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if user is in the Billing Address step or not
@@ -1153,7 +1155,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the billing same as shipping address checkbox
@@ -1169,7 +1171,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the course name is present in the cart page or not
@@ -1189,7 +1191,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * Description : Entering the CardHolder Name 
@@ -1206,7 +1208,7 @@ public class app_WileyPLUS_Repo {
 		}
 	}
 
-	
+
 
 	/*
 	 * @Author: Anindita
@@ -1254,7 +1256,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description:This method is used enter the CardNumber on Billing AddressForm
@@ -1270,7 +1272,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description:This method is used to enter the FirstName
@@ -1303,14 +1305,14 @@ public class app_WileyPLUS_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * Description : Select Country From DropDown in shipping an billing
 	 */
 	public void selectCountry(String country) throws IOException {
 		try {
-			
+
 			Select selExpirationMonth = new Select(SelectCountryDropDown);
 			selExpirationMonth.selectByVisibleText(country);
 			Reporting.updateTestReport("Country has been selected successfully by user",
@@ -1320,7 +1322,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clears the Address line 1 field if anything is present and then Enters the new value in the billing address form
@@ -1349,8 +1351,8 @@ public class app_WileyPLUS_Repo {
 			Reporting.updateTestReport("City couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
-	
+
+
 	/*
 	 *@Author: Anindita
 	 * @Description: Clears the Zip code field if anything is present then Enters the value in the billing address form
@@ -1392,7 +1394,7 @@ public class app_WileyPLUS_Repo {
 			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Description: Returns the Billing address doctor pop up button 
 	 * @Author: Anindita
@@ -1400,7 +1402,7 @@ public class app_WileyPLUS_Repo {
 	public WebElement returnUseSelectedBillingAddressButtonAddressDoctorPopUp() {
 		return UseSelectedBillingAddressButtonAddressDoctorPopUp;
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the Place Order button 
@@ -1415,11 +1417,11 @@ public class app_WileyPLUS_Repo {
 			Reporting.updateTestReport("Place Order button couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
-     * @Author: Anindita
-     * @Description:This method is used for fetching the OrderId
-     */
+	 * @Author: Anindita
+	 * @Description:This method is used for fetching the OrderId
+	 */
 	public String fetchOrderId() throws IOException {
 		try {
 			String id = OrderId.getText();
@@ -1433,7 +1435,7 @@ public class app_WileyPLUS_Repo {
 			return "";
 		}
 	}
-	
+
 
 	/*
 	 * @Description: Fetches the Order Total
@@ -1450,7 +1452,7 @@ public class app_WileyPLUS_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description : This Method using for TaxAmount Fetching From Order Confirmation page
@@ -1466,7 +1468,7 @@ public class app_WileyPLUS_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description : This Method using for Shipping charge Fetching From Order Confirmation page
@@ -1485,12 +1487,14 @@ public class app_WileyPLUS_Repo {
 		}
 		return "";
 	}
-	
+
+	//Commenting out the yopmail methods
+
 	/*
 	 * @Description: Enters the email id in Yopmail
 	 * @Author: Anindita
 	 */
-	public void enterEmailIdInYopmail(String username) throws IOException {
+	/*public void enterEmailIdInYopmail(String username) throws IOException {
 		try {
 			EnterEmailIdInYopmail.clear();
 			Thread.sleep(1000);
@@ -1502,13 +1506,13 @@ public class app_WileyPLUS_Repo {
 					StatusDetails.PASS);
 		}
 
-	}
-	
+	}*/
+
 	/*
 	 * @Description: Clicks on check inbox in yopmail after entering user id
 	 *@Author: Anindita
 	 */
-	public void clickOnCheckInboxButton() throws IOException{
+	/*public void clickOnCheckInboxButton() throws IOException{
 		try {
 			clickOnCheckInboxButton.click();
 			Reporting.updateTestReport("Arrow button clicked successfully ", CaptureScreenshot.getScreenshot(SS_path),
@@ -1518,8 +1522,8 @@ public class app_WileyPLUS_Repo {
 			Reporting.updateTestReport("Failed to click on arrowbutton", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.FAIL);
 		}
-	}
-	
+	}*/
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the course name is present in the Order Review page or not
@@ -1540,7 +1544,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the course name is present in the Order Confirmation page or not
@@ -1560,7 +1564,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if global addresses are getting displayed as a saved address or not
@@ -1576,23 +1580,23 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clears the Address line 1 field if anything is present and then Enters the new value in the shipping address form
 	 */
 	public void enterAddressLine1Shipping(String line1) throws IOException{
 		try {
-		    ShippingAddressLine1.clear();
-		    ShippingAddressLine1.sendKeys(line1);
+			ShippingAddressLine1.clear();
+			ShippingAddressLine1.sendKeys(line1);
 			Reporting.updateTestReport("Address line 1: "+line1+" was entered",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Address line 1 couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
-	
+
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clears the Phone number if anything is present and then Enters the new value in the shipping address form
@@ -1607,8 +1611,8 @@ public class app_WileyPLUS_Repo {
 			Reporting.updateTestReport("Phone number couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
-	
+
+
 	/*
 	 * @Description: Clicks on the Use Selected Address Button in Address Doctor PopUp
 	 * @Author: Anindita
@@ -1622,7 +1626,7 @@ public class app_WileyPLUS_Repo {
 			Reporting.updateTestReport("Use Selected Address Button in Address Doctor PopUp couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description : Postal code updating in shipping page.
@@ -1673,7 +1677,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Description: Returns the Shipping address doctor pop up button 
 	 * @Author: Anindita
@@ -1681,7 +1685,7 @@ public class app_WileyPLUS_Repo {
 	public WebElement returnUseSelectedShippingAddressButtonAddressDoctorPopUp() {
 		return UseSelectedShippingAddressButtonAddressDoctorPopUp;
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the ISBN is present in PDP or not is present or not
@@ -1698,7 +1702,7 @@ public class app_WileyPLUS_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Description: Clicks on the Add to cart button in the pdp page
 	 * @Date: 06/01/23
@@ -1718,7 +1722,7 @@ public class app_WileyPLUS_Repo {
 	 */
 	public void clickOnViewCartButton() throws IOException{
 		try {
-			
+
 			ViewCartButton.click();
 			Reporting.updateTestReport("View Cart Button was clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
@@ -1726,7 +1730,7 @@ public class app_WileyPLUS_Repo {
 			Reporting.updateTestReport("View Cart Button couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Description: Clicks on the Continue Shopping Button in the cart page
 	 * @Date: 06/01/23
@@ -1740,7 +1744,7 @@ public class app_WileyPLUS_Repo {
 			Reporting.updateTestReport("Continue Shopping Button couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Description: Clicks on the Onboarding Create Account Link 
 	 * @Date: 06/01/23
@@ -1754,7 +1758,7 @@ public class app_WileyPLUS_Repo {
 			Reporting.updateTestReport("Onboarding Create Account Link couldn't be clicked",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters First name in onboarding create account page
@@ -1770,7 +1774,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters Last name in onboarding create account page
@@ -1786,7 +1790,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters Email Id in onboarding create account page
@@ -1794,7 +1798,7 @@ public class app_WileyPLUS_Repo {
 	public String enterEmailIdInOnboardingCreateAccount() throws IOException {
 		try {
 			String dateTime= new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-			String emailId="onboardinguser"+dateTime+"@yopmail.com";
+			String emailId="onboardinguser"+dateTime+"@mailinator.com";
 			OnboardingEmailId.sendKeys(emailId);
 			Reporting.updateTestReport("Email Id: "+emailId+" was entered in onboarding create account page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1806,7 +1810,7 @@ public class app_WileyPLUS_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters Institution name in onboarding create account page
@@ -1826,7 +1830,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters password in onboarding create account page
@@ -1842,7 +1846,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the privacy policy checkbox on onboarding create account page
@@ -1858,7 +1862,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the Onboarding Create Account Button on onboarding create account page
@@ -1874,7 +1878,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 10/01/23
 	 * @Description: Clicks on Finish registration link in Onboarding registration mail
@@ -1892,7 +1896,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Date: 10/1/23
 	 * @Description: Enters Email Id in onboarding login page
@@ -1906,10 +1910,10 @@ public class app_WileyPLUS_Repo {
 		catch(Exception e) {
 			Reporting.updateTestReport("Email Id couldn't be entered in onboarding Login page",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			
+
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the Onboarding Login Button on onboarding login page
@@ -1925,7 +1929,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the Onboarding Add course Button on onboarding my account page
@@ -1941,7 +1945,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @DEscription: Enters course section id in the add course page
@@ -1959,7 +1963,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on continue button on add course page
@@ -1975,7 +1979,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on continue button on add course page
@@ -1991,7 +1995,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on Single Term Radio Button In Join Course page
@@ -2007,7 +2011,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on First purchase option in Purchase options page
@@ -2023,7 +2027,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on Continue to checkout button in Purchase options page
@@ -2039,7 +2043,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on Multi Term Radio Button In Join Course page
@@ -2055,7 +2059,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on Loose leaf purchase option in Purchase options page
@@ -2071,7 +2075,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Returns the modal pop up element
@@ -2079,7 +2083,7 @@ public class app_WileyPLUS_Repo {
 	public WebElement getModalPopUp(){
 		return ModalPopUp;
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on Continue button on currency change modal pop up
@@ -2095,7 +2099,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on Go Back button on currency change modal pop up
@@ -2111,7 +2115,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the first product's price
@@ -2126,7 +2130,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the second product's price
@@ -2141,7 +2145,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the product's price from PDP
@@ -2160,7 +2164,7 @@ public class app_WileyPLUS_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the the order subtotal from cart page
@@ -2179,7 +2183,7 @@ public class app_WileyPLUS_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Text In Order Summary Tab during checkout
@@ -2196,7 +2200,7 @@ public class app_WileyPLUS_Repo {
 			Reporting.updateTestReport("Text: "+message+" In Order Summary Tab is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks if the Guest checkout button is present or not
@@ -2216,7 +2220,7 @@ public class app_WileyPLUS_Repo {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the First Product's Price from Order Review Step
@@ -2235,7 +2239,7 @@ public class app_WileyPLUS_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the Second Product's Price from Order Review Step
@@ -2254,7 +2258,7 @@ public class app_WileyPLUS_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the shipping charge from Order Review Step
@@ -2273,7 +2277,7 @@ public class app_WileyPLUS_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the discount from Order Review Step
@@ -2292,8 +2296,8 @@ public class app_WileyPLUS_Repo {
 
 		}
 	}
-	
-	
+
+
 	/*
 	 * @Author:Anindita
 	 * @Description: Checks if Text in Order confirmation page
@@ -2302,7 +2306,7 @@ public class app_WileyPLUS_Repo {
 		try {
 			if(driver.findElement(By.xpath
 					("//div[@id=\"orderConfirmationProgressAboveText\" and contains(text(),\""+message+"\")]")).isDisplayed()) 
-				
+
 				Reporting.updateTestReport("Text: "+message+" In Order confirmation page is present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else 
 				Reporting.updateTestReport("Text: "+message+" In Order confirmation page is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -2311,7 +2315,7 @@ public class app_WileyPLUS_Repo {
 			Reporting.updateTestReport("Text: "+message+" In Order confirmation page is not present", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the tax from Order Review Step
@@ -2330,7 +2334,7 @@ public class app_WileyPLUS_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the total from Order Review Step
@@ -2349,7 +2353,7 @@ public class app_WileyPLUS_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * Author:Anindita
 	 * @Description: Checks on the print receipt link in order confirmation page
@@ -2367,7 +2371,7 @@ public class app_WileyPLUS_Repo {
 			Reporting.updateTestReport("The print reciept icon was not present in the order confirmation page", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the account icon in onboarding page
@@ -2383,7 +2387,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Logs out user from Onboarding my account page
@@ -2402,7 +2406,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Description: Removes all the products from cart
 	 * @Author: Anindita
@@ -2415,9 +2419,9 @@ public class app_WileyPLUS_Repo {
 			ScrollingWebPage.PageScrolldown(driver, 0, 250, SS_path);
 			List<WebElement> removeList = driver.findElements(By.xpath("//a[@class='remove-item remove-entry-button removeCartEntryBtn']"));
 			while(!removeList.isEmpty()){
-			    removeList.get(0).click();
-			    Thread.sleep(200);
-			    removeList = driver.findElements(By.xpath("//a[@class='remove-item remove-entry-button removeCartEntryBtn']"));
+				removeList.get(0).click();
+				Thread.sleep(200);
+				removeList = driver.findElements(By.xpath("//a[@class='remove-item remove-entry-button removeCartEntryBtn']"));
 			}
 			Reporting.updateTestReport("Few products were removed from cart",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -2427,7 +2431,7 @@ public class app_WileyPLUS_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks on the Promotion code link in cart page
@@ -2474,7 +2478,7 @@ public class app_WileyPLUS_Repo {
 					StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the Order total in cart page
@@ -2512,7 +2516,7 @@ public class app_WileyPLUS_Repo {
 			return "";
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Fetches the cookie value of ALM Token
@@ -2522,13 +2526,15 @@ public class app_WileyPLUS_Repo {
 			Reporting.updateTestReport(
 					"ALM-token cookie was present with value: "
 							+ driver.manage().getCookieNamed("ALM-token").getValue(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("ALM-token cookie was not present",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 		}
 	}
-	
 
 	
+
+
+
 }

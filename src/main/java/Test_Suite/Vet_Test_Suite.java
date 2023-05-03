@@ -51,11 +51,11 @@ public class Vet_Test_Suite extends DriverModule {
 	app_Riskified_Repo RiskifiedRepo;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
-	public static String EmailConfirmationText="//button/div[contains(text(),'Order Confirmation')]";
+	public static String EmailConfirmationText="//td[contains(text(),'Order Confirmation')]";
 	private static String VETLoginURL=excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data");
 	private static String VETSubscriptionURLWithCredentials=excelOperation.getTestData("VET_Subscription_URL_With_Password", "Generic_Dataset", "Data");
 	private static String VETSubscriptionURL=excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data");
-
+	
 
 	@BeforeTest
 	public void initializeRepo() {
@@ -128,11 +128,7 @@ public class Vet_Test_Suite extends DriverModule {
 					excelOperation.updateTestData("TC01", "VET_Test_Data", "Total", total);
 					excelOperation.updateTestData("TC01", "VET_Test_Data", "Email_Id", email);
 					VET.logOut(driver);
-					driver.get(excelOperation.getTestData("Yopmail_URL",
-							"Generic_Dataset", "Data"));
-					VET.enterEmailIdInYopmail(email);
-					VET.clickOnArrowButton();
-					if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+					if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 						Reporting.updateTestReport("Order Confirmation mail was received",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						EmailValidation.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
@@ -327,15 +323,11 @@ public class Vet_Test_Suite extends DriverModule {
 			VET.RetriveLoginInfo(excelOperation.getTestData("TC06", "VET_Test_Data", "Email_Id"));
 			VET.clickOnSubmit();
 			VET.AlertMessage();
-			driver.get(excelOperation.getTestData("Yopmail_URL",
-					"Generic_Dataset", "Data"));
-			VET.enteryopmail(excelOperation.getTestData("TC06", "VET_Test_Data","Email_Id"));
-			VET.clickonbutton();
-			EmailValidation.forgotPasswordMailForVet(driver, SS_path, VET);
+			EmailValidation.forgotPasswordMailForVet
+			(excelOperation.getTestData("TC06", "VET_Test_Data","Email_Id"),driver, SS_path, VET);
 		}
 
 		catch (Exception e) {
-			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 
@@ -391,11 +383,7 @@ public class Vet_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC07", "VET_Test_Data", "Total", total);
 				excelOperation.updateTestData("TC07", "VET_Test_Data", "Email_Id", email);
 				VET.logOut(driver);
-				driver.get(excelOperation.getTestData("Yopmail_URL",
-						"Generic_Dataset", "Data"));
-				VET.enterEmailIdInYopmail(email);
-				VET.clickOnArrowButton();
-				if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+				if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 					Reporting.updateTestReport("Order Confirmation mail was received",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					EmailValidation.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
@@ -473,11 +461,7 @@ public class Vet_Test_Suite extends DriverModule {
 					excelOperation.updateTestData("TC11", "VET_Test_Data", "Total", total);
 					excelOperation.updateTestData("TC11", "VET_Test_Data", "Email_Id", email);
 					VET.logOut(driver);
-					driver.get(excelOperation.getTestData("Yopmail_URL",
-							"Generic_Dataset", "Data"));
-					VET.enterEmailIdInYopmail(email);
-					VET.clickOnArrowButton();
-					if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+					if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 						Reporting.updateTestReport("Order Confirmation mail was received",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						EmailValidation.validateOrderConfirmationMailContent("VET",driver,SS_path,tax,"",total);
@@ -851,8 +835,6 @@ public class Vet_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC04", "VET_Test_Data", "Email_Id", emailId);
 				excelOperation.updateTestData("TC06", "VET_Test_Data", "Email_Id", emailId);
 				excelOperation.updateTestData("TC12", "VET_Test_Data", "Email_Id", emailId);
-
-
 			} else {
 				Reporting.updateTestReport("Data couldn't be entered", CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 			}

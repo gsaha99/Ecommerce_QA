@@ -101,10 +101,10 @@ public class app_WEL_Repo {
 
 	@FindBy(id = "guest.email")
 	WebElement GuestUser;
-	
+
 	@FindBy(xpath="(//div[@id='checkoutGuestUserReg'])[1]")
 	WebElement LoginCheckoutPageHeading;
-	
+
 	@FindBy(xpath="(//div[@class='help-block commonErrorWelStyle'])[1]")
 	WebElement ErrorMessageAfterEnteringInvalidEmailId;
 
@@ -704,6 +704,8 @@ public class app_WEL_Repo {
 	@FindBy(xpath = "//a[@href='/checkout/multi/payment-method/add/']/span[@class='stepEdit']")
 	WebElement PaymentDetailsEditIcon;
 
+	
+
 	/*
 	 * @Author:Vishnu
 	 * 
@@ -871,7 +873,7 @@ public class app_WEL_Repo {
 	public String enterEmailIdInCreateAccountForm() throws IOException {
 		try {
 			String dateTime = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-			String emailId = "autowel" + dateTime + "@yopmail.com";
+			String emailId = "autowel" + dateTime + "@mailinator.com";
 			EmailAddress.sendKeys(emailId);
 			Reporting.updateTestReport("Email Id: " + emailId + " was entered successfully ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1449,7 +1451,7 @@ public class app_WEL_Repo {
 	public String EnterGuestUser() throws IOException {
 		try {
 			String dateTime = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-			String gEmail = "autowel" + dateTime + "@yopmail.com";
+			String gEmail = "autowel" + dateTime + "@mailinator.com";
 			GuestUser.sendKeys(gEmail);
 			Reporting.updateTestReport("Email Id: " + gEmail + " was entered successfully ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -2756,7 +2758,7 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport(
 					"The Shipping method: " + ShipMethod.getText().split("-")[0] + " was displayed successfully"
 							+ " with shipping charge: " + ShipValue.getText(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Failed to Shipping method " + e.getClass().toString(),
@@ -3238,7 +3240,7 @@ public class app_WEL_Repo {
 				Reporting.updateTestReport(
 						"Recommendation Title was present on cart page with a summary line: "
 								+ ProductSummaryOnRecommendationTitle.getText(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else
 				Reporting.updateTestReport("Recommendation Title Summary line was not present on cart page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -3710,7 +3712,7 @@ public class app_WEL_Repo {
 	 * 
 	 * @Date: 02/01/23
 	 */
-	public void enterEmailIdInYopmail(String username) throws IOException {
+	/*public void enterEmailIdInYopmail(String username) throws IOException {
 		try {
 			EnterEmailIdInYopmail.clear();
 			EnterEmailIdInYopmail.sendKeys(username);
@@ -3721,7 +3723,7 @@ public class app_WEL_Repo {
 					StatusDetails.PASS);
 		}
 
-	}
+	}*/
 
 	/*
 	 * @Author: Anindita
@@ -3730,7 +3732,7 @@ public class app_WEL_Repo {
 	 * 
 	 * @Date: 02/01/23
 	 */
-	public void clickOnCheckInboxButton() throws IOException {
+	/*public void clickOnCheckInboxButton() throws IOException {
 		try {
 			clickOnCheckInboxButton.click();
 			Reporting.updateTestReport("Arrow button clicked successfully ", CaptureScreenshot.getScreenshot(SS_path),
@@ -3739,7 +3741,7 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport("Failed to click on arrowbutton", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.FAIL);
 		}
-	}
+	}*/
 
 	/*
 	 * @Author: Anindita
@@ -3828,7 +3830,7 @@ public class app_WEL_Repo {
 				Reporting.updateTestReport(
 						OrderIdEmailHeader.getText().substring(1) + " was  present in the header in email"
 								+ "which is not same as Order Id: " + orderId + " order confirmation page",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Order Id " + " was not present in the header in email",
@@ -3854,7 +3856,7 @@ public class app_WEL_Repo {
 				Reporting.updateTestReport(
 						AddressLine1ShippingInMail.getText().substring(1) + " was  present in the header in email"
 								+ "which is not same as Address line 1: " + line1 + " order confirmation page",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Address line 1 " + " was not present in the header in email",
@@ -3881,18 +3883,18 @@ public class app_WEL_Repo {
 			else
 				Reporting.updateTestReport(
 						cityInMail + " was  present in the header in email" + "which is not same as City: " + city
-								+ " in order confirmation page",
+						+ " in order confirmation page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 			if (zipStateInMail.contains(zipCode))
 				Reporting.updateTestReport(
 						zipStateInMail + " was present in email which contains zip Code: " + zipCode
-								+ " in order confirmation page",
+						+ " in order confirmation page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else
 				Reporting.updateTestReport(
 						zipStateInMail + " was present in email which doesn't contain zip Code: " + zipCode
-								+ " in order confirmation page",
+						+ " in order confirmation page",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		} catch (Exception e) {
@@ -3919,7 +3921,7 @@ public class app_WEL_Repo {
 				Reporting.updateTestReport(
 						CardNumberLastFourDigitInMail.getText() + " was present in email"
 								+ "which is not same as Card number entered: " + number.substring(number.length() - 4),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		} catch (Exception e) {
 			Reporting.updateTestReport("Card number " + " was not present in email body",
@@ -4609,7 +4611,7 @@ public class app_WEL_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Method to enter a new user id which is not auto generated and passed from datasheet
@@ -4627,7 +4629,7 @@ public class app_WEL_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Clicks outside the email id field in login checkout page
@@ -4643,7 +4645,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	/*
 	 * @Author: Anindita
 	 * @Description: Checks error message after entering invalid email id in login checkout page
@@ -4663,4 +4665,6 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+
+	
 }

@@ -43,7 +43,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 	app_Riskified_Repo RiskifiedRepo;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
-	public static String EmailConfirmationText="//button/div[contains(text(),'Your Order with Wiley')]";
+	public static String EmailConfirmationText="//td[contains(text(),'Your Order with Wiley')]";
 
 	@BeforeTest
 	public void launchBrowser() {
@@ -187,11 +187,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Tax", tax);
 						excelOperation.updateTestData("TC01", "WILEY_NA_Cart_Test_Data", "Order_Total", orderTotal);
-						driver.get(excelOperation.getTestData("Yopmail_URL",
-								"Generic_Dataset", "Data"));
-						wiley.enterEmailIdInYopmail(email);
-						wiley.clickOnCheckInboxButton();
-						if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+						if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 							Reporting.updateTestReport("Order Confirmation mail was received",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,tax," ",orderTotal);
@@ -294,6 +290,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterCityBilling(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_City"));
 						wiley.enterState(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_State"));
 						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
+						wiley.clickOnSaveAndContinueButton();
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='wel_billing_use_suggested_address_button']/span[text()='Use Selected Address'])[2]")));
 							wiley.clickOnUseSelectedBillingAddressButtonAddressDoctor();
@@ -302,7 +299,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							Reporting.updateTestReport("Adress doctor pop up did not appear",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 						}
-						wiley.clickOnSaveAndContinueButton();
 						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
 						BigDecimal taxInOrderReview=new BigDecimal(wiley.fetchTaxInOrderReview().substring(1));
 						BigDecimal orderTotalInOrderReview=new BigDecimal(wiley.fetchTotalInOrderReview().substring(1));
@@ -525,11 +521,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
 							excelOperation.updateTestData("TC03", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
-							/*driver.get(excelOperation.getTestData("Yopmail_URL",
-									"Generic_Dataset", "Data"));
-							wiley.enterEmailIdInYopmail(emailID);
-							wiley.clickOnCheckInboxButton();
-							if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+							if(EmailValidation.checkIfOrderConfirmationMailReceived(emailID,driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
@@ -537,7 +529,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}*/				
+							}	
 						}			
 
 						else {
@@ -697,11 +689,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							excelOperation.updateTestData("TC04", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC04", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
 							excelOperation.updateTestData("TC04", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
-							driver.get(excelOperation.getTestData("Yopmail_URL",
-									"Generic_Dataset", "Data"));
-							wiley.enterEmailIdInYopmail(email);
-							wiley.clickOnCheckInboxButton();
-							if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+							if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
@@ -1206,11 +1194,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									excelOperation.updateTestData("TC07", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 									excelOperation.updateTestData("TC07", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
 									excelOperation.updateTestData("TC07", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
-									driver.get(excelOperation.getTestData("Yopmail_URL",
-											"Generic_Dataset", "Data"));
-									wiley.enterEmailIdInYopmail(email);
-									wiley.clickOnCheckInboxButton();
-									if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 										Reporting.updateTestReport("Order Confirmation mail was received",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
@@ -1409,11 +1393,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									excelOperation.updateTestData("TC08", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 									excelOperation.updateTestData("TC08", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
 									excelOperation.updateTestData("TC08", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
-									driver.get(excelOperation.getTestData("Yopmail_URL",
-											"Generic_Dataset", "Data"));
-									wiley.enterEmailIdInYopmail(email);
-									wiley.clickOnCheckInboxButton();
-									if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 										Reporting.updateTestReport("Order Confirmation mail was received",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										//validateOrderConfirmationMailContent(taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
@@ -1594,20 +1574,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							excelOperation.updateTestData("TC09", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC09", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
 
-							/*driver.get(excelOperation.getTestData("Yopmail_URL",
-							"Generic_Dataset", "Data"));
-
-							wiley.enterEmailIdInYopmail(emailID);
-							wiley.clickOnCheckInboxButton();
-							if(checkIfOrderConfirmationMailReceived()) {
+							if(EmailValidation.checkIfOrderConfirmationMailReceived(emailID,driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								validateOrderConfirmationMailContent(taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation," ",ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}*/
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
 
 						}		
 
@@ -1778,19 +1753,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							excelOperation.updateTestData("TC10", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC10", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
 							excelOperation.updateTestData("TC10", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
-							/*driver.get("https://yopmail.com/en/");
-
-							wiley.enterEmailIdInYopmail(email);
-							wiley.clickOnCheckInboxButton();
-							if(checkIfOrderConfirmationMailReceived()) {
+							if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								validateOrderConfirmationMailContent(taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}*/
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
 
 						}		
 
@@ -1951,7 +1922,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 										ScrollingWebPage.PageScrolldown(driver,0,500,SS_path);
 										String ordertotal = wiley.fetchOrderTotal();
 										String taxInOrderConfirmation = wiley.fetchTaxAmount();
-										String shipingChargeInOrderConfirmation=wiley.fetchShippingCharge();
+										String shippingChargeInOrderConfirmation=wiley.fetchShippingCharge();
 										if(taxInOrderReview.compareTo(new BigDecimal(taxInOrderConfirmation.substring(1)))==0)
 											Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
 													" is same as tax in Order confirmation page: "+taxInOrderConfirmation, 
@@ -1960,13 +1931,13 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 											Reporting.updateTestReport("Tax calculated in Order review step: $"+taxInOrderReview+
 													" is not same as tax in Order confirmation page: "+taxInOrderConfirmation, 
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										if(shippingInOrderReview.compareTo(new BigDecimal(shipingChargeInOrderConfirmation.substring(1)))==0)
+										if(shippingInOrderReview.compareTo(new BigDecimal(shippingChargeInOrderConfirmation.substring(1)))==0)
 											Reporting.updateTestReport("Shipping charge calculated in Order review step: $"+shippingInOrderReview+
-													" is same as Shipping charge in Order confirmation page: "+shipingChargeInOrderConfirmation, 
+													" is same as Shipping charge in Order confirmation page: "+shippingChargeInOrderConfirmation, 
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
 											Reporting.updateTestReport("Shipping charge calculated in Order review step: $"+shippingInOrderReview+
-													" is not same as Shipping charge in Order confirmation page: "+shipingChargeInOrderConfirmation, 
+													" is not same as Shipping charge in Order confirmation page: "+shippingChargeInOrderConfirmation, 
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										if(orderTotalInOrderReview.compareTo(new BigDecimal(ordertotal.substring(1)))==0)
 											Reporting.updateTestReport("Order total calculated in Order review step: $"+orderTotalInOrderReview+
@@ -1978,20 +1949,16 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										excelOperation.updateTestData("TC11", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 										excelOperation.updateTestData("TC11", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
-										excelOperation.updateTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
-										/*driver.get("https://yopmail.com/en/");
-
-										wiley.enterEmailIdInYopmail(email);
-										wiley.clickOnCheckInboxButton();
-										if(checkIfOrderConfirmationMailReceived()) {
+										excelOperation.updateTestData("TC11", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shippingChargeInOrderConfirmation);
+										if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 											Reporting.updateTestReport("Order Confirmation mail was received",
-							                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-											validateOrderConfirmationMailContent(taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shippingChargeInOrderConfirmation,ordertotal);
 										}
 										else {
 											Reporting.updateTestReport("Order Confirmation mail was not received",
-							                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}*/
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										}
 
 									}				
 									else {
@@ -2199,19 +2166,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							excelOperation.updateTestData("TC12", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC12", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
 							excelOperation.updateTestData("TC12", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
-							/*driver.get("https://yopmail.com/en/");
-
-							wiley.enterEmailIdInYopmail(email);
-							wiley.clickOnCheckInboxButton();
-							if(checkIfOrderConfirmationMailReceived()) {
+							if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								validateOrderConfirmationMailContent(taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}*/
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
 
 						}				
 						else {
@@ -2373,19 +2336,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							excelOperation.updateTestData("TC13", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC13", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
-							/*driver.get("https://yopmail.com/en/");
-
-							wiley.enterEmailIdInYopmail(email);
-							wiley.clickOnCheckInboxButton();
-							if(checkIfOrderConfirmationMailReceived()) {
+							if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								validateOrderConfirmationMailContent(taxInOrderConfirmation," ",ordertotal);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation," ",ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}*/
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
 
 
 						}				
@@ -2559,19 +2518,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							excelOperation.updateTestData("TC14", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC14", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
 							excelOperation.updateTestData("TC14", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
-							/*driver.get("https://yopmail.com/en/");
-
-							wiley.enterEmailIdInYopmail(emailID);
-							wiley.clickOnCheckInboxButton();
-							if(checkIfOrderConfirmationMailReceived()) {
+							if(EmailValidation.checkIfOrderConfirmationMailReceived(emailID,driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								validateOrderConfirmationMailContent(taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}*/
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
 
 						}				
 						else {
@@ -2731,19 +2686,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							excelOperation.updateTestData("TC15", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC15", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
-							/*driver.get("https://yopmail.com/en/");
-
-							wiley.enterEmailIdInYopmail(email);
-							wiley.clickOnCheckInboxButton();
-							if(checkIfOrderConfirmationMailReceived()) {
+							if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								validateOrderConfirmationMailContent(taxInOrderConfirmation," ",ordertotal);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation," ",ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}*/
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
 
 
 						}				
@@ -2914,19 +2865,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							excelOperation.updateTestData("TC16", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC16", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
 							excelOperation.updateTestData("TC16", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
-							/*driver.get("https://yopmail.com/en/");
-
-							wiley.enterEmailIdInYopmail(emailID);
-							wiley.clickOnCheckInboxButton();
-							if(checkIfOrderConfirmationMailReceived()) {
+							if(EmailValidation.checkIfOrderConfirmationMailReceived(emailID,driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								validateOrderConfirmationMailContent(taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}*/
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
 
 						}				
 						else {
@@ -3128,11 +3075,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 									excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
 									excelOperation.updateTestData("TC17", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
-									driver.get(excelOperation.getTestData("Yopmail_URL",
-											"Generic_Dataset", "Data"));
-									wiley.enterEmailIdInYopmail(emailID);
-									wiley.clickOnCheckInboxButton();
-									if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									if(EmailValidation.checkIfOrderConfirmationMailReceived(emailID,driver,SS_path,EmailConfirmationText)) {
 										Reporting.updateTestReport("Order Confirmation mail was received",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
@@ -3537,19 +3480,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							excelOperation.updateTestData("TC20", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC20", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
 							excelOperation.updateTestData("TC20", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
-							/*driver.get("https://yopmail.com/en/");
-
-							wiley.enterEmailIdInYopmail(emailID);
-							wiley.clickOnCheckInboxButton();
-							if(checkIfOrderConfirmationMailReceived()) {
+							if(EmailValidation.checkIfOrderConfirmationMailReceived(emailID,driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								validateOrderConfirmationMailContent(taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}*/
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
 
 
 						}				
@@ -3848,19 +3787,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							excelOperation.updateTestData("TC22", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC22", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
-							/*driver.get("https://yopmail.com/en/");
-
-							wiley.enterEmailIdInYopmail(email);
-							wiley.clickOnCheckInboxButton();
-							if(checkIfOrderConfirmationMailReceived()) {
+							if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								validateOrderConfirmationMailContent(taxInOrderConfirmation," ",ordertotal);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation," ",ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}*/
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
 
 
 						}				
@@ -3953,7 +3888,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterAddressLine1Billing(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
 						wiley.enterZipBilling(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
 						wiley.enterCityBilling(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "Bill_City"));
-						wiley.enterState(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "Bill_State"));
+						
+						//State is commented out as the filed is not present for Australia
+						//wiley.enterState(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "Bill_State"));
 
 						wiley.enterPhoneNumberBilling(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "Bill_Phone_Number"));
 						wiley.clickOnSaveAndContinueButton();
@@ -4197,7 +4134,16 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							excelOperation.updateTestData("TC24", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 							excelOperation.updateTestData("TC24", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
-							excelOperation.updateTestData("TC24", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);			
+							excelOperation.updateTestData("TC24", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);	
+							if(EmailValidation.checkIfOrderConfirmationMailReceived(emailID,driver,SS_path,EmailConfirmationText)) {
+								Reporting.updateTestReport("Order Confirmation mail was received",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
+							}
+							else {
+								Reporting.updateTestReport("Order Confirmation mail was not received",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
 						}			
 
 						else {
@@ -4786,19 +4732,14 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									excelOperation.updateTestData("TC32", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 									excelOperation.updateTestData("TC32", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
 									excelOperation.updateTestData("TC32", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
-									/*driver.get("https://yopmail.com/en/");
-
-							wiley.enterEmailIdInYopmail(email);
-							wiley.clickOnCheckInboxButton();
-							if(checkIfOrderConfirmationMailReceived()) {
-								Reporting.updateTestReport("Order Confirmation mail was received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								validateOrderConfirmationMailContent(taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
-							}
-							else {
-								Reporting.updateTestReport("Order Confirmation mail was not received",
-				                        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}*/
+									if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
+										Reporting.updateTestReport("Order Confirmation mail was received",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									}
+									else {
+										Reporting.updateTestReport("Order Confirmation mail was not received",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
 
 
 
@@ -4876,11 +4817,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.entersEmailIdForRecievingResetPasswordMail(excelOperation.getTestData("TC33", "WILEY_NA_Cart_Test_Data", "Email_Id"));
 				wiley.clickOnSubmitButtonForRecievingResetPasswordMail();
 				if(wiley.checkIfResetPasswordInstructionsIsPresent()) {
-					driver.get(excelOperation.getTestData("Yopmail_URL",
-							"Generic_Dataset", "Data"));
-					wiley.enterEmailIdInYopmail(excelOperation.getTestData("TC33", "WILEY_NA_Cart_Test_Data", "Email_Id"));
-					wiley.clickOnCheckInboxButton();
-					int flag=EmailValidation.forgotPasswordEmailForWiley(driver, SS_path, wiley);
+					int flag=EmailValidation.forgotPasswordEmailForWiley
+							(excelOperation.getTestData("TC33", "WILEY_NA_Cart_Test_Data", "Email_Id"),driver, SS_path, wiley);
 
 					if(flag==1) {
 
@@ -4899,14 +4837,14 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 					}
 					else {
-						Reporting.updateTestReport("No reset password mail was recieved in yopmail inbox", 
+						Reporting.updateTestReport("No reset password mail was recieved in inbox", 
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 
 
 				}
 				else {
-					Reporting.updateTestReport("As reset password instructions was not displayed, yopmail was not opened", 
+					Reporting.updateTestReport("As reset password instructions was not displayed,mail inbox was not opened", 
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 
@@ -5945,15 +5883,10 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Order_Total", ordertotal);
 									excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Tax", taxInOrderConfirmation);
 									excelOperation.updateTestData("TC42", "WILEY_NA_Cart_Test_Data", "Shipping_Charge", shipingChargeInOrderConfirmation);
-									driver.get(excelOperation.getTestData("Yopmail_URL",
-											"Generic_Dataset", "Data"));
-									wiley.enterEmailIdInYopmail(emailID);
-									wiley.clickOnCheckInboxButton();
-									if(EmailValidation.checkIfOrderConfirmationMailReceived(driver,SS_path,EmailConfirmationText)) {
+									if(EmailValidation.checkIfOrderConfirmationMailReceived(emailID,driver,SS_path,EmailConfirmationText)) {
 										Reporting.updateTestReport("Order Confirmation mail was received",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,
-												shipingChargeInOrderConfirmation,ordertotal);
+										EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
 									}
 									else {
 										Reporting.updateTestReport("Order Confirmation mail was not received",
@@ -6031,11 +5964,8 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.entersEmailIdForRecievingResetPasswordMail(excelOperation.getTestData("TC43", "WILEY_NA_Cart_Test_Data", "Email_Id"));
 				wiley.clickOnSubmitButtonForRecievingResetPasswordMail();
 				if(wiley.checkIfResetPasswordInstructionsIsPresent()) {
-					driver.get(excelOperation.getTestData("Yopmail_URL",
-							"Generic_Dataset", "Data"));
-					wiley.enterEmailIdInYopmail(excelOperation.getTestData("TC43", "WILEY_NA_Cart_Test_Data", "Email_Id"));
-					wiley.clickOnCheckInboxButton();
-					int flag=EmailValidation.forgotPasswordEmailForWiley(driver, SS_path, wiley);
+					int flag=EmailValidation.forgotPasswordEmailForWiley
+							(excelOperation.getTestData("TC43", "WILEY_NA_Cart_Test_Data", "Email_Id"),driver, SS_path, wiley);
 
 					if(flag==1) {
 						//First password only lower case letters and numbers with less than 10 characters.
@@ -6075,14 +6005,14 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 					}
 					else {
-						Reporting.updateTestReport("No reset password mail was recieved in yopmail inbox", 
+						Reporting.updateTestReport("No reset password mail was recieved in inbox", 
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 
 
 				}
 				else {
-					Reporting.updateTestReport("As reset password instructions was not displayed, yopmail was not opened", 
+					Reporting.updateTestReport("As reset password instructions was not displayed, mail inbox was not opened", 
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 
@@ -6155,6 +6085,34 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		catch(Exception e) {
 			wiley.wileyLogOutException();
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+		}
+	}
+	
+	@Test
+	public void dummyMail() {
+		try {
+			driver.get("https://www.mailinator.com/v4/public/inboxes.jsp?msgid=autowiley20230502012607-1683014275-21400745#");
+			driver.switchTo().frame("texthtml_msg_body");
+			//List<WebElement> elements=driver.findElement(By.xpath("//br/ancestor::body"));
+			String orderConfirmationMail=driver.findElement(By.xpath("//br/ancestor::body")).getText();
+			
+			System.out.println(orderConfirmationMail);
+			String[] A=orderConfirmationMail.split("Tax:");
+			System.out.println(A[1]);
+			String[] B=A[1].split("Delivery:");
+			System.out.println(B[1]);
+			String taxInMail=B[0].trim();
+			String[] C=B[1].split("TOTAL:");
+			String shippingChargeInMail=C[0].trim();
+			String[] D=C[1].trim().split(" ");
+			String[] E=D[0].trim().split("\\R");
+			String orderTotalInMail=E[0].trim();
+			System.out.println("Printed Tax: "+taxInMail);
+			System.out.println("Printed shippingChargeInMail: "+shippingChargeInMail);
+			System.out.println("Printed orderTotalInMail: "+orderTotalInMail);
+		}
+		catch(Exception e) {
+			
 		}
 	}
 }
