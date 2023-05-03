@@ -124,6 +124,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
 
@@ -223,141 +224,148 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									wait.until(ExpectedConditions.visibilityOfElementLocated(By
 											.xpath("(//button[contains(text(),'GET PLATINUM WILEY CMA COURSE')])[2]")));
 									ScrollingWebPage.PageScrollDownUptoTop(driver, SS_path);
-								} catch (Exception e) {
-									Reporting.updateTestReport("GET PLATINUM WILEY CMA COURSE -> button didn't appear",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-								}
-								try {
-									wait.until(ExpectedConditions
-											.visibilityOfElementLocated(By.xpath("//label[@for='Print + eBook0']")));
-									ScrollingWebPage.PageDown(driver, SS_path);
-									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+
 									try {
-										wait.until(ExpectedConditions.elementToBeClickable(By
-												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
-										WEL.clickOnAddToCartButton();
+										wait.until(ExpectedConditions.visibilityOfElementLocated(
+												By.xpath("//label[@for='Print + eBook0']")));
+										ScrollingWebPage.PageDown(driver, SS_path);
+										BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 										try {
-											wait.until(ExpectedConditions
-													.visibilityOfElementLocated(By.id("cartPageMainTitle")));
-										} catch (Exception e) {
-											try {
-												if (driver
-														.findElement(
-																By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-														.isDisplayed()) {
-													Reporting.updateTestReport(
-															"Server error came in cart page and the page was refreshed",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.INFO);
-													driver.navigate().refresh();
-												}
-											} catch (Exception e1) {
-												Reporting.updateTestReport(
-														"User was not in the cart page"
-																+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-											}
-										}
-										BigDecimal subtotal = new BigDecimal(
-												WEL.fetchOrderSubTotalInCartPage().substring(1));
-										if (price.compareTo(subtotal) == 0)
-											Reporting.updateTestReport(
-													"The addition of all the products' price is same as the subtotal in cart page",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										else
-											Reporting.updateTestReport(
-													"The addition of all the products' pricedidn't match with the subtotal in cart page",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										try {
-											wait.until(
-													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
-											WEL.clickonCheckOutButtonOnCartPage();
+											wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+													"//button[@type='submit' and contains(text(),'ADD TO CART')]")));
+											WEL.clickOnAddToCartButton();
 											try {
 												wait.until(ExpectedConditions
-														.visibilityOfElementLocated(By.id("checkoutLogRegPageTitle")));
-												String emailId = WEL.enterNewUserIdInCheckoutLoginRegistration();
-												WEL.clickOnCreateAccountButtonInCheckoutLoginRegistration();
+														.visibilityOfElementLocated(By.id("cartPageMainTitle")));
+											} catch (Exception e) {
 												try {
-													wait.until(ExpectedConditions.presenceOfElementLocated(
-															By.xpath("//div[@class='welCheckoutJourneyMainDiv']")));
-													WEL.enterConfirmEmailIdInCheckout(emailId);
-													WEL.enterPasswordInCheckout(excelOperation.getTestData("TC02",
-															"WEL_Test_Data", "Password"));
-													WEL.clickOnSaveAndContinue();
-													try {
-														wait.until(ExpectedConditions.visibilityOfElementLocated(
-																By.xpath("//h5[@id='shippingAddressTitle']/span")));
+													if (driver
+															.findElement(By.xpath(
+																	"//h1[contains(text(),'SERVER ERROR (500)')]"))
+															.isDisplayed()) {
 														Reporting.updateTestReport(
-																"User was in shipping step after successful registration",
+																"Server error came in cart page and the page was refreshed",
 																CaptureScreenshot.getScreenshot(SS_path),
-																StatusDetails.PASS);
+																StatusDetails.INFO);
+														driver.navigate().refresh();
+													}
+												} catch (Exception e1) {
+													Reporting.updateTestReport(
+															"User was not in the cart page"
+																	+ " and caused timeout exception",
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
+												}
+											}
+											BigDecimal subtotal = new BigDecimal(
+													WEL.fetchOrderSubTotalInCartPage().substring(1));
+											if (price.compareTo(subtotal) == 0)
+												Reporting.updateTestReport(
+														"The addition of all the products' price is same as the subtotal in cart page",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											else
+												Reporting.updateTestReport(
+														"The addition of all the products' pricedidn't match with the subtotal in cart page",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											try {
+												wait.until(ExpectedConditions
+														.elementToBeClickable(By.id("cartCheckoutBtn")));
+												WEL.clickonCheckOutButtonOnCartPage();
+												try {
+													wait.until(ExpectedConditions.visibilityOfElementLocated(
+															By.id("checkoutLogRegPageTitle")));
+													String emailId = WEL.enterNewUserIdInCheckoutLoginRegistration();
+													WEL.clickOnCreateAccountButtonInCheckoutLoginRegistration();
+													try {
+														wait.until(ExpectedConditions.presenceOfElementLocated(
+																By.xpath("//div[@class='welCheckoutJourneyMainDiv']")));
+														WEL.enterConfirmEmailIdInCheckout(emailId);
+														WEL.enterPasswordInCheckout(excelOperation.getTestData("TC02",
+																"WEL_Test_Data", "Password"));
+														WEL.clickOnSaveAndContinue();
 														try {
-															wait.until(ExpectedConditions.visibilityOfElementLocated(By
-																	.xpath("//div[@id='orderSummaryProductTotalValue']")));
+															wait.until(ExpectedConditions.visibilityOfElementLocated(
+																	By.xpath("//h5[@id='shippingAddressTitle']/span")));
+															Reporting.updateTestReport(
+																	"User was in shipping step after successful registration",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.PASS);
+															try {
+																wait.until(ExpectedConditions
+																		.visibilityOfElementLocated(By.xpath(
+																				"//div[@id='orderSummaryProductTotalValue']")));
 
-															String orderprice = WEL
-																	.fetchFirstProductPriceInOrderSummary();
-															if (orderprice.contains(","))
-																orderprice = orderprice.replace(",", "");
-															BigDecimal orderproductprice = new BigDecimal(
-																	orderprice.substring(1));
+																String orderprice = WEL
+																		.fetchFirstProductPriceInOrderSummary();
+																if (orderprice.contains(","))
+																	orderprice = orderprice.replace(",", "");
+																BigDecimal orderproductprice = new BigDecimal(
+																		orderprice.substring(1));
 
-															String discount = WEL.fetchDiscountInOrderReview();
-															if (discount.contains(","))
-																discount = discount.replace(",", "");
-															BigDecimal orderpriceafterdiscount = new BigDecimal(
-																	discount.substring(1));
+																String discount = WEL.fetchDiscountInOrderReview();
+																if (discount.contains(","))
+																	discount = discount.replace(",", "");
+																BigDecimal orderpriceafterdiscount = new BigDecimal(
+																		discount.substring(1));
 
-															BigDecimal productpriceafterdiscount = orderproductprice
-																	.subtract(orderpriceafterdiscount);
+																BigDecimal productpriceafterdiscount = orderproductprice
+																		.subtract(orderpriceafterdiscount);
 
-															String totalorderReview = WEL.fetchTotalInOrderReview();
-															if (totalorderReview.contains(","))
-																totalorderReview = totalorderReview.replace(",", "");
-															BigDecimal orderTotalPrice = new BigDecimal(
-																	totalorderReview.substring(1));
+																String totalorderReview = WEL.fetchTotalInOrderReview();
+																if (totalorderReview.contains(","))
+																	totalorderReview = totalorderReview.replace(",",
+																			"");
+																BigDecimal orderTotalPrice = new BigDecimal(
+																		totalorderReview.substring(1));
 
-															if (productpriceafterdiscount
-																	.compareTo(orderTotalPrice) == 0)
+																if (productpriceafterdiscount
+																		.compareTo(orderTotalPrice) == 0)
+																	Reporting.updateTestReport(
+																			"First Product price - Discount "
+																					+ " = Order total in Order Review step",
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.PASS);
+																else
+																	Reporting.updateTestReport(
+																			"First Product price + Tax "
+																					+ " is not equal to Order total in Order Review step",
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.FAIL);
+
+															} catch (Exception e) {
 																Reporting.updateTestReport(
-																		"First Product price - Discount "
-																				+ " = Order total in Order Review step",
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.PASS);
-															else
-																Reporting.updateTestReport("First Product price + Tax "
-																		+ " is not equal to Order total in Order Review step",
+																		"Order Summary tab was not visible"
+																				+ e.getMessage(),
 																		CaptureScreenshot.getScreenshot(SS_path),
 																		StatusDetails.FAIL);
-
+															}
 														} catch (Exception e) {
 															Reporting.updateTestReport(
-																	"Order Summary tab was not visible"
-																			+ e.getMessage(),
+																	"User was not in shipping step and caused timeout exception",
 																	CaptureScreenshot.getScreenshot(SS_path),
 																	StatusDetails.FAIL);
 														}
 													} catch (Exception e) {
 														Reporting.updateTestReport(
-																"User was not in shipping step and caused timeout exception",
+																"User was not redirected to checkout page and caused timeout exception",
 																CaptureScreenshot.getScreenshot(SS_path),
 																StatusDetails.FAIL);
 													}
 												} catch (Exception e) {
 													Reporting.updateTestReport(
-															"User was not redirected to checkout page and caused timeout exception",
+															"User was not redirected to checkout login/ registration page and caused timeout exception",
 															CaptureScreenshot.getScreenshot(SS_path),
 															StatusDetails.FAIL);
 												}
 											} catch (Exception e) {
 												Reporting.updateTestReport(
-														"User was not redirected to checkout login/ registration page and caused timeout exception",
+														"Checkout button was not clickable in cart page and caused timeout exception",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										} catch (Exception e) {
 											Reporting.updateTestReport(
-													"Checkout button was not clickable in cart page and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													"GET PLATINUM WILEY CMA COURSE -> button didn't appear",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 										}
 
 									} catch (Exception e) {
@@ -846,7 +854,6 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
 	}
-
 	/*
 	 * @Date: 6/4/23
 	 * 
@@ -2675,229 +2682,255 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 						try {
 							wait.until(ExpectedConditions
 									.visibilityOfElementLocated(By.xpath("(//div[@class='price-block'])[1]")));
-							ScrollingWebPage.PageDown(driver, SS_path);
 							try {
-								wait.until(ExpectedConditions.elementToBeClickable(
-										By.xpath("//a[@href='/cma/products/platinum-cma-review-course/']"
-												+ "/button[contains(text(),'VIEW COURSE OPTIONS')]")));
-								WEL.clickOnCMAViewCourseButton();
+								wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+										"//div[@class='card-title course-pkg-cards-heading most-popular-block']")));
+								ScrollingWebPage.PageDown(driver, SS_path);
 								try {
-									wait.until(ExpectedConditions.visibilityOfElementLocated(By
-											.xpath("(//button[contains(text(),'GET PLATINUM WILEY CMA COURSE')])[2]")));
-									ScrollingWebPage.PageScrollDownUptoTop(driver, SS_path);
+									wait.until(ExpectedConditions.elementToBeClickable(
+											By.xpath("//a[@href='/cma/products/platinum-cma-review-course/']"
+													+ "/button[contains(text(),'VIEW COURSE OPTIONS')]")));
+									WEL.clickOnCMAViewCourseButton();
 									try {
 										wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
 												"(//button[contains(text(),'GET PLATINUM WILEY CMA COURSE')])[2]")));
 										ScrollingWebPage.PageScrollDownUptoTop(driver, SS_path);
-									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"GET PLATINUM WILEY CMA COURSE -> button didn't appear",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-									}
-									try {
-										wait.until(ExpectedConditions.visibilityOfElementLocated(
-												By.xpath("//label[@for='Print + eBook0']")));
-										WEL.clickonCMAeBook();
-									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Failed to click on CMA eBook caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-									}
-									ScrollingWebPage.PageDown(driver, SS_path);
-									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-									try {
-										wait.until(ExpectedConditions.elementToBeClickable(By
-												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
-										WEL.clickOnAddToCartButton();
 										try {
-											wait.until(ExpectedConditions
-													.visibilityOfElementLocated(By.id("cartPageMainTitle")));
-										} catch (Exception e) {
+											wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+													"(//button[contains(text(),'GET PLATINUM WILEY CMA COURSE')])[2]")));
+											ScrollingWebPage.PageScrollDownUptoTop(driver, SS_path);
+
 											try {
-												if (driver
-														.findElement(
-																By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-														.isDisplayed()) {
-													Reporting.updateTestReport(
-															"Server error came in cart page and the page was refreshed",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.INFO);
-													driver.navigate().refresh();
-												}
-											} catch (Exception e1) {
-												Reporting.updateTestReport(
-														"User was not in the cart page"
-																+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-											}
-										}
-										BigDecimal subtotal = new BigDecimal(
-												WEL.fetchOrderSubTotalInCartPage().substring(1));
-										if (price.compareTo(subtotal) == 0)
-											Reporting.updateTestReport(
-													"The addition of all the products' price is same as the subtotal in cart page",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										else
-											Reporting.updateTestReport(
-													"The addition of all the products' pricedidn't match with the subtotal in cart page",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
-										try {
-											wait.until(
-													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
-											WEL.clickonCheckOutButtonOnCartPage();
-											try {
-												wait.until(ExpectedConditions
-														.visibilityOfElementLocated(By.id("checkoutLogRegPageTitle")));
-												WEL.enterExistingUserNameInCheckoutLoginPage(excelOperation
-														.getTestData("TC14", "WEL_Test_Data", "Email_Address"));
-												WEL.enterExistingUserPasswordInCheckoutLoginPage(excelOperation
-														.getTestData("TC14", "WEL_Test_Data", "Password"));
-												WEL.clickOnLoginButtonInCheckoutLoginPage();
+												wait.until(ExpectedConditions.visibilityOfElementLocated(
+														By.xpath("//label[@for='Print + eBook0']")));
+												WEL.clickonCMAeBook();
+												ScrollingWebPage.PageDown(driver, SS_path);
+												BigDecimal price = new BigDecimal(
+														WEL.fetchProductPriceInPDP().substring(1));
 												try {
-													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("//h5[@class='welCommonHeadingTitle']")));
-													WEL.firstName(excelOperation.getTestData("TC14", "WEL_Test_Data",
-															"First_Name"));
-													WEL.lastName(excelOperation.getTestData("TC14", "WEL_Test_Data",
-															"Last_Name"));
-
-													WEL.selectBillCountry(excelOperation.getTestData("TC14",
-															"WEL_Test_Data", "Bill_Country"));
-													WEL.addressLineOne(excelOperation.getTestData("TC14",
-															"WEL_Test_Data", "Bill_Address_line1"));
-													WEL.enterZipcode(excelOperation.getTestData("TC14", "WEL_Test_Data",
-															"Bill_Zip_Code"));
-													WEL.enterState(excelOperation.getTestData("TC14", "WEL_Test_Data",
-															"Bill_State"));
-													WEL.enterCity(excelOperation.getTestData("TC14", "WEL_Test_Data",
-															"Bill_City/ Province"));
-													WEL.enterPhoneNumber(excelOperation.getTestData("TC14",
-															"WEL_Test_Data", "Bill_Phone_Number"));
-
-													// WEL.clickingOnSaveAndContinue();
-
-													Reporting.updateTestReport(
-															"User was in Billing step after successful registration",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
-												} catch (Exception e) {
-													Reporting.updateTestReport(
-															"User was not in shipping step and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
-												}
-												try {
-													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("//div[@id='orderSummaryProductTotalValue']")));
-
-													BigDecimal firstproductprice2 = new BigDecimal(
-															WEL.fetchFirstProductPriceInOrderReview().substring(1));
-
-													String discount = WEL.fetchDiscountInOrderReview();
-													if (discount.contains(","))
-														discount = discount.replace(",", "");
-													BigDecimal discountinorderreview = new BigDecimal(
-															discount.substring(1));
-													String totalorderReview = WEL.fetchTotalInOrderReview();
-													if (totalorderReview.contains(","))
-														totalorderReview = totalorderReview.replace(",", "");
-													BigDecimal orderTotalPrice1 = new BigDecimal(
-															totalorderReview.substring(1));
-													if (firstproductprice2.subtract(discountinorderreview)
-															.compareTo(orderTotalPrice1) == 0)
+													wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+															"//button[@type='submit' and contains(text(),'ADD TO CART')]")));
+													WEL.clickOnAddToCartButton();
+													try {
+														wait.until(ExpectedConditions.visibilityOfElementLocated(
+																By.id("cartPageMainTitle")));
+													} catch (Exception e) {
+														try {
+															if (driver.findElement(By.xpath(
+																	"//h1[contains(text(),'SERVER ERROR (500)')]"))
+																	.isDisplayed()) {
+																Reporting.updateTestReport(
+																		"Server error came in cart page and the page was refreshed",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.INFO);
+																driver.navigate().refresh();
+															}
+														} catch (Exception e1) {
+															Reporting.updateTestReport(
+																	"User was not in the cart page"
+																			+ " and caused timeout exception",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
+														}
+													}
+													BigDecimal subtotal = new BigDecimal(
+															WEL.fetchOrderSubTotalInCartPage().substring(1));
+													if (price.compareTo(subtotal) == 0)
 														Reporting.updateTestReport(
-																"First Product price + Second Product price -discount "
-																		+ " = Order total in Order Review step",
+																"The addition of all the products' price is same as the subtotal in cart page",
 																CaptureScreenshot.getScreenshot(SS_path),
 																StatusDetails.PASS);
 													else
 														Reporting.updateTestReport(
-																"First Product price +second product price- discount is not equal to Order total in Order Review step",
+																"The addition of all the products' pricedidn't match with the subtotal in cart page",
 																CaptureScreenshot.getScreenshot(SS_path),
 																StatusDetails.FAIL);
 
-												} catch (Exception e) {
-													Reporting.updateTestReport(
-															"Order summary tab was not visible" + e.getMessage(),
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
-												}
-
-											} catch (Exception e) {
-												Reporting.updateTestReport(
-														"User was not redirected to checkout login/ registration page and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-											}
-
-											driver.switchTo().frame(driver
-													.findElement(By.xpath(".//iframe[@title='cardholder name']")));
-											try {
-												wait.until(
-														ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
-												WEL.enterCardHolderName(excelOperation.getTestData("TC14",
-														"WEL_Test_Data", "First_Name"));
-												driver.switchTo().defaultContent();
-												driver.switchTo().frame(driver
-														.findElement(By.xpath(".//iframe[@title='card number']")));
-												WEL.enterCardNumber(excelOperation.getTestData("TC14", "WEL_Test_Data",
-														"Card_Number"));
-												driver.switchTo().defaultContent();
-												driver.switchTo().frame(driver
-														.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-												WEL.selectExpirationMonthFromDropDown(excelOperation.getTestData("TC14",
-														"WEL_Test_Data", "Expiry_Month"));
-												driver.switchTo().defaultContent();
-												driver.switchTo().frame(
-														driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-												WEL.selectExpirationYearFromDropDown(excelOperation.getTestData("TC14",
-														"WEL_Test_Data", "Expiry_Year"));
-												driver.switchTo().defaultContent();
-												driver.switchTo().frame(driver
-														.findElement(By.xpath(".//iframe[@title='securityCode']")));
-												WEL.enterCVV_Number(
-														excelOperation.getTestData("TC14", "WEL_Test_Data", "CVV"));
-												driver.switchTo().defaultContent();
-												WEL.saveAndContinueCheckOut();
-												try {
-													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("//div[@class='helpButton']")));
 													try {
-														if (WEL.returnUseSelectedBillingAddressButtonAddressDoctorPopUp()
-																.isDisplayed())
-															WEL.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+														wait.until(ExpectedConditions
+																.elementToBeClickable(By.id("cartCheckoutBtn")));
+														WEL.clickonCheckOutButtonOnCartPage();
+														try {
+															wait.until(ExpectedConditions.visibilityOfElementLocated(
+																	By.id("checkoutLogRegPageTitle")));
+															WEL.enterExistingUserNameInCheckoutLoginPage(
+																	excelOperation.getTestData("TC14", "WEL_Test_Data",
+																			"Email_Address"));
+															WEL.enterExistingUserPasswordInCheckoutLoginPage(
+																	excelOperation.getTestData("TC14", "WEL_Test_Data",
+																			"Password"));
+															WEL.clickOnLoginButtonInCheckoutLoginPage();
+															try {
+																wait.until(ExpectedConditions
+																		.visibilityOfElementLocated(By.xpath(
+																				"//h5[@class='welCommonHeadingTitle']")));
+																WEL.firstName(excelOperation.getTestData("TC14",
+																		"WEL_Test_Data", "First_Name"));
+																WEL.lastName(excelOperation.getTestData("TC14",
+																		"WEL_Test_Data", "Last_Name"));
+
+																WEL.selectBillCountry(excelOperation.getTestData("TC14",
+																		"WEL_Test_Data", "Bill_Country"));
+																WEL.addressLineOne(excelOperation.getTestData("TC14",
+																		"WEL_Test_Data", "Bill_Address_line1"));
+																WEL.enterZipcode(excelOperation.getTestData("TC14",
+																		"WEL_Test_Data", "Bill_Zip_Code"));
+																WEL.enterState(excelOperation.getTestData("TC14",
+																		"WEL_Test_Data", "Bill_State"));
+																WEL.enterCity(excelOperation.getTestData("TC14",
+																		"WEL_Test_Data", "Bill_City/ Province"));
+																WEL.enterPhoneNumber(excelOperation.getTestData("TC14",
+																		"WEL_Test_Data", "Bill_Phone_Number"));
+
+																// WEL.clickingOnSaveAndContinue();
+
+																Reporting.updateTestReport(
+																		"User was in Billing step after successful registration",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.PASS);
+															} catch (Exception e) {
+																Reporting.updateTestReport(
+																		"User was not in shipping step and caused timeout exception",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.FAIL);
+															}
+															try {
+																wait.until(ExpectedConditions
+																		.visibilityOfElementLocated(By.xpath(
+																				"//div[@id='orderSummaryProductTotalValue']")));
+
+																BigDecimal firstproductprice2 = new BigDecimal(
+																		WEL.fetchFirstProductPriceInOrderReview()
+																				.substring(1));
+
+																String discount = WEL.fetchDiscountInOrderReview();
+																if (discount.contains(","))
+																	discount = discount.replace(",", "");
+																BigDecimal discountinorderreview = new BigDecimal(
+																		discount.substring(1));
+																String totalorderReview = WEL.fetchTotalInOrderReview();
+																if (totalorderReview.contains(","))
+																	totalorderReview = totalorderReview.replace(",",
+																			"");
+																BigDecimal orderTotalPrice1 = new BigDecimal(
+																		totalorderReview.substring(1));
+																if (firstproductprice2.subtract(discountinorderreview)
+																		.compareTo(orderTotalPrice1) == 0)
+																	Reporting.updateTestReport(
+																			"First Product price + Second Product price -discount "
+																					+ " = Order total in Order Review step",
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.PASS);
+																else
+																	Reporting.updateTestReport(
+																			"First Product price +second product price- discount is not equal to Order total in Order Review step",
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.FAIL);
+
+															} catch (Exception e) {
+																Reporting.updateTestReport(
+																		"Order summary tab was not visible"
+																				+ e.getMessage(),
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.FAIL);
+															}
+
+														} catch (Exception e) {
+															Reporting.updateTestReport(
+																	"User was not redirected to checkout login/ registration page and caused timeout exception",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
+														}
+
+														driver.switchTo().frame(driver.findElement(
+																By.xpath(".//iframe[@title='cardholder name']")));
+														try {
+															wait.until(ExpectedConditions
+																	.elementToBeClickable(By.id("nameOnCard")));
+															WEL.enterCardHolderName(excelOperation.getTestData("TC14",
+																	"WEL_Test_Data", "First_Name"));
+															driver.switchTo().defaultContent();
+															driver.switchTo().frame(driver.findElement(
+																	By.xpath(".//iframe[@title='card number']")));
+															WEL.enterCardNumber(excelOperation.getTestData("TC14",
+																	"WEL_Test_Data", "Card_Number"));
+															driver.switchTo().defaultContent();
+															driver.switchTo().frame(driver.findElement(
+																	By.xpath(".//iframe[@title='expiryMonth']")));
+															WEL.selectExpirationMonthFromDropDown(
+																	excelOperation.getTestData("TC14", "WEL_Test_Data",
+																			"Expiry_Month"));
+															driver.switchTo().defaultContent();
+															driver.switchTo().frame(driver.findElement(
+																	By.xpath(".//iframe[@title='expiryYear']")));
+															WEL.selectExpirationYearFromDropDown(
+																	excelOperation.getTestData("TC14", "WEL_Test_Data",
+																			"Expiry_Year"));
+															driver.switchTo().defaultContent();
+															driver.switchTo().frame(driver.findElement(
+																	By.xpath(".//iframe[@title='securityCode']")));
+															WEL.enterCVV_Number(excelOperation.getTestData("TC14",
+																	"WEL_Test_Data", "CVV"));
+															driver.switchTo().defaultContent();
+															WEL.saveAndContinueCheckOut();
+															try {
+																wait.until(
+																		ExpectedConditions.visibilityOfElementLocated(By
+																				.xpath("//div[@class='helpButton']")));
+																try {
+																	if (WEL.returnUseSelectedBillingAddressButtonAddressDoctorPopUp()
+																			.isDisplayed())
+																		WEL.clickOnUseSelectedBillingAddressButtonAddressDoctor();
+																} catch (Exception e) {
+																	Reporting.updateTestReport(
+																			"Failed to click Address on Address SUggestion due to timeout exception",
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.INFO);
+																}
+
+															} catch (Exception e) {
+																Reporting.updateTestReport(
+																		"Help button was not visible and caused timeout exception",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.FAIL);
+															}
+														} catch (Exception e) {
+															Reporting.updateTestReport(
+																	"The name field in card information step was not clickable and caused timeout exception",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
+														}
+
 													} catch (Exception e) {
 														Reporting.updateTestReport(
-																"Failed to click Address on Address SUggestion due to timeout exception",
+																"Checkout button was not clickable in cart page and caused timeout exception",
 																CaptureScreenshot.getScreenshot(SS_path),
-																StatusDetails.INFO);
+																StatusDetails.FAIL);
 													}
-
 												} catch (Exception e) {
 													Reporting.updateTestReport(
-															"Help button was not visible and caused timeout exception",
+															"GET PLATINUM WILEY CMA COURSE -> button didn't appear",
 															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
+															StatusDetails.INFO);
 												}
 											} catch (Exception e) {
 												Reporting.updateTestReport(
-														"The name field in card information step was not clickable and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+														"Failed to click on CMA eBook caused timeout exception",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 											}
-
 										} catch (Exception e) {
 											Reporting.updateTestReport(
-													"Checkout button was not clickable in cart page and caused timeout exception",
+													"Add To Cart button on product page was not clickable and caused timeout exception ",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 									} catch (Exception e) {
 										Reporting.updateTestReport(
-												"Add To Cart button on product page was not clickable and caused timeout exception ",
+												"CMA Product details page didn't appear and caused timeout exception",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 								} catch (Exception e) {
 									Reporting.updateTestReport(
-											"CIA Product details page didn't appear and caused timeout exception",
+											"CMA Review Course title was not visible and caused timeout exception",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 							} catch (Exception e) {
@@ -2916,7 +2949,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				} catch (Exception e) {
-					Reporting.updateTestReport("CIA Link on homepage was not clickable and caused timeout exception ",
+					Reporting.updateTestReport("CMA Link on homepage was not clickable and caused timeout exception ",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			} catch (Exception e) {
@@ -2961,171 +2994,195 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 						try {
 							wait.until(ExpectedConditions
 									.visibilityOfElementLocated(By.xpath("(//div[@class='price-block'])[1]")));
-							ScrollingWebPage.PageDown(driver, SS_path);
 							try {
-								wait.until(ExpectedConditions.elementToBeClickable(
-										By.xpath("//a[@href='/cma/products/platinum-cma-review-course/']"
-												+ "/button[contains(text(),'VIEW COURSE OPTIONS')]")));
-								WEL.clickOnCMAViewCourseButton();
+								wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+										"//div[@class='card-title course-pkg-cards-heading most-popular-block']")));
+
+								ScrollingWebPage.PageDown(driver, SS_path);
 								try {
-									wait.until(ExpectedConditions.visibilityOfElementLocated(By
-											.xpath("(//button[contains(text(),'GET PLATINUM WILEY CMA COURSE')])[2]")));
-									ScrollingWebPage.PageScrollDownUptoTop(driver, SS_path);
+									wait.until(ExpectedConditions.elementToBeClickable(
+											By.xpath("//a[@href='/cma/products/platinum-cma-review-course/']"
+													+ "/button[contains(text(),'VIEW COURSE OPTIONS')]")));
+									WEL.clickOnCMAViewCourseButton();
 									try {
 										wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
 												"(//button[contains(text(),'GET PLATINUM WILEY CMA COURSE')])[2]")));
 										ScrollingWebPage.PageScrollDownUptoTop(driver, SS_path);
-									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"GET PLATINUM WILEY CMA COURSE -> button didn't appear",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-									}
-									try {
-										wait.until(ExpectedConditions.visibilityOfElementLocated(
-												By.xpath("//label[@for='Print + eBook0']")));
-										WEL.clickonCMAeBook();
-									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Failed to click on CMA eBook caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									}
-									ScrollingWebPage.PageDown(driver, SS_path);
-									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-									try {
-										wait.until(ExpectedConditions.elementToBeClickable(By
-												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
-										WEL.clickOnAddToCartButton();
 										try {
-											wait.until(ExpectedConditions
-													.visibilityOfElementLocated(By.id("cartPageMainTitle")));
-										} catch (Exception e) {
-											try {
-												if (driver
-														.findElement(
-																By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-														.isDisplayed()) {
-													Reporting.updateTestReport(
-															"Server error came in cart page and the page was refreshed",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.INFO);
-													driver.navigate().refresh();
-												}
-											} catch (Exception e1) {
-												Reporting.updateTestReport(
-														"User was not in the cart page"
-																+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-											}
-										}
-										BigDecimal subtotal = new BigDecimal(
-												WEL.fetchOrderSubTotalInCartPage().substring(1));
-										if (price.compareTo(subtotal) == 0)
-											Reporting.updateTestReport(
-													"The addition of all the products' price is same as the subtotal in cart page",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										else
-											Reporting.updateTestReport(
-													"The addition of all the products' pricedidn't match with the subtotal in cart page",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										try {
-											wait.until(
-													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
-											WEL.clickonCheckOutButtonOnCartPage();
-											try {
-												wait.until(ExpectedConditions
-														.visibilityOfElementLocated(By.id("checkoutLogRegPageTitle")));
-												WEL.enterExistingUserNameInCheckoutLoginPage(excelOperation
-														.getTestData("TC15", "WEL_Test_Data", "Email_Address"));
-												WEL.enterExistingUserPasswordInCheckoutLoginPage(excelOperation
-														.getTestData("TC15", "WEL_Test_Data", "Password"));
-												WEL.clickOnLoginButtonInCheckoutLoginPage();
-												try {
-													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("//h5[@class='welCommonHeadingTitle']")));
-													WEL.firstName(excelOperation.getTestData("TC15", "WEL_Test_Data",
-															"First_Name"));
-													WEL.lastName(excelOperation.getTestData("TC15", "WEL_Test_Data",
-															"Last_Name"));
-													WEL.selectBillCountry(excelOperation.getTestData("TC15",
-															"WEL_Test_Data", "Bill_Country"));
-													WEL.addressLineOne(excelOperation.getTestData("TC15",
-															"WEL_Test_Data", "Bill_Address_line1"));
-													WEL.enterZipcode(excelOperation.getTestData("TC15", "WEL_Test_Data",
-															"Bill_Zip_Code"));
-													WEL.enterState(excelOperation.getTestData("TC15", "WEL_Test_Data",
-															"Bill_State"));
-													WEL.enterCity(excelOperation.getTestData("TC15", "WEL_Test_Data",
-															"Bill_City/ Province"));
-													WEL.enterPhoneNumber(excelOperation.getTestData("TC15",
-															"WEL_Test_Data", "Bill_Phone_Number"));
-													WEL.verifyPaypaltext();
-													Reporting.updateTestReport(
-															"User was in Billing step after successful registration",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
-												} catch (Exception e) {
-													Reporting.updateTestReport(
-															"User was not in billing step and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
-												}
-												try {
-													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+											wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+													"(//button[contains(text(),'GET PLATINUM WILEY CMA COURSE')])[2]")));
+											ScrollingWebPage.PageScrollDownUptoTop(driver, SS_path);
 
-													BigDecimal firstproductprice2 = new BigDecimal(
-															WEL.fetchFirstProductPriceInOrderReview().substring(1));
+											try {
+												wait.until(ExpectedConditions.visibilityOfElementLocated(
+														By.xpath("//label[@for='Print + eBook0']")));
+												WEL.clickonCMAeBook();
 
-													String discount = WEL.fetchDiscountInOrderReview();
-													if (discount.contains(","))
-														discount = discount.replace(",", "");
-													BigDecimal discountinorderreview = new BigDecimal(
-															discount.substring(1));
-													String totalorderReview = WEL.fetchTotalInOrderReview();
-													if (totalorderReview.contains(","))
-														totalorderReview = totalorderReview.replace(",", "");
-													BigDecimal orderTotalPrice1 = new BigDecimal(
-															totalorderReview.substring(1));
-													if (firstproductprice2.subtract(discountinorderreview)
-															.compareTo(orderTotalPrice1) == 0)
+												ScrollingWebPage.PageDown(driver, SS_path);
+												BigDecimal price = new BigDecimal(
+														WEL.fetchProductPriceInPDP().substring(1));
+												try {
+													wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+															"//button[@type='submit' and contains(text(),'ADD TO CART')]")));
+													WEL.clickOnAddToCartButton();
+													try {
+														wait.until(ExpectedConditions.visibilityOfElementLocated(
+																By.id("cartPageMainTitle")));
+													} catch (Exception e) {
+														try {
+															if (driver.findElement(By.xpath(
+																	"//h1[contains(text(),'SERVER ERROR (500)')]"))
+																	.isDisplayed()) {
+																Reporting.updateTestReport(
+																		"Server error came in cart page and the page was refreshed",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.INFO);
+																driver.navigate().refresh();
+															}
+														} catch (Exception e1) {
+															Reporting.updateTestReport(
+																	"User was not in the cart page"
+																			+ " and caused timeout exception",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
+														}
+													}
+													BigDecimal subtotal = new BigDecimal(
+															WEL.fetchOrderSubTotalInCartPage().substring(1));
+													if (price.compareTo(subtotal) == 0)
 														Reporting.updateTestReport(
-																"First Product price + Second Product price -discount "
-																		+ " = Order total in Order Review step",
+																"The addition of all the products' price is same as the subtotal in cart page",
 																CaptureScreenshot.getScreenshot(SS_path),
 																StatusDetails.PASS);
 													else
 														Reporting.updateTestReport(
-																"First Product price +second product price- discount is not equal to Order total in Order Review step",
+																"The addition of all the products' pricedidn't match with the subtotal in cart page",
 																CaptureScreenshot.getScreenshot(SS_path),
 																StatusDetails.FAIL);
+													try {
+														wait.until(ExpectedConditions
+																.elementToBeClickable(By.id("cartCheckoutBtn")));
+														WEL.clickonCheckOutButtonOnCartPage();
+														try {
+															wait.until(ExpectedConditions.visibilityOfElementLocated(
+																	By.id("checkoutLogRegPageTitle")));
+															WEL.enterExistingUserNameInCheckoutLoginPage(
+																	excelOperation.getTestData("TC15", "WEL_Test_Data",
+																			"Email_Address"));
+															WEL.enterExistingUserPasswordInCheckoutLoginPage(
+																	excelOperation.getTestData("TC15", "WEL_Test_Data",
+																			"Password"));
+															WEL.clickOnLoginButtonInCheckoutLoginPage();
+															try {
+																wait.until(ExpectedConditions
+																		.visibilityOfElementLocated(By.xpath(
+																				"//h5[@class='welCommonHeadingTitle']")));
+																WEL.firstName(excelOperation.getTestData("TC15",
+																		"WEL_Test_Data", "First_Name"));
+																WEL.lastName(excelOperation.getTestData("TC15",
+																		"WEL_Test_Data", "Last_Name"));
+																WEL.selectBillCountry(excelOperation.getTestData("TC15",
+																		"WEL_Test_Data", "Bill_Country"));
+																WEL.addressLineOne(excelOperation.getTestData("TC15",
+																		"WEL_Test_Data", "Bill_Address_line1"));
+																WEL.enterZipcode(excelOperation.getTestData("TC15",
+																		"WEL_Test_Data", "Bill_Zip_Code"));
+																WEL.enterState(excelOperation.getTestData("TC15",
+																		"WEL_Test_Data", "Bill_State"));
+																WEL.enterCity(excelOperation.getTestData("TC15",
+																		"WEL_Test_Data", "Bill_City/ Province"));
+																WEL.enterPhoneNumber(excelOperation.getTestData("TC15",
+																		"WEL_Test_Data", "Bill_Phone_Number"));
+																WEL.verifyPaypaltext();
+																Reporting.updateTestReport(
+																		"User was in Billing step after successful registration",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.PASS);
+															} catch (Exception e) {
+																Reporting.updateTestReport(
+																		"User was not in billing step and caused timeout exception",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.FAIL);
+															}
+															try {
+																wait.until(ExpectedConditions
+																		.visibilityOfElementLocated(By.xpath(
+																				"//div[@id='orderSummaryProductTotalValue']")));
 
+																BigDecimal firstproductprice2 = new BigDecimal(
+																		WEL.fetchFirstProductPriceInOrderReview()
+																				.substring(1));
+
+																String discount = WEL.fetchDiscountInOrderReview();
+																if (discount.contains(","))
+																	discount = discount.replace(",", "");
+																BigDecimal discountinorderreview = new BigDecimal(
+																		discount.substring(1));
+																String totalorderReview = WEL.fetchTotalInOrderReview();
+																if (totalorderReview.contains(","))
+																	totalorderReview = totalorderReview.replace(",",
+																			"");
+																BigDecimal orderTotalPrice1 = new BigDecimal(
+																		totalorderReview.substring(1));
+																if (firstproductprice2.subtract(discountinorderreview)
+																		.compareTo(orderTotalPrice1) == 0)
+																	Reporting.updateTestReport(
+																			"First Product price + Second Product price -discount "
+																					+ " = Order total in Order Review step",
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.PASS);
+																else
+																	Reporting.updateTestReport(
+																			"First Product price +second product price- discount is not equal to Order total in Order Review step",
+																			CaptureScreenshot.getScreenshot(SS_path),
+																			StatusDetails.FAIL);
+
+															} catch (Exception e) {
+																Reporting.updateTestReport(
+																		"Order summary tab was not visible"
+																				+ e.getMessage(),
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.FAIL);
+															}
+
+														} catch (Exception e) {
+															Reporting.updateTestReport(
+																	"User was not redirected to checkout login/ registration page and caused timeout exception",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
+														}
+														// WEL.clickOnEnterNewAddressButtonOnShippingPage();
+
+													} catch (Exception e) {
+														Reporting.updateTestReport(
+																"Checkout button was not clickable in cart page and caused timeout exception",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+													}
 												} catch (Exception e) {
 													Reporting.updateTestReport(
-															"Order summary tab was not visible" + e.getMessage(),
+															"GET PLATINUM WILEY CMA COURSE -> button didn't appear",
 															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
+															StatusDetails.INFO);
 												}
-
 											} catch (Exception e) {
 												Reporting.updateTestReport(
-														"User was not redirected to checkout login/ registration page and caused timeout exception",
+														"Failed to click on CMA eBook caused timeout exception",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
-											// WEL.clickOnEnterNewAddressButtonOnShippingPage();
-
 										} catch (Exception e) {
 											Reporting.updateTestReport(
-													"Checkout button was not clickable in cart page and caused timeout exception",
+													"Add To Cart button on product page was not clickable and caused timeout exception ",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 									} catch (Exception e) {
 										Reporting.updateTestReport(
-												"Add To Cart button on product page was not clickable and caused timeout exception ",
+												"CMA Product details page didn't appear and caused timeout exception",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 								} catch (Exception e) {
 									Reporting.updateTestReport(
-											"CIA Product details page didn't appear and caused timeout exception",
+											"CMA Review Course title was not visible and caused timeout exception",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 							} catch (Exception e) {
@@ -3144,7 +3201,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				} catch (Exception e) {
-					Reporting.updateTestReport("CIA Link on homepage was not clickable and caused timeout exception ",
+					Reporting.updateTestReport("CMA Link on homepage was not clickable and caused timeout exception ",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			} catch (Exception e) {
@@ -3399,22 +3456,24 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions
 						.elementToBeClickable(By.xpath("//div[@class='form-group']//input[@id='inputPartnerSearch']")));
 				WEL.enterUniversityName(excelOperation.getTestData("TC17", "WEL_Test_Data", "Partner_Name"));
-				ScrollingWebPage.PageScrolldown(driver, 0, 230, SS_path);
-				Thread.sleep(100);
 				try {
-					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-							"//div[@class='container product-categories-container']//div[2]//dd/a[contains(text(),'CPA')]")));
-					WEL.clickOnDeanDortonCMAProduct();
+					wait.until(ExpectedConditions.visibilityOfElementLocated(
+							By.xpath("(//div[@class='col-xs-12 col-md-4 product-categories-card-padding'])[1]")));
 					ScrollingWebPage.PageDown(driver, SS_path);
 					try {
-						wait.until(ExpectedConditions.visibilityOfElementLocated(
-								By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
-						String price = WEL.fetchPartnerProductPriceInPDP();
+						wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+								"//div[@class='container product-categories-container']//div[2]//dd/a[contains(text(),'CPA')]")));
+						WEL.clickOnDeanDortonCMAProduct();
+						ScrollingWebPage.PageDown(driver, SS_path);
 						try {
-							wait.until(ExpectedConditions.elementToBeClickable(
+							wait.until(ExpectedConditions.visibilityOfElementLocated(
 									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
-							WEL.clickOnAddToCartButtonOnPDP();
-							
+							String price = WEL.fetchPartnerProductPriceInPDP();
+							try {
+								wait.until(ExpectedConditions.elementToBeClickable(
+										By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+								WEL.clickOnAddToCartButtonOnPDP();
+
 								try {
 									wait.until(ExpectedConditions
 											.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
@@ -3432,7 +3491,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -3446,17 +3505,20 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 											"The addition of all the products' pricedidn't match with the subtotal in cart page",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							} catch (Exception e) {
-								Reporting.updateTestReport(
-										"Failed to click on Add To Cart button due to timeout exception",
+								Reporting.updateTestReport("Account geader is not appeared due to timeout exception",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
 							}
-							
 						} catch (Exception e) {
-							Reporting.updateTestReport(
-									"Add To Cart button was not visible and caused timeout exception",
+							Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
-							
+
+					} catch (Exception e) {
+						Reporting.updateTestReport("Add To Cart button was not visible and caused timeout exception",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+
 				} catch (Exception e) {
 					Reporting.updateTestReport("Failed to click on DeanDorton CMA Product caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -3494,49 +3556,58 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 				wait.until(ExpectedConditions
 						.elementToBeClickable(By.xpath("//div[@class='form-group']//input[@id='inputPartnerSearch']")));
 				WEL.enteruniversityName(excelOperation.getTestData("TC18", "WEL_Test_Data", "Partner_Name"));
-				ScrollingWebPage.PageDown(driver, SS_path);
 				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-							"//div[@class='partner-detail partner-list-container']//div[@class='col-xs-12 col-sm-6 package-selection-col']//button")));
-					BigDecimal price = new BigDecimal(WEL.fetchPartnerProductPriceInPDP().substring(1));
+					wait.until(ExpectedConditions.visibilityOfElementLocated(
+							By.xpath("//div[@class='container package-selection-title-container']")));
+
+					ScrollingWebPage.PageDown(driver, SS_path);
 					try {
-						wait.until(ExpectedConditions.elementToBeClickable(
-								By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
-
-						WEL.clickOnAddToCartButtonOnPDP();
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+								"//div[@class='partner-detail partner-list-container']//div[@class='col-xs-12 col-sm-6 package-selection-col']//button")));
+						BigDecimal price = new BigDecimal(WEL.fetchPartnerProductPriceInPDP().substring(1));
 						try {
-							wait.until(ExpectedConditions
-									.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+							wait.until(ExpectedConditions.elementToBeClickable(
+									By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
 
-						} catch (Exception e) {
+							WEL.clickOnAddToCartButtonOnPDP();
 							try {
-								if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-										.isDisplayed()) {
+								wait.until(ExpectedConditions
+										.elementToBeClickable(By.xpath("//button[@id='cartCheckoutBtn']/span")));
+
+							} catch (Exception e) {
+								try {
+									if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+											.isDisplayed()) {
+										Reporting.updateTestReport(
+												"Server error came in cart page and the page was refreshed",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+										driver.navigate().refresh();
+									}
+								} catch (Exception e1) {
 									Reporting.updateTestReport(
-											"Server error came in cart page and the page was refreshed",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-									driver.navigate().refresh();
+											"Checkout button was not clickable in the cart page"
+													+ " and caused timeout exception",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
-							} catch (Exception e1) {
-								Reporting.updateTestReport(
-										"Checkout button was not clickable in the cart page"
-												+ " and caused timeout exception",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
 							}
 
-						}
-						
-						BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
-						if (price.compareTo(subtotal) == 0)
-							Reporting.updateTestReport(
-									"The addition of all the products' price is same as the subtotal in cart page",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport(
-									"The addition of all the products' pricedidn't match with the subtotal in cart page",
+							BigDecimal subtotal = new BigDecimal(WEL.fetchOrderSubTotalInCartPage().substring(1));
+							if (price.compareTo(subtotal) == 0)
+								Reporting.updateTestReport(
+										"The addition of all the products' price is same as the subtotal in cart page",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport(
+										"The addition of all the products' pricedidn't match with the subtotal in cart page",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						} catch (Exception e) {
+							Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
 					} catch (Exception e) {
-						Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
+						Reporting.updateTestReport(
+								"Pro CPA Review Course 2023 titles was not visible due to timeout exception",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				} catch (Exception e) {
@@ -3794,103 +3865,92 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 													try {
 														wait.until(ExpectedConditions.visibilityOfElementLocated(
 																By.xpath("//input[@id='line1']")));
+														WEL.shipAddressLineOne(excelOperation.getTestData("TC20",
+																"WEL_Test_Data", "Shipping_Address_line1"));
+														WEL.shipTownCity(excelOperation.getTestData("TC20",
+																"WEL_Test_Data", "Shipping_City/ Province"));
+														WEL.enterState(excelOperation.getTestData("TC20",
+																"WEL_Test_Data", "Shipping_State"));
+														WEL.shipPostCode(excelOperation.getTestData("TC20",
+																"WEL_Test_Data", "Shipping_Zip_Code"));
+														WEL.shipPhonenumber(excelOperation.getTestData("TC20",
+																"WEL_Test_Data", "Shipping_Phone_Number"));
+														WEL.clickingOnSaveAndContinue();
 														try {
-															wait.until(ExpectedConditions.visibilityOfElementLocated(
-																	By.xpath("//div[@class='helpButton']")));
-															WEL.shipAddressLineOne(excelOperation.getTestData("TC20",
-																	"WEL_Test_Data", "Shipping_Address_line1"));
-															WEL.shipTownCity(excelOperation.getTestData("TC20",
-																	"WEL_Test_Data", "Shipping_City/ Province"));
-															WEL.enterState(excelOperation.getTestData("TC20",
-																	"WEL_Test_Data", "Shipping_State"));
-															WEL.shipPostCode(excelOperation.getTestData("TC20",
-																	"WEL_Test_Data", "Shipping_Zip_Code"));
-															WEL.shipPhonenumber(excelOperation.getTestData("TC20",
-																	"WEL_Test_Data", "Shipping_Phone_Number"));
-															WEL.clickingOnSaveAndContinue();
-															try {
-																if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
-																		.isDisplayed())
-																	WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
-															} catch (Exception e) {
-																Reporting.updateTestReport(
-																		"Failed to click Address on Address SUggestion due to timeout exception",
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.INFO);
-															}
-
-															Reporting.updateTestReport(
-																	"User was in shipping step after successful registration",
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.PASS);
+															if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
+																	.isDisplayed())
+																WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
 														} catch (Exception e) {
 															Reporting.updateTestReport(
-																	"User was not in shipping step and caused timeout exception",
+																	"Failed to click Address on Address SUggestion due to timeout exception",
 																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.FAIL);
-														}
-														try {
-															wait.until(ExpectedConditions.visibilityOfElementLocated(By
-																	.xpath("//div[@id='orderSummaryProductTotalValue']")));
-
-															BigDecimal firstproductprice2 = new BigDecimal(
-																	WEL.fetchFirstProductPriceInOrderReview()
-																			.substring(1));
-
-															String discount = WEL.fetchDiscountInOrderReview();
-															if (discount.contains(","))
-																discount = discount.replace(",", "");
-															BigDecimal discountinorderreview = new BigDecimal(
-																	discount.substring(1));
-															String totalorderReview = WEL.fetchTotalInOrderReview();
-															if (totalorderReview.contains(","))
-																totalorderReview = totalorderReview.replace(",", "");
-															String shippingcharge = WEL
-																	.fetchShippingChargeInOrderReview();
-
-															if (shippingcharge.contains(","))
-																shippingcharge = shippingcharge.replace(",", "");
-															BigDecimal ShipchargoneReviewpage = new BigDecimal(
-																	shippingcharge.substring(1));
-
-															BigDecimal orderTotalPrice1 = new BigDecimal(
-																	totalorderReview.substring(1));
-															if (firstproductprice2.subtract(discountinorderreview)
-																	.add(ShipchargoneReviewpage)
-																	.compareTo(orderTotalPrice1) == 0)
-																Reporting.updateTestReport(
-																		"First Product price + shippingcharge -discount "
-																				+ " = Order total in Order Review step",
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.PASS);
-															else
-																Reporting.updateTestReport(
-																		"First Product price +shipping charge- discount is not equal to Order total in Order Review step",
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.FAIL);
-
-														} catch (Exception e) {
-															Reporting.updateTestReport(
-																	"Order summary tab was not visible"
-																			+ e.getMessage(),
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.FAIL);
+																	StatusDetails.INFO);
 														}
 
+														Reporting.updateTestReport(
+																"User was in shipping step after successful registration",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
 													} catch (Exception e) {
 														Reporting.updateTestReport(
-																"User was not redirected to checkout login/ registration page and caused timeout exception",
+																"User was not in shipping step and caused timeout exception",
 																CaptureScreenshot.getScreenshot(SS_path),
 																StatusDetails.FAIL);
 													}
-													// WEL.clickOnEnterNewAddressButtonOnShippingPage();
-													ScrollingWebPage.PageScrolldown(driver, 0, 350, SS_path);
+													try {
+														wait.until(ExpectedConditions.visibilityOfElementLocated(By
+																.xpath("//div[@id='orderSummaryProductTotalValue']")));
+
+														BigDecimal firstproductprice2 = new BigDecimal(
+																WEL.fetchFirstProductPriceInOrderReview().substring(1));
+
+														String discount = WEL.fetchDiscountInOrderReview();
+														if (discount.contains(","))
+															discount = discount.replace(",", "");
+														BigDecimal discountinorderreview = new BigDecimal(
+																discount.substring(1));
+														String totalorderReview = WEL.fetchTotalInOrderReview();
+														if (totalorderReview.contains(","))
+															totalorderReview = totalorderReview.replace(",", "");
+														String shippingcharge = WEL.fetchShippingChargeInOrderReview();
+
+														if (shippingcharge.contains(","))
+															shippingcharge = shippingcharge.replace(",", "");
+														BigDecimal ShipchargoneReviewpage = new BigDecimal(
+																shippingcharge.substring(1));
+
+														BigDecimal orderTotalPrice1 = new BigDecimal(
+																totalorderReview.substring(1));
+														if (firstproductprice2.subtract(discountinorderreview)
+																.add(ShipchargoneReviewpage)
+																.compareTo(orderTotalPrice1) == 0)
+															Reporting.updateTestReport(
+																	"First Product price + shippingcharge -discount "
+																			+ " = Order total in Order Review step",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.PASS);
+														else
+															Reporting.updateTestReport(
+																	"First Product price +shipping charge- discount is not equal to Order total in Order Review step",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
+
+													} catch (Exception e) {
+														Reporting.updateTestReport(
+																"Order summary tab was not visible" + e.getMessage(),
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+													}
+
 												} catch (Exception e) {
 													Reporting.updateTestReport(
-															"Help button was not visible and caused timeout exception",
+															"User was not redirected to checkout login/ registration page and caused timeout exception",
 															CaptureScreenshot.getScreenshot(SS_path),
 															StatusDetails.FAIL);
 												}
+												// WEL.clickOnEnterNewAddressButtonOnShippingPage();
+												ScrollingWebPage.PageScrolldown(driver, 0, 350, SS_path);
+
 											} catch (Exception e) {
 												Reporting.updateTestReport(
 														"Address line 1 was not clickable and caused timeout exception",
@@ -4041,37 +4101,29 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 													try {
 														wait.until(ExpectedConditions.visibilityOfElementLocated(
 																By.xpath("//input[@id='line1']")));
+														WEL.shipAddressLineOne(excelOperation.getTestData("TC21",
+																"WEL_Test_Data", "Shipping_Address_line1"));
+														WEL.shipTownCity(excelOperation.getTestData("TC21",
+																"WEL_Test_Data", "Shipping_City/ Province"));
+														WEL.enterState(excelOperation.getTestData("TC21",
+																"WEL_Test_Data", "Shipping_State"));
+														WEL.shipPostCode(excelOperation.getTestData("TC21",
+																"WEL_Test_Data", "Shipping_Zip_Code"));
+														WEL.shipPhonenumber(excelOperation.getTestData("TC21",
+																"WEL_Test_Data", "Shipping_Phone_Number"));
+														WEL.clickingOnSaveAndContinue();
 														try {
-															wait.until(ExpectedConditions.visibilityOfElementLocated(
-																	By.xpath("//div[@class='helpButton']")));
-															WEL.shipAddressLineOne(excelOperation.getTestData("TC21",
-																	"WEL_Test_Data", "Shipping_Address_line1"));
-															WEL.shipTownCity(excelOperation.getTestData("TC21",
-																	"WEL_Test_Data", "Shipping_City/ Province"));
-															WEL.enterState(excelOperation.getTestData("TC21",
-																	"WEL_Test_Data", "Shipping_State"));
-															WEL.shipPostCode(excelOperation.getTestData("TC21",
-																	"WEL_Test_Data", "Shipping_Zip_Code"));
-															WEL.shipPhonenumber(excelOperation.getTestData("TC21",
-																	"WEL_Test_Data", "Shipping_Phone_Number"));
-															WEL.clickingOnSaveAndContinue();
-															try {
-																if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
-																		.isDisplayed())
-																	WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
-															} catch (Exception e) {
-																Reporting.updateTestReport(
-																		"Failed to click Address on Address SUggestion due to timeout exception",
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.INFO);
-															}
-															ScrollingWebPage.PageScrolldown(driver, 0, 350, SS_path);
+															if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
+																	.isDisplayed())
+																WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
 														} catch (Exception e) {
 															Reporting.updateTestReport(
-																	"Help button was not visible and caused timeout exception",
+																	"Failed to click Address on Address SUggestion due to timeout exception",
 																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.FAIL);
+																	StatusDetails.INFO);
 														}
+														ScrollingWebPage.PageScrolldown(driver, 0, 350, SS_path);
+
 													} catch (Exception e) {
 														Reporting.updateTestReport(
 																"Address line 1 was not clickable and caused timeout exception",
@@ -4284,89 +4336,79 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 													try {
 														wait.until(ExpectedConditions.visibilityOfElementLocated(
 																By.xpath("//input[@id='line1']")));
+														WEL.shipAddressLineOne(excelOperation.getTestData("TC22",
+																"WEL_Test_Data", "Shipping_Address_line1"));
+														WEL.shipTownCity(excelOperation.getTestData("TC22",
+																"WEL_Test_Data", "Shipping_City/ Province"));
+														WEL.enterState(excelOperation.getTestData("TC22",
+																"WEL_Test_Data", "Shipping_State"));
+														WEL.shipPostCode(excelOperation.getTestData("TC22",
+																"WEL_Test_Data", "Shipping_Zip_Code"));
+														WEL.shipPhonenumber(excelOperation.getTestData("TC22",
+																"WEL_Test_Data", "Shipping_Phone_Number"));
+
+														WEL.clickingOnSaveAndContinue();
 														try {
-															wait.until(ExpectedConditions.visibilityOfElementLocated(
-																	By.xpath("//div[@class='helpButton']")));
-															WEL.shipAddressLineOne(excelOperation.getTestData("TC22",
-																	"WEL_Test_Data", "Shipping_Address_line1"));
-															WEL.shipTownCity(excelOperation.getTestData("TC22",
-																	"WEL_Test_Data", "Shipping_City/ Province"));
-															WEL.enterState(excelOperation.getTestData("TC22",
-																	"WEL_Test_Data", "Shipping_State"));
-															WEL.shipPostCode(excelOperation.getTestData("TC22",
-																	"WEL_Test_Data", "Shipping_Zip_Code"));
-															WEL.shipPhonenumber(excelOperation.getTestData("TC22",
-																	"WEL_Test_Data", "Shipping_Phone_Number"));
-
-															WEL.clickingOnSaveAndContinue();
-															try {
-																if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
-																		.isDisplayed())
-																	WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
-															} catch (Exception e) {
-																Reporting.updateTestReport(
-																		"Failed to click Address on Address SUggestion due to timeout exception",
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.INFO);
-															}
-
-															try {
-																wait.until(ExpectedConditions
-																		.visibilityOfElementLocated(By.xpath(
-																				"//div[@id='orderSummaryProductTotalValue']")));
-
-																BigDecimal firstproductprice2 = new BigDecimal(
-																		WEL.fetchFirstProductPriceInOrderReview()
-																				.substring(1));
-
-																String discount = WEL.fetchDiscountInOrderReview();
-																if (discount.contains(","))
-																	discount = discount.replace(",", "");
-																BigDecimal discountinorderreview = new BigDecimal(
-																		discount.substring(1));
-																String totalorderReview = WEL.fetchTotalInOrderReview();
-																if (totalorderReview.contains(","))
-																	totalorderReview = totalorderReview.replace(",",
-																			"");
-																String shippingcharge = WEL
-																		.fetchShippingChargeInOrderReview();
-
-																if (shippingcharge.contains(","))
-																	shippingcharge = shippingcharge.replace(",", "");
-																BigDecimal ShipchargoneReviewpage = new BigDecimal(
-																		shippingcharge.substring(1));
-
-																BigDecimal orderTotalPrice1 = new BigDecimal(
-																		totalorderReview.substring(1));
-																if (firstproductprice2.subtract(discountinorderreview)
-																		.add(ShipchargoneReviewpage)
-																		.compareTo(orderTotalPrice1) == 0)
-																	Reporting.updateTestReport(
-																			"First Product price + shippingcharge -discount "
-																					+ " = Order total in Order Review step",
-																			CaptureScreenshot.getScreenshot(SS_path),
-																			StatusDetails.PASS);
-																else
-																	Reporting.updateTestReport(
-																			"First Product price +shipping charge- discount is not equal to Order total in Order Review step",
-																			CaptureScreenshot.getScreenshot(SS_path),
-																			StatusDetails.FAIL);
-
-															} catch (Exception e) {
-																Reporting.updateTestReport(
-																		"Order summary tab was not visible"
-																				+ e.getMessage(),
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.FAIL);
-															}
-
-															ScrollingWebPage.PageScrolldown(driver, 0, 350, SS_path);
+															if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
+																	.isDisplayed())
+																WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
 														} catch (Exception e) {
 															Reporting.updateTestReport(
-																	"Help button was not visible and caused timeout exception",
+																	"Failed to click Address on Address SUggestion due to timeout exception",
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.INFO);
+														}
+
+														try {
+															wait.until(ExpectedConditions.visibilityOfElementLocated(By
+																	.xpath("//div[@id='orderSummaryProductTotalValue']")));
+
+															BigDecimal firstproductprice2 = new BigDecimal(
+																	WEL.fetchFirstProductPriceInOrderReview()
+																			.substring(1));
+
+															String discount = WEL.fetchDiscountInOrderReview();
+															if (discount.contains(","))
+																discount = discount.replace(",", "");
+															BigDecimal discountinorderreview = new BigDecimal(
+																	discount.substring(1));
+															String totalorderReview = WEL.fetchTotalInOrderReview();
+															if (totalorderReview.contains(","))
+																totalorderReview = totalorderReview.replace(",", "");
+															String shippingcharge = WEL
+																	.fetchShippingChargeInOrderReview();
+
+															if (shippingcharge.contains(","))
+																shippingcharge = shippingcharge.replace(",", "");
+															BigDecimal ShipchargoneReviewpage = new BigDecimal(
+																	shippingcharge.substring(1));
+
+															BigDecimal orderTotalPrice1 = new BigDecimal(
+																	totalorderReview.substring(1));
+															if (firstproductprice2.subtract(discountinorderreview)
+																	.add(ShipchargoneReviewpage)
+																	.compareTo(orderTotalPrice1) == 0)
+																Reporting.updateTestReport(
+																		"First Product price + shippingcharge -discount "
+																				+ " = Order total in Order Review step",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.PASS);
+															else
+																Reporting.updateTestReport(
+																		"First Product price +shipping charge- discount is not equal to Order total in Order Review step",
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.FAIL);
+
+														} catch (Exception e) {
+															Reporting.updateTestReport(
+																	"Order summary tab was not visible"
+																			+ e.getMessage(),
 																	CaptureScreenshot.getScreenshot(SS_path),
 																	StatusDetails.FAIL);
 														}
+
+														ScrollingWebPage.PageScrolldown(driver, 0, 350, SS_path);
+
 													} catch (Exception e) {
 														Reporting.updateTestReport(
 																"Address line 1 was not clickable and caused timeout exception",
@@ -4690,393 +4732,486 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 						wait.until(ExpectedConditions
 								.elementToBeClickable(By.xpath("//button[@class='shop-courses-btn  ']")));
 						WEL.clickOnExploreCourseButton();
-						ScrollingWebPage.PageScrolldown(driver, 0, 990, SS_path);
 						try {
-							wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-									"//a[@href='/cpa/products/platinum-cpa-review-course/']/button[contains(text(),'VIEW COURSE')]")));
-							WEL.clickOnCPAViewCourseButton();
+							wait.until(ExpectedConditions.visibilityOfElementLocated(By
+									.xpath("//div[@class='card-title course-pkg-cards-heading most-popular-block']")));
+							ScrollingWebPage.PageDown(driver, SS_path);
 							try {
 								wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-										"//div[@class='btn-group btn-group-toggle']/label[@class='btn btn-secondary print-ebook active']")));
-								WEL.clickonCPAPrinteBook();
-								driver.navigate().refresh();
-								ScrollingWebPage.PageDown(driver, SS_path);
-								BigDecimal firstproductprice = new BigDecimal(
-										WEL.fetchProductPriceInPDP().substring(1));
+										"//a[@href='/cpa/products/platinum-cpa-review-course/']/button[contains(text(),'VIEW COURSE')]")));
+								WEL.clickOnCPAViewCourseButton();
 								try {
-									wait.until(ExpectedConditions.elementToBeClickable(
-											By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
-									WEL.clickOnAddToCartButtonOnPDP();
+									wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+											"//div[@class='btn-group btn-group-toggle']/label[@class='btn btn-secondary print-ebook active']")));
+									WEL.clickonCPAPrinteBook();
+									driver.navigate().refresh();
+									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal firstproductprice = new BigDecimal(
+											WEL.fetchProductPriceInPDP().substring(1));
 									try {
-										wait.until(ExpectedConditions
-												.visibilityOfElementLocated(By.id("cartPageMainTitle")));
-									} catch (Exception e) {
+										wait.until(ExpectedConditions.visibilityOfElementLocated(
+												By.xpath("//div[@class='row package-form-row']/div/h4")));
+
 										try {
-											if (driver
-													.findElement(
-															By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-													.isDisplayed()) {
-												Reporting.updateTestReport(
-														"Server error came in cart page and the page was refreshed",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-												driver.navigate().refresh();
-											}
-										} catch (Exception e1) {
-											Reporting.updateTestReport(
-													"User was not in the cart page" + " and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
-									}
-									driver.get(WEL_Homepage_URL);
-									try {
-										wait.until(ExpectedConditions
-												.elementToBeClickable(By.xpath("//a[@aria-label='login']")));
-										ScrollingWebPage.PageDown(driver, SS_path);
-										try {
-											wait.until(ExpectedConditions.elementToBeClickable(
-													By.xpath("//a[@data-for='productTooltipCMA' and @data-key='1']")));
-											WEL.clickOnCMALinkOnHomepage();
+											wait.until(ExpectedConditions.elementToBeClickable(By
+													.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+											WEL.clickOnAddToCartButtonOnPDP();
 											try {
-												wait.until(ExpectedConditions.elementToBeClickable(
-														By.xpath("//button[@class='shop-courses-btn  ']")));
-												driver.navigate().refresh();
-												WEL.clickOnExploreCourseButton();
+												wait.until(ExpectedConditions
+														.visibilityOfElementLocated(By.id("cartPageMainTitle")));
+											} catch (Exception e) {
 												try {
-													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("(//div[@class='price-block'])[1]")));
-													ScrollingWebPage.PageDown(driver, SS_path);
+													if (driver
+															.findElement(By.xpath(
+																	"//h1[contains(text(),'SERVER ERROR (500)')]"))
+															.isDisplayed()) {
+														Reporting.updateTestReport(
+																"Server error came in cart page and the page was refreshed",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.INFO);
+														driver.navigate().refresh();
+													}
+												} catch (Exception e1) {
+													Reporting.updateTestReport(
+															"User was not in the cart page"
+																	+ " and caused timeout exception",
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
+												}
+											}
+											driver.get(WEL_Homepage_URL);
+											try {
+												wait.until(ExpectedConditions
+														.elementToBeClickable(By.xpath("//a[@aria-label='login']")));
+												ScrollingWebPage.PageDown(driver, SS_path);
+												try {
+													wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+															"//a[@data-for='productTooltipCMA' and @data-key='1']")));
+													WEL.clickOnCMALinkOnHomepage();
 													try {
-														wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-																"//a[@href='/cma/products/platinum-cma-review-course/']"
-																		+ "/button[contains(text(),'VIEW COURSE OPTIONS')]")));
-														WEL.clickOnCMAViewCourseButton();
+														wait.until(ExpectedConditions.elementToBeClickable(
+																By.xpath("//button[@class='shop-courses-btn  ']")));
+														driver.navigate().refresh();
+														WEL.clickOnExploreCourseButton();
 														try {
-															wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-																	"//div[@class='btn-group btn-group-toggle']/label[1]")));
-															WEL.clickonCMAPrinteBook();
-															driver.navigate().refresh();
+															wait.until(ExpectedConditions.visibilityOfElementLocated(
+																	By.xpath("(//div[@class='price-block'])[1]")));
 															ScrollingWebPage.PageDown(driver, SS_path);
-															BigDecimal secondproductprice = new BigDecimal(
-																	WEL.fetchProductPriceInPDP().substring(1));
 															try {
 																wait.until(ExpectedConditions.elementToBeClickable(By
-																		.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
-																WEL.clickOnAddToCartButtonOnPDP();
+																		.xpath("//a[@href='/cma/products/platinum-cma-review-course/']"
+																				+ "/button[contains(text(),'VIEW COURSE OPTIONS')]")));
+																WEL.clickOnCMAViewCourseButton();
 																try {
 																	wait.until(ExpectedConditions
-																			.visibilityOfElementLocated(
-																					By.id("cartPageMainTitle")));
-																} catch (Exception e) {
-																	try {
-																		if (driver.findElement(By.xpath(
-																				"//h1[contains(text(),'SERVER ERROR (500)')]"))
-																				.isDisplayed()) {
-																			Reporting.updateTestReport(
-																					"Server error came in cart page and the page was refreshed",
-																					CaptureScreenshot
-																							.getScreenshot(SS_path),
-																					StatusDetails.INFO);
-																			driver.navigate().refresh();
-																		}
-																	} catch (Exception e1) {
-																		Reporting.updateTestReport(
-																				"User was not in the cart page"
-																						+ " and caused timeout exception",
-																				CaptureScreenshot.getScreenshot(
-																						SS_path),
-																				StatusDetails.FAIL);
-																	}
-																}
-																driver.get(WEL_Homepage_URL);
-																try {
-																	wait.until(ExpectedConditions.elementToBeClickable(
-																			By.xpath("//a[@aria-label='login']")));
+																			.elementToBeClickable(By.xpath(
+																					"//div[@class='btn-group btn-group-toggle']/label[1]")));
+																	WEL.clickonCMAPrinteBook();
+																	driver.navigate().refresh();
 																	ScrollingWebPage.PageDown(driver, SS_path);
-																} catch (Exception e) {
-
-																}
-																try {
-																	wait.until(ExpectedConditions
-																			.visibilityOfElementLocated(By.xpath(
-																					"//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_2']/a[1]")));
-																	WEL.clickonCFAlinkOnHomePage();
-																	try {
-																		wait.until(ExpectedConditions
-																				.visibilityOfElementLocated(By.xpath(
-																						"//button[@class='shop-courses-btn  ']")));
-																		WEL.clickOnExploreCourseButton();
-																	} catch (Exception e) {
-
-																	}
-																	ScrollingWebPage.PageScrolldown(driver, 0, 1250,
-																			SS_path);
+																	BigDecimal secondproductprice = new BigDecimal(
+																			WEL.fetchProductPriceInPDP().substring(1));
 																	try {
 																		wait.until(ExpectedConditions
 																				.elementToBeClickable(By.xpath(
-																						"//a[@href='/cfa/products/']"
-																								+ "/button[contains(text(),'VIEW COURSE OPTIONS')]")));
-																		WEL.clickOnCFAViewCourseButton();
+																						"//button[@type='submit' and @class='add-to-cart-btn  ']")));
+																		WEL.clickOnAddToCartButtonOnPDP();
 																		try {
 																			wait.until(ExpectedConditions
 																					.visibilityOfElementLocated(By
-																							.xpath("//div[@class='col compare-wiley-heading']")));
+																							.id("cartPageMainTitle")));
+																		} catch (Exception e) {
+																			try {
+																				if (driver.findElement(By.xpath(
+																						"//h1[contains(text(),'SERVER ERROR (500)')]"))
+																						.isDisplayed()) {
+																					Reporting.updateTestReport(
+																							"Server error came in cart page and the page was refreshed",
+																							CaptureScreenshot
+																									.getScreenshot(
+																											SS_path),
+																							StatusDetails.INFO);
+																					driver.navigate().refresh();
+																				}
+																			} catch (Exception e1) {
+																				Reporting.updateTestReport(
+																						"User was not in the cart page"
+																								+ " and caused timeout exception",
+																						CaptureScreenshot
+																								.getScreenshot(SS_path),
+																						StatusDetails.FAIL);
+																			}
+																		}
+																		driver.get(WEL_Homepage_URL);
+																		try {
+																			wait.until(ExpectedConditions
+																					.elementToBeClickable(By.xpath(
+																							"//a[@aria-label='login']")));
 																			ScrollingWebPage.PageDown(driver, SS_path);
 																			try {
 																				wait.until(ExpectedConditions
-																						.elementToBeClickable(By.xpath(
-																								"//a[@href='/cfa/products/level-1/platinum-cfa-course/' and contains(text(),'View Course')]")));
-																				WEL.clickOnCFAViewCourseLink();
-																				driver.navigate().refresh();
-																				ScrollingWebPage.PageDown(driver,
-																						SS_path);
-																				BigDecimal thirdproductprice = new BigDecimal(
-																						WEL.fetchProductPriceInPDP()
-																								.substring(1));
+																						.visibilityOfElementLocated(By
+																								.xpath("//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_2']/a[1]")));
+																				WEL.clickonCFAlinkOnHomePage();
 																				try {
 																					wait.until(ExpectedConditions
-																							.elementToBeClickable(By
-																									.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
-																					WEL.clickOnAddToCartButton();
+																							.visibilityOfElementLocated(
+																									By.xpath(
+																											"//button[@class='shop-courses-btn  ']")));
+																					WEL.clickOnExploreCourseButton();
+																					ScrollingWebPage.PageScrolldown(
+																							driver, 0, 1250, SS_path);
 																					try {
 																						wait.until(ExpectedConditions
 																								.visibilityOfElementLocated(
-																										By.id("cartPageMainTitle")));
-																					} catch (Exception e) {
-																						try {
-																							if (driver.findElement(By
-																									.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-																									.isDisplayed()) {
-																								Reporting
-																										.updateTestReport(
-																												"Server error came in cart page and the page was refreshed",
-																												CaptureScreenshot
-																														.getScreenshot(
-																																SS_path),
-																												StatusDetails.INFO);
-																								driver.navigate()
-																										.refresh();
-																							}
-																						} catch (Exception e1) {
-																							Reporting.updateTestReport(
-																									"User was not in the cart page"
-																											+ " and caused timeout exception",
-																									CaptureScreenshot
-																											.getScreenshot(
-																													SS_path),
-																									StatusDetails.FAIL);
-																						}
-																					}
-																					BigDecimal subtotal = new BigDecimal(
-																							WEL.fetchOrderSubTotalInCartPage()
-																									.substring(1));
-																					if (firstproductprice
-																							.add(secondproductprice)
-																							.add(thirdproductprice)
-																							.compareTo(subtotal) == 0)
-																						Reporting.updateTestReport(
-																								"The addition of all the products' price is same as the subtotal in cart page",
-																								CaptureScreenshot
-																										.getScreenshot(
-																												SS_path),
-																								StatusDetails.PASS);
-																					else
-																						Reporting.updateTestReport(
-																								"The addition of the price is not match with the subtotal in cart page due to multiple coupons was aplied in Cart Page",
-																								CaptureScreenshot
-																										.getScreenshot(
-																												SS_path),
-																								StatusDetails.INFO);
-																					try {
-																						wait.until(ExpectedConditions
-																								.elementToBeClickable(By
-																										.id("cartCheckoutBtn")));
-																						WEL.clickonCheckOutButtonOnCartPage();
+																										By.xpath(
+																												"(//div[@class='card course-pkg-cards-container ms-3 me-3']//div/div/p[@class='title'])[1]")));
+
+																						ScrollingWebPage.PageDown(
+																								driver, SS_path);
 																						try {
 																							wait.until(
 																									ExpectedConditions
-																											.visibilityOfElementLocated(
-																													By.id("checkoutLogRegPageTitle")));
-																							String GuestEmail = WEL
-																									.enterGuestuser();
-																							WEL.clickingOnCreateAccoutButton();
-																							WEL.guestConfirmEmailId(
-																									GuestEmail);
-																							WEL.enterPassword(
-																									excelOperation
-																											.getTestData(
-																													"TC24",
-																													"WEL_Test_Data",
-																													"Password"));
-																							WEL.clickonAgreementCheckBox();
-																							WEL.clickingOnSaveAndContinue();
-
+																											.elementToBeClickable(
+																													By.xpath(
+																															"//a[@href='/cfa/products/']"
+																																	+ "/button[contains(text(),'VIEW COURSE OPTIONS')]")));
+																							WEL.clickOnCFAViewCourseButton();
 																							try {
 																								wait.until(
 																										ExpectedConditions
 																												.visibilityOfElementLocated(
 																														By.xpath(
-																																"//h5[@id='shippingAddressTitle']/span")));
-																								WEL.firstName(
-																										excelOperation
-																												.getTestData(
-																														"TC24",
-																														"WEL_Test_Data",
-																														"First_Name"));
-																								WEL.lastName(
-																										excelOperation
-																												.getTestData(
-																														"TC24",
-																														"WEL_Test_Data",
-																														"Last_Name"));
-																								WEL.selectShipCountry(
-																										excelOperation
-																												.getTestData(
-																														"TC24",
-																														"WEL_Test_Data",
-																														"Shipping_Country"));
-																								WEL.shipAddressLineOne(
-																										excelOperation
-																												.getTestData(
-																														"TC24",
-																														"WEL_Test_Data",
-																														"Shipping_Address_line1"));
-																								WEL.shipTownCity(
-																										excelOperation
-																												.getTestData(
-																														"TC24",
-																														"WEL_Test_Data",
-																														"Shipping_City/ Province"));
-																								WEL.enterState(
-																										excelOperation
-																												.getTestData(
-																														"TC11",
-																														"WEL_Test_Data",
-																														"Shipping_State"));
-																								WEL.shipPostCode(
-																										excelOperation
-																												.getTestData(
-																														"TC24",
-																														"WEL_Test_Data",
-																														"Shipping_Zip_Code"));
-																								WEL.shipPhonenumber(
-																										excelOperation
-																												.getTestData(
-																														"TC24",
-																														"WEL_Test_Data",
-																														"Shipping_Phone_Number"));
-																								WEL.shipSaveAndContinueButton();
+																																"//div[@class='col compare-wiley-heading']")));
+																								driver.navigate()
+																										.refresh();
+																								ScrollingWebPage
+																										.PageDown(
+																												driver,
+																												SS_path);
 																								try {
-																									if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
-																											.isDisplayed())
-																										WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+																									wait.until(
+																											ExpectedConditions
+																													.elementToBeClickable(
+																															By.xpath(
+																																	"//a[@href='/cfa/products/level-1/platinum-cfa-course/' and contains(text(),'View Course')]")));
+																									WEL.clickOnCFAViewCourseLink();
+																									driver.navigate()
+																											.refresh();
+																									ScrollingWebPage
+																											.PageDown(
+																													driver,
+																													SS_path);
+																									BigDecimal thirdproductprice = new BigDecimal(
+																											WEL.fetchProductPriceInPDP()
+																													.substring(
+																															1));
+																									try {
+																										wait.until(
+																												ExpectedConditions
+																														.elementToBeClickable(
+																																By.xpath(
+																																		"//button[@type='submit' and contains(text(),'ADD TO CART')]")));
+																										WEL.clickOnAddToCartButton();
+																										try {
+																											wait.until(
+																													ExpectedConditions
+																															.visibilityOfElementLocated(
+																																	By.id("cartPageMainTitle")));
+																										} catch (Exception e) {
+																											try {
+																												if (driver
+																														.findElement(
+																																By.xpath(
+																																		"//h1[contains(text(),'SERVER ERROR (500)')]"))
+																														.isDisplayed()) {
+																													Reporting
+																															.updateTestReport(
+																																	"Server error came in cart page and the page was refreshed",
+																																	CaptureScreenshot
+																																			.getScreenshot(
+																																					SS_path),
+																																	StatusDetails.INFO);
+																													driver.navigate()
+																															.refresh();
+																												}
+																											} catch (Exception e1) {
+																												Reporting
+																														.updateTestReport(
+																																"User was not in the cart page"
+																																		+ " and caused timeout exception",
+																																CaptureScreenshot
+																																		.getScreenshot(
+																																				SS_path),
+																																StatusDetails.FAIL);
+																											}
+																										}
+																										BigDecimal subtotal = new BigDecimal(
+																												WEL.fetchOrderSubTotalInCartPage()
+																														.substring(
+																																1));
+																										if (firstproductprice
+																												.add(secondproductprice)
+																												.add(thirdproductprice)
+																												.compareTo(
+																														subtotal) == 0)
+																											Reporting
+																													.updateTestReport(
+																															"The addition of all the products' price is same as the subtotal in cart page",
+																															CaptureScreenshot
+																																	.getScreenshot(
+																																			SS_path),
+																															StatusDetails.PASS);
+																										else
+																											Reporting
+																													.updateTestReport(
+																															"The addition of the price is not match with the subtotal in cart page due to multiple coupons was aplied in Cart Page",
+																															CaptureScreenshot
+																																	.getScreenshot(
+																																			SS_path),
+																															StatusDetails.INFO);
+																										try {
+																											wait.until(
+																													ExpectedConditions
+																															.elementToBeClickable(
+																																	By.id("cartCheckoutBtn")));
+																											WEL.clickonCheckOutButtonOnCartPage();
+																											try {
+																												wait.until(
+																														ExpectedConditions
+																																.visibilityOfElementLocated(
+																																		By.id("checkoutLogRegPageTitle")));
+																												String GuestEmail = WEL
+																														.enterGuestuser();
+																												WEL.clickingOnCreateAccoutButton();
+																												WEL.guestConfirmEmailId(
+																														GuestEmail);
+																												WEL.enterPassword(
+																														excelOperation
+																																.getTestData(
+																																		"TC24",
+																																		"WEL_Test_Data",
+																																		"Password"));
+																												WEL.clickonAgreementCheckBox();
+																												WEL.clickingOnSaveAndContinue();
+
+																												try {
+																													wait.until(
+																															ExpectedConditions
+																																	.visibilityOfElementLocated(
+																																			By.xpath(
+																																					"//h5[@id='shippingAddressTitle']/span")));
+																													WEL.firstName(
+																															excelOperation
+																																	.getTestData(
+																																			"TC24",
+																																			"WEL_Test_Data",
+																																			"First_Name"));
+																													WEL.lastName(
+																															excelOperation
+																																	.getTestData(
+																																			"TC24",
+																																			"WEL_Test_Data",
+																																			"Last_Name"));
+																													WEL.selectShipCountry(
+																															excelOperation
+																																	.getTestData(
+																																			"TC24",
+																																			"WEL_Test_Data",
+																																			"Shipping_Country"));
+																													WEL.shipAddressLineOne(
+																															excelOperation
+																																	.getTestData(
+																																			"TC24",
+																																			"WEL_Test_Data",
+																																			"Shipping_Address_line1"));
+																													WEL.shipTownCity(
+																															excelOperation
+																																	.getTestData(
+																																			"TC24",
+																																			"WEL_Test_Data",
+																																			"Shipping_City/ Province"));
+																													WEL.enterState(
+																															excelOperation
+																																	.getTestData(
+																																			"TC11",
+																																			"WEL_Test_Data",
+																																			"Shipping_State"));
+																													WEL.shipPostCode(
+																															excelOperation
+																																	.getTestData(
+																																			"TC24",
+																																			"WEL_Test_Data",
+																																			"Shipping_Zip_Code"));
+																													WEL.shipPhonenumber(
+																															excelOperation
+																																	.getTestData(
+																																			"TC24",
+																																			"WEL_Test_Data",
+																																			"Shipping_Phone_Number"));
+																													WEL.shipSaveAndContinueButton();
+																													try {
+																														if (WEL.returnUseSelectedShippingAddressButtonAddressDoctorPopUp()
+																																.isDisplayed())
+																															WEL.clickOnUseSelectedShippingAddressButtonAddressDoctor();
+																													} catch (Exception e) {
+																														Reporting
+																																.updateTestReport(
+																																		"Failed to click Address on Address SUggestion due to timeout exception",
+																																		CaptureScreenshot
+																																				.getScreenshot(
+																																						SS_path),
+																																		StatusDetails.INFO);
+																													}
+
+																													Reporting
+																															.updateTestReport(
+																																	"User was in shipping step after successful registration",
+																																	CaptureScreenshot
+																																			.getScreenshot(
+																																					SS_path),
+																																	StatusDetails.PASS);
+																												} catch (Exception e) {
+																													Reporting
+																															.updateTestReport(
+																																	"User was not in shipping step and caused timeout exception",
+																																	CaptureScreenshot
+																																			.getScreenshot(
+																																					SS_path),
+																																	StatusDetails.FAIL);
+																												}
+																												try {
+																													wait.until(
+																															ExpectedConditions
+																																	.visibilityOfElementLocated(
+																																			By.xpath(
+																																					"//div[@id='orderSummaryProductTotalValue']")));
+
+																													BigDecimal firstproductprice2 = new BigDecimal(
+																															WEL.fetchFirstProductPriceInOrderReview()
+																																	.substring(
+																																			1));
+
+																													String discount = WEL
+																															.fetchDiscountInOrderReview();
+																													if (discount
+																															.contains(
+																																	","))
+																														discount = discount
+																																.replace(
+																																		",",
+																																		"");
+																													BigDecimal discountinorderreview = new BigDecimal(
+																															discount.substring(
+																																	1));
+																													String totalorderReview = WEL
+																															.fetchTotalInOrderReview();
+																													if (totalorderReview
+																															.contains(
+																																	","))
+																														totalorderReview = totalorderReview
+																																.replace(
+																																		",",
+																																		"");
+																													BigDecimal orderTotalPrice1 = new BigDecimal(
+																															totalorderReview
+																																	.substring(
+																																			1));
+																													if (firstproductprice2
+																															.subtract(
+																																	discountinorderreview)
+																															.compareTo(
+																																	orderTotalPrice1) == 0)
+																														Reporting
+																																.updateTestReport(
+																																		"First Product price + Second Product price -discount "
+																																				+ " = Order total in Order Review step",
+																																		CaptureScreenshot
+																																				.getScreenshot(
+																																						SS_path),
+																																		StatusDetails.PASS);
+																													else
+																														Reporting
+																																.updateTestReport(
+																																		"First Product price +second product price- discount is not equal to Order total in Order Review step",
+																																		CaptureScreenshot
+																																				.getScreenshot(
+																																						SS_path),
+																																		StatusDetails.FAIL);
+
+																												} catch (Exception e) {
+																													Reporting
+																															.updateTestReport(
+																																	"Order summary tab was not visible"
+																																			+ e.getMessage(),
+																																	CaptureScreenshot
+																																			.getScreenshot(
+																																					SS_path),
+																																	StatusDetails.FAIL);
+																												}
+
+																											} catch (Exception e) {
+																												Reporting
+																														.updateTestReport(
+																																"User was not redirected to checkout login/ registration page and caused timeout exception",
+																																CaptureScreenshot
+																																		.getScreenshot(
+																																				SS_path),
+																																StatusDetails.FAIL);
+																											}
+																											// WEL.clickOnEnterNewAddressButtonOnShippingPage();
+																											WEL.clickingOnSaveAndContinue();
+
+																										} catch (Exception e) {
+																											Reporting
+																													.updateTestReport(
+																															"Checkout button was not clickable in cart page and caused timeout exception",
+																															CaptureScreenshot
+																																	.getScreenshot(
+																																			SS_path),
+																															StatusDetails.FAIL);
+																										}
+																									} catch (Exception e) {
+																										Reporting
+																												.updateTestReport(
+																														"Failed to click on Add To Cart button caused timeout exception ",
+																														CaptureScreenshot
+																																.getScreenshot(
+																																		SS_path),
+																														StatusDetails.FAIL);
+																									}
 																								} catch (Exception e) {
 																									Reporting
 																											.updateTestReport(
-																													"Failed to click Address on Address SUggestion due to timeout exception",
-																													CaptureScreenshot
-																															.getScreenshot(
-																																	SS_path),
-																													StatusDetails.INFO);
-																								}
-
-																								Reporting
-																										.updateTestReport(
-																												"User was in shipping step after successful registration",
-																												CaptureScreenshot
-																														.getScreenshot(
-																																SS_path),
-																												StatusDetails.PASS);
-																							} catch (Exception e) {
-																								Reporting
-																										.updateTestReport(
-																												"User was not in shipping step and caused timeout exception",
-																												CaptureScreenshot
-																														.getScreenshot(
-																																SS_path),
-																												StatusDetails.FAIL);
-																							}
-																							try {
-																								wait.until(
-																										ExpectedConditions
-																												.visibilityOfElementLocated(
-																														By.xpath(
-																																"//div[@id='orderSummaryProductTotalValue']")));
-
-																								BigDecimal firstproductprice2 = new BigDecimal(
-																										WEL.fetchFirstProductPriceInOrderReview()
-																												.substring(
-																														1));
-
-																								String discount = WEL
-																										.fetchDiscountInOrderReview();
-																								if (discount
-																										.contains(","))
-																									discount = discount
-																											.replace(
-																													",",
-																													"");
-																								BigDecimal discountinorderreview = new BigDecimal(
-																										discount.substring(
-																												1));
-																								String totalorderReview = WEL
-																										.fetchTotalInOrderReview();
-																								if (totalorderReview
-																										.contains(","))
-																									totalorderReview = totalorderReview
-																											.replace(
-																													",",
-																													"");
-																								BigDecimal orderTotalPrice1 = new BigDecimal(
-																										totalorderReview
-																												.substring(
-																														1));
-																								if (firstproductprice2
-																										.subtract(
-																												discountinorderreview)
-																										.compareTo(
-																												orderTotalPrice1) == 0)
-																									Reporting
-																											.updateTestReport(
-																													"First Product price + Second Product price -discount "
-																															+ " = Order total in Order Review step",
-																													CaptureScreenshot
-																															.getScreenshot(
-																																	SS_path),
-																													StatusDetails.PASS);
-																								else
-																									Reporting
-																											.updateTestReport(
-																													"First Product price +second product price- discount is not equal to Order total in Order Review step",
+																													"Failed appear the login button caused timeout exception ",
 																													CaptureScreenshot
 																															.getScreenshot(
 																																	SS_path),
 																													StatusDetails.FAIL);
 
+																								}
 																							} catch (Exception e) {
 																								Reporting
 																										.updateTestReport(
-																												"Order summary tab was not visible"
-																														+ e.getMessage(),
+																												"Failed to click on CFA Explore Course button caused timeout exception ",
 																												CaptureScreenshot
 																														.getScreenshot(
 																																SS_path),
 																												StatusDetails.FAIL);
-																							}
 
+																							}
 																						} catch (Exception e) {
 																							Reporting.updateTestReport(
-																									"User was not redirected to checkout login/ registration page and caused timeout exception",
+																									"Failed to appear Level 1Text caused timeout exception ",
 																									CaptureScreenshot
 																											.getScreenshot(
 																													SS_path),
 																									StatusDetails.FAIL);
 																						}
-																						// WEL.clickOnEnterNewAddressButtonOnShippingPage();
-																						WEL.clickingOnSaveAndContinue();
 
 																					} catch (Exception e) {
 																						Reporting.updateTestReport(
-																								"Checkout button was not clickable in cart page and caused timeout exception",
+																								"Failed to click on CFAView Course link button caused timeout exception ",
 																								CaptureScreenshot
 																										.getScreenshot(
 																												SS_path),
@@ -5084,30 +5219,30 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																					}
 																				} catch (Exception e) {
 																					Reporting.updateTestReport(
-																							"Failed to click on Add To Cart button caused timeout exception ",
+																							"Failed to click on CFAView Coouse button caused timeout exception ",
 																							CaptureScreenshot
 																									.getScreenshot(
 																											SS_path),
 																							StatusDetails.FAIL);
 																				}
-
 																			} catch (Exception e) {
 																				Reporting.updateTestReport(
-																						"Failed to click on CFAView Coouse link button caused timeout exception ",
+																						"Failed to click on CFA explore Coouse button caused timeout exception ",
 																						CaptureScreenshot
 																								.getScreenshot(SS_path),
 																						StatusDetails.FAIL);
 																			}
+
 																		} catch (Exception e) {
 																			Reporting.updateTestReport(
-																					"Failed to click on CFAView Coouse button caused timeout exception ",
+																					"Failed to click on CFA link from Home Page caused timeout exception ",
 																					CaptureScreenshot
 																							.getScreenshot(SS_path),
 																					StatusDetails.FAIL);
 																		}
 																	} catch (Exception e) {
 																		Reporting.updateTestReport(
-																				"Failed to click on CFA explore Coouse button caused timeout exception ",
+																				"Failed to click on Add To Cart button caused timeout exception ",
 																				CaptureScreenshot.getScreenshot(
 																						SS_path),
 																				StatusDetails.FAIL);
@@ -5115,7 +5250,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 
 																} catch (Exception e) {
 																	Reporting.updateTestReport(
-																			"Failed to click on CFA link from Home Page caused timeout exception ",
+																			"Failed to click on CMAPrinteBook caused timeout exception ",
 																			CaptureScreenshot.getScreenshot(SS_path),
 																			StatusDetails.FAIL);
 																}
@@ -5125,33 +5260,32 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																		CaptureScreenshot.getScreenshot(SS_path),
 																		StatusDetails.FAIL);
 															}
-
 														} catch (Exception e) {
 															Reporting.updateTestReport(
-																	"Failed to click on CMAPrinteBook caused timeout exception ",
+																	"Failed to click on CMAView Coouse button caused timeout exception ",
 																	CaptureScreenshot.getScreenshot(SS_path),
 																	StatusDetails.FAIL);
 														}
 													} catch (Exception e) {
 														Reporting.updateTestReport(
-																"Failed to click on Add To Cart button caused timeout exception ",
+																"Failed to click on Explore course button caused timeout exception ",
 																CaptureScreenshot.getScreenshot(SS_path),
 																StatusDetails.FAIL);
 													}
 												} catch (Exception e) {
 													Reporting.updateTestReport(
-															"Failed to click on CMAView Coouse button caused timeout exception ",
+															"Failed to click on CMALinkHomePage caused timeout exception ",
 															CaptureScreenshot.getScreenshot(SS_path),
 															StatusDetails.FAIL);
 												}
 											} catch (Exception e) {
 												Reporting.updateTestReport(
-														"Failed to click on Explore course button caused timeout exception ",
+														"Failed to click on Add To Cart button caused timeout exception ",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										} catch (Exception e) {
 											Reporting.updateTestReport(
-													"Failed to click on CMALinkHomePage caused timeout exception ",
+													"Failed to appear Platinum CPA Review Course 2023 the  caused timeout exception ",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 									} catch (Exception e) {
@@ -5161,18 +5295,18 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 									}
 								} catch (Exception e) {
 									Reporting.updateTestReport(
-											"Failed to click on Add To Cart button caused timeout exception ",
+											"Failed to click on CPA Physital product caused timeout exception ",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 							} catch (Exception e) {
 								Reporting.updateTestReport(
-										"Failed to click on CPA Physital product caused timeout exception ",
+										"Failed to click on CPA View course button caused timeout exception ",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 						} catch (Exception e) {
 							Reporting.updateTestReport(
-									"Failed to click on CPA View course button caused timeout exception ",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									"CPA Review course title was not visible and caused timeout exception", SS_path,
+									StatusDetails.FAIL);
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Failed to click on explore course button caused timeout exception ",
@@ -5220,79 +5354,88 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 						try {
 							wait.until(ExpectedConditions
 									.visibilityOfElementLocated(By.xpath("(//div[@class='price-block'])[1]")));
-							ScrollingWebPage.PageDown(driver, SS_path);
 							try {
-								wait.until(ExpectedConditions.elementToBeClickable(
-										By.xpath("//a[@href='/cma/products/platinum-cma-review-course/']"
-												+ "/button[contains(text(),'VIEW COURSE OPTIONS')]")));
-								WEL.clickOnCMAViewCourseButton();
+								wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+										"//div[@class='card-title course-pkg-cards-heading most-popular-block']")));
+								ScrollingWebPage.PageDown(driver, SS_path);
 								try {
 									wait.until(ExpectedConditions.elementToBeClickable(
-											By.xpath("//div[@class='btn-group btn-group-toggle']/label[1]")));
-									WEL.clickonCMAPrinteBook();
-									driver.navigate().refresh();
-									ScrollingWebPage.PageDown(driver, SS_path);
-									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
+											By.xpath("//a[@href='/cma/products/platinum-cma-review-course/']"
+													+ "/button[contains(text(),'VIEW COURSE OPTIONS')]")));
+									WEL.clickOnCMAViewCourseButton();
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(
-												By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
-										WEL.clickOnAddToCartButtonOnPDP();
+												By.xpath("//div[@class='btn-group btn-group-toggle']/label[1]")));
+										WEL.clickonCMAPrinteBook();
+										driver.navigate().refresh();
+										ScrollingWebPage.PageDown(driver, SS_path);
+										BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 										try {
-											wait.until(ExpectedConditions
-													.visibilityOfElementLocated(By.id("cartPageMainTitle")));
-										} catch (Exception e) {
+											wait.until(ExpectedConditions.elementToBeClickable(By
+													.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
+											WEL.clickOnAddToCartButtonOnPDP();
 											try {
-												if (driver
-														.findElement(
-																By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
-														.isDisplayed()) {
+												wait.until(ExpectedConditions
+														.visibilityOfElementLocated(By.id("cartPageMainTitle")));
+											} catch (Exception e) {
+												try {
+													if (driver
+															.findElement(By.xpath(
+																	"//h1[contains(text(),'SERVER ERROR (500)')]"))
+															.isDisplayed()) {
+														Reporting.updateTestReport(
+																"Server error came in cart page and the page was refreshed",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.INFO);
+														driver.navigate().refresh();
+													}
+												} catch (Exception e1) {
 													Reporting.updateTestReport(
-															"Server error came in cart page and the page was refreshed",
+															"User was not in the cart page"
+																	+ " and caused timeout exception",
 															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.INFO);
-													driver.navigate().refresh();
+															StatusDetails.FAIL);
 												}
-											} catch (Exception e1) {
+											}
+											BigDecimal subtotal = new BigDecimal(
+													WEL.fetchOrderSubTotalInCartPage().substring(1));
+											if (price.compareTo(subtotal) == 0)
 												Reporting.updateTestReport(
-														"User was not in the cart page"
-																+ " and caused timeout exception",
+														"The addition of all the products' price is same as the subtotal in cart page",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											else
+												Reporting.updateTestReport(
+														"The addition of all the products' pricedidn't match with the subtotal in cart page",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											ScrollingWebPage.PageScrollDownUptoTop(driver, SS_path);
+											WEL.clickOnAddDiscountLink();
+											WEL.enterDiscountValue(excelOperation.getTestData("Cart_Coupon",
+													"Generic_Dataset", "Data"));
+
+											WEL.clickOnDiscountApplyButtonInCartPage();
+											WEL.verifyDiscountText();
+											try {
+												wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+														By.id("cartPageSuccessCouponDiv")));
+												Reporting.updateTestReport("The coupon code was successfuly applied",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											} catch (Exception e) {
+												Reporting.updateTestReport("The coupon code  couldn't be applied",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
-										}
-										BigDecimal subtotal = new BigDecimal(
-												WEL.fetchOrderSubTotalInCartPage().substring(1));
-										if (price.compareTo(subtotal) == 0)
-											Reporting.updateTestReport(
-													"The addition of all the products' price is same as the subtotal in cart page",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-										else
-											Reporting.updateTestReport(
-													"The addition of all the products' pricedidn't match with the subtotal in cart page",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										ScrollingWebPage.PageScrollDownUptoTop(driver, SS_path);
-										WEL.clickOnAddDiscountLink();
-										WEL.enterDiscountValue(
-												excelOperation.getTestData("Cart_Coupon", "Generic_Dataset", "Data"));
-
-										WEL.clickOnDiscountApplyButtonInCartPage();
-										WEL.verifyDiscountText();
-										try {
-											wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-													By.id("cartPageSuccessCouponDiv")));
-											Reporting.updateTestReport("The coupon code was successfuly applied",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										} catch (Exception e) {
-											Reporting.updateTestReport("The coupon code  couldn't be applied",
+											Reporting.updateTestReport(
+													"Failed to click on Add TO Cart and caused timeout exception ",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 									} catch (Exception e) {
 										Reporting.updateTestReport(
-												"Failed to click on Add TO Cart and caused timeout exception ",
+												"CMA PrinteBook was selected and caused timeout exception ",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 								} catch (Exception e) {
 									Reporting.updateTestReport(
-											"CMA PrinteBook was selected and caused timeout exception ",
+											"CMA Review Course title was not visible and caused timeout exception",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 							} catch (Exception e) {
@@ -5318,8 +5461,8 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Login button on homepage was not clickable and caused timeout exception ",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
+			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -5327,14 +5470,13 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 		}
 	}
 	/*
-		 * @Author: Anindita
-		 * 
-		 * @Date: 19/04/23
-		 * 
-		 * @Description: Shipping Charge for Multiple Quantity
-		 */
+	 * @Author: Anindita
+	 * 
+	 * @Date: 19/04/23
+	 * 
+	 * @Description: Shipping Charge for Multiple Quantity
+	 */
 
-	
 	@Test
 	public void TC27_Shipping_Charge_For_Multiple_Quantity() throws IOException {
 		try {
@@ -5485,10 +5627,20 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																				StatusDetails.PASS);
 																	else
 																		Reporting.updateTestReport(
-																				"Courier charge has been wrongly calculated as: "+(courierChargeForOneUnit.add((new BigDecimal(
-																						quantity).subtract(new BigDecimal("1")))
-																						.multiply(new BigDecimal("10"))))
-																								.setScale(2,RoundingMode.CEILING),CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+																				"Courier charge has been wrongly calculated as: "
+																						+ (courierChargeForOneUnit
+																								.add((new BigDecimal(
+																										quantity)
+																												.subtract(
+																														new BigDecimal(
+																																"1"))).multiply(
+																																		new BigDecimal(
+																																				"10")))).setScale(
+																																						2,
+																																						RoundingMode.CEILING),
+																				CaptureScreenshot.getScreenshot(
+																						SS_path),
+																				StatusDetails.FAIL);
 																	WEL.selectShipCountry(country2);
 																	BigDecimal twoDayChargeForMultiUnit = WEL
 																			.fetchShippingChargeNonUS(driver,
