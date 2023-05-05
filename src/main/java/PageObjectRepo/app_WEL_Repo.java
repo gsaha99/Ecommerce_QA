@@ -60,7 +60,7 @@ public class app_WEL_Repo {
 	WebElement AccountButtonOnHomepage;
 	@FindBy(xpath = "//button[contains(text(),'I Accept')]")
 	WebElement AcceptButtonOnWileyWELPrivacyAgreement;
-	@FindBy(id = "signout")
+	@FindBy(xpath = "//li[@id='signout']/label")
 	WebElement SignOutButtonInMyAccountPage;
 
 	// Products related xpaths
