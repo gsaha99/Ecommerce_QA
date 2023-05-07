@@ -1343,9 +1343,11 @@ public class app_WileyPLUS_Repo {
 	 */
 	public void enterCityBilling(String city) throws IOException{
 		try {
+			String autofilledValue=CityBilling.getAttribute("value");
 			CityBilling.clear();
+			Thread.sleep(1000);
 			CityBilling.sendKeys(city);
-			Reporting.updateTestReport("City: "+city+" was entered",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			Reporting.updateTestReport("City: "+city+" was entered in Billing address section after clearing the auto filled value: "+autofilledValue,CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("City couldn't be entered with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -1667,10 +1669,12 @@ public class app_WileyPLUS_Repo {
 	 */
 	public void enterState(String state) throws IOException {
 		try {
+			String autofilledValue=SelectStateDropDown.getAttribute("value");
 			SelectStateDropDown.clear();
+			Thread.sleep(1000);
 			SelectStateDropDown.sendKeys(state);
 			SelectStateDropDown.sendKeys(Keys.ENTER);
-			Reporting.updateTestReport("State: "+state+" has been selected successfully by user",
+			Reporting.updateTestReport("State: "+state+" has been selected successfully by user after clearing the auto filled value: "+autofilledValue,
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("User failed to select State " + e.getClass().toString(),
