@@ -44,4 +44,19 @@ public class ScrollingWebPage {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
 		}
 	}
+	
+	public static void PageUp(WebDriver driver,String SS_path) throws IOException 
+	{
+		try {
+			Actions at = new Actions(driver);      
+			at.sendKeys(Keys.PAGE_UP).build().perform();
+			Thread.sleep(2000);
+			Reporting.updateTestReport("Perform Page Up",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);		
+		} 
+		catch (Exception e) {
+			Reporting.updateTestReport("Unable to Perform Page Up",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.WARNING);
+		}
+	}
 }

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="61" total="65" passed="4" failed="0" skipped="0">
+<testng-results ignored="25" total="26" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-04-12T17:38:46 IST" name="WPS_Regression" finished-at="2023-04-12T17:42:45 IST" duration-ms="238877">
+  <suite started-at="2023-05-02T20:20:31 IST" name="Default suite" finished-at="2023-05-02T20:32:30 IST" duration-ms="719384">
     <groups>
     </groups>
-    <test started-at="2023-04-12T17:38:46 IST" name="Client Portal_Test_Suite" finished-at="2023-04-12T17:41:48 IST" duration-ms="182323">
+    <test started-at="2023-05-02T20:20:31 IST" name="Default test" finished-at="2023-05-02T20:32:30 IST" duration-ms="719384">
       <class name="Test_Suite.ClientPortal_RegressionSuite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String,java.lang.String)[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@4879f0f2]" started-at="2023-04-12T17:38:46 IST" name="initiate" finished-at="2023-04-12T17:39:10 IST" duration-ms="24315" status="PASS">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String,java.lang.String)[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@1433046b]" started-at="2023-05-02T20:20:31 IST" name="initiate" finished-at="2023-05-02T20:20:40 IST" duration-ms="9072" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@adc8683]]>
+                <![CDATA[org.testng.TestRunner@47a246ec]]>
               </value>
             </param>
             <param index="1">
@@ -21,159 +21,48 @@
             </param>
             <param index="2">
               <value>
-                <![CDATA[Mobile]]>
+                <![CDATA[Desktop]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@4879f0f2]" started-at="2023-04-12T17:39:10 IST" name="initializeRepo" finished-at="2023-04-12T17:39:11 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="92" status="PASS">
+        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@1433046b]" started-at="2023-05-02T20:20:40 IST" name="initializeRepo" finished-at="2023-05-02T20:20:40 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="67" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeRepo -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@4879f0f2]" started-at="2023-04-12T17:39:11 IST" name="nameBefore" finished-at="2023-04-12T17:39:11 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@1433046b]" started-at="2023-05-02T20:20:40 IST" name="nameBefore" finished-at="2023-05-02T20:20:40 IST" duration-ms="2" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test_Suite.ClientPortal_RegressionSuite.TC01_Login_WPSAdmin() throws java.io.IOException]]>
+                <![CDATA[public void Test_Suite.ClientPortal_RegressionSuite.TC05_PromoteToProd_WPSAdmin() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameBefore -->
-        <test-method signature="TC01_Login_WPSAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@4879f0f2]" started-at="2023-04-12T17:39:11 IST" name="TC01_Login_WPSAdmin" finished-at="2023-04-12T17:40:19 IST" duration-ms="67978" status="PASS">
+        <test-method signature="TC05_PromoteToProd_WPSAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@1433046b]" started-at="2023-05-02T20:20:40 IST" name="TC05_PromoteToProd_WPSAdmin" finished-at="2023-05-02T20:32:28 IST" duration-ms="708107" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC01_Login_WPSAdmin -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@4879f0f2]" started-at="2023-04-12T17:40:19 IST" name="nameAfter" finished-at="2023-04-12T17:40:19 IST" duration-ms="3" status="PASS">
+        </test-method> <!-- TC05_PromoteToProd_WPSAdmin -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@1433046b]" started-at="2023-05-02T20:32:28 IST" name="nameAfter" finished-at="2023-05-02T20:32:28 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test_Suite.ClientPortal_RegressionSuite.TC01_Login_WPSAdmin() throws java.io.IOException]]>
+                <![CDATA[public void Test_Suite.ClientPortal_RegressionSuite.TC05_PromoteToProd_WPSAdmin() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameAfter -->
-        <test-method signature="TC02_AddNewClientApp_WPSAdmin()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@4879f0f2]" started-at="2023-04-12T17:40:19 IST" name="TC02_AddNewClientApp_WPSAdmin" finished-at="2023-04-12T17:41:47 IST" duration-ms="87985" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC02_AddNewClientApp_WPSAdmin -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@4879f0f2]" started-at="2023-04-12T17:40:19 IST" name="nameBefore" finished-at="2023-04-12T17:40:19 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.ClientPortal_RegressionSuite.TC02_AddNewClientApp_WPSAdmin() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@4879f0f2]" started-at="2023-04-12T17:41:47 IST" name="nameAfter" finished-at="2023-04-12T17:41:47 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.ClientPortal_RegressionSuite.TC02_AddNewClientApp_WPSAdmin() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@4879f0f2]" started-at="2023-04-12T17:41:47 IST" name="CloseBrowser" finished-at="2023-04-12T17:41:48 IST" duration-ms="1846" status="PASS">
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.ClientPortal_RegressionSuite@1433046b]" started-at="2023-05-02T20:32:28 IST" name="CloseBrowser" finished-at="2023-05-02T20:32:30 IST" duration-ms="1869" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
       </class> <!-- Test_Suite.ClientPortal_RegressionSuite -->
-    </test> <!-- Client Portal_Test_Suite -->
-    <test started-at="2023-04-12T17:41:48 IST" name="TestHarness_Test_Suite" finished-at="2023-04-12T17:42:45 IST" duration-ms="56482">
-      <class name="Test_Suite.TestHarness_RegressionSuite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String,java.lang.String)[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@1623134f]" started-at="2023-04-12T17:41:48 IST" name="initiate" finished-at="2023-04-12T17:42:08 IST" duration-ms="19844" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[org.testng.TestRunner@4eac65db]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[Chrome]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[Mobile]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="initializeRepo()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@1623134f]" started-at="2023-04-12T17:42:08 IST" name="initializeRepo" finished-at="2023-04-12T17:42:08 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="30" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- initializeRepo -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@1623134f]" started-at="2023-04-12T17:42:08 IST" name="nameBefore" finished-at="2023-04-12T17:42:08 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.TestHarness_RegressionSuite.TC01_HTTP_Probe() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC01_HTTP_Probe()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@1623134f]" started-at="2023-04-12T17:42:08 IST" name="TC01_HTTP_Probe" finished-at="2023-04-12T17:42:16 IST" duration-ms="8025" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC01_HTTP_Probe -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@1623134f]" started-at="2023-04-12T17:42:16 IST" name="nameAfter" finished-at="2023-04-12T17:42:16 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.TestHarness_RegressionSuite.TC01_HTTP_Probe() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@1623134f]" started-at="2023-04-12T17:42:16 IST" name="nameBefore" finished-at="2023-04-12T17:42:16 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.TestHarness_RegressionSuite.TC02_HTTP_Tokenise_Request_Response() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC02_HTTP_Tokenise_Request_Response()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@1623134f]" started-at="2023-04-12T17:42:16 IST" name="TC02_HTTP_Tokenise_Request_Response" finished-at="2023-04-12T17:42:44 IST" duration-ms="27199" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC02_HTTP_Tokenise_Request_Response -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@1623134f]" started-at="2023-04-12T17:42:44 IST" name="nameAfter" finished-at="2023-04-12T17:42:44 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.TestHarness_RegressionSuite.TC02_HTTP_Tokenise_Request_Response() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.TestHarness_RegressionSuite@1623134f]" started-at="2023-04-12T17:42:44 IST" name="CloseBrowser" finished-at="2023-04-12T17:42:45 IST" duration-ms="1363" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- CloseBrowser -->
-      </class> <!-- Test_Suite.TestHarness_RegressionSuite -->
-    </test> <!-- TestHarness_Test_Suite -->
-  </suite> <!-- WPS_Regression -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>

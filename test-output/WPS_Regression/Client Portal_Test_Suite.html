@@ -1,0 +1,210 @@
+<html>
+<head>
+<title>TestNG:  Client Portal_Test_Suite</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>Client Portal_Test_Suite</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>26/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Tue May 02 19:31:02 IST 2023</td>
+</tr>
+<tr><td>Total time:</td><td>2211 seconds (2211466 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC10_ViewNewClientApp_WPSSupport()'><b>TC10_ViewNewClientApp_WPSSupport</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>133</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC06_EditClientApp_WPSAdmin()'><b>TC06_EditClientApp_WPSAdmin</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>54</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC07_Pagination_WPSAdmin()'><b>TC07_Pagination_WPSAdmin</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>22</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC29_Login_ServiceDeskUser()'><b>TC29_Login_ServiceDeskUser</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>35</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC14_RegisterNewClientApp_Cancel_WPS_Support()'><b>TC14_RegisterNewClientApp_Cancel_WPS_Support</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>76</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC25_Login_ClientAdmin()'><b>TC25_Login_ClientAdmin</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>97</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC13_RegisterNewClientApp_WPSSupport()'><b>TC13_RegisterNewClientApp_WPSSupport</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>135</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC19_Login_ApplicationUser()'><b>TC19_Login_ApplicationUser</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>92</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC09_Login_WPSSupport()'><b>TC09_Login_WPSSupport</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>103</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC12_RegisterNewClientApp_Negative_Scenarios_WPSSupport()'><b>TC12_RegisterNewClientApp_Negative_Scenarios_WPSSupport</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>44</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC31_RegisterNewUser_SDUser()'><b>TC31_RegisterNewUser_SDUser</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>31</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC26_RegisterNewClientApp_ClientAdmin()'><b>TC26_RegisterNewClientApp_ClientAdmin</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>140</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC01_Login_WPSAdmin()'><b>TC01_Login_WPSAdmin</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>104</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC02_AddNewClientApp_WPSAdmin()'><b>TC02_AddNewClientApp_WPSAdmin</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>50</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC27_RegisterNewClientApp_Negative_Scenarios_ClientAdmin()'><b>TC27_RegisterNewClientApp_Negative_Scenarios_ClientAdmin</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>55</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC30_RegisterNewUser_Negative_Scenarios_SDUser()'><b>TC30_RegisterNewUser_Negative_Scenarios_SDUser</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>45</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC18_Footer_WPSSupport()'><b>TC18_Footer_WPSSupport</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>54</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC15_RegisterNewUser_WPSSupport()'><b>TC15_RegisterNewUser_WPSSupport</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>39</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC28_RegisterNewClientApp_Cancel_ClientAdmin()'><b>TC28_RegisterNewClientApp_Cancel_ClientAdmin</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>75</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC08_Footer_WPSAdmin()'><b>TC08_Footer_WPSAdmin</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>55</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC03_RegisterNewUser_WPSAdmin()'><b>TC03_RegisterNewUser_WPSAdmin</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>32</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC05_PromoteToProd_WPSAdmin()'><b>TC05_PromoteToProd_WPSAdmin</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>508</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC04_DeclineNewApp_WPSAdmin()'><b>TC04_DeclineNewApp_WPSAdmin</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>102</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC11_Pagination_WPSSupport()'><b>TC11_Pagination_WPSSupport</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>25</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC16_RegisterNewUser_Negative_Scenarios_WPSSupport()'><b>TC16_RegisterNewUser_Negative_Scenarios_WPSSupport</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>48</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+<tr>
+<td title='Test_Suite.ClientPortal_RegressionSuite.TC22_ViewNewClientApp_ApplicationUser()'><b>TC22_ViewNewClientApp_ApplicationUser</b><br>Test class: Test_Suite.ClientPortal_RegressionSuite</td>
+<td></td>
+<td>33</td>
+<td>Test_Suite.ClientPortal_RegressionSuite@6b5894c8</td></tr>
+</table><p>
+</body>
+</html>

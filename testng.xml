@@ -27,4 +27,19 @@
 		</class>
 	</classes>
   </test>  <!-- Test -->
+  
+   <test name="TestHarness_Test_Suite" >
+  <parameter name="browser" value="Chrome"/>
+  <parameter name="DeviceType" value="Mobile"/>
+   <classes>
+		<class name="Test_Suite.TestHarness_RegressionSuite">
+			<methods>
+
+				<include name="TC01.*" />
+        		<include name="TC02.*" />
+
+			</methods>
+		</class>
+	</classes>
+  </test> 
 </suite> <!-- Suite -->

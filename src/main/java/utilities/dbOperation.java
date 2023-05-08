@@ -7,11 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.openqa.selenium.WebDriver;
+
 import Test_Suite.ClientPortal_RegressionSuite;
 
 public class dbOperation {
 	
-	public String SS_path=ClientPortal_RegressionSuite.SS_path;
+	public static String SS_path=ClientPortal_RegressionSuite.SS_path;
 	public static String DB_Select(String DBName,String Query,String Parameter) throws InstantiationException, IllegalAccessException
     
 	{
@@ -70,18 +72,24 @@ public class dbOperation {
 	 * Description :  Method to check Promote to prod status
 	 */
 
-	public void appPromotionStatus() throws IOException {
+	public static void appPromotionStatus(WebDriver driver,String DBName,String query,String datatype,String SS_Path) throws IOException {
 		try {
-			String DBName=excelOperation.getTestData("TC07", "DB_Query", "DB_Name");
-			String query=excelOperation.getTestData("TC07", "DB_Query", "Query");
-			String datatype=excelOperation.getTestData("TC07", "DB_Query", "Data_Type");
-			String expectedstatusid="";
+			
+			String expectedstatusid=null;
+			int i=0;
 			do 
 			{
-			expectedstatusid=dbOperation.DB_Select(DBName,query,datatype);
-			System.out.println(expectedstatusid);
+				expectedstatusid=dbOperation.DB_Select(DBName,query,datatype);
+				System.out.println(expectedstatusid);
+				if(i%300==0)
+				{
+					ScrollingWebPage.PageDown(driver, SS_Path);
+					ScrollingWebPage.PageUp(driver, SS_Path);
+				}
+				i++;
 			}
 			while ((Integer.parseInt(expectedstatusid)!=4)&&(Integer.parseInt(expectedstatusid)!=5));
+			
 			if(expectedstatusid.equalsIgnoreCase(excelOperation.getTestData("Promoted", "Generic_Dataset", "Data")))
 		       {
 			
@@ -104,11 +112,8 @@ public class dbOperation {
 	 * Description :  Method to check Promotion rollback status
 	 */
 
-	public void appPromotionRollbackStatus() throws IOException {
+	public static void appPromotionRollbackStatus(WebDriver driver,String DBName,String query,String datatype,String SS_Path) throws IOException {
 		try {
-			String DBName=excelOperation.getTestData("TC07", "DB_Query", "DB_Name");
-			String query=excelOperation.getTestData("TC07", "DB_Query", "Query");
-			String datatype=excelOperation.getTestData("TC07", "DB_Query", "Data_Type");
 			String expectedstatusid="";
 			do 
 			{
@@ -129,7 +134,7 @@ public class dbOperation {
 		       }
 		}
 		catch(Exception e){
-			Reporting.updateTestReport("Promotion rollback not working : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			Reporting.updateTestReport("Promotion rollback not working : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(""), StatusDetails.FAIL);
 		}
 	 }
 

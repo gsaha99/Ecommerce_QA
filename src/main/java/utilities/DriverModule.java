@@ -27,8 +27,8 @@ import com.browserstack.local.Local;
 public class DriverModule {
 
 	public  static WebDriver driver =null;
-	public static final String username		= excelOperation.getTestData("BS_Username", "BrowserStack_Config", "Data");
-	public static final String AccessToken 	= excelOperation.getTestData("BS_Password", "BrowserStack_Config", "Data");
+	private static final String username		= excelOperation.getTestData("BS_Username", "BrowserStack_Config", "Data");
+	private static final String AccessToken 	= excelOperation.getTestData("BS_Password", "BrowserStack_Config", "Data");
 	
 	public static final String URL = "https://"+username+":"+AccessToken+"@hub-cloud.browserstack.com/wd/hub";
 	
@@ -71,27 +71,14 @@ public class DriverModule {
 			
 			browserstackOptions.put("interactiveDebugging", "true"); // Enable the Interactive session in runtime
 			browserstackOptions.put("debug", "true"); 		// to enable visual logs
-			browserstackOptions.put("consoleLogs", "info"); 
+			browserstackOptions.put("consoleLogs", "info");  // Enable console logs
 			browserstackOptions.put("networkLogs", "true"); // to enable network logs to be logged
 			
-			browserstackOptions.put("resolution", "1024x768");	
+			browserstackOptions.put("resolution", "1024x768");	 // To set Resolution
 			
 			browserstackOptions.put("idleTimeout", "300"); // Default 90 sec and Max 300 Sec
 			
-							
-			//Set Firefox			
-			if(browser.equalsIgnoreCase("firefox")) 
-				browserstackOptions.put("browser", browser);
-				//driver= new FirefoxDriver();
-			
-			//Set Chrome		
-			else if(browser.equalsIgnoreCase("chrome"))
-				browserstackOptions.put("browser", browser);
-				//driver= new ChromeDriver();
-							
-			// Set Edge 			
-			else if(browser.equalsIgnoreCase("Edge")) 
-				browserstackOptions.put("browser", browser);
+			browserstackOptions.put("browser", browser); // Set the Browser
 							
 			Caps.setCapability("bstack:options", browserstackOptions);	
 			
@@ -111,7 +98,7 @@ public class DriverModule {
 			Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_In_"+browserName+"_"+date,
 					browserName,browserVersion,OS_Name,OS_Version);
 			
-			LogTextFile.createTodayLog(testSuiteName+"_"+date);
+			LogTextFile.createTodayLog(testSuiteName+"_"+date,browserName,browserVersion,OS_Name);
 						
 		}
 		catch(Exception e){ System.out.println(e.getMessage());}

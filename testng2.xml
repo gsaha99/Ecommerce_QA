@@ -3,31 +3,12 @@
 <suite name="WPS_Regression" >
 
  <test name="Client Portal_Test_Suite" >
-  <parameter name="browser" value="chrome"/>
-  <parameter name="DeviceType" value="Mobile"/>
-   <classes>
-		<class name="Test_Suite.ClientPortal_RegressionSuite">
-			<methods>
-
-				<include name="TC01.*" />
-        		<include name="TC02.*" />
-
-			</methods>
-		</class>
-	</classes>
-  </test> <!-- Test -->
- <test name="TestHarness_Test_Suite" >
   <parameter name="browser" value="Chrome"/>
   <parameter name="DeviceType" value="Mobile"/>
    <classes>
-		<class name="Test_Suite.TestHarness_RegressionSuite">
-			<methods>
+		<class name="Test_Suite.ClientPortal_RegressionSuite"/>
 
-				<include name="TC01.*" />
-        		<include name="TC02.*" />
-
-			</methods>
-		</class>
 	</classes>
-  </test> 
+  </test> <!-- Test -->
+
 </suite> <!-- Suite -->

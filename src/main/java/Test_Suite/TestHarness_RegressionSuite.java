@@ -352,6 +352,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for Tokenise operation,"
 					+ " on giving some incorrect details, proper error message with error code displayed");
 			
+			LogTextFile.writeTestCaseStatus("TC05_HTTP Client: "
+					+ "Validate that for Tokenise operation,"
+					+ " on giving some incorrect details, proper error message with error code displayed", "Test case");
+			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
 			THarness.ClickHttp_Tokenise();
@@ -446,6 +450,11 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC06_HTTP Client: "
 					+ "Validate that for Validate operation,"
 					+ " Request and Result page is displayed successfully with all the required details");
+			
+			LogTextFile.writeTestCaseStatus("TC06_HTTP Client: "
+					+ "Validate that for Validate operation,"
+					+ " Request and Result page is displayed successfully with all the required details", "Test case");
+			
 			WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -540,6 +549,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for Validate,"
 					+ " on clicking on Continue, payment portal is displayed with proper Iframe");
 			
+			LogTextFile.writeTestCaseStatus("TC07_HTTP Client: "
+					+ "Validate that for Validate,"
+					+ " on clicking on Continue, payment portal is displayed with proper Iframe", "Test case");
+			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
 			THarness.ClickHttp_Validate();
@@ -582,6 +595,9 @@ public class TestHarness_RegressionSuite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC08_HTTP Client: "
 					+ "Validate that for Validate Operation, proper data is displayed in elastic as well as Stripe");
+			
+			LogTextFile.writeTestCaseStatus("TC08_HTTP Client: "
+					+ "Validate that for Validate Operation, proper data is displayed in elastic as well as Stripe", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -674,6 +690,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC09_HTTP Client: "
 					+ "Validate that for Validate operation,"
 					+ " on giving some incorrect details, proper error message with error code displayed");
+			
+			LogTextFile.writeTestCaseStatus("TC09_HTTP Client: "
+					+ "Validate that for Validate operation,"
+					+ " on giving some incorrect details, proper error message with error code displayed", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -772,6 +792,12 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for Authorise Operation,"
 					+ "Request page, payment portal is displayed with proper Iframe, Result page is displayed successfully with all the required details"
 					+ "and proper data is displayed in elastic as well as Stripe");
+			
+			LogTextFile.writeTestCaseStatus("TC10_HTTP Client: "
+					+ "Validate that for Authorise Operation,"
+					+ "Request page, payment portal is displayed with proper Iframe, Result page is displayed successfully with all the required details"
+					+ "and proper data is displayed in elastic as well as Stripe", "Test case");
+			
 			WebDriverWait pagewait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -869,6 +895,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for Authorise operation,"
 					+ " on giving some incorrect details, proper error message with error code displayed");
 			
+			LogTextFile.writeTestCaseStatus("TC11_HTTP Client: "
+					+ "Validate that for Authorise operation,"
+					+ " on giving some incorrect details, proper error message with error code displayed", "Test case");
+			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
 			THarness.ClickHttp_Authorise();
@@ -947,6 +977,11 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for Auth & Settle Operation,"
 					+ "Request page, payment portal is displayed with proper Iframe, Result page is displayed successfully with all the required details"
 					+ "and proper data is displayed in elastic as well as Stripe");
+			
+			LogTextFile.writeTestCaseStatus("TC12_HTTP Client: "
+					+ "Validate that for Auth & Settle Operation,"
+					+ "Request page, payment portal is displayed with proper Iframe, Result page is displayed successfully with all the required details"
+					+ "and proper data is displayed in elastic as well as Stripe", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -1044,6 +1079,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for Auth & Settle operation,"
 					+ " on giving some incorrect details, proper error message with error code displayed");
 			
+			LogTextFile.writeTestCaseStatus("TC13_HTTP Client: "
+					+ "Validate that for Auth & Settle operation,"
+					+ " on giving some incorrect details, proper error message with error code displayed", "Test case");
+			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
 			THarness.ClickHttp_AuthSettle();
@@ -1116,7 +1155,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
      */
 	@Test
 	
-        public void TC14_HTTP_TokenAuth_ES_Stripe_Validation() throws IOException
+    public void TC14_HTTP_TokenAuth_ES_Stripe_Validation() throws IOException
 	{
 		
 		try {
@@ -1124,6 +1163,11 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for TokenAuth Operation,"
 					+ "Request page, Response page is displayed successfully with all the required details"
 					+ "and proper data is displayed in elastic as well as Stripe");
+			
+			LogTextFile.writeTestCaseStatus("TC14_HTTP Client: "
+					+ "Validate that for TokenAuth Operation,"
+					+ "Request page, Response page is displayed successfully with all the required details"
+					+ "and proper data is displayed in elastic as well as Stripe", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -1206,13 +1250,17 @@ public class TestHarness_RegressionSuite extends DriverModule {
      */
 	@Test
 	
-        public void TC15_HTTP_Validate_for_Token_Auth_Error_Message() throws IOException
+    public void TC15_HTTP_Validate_for_Token_Auth_Error_Message() throws IOException
 	{
 		
 		try {
 			Reporting.test = Reporting.extent.createTest("TC15_HTTP Client: "
 					+ "Validate that for Token Auth operation,"
 					+ " on giving some incorrect details, proper error message with error code displayed");
+			
+			LogTextFile.writeTestCaseStatus("TC15_HTTP Client: "
+					+ "Validate that for Token Auth operation,"
+					+ " on giving some incorrect details, proper error message with error code displayed", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -1293,7 +1341,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
      */
 	@Test
 	
-        public void TC16_HTTP_TokenSettle_ES_Stripe_Validation() throws IOException
+    public void TC16_HTTP_TokenSettle_ES_Stripe_Validation() throws IOException
 	{
 		
 		try {
@@ -1301,6 +1349,11 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for Token Settle Operation,"
 					+ "Request page, Response page is displayed successfully with all the required details"
 					+ "and proper data is displayed in elastic as well as Stripe");
+			
+			LogTextFile.writeTestCaseStatus("TC16_HTTP Client: "
+					+ "Validate that for Token Settle Operation,"
+					+ "Request page, Response page is displayed successfully with all the required details"
+					+ "and proper data is displayed in elastic as well as Stripe", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -1389,6 +1442,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC17_HTTP Client: "
 					+ "Validate that for Token Settle operation,"
 					+ " on giving some incorrect details, proper error message with error code displayed");
+			
+			LogTextFile.writeTestCaseStatus("TC17_HTTP Client: "
+					+ "Validate that for Token Settle operation,"
+					+ " on giving some incorrect details, proper error message with error code displayed", "Test case");
 	
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -1470,7 +1527,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
      */
 	@Test
 	
-        public void TC18_HTTP_TokenAuthSettle_ES_Stripe_Validation() throws IOException
+    public void TC18_HTTP_TokenAuthSettle_ES_Stripe_Validation() throws IOException
 	
 	{
 		
@@ -1479,6 +1536,11 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for TokenAuthSettle Operation,"
 					+ "Request page, Response page is displayed successfully with all the required details"
 					+ "and proper data is displayed in elastic as well as Stripe");
+			
+			LogTextFile.writeTestCaseStatus("TC18_HTTP Client: "
+					+ "Validate that for TokenAuthSettle Operation,"
+					+ "Request page, Response page is displayed successfully with all the required details"
+					+ "and proper data is displayed in elastic as well as Stripe", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -1563,6 +1625,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC19_HTTP Client: "
 					+ "Validate that for Token Auth&Settle operation,"
 					+ " on giving some incorrect details, proper error message with error code displayed");
+			
+			LogTextFile.writeTestCaseStatus("TC19_HTTP Client: "
+					+ "Validate that for Token Auth&Settle operation,"
+					+ " on giving some incorrect details, proper error message with error code displayed", "Test case");
 	
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -1651,6 +1717,11 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Request page, Response page is displayed successfully with all the required details"
 					+ "and proper data is displayed in elastic as well as Stripe");
 			
+			LogTextFile.writeTestCaseStatus("TC20_HTTP Client: "
+					+ "Validate that for VoidAuth Operation,"
+					+ "Request page, Response page is displayed successfully with all the required details"
+					+ "and proper data is displayed in elastic as well as Stripe", "Test case");
+			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
 			THarness.ClickHttp_VoidAuth();
@@ -1736,6 +1807,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC21_HTTP Client: "
 					+ "Validate that for Void Auth operation,"
 					+ " on giving some incorrect details, proper error message with error code displayed");
+			
+			LogTextFile.writeTestCaseStatus("TC21_HTTP Client: "
+					+ "Validate that for Void Auth operation,"
+					+ " on giving some incorrect details, proper error message with error code displayed", "Test case");
 	
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -1824,6 +1899,11 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Request page, Response page is displayed successfully with all the required details"
 					+ "and proper data is displayed in elastic as well as Stripe");
 			
+			LogTextFile.writeTestCaseStatus("TC22_SOAP Client: "
+					+ "Validate that for Probe Operation,"
+					+ "Request page, Response page is displayed successfully with all the required details"
+					+ "and proper data is displayed in elastic as well as Stripe", "Test case");
+			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickSOAP_Interface();
 			THarness.Http_Tokenise_EnterClientID(excelOperation.getTestData("TC22", "TestHarness_Test_Data", "Client_ID"));
@@ -1887,13 +1967,17 @@ public class TestHarness_RegressionSuite extends DriverModule {
      */
 	@Test
 	
-        public void TC23_SOAP_Probe_Error_Message_Validation() throws IOException
+    public void TC23_SOAP_Probe_Error_Message_Validation() throws IOException
 	{
 		
 		try {
 			Reporting.test = Reporting.extent.createTest("TC23_SOAP Client: "
 					+ "Validate that for Probe Operation,"
 					+ "on giving some incorrect details, proper error message with error code displayed");
+			
+			LogTextFile.writeTestCaseStatus("TC23_SOAP Client: "
+					+ "Validate that for Probe Operation,"
+					+ "on giving some incorrect details, proper error message with error code displayed", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickSOAP_Interface();
@@ -1959,7 +2043,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
      */
 	@Test
 	
-        public void TC24_SOAP_TokenAuth_ES_Stripe_Validation() throws IOException
+    public void TC24_SOAP_TokenAuth_ES_Stripe_Validation() throws IOException
 	{
 		
 		try {
@@ -1967,6 +2051,11 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for TokenAuth Operation,"
 					+ "Request page, Response page is displayed successfully with all the required details"
 					+ "and proper data is displayed in elastic as well as Stripe");
+			
+			LogTextFile.writeTestCaseStatus("TC24_SOAP Client: "
+					+ "Validate that for TokenAuth Operation,"
+					+ "Request page, Response page is displayed successfully with all the required details"
+					+ "and proper data is displayed in elastic as well as Stripe", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickSOAP_Interface();
@@ -2052,6 +2141,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for TokenAuth Operation,"
 					+ "on giving some incorrect details, proper error message with error code displayed");
 			
+			LogTextFile.writeTestCaseStatus("TC25_SOAP Client: "
+					+ "Validate that for TokenAuth Operation,"
+					+ "on giving some incorrect details, proper error message with error code displayed", "Test case");
+			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickSOAP_Interface();
 			THarness.ClickSOAP_TokenAuth();
@@ -2128,7 +2221,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
      */
 	@Test
 	
-        public void TC26_SOAP_TokenSettle_ES_Stripe_Validation() throws IOException
+    public void TC26_SOAP_TokenSettle_ES_Stripe_Validation() throws IOException
 	{
 		
 		try {
@@ -2136,6 +2229,11 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for TokenSettle Operation,"
 					+ "Request page, Response page is displayed successfully with all the required details"
 					+ "and proper data is displayed in elastic as well as Stripe");
+			
+			LogTextFile.writeTestCaseStatus("TC26_SOAP Client: "
+					+ "Validate that for TokenSettle Operation,"
+					+ "Request page, Response page is displayed successfully with all the required details"
+					+ "and proper data is displayed in elastic as well as Stripe", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickSOAP_Interface();
@@ -2213,13 +2311,19 @@ public class TestHarness_RegressionSuite extends DriverModule {
      */
 	@Test
 	
-        public void TC27_SOAP_TokenSettle_Error_Message_Validation() throws IOException
+    
+	
+	public void TC27_SOAP_TokenSettle_Error_Message_Validation() throws IOException
 	{
 		
 		try {
 			Reporting.test = Reporting.extent.createTest("TC27_SOAP Client: "
 					+ "Validate that for TokenSettle Operation,"
 					+ "on giving some incorrect details, proper error message with error code displayed");
+			
+			LogTextFile.writeTestCaseStatus("TC27_SOAP Client: "
+					+ "Validate that for TokenSettle Operation,"
+					+ "on giving some incorrect details, proper error message with error code displayed", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickSOAP_Interface();
@@ -2305,6 +2409,11 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for Token Auth & Settle Operation,"
 					+ "Request page, Result page is displayed successfully with all the required details"
 					+ "and proper data is displayed in elastic as well as Stripe");
+			
+			LogTextFile.writeTestCaseStatus("TC28_SOAP Client: "
+					+ "Validate that for Token Auth & Settle Operation,"
+					+ "Request page, Result page is displayed successfully with all the required details"
+					+ "and proper data is displayed in elastic as well as Stripe", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickSOAP_Interface();
@@ -2395,6 +2504,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "on giving some incorrect details, proper error message with error code displayed"
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC29_SOAP Client: "
+					+ "Validate that for Token Auth & Settle,"
+					+ "on giving some incorrect details, proper error message with error code displayed", "Test case");
+			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickSOAP_Interface();
 			THarness.ClickSOAP_TokenAuthSettle();
@@ -2474,6 +2587,11 @@ public class TestHarness_RegressionSuite extends DriverModule {
                     + "Validate that for TokenRefund Operation,"
                     + "Request page, Response page is displayed successfully with all the required details"
                     + "and proper data is displayed in elastic as well as Stripe");
+            
+            LogTextFile.writeTestCaseStatus("TC30_SOAP Client: "
+                    + "Validate that for TokenRefund Operation,"
+                    + "Request page, Response page is displayed successfully with all the required details"
+                    + "and proper data is displayed in elastic as well as Stripe", "Test case");
 
             driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
             THarness.ClickSOAP_Interface();
@@ -2561,6 +2679,11 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for Void Auth Operation,"
 					+ "Request page,Result page is displayed successfully with all the required details"
 					+ "and proper data is displayed in elastic as well as Stripe");
+			
+			LogTextFile.writeTestCaseStatus("TC31_SOAP Client: "
+					+ "Validate that for Void Auth Operation,"
+					+ "Request page,Result page is displayed successfully with all the required details"
+					+ "and proper data is displayed in elastic as well as Stripe", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickSOAP_Interface();
@@ -2652,6 +2775,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "on giving some incorrect details, proper error message with error code displayed"
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC32_SOAP Client: "
+					+ "Validate that for Void Auth,"
+					+ "on giving some incorrect details, proper error message with error code displayed", "Test case");
+			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickSOAP_Interface();
 			THarness.ClickSOAP_VoidAuth();
@@ -2731,6 +2858,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for Embedded operation with intent type Auth,"
 					+ "Request and Result page is displayed successfully with all the required details"
 					);
+			
+			LogTextFile.writeTestCaseStatus("TC33_HTTP Client: "
+					+ "Validate that for Embedded operation with intent type Auth,"
+					+ "Request and Result page is displayed successfully with all the required details", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -2817,6 +2948,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Request and Result page is displayed successfully with all the required details"
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC34_HTTP Client: "
+					+ "Validate that for Embedded operation with intent type Auth-Capture,"
+					+ "Request and Result page is displayed successfully with all the required details", "Test case");
+			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
 			THarness.ClickHTTP_Embedded();
@@ -2902,6 +3037,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Request and Result page is displayed successfully with all the required details"
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC35_HTTP Client: "
+					+ "Validate that for Embedded operation with intent type Save Card,"
+					+ "Request and Result page is displayed successfully with all the required details", "Test case");
+			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
 			THarness.ClickHTTP_Embedded();
@@ -2983,6 +3122,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for Non Embedded operation with intent type Auth,"
 					+ "Request and Result page is displayed successfully with all the required details"
 					);
+			
+			LogTextFile.writeTestCaseStatus("TC36_HTTP Client: "
+					+ "Validate that for Non Embedded operation with intent type Auth,"
+					+ "Request and Result page is displayed successfully with all the required details", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -3076,6 +3219,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for Non Embedded operation with intent type Auth-Capture,"
 					+ "Request and Result page is displayed successfully with all the required details"
 					);
+			
+			LogTextFile.writeTestCaseStatus("TC37_HTTP Client: "
+					+ "Validate that for Non Embedded operation with intent type Auth-Capture,"
+					+ "Request and Result page is displayed successfully with all the required details", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -3171,6 +3318,10 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Request and Result page is displayed successfully with all the required details"
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC38_HTTP Client: "
+					+ "Validate that for Non Embedded operation with intent type Save Card,"
+					+ "Request and Result page is displayed successfully with all the required details", "Test case");
+			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
 			THarness.ClickHTTP_Embedded();
@@ -3254,7 +3405,7 @@ public class TestHarness_RegressionSuite extends DriverModule {
      */
 	@Test
 	
-        public void TC39_HTTP_TokenRefund_ES_Stripe_Validation() throws IOException
+    public void TC39_HTTP_TokenRefund_ES_Stripe_Validation() throws IOException
 	{
 		
 		try {
@@ -3262,6 +3413,11 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for Token Refund Operation,"
 					+ "Request page, Response page is displayed successfully with all the required details"
 					+ "and proper data is displayed in elastic as well as Stripe");
+			
+			LogTextFile.writeTestCaseStatus("TC39_HTTP Client: "
+					+ "Validate that for Token Refund Operation,"
+					+ "Request page, Response page is displayed successfully with all the required details"
+					+ "and proper data is displayed in elastic as well as Stripe", "Test case");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();

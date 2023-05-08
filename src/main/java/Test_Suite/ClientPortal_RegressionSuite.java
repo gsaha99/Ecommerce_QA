@@ -8,8 +8,6 @@ import java.util.Date;
 import java.util.Random;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -34,6 +32,17 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 	app_ClientPortal_Repo CPortal;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
+	public static String WPSAdmin_emailID=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
+	public static String WPSAdmin_pwd=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
+	public static String ClientAdmin_emailID=excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "EmailID");
+	public static String ClientAdmin_pwd=excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "PWD");
+	public static String WPSSupport_emailID=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID");
+	public static String WPSSupport_pwd=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD");
+	public static String ApplicationUser_emailID=excelOperation.getTestData("Application_User", "ClientPortal_SignIN", "EmailID");
+	public static String ApplicationUser_pwd=excelOperation.getTestData("Application_User", "ClientPortal_SignIN", "PWD");
+	public static String ServiceDeskUser_emailID=excelOperation.getTestData("Service_Desk_User", "ClientPortal_SignIN", "EmailID");
+	public static String ServiceDeskUser_pwd=excelOperation.getTestData("Service_Desk_User", "ClientPortal_SignIN", "PWD");
+	
 
 	
 	@BeforeTest
@@ -77,9 +86,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
-			String pwd=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID, pwd,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSAdmin_emailID, WPSAdmin_pwd,SS_path);
 			CPortal.WPSAdmin_ClickHome();
 			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_ClickRegisterNewUser();
@@ -131,16 +138,14 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ "and verify the filter functionality at home screen", "Test case");
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
-			String pwd=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID, pwd,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSAdmin_emailID, WPSAdmin_pwd,SS_path);
 			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_SelectSOAP();
 			CPortal.WPSAdmin_SelectBusinessUnit();
 			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
-			String ClientAppName="TestAuto_"+uuid;
+			String ClientAppName=excelOperation.getTestData("WPSAdminAppName", "Generic_Dataset", "Data")+uuid;
 			CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
-			CPortal.WPSAdmin_Enter_ClientApp_ShortName("TA"+uuid);
+			CPortal.WPSAdmin_Enter_ClientApp_ShortName(excelOperation.getTestData("WPSAdminAppShortName", "Generic_Dataset", "Data")+uuid);
 			CPortal.WPSAdmin_SelectUserID();
 			driver.findElement(By.xpath("//h1[contains(text(),'Add New Client Application')]")).click();
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -206,14 +211,12 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ "Verify whether WPS admin able to Register New User", "Test case");
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
-			String pwd=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID, pwd,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSAdmin_emailID, WPSAdmin_pwd,SS_path);
 			CPortal.WPSAdmin_ClickRegisterNewUser();
-			CPortal.WPSAdmin_Enter_First_Name("TestAutoFirstName");
-			CPortal.WPSAdmin_Enter_Last_Name("TestAutoLastName");
+			CPortal.WPSAdmin_Enter_First_Name(excelOperation.getTestData("WPSAdminFirstName", "Generic_Dataset", "Data"));
+			CPortal.WPSAdmin_Enter_Last_Name(excelOperation.getTestData("WPSAdminLastName", "Generic_Dataset", "Data"));
 			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
-			String SSOID = "TestUser"+uuid+"@wiley.com";
+			String SSOID =excelOperation.getTestData("WPSAdminSSOID", "Generic_Dataset", "Data")+uuid+"@wiley.com";
 			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
 			CPortal.WPSAdmin_SelectRole();
 			CPortal.WPSAdmin_ClickRegister();
@@ -263,17 +266,15 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ "Verify whether user can View under the Action option in My Worklist and decline the app", "Test case");
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID=excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "EmailID");
-			String pwd=excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID, pwd,SS_path);
+			CommonPage.LogIN(driver,CPortal, ClientAdmin_emailID, ClientAdmin_pwd,SS_path);
 			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_SelectHTTP();
 			CPortal.WPSAdmin_SelectBusinessUnit();
 			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
-			String ClientAppName="ClientAdminTestAuto_"+uuid;
+			String ClientAppName=excelOperation.getTestData("ClinetAdminAutoApp", "Generic_Dataset", "Data")+uuid;
 			CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
-			CPortal.WPSAdmin_Enter_ClientApp_ShortName("CATA"+uuid);
-			CPortal.WPSAdmin_SelectUserID();
+			CPortal.WPSAdmin_Enter_ClientApp_ShortName(excelOperation.getTestData("ClinetAdminAutoShortName", "Generic_Dataset", "Data")+uuid);
+			CPortal.ClientAdmin_SelectUserID();
 			CPortal.WPSAdmin_Enter_Template(excelOperation.getTestData("Template", "Generic_Dataset", "Data"));
 			CPortal.WPSAdmin_Enter_TargetURL(excelOperation.getTestData("Target URL", "Generic_Dataset", "Data"));
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -285,9 +286,10 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickLogOut();
 			CPortal.WPSAdmin_ClickLogOutImage();
 			CPortal.WPSAdmin_ClickLogIN();
-			String emailID1=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			
+			/* Log in with WPS Admin*/
+            
+			CommonPage.LogIN(driver,CPortal, WPSAdmin_emailID, WPSAdmin_pwd,SS_path);
 			CPortal.WPSAdmin_ClickMyWorklist();
 			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
 			CPortal.WPSAdmin_Click_ViewIcon();
@@ -341,9 +343,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ "and Promote to Prod functionality is working", "Test case");
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSAdmin_emailID, WPSAdmin_pwd,SS_path);
 			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_SelectHTTP();
 			CPortal.WPSAdmin_SelectBusinessUnit();
@@ -369,8 +369,10 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			CPortal.WPSAdmin_Click_Promote();
 			CPortal.WPSAdmin_Click_Promote_Confirm();
-			dbOperation dbOperation = new dbOperation();
-			dbOperation.appPromotionStatus();
+			String DBName=excelOperation.getTestData("TC07", "DB_Query", "DB_Name");
+			String query=excelOperation.getTestData("TC07", "DB_Query", "Query");
+			String datatype=excelOperation.getTestData("TC07", "DB_Query", "Data_Type");
+			dbOperation.appPromotionStatus(driver,DBName,query,datatype,SS_path);
 			CPortal.WPSAdmin_ClickHome();
 			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
 			CPortal.WPSAdmin_ClickEditIcon();
@@ -386,7 +388,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			CPortal.WPSAdmin_Click_Promote();
 			CPortal.WPSAdmin_Click_Promote_Confirm();
-			dbOperation.appPromotionStatus();
+			dbOperation.appPromotionStatus(driver,DBName,query,datatype,SS_path);
 			CPortal.WPSAdmin_ClickHome();
 			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
 			CPortal.WPSAdmin_Click_RevertIcon();
@@ -395,14 +397,14 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			CPortal.WPSAdmin_Click_RevertConfirm();
 			CPortal.WPSAdmin_Click_Promote_Confirm();
-			dbOperation.appPromotionRollbackStatus();
+			dbOperation.appPromotionRollbackStatus(driver,DBName,query,datatype,SS_path);
 			CPortal.WPSAdmin_ClickLogOut();
 		    CPortal.WPSAdmin_ClickLogOutImage();
 		}
 		catch (Exception e) 
 		{
-			System.out.println("Promote to Prod with WPS Support Role Failed" + e.getMessage());
-			Reporting.updateTestReport("Promote to Prod with WPS Support Role Failed" + e.getMessage(),
+			System.out.println("Promote to Prod with WPS Admin Role Failed" + e.getMessage());
+			Reporting.updateTestReport("Promote to Prod with WPS Admin Role Failed" + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -420,17 +422,18 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ "Verify the Edit option in the home page"
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC06_Client Portal: "
+					+ "Verify the Edit option in the home page", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSAdmin_emailID, WPSAdmin_pwd,SS_path);
 			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_SelectSOAP();
 			CPortal.WPSAdmin_SelectBusinessUnit();
 			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
-			String ClientAppName="TestAuto_"+uuid;
+			String ClientAppName=excelOperation.getTestData("WPSAdminAppName", "Generic_Dataset", "Data")+uuid;
 			CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
-			CPortal.WPSAdmin_Enter_ClientApp_ShortName("TA"+uuid);
+			CPortal.WPSAdmin_Enter_ClientApp_ShortName(excelOperation.getTestData("WPSAdminAppShortName", "Generic_Dataset", "Data")+uuid);
 			CPortal.WPSAdmin_SelectUserID();
 			driver.findElement(By.xpath("//h1[contains(text(),'Add New Client Application')]")).click();
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -449,7 +452,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		      }
 		     else 
 		      {
-			      Reporting.updateTestReport("Filtering is working",
+			      Reporting.updateTestReport("Filtering is not working",
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		      }
 			CPortal.WPSAdmin_ClickEditIcon();
@@ -501,12 +504,14 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ "Verify whether system is showing the count of the client application in home page,"
 					+ " and in My Worklist and pagination is working properly for WPS Admin role.");
 			
+			LogTextFile.writeTestCaseStatus("TC07_Client Portal: "
+					+ "Verify whether system is showing the count of the client application in home page,"
+					+ " and in My Worklist and pagination is working properly for WPS Admin role.", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSAdmin_emailID, WPSAdmin_pwd,SS_path);
 			CPortal.WPSAdmin_ClickHome();
-			CPortal.WPSAdmin_CheckPagination();
+			CommonPage.WPSAdmin_CheckPagination(driver,CPortal,SS_path);
 			CPortal.WPSAdmin_ClickLogOut();
 		    CPortal.WPSAdmin_ClickLogOutImage();
 			
@@ -534,10 +539,13 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ " in all the screens of Client portal and Verify whether System allow user to navigate,"
 					+ "to the separate tab when user clicks on \"\"Copyright Â© 2000-2021\" hyper link on footer.");
 			
+			LogTextFile.writeTestCaseStatus("TC08_Client Portal: "
+					+ "Verify whether system display Footer as \"\"Copyright Â© 2000-2021 by John Wiley & Sons, Inc., or related companies. All rights reserved.\","
+					+ " in all the screens of Client portal and Verify whether System allow user to navigate,"
+					+ "to the separate tab when user clicks on \"\"Copyright Â© 2000-2021\" hyper link on footer.", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSAdmin_emailID, WPSAdmin_pwd,SS_path);
 			CPortal.WPSAdmin_ClickHome();
 			CPortal.WPSAdmin_ClickFooter();
 			CPortal.WPSAdmin_ClickNewClientApp();
@@ -574,10 +582,15 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ " user should be able to logout from the application on top right corner there is a down arrow"
 					+ "on click of that Logout is visible.");
 			
+			LogTextFile.writeTestCaseStatus("TC09_Client Portal: "
+					+ "Validate that the user should be able to see the user name on top right corner,"
+					+ " WPS Support user contains the Home,Create New Application, Register new User, My Work List,"
+					+ "Transaction search  options  on header of the page,"
+					+ " user should be able to logout from the application on top right corner there is a down arrow"
+					+ "on click of that Logout is visible.", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSSupport_emailID, WPSSupport_pwd,SS_path);
 			CPortal.WPSAdmin_ClickHome();
 			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_ClickRegisterNewUser();
@@ -623,17 +636,18 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC10_Client Portal: "
+					+ "Verify the View option in the home page", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSSupport_emailID, WPSSupport_pwd,SS_path);
 			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_SelectHTTP();
 			CPortal.WPSAdmin_SelectBusinessUnit();
 			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
-			String ClientAppName="WPSSupportTestAuto_"+uuid;
+			String ClientAppName=(excelOperation.getTestData("WPSSupportClinetName", "Generic_Dataset", "Data")+uuid);
 			CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
-			CPortal.WPSAdmin_Enter_ClientApp_ShortName("WPSSTA"+uuid);
+			CPortal.WPSAdmin_Enter_ClientApp_ShortName(excelOperation.getTestData("WPSSupportAppShortName", "Generic_Dataset", "Data")+uuid);
 			CPortal.WPSAdmin_SelectUserID();
 			CPortal.WPSAdmin_Enter_Template(excelOperation.getTestData("Template", "Generic_Dataset", "Data"));
 			CPortal.WPSAdmin_Enter_TargetURL(excelOperation.getTestData("Target URL", "Generic_Dataset", "Data"));
@@ -652,9 +666,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickLogOut();
 			CPortal.WPSAdmin_ClickLogOutImage();
 			CPortal.WPSAdmin_ClickLogIN();
-			String emailID2=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
-			String pwd2=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID2, pwd2,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSAdmin_emailID, WPSAdmin_pwd,SS_path);
 			CPortal.WPSAdmin_ClickMyWorklist();
 			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
 			CPortal.WPSAdmin_Click_ViewIcon();
@@ -663,10 +675,15 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			CPortal.WPSAdmin_Click_Approve();
 			CPortal.WPSAdmin_Click_Confirm();
+			
+			/*
+			 * *Author :Jayanta
+			 * *Description : Logout from current role and relog in with WPS Support role
+			 */
 			CPortal.WPSAdmin_ClickLogOut();
 			CPortal.WPSAdmin_ClickLogOutImage();
 			CPortal.WPSAdmin_ClickLogIN();
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSSupport_emailID, WPSSupport_pwd,SS_path);
 			CPortal.WPSAdmin_ClickHome();
 			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);									
 			CPortal.WPSSupport_Click_ViewIcon();
@@ -700,12 +717,14 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 						+ "Verify whether system is showing the count of the client application in home page,"
 						+ " and in My Worklist and pagination is working properly for WPS Support role.");
 				
+				LogTextFile.writeTestCaseStatus("TC11_Client Portal: "
+						+ "Verify whether system is showing the count of the client application in home page,"
+						+ " and in My Worklist and pagination is working properly for WPS Support role.", "Test case");
+				
 				driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-				String emailID1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID");
-				String pwd1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD");
-				CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+				CommonPage.LogIN(driver,CPortal, WPSSupport_emailID, WPSSupport_pwd,SS_path);
 				CPortal.WPSAdmin_ClickHome();
-				CPortal.WPSAdmin_CheckPagination();
+				CommonPage.WPSAdmin_CheckPagination(driver, CPortal,SS_path);
 				CPortal.WPSAdmin_ClickLogOut();
 			    CPortal.WPSAdmin_ClickLogOutImage();
 				
@@ -738,10 +757,17 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC12_Client Portal: "
+					+ "Verify the below negative scenarion in Register New Client app screen :"
+					+ "whether system display error message when user tries to register new client app without entering values in Type dropdown."
+					+ "whether system displays error message when user tries to register new client app without entering values in Name field."
+					+ "the system  displays error message when user tries to register new client app without entering values in Template field."
+					+ "system should not displays error message when user tries to register new client app without entering values in Target URL field if the type is SOAP."
+					+ "whether system  displays * mandatory and error message when user tries to register new client app without entering values in Target URL and LANSA field if the type is HTTP."
+					+ "whether system does not displays error message when user tries to register new client app without entering values in LANSA URL field if the type is SOAP.", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSSupport_emailID, WPSSupport_pwd,SS_path);
 			CPortal.WPSAdmin_ClickNewClientApp();
 			ScrollingWebPage.PageDown(driver, SS_path);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -751,7 +777,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			driver.findElement(By.xpath("//h1[contains(text(),'Register New Client Application')]")).click();
             String actualErrorType = CPortal.FetchError_RegisterApp_Type();
             String expectedErrorType=excelOperation.getTestData("Type", "CPortal_Error_Message", "Error_Message");
-		    if(actualErrorType.equalsIgnoreCase(expectedErrorType))
+		    if(actualErrorType.compareTo(expectedErrorType)==0)
 		     {
 
 			   Reporting.updateTestReport("Error message for type field is showing and message is: " + actualErrorType,
@@ -765,7 +791,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		     
 		    String actualErrorBU = CPortal.FetchError_RegisterApp_BU();
 	        String expectedErrorBU=excelOperation.getTestData("BU", "CPortal_Error_Message", "Error_Message");
-			if(actualErrorBU.equalsIgnoreCase(expectedErrorBU))
+			if(actualErrorBU.compareTo(expectedErrorBU)==0)
 			   {
 
 				   Reporting.updateTestReport("Error message for BU field is showing and message is: " + actualErrorBU,
@@ -778,7 +804,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			    }
 	        String actualErrorName = CPortal.FetchError_RegisterApp_Name();
 		    String expectedErrorName=excelOperation.getTestData("Name", "CPortal_Error_Message", "Error_Message");
-	        if(actualErrorName.equalsIgnoreCase(expectedErrorName))
+	        if(actualErrorName.compareTo(expectedErrorName)==0)
 				   {
 
 					 Reporting.updateTestReport("Error message for Name field is showing and message is: " + actualErrorName,
@@ -792,7 +818,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 				     
 		    String actualErrorAppShortName = CPortal.FetchError_RegisterApp_App_Short_Name();
 			String expectedErrorAppShortName=excelOperation.getTestData("App_Short_Name", "CPortal_Error_Message", "Error_Message");
-		    if(actualErrorAppShortName.equalsIgnoreCase(expectedErrorAppShortName))
+		    if(actualErrorAppShortName.compareTo(expectedErrorAppShortName)==0)
 				  {
                    Reporting.updateTestReport("Error message for App short name field is showing and message is: " + actualErrorAppShortName,
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -804,7 +830,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 				}
 		    String actualErrorUserID = CPortal.FetchError_RegisterApp_User_ID();
 			String expectedErrorUserID=excelOperation.getTestData("User_ID", "CPortal_Error_Message", "Error_Message");
-		    if(actualErrorUserID.equalsIgnoreCase(expectedErrorUserID))
+		    if(actualErrorUserID.compareTo(expectedErrorUserID)==0)
 			       {
 			        Reporting.updateTestReport("Error message for User_ID field is showing and message is: " + actualErrorUserID,
 					  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -818,7 +844,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 						  	  
 		     String actualErrorPaymentMethod = CPortal.FetchError_RegisterApp_Payment_Method();
 		     String expectedErrorPaymentMethod=excelOperation.getTestData("Payment_Method", "CPortal_Error_Message", "Error_Message");
-		     if(actualErrorPaymentMethod.equalsIgnoreCase(expectedErrorPaymentMethod))
+		     if(actualErrorPaymentMethod.compareTo(expectedErrorPaymentMethod)==0)
 			     {
                    Reporting.updateTestReport("Error message for payment method field is showing and message is: " + actualErrorPaymentMethod,
 					  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -841,7 +867,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 				
 			    String actualErrorNameSize = CPortal.FetchError_RegisterApp_NameSize();
 		        String expectedErrorNameSize=excelOperation.getTestData("Name_Size", "CPortal_Error_Message", "Error_Message");
-		        if(actualErrorNameSize.equalsIgnoreCase(expectedErrorNameSize))
+		        if(actualErrorNameSize.compareTo(expectedErrorNameSize)==0)
 			     {
 	              Reporting.updateTestReport("Error message for Name1 field is showing and message is: " + actualErrorNameSize,
 					  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -855,7 +881,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			
 			String actualErrorAppShortName1 = CPortal.FetchError_RegisterApp_App_Short_Name1();
 		     String expectedErrorAppShortName1=excelOperation.getTestData("App_Short_Name1", "CPortal_Error_Message", "Error_Message");
-		     if(actualErrorAppShortName1.equalsIgnoreCase(expectedErrorAppShortName1))
+		     if(actualErrorAppShortName1.compareTo(expectedErrorAppShortName1)==0)
 			     {
 	              Reporting.updateTestReport("Error message for App_Short_Name1 field is showing and message is: " + actualErrorAppShortName1,
 					  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -868,7 +894,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		     
 		     String actualErrorTemplate = CPortal.FetchError_RegisterApp_Template();
 		     String expectedErrorTemplate=excelOperation.getTestData("Template", "CPortal_Error_Message", "Error_Message");
-		     if(actualErrorTemplate.equalsIgnoreCase(expectedErrorTemplate))
+		     if(actualErrorTemplate.compareTo(expectedErrorTemplate)==0)
 			     {
 	              Reporting.updateTestReport("Error message for Template is showing and message is: " + actualErrorTemplate,
 					  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -880,7 +906,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 				  }
 		     String actualErrorTargetURL = CPortal.FetchError_RegisterApp_TargetURL();
 		     String expectedErrorTargetURL=excelOperation.getTestData("Target URL", "CPortal_Error_Message", "Error_Message");
-		     if(actualErrorTargetURL.equalsIgnoreCase(expectedErrorTargetURL))
+		     if(actualErrorTargetURL.compareTo(expectedErrorTargetURL)==0)
 			     {
 	              Reporting.updateTestReport("Error message for TargetURL is showing and message is: " + actualErrorTargetURL,
 					  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -920,17 +946,21 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC13_Client Portal: "
+					+ "Verify whether system allows user to register a new client app by entering values in all the mandatory fields and also verify below," 
+					+ "system should display the entry in Client_app table when client_admin register a new client app using client portal," 
+					+ "system should navigate user back to the Home Screen when user enter values in all the mandatory fields and click on Register Button," 
+					+ "whether system navigate user back to the Home Screen with confirmation message - Client Application has been registered successfully!.", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSSupport_emailID, WPSSupport_pwd,SS_path);
 			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_SelectHTTP();
 			CPortal.WPSAdmin_SelectBusinessUnit();
 			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
-			String ClientAppName="WPSSupportTestAuto_"+uuid;
+			String ClientAppName=excelOperation.getTestData("WPSSupportClinetName", "Generic_Dataset", "Data")+uuid;
 			CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
-			CPortal.WPSAdmin_Enter_ClientApp_ShortName("WPSSTA"+uuid);
+			CPortal.WPSAdmin_Enter_ClientApp_ShortName(excelOperation.getTestData("WPSSupportAppShortName", "Generic_Dataset", "Data")+uuid);
 			CPortal.WPSAdmin_SelectUserID();
 			CPortal.WPSAdmin_Enter_Template(excelOperation.getTestData("Template", "Generic_Dataset", "Data"));
 			CPortal.WPSAdmin_Enter_TargetURL(excelOperation.getTestData("Target URL", "Generic_Dataset", "Data"));
@@ -982,9 +1012,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickLogOut();
 			CPortal.WPSAdmin_ClickLogOutImage();
 			CPortal.WPSAdmin_ClickLogIN();
-			String emailID2=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
-			String pwd2=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID2, pwd2,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSAdmin_emailID, WPSAdmin_pwd,SS_path);
 			CPortal.WPSAdmin_ClickMyWorklist();
 			CPortal.WPSAdmin_Enter_ClientApp_HomeName(clientappname);
 			String FetchName1=CPortal.WPSAdmin_Fetch_ClientApp_HomeName();
@@ -1006,10 +1034,16 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			CPortal.WPSAdmin_Click_Approve();
 			CPortal.WPSAdmin_Click_Confirm();
+			
+
+			/*
+			 * *Author :Jayanta
+			 * *Description : Logout from current role and relog in with WPS Support role
+			 */
 			CPortal.WPSAdmin_ClickLogOut();
 			CPortal.WPSAdmin_ClickLogOutImage();
 			CPortal.WPSAdmin_ClickLogIN();
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSSupport_emailID, WPSSupport_pwd,SS_path);
 			CPortal.WPSAdmin_ClickHome();
 			CPortal.WPSAdmin_Enter_ClientApp_HomeName(clientappname);
 			String FetchName2=CPortal.WPSAdmin_Fetch_ClientApp_HomeName();
@@ -1048,40 +1082,55 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC14_Client Portal: "
 					+ "Verify whether system navigate user back to the Home Screen when user clicks on Cancel Button in Register New Client app screen");
 			
-			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			String emailID1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
-			CPortal.WPSAdmin_ClickNewClientApp();
-			CPortal.WPSAdmin_SelectSOAP();
-			CPortal.WPSAdmin_SelectBusinessUnit();
-			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
-			String ClientAppName="WPSSUpportCancelTestAuto_"+uuid;
-			CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
-			CPortal.WPSAdmin_Enter_ClientApp_ShortName("CATA"+uuid);
-			CPortal.WPSAdmin_SelectUserID();
-			driver.findElement(By.xpath("//h1[contains(text(),'Register New Client Application')]")).click();
-			ScrollingWebPage.PageDown(driver, SS_path);
-			ScrollingWebPage.PageDown(driver, SS_path);
-			ScrollingWebPage.PageScrolldown(driver, 0, 600);
-			CPortal.WPSAdmin_ClickPaymentMethod();
-			CPortal.WPSAdmin_Click_DebitCard();
-			CPortal.ClientAdmin_Click_Cancel();
-			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'No records found!')]")));
-			CPortal.WPSAdmin_ClickLogOut();
-			CPortal.WPSAdmin_ClickLogOutImage();
-			CPortal.WPSAdmin_ClickLogIN();
-			String emailID2=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
-			String pwd2=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID2, pwd2,SS_path);
-			CPortal.WPSAdmin_ClickMyWorklist();
-			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'No records found!')]")));
-			CPortal.WPSAdmin_ClickLogOut();
-		    CPortal.WPSAdmin_ClickLogOutImage();
+			LogTextFile.writeTestCaseStatus("TC14_Client Portal: "
+					+ "Verify whether system navigate user back to the Home Screen when user clicks on Cancel Button in Register New Client app screen", "Test case");
 			
+			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
+			
+			try {
+				
+					WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+					CommonPage.LogIN(driver,CPortal, WPSSupport_emailID, WPSSupport_pwd,SS_path);
+					CPortal.WPSAdmin_ClickNewClientApp();
+					CPortal.WPSAdmin_SelectSOAP();
+					CPortal.WPSAdmin_SelectBusinessUnit();
+					String uuid = Integer.toString(((new Random().nextInt(10000))+1));
+					String ClientAppName=excelOperation.getTestData("WPSSUpportCancel", "Generic_Dataset", "Data")+uuid;
+					CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
+					CPortal.WPSAdmin_Enter_ClientApp_ShortName(excelOperation.getTestData("ClinetAdminAutoShortName", "Generic_Dataset", "Data")+uuid);
+					CPortal.WPSAdmin_SelectUserID();
+					driver.findElement(By.xpath("//h1[contains(text(),'Register New Client Application')]")).click();
+					ScrollingWebPage.PageDown(driver, SS_path);
+					ScrollingWebPage.PageDown(driver, SS_path);
+					ScrollingWebPage.PageScrolldown(driver, 0, 600);
+					CPortal.WPSAdmin_ClickPaymentMethod();
+					CPortal.WPSAdmin_Click_DebitCard();
+					CPortal.ClientAdmin_Click_Cancel();
+					CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'No records found!')]")));
+			
+					/* 
+			 
+			 		relogin with WPS Admin role
+		
+					 */
+					CPortal.WPSAdmin_ClickLogOut();
+					CPortal.WPSAdmin_ClickLogOutImage();
+					CPortal.WPSAdmin_ClickLogIN();
+					CommonPage.LogIN(driver,CPortal, WPSAdmin_emailID, WPSAdmin_pwd,SS_path);
+					CPortal.WPSAdmin_ClickMyWorklist();
+					CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'No records found!')]")));
+					CPortal.WPSAdmin_ClickLogOut();
+					CPortal.WPSAdmin_ClickLogOutImage();
+			}
+		       catch (Exception e) 
+		       {
+			        System.out.println("Register Client App page is not displayed after 50 seconds" + e.getMessage());
+			        Reporting.updateTestReport("Register Client App page is not displayed after 50 seconds" + e.getMessage(),
+					        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		       }
+		   	
 		}
 		catch (Exception e) 
 		{
@@ -1104,15 +1153,16 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ "Verify whether WPS Support able to Register New User"
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC15_Client Portal: "
+					+ "Verify whether WPS Support able to Register New User", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSSupport_emailID, WPSSupport_pwd,SS_path);
 			CPortal.WPSAdmin_ClickRegisterNewUser();
-			CPortal.WPSAdmin_Enter_First_Name("TestAutoSupportFirstName");
-			CPortal.WPSAdmin_Enter_Last_Name("TestAutoSupportLastName");
+			CPortal.WPSAdmin_Enter_First_Name("SupportFirstName");
+			CPortal.WPSAdmin_Enter_Last_Name("SupportLastName");
 			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
-			String SSOID = "TestUserSupport"+uuid+"@wiley.com";
+			String SSOID = excelOperation.getTestData("SUpportUserSSOID", "Generic_Dataset", "Data")+uuid+"@wiley.com";
 			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
 			CPortal.WPSSupport_SelectWPSSupportRole();
 			CPortal.WPSAdmin_ClickRegister();
@@ -1164,15 +1214,22 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ " tries to register the user with existing user details."
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC17_Client Portal: "
+					+ "Verify the negative scenarios for Register New User: "
+					+ "1.Validate the error message displayed when user tries to register"
+					+ " the user without entering values in mandatory field."
+					+ "2.Check whether system display error message when user enter values"
+					+ " which exceeds 35 characters in Field-First Name ,Last Name, SSO ID."
+					+ "3.Validate the error message displayed when service desk user"
+					+ " tries to register the user with existing user details.", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSSupport_emailID, WPSSupport_pwd,SS_path);
 			CPortal.WPSAdmin_ClickRegisterNewUser();
 			CPortal.ClickRegister_Negative();
 			String actualErrorFName = CPortal.FetchError_RegisterUser_FName();
             String expectedErrorFName=excelOperation.getTestData("FName", "CPortal_Error_Message", "Error_Message");
-            if(actualErrorFName.equalsIgnoreCase(expectedErrorFName))
+            if(actualErrorFName.compareTo(expectedErrorFName)==0)
 		     {
 
 			   Reporting.updateTestReport("Error message for First Name field is showing and message is: " + actualErrorFName,
@@ -1185,7 +1242,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		     }
             String actualErrorLName = CPortal.FetchError_RegisterUser_LName();
             String expectedErrorLName=excelOperation.getTestData("LName", "CPortal_Error_Message", "Error_Message");
-            if(actualErrorLName.equalsIgnoreCase(expectedErrorLName))
+            if(actualErrorLName.compareTo(expectedErrorLName)==0)
 		     {
 
 			   Reporting.updateTestReport("Error message for Last Name field is showing and message is: " + actualErrorLName,
@@ -1198,7 +1255,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		     }
             String actualErrorSSOID = CPortal.FetchError_RegisterUser_SSOID();
             String expectedErrorSSOID=excelOperation.getTestData("SSOID", "CPortal_Error_Message", "Error_Message");
-            if(actualErrorSSOID.equalsIgnoreCase(expectedErrorSSOID))
+            if(actualErrorSSOID.compareTo(expectedErrorSSOID)==0)
 		     {
 
 			   Reporting.updateTestReport("Error message for SSO ID field is showing and message is: " + actualErrorSSOID,
@@ -1211,7 +1268,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		     }
             String actualErrorRole = CPortal.FetchError_RegisterUser_Role();
             String expectedErrorRole=excelOperation.getTestData("Role", "CPortal_Error_Message", "Error_Message");
-            if(actualErrorRole.equalsIgnoreCase(expectedErrorRole))
+            if(actualErrorRole.compareTo(expectedErrorRole)==0)
 		     {
 
 			   Reporting.updateTestReport("Error message for Role field is showing and message is: " + actualErrorRole,
@@ -1229,7 +1286,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.ClickRegister_Negative();
 			String actualErrorFNameSize = CPortal.FetchError_RegisterUser_FName_Size();
             String expectedErrorFNameSize=excelOperation.getTestData("Fname_Size", "CPortal_Error_Message", "Error_Message");
-            if(actualErrorFNameSize.equalsIgnoreCase(expectedErrorFNameSize))
+            if(actualErrorFNameSize.compareTo(expectedErrorFNameSize)==0)
 		     {
 
 			   Reporting.updateTestReport("Error message for First Name field size is showing and message is: " + actualErrorFNameSize,
@@ -1242,7 +1299,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		     }
             String actualErrorLNameSize = CPortal.FetchError_RegisterUser_LName_Size();
             String expectedErrorLNameSize=excelOperation.getTestData("Lname_Size", "CPortal_Error_Message", "Error_Message");
-            if(actualErrorLNameSize.equalsIgnoreCase(expectedErrorLNameSize))
+            if(actualErrorLNameSize.compareTo(expectedErrorLNameSize)==0)
 		     {
 
 			   Reporting.updateTestReport("Error message for Last Name field size is showing and message is: " + actualErrorLNameSize,
@@ -1255,7 +1312,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		     }
             String actualErrorSSOIDSize = CPortal.FetchError_RegisterUser_SSOID_Size();
             String expectedErrorSSOIDSize =excelOperation.getTestData("SSOID_Size", "CPortal_Error_Message", "Error_Message");
-            if(actualErrorSSOIDSize.equalsIgnoreCase(expectedErrorSSOIDSize))
+            if(actualErrorSSOIDSize.compareTo(expectedErrorSSOIDSize)==0)
 		     {
 
 			   Reporting.updateTestReport("Error message for SSO ID field size is showing and message is: " + actualErrorSSOIDSize,
@@ -1266,15 +1323,15 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			   Reporting.updateTestReport("Error message for SSO ID field size is not showing",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		     }
-            CPortal.WPSAdmin_Enter_First_Name("TestAutoFirstName");
-			CPortal.WPSAdmin_Enter_Last_Name("TestAutoLastName");
+            CPortal.WPSAdmin_Enter_First_Name(excelOperation.getTestData("WPSAdminFirstName", "Generic_Dataset", "Data"));
+			CPortal.WPSAdmin_Enter_Last_Name(excelOperation.getTestData("WPSAdminLastName", "Generic_Dataset", "Data"));
 			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
-			String SSOID = "TestSDUser"+uuid+"@wiley.com";
+			String SSOID = (excelOperation.getTestData("WPSSupportTestUser", "Generic_Dataset", "Data"))+uuid+"@wiley.com";
 			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
 			CPortal.SDUser_SelectRole();
 			CPortal.WPSAdmin_ClickRegister();
-			CPortal.WPSAdmin_Enter_First_Name("TestAutoFirstName");
-			CPortal.WPSAdmin_Enter_Last_Name("TestAutoLastName");
+			CPortal.WPSAdmin_Enter_First_Name(excelOperation.getTestData("WPSAdminFirstName", "Generic_Dataset", "Data"));
+			CPortal.WPSAdmin_Enter_Last_Name(excelOperation.getTestData("WPSAdminFirstName", "Generic_Dataset", "Data"));
 			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
 			CPortal.SDUser_SelectRole();
 			CPortal.ClickRegister_ExistingUser();
@@ -1304,10 +1361,13 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ " in all the screens of Client portal and Verify whether System allow user to navigate,"
 					+ "to the separate tab when user clicks on \"\"Copyright Â© 2000-2021\" hyper link on footer.");
 			
+			LogTextFile.writeTestCaseStatus("TC16_Client Portal: "
+					+ "Verify whether system display Footer as \"\"Copyright Â© 2000-2021 by John Wiley & Sons, Inc., or related companies. All rights reserved.\","
+					+ " in all the screens of Client portal and Verify whether System allow user to navigate,"
+					+ "to the separate tab when user clicks on \"\"Copyright Â© 2000-2021\" hyper link on footer.", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_Support", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSSupport_emailID, WPSSupport_pwd,SS_path);
 			CPortal.WPSAdmin_ClickHome();
 			CPortal.WPSAdmin_ClickFooter();
 			CPortal.WPSAdmin_ClickNewClientApp();
@@ -1344,10 +1404,15 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ " user should be able to logout from the application on top right corner there is a down arrow"
 					+ "on click of that Logout is visible.");
 			
+			LogTextFile.writeTestCaseStatus("TC19_Client Portal: "
+					+ "Validate that the user should be able to see the user name on top right corner,"
+					+ " Client Admin user contains the Home,"
+					+ "Transaction search  options  on header of the page,"
+					+ " user should be able to logout from the application on top right corner there is a down arrow"
+					+ "on click of that Logout is visible.", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("Application_User", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("Application_User", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, ApplicationUser_emailID, ApplicationUser_pwd,SS_path);
 			CPortal.WPSAdmin_ClickHome();			
 		    CPortal.WPSAdmin_ClickTransactionSearch();
 		    CPortal.WPSAdmin_ClickLogOut();
@@ -1377,10 +1442,11 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC22_Client Portal: "
+					+ "Verify the View option in the home page for Application User", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("Application_User", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("Application_User", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);			
+			CommonPage.LogIN(driver,CPortal, ApplicationUser_emailID, ApplicationUser_pwd,SS_path);			
 			CPortal.WPSAdmin_ClickHome();												
 			CPortal.WPSSupport_Click_ViewIcon();
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -1418,10 +1484,15 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ " user should be able to logout from the application on top right corner there is a down arrow"
 					+ "on click of that Logout is visible.");
 			
+			LogTextFile.writeTestCaseStatus("TC25_Client Portal: "
+					+ "Validate that the user should be able to see the user name on top right corner,"
+					+ " Client Admin user contains the Home,Register New Application,"
+					+ "Transaction search  options  on header of the page,"
+					+ " user should be able to logout from the application on top right corner there is a down arrow"
+					+ "on click of that Logout is visible.", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, ClientAdmin_emailID, ClientAdmin_pwd,SS_path);
 			CPortal.WPSAdmin_ClickHome();
 			CPortal.WPSAdmin_ClickNewClientApp();
 			String actualUserName = driver.findElement(By.xpath("//div[@class='userNameCircle']")).getText();
@@ -1465,18 +1536,19 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ "Verify whether Client admin is able to register New Client Application"
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC26_Client Portal: "
+					+ "Verify whether Client admin is able to register New Client Application", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, ClientAdmin_emailID, ClientAdmin_pwd,SS_path);
 			CPortal.WPSAdmin_ClickNewClientApp();
 			CPortal.WPSAdmin_SelectHTTP();
 			CPortal.WPSAdmin_SelectBusinessUnit();
 			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
-			String ClientAppName="ClientAdminTestAuto_"+uuid;
+			String ClientAppName=excelOperation.getTestData("ClinetAdminAutoApp", "Generic_Dataset", "Data")+uuid;
 			CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
-			CPortal.WPSAdmin_Enter_ClientApp_ShortName("CATA"+uuid);
-			CPortal.WPSAdmin_SelectUserID();
+			CPortal.WPSAdmin_Enter_ClientApp_ShortName(excelOperation.getTestData("ClinetAdminAutoShortName", "Generic_Dataset", "Data")+uuid);
+			CPortal.ClientAdmin_SelectUserID();
 			CPortal.WPSAdmin_Enter_Template(excelOperation.getTestData("Template", "Generic_Dataset", "Data"));
 			CPortal.WPSAdmin_Enter_TargetURL(excelOperation.getTestData("Target URL", "Generic_Dataset", "Data"));
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -1504,9 +1576,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickLogOut();
 			CPortal.WPSAdmin_ClickLogOutImage();
 			CPortal.WPSAdmin_ClickLogIN();
-			String emailID2=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
-			String pwd2=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID2, pwd2,SS_path);
+			CommonPage.LogIN(driver,CPortal, WPSAdmin_emailID, WPSAdmin_pwd,SS_path);
 			CPortal.WPSAdmin_ClickMyWorklist();
 			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
 			String FetchName=CPortal.WPSAdmin_Fetch_ClientApp_HomeName();
@@ -1531,7 +1601,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_ClickLogOut();
 			CPortal.WPSAdmin_ClickLogOutImage();
 			CPortal.WPSAdmin_ClickLogIN();
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, ClientAdmin_emailID, ClientAdmin_pwd,SS_path);
 			CPortal.WPSAdmin_ClickHome();
 			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
 			String FetchName1=CPortal.WPSAdmin_Fetch_ClientApp_HomeName();
@@ -1600,10 +1670,13 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ "2. Check whether system display error message when user enter values which exceeds 35 characters in Field-Name ,Template, Target URL."
                     );
 			
+			LogTextFile.writeTestCaseStatus("TC27_Client Portal: "
+					+ "Verify the negative scenarios for Register New Client App :"
+					+ "1.Validate the error message displayed when user tries to register the user without entering values in mandatory field."
+					+ "2. Check whether system display error message when user enter values which exceeds 35 characters in Field-Name ,Template, Target URL.", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, ClientAdmin_emailID, ClientAdmin_pwd,SS_path);
 			CPortal.WPSAdmin_ClickNewClientApp();
 			ScrollingWebPage.PageDown(driver, SS_path);
 			ScrollingWebPage.PageDown(driver, SS_path);
@@ -1612,7 +1685,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			driver.findElement(By.xpath("//h1[contains(text(),'Register New Client Application')]")).click();
             String actualErrorType = CPortal.FetchError_RegisterApp_Type();
             String expectedErrorType=excelOperation.getTestData("Type", "CPortal_Error_Message", "Error_Message");
-            if(actualErrorType.equalsIgnoreCase(expectedErrorType))
+            if(actualErrorType.compareTo(expectedErrorType)==0)
 		     {
 
 			   Reporting.updateTestReport("Error message for type field is showing and message is: " + actualErrorType,
@@ -1625,7 +1698,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		     }
 		     String actualErrorBU = CPortal.FetchError_RegisterApp_BU();
 		     String expectedErrorBU=excelOperation.getTestData("BU", "CPortal_Error_Message", "Error_Message");
-		     if(actualErrorBU.equalsIgnoreCase(expectedErrorBU))
+		     if(actualErrorBU.compareTo(expectedErrorBU)==0)
 			   {
 
 				   Reporting.updateTestReport("Error message for BU field is showing and message is: " + actualErrorBU,
@@ -1638,7 +1711,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			    }
 	        String actualErrorName = CPortal.FetchError_RegisterApp_Name();
 		    String expectedErrorName=excelOperation.getTestData("Name", "CPortal_Error_Message", "Error_Message");
-	        if(actualErrorName.equalsIgnoreCase(expectedErrorName))
+	        if(actualErrorName.compareTo(expectedErrorName)==0)
 				   {
 
 					 Reporting.updateTestReport("Error message for Name field is showing and message is: " + actualErrorName,
@@ -1652,7 +1725,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 				     
 		    String actualErrorAppShortName = CPortal.FetchError_RegisterApp_App_Short_Name();
 			String expectedErrorAppShortName=excelOperation.getTestData("App_Short_Name", "CPortal_Error_Message", "Error_Message");
-		    if(actualErrorAppShortName.equalsIgnoreCase(expectedErrorAppShortName))
+		    if(actualErrorAppShortName.compareTo(expectedErrorAppShortName)==0)
 				  {
                  Reporting.updateTestReport("Error message for App short name field is showing and message is: " + actualErrorAppShortName,
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1664,7 +1737,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 				}
 		    String actualErrorUserID = CPortal.FetchError_RegisterApp_User_ID();
 			String expectedErrorUserID=excelOperation.getTestData("User_ID", "CPortal_Error_Message", "Error_Message");
-		    if(actualErrorUserID.equalsIgnoreCase(expectedErrorUserID))
+		    if(actualErrorUserID.compareTo(expectedErrorUserID)==0)
 			       {
 			        Reporting.updateTestReport("Error message for User_ID field is showing and message is: " + actualErrorUserID,
 					  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1679,7 +1752,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			ScrollingWebPage.PageDown(driver, SS_path);
 			String actualErrorPaymentMethod = CPortal.FetchError_RegisterApp_Payment_Method();
 			String expectedErrorPaymentMethod=excelOperation.getTestData("Payment_Method", "CPortal_Error_Message", "Error_Message");
-			if(actualErrorPaymentMethod.equalsIgnoreCase(expectedErrorPaymentMethod))
+			if(actualErrorPaymentMethod.compareTo(expectedErrorPaymentMethod)==0)
 		     {
                 Reporting.updateTestReport("Error message for payment method field is showing and message is: " + actualErrorPaymentMethod,
 				  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1694,7 +1767,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.WPSAdmin_SelectBusinessUnit();
 			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
 		    CPortal.WPSAdmin_Enter_ClientApp_Name(excelOperation.getTestData("Field_Size", "Generic_Dataset", "Data"));
-		    CPortal.WPSAdmin_Enter_ClientApp_ShortName("CATA"+uuid);
+		    CPortal.WPSAdmin_Enter_ClientApp_ShortName(excelOperation.getTestData("ClinetAdminAutoShortName", "Generic_Dataset", "Data")+uuid);
 			CPortal.WPSAdmin_SelectUserID();
 			CPortal.WPSAdmin_Enter_Template(excelOperation.getTestData("Template", "Generic_Dataset", "Data"));
 		    ScrollingWebPage.PageDown(driver, SS_path);
@@ -1707,7 +1780,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			driver.findElement(By.xpath("//h1[contains(text(),'Register New Client Application')]")).click();
    		    String actualErrorNameSize = CPortal.FetchError_RegisterApp_NameSize();
 		    String expectedErrorNameSize=excelOperation.getTestData("Name_Size", "CPortal_Error_Message", "Error_Message");
-		        if(actualErrorNameSize.equalsIgnoreCase(expectedErrorNameSize))
+		        if(actualErrorNameSize.compareTo(expectedErrorNameSize)==0)
 			     {
 	              Reporting.updateTestReport("Size Error message for Name field is showing and message is: " + actualErrorNameSize,
 					  CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -1742,39 +1815,49 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ "Register New Client Application Screen with Type SOAP."
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC28_Client Portal: "
+					+ "Validate the functionality of Cancel button displayed in the "
+					+ "Register New Client Application Screen with Type SOAP.", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			String emailID1=excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("WPS_ClientAdmin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
-			CPortal.WPSAdmin_ClickNewClientApp();
-			CPortal.WPSAdmin_SelectSOAP();
-			CPortal.WPSAdmin_SelectBusinessUnit();
-			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
-			String ClientAppName="ClientAdminTestAuto_"+uuid;
-			CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
-			CPortal.WPSAdmin_Enter_ClientApp_ShortName("CATA"+uuid);
-			CPortal.WPSAdmin_SelectUserID();
-			driver.findElement(By.xpath("//h1[contains(text(),'Register New Client Application')]")).click();
-			ScrollingWebPage.PageDown(driver, SS_path);
-			ScrollingWebPage.PageDown(driver, SS_path);
-			ScrollingWebPage.PageScrolldown(driver, 0, 600);
-			CPortal.WPSAdmin_ClickPaymentMethod();
-			CPortal.WPSAdmin_Click_DebitCard();
-			CPortal.ClientAdmin_Click_Cancel();
-			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'No records found!')]")));
-			CPortal.WPSAdmin_ClickLogOut();
-			CPortal.WPSAdmin_ClickLogOutImage();
-			CPortal.WPSAdmin_ClickLogIN();
-			String emailID2=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "EmailID");
-			String pwd2=excelOperation.getTestData("WPS_Admin", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID2, pwd2,SS_path);
-			CPortal.WPSAdmin_ClickMyWorklist();
-			CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'No records found!')]")));
-			CPortal.WPSAdmin_ClickLogOut();
-		    CPortal.WPSAdmin_ClickLogOutImage();
+			
+			try {
+							
+					WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+					CommonPage.LogIN(driver,CPortal, ClientAdmin_emailID, ClientAdmin_pwd,SS_path);
+					CPortal.WPSAdmin_ClickNewClientApp();
+					CPortal.WPSAdmin_SelectSOAP();
+					CPortal.WPSAdmin_SelectBusinessUnit();
+					String uuid = Integer.toString(((new Random().nextInt(10000))+1));
+					String ClientAppName=excelOperation.getTestData("ClinetAdminAutoApp", "Generic_Dataset", "Data")+uuid;
+					CPortal.WPSAdmin_Enter_ClientApp_Name(ClientAppName);
+					CPortal.WPSAdmin_Enter_ClientApp_ShortName(excelOperation.getTestData("ClinetAdminAutoShortName", "Generic_Dataset", "Data")+uuid);
+					CPortal.WPSAdmin_SelectUserID();
+					driver.findElement(By.xpath("//h1[contains(text(),'Register New Client Application')]")).click();
+					ScrollingWebPage.PageDown(driver, SS_path);
+					ScrollingWebPage.PageDown(driver, SS_path);
+					ScrollingWebPage.PageScrolldown(driver, 0, 600);
+					CPortal.WPSAdmin_ClickPaymentMethod();
+					CPortal.WPSAdmin_Click_DebitCard();
+					CPortal.ClientAdmin_Click_Cancel();
+					CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'No records found!')]")));
+					CPortal.WPSAdmin_ClickLogOut();
+					CPortal.WPSAdmin_ClickLogOutImage();
+					CPortal.WPSAdmin_ClickLogIN();
+					CommonPage.LogIN(driver,CPortal, WPSAdmin_emailID, WPSAdmin_pwd,SS_path);
+					CPortal.WPSAdmin_ClickMyWorklist();
+					CPortal.WPSAdmin_Enter_ClientApp_HomeName(ClientAppName);
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'No records found!')]")));
+					CPortal.WPSAdmin_ClickLogOut();
+					CPortal.WPSAdmin_ClickLogOutImage();
+			}
+		       catch (Exception e) 
+		       {
+			        System.out.println("Register New Client Application page is not displayed after 50 seconds" + e.getMessage());
+			        Reporting.updateTestReport("Register New Client Application page is not displayed after 50 seconds" + e.getMessage(),
+					        CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		       }
 			
 		}
 		catch (Exception e) 
@@ -1800,10 +1883,13 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ "Also Validate the Logout Functionality as Service Desk User."
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC29_Client Portal: "
+					+ "Login into Client Portal as Service Desk User"
+					+ "and Validate the Header and the Footer of Register New User  when service desk user is logged in."
+					+ "Also Validate the Logout Functionality as Service Desk User.", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("Service_Desk_User", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("Service_Desk_User", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, ServiceDeskUser_emailID, ServiceDeskUser_pwd,SS_path);
 			CPortal.WPSAdmin_ClickRegisterNewUser();
 			String actualUserName = driver.findElement(By.xpath("//div[@class='userNameCircle']")).getText();
 		    String expectedUserName = excelOperation.getTestData("Service_Desk_User", "ClientPortal_SignIN", "Initial");
@@ -1852,15 +1938,22 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ " tries to register the user with existing user details."
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC30_Client Portal: "
+					+ "Verify the negative scenarios for Register New User: "
+					+ "1.Validate the error message displayed when user tries to register"
+					+ " the user without entering values in mandatory field."
+					+ "2.Check whether system display error message when user enter values"
+					+ " which exceeds 35 characters in Field-First Name ,Last Name, SSO ID."
+					+ "3.Validate the error message displayed when service desk user"
+					+ " tries to register the user with existing user details.", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("Service_Desk_User", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("Service_Desk_User", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, ServiceDeskUser_emailID, ServiceDeskUser_pwd,SS_path);
 			CPortal.WPSAdmin_ClickRegisterNewUser();
 			CPortal.ClickRegister_Negative();
 			String actualErrorFName = CPortal.FetchError_RegisterUser_FName();
             String expectedErrorFName=excelOperation.getTestData("FName", "CPortal_Error_Message", "Error_Message");
-            if(actualErrorFName.equalsIgnoreCase(expectedErrorFName))
+            if(actualErrorFName.compareTo(expectedErrorFName)==0)
 		     {
 
 			   Reporting.updateTestReport("Error message for First Name field is showing and message is: " + actualErrorFName,
@@ -1873,7 +1966,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		     }
             String actualErrorLName = CPortal.FetchError_RegisterUser_LName();
             String expectedErrorLName=excelOperation.getTestData("LName", "CPortal_Error_Message", "Error_Message");
-            if(actualErrorLName.equalsIgnoreCase(expectedErrorLName))
+            if(actualErrorLName.compareTo(expectedErrorLName)==0)
 		     {
 
 			   Reporting.updateTestReport("Error message for Last Name field is showing and message is: " + actualErrorLName,
@@ -1886,7 +1979,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		     }
             String actualErrorSSOID = CPortal.FetchError_RegisterUser_SSOID();
             String expectedErrorSSOID=excelOperation.getTestData("SSOID", "CPortal_Error_Message", "Error_Message");
-            if(actualErrorSSOID.equalsIgnoreCase(expectedErrorSSOID))
+            if(actualErrorSSOID.compareTo(expectedErrorSSOID)==0)
 		     {
 
 			   Reporting.updateTestReport("Error message for SSO ID field is showing and message is: " + actualErrorSSOID,
@@ -1899,7 +1992,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		     }
             String actualErrorRole = CPortal.FetchError_RegisterUser_Role();
             String expectedErrorRole=excelOperation.getTestData("Role", "CPortal_Error_Message", "Error_Message");
-            if(actualErrorRole.equalsIgnoreCase(expectedErrorRole))
+            if(actualErrorRole.compareTo(expectedErrorRole)==0)
 		     {
 
 			   Reporting.updateTestReport("Error message for Role field is showing and message is: " + actualErrorRole,
@@ -1917,7 +2010,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			CPortal.ClickRegister_Negative();
 			String actualErrorFNameSize = CPortal.FetchError_RegisterUser_FName_Size();
             String expectedErrorFNameSize=excelOperation.getTestData("Fname_Size", "CPortal_Error_Message", "Error_Message");
-            if(actualErrorFNameSize.equalsIgnoreCase(expectedErrorFNameSize))
+            if(actualErrorFNameSize.compareTo(expectedErrorFNameSize)==0)
 		     {
 
 			   Reporting.updateTestReport("Error message for First Name field size is showing and message is: " + actualErrorFNameSize,
@@ -1930,7 +2023,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		     }
             String actualErrorLNameSize = CPortal.FetchError_RegisterUser_LName_Size();
             String expectedErrorLNameSize=excelOperation.getTestData("Lname_Size", "CPortal_Error_Message", "Error_Message");
-            if(actualErrorLNameSize.equalsIgnoreCase(expectedErrorLNameSize))
+            if(actualErrorLNameSize.compareTo(expectedErrorLNameSize)==0)
 		     {
 
 			   Reporting.updateTestReport("Error message for Last Name field size is showing and message is: " + actualErrorLNameSize,
@@ -1943,7 +2036,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 		     }
             String actualErrorSSOIDSize = CPortal.FetchError_RegisterUser_SSOID_Size();
             String expectedErrorSSOIDSize =excelOperation.getTestData("SSOID_Size", "CPortal_Error_Message", "Error_Message");
-            if(actualErrorSSOIDSize.equalsIgnoreCase(expectedErrorSSOIDSize))
+            if(actualErrorSSOIDSize.compareTo(expectedErrorSSOIDSize)==0)
 		     {
 
 			   Reporting.updateTestReport("Error message for SSO ID field size is showing and message is: " + actualErrorSSOIDSize,
@@ -1954,15 +2047,15 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			   Reporting.updateTestReport("Error message for SSO ID field size is not showing",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		     }
-            CPortal.WPSAdmin_Enter_First_Name("TestAutoFirstName");
-			CPortal.WPSAdmin_Enter_Last_Name("TestAutoLastName");
+            CPortal.WPSAdmin_Enter_First_Name(excelOperation.getTestData("WPSAdminFirstName", "Generic_Dataset", "Data"));
+			CPortal.WPSAdmin_Enter_Last_Name(excelOperation.getTestData("WPSAdminLastName", "Generic_Dataset", "Data"));
 			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
-			String SSOID = "TestSDUser"+uuid+"@wiley.com";
+			String SSOID = excelOperation.getTestData("SDTestUser", "Generic_Dataset", "Data")+uuid+"@wiley.com";
 			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
 			CPortal.SDUser_SelectRole();
 			CPortal.WPSAdmin_ClickRegister();
-			CPortal.WPSAdmin_Enter_First_Name("TestAutoFirstName");
-			CPortal.WPSAdmin_Enter_Last_Name("TestAutoLastName");
+			CPortal.WPSAdmin_Enter_First_Name(excelOperation.getTestData("WPSAdminFirstName", "Generic_Dataset", "Data"));
+			CPortal.WPSAdmin_Enter_Last_Name(excelOperation.getTestData("WPSAdminLastName", "Generic_Dataset", "Data"));
 			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
 			CPortal.SDUser_SelectRole();
 			CPortal.ClickRegister_ExistingUser();
@@ -1993,15 +2086,19 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ "is registered by service desk user in client portal."
 					);
 			
+			LogTextFile.writeTestCaseStatus("TC31_Client Portal: "
+					+ "1.whether service desk user able to register the new user with role as - "
+					+ "Client admin, Application User, Service Desk User,"
+					+ "2.Validate the entry in DB (Table-User,User_role) once the new user"
+					+ "is registered by service desk user in client portal.", "Test case");
+			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
-			String emailID1=excelOperation.getTestData("Service_Desk_User", "ClientPortal_SignIN", "EmailID");
-			String pwd1=excelOperation.getTestData("Service_Desk_User", "ClientPortal_SignIN", "PWD");
-			CommonPage.LogIN(driver,CPortal, emailID1, pwd1,SS_path);
+			CommonPage.LogIN(driver,CPortal, ServiceDeskUser_emailID, ServiceDeskUser_pwd,SS_path);
 			CPortal.WPSAdmin_ClickRegisterNewUser();
-			CPortal.WPSAdmin_Enter_First_Name("TestAutoFirstName");
-			CPortal.WPSAdmin_Enter_Last_Name("TestAutoLastName");
+			CPortal.WPSAdmin_Enter_First_Name(excelOperation.getTestData("WPSAdminFirstName", "Generic_Dataset", "Data"));
+			CPortal.WPSAdmin_Enter_Last_Name(excelOperation.getTestData("WPSAdminLastName", "Generic_Dataset", "Data"));
 			String uuid = Integer.toString(((new Random().nextInt(10000))+1));
-			String SSOID = "TestSDUser"+uuid+"@wiley.com";
+			String SSOID = excelOperation.getTestData("SDTestUser", "Generic_Dataset", "Data")+uuid+"@wiley.com";
 			CPortal.WPSAdmin_Enter_SSO_ID(SSOID);
 			CPortal.SDUser_SelectRole();
 			CPortal.WPSAdmin_ClickRegister();

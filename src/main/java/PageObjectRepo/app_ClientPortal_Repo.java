@@ -88,8 +88,11 @@ public class app_ClientPortal_Repo extends DriverModule {
 	@FindBy(name="appShortName")
     WebElement enterClientAppShortName;
 	
-	@FindBy(xpath = "//option[@value='671']")
+	@FindBy(xpath = "//option[@value='22']")
     WebElement selectUserID;
+	
+	/*@FindBy(xpath = "//option[@value='22']")
+    WebElement selectUserID;*/
 	
 	@FindBy(xpath = "//span[contains(text(),'Card Payment')]")
    	WebElement ClickPaymentMethod;
@@ -287,6 +290,13 @@ public class app_ClientPortal_Repo extends DriverModule {
 	    @FindBy(xpath = "//button[@type='button' and @class='btn white-btn back-btn']")
 		WebElement ClickBack;
 	    
+	    /* 
+		 * Author : Jayanta
+		 * Description : Object repo to click Save in View Client App page. 
+		 */
+	    @FindBy(xpath = "//option[@value='41']")
+	    WebElement ClientAdminselectUserID;
+	    
 	
 	/* 
 	 * Author : Jayanta
@@ -411,7 +421,15 @@ public class app_ClientPortal_Repo extends DriverModule {
 		    //switch to new tab
 		    driver.switchTo().window(newTb.get(1));
 		    System.out.println("Page title of new tab: " + driver.getTitle());
+		    if(driver.getTitle().contains("Elastic"))
+		    {
 		    Reporting.updateTestReport("Transaction Search is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		    }
+		    else
+		    {
+		    	Reporting.updateTestReport("Transaction Search page is not opened successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);	
+		    }
+		    driver.close();
 		    
 		    //switch to parent window
 		    driver.switchTo().window(newTb.get(0));
@@ -478,7 +496,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	 * Author : Jayanta
 	 * Description : Method to click Use Another account for WPS Admin
 	 */
-	
+
 	public void WPSAdmin_ClickAnotherUserAccount() throws IOException {
 		try {
 			ClickAnotherUserAccount.click();
@@ -669,7 +687,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 		try {
 			ClickAdd.click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'application has been added successfully')]")));
-		    driver.findElement(By.xpath("//span[contains(text(),'application has been added successfully')]")).click();
+		  //driver.findElement(By.xpath("//span[contains(text(),'application has been added successfully')]")).click();
 		    Thread.sleep(5000);
 			Reporting.updateTestReport("Add button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
@@ -765,6 +783,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 		try {
 			ClickRegister.click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'User has been registered successfully')]")));
+			Thread.sleep(5000);
 			Reporting.updateTestReport("Register button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
@@ -870,7 +889,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 			ClickSave.click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Your changes have been saved successfully')]")));
 		    driver.findElement(By.xpath("//span[contains(text(),'Your changes have been saved successfully')]")).click();
-		    Thread.sleep(5000);
+		    //Thread.sleep(5000);
 			Reporting.updateTestReport("Save button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
@@ -912,7 +931,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 			ClickRegister.click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'application has been submitted for registration. Approval pending.')]")));
 		    driver.findElement(By.xpath("//span[contains(text(),'application has been submitted for registration. Approval pending.')]")).click();
-		    Thread.sleep(5000);
+		    //Thread.sleep(5000);
 			Reporting.updateTestReport("Register button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
@@ -929,7 +948,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 		try {
 			ClickRegister.click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1[contains(text(),'Register New Client Application')]")));
-		    Thread.sleep(5000);
+		    //Thread.sleep(5000);
 			Reporting.updateTestReport("Register button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
@@ -938,63 +957,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	}
 	
 	
-	/* 
-	 * Author - Jayanta 
-	 * Description : Method to check pagination in Client portal home screen for WPS Admin
-	 */
 	
-	public void WPSAdmin_CheckPagination() throws IOException {
-		try {
-			String Pagination=driver.findElement(By.xpath("//div[@class='nctable-info']")).getText();
-			String splitPaginationFirst[] = Pagination.split("of",2);
-			for (String s : splitPaginationFirst)
-			     System.out.println(s);
-			String s1=splitPaginationFirst[1];
-			String splitPaginationSecond[]=s1.split(" ");
-			for (String s2 : splitPaginationSecond)
-			     System.out.println(s2);
-			int TotalNumber= Integer.parseInt(splitPaginationSecond[1]);
-			System.out.println(TotalNumber);
-			int pagenumber=TotalNumber/10;
-			if (TotalNumber%10 > 0)
-		    {
-				pagenumber=pagenumber+1;
-			    System.out.println(pagenumber);
-			}
-			else
-			{
-				Reporting.updateTestReport("Pagination is working but no records are found ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			}
-			driver.findElement(By.xpath("//input[@type='text']")).click();
-			driver.findElement(By.xpath("//input[@type='text']")).clear();
-			driver.findElement(By.xpath("//input[@type='text']")).sendKeys(Integer.toString(pagenumber));
-			//act.moveToElement(ClickNextPagination).click().build().perform();
-			if (ClickNextPagination.isEnabled())
-			Reporting.updateTestReport("Pagination is not working ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			else
-				Reporting.updateTestReport("Pagination is working: ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			act.moveToElement(ClickPrevPagination).click().build().perform();
-			String currentPage = driver.findElement(By.xpath("//div[@class='pageNum']/input")).getAttribute("value");
-			System.out.println(currentPage);
-			int actualcurrentpgnumber=Integer.parseInt(currentPage);
-			System.out.println(actualcurrentpgnumber);
-			int expectedcurrentpgnumber=pagenumber-1;
-			if (actualcurrentpgnumber==expectedcurrentpgnumber)
-			{
-				Reporting.updateTestReport("Pagination is working and previous button is clicked ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);	
-			}
-			else
-			{
-				Reporting.updateTestReport("Pagination is not working and previous button is not clicked ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-				
-				
-			
-		}
-		catch(Exception e){
-			Reporting.updateTestReport("Pagination is not working: "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
 	
 	/* 
 	 * Author : Jayanta
@@ -1059,7 +1022,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 			Click_Approve.click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Do you really want to ')]")));
 		    driver.findElement(By.xpath("//h2[contains(text(),'Do you really want to ')]")).click();
-		    Thread.sleep(5000);
+		    //Thread.sleep(5000);
 			Reporting.updateTestReport("Approve button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
@@ -1077,7 +1040,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 			Click_Decline.click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Do you really want to ')]")));
 		    driver.findElement(By.xpath("//h2[contains(text(),'Do you really want to ')]")).click();
-		    Thread.sleep(5000);
+		    //Thread.sleep(5000);
 			Reporting.updateTestReport("Decline button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
@@ -1095,7 +1058,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 			Click_Confirm.click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'application has been approved')]")));
 		    driver.findElement(By.xpath("//span[contains(text(),'application has been approved')]")).click();
-		    Thread.sleep(5000);
+		    //Thread.sleep(5000);
 			Reporting.updateTestReport("Confirm button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
@@ -1113,7 +1076,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 			Click_Confirm.click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'application has been declined')]")));
 		    driver.findElement(By.xpath("//span[contains(text(),'application has been declined')]")).click();
-		    Thread.sleep(5000);
+		    //Thread.sleep(5000);
 			Reporting.updateTestReport("Confirm button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
@@ -1149,7 +1112,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 			Click_Confirm.click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'application has been initiated')]")));
 		    driver.findElement(By.xpath("//span[contains(text(),'application has been initiated')]")).click();
-		    Thread.sleep(2000);
+		    //Thread.sleep(2000);
 			Reporting.updateTestReport("Confirm button is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e){
@@ -1526,7 +1489,23 @@ public void ApplicationUser_Click_Back() throws IOException {
 	catch(Exception e){
 		Reporting.updateTestReport("Back button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 	}
- }
+ 
+}
+
+/* 
+     * Author - Jayanta 
+     * Description : Method to select User ID as bbiswas in add new client app screen for Client Admin
+     */
+
+public void ClientAdmin_SelectUserID() throws IOException {
+	  try {
+           ClientAdminselectUserID.click();
+           Reporting.updateTestReport("User ID is selected successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+	  }
+	  catch(Exception e){
+			Reporting.updateTestReport("Back button is not clicked : "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		} 
+}
 }
 
 
