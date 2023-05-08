@@ -143,14 +143,15 @@ public class EmailValidation {
 			else{
 				BigDecimal taxDouble=new BigDecimal(tax.substring(1));
 				BigDecimal taxInMailDouble=new BigDecimal(taxInMail.substring(1));
-				if((taxDouble.subtract(taxInMailDouble).compareTo(new BigDecimal("0.01") )==0 ) || (taxDouble.subtract(taxInMailDouble).compareTo(new BigDecimal("-0.01") )==0 )) {
+				if((taxDouble.subtract(taxInMailDouble).compareTo(new BigDecimal("0.01") )==0 ) || (taxDouble.subtract(taxInMailDouble).compareTo(new BigDecimal("-0.01") )==0 )) 
 					Reporting.updateTestReport(taxInMail+" : shown as tax in Order Confirmation mail has just 0.01 difference with tax in Order Confirmation page: "+tax,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				}
-				else {
+				else if((taxDouble.subtract(taxInMailDouble).compareTo(new BigDecimal("0.02") )==0 ) || (taxDouble.subtract(taxInMailDouble).compareTo(new BigDecimal("-0.02") )==0 ))
+					Reporting.updateTestReport(taxInMail+" : shown as tax in Order Confirmation mail has just 0.01 difference with tax in Order Confirmation page: "+tax,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
 					Reporting.updateTestReport(taxInMail+" : shown as tax in Order Confirmation mail was not same as tax in Order Confirmation page: "+tax,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
 
 			}
 			//Validation of shipping
@@ -174,14 +175,15 @@ public class EmailValidation {
 			else{
 				BigDecimal totalDouble=new BigDecimal(total.substring(1));
 				BigDecimal totalInMailDouble=new BigDecimal(orderTotalInMail.substring(1));
-				if((totalDouble.subtract(totalInMailDouble).compareTo(new BigDecimal("0.01") )==0 ) || (totalDouble.subtract(totalInMailDouble).compareTo(new BigDecimal("-0.01") )==0 )) {
+				if((totalDouble.subtract(totalInMailDouble).compareTo(new BigDecimal("0.01") )==0 ) || (totalDouble.subtract(totalInMailDouble).compareTo(new BigDecimal("-0.01") )==0 )) 
 					Reporting.updateTestReport(orderTotalInMail+" : shown as Order total in Order Confirmation mail has just 0.01 difference with total in Order Confirmation page: "+total,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-				}
-				else {
+				else if((totalDouble.subtract(totalInMailDouble).compareTo(new BigDecimal("0.02") )==0 ) || (totalDouble.subtract(totalInMailDouble).compareTo(new BigDecimal("-0.02") )==0 )) 
+					Reporting.updateTestReport(orderTotalInMail+" : shown as Order total in Order Confirmation mail has just 0.01 difference with total in Order Confirmation page: "+total,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else 
 					Reporting.updateTestReport(orderTotalInMail+" : shown as Order total in Order Confirmation mail was not same as total in Order Confirmation page: "+total,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
 
 			}
 

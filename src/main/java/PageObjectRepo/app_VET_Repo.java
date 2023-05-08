@@ -562,8 +562,9 @@ public class app_VET_Repo {
 	 */
 	public void enterAddressLine1(String line1) throws IOException{
 		try {
+			Thread.sleep(1000);
 			AddressLine1.clear();
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			AddressLine1.sendKeys(line1);
 			Reporting.updateTestReport("Address line 1: "+line1+" was entered",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
@@ -706,7 +707,7 @@ public class app_VET_Repo {
 		try {
 			String id=OrderId.getText();
 			String order=id.substring(7, 15);
-			Reporting.updateTestReport("Order id was fetched successfully", CaptureScreenshot.getScreenshot(SS_path),StatusDetails.PASS);
+			Reporting.updateTestReport("Order id: "+id+" was fetched successfully", CaptureScreenshot.getScreenshot(SS_path),StatusDetails.PASS);
 			return order;
 		}
 		catch(Exception e) {

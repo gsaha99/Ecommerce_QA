@@ -139,20 +139,27 @@ public class PaymentGateway {
 	 */
 	public static void paymentWiley(WebDriver driver, app_Wiley_Repo wiley, String tcNo, String path) throws IOException {
 		try{
+			WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(30));
 			wiley.enterCardHolderName(excelOperation.getTestData(tcNo, "WILEY_NA_Cart_Test_Data", "First_Name"));
 			driver.switchTo().defaultContent();
 			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-			wiley.enterCardNumber(excelOperation.getTestData(tcNo, "WILEY_NA_Cart_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-			wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData(tcNo, "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			wiley.selectExpirationYearFromDropDown(excelOperation.getTestData(tcNo, "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-			wiley.enterCVV_Number(excelOperation.getTestData(tcNo, "WILEY_NA_Cart_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();			
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("number")));
+				wiley.enterCardNumber(excelOperation.getTestData(tcNo, "WILEY_NA_Cart_Test_Data", "Card_Number"));
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+				wiley.selectExpirationMonthFromDropDown(excelOperation.getTestData(tcNo, "WILEY_NA_Cart_Test_Data", "Expiry_Month"));
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+				wiley.selectExpirationYearFromDropDown(excelOperation.getTestData(tcNo, "WILEY_NA_Cart_Test_Data", "Expiry_Year"));
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+				wiley.enterCVV_Number(excelOperation.getTestData(tcNo, "WILEY_NA_Cart_Test_Data", "CVV"));
+				driver.switchTo().defaultContent();		
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Card number field was not clickable", CaptureScreenshot.getScreenshot(path), StatusDetails.FAIL);
+			}
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Payment Details could not be entered for Wiley", CaptureScreenshot.getScreenshot(path),
@@ -166,20 +173,27 @@ public class PaymentGateway {
 	 */
 	public static void paymentWileyPLUS(WebDriver driver, app_WileyPLUS_Repo WileyPLUS, String tcNo, String path) throws IOException {
 		try{
+			WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(30));
 			WileyPLUS.enterCardHolderName(excelOperation.getTestData(tcNo, "WileyPLUS_Test_Data", "First_Name"));
 			driver.switchTo().defaultContent();
 			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-			WileyPLUS.enterCardNumber(excelOperation.getTestData(tcNo, "WileyPLUS_Test_Data", "Card_Number"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-			WileyPLUS.selectExpirationMonthFromDropDown(excelOperation.getTestData(tcNo, "WileyPLUS_Test_Data", "Expiry_Month"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-			WileyPLUS.selectExpirationYearFromDropDown(excelOperation.getTestData(tcNo, "WileyPLUS_Test_Data", "Expiry_Year"));
-			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
-			WileyPLUS.enterCVV_Number(excelOperation.getTestData(tcNo, "WileyPLUS_Test_Data", "CVV"));
-			driver.switchTo().defaultContent();			
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("number")));
+				WileyPLUS.enterCardNumber(excelOperation.getTestData(tcNo, "WileyPLUS_Test_Data", "Card_Number"));
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+				WileyPLUS.selectExpirationMonthFromDropDown(excelOperation.getTestData(tcNo, "WileyPLUS_Test_Data", "Expiry_Month"));
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+				WileyPLUS.selectExpirationYearFromDropDown(excelOperation.getTestData(tcNo, "WileyPLUS_Test_Data", "Expiry_Year"));
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+				WileyPLUS.enterCVV_Number(excelOperation.getTestData(tcNo, "WileyPLUS_Test_Data", "CVV"));
+				driver.switchTo().defaultContent();	
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Card number field was not clickable", CaptureScreenshot.getScreenshot(path), StatusDetails.FAIL);
+			}
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Payment Details could not be entered for WileyPLUS", CaptureScreenshot.getScreenshot(path),

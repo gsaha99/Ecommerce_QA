@@ -57,7 +57,7 @@ public class app_WileyPLUS_Repo {
 
 	@FindBy(xpath="//div[contains(text(),'WileyPLUS')]")
 	WebElement WileyPLUSTabPDP;
-	@FindBy(xpath="//span[@class='item-price item-price-value']")
+	@FindBy(xpath="//p[@class='pr-price']")
 	WebElement PriceInPDP;
 	@FindBy(xpath="//button[contains(text(),'Single Term')]")
 	WebElement SingleTermWileyPLUSTab;
@@ -77,6 +77,8 @@ public class app_WileyPLUS_Repo {
 	WebElement ByDefaultSelecetedWileyPLUSTab;
 	@FindBy(xpath="//p[@class='pr-price']")
 	WebElement ProductPriceInPDP;
+	@FindBy(xpath="//span[@class='typeOfProductSpan' and contains(text(),'E-Book Rental (150 Days)')]/preceding-sibling::input")
+	WebElement EBookRental150RadioButton;
 
 	//Cart page 
 
@@ -1263,7 +1265,6 @@ public class app_WileyPLUS_Repo {
 	 */
 	public void enterCardNumber(String cardNumber) throws IOException {
 		try {
-			CardNumber.click();
 			CardNumber.sendKeys(cardNumber);
 			Reporting.updateTestReport("CardNumber was entered successfully on paymentpage",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -2534,6 +2535,22 @@ public class app_WileyPLUS_Repo {
 		} catch (Exception e) {
 			Reporting.updateTestReport("ALM-token cookie was not present",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+		}
+	}
+	
+	/*
+	 * @Author: Anindita
+	 * @Description: Selects the E-Book Rental 150 days radio button in PDP
+	 */
+	public void clickOnEBookRental150RadioButton() throws IOException{
+		try {
+			EBookRental150RadioButton.click();
+			Reporting.updateTestReport("The radio button for E-Book rental 150 days was selected in PDP",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}
+		catch(Exception e) {
+			Reporting.updateTestReport("The radio button for E-Book rental 150 days couldn't be selected selected in PDP",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 

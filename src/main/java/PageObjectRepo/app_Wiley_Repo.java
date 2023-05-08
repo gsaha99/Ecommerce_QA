@@ -705,7 +705,9 @@ public class app_Wiley_Repo {
 	 */
 	public void enterAddressLine1Billing(String line1) throws IOException{
 		try {
+			Thread.sleep(500);
 			BillingAddressLine1.clear();
+			Thread.sleep(500);
 			BillingAddressLine1.sendKeys(line1);
 			Reporting.updateTestReport("Address line 1: "+line1+" was entered in Billing address section",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
@@ -1271,7 +1273,6 @@ public class app_Wiley_Repo {
 	 */
 	public void enterCardNumber(String cardNumber) throws IOException {
 		try {
-			CardNumber.click();
 			CardNumber.sendKeys(cardNumber);
 			Reporting.updateTestReport("Card Number was entered successfully on paymentpage",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);

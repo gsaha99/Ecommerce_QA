@@ -55,7 +55,7 @@ public class Vet_Test_Suite extends DriverModule {
 	private static String VETLoginURL=excelOperation.getTestData("VET_Login_URL", "Generic_Dataset", "Data");
 	private static String VETSubscriptionURLWithCredentials=excelOperation.getTestData("VET_Subscription_URL_With_Password", "Generic_Dataset", "Data");
 	private static String VETSubscriptionURL=excelOperation.getTestData("VET_Subscription_URL", "Generic_Dataset", "Data");
-	
+
 
 	@BeforeTest
 	public void initializeRepo() {
@@ -68,13 +68,13 @@ public class Vet_Test_Suite extends DriverModule {
 	@BeforeMethod
 	public void nameBefore(Method method)
 	{
-	    System.out.println("Test case: " + method.getName()+" execution started");       
+		System.out.println("Test case: " + method.getName()+" execution started");       
 	}
-	
+
 	@AfterMethod
 	public void nameAfter(Method method)
 	{
-	    System.out.println("Test case: " + method.getName()+" execution completed");       
+		System.out.println("Test case: " + method.getName()+" execution completed");       
 	}
 
 	/*
@@ -149,7 +149,7 @@ public class Vet_Test_Suite extends DriverModule {
 				Reporting.updateTestReport("Continue button on cart page was not clickable"
 						+ " and caused timeout excepion", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			
+
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -483,7 +483,7 @@ public class Vet_Test_Suite extends DriverModule {
 						+ " not displayed and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
@@ -537,7 +537,7 @@ public class Vet_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC12", "VET_Test_Data", "Order_Id", orderID);
 				excelOperation.updateTestData("TC12", "VET_Test_Data", "Tax", tax);
 				excelOperation.updateTestData("TC12", "VET_Test_Data", "Total", total);
-			
+
 			}
 
 			catch(Exception e)
@@ -600,24 +600,32 @@ public class Vet_Test_Suite extends DriverModule {
 			driver.get(VETSubscriptionURLWithCredentials);
 			driver.get(VETSubscriptionURL);
 			VET.addSubscriptionToCart();
-			VET.addPromoToCart(excelOperation.getTestData("100_Percent_Coupon", "Generic_Dataset", "Data"));
-			VET.continueToCheckout();
-			VET.enterFirstName(excelOperation.getTestData("TC18", "VET_Test_Data", "First_Name"));
-			VET.enterLastName(excelOperation.getTestData("TC18", "VET_Test_Data", "Last_Name"));
-			String email=VET.enterEmailId();
-			VET.enterPassword(excelOperation.getTestData("TC18", "VET_Test_Data", "Password"));
-			VET.clickCreateAccountButton();
 			try {
-				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed."
-						+ " A confirmation email')]")));
-				String orderID = VET.fetchOrderId();
-				String total = VET.fetchTotal();
-				excelOperation.updateTestData("TC18", "VET_Test_Data", "Order_Id", orderID);
-				excelOperation.updateTestData("TC18", "VET_Test_Data", "Total", total);
-				excelOperation.updateTestData("TC18", "VET_Test_Data", "Email_Id", email);
+				wait.until(ExpectedConditions.visibilityOf(VET.returnDiscountCodeField()));
+				VET.addPromoToCart(excelOperation.getTestData("100_Percent_Coupon", "Generic_Dataset", "Data"));
+				VET.continueToCheckout();
+				VET.enterFirstName(excelOperation.getTestData("TC18", "VET_Test_Data", "First_Name"));
+				VET.enterLastName(excelOperation.getTestData("TC18", "VET_Test_Data", "Last_Name"));
+				String email=VET.enterEmailId();
+				VET.enterPassword(excelOperation.getTestData("TC18", "VET_Test_Data", "Password"));
+				VET.clickCreateAccountButton();
+				try {
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Your order is being processed."
+							+ " A confirmation email')]")));
+					String orderID = VET.fetchOrderId();
+					String total = VET.fetchTotal();
+					excelOperation.updateTestData("TC18", "VET_Test_Data", "Order_Id", orderID);
+					excelOperation.updateTestData("TC18", "VET_Test_Data", "Total", total);
+					excelOperation.updateTestData("TC18", "VET_Test_Data", "Email_Id", email);
+				}
+				catch(Exception e) {
+					Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+							StatusDetails.FAIL);
+				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
+				Reporting.updateTestReport("Discount code field was"
+						+ " not displayed and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
 			VET.logOut(driver);
@@ -687,7 +695,7 @@ public class Vet_Test_Suite extends DriverModule {
 				VET.enterPhoneNumber(excelOperation.getTestData("TC20", "VET_Test_Data", "Phone_Number"));
 				VET.clickOnBillingSaveButton();
 				VET.checkIfAlertBoxDisplayedOnBillingAddressPage();
-				
+
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Address line 1 field was not clickable"
@@ -809,7 +817,7 @@ public class Vet_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	//This test case was designed to prepare the data for the data preparation of other test cases
 	@Test
 	public void Data_Preparation() throws IOException {
@@ -1004,7 +1012,7 @@ public class Vet_Test_Suite extends DriverModule {
 								Reporting.updateTestReport("Order was not placed", CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
 								VET.logOut(driver);}	
-							
+
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Address line 1 field was not clickable"
@@ -1027,7 +1035,7 @@ public class Vet_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				VET.logOut(driver);
 			}	
-			
+
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -1037,7 +1045,7 @@ public class Vet_Test_Suite extends DriverModule {
 
 		}
 	}
-	
+
 	/*
 	 * @Description: Opens the Home page and checks the content if everything is present or not
 	 */

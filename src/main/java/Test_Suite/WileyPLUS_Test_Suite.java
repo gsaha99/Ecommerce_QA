@@ -79,12 +79,21 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					WileyPLUS.clickOnSRP_WileyProduct();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='product-add-to-cart']")));
-						if(price.equalsIgnoreCase(WileyPLUS.checkPriceInPDP()))
-							Reporting.updateTestReport("The price in SRP was same as price in PDP",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport("The price in SRP was not same as price in PDP",
+						WileyPLUS.clickOnEBookRental150RadioButton();
+						try {
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath
+									("//button[@class='small-button add-to-cart-button js-add-to-cart']")));
+							if(price.equalsIgnoreCase(WileyPLUS.checkPriceInPDP()))
+								Reporting.updateTestReport("The price in SRP was same as price in PDP",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							else
+								Reporting.updateTestReport("The price in SRP was not same as price in PDP: "+price,
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+						catch(Exception e) {
+							Reporting.updateTestReport("Add to cart button was not clickable after selcting E-Book rental 150 days and caused timeout exception",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Product details page couldn't be loaded and caused timeout exception",
@@ -145,14 +154,22 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						String price=WileyPLUS.checkPriceInSRP_PLP();
 						WileyPLUS.clickOnSRP_WileyProduct();
 						try {
-							wait.until(ExpectedConditions.presenceOfElementLocated(
-									By.xpath("//div[@class='product-add-to-cart']")));
-							if(price.equalsIgnoreCase(WileyPLUS.checkPriceInPDP()))
-								Reporting.updateTestReport("The price in PLP was same as price in PDP",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-							else
-								Reporting.updateTestReport("The price in PLP was not same as price in PDP",
+							wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='product-add-to-cart']")));
+							WileyPLUS.clickOnEBookRental150RadioButton();
+							try {
+								wait.until(ExpectedConditions.elementToBeClickable(By.xpath
+										("//button[@class='small-button add-to-cart-button js-add-to-cart']")));
+								if(price.equalsIgnoreCase(WileyPLUS.checkPriceInPDP()))
+									Reporting.updateTestReport("The price in SRP was same as price in PDP",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								else
+									Reporting.updateTestReport("The price in SRP was not same as price in PDP",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+							catch(Exception e) {
+								Reporting.updateTestReport("Add to cart button was not clickable after selcting E-Book rental 150 days and caused timeout exception",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Product details page couldn't be loaded and caused timeout exception",
@@ -534,12 +551,28 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC09", "WileyPLUS_Test_Data", "SearchBox_Text"));
 					WileyPLUS.clickOnSRP_WileyProduct();
 					if(WileyPLUS.checkAddToCartButton()) {
-						Reporting.updateTestReport("Add to cart button was present in the E-book variant page",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						Reporting.updateTestReport("Add to cart button was present in the E-book Rental 120 days variant page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 					else
-						Reporting.updateTestReport("Add to cart button was not present in the E-book variant page",
+						Reporting.updateTestReport("Add to cart button was not present in the E-book Rental 120 days variant page",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					WileyPLUS.clickOnEBookRental150RadioButton();
+					try {
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath
+								("//button[@class='small-button add-to-cart-button js-add-to-cart']")));
+						if(WileyPLUS.checkAddToCartButton()) {
+							Reporting.updateTestReport("Add to cart button was present in the E-book Rental 150 days variant page",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						}
+						else
+							Reporting.updateTestReport("Add to cart button was not present in the E-book Rental 150 days variant page",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("Add to cart button was not clickable after selcting E-Book rental 150 days and caused timeout exception",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
 					if(WileyPLUS.checkWileyPLUSTabInPDP())
 						WileyPLUS.clickOnWileyPLUSTabPDP();
 					else 
