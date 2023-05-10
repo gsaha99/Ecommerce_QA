@@ -648,14 +648,6 @@ public class Wiley_dot_com_Test_Suite extends DriverModule {
 					WebElement l1=driver.findElement(By.id("sortOptions-button"));
 					WebElement l=driver.findElement(By.xpath("//div[contains(text(),'Publication Date (newest-oldest)')]"));
 					wiley.clickOnPublicationDateFromSortDropDown();
-					/*Actions action = new Actions(driver);
-				try {
-					action.moveToElement(l1).click().perform();
-					action.moveToElement(l).click().perform();
-					}
-				catch(Exception e) {
-					Reporting.updateTestReport(e.getMessage(),CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
-				}*/
 					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='ui-selectmenu-text' and contains(text(),"
 							+ "'Publication Date (newest-oldest)')]")));
 					//wait.until(ExpectedConditions.urlContains("publicationDate"));

@@ -2221,8 +2221,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC13_eBook_Rental_product_Purchase");
 			LogTextFile.writeTestCaseStatus("TC13_eBook_Rental_product_Purchase", "Test case");
 			driver.get(wiley.wileyURLConcatenation("TC13", "WILEY_NA_Cart_Test_Data", "URL"));
-			//driver.navigate().refresh();
-			//wiley.ebookRentalProduct();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -3888,7 +3886,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.enterAddressLine1Billing(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "Bill_Address_line1"));
 						wiley.enterZipBilling(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "Bill_Zip_Code"));
 						wiley.enterCityBilling(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "Bill_City"));
-						
+
 						//State is commented out as the filed is not present for Australia
 						//wiley.enterState(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "Bill_State"));
 
@@ -5161,21 +5159,28 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 	 * @Description: Validates the updated hover text for E-Books in Product details page
 	 */
 	@Test
-	public void TC37_Generic_info_hover_text_EBook_EBookRental_PDP() throws IOException{
+	public void TC37_Generic_info_hover_text_EBook_EBookRental_PDP_And_Price_Validation() throws IOException{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC37_Generic_info_hover_text_EBook_EBookRental_PDP");
 			LogTextFile.writeTestCaseStatus("TC37_Generic_info_hover_text_EBook_EBookRental_PDP", "Test case");
+			BigDecimal priceOfEBook;
+			BigDecimal priceOfEBookRental;
 			String[] regions=excelOperation.getTestData("TC37", "WILEY_NA_Cart_Test_Data", "URL").split(",");
-			String[] products=excelOperation.getTestData("TC37", "WILEY_NA_Cart_Test_Data", "ISBN").split("_variant_");
-			String[] eBooks=products[0].split(",");
-			String[] eBookRentals=products[1].split(",");
-
-			//For eBooks
+			String[] products=excelOperation.getTestData("TC37", "WILEY_NA_Cart_Test_Data", "ISBN").split(",");
 
 			for(String region:regions) {
-				for(String eBook:eBooks) {
-					driver.get(wiley.wileyURLConcatenationwithRegions(region,eBook));
+				for(String product:products) {
+					driver.get(wiley.wileyURLConcatenationwithRegions(region,product));
 					driver.navigate().refresh();
+					wiley.checkEBookRental120();
+					wiley.checkEBookRental150();
+					if(region.equalsIgnoreCase("us"))
+						priceOfEBook=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
+					else
+						priceOfEBook=new BigDecimal(wiley.fetchPriceInPDPInCAD().substring(1));
+
+
+					//Hover info for ebook
 					if(wiley.fetchGenericHoverInfo(driver).
 							contains(excelOperation.getTestData("GenericHoverInfoTextFistBulletPoint", "Generic_Messages", "Data").trim()))
 						Reporting.updateTestReport("Correct text was present in generic info for eBook",
@@ -5186,15 +5191,22 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								excelOperation.getTestData("GenericHoverInfoTextFistBulletPoint", "Generic_Messages", "Data").trim().length(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
+					wiley.clickOnEBookRental150RadioButton();
+					if(region.equalsIgnoreCase("us"))
+						priceOfEBookRental=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
+					else
+						priceOfEBookRental=new BigDecimal(wiley.fetchPriceInPDPInCAD().substring(1));
+					BigDecimal calculatedPrice=priceOfEBook.multiply(new BigDecimal("0.42")).setScale(0,RoundingMode.HALF_UP);
+					if(calculatedPrice.compareTo(priceOfEBookRental)==0)						
+						Reporting.updateTestReport("The calculated 42% price of ebook: "+calculatedPrice+
+								" is same as the price shown in pdp: "+priceOfEBookRental,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport("The calculated 42% price of ebook: "+calculatedPrice+
+								" is not same as the price shown in pdp: "+priceOfEBookRental,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
-				}
-			}
-
-			//For eBook Rental products
-
-			for(String region:regions) {
-				for(String eBookRental:eBookRentals) {
-					driver.get(wiley.wileyURLConcatenationwithRegions(region,eBookRental));
+					//Hover info for ebook Rental
 					if(wiley.fetchGenericHoverInfo(driver).
 							contains(excelOperation.getTestData("GenericHoverInfoTextFistBulletPoint", "Generic_Messages", "Data").trim()))
 						Reporting.updateTestReport("Correct text was present in generic info for eBook Rentals",
@@ -5208,7 +5220,6 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 				}
 			}
-
 			wiley.WileyLogOut(driver);
 
 		}
@@ -6087,7 +6098,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
 	}
-	
+
 	@Test
 	public void dummyMail() {
 		try {
@@ -6095,7 +6106,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.switchTo().frame("texthtml_msg_body");
 			//List<WebElement> elements=driver.findElement(By.xpath("//br/ancestor::body"));
 			String orderConfirmationMail=driver.findElement(By.xpath("//br/ancestor::body")).getText();
-			
+
 			System.out.println(orderConfirmationMail);
 			String[] A=orderConfirmationMail.split("Tax:");
 			System.out.println(A[1]);
@@ -6112,7 +6123,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			System.out.println("Printed orderTotalInMail: "+orderTotalInMail);
 		}
 		catch(Exception e) {
-			
+
 		}
 	}
 }

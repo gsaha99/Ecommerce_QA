@@ -79,7 +79,8 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					WileyPLUS.clickOnSRP_WileyProduct();
 					try {
 						wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='product-add-to-cart']")));
-						WileyPLUS.clickOnEBookRental150RadioButton();
+						WileyPLUS.checkEBookRental120();
+						WileyPLUS.checkEBookRental150();
 						try {
 							wait.until(ExpectedConditions.elementToBeClickable(By.xpath
 									("//button[@class='small-button add-to-cart-button js-add-to-cart']")));
@@ -155,7 +156,8 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						WileyPLUS.clickOnSRP_WileyProduct();
 						try {
 							wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='product-add-to-cart']")));
-							WileyPLUS.clickOnEBookRental150RadioButton();
+							WileyPLUS.checkEBookRental120();
+							WileyPLUS.checkEBookRental150();
 							try {
 								wait.until(ExpectedConditions.elementToBeClickable(By.xpath
 										("//button[@class='small-button add-to-cart-button js-add-to-cart']")));
@@ -550,14 +552,9 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 					wait.until(ExpectedConditions.elementToBeClickable(By.id("searchbar")));
 					WileyPLUS.searchProductInHomePageSearchBar(excelOperation.getTestData("TC09", "WileyPLUS_Test_Data", "SearchBox_Text"));
 					WileyPLUS.clickOnSRP_WileyProduct();
-					if(WileyPLUS.checkAddToCartButton()) {
-						Reporting.updateTestReport("Add to cart button was present in the E-book Rental 120 days variant page",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
-					else
-						Reporting.updateTestReport("Add to cart button was not present in the E-book Rental 120 days variant page",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-					WileyPLUS.clickOnEBookRental150RadioButton();
+					WileyPLUS.checkEBookRental120();
+					WileyPLUS.checkEBookRental150();
+					//WileyPLUS.clickOnEBookRental150RadioButton();
 					try {
 						wait.until(ExpectedConditions.elementToBeClickable(By.xpath
 								("//button[@class='small-button add-to-cart-button js-add-to-cart']")));

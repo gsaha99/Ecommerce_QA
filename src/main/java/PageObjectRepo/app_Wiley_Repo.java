@@ -354,6 +354,15 @@ public class app_Wiley_Repo {
 
 	@FindBy(xpath="//p[@class='pr-price']")
 	WebElement ProductPriceInPDP;
+	
+	@FindBy(xpath="//span[@class='typeOfProductSpan' and contains(text(),'E-Book Rental (150 Days)')]/preceding-sibling::input")
+	WebElement EBookRental150RadioButton;	
+	
+	@FindBy(xpath="//span[@class='typeOfProductSpan' and contains(text(),'E-Book Rental (120 Days)')]")
+	WebElement EBookRental120;
+	
+	@FindBy(xpath="//span[@class='typeOfProductSpan' and contains(text(),'E-Book Rental (150 Days)')]")
+	WebElement EBookRental150;
 
 	// Footer Page
 
@@ -4135,6 +4144,81 @@ public class app_Wiley_Repo {
 			} catch (Exception e) {
 				Reporting.updateTestReport("Data couldn't be entered in the search bar",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Author: Anindita
+		 * @Description: Selects the E-Book Rental 150 days radio button in PDP
+		 */
+		public void clickOnEBookRental150RadioButton() throws IOException{
+			try {
+				EBookRental150RadioButton.click();
+				Reporting.updateTestReport("The radio button for E-Book rental 150 days was selected in PDP",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The radio button for E-Book rental 150 days couldn't be selected selected in PDP",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Author: Anindita
+		 * @Description: Checks if the E-Book Rental 120 days is present or not
+		 */
+		public void checkEBookRental120() throws IOException{
+			try {
+				if(EBookRental120.isDisplayed())
+					Reporting.updateTestReport("The E-Book rental 120 days was present in PDP",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				else
+					Reporting.updateTestReport("The E-Book rental 120 days was not present in PDP as expected",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The E-Book rental 120 days was not present in PDP as expected",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+		}
+		
+		/*
+		 * @Author: Anindita
+		 * @Description: Checks if the E-Book Rental 150 days is present or not
+		 */
+		public void checkEBookRental150() throws IOException{
+			try {
+				if(EBookRental150.isDisplayed())
+					Reporting.updateTestReport("The E-Book rental 120 days was present in PDP as expected",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("The E-Book rental 120 days was not present in PDP",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The E-Book rental 120 days was not present in PDP",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Author: Anindita
+		 * @Description: Fetches the product's price from PDP
+		 */
+		public String fetchPriceInPDPInCAD() throws IOException {
+			try {
+				Reporting.updateTestReport(
+						"Price of the product in PDP: "+ProductPriceInPDP.getText().trim()+" was returned",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				return ProductPriceInPDP.getText().trim().split(" ")[1];
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport(
+						"Price of the product in PDP could not be returned",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				return "";
 			}
 		}
 		
