@@ -641,8 +641,8 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 						driver.navigate().refresh();
 						WEL.clickOnExploreCourseButton();
 						try {
-							wait.until(ExpectedConditions
-									.visibilityOfElementLocated(By.xpath("(//div[@class='price-block'])[1]")));
+							wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+									"(//div[@class='card-title course-pkg-cards-heading most-popular-block'])[1]")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							try {
 								wait.until(ExpectedConditions.elementToBeClickable(
@@ -1247,8 +1247,8 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																By.xpath("//a[@aria-label='login']")));
 														ScrollingWebPage.PageDown(driver, SS_path);
 														try {
-															wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-																	"//a[@data-for='productTooltipCFA' and @data-key='0']")));
+															wait.until(ExpectedConditions.elementToBeClickable(By
+																	.xpath("(//a[@data-for='productTooltipCFA'])[1]")));
 															WEL.clickOnCFALinkOnHomepage();
 															try {
 																wait.until(ExpectedConditions.elementToBeClickable(By
@@ -1258,7 +1258,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																try {
 																	wait.until(ExpectedConditions
 																			.visibilityOfElementLocated(By.xpath(
-																					"(//div[@class='card-title course-pkg-cards-heading other-block'])[1]")));
+																					"(//div[@class='card-text course-pkg-cards-content'])[1]")));
 																	ScrollingWebPage.PageDown(driver, SS_path);
 																	try {
 																		wait.until(ExpectedConditions
@@ -1836,7 +1836,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 				try {
 					wait.until(ExpectedConditions
 							.elementToBeClickable(By.xpath("//a[@data-for='productTooltipCPA' and @data-key='0']")));
-					WEL.clickOnCFALinkOnHomepage();
+					WEL.clickOnCPALinkOnHomepage();
 					WEL.clickOnFreeTrialButton();
 					WEL.enterFreeTrialFirstName(excelOperation.getTestData("TC10", "WEL_Test_Data", "First_Name"));
 					WEL.enterFreeTrialLastName(excelOperation.getTestData("TC10", "WEL_Test_Data", "Last_Name"));
@@ -1906,8 +1906,8 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 										ExpectedConditions.elementToBeClickable(By.xpath("//a[@aria-label='login']")));
 								ScrollingWebPage.PageDown(driver, SS_path);
 								try {
-									wait.until(ExpectedConditions.elementToBeClickable(
-											By.xpath("//a[@data-for='productTooltipCFA' and @data-key='0']")));
+									wait.until(ExpectedConditions
+											.elementToBeClickable(By.xpath("(//a[@data-for='productTooltipCFA'])[1]")));
 									WEL.clickOnCFALinkOnHomepage();
 									WEL.clickOnFreeTrialButton();
 									WEL.enterFreeTrialFirstName(
@@ -3775,7 +3775,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC20_Shipping_Billing_ForIndiaAddress");
 			LogTextFile.writeTestCaseStatus("TC20_Shipping_Billing_ForIndiaAddress", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WEL_Homepage_URL);
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@aria-label='login']")));
@@ -4010,7 +4010,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC21_Shipping_Billing_ForChinaAddress");
 			LogTextFile.writeTestCaseStatus("TC21_Shipping_Billing_ForChinaAddress", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WEL_Homepage_URL);
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@aria-label='login']")));
@@ -4246,7 +4246,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC22_Shipping_Billing_ForJapanAddress");
 			LogTextFile.writeTestCaseStatus("TC22_Shipping_Billing_ForJapanAddress", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WEL_Homepage_URL);
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@aria-label='login']")));
@@ -4721,6 +4721,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 					"Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WEL_Homepage_URL);
+			driver.navigate().refresh();
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@aria-label='login']")));
 				ScrollingWebPage.PageDown(driver, SS_path);
@@ -4733,8 +4734,8 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 								.elementToBeClickable(By.xpath("//button[@class='shop-courses-btn  ']")));
 						WEL.clickOnExploreCourseButton();
 						try {
-							wait.until(ExpectedConditions.visibilityOfElementLocated(
-									By.xpath("(//dl[@class='dl-horizontal']/dl/dd[2])[1]")));
+							wait.until(ExpectedConditions.visibilityOfElementLocated(By
+									.xpath("//div[@class='card-title course-pkg-cards-heading most-popular-block']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							try {
 								wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
@@ -4795,8 +4796,8 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 														driver.navigate().refresh();
 														WEL.clickOnExploreCourseButton();
 														try {
-															wait.until(ExpectedConditions.visibilityOfElementLocated(
-																	By.xpath("(//div[@class='price-block'])[1]")));
+															wait.until(ExpectedConditions.visibilityOfElementLocated(By
+																	.xpath("(//div[@class='card-title course-pkg-cards-heading most-popular-block'])[1]")));
 															ScrollingWebPage.PageDown(driver, SS_path);
 															try {
 																wait.until(ExpectedConditions.elementToBeClickable(By
@@ -4816,7 +4817,6 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																		wait.until(ExpectedConditions
 																				.visibilityOfElementLocated(By.xpath(
 																						"//div[@class='row exam-parts-row']")));
-
 
 																		try {
 																			wait.until(ExpectedConditions
@@ -4859,26 +4859,24 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																						SS_path);
 																				try {
 																					wait.until(ExpectedConditions
-																							.visibilityOfElementLocated(
-																									By.xpath(
-																											"//div[@class='fe-product_content']/div[2]/div[@class='fe_flex grid_2']/a[1]")));
-																					WEL.clickonCFAlinkOnHomePage();
+																							.elementToBeClickable(By
+																									.xpath("(//a[@data-for='productTooltipCFA'])[1]")));
+																					WEL.clickOnCFALinkOnHomepage();
 																					try {
 																						wait.until(ExpectedConditions
-																								.visibilityOfElementLocated(
-																										By.xpath(
-																												"//button[@class='shop-courses-btn  ']")));
+																								.elementToBeClickable(By
+																										.xpath("//button[@class='shop-courses-btn  ']")));
+																						driver.navigate().refresh();
 																						WEL.clickOnExploreCourseButton();
 																						ScrollingWebPage.PageScrolldown(
-																								driver, 0, 1250,
+																								driver, 0, 800,
 																								SS_path);
 																						try {
 																							wait.until(
 																									ExpectedConditions
 																											.visibilityOfElementLocated(
 																													By.xpath(
-																															"(//div[@class='card course-pkg-cards-container ms-3 me-3']//div/div/p[@class='title'])[1]")));
-
+																															"(//div[@class='card-text course-pkg-cards-content'])[1]")));
 																							ScrollingWebPage.PageDown(
 																									driver, SS_path);
 																							try {
@@ -4895,8 +4893,6 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																													.visibilityOfElementLocated(
 																															By.xpath(
 																																	"//div[@class='col compare-wiley-heading']")));
-																									driver.navigate()
-																											.refresh();
 																									ScrollingWebPage
 																											.PageDown(
 																													driver,
@@ -5136,7 +5132,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																																		orderTotalPrice1) == 0)
 																															Reporting
 																																	.updateTestReport(
-																																			"First Product price + Second Product price -discount "
+																																			"First Product price + Second Product price+ third product price -discount "
 																																					+ " = Order total in Order Review step",
 																																			CaptureScreenshot
 																																					.getScreenshot(
@@ -5145,7 +5141,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																														else
 																															Reporting
 																																	.updateTestReport(
-																																			"First Product price +second product price- discount is not equal to Order total in Order Review step",
+																																			"First Product price +second product price + third product price- discount is not equal to Order total in Order Review step",
 																																			CaptureScreenshot
 																																					.getScreenshot(
 																																							SS_path),
@@ -5365,126 +5361,113 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 				ScrollingWebPage.PageDown(driver, SS_path);
 				try {
 					wait.until(ExpectedConditions
-							.elementToBeClickable(By.xpath("//a[@data-for='productTooltipCMA' and @data-key='1']")));
-					WEL.clickOnCMALinkOnHomepage();
+							.elementToBeClickable(By.xpath("//a[@data-for='productTooltipCIA' and @data-key='2']")));
+					WEL.clickOnCIALinkOnHomepage();
 					try {
 						wait.until(ExpectedConditions
-								.elementToBeClickable(By.xpath("//button[@class='shop-courses-btn  ']")));
+								.elementToBeClickable(By.xpath("//div[@class='col-xs-12 col-sm-6 col-md-5 col-lg-5 "
+										+ "col-xl-4 shop-courses-btn-container']/a/button")));
 						driver.navigate().refresh();
-						WEL.clickOnExploreCourseButton();
+						WEL.clickOnShopCourseButton();
 						try {
 							wait.until(ExpectedConditions
-									.visibilityOfElementLocated(By.xpath("(//div[@class='price-block'])[1]")));
+									.visibilityOfElementLocated(By.xpath("//div[@class='col compare-wiley-heading']")));
+							ScrollingWebPage.PageDown(driver, SS_path);
 							try {
-								wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-										"//div[@class='card-title course-pkg-cards-heading most-popular-block']")));
-								ScrollingWebPage.PageDown(driver, SS_path);
+								wait.until(ExpectedConditions
+										.elementToBeClickable(By.xpath("(//a[@href='/cia/products/cia-review-course/'"
+												+ " and contains(text(),'View Course')])[1]")));
+								WEL.clickOnCIAViewCourseButton();
 								try {
-									wait.until(ExpectedConditions.elementToBeClickable(
-											By.xpath("//a[@href='/cma/products/platinum-cma-review-course/']"
-													+ "/button[contains(text(),'VIEW COURSE OPTIONS')]")));
-									WEL.clickOnCMAViewCourseButton();
+									wait.until(ExpectedConditions
+											.visibilityOfElementLocated(By.xpath("//label[@for='Print0']")));
+									ScrollingWebPage.PageDown(driver, SS_path);
+									BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 									try {
-										wait.until(ExpectedConditions.elementToBeClickable(
-												By.xpath("//div[@class='btn-group btn-group-toggle']/label[1]")));
-										WEL.clickonCMAPrinteBook();
-
-										ScrollingWebPage.PageDown(driver, SS_path);
-										BigDecimal price = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-										
-											try {
-												wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-														"//button[@type='submit' and @class='add-to-cart-btn  ']")));
-												WEL.clickOnAddToCartButtonOnPDP();
-												try {
-													wait.until(ExpectedConditions
-															.visibilityOfElementLocated(By.id("cartPageMainTitle")));
-												} catch (Exception e) {
-													try {
-														if (driver
-																.findElement(By.xpath(
-																		"//h1[contains(text(),'SERVER ERROR (500)')]"))
-																.isDisplayed()) {
-															Reporting.updateTestReport(
-																	"Server error came in cart page and the page was refreshed",
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.INFO);
-															driver.navigate().refresh();
-														}
-													} catch (Exception e1) {
-														Reporting.updateTestReport(
-																"User was not in the cart page"
-																		+ " and caused timeout exception",
-																CaptureScreenshot.getScreenshot(SS_path),
-																StatusDetails.FAIL);
-													}
-												}
-												BigDecimal subtotal = new BigDecimal(
-														WEL.fetchOrderSubTotalInCartPage().substring(1));
-												if (price.compareTo(subtotal) == 0)
-													Reporting.updateTestReport(
-															"The addition of all the products' price is same as the subtotal in cart page",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
-												else
-													Reporting.updateTestReport(
-															"The addition of all the products' pricedidn't match with the subtotal in cart page",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
-												ScrollingWebPage.PageScrollDownUptoTop(driver, SS_path);
-												WEL.clickOnAddDiscountLink();
-												WEL.enterDiscountValue(excelOperation.getTestData("Cart_Coupon",
-														"Generic_Dataset", "Data"));
-
-												WEL.clickOnDiscountApplyButtonInCartPage();
-												WEL.verifyDiscountText();
-												try {
-													wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-															By.id("cartPageSuccessCouponDiv")));
-													Reporting.updateTestReport(
-															"The coupon code was successfuly applied",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.PASS);
-												} catch (Exception e) {
-													Reporting.updateTestReport("The coupon code  couldn't be applied",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
-												}
-											
+										wait.until(ExpectedConditions.elementToBeClickable(By
+												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
+										WEL.clickOnAddToCartButton();
+										try {
+											wait.until(ExpectedConditions
+													.visibilityOfElementLocated(By.id("cartPageMainTitle")));
 										} catch (Exception e) {
+											try {
+												if (driver
+														.findElement(
+																By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+														.isDisplayed()) {
+													Reporting.updateTestReport(
+															"Server error came in cart page and the page was refreshed",
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.INFO);
+													driver.navigate().refresh();
+												}
+											} catch (Exception e1) {
+												Reporting.updateTestReport(
+														"User was not in the cart page"
+																+ " and caused timeout exception",
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											}
+										}
+										BigDecimal subtotal = new BigDecimal(
+												WEL.fetchOrderSubTotalInCartPage().substring(1));
+										if (price.compareTo(subtotal) == 0)
 											Reporting.updateTestReport(
-													"Failed to click on Add TO Cart and caused timeout exception ",
+													"The addition of all the products' price is same as the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										else
+											Reporting.updateTestReport(
+													"The addition of all the products' pricedidn't match with the subtotal in cart page",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										ScrollingWebPage.PageScrollDownUptoTop(driver, SS_path);
+										WEL.clickOnAddDiscountLink();
+										WEL.enterDiscountValue(
+												excelOperation.getTestData("Cart_Coupon", "Generic_Dataset", "Data"));
+
+										WEL.clickOnDiscountApplyButtonInCartPage();
+										WEL.verifyDiscountText();
+										try {
+											wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+													By.id("cartPageSuccessCouponDiv")));
+											Reporting.updateTestReport("The coupon code was successfuly applied",
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										} catch (Exception e) {
+											Reporting.updateTestReport("The coupon code  couldn't be applied",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
+
 									} catch (Exception e) {
 										Reporting.updateTestReport(
-												"CMA PrinteBook was selected and caused timeout exception ",
+												"Failed to click on Add TO Cart and caused timeout exception ",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
+
 								} catch (Exception e) {
-									Reporting.updateTestReport(
-											"CMA Review Course title was not visible and caused timeout exception",
+									Reporting.updateTestReport("Price was not fetched caused timeout exception ",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 							} catch (Exception e) {
 								Reporting.updateTestReport(
-										"Failed to click on CMA View Course and caused timeout exception ",
+										"CIA Product details page didn't appear and caused timeout exception",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 						} catch (Exception e) {
 							Reporting.updateTestReport(
-									"Failed to click on Explore Course and caused timeout exception ",
+									"View Course button on product page was not clickable and caused timeout exception ",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
+
 					} catch (Exception e) {
 						Reporting.updateTestReport(
-								"After clicking on explore course button, the page didn't show the product title and caused timeout exception ",
+								"Shop course button on product page was not clickable and caused timeout exception ",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
+
 				} catch (Exception e) {
-					Reporting.updateTestReport("CMA Icon was not clickable  and caused timeout exception ",
+					Reporting.updateTestReport("CIA Link on homepage was not clickable and caused timeout exception ",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
+
 			} catch (Exception e) {
 				Reporting.updateTestReport("Login button on homepage was not clickable and caused timeout exception ",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -5496,6 +5479,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		}
+
 	}
 	/*
 	 * @Author: Anindita
@@ -5510,7 +5494,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC27_Shipping_Charge_For_Multiple_Quantity");
 			LogTextFile.writeTestCaseStatus("TC27_Shipping_Charge_For_Multiple_Quantity", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WEL_Homepage_URL);
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@aria-label='login']")));
@@ -5600,17 +5584,36 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 
 													// Validation for Brazil
 													WEL.selectShipCountry(country1);
+													try {
+														wait.until(ExpectedConditions.elementToBeClickable(
+																By.xpath("//input[@id='line1']")));
+													} catch (Exception e) {
+														Reporting.updateTestReport(
+																"AddressLine1 is not appeared caused timeout exception",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+													}
 													BigDecimal courierChargeForOneUnit = WEL
 															.fetchShippingChargeNonUS(driver, "Courier");
 
 													// Validation for Ameriocan samoa
 													WEL.selectShipCountry(country2);
+													try {
+														wait.until(ExpectedConditions.elementToBeClickable(
+																By.xpath("//input[@id='line1']")));
+													} catch (Exception e) {
+														Reporting.updateTestReport(
+																"AddressLine1 is not appeared caused timeout exception",
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
+													}
 													BigDecimal twoDayChargeForOneUnit = WEL
 															.fetchShippingChargeNonUS(driver, "Standard Shipping");
-													ScrollingWebPage.PageScrollDownUptoTop(driver, SS_path);
+													//ScrollingWebPage.PageScrollUp(driver, 0, -100, SS_path);
+													driver.navigate().refresh();
 													try {
-														wait.until(ExpectedConditions
-																.elementToBeClickable(By.id("backTocartNavbarMainId")));
+														wait.until(ExpectedConditions.elementToBeClickable(
+																By.xpath("//span[@id='backTocartNavbarMainId']/a")));
 														WEL.clickOnBackToCartButton();
 
 														try {
@@ -5635,7 +5638,17 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																	wait.until(ExpectedConditions
 																			.visibilityOfElementLocated(By.xpath(
 																					"//h5[@id='shippingAddressTitle']/span")));
+																	
 																	WEL.selectShipCountry(country1);
+																	try {
+																		wait.until(ExpectedConditions.elementToBeClickable(
+																				By.xpath("//input[@id='line1']")));
+																	} catch (Exception e) {
+																		Reporting.updateTestReport(
+																				"AddressLine1 is not appeared caused timeout exception",
+																				CaptureScreenshot.getScreenshot(SS_path),
+																				StatusDetails.FAIL);
+																	}
 																	// validation for Brzil/ columbia
 																	BigDecimal courierChargeForMultiUnit = WEL
 																			.fetchShippingChargeNonUS(driver,
@@ -5670,6 +5683,15 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																						SS_path),
 																				StatusDetails.FAIL);
 																	WEL.selectShipCountry(country2);
+																	try {
+																		wait.until(ExpectedConditions.elementToBeClickable(
+																				By.xpath("//input[@id='line1']")));
+																	} catch (Exception e) {
+																		Reporting.updateTestReport(
+																				"AddressLine1 is not appeared caused timeout exception",
+																				CaptureScreenshot.getScreenshot(SS_path),
+																				StatusDetails.FAIL);
+																	}
 																	BigDecimal twoDayChargeForMultiUnit = WEL
 																			.fetchShippingChargeNonUS(driver,
 																					"Standard Shipping");

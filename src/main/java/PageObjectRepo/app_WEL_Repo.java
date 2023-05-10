@@ -69,7 +69,7 @@ public class app_WEL_Repo {
 	WebElement CMALinkOnHomepage;
 	@FindBy(xpath = "//a[@data-for='productTooltipCIA' and @data-key='2']")
 	WebElement CIALinkOnHomepage;
-	@FindBy(xpath = "//a[@data-for='productTooltipCFA' and @data-key='0']")
+	@FindBy(xpath = "(//a[@data-for='productTooltipCFA'])[1]")
 	WebElement CFALinkOnHomepage;
 	@FindBy(xpath = "//a[@data-for='productTooltipCPA' and @data-key='0']")
 	WebElement CPALinkOnHomepage;
@@ -120,7 +120,7 @@ public class app_WEL_Repo {
 	WebElement Discount;
 	@FindBy(id = "discountApplyBtn")
 	WebElement DiscountApplyButtonInCartPage;
-	@FindBy(id = "backTocartNavbarMainId")
+	@FindBy(xpath = "//span[@id='backTocartNavbarMainId']/a")
 	WebElement BackToCartButton;
 	@FindBy(xpath = "//select[@id='quantity_0']")
 	WebElement SelectQuantityDropdown;
@@ -2413,7 +2413,8 @@ public class app_WEL_Repo {
 			Reporting.updateTestReport("Back to cart button was clicked successfully",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
-			Reporting.updateTestReport("Back to cart button couldn't be clicked ",
+
+			Reporting.updateTestReport("Back to cart button couldn't be clicked" + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 
@@ -2634,6 +2635,7 @@ public class app_WEL_Repo {
 
 	public String fetchProductPriceInPDP() throws IOException {
 		try {
+
 			String pdpprice = ProductPriceInPDP.getText().trim();
 			if (pdpprice.contains(",")) {
 				System.out.println("The Product Price in PDP Page" + (pdpprice.replace(",", "")));
@@ -2791,7 +2793,7 @@ public class app_WEL_Repo {
 
 		}
 	}
-	
+
 	/*
 	 * @Author:Vishnu
 	 * 
@@ -2804,7 +2806,7 @@ public class app_WEL_Repo {
 			if (partnerpdpprice.contains(",")) {
 				System.out.println("The Product Price in PDP Page" + (partnerpdpprice.replace(",", "")));
 				partnerpdpprice = partnerpdpprice.replace(",", "");
-			} else if(partnerpdpprice.trim().contains("$0.00"))
+			} else if (partnerpdpprice.trim().contains("$0.00"))
 				partnerpdpprice = "FREE";
 
 			Reporting.updateTestReport("Price of the product in PDP: " + partnerpdpprice.trim() + " was returned",
