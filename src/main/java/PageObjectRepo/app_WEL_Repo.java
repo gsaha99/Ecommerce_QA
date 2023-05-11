@@ -213,6 +213,8 @@ public class app_WEL_Repo {
 	WebElement AddressLine1;
 	@FindBy(id = "address.region")
 	WebElement selectState;
+	@FindBy(id = "address.region")
+	WebElement SelectState;
 	@FindBy(id = "line1")
 	WebElement shipAddressLineOne;
 	@FindBy(id = "postcode")
@@ -333,6 +335,8 @@ public class app_WEL_Repo {
 	WebElement TotalInOrderReview;
 	@FindBy(id = "orderSummaryProductTotalValue")
 	WebElement PriceOfFirstProductInOrderReview;
+	@FindBy(xpath = "//div[@class='step-head checkoutCompletedStep']//div[@class='edit']/a")
+	WebElement EditIcononShippingPage;
 	@FindBy(id = "totalPriceValue")
 	WebElement OrderTotaOnCartPage;
 	@FindBy(xpath = "(//div[@class='col-6 noPadding orderReviewDetailsValue'])[2]")
@@ -884,6 +888,24 @@ public class app_WEL_Repo {
 		} catch (Exception e) {
 			Reporting.updateTestReport(
 					"Existing User password was not entered with the error message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to click on add new address on Shipping Page
+	 */
+
+	public void ClickOnEnterNewAddressButtonOnShippingPage() throws IOException {
+		try {
+			EnterNewAddressButton.click();
+			Reporting.updateTestReport("Enter new Address  button clicked successfully", CaptureScreenshot.getScreenshot(SS_path),
+					StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on Enter New Address button " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
@@ -1743,6 +1765,44 @@ public class app_WEL_Repo {
 		}
 	}
 
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to select the State from Drop down
+	 */
+
+	public void selectStateFromDropsown(String state) throws IOException {
+		try {
+
+			Select stateDropdown = new Select(SelectState);
+			stateDropdown.selectByVisibleText(state);
+			Reporting.updateTestReport("State " + state + " has been selected successfully by user",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("User failed to select state " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
+	
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to validate verification of Student for NON Us Address
+	 */
+	public void VerificationOfStudentForNonUS() throws IOException {
+		try {
+
+			String studentmessage = StudentVerification.getText();
+			Reporting.updateTestReport("The message: " + studentmessage + " Displayed successfully for NON US Address",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to the message " + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
+	
 	/*
 	 * @Author:Vishnu
 	 * 
@@ -2674,7 +2734,24 @@ public class app_WEL_Repo {
 
 		}
 	}
+	/*
+	 * @Author:Vishnu
+	 * 
+	 * @Description: Method to click on Edit Icon on Shippnig Page
+	 */
+	public void ClickOnEditIcononShippingPage() throws IOException {
+		try {
 
+			EditIcononShippingPage.click();
+			Reporting.updateTestReport("The edit Icon was clcicked successfully on Shipping Page",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+
+		} catch (Exception e) {
+			Reporting.updateTestReport("Failed to click on edit Icon on Shipping page" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+		}
+	}
 	/*
 	 * @Author:Vishnu
 	 * 
