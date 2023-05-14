@@ -23,7 +23,7 @@ public class app_Riskified_Repo {
 	WebElement RiskifiedUserId;
 	@FindBy(xpath = "//input[@placeholder='Password']")
 	WebElement RiskifiedPassword;
-	@FindBy(xpath = "//button[@class='elm-button']")
+	@FindBy(id = "login-button")
 	WebElement RiskifiedSignInButton;
 	@FindBy(xpath = "(//div[@id='app-shell-merchant-shop-name'])/span[contains(text(),'Vet Consult - Wiley')]")
 	WebElement Rvet;

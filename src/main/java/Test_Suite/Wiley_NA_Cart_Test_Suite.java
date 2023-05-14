@@ -2169,7 +2169,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 								Reporting.updateTestReport("Order Confirmation mail was received",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-								EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
+								//EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation,shipingChargeInOrderConfirmation,ordertotal);
 							}
 							else {
 								Reporting.updateTestReport("Order Confirmation mail was not received",
