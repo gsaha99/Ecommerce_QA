@@ -17,7 +17,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import PageObjectRepo.app_VET_Repo;
+
 import PageObjectRepo.app_WEL_Repo;
 import utilities.CaptureScreenshot;
 import utilities.DriverModule;
@@ -2282,7 +2282,7 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 													try {
 														wait.until(ExpectedConditions.visibilityOfElementLocated(
 																By.id("checkoutLogRegPageTitle")));
-														
+
 														WEL.enterExistingUserNameInCheckoutLoginPage(excelOperation
 																.getTestData("TC12", "WEL_Test_Data", "Email_Address"));
 														WEL.enterExistingUserPasswordInCheckoutLoginPage(excelOperation
@@ -5015,13 +5015,14 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																					"//div[@class='btn-group btn-group-toggle']/label[1]")));
 																	WEL.clickonCMAPrinteBook();
 																	driver.navigate().refresh();
-																	ScrollingWebPage.PageDown(driver, SS_path);
-																	BigDecimal secondproductprice = new BigDecimal(
-																			WEL.fetchProductPriceInPDP().substring(1));
 																	try {
 																		wait.until(ExpectedConditions
 																				.visibilityOfElementLocated(By.xpath(
 																						"//div[@class='row exam-parts-row']")));
+																		ScrollingWebPage.PageDown(driver, SS_path);
+																		BigDecimal secondproductprice = new BigDecimal(
+																				WEL.fetchProductPriceInPDP()
+																						.substring(1));
 
 																		try {
 																			wait.until(ExpectedConditions
@@ -5073,15 +5074,13 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																										.xpath("//button[@class='shop-courses-btn  ']")));
 																						driver.navigate().refresh();
 																						WEL.clickOnExploreCourseButton();
-																						ScrollingWebPage.PageScrolldown(
-																								driver, 0, 800,
-																								SS_path);
+																						
 																						try {
 																							wait.until(
 																									ExpectedConditions
 																											.visibilityOfElementLocated(
 																													By.xpath(
-																															"(//div[@class='card-text course-pkg-cards-content'])[1]")));
+																															"(//dl[@class='dl-horizontal']/h4)[1]")));
 																							ScrollingWebPage.PageDown(
 																									driver, SS_path);
 																							try {
@@ -5111,6 +5110,21 @@ public class WEL_Prod_Test_Suite extends DriverModule {
 																										WEL.clickOnCFAViewCourseLink();
 																										driver.navigate()
 																												.refresh();
+																										try {
+																											wait.until(
+																													ExpectedConditions
+																															.visibilityOfAllElementsLocatedBy(
+																																	By.xpath(
+																																			"//p[@class='package-selection-format']")));
+																										} catch (Exception e) {
+																											Reporting
+																											.updateTestReport(
+																													"Format section is not appeared due to timeout exception",
+																													CaptureScreenshot
+																															.getScreenshot(
+																																	SS_path),
+																													StatusDetails.FAIL);
+																										}
 																										ScrollingWebPage
 																												.PageDown(
 																														driver,

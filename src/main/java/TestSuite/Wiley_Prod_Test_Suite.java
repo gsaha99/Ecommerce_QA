@@ -517,6 +517,15 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 			String newXpath="(//span[@class='search-highlight' and contains(text(),'"+
 					excelOperation.getTestData("TC15", "WILEY_Test_Data", "SearchBox_Text")+"')])[1]";
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath
+						("//button[@class='osano-cm-dialog__close osano-cm-close']")));
+				driver.findElement(By.xpath("//button[@class='osano-cm-dialog__close osano-cm-close']")).click();
+				Reporting.updateTestReport("One cookie acceptancepop up was closed", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("No cookie acceptance pop up was dispalyed", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+			}
 
 			try {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
@@ -605,7 +614,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 						Reporting.updateTestReport("Pagination funationility is working fine after filtering with Author field",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					else
-						Reporting.updateTestReport("Pagination funationility is not working",
+						Reporting.updateTestReport("Pagination funationility is not working. Calculated page is: "+numberOfPages,
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					List<WebElement> filteredProducts=driver.findElements(By.className("product-title"));
 					System.out.println(filteredProducts.size());
@@ -639,7 +648,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 					String quantity1=facetTextAndQuantityForFormat.split("#")[1];
 					wiley.checkNumberOfProductsAfterFiltering(quantity1);
 					int numberOfPages1;
-					if(Integer.parseInt(quantity)%10==0) 
+					if(Integer.parseInt(quantity1)%10==0) 
 						numberOfPages1=Integer.parseInt(quantity1)/10;
 					else
 						numberOfPages1=Integer.parseInt(quantity1)/10+1;
@@ -647,7 +656,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 						Reporting.updateTestReport("Pagination funationility is working fine after filtering with Format ffield",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					else
-						Reporting.updateTestReport("Pagination funationility is not working",
+						Reporting.updateTestReport("Pagination funationility is not working. Calculated page is: "+numberOfPages1,
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					List<WebElement> filteredProductsForFormat=driver.findElements(By.className("product-title"));
 					int flag1=0;
@@ -761,12 +770,12 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					flag=1;
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				}
 				if(flag==1) {
 					wiley.clickOnSRP_WileyProductNewSearchPage();
