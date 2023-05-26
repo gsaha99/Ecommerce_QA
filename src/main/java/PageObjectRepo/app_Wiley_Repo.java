@@ -18,16 +18,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import TestSuite.Wiley_Prod_Test_Suite;
-import utilities.CaptureScreenshot;
-import utilities.DriverModule;
-import utilities.Reporting;
-import utilities.ScrollingWebPage;
-import utilities.StatusDetails;
-import utilities.excelOperation;
+import TestSuite.Wiley_Node_Test_Suite;
+import utilities.*;
 
 public class app_Wiley_Repo {
-	Wiley_Prod_Test_Suite Wiley_Prod_Test;
+	Wiley_Node_Test_Suite Wiley_Prod_Test;
 	public String SS_path = Wiley_Prod_Test.SS_path;
 
 	//Home page 
@@ -343,7 +338,7 @@ public class app_Wiley_Repo {
 	public void WileyLogOut() throws IOException {
 		try {
 			WebDriver driver=DriverModule.getWebDriver();
-			driver.get(excelOperation.getTestData("WILEY_LogOut_URL", "Generic_Dataset", "Data"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("WILEY_LogOut_URL", "Generic_Dataset", "Data","WILEY_Env_URL"));
 			if(driver.getTitle().contentEquals("Wiley | Global Leader in Publishing, Education and Research")) Reporting.updateTestReport("Logged out successfully",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.PASS);
 		}
 		catch(Exception e) {
@@ -1256,7 +1251,7 @@ public class app_Wiley_Repo {
 	public void ViewAllOnCLPPage() throws IOException {
 		try {
 			ViewAllOnCLPPage.click();
-			Reporting.updateTestReport("View ALL Option Clicked on Category Landing page have ",
+			Reporting.updateTestReport("View ALL Option was clicked on Category Landing page  ",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
 		} catch (Exception e) {
@@ -2127,10 +2122,11 @@ public class app_Wiley_Repo {
 	 */
 	public String wileyURLConcatenationwithRegions(String region, String pdpURL) throws IOException{
 		try {
-			String envURL="www.wiley.com/en-"+region;
+			String envURL=excelOperation.getTestData("Node_URL", "Generic_Dataset", "Data")+
+					"/wileyb2cstorefront/en-"+region;
 			Reporting.updateTestReport("Concatenated url was returned as: "+
-					"https://"+envURL+"/"+pdpURL, CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			return "https://"+envURL+"/"+pdpURL;
+					envURL+"/"+pdpURL, CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			return envURL+"/"+pdpURL;
 
 		}
 		catch(Exception e) {

@@ -15,33 +15,27 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import TestSuite.WileyPLUS_Prod_Test_Suite;
-import TestSuite.Wiley_Prod_Test_Suite;
-import utilities.CaptureScreenshot;
-import utilities.DriverModule;
-import utilities.Reporting;
-import utilities.ScrollingWebPage;
-import utilities.StatusDetails;
-import utilities.excelOperation;
+import TestSuite.WileyPLUS_Node_Test_Suite;
+import utilities.*;
 
 public class app_WileyPLUS_Repo {
 
-	public String SS_path = WileyPLUS_Prod_Test_Suite.SS_path;
+	public String SS_path = WileyPLUS_Node_Test_Suite.SS_path;
 
 	//Homepage 
 
 	@FindBy(xpath = "//a[@href='/']/img[@class='brand-logo']")
 	WebElement WileyLogo;
-	@FindBy(id = "searchbar")
+	@FindBy(id = "search-bar")
 	WebElement HomePageSearchBar;
 
 	//Search Result Page
 
 	@FindBy(xpath="//div[@class='product-date wileyProductDateGroup wileyProductPubDate']")
 	WebElement PublicationDateSRP;
-	@FindBy(xpath="(//span[@class='wileyProductDateGroup wileyProductDateGroupPipe' and contains(text(),'WileyPLUS')])[2]")
+	@FindBy(xpath="//span[@class='wileyProductDateGroup wileyProductDateGroupPipe' and contains(text(),'WileyPLUS')]")
 	WebElement WileyPLUSFormatInSRP;
-	@FindBy(xpath="(//div[@class='wileyProductPriceFormate'])[2]")
+	@FindBy(xpath="//div[@class='wileyProductPriceFormate']")
 	WebElement PriceInSRP;
     @FindBy(xpath = "(//div[@class='products-list']//section//div//a//img)//following::div//h3//a")
 	WebElement SRP_WileyProduct;
@@ -286,8 +280,8 @@ public class app_WileyPLUS_Repo {
 	public void WileyLogOut() throws IOException {
 		try {
 			WebDriver driver=DriverModule.getWebDriver();
-			driver.get(excelOperation.getTestData("WILEY_LogOut_URL", "Generic_Dataset", "Data"));
-			if(driver.getTitle().contentEquals("Wiley | Global Leader in Publishing, Education and Research")) Reporting.updateTestReport("Logged out successfully",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.PASS);
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("WILEY_LogOut_URL", "Generic_Dataset", "Data","WILEY_Env_URL"));
+			if(driver.getTitle().contentEquals("Homepage | Wiley")) Reporting.updateTestReport("Logged out successfully",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.PASS);
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Couldn't logout",CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);

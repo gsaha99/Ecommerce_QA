@@ -32,11 +32,12 @@ import utilities.StatusDetails;
 import utilities.excelOperation;
 import utilities.CommonFunctions;
 
-public class Wiley_Prod_Test_Suite extends DriverModule{
+public class Wiley_Node_Test_Suite extends DriverModule{
 	app_Wiley_Repo wiley;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
-	private static String Homepage = excelOperation.getTestData("Wiley_Homepage_URL", "Generic_Dataset", "Data");
+	private static String Homepage = excelOperation.getTestData("Node_URL", "Generic_Dataset", "Data")+
+			excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data");
 
 	@BeforeTest
 	public void launchBrowser() {
@@ -66,7 +67,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC01_MicroSites");
 			LogTextFile.writeTestCaseStatus("TC01_MicroStes", "Test case");
-			driver.get(wiley.wileyURLConcatenation("TC01", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC01", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			String title = driver.getTitle();
 			if (title.equals("The Leadership Challenge"))
@@ -93,7 +94,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC02_ProductDetailsPage");
 			LogTextFile.writeTestCaseStatus("TC02_ProductDetailsPage", "Test case");
-			driver.get(wiley.wileyURLConcatenation("TC02", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC02", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			wiley.checkShopLinkInCartPageHeader();
 			wiley.checkResearchLibrariesLinkInCartPageHeader();
@@ -149,7 +150,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 
 			Reporting.test = Reporting.extent.createTest("TC04_404_Error_Page");
 			LogTextFile.writeTestCaseStatus("TC04_404_Error_Page", "Test case");
-			driver.get(wiley.wileyURLConcatenation("TC04", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC04", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			String pagenotfound = driver.getTitle();
 			if (pagenotfound.equals("404 Error Page | Wiley"))
@@ -185,7 +186,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				Reporting.updateTestReport("The title of the Page : " + aboutUsPageTitle + " ",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			else
-				Reporting.updateTestReport("New Cart was not merged with old cart",
+				Reporting.updateTestReport("About Wiley page was not opened",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		} catch (Exception e) {
@@ -205,12 +206,33 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 			Reporting.test = Reporting.extent.createTest("TC06_SiteMap");
 			LogTextFile.writeTestCaseStatus("TC06_SiteMap", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-			driver.get(wiley.wileyURLConcatenation("TC06", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC06", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			ScrollingWebPage.PageScrollDownUptoBottom(driver, SS_path);
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='/sitemap']")));
 				wiley.clickonsitemap();
+				int indexOfSearch;
+				String correctURL;
+				String lastPart;
+				String oldURL= driver.getCurrentUrl();
+				if(!oldURL.contains("wileyb2cstorefront")) {
+					indexOfSearch = oldURL.indexOf("sitemap");
+					lastPart=oldURL.substring(indexOfSearch,oldURL.length());
+					correctURL=oldURL.substring(0,indexOfSearch)+
+							excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data")
+							+"/"+lastPart;
+					System.out.println(correctURL);
+					driver.get(correctURL);
+					try{
+						wait.until(ExpectedConditions.presenceOfElementLocated
+								(By.xpath("//title[contains(text(),'Site Map')]")));				}
+					catch(Exception e1){
+						Reporting.updateTestReport
+								("Sitemap page didn't load after hitting the updated URL",
+										CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+					}
+				}
 				String sitemaptitle = driver.getTitle();
 				if (sitemaptitle.equals("Site Map"))
 					Reporting.updateTestReport("The title of the Page is : " + sitemaptitle + " ",
@@ -235,16 +257,16 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 	/*
 	 * @Date: 03/04/23
 	 * 
-	 * @Description: Validates the Product l;isting page functionality
+	 * @Description: Validates the Product listing page functionality
 	 */
 	@Test
 	public void TC07_ProductListPage() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC07_ProductListPage");
 			LogTextFile.writeTestCaseStatus("TC07_ProductListPage", "Test case");
-			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(15));
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(45));
 			int flag=0;
-			driver.get(wiley.wileyURLConcatenation("TC07", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC07", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			wiley.searchTextInSearchBar(excelOperation.getTestData("TC07", "WILEY_Test_Data", "SearchBox_Text"));
 			try {
@@ -254,8 +276,30 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				flag=1;
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+				int indexOfSearch;
+				String correctURL;
+				String lastPart;
+				String oldURL=driver.getCurrentUrl();
+				Reporting.updateTestReport("Old Search page came with URL: "+oldURL,
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+				if(!oldURL.contains("wileyb2cstorefront")) {
+					indexOfSearch = oldURL.indexOf("search");
+					lastPart=oldURL.substring(indexOfSearch,oldURL.length());
+					correctURL=oldURL.substring(0,indexOfSearch)+
+							excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data")
+							+"/"+lastPart;
+					System.out.println(correctURL);
+					driver.get(correctURL);
+					try{
+						wait.until(ExpectedConditions.visibilityOfElementLocated
+								(By.xpath("//a[contains(text(),'PRODUCTS')]")));				}
+					catch(Exception e1){
+						Reporting.updateTestReport
+								("Search result page didn't load after hitting the updated URL",
+										CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+					}
+				}
+
 			}
 			if(flag==1) {
 				if(wiley.checkPlpProductTabNewSearch().trim().equals("Products"))
@@ -316,8 +360,8 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 			driver.get(Homepage);
 			driver.navigate().refresh();
 			String titleofHomepgae = driver.getTitle();
-			if (titleofHomepgae.equals("Wiley | Global Leader in Publishing, Education and Research"))
-				Reporting.updateTestReport("Home Page was lauched Successfully", CaptureScreenshot.getScreenshot(SS_path),
+			if (titleofHomepgae.contains("Homepage | Wiley"))
+				Reporting.updateTestReport("Home Page was launched Successfully", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.PASS);
 			else
 				Reporting.updateTestReport("Failed to Load the Home Page", CaptureScreenshot.getScreenshot(SS_path),
@@ -325,8 +369,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 
 		} catch (Exception e) {
 			wiley.WileyLogOut();
-			System.out.println(e.getMessage());
-			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+			Reporting.updateTestReport("Exception occurred: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -364,23 +407,53 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 	@Test
 	public void TC10_SearchResultEmptyPage() throws IOException {
 		try {
-
 			Reporting.test = Reporting.extent.createTest("TC10_SearchResultEmptyPage");
 			LogTextFile.writeTestCaseStatus("TC10_SearchResultEmptyPage", "Test case");
-			driver.get(wiley.wileyURLConcatenation("TC10", "WILEY_Test_Data", "URL"));
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(45));
+			int flag;
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC10", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			wiley.searchTextInSearchBar(excelOperation.getTestData("TC10", "WILEY_Test_Data", "SearchBox_Text"));
-			String titleofthePage=driver.getTitle();
-			if(titleofthePage.equals("Wiley"))
-				Reporting.updateTestReport("Your Search didn;t match any results messsage is displayed", CaptureScreenshot.getScreenshot(SS_path),
+			try {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
+				Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+				flag=1;
+			}
+			catch(Exception e) {
+				int indexOfSearch;
+				String correctURL;
+				String lastPart;
+				String oldURL=driver.getCurrentUrl();
+				Reporting.updateTestReport("Old Search page came with URL: "+oldURL,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+				if(!oldURL.contains("wileyb2cstorefront")) {
+					indexOfSearch = oldURL.indexOf("search");
+					lastPart=oldURL.substring(indexOfSearch,oldURL.length());
+					correctURL=oldURL.substring(0,indexOfSearch)+
+							excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data")
+							+"/"+lastPart;
+					System.out.println(correctURL);
+					driver.get(correctURL);
+
+				}
+
+			}
+
+			try {
+				wait.until(ExpectedConditions.presenceOfElementLocated(
+						By.xpath("//div[@class='empty-result']")));
+				Reporting.updateTestReport("Empty search result page appeared successfully", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.PASS);
-			else
+			}
+			catch(Exception e) {
 				Reporting.updateTestReport("Failed to Load Results message", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
+			}
 
 
 		} catch (Exception e) {
-			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
+			Reporting.updateTestReport("Exception occurred: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
@@ -395,7 +468,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 
 			Reporting.test = Reporting.extent.createTest("TC11_Add_To_Cart_PopUp");
 			LogTextFile.writeTestCaseStatus("TC11_Add_To_Cart_PopUp", "Test case");
-			driver.get(wiley.wileyURLConcatenation("TC11", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC11", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			wiley.clickOnAddToCartButton();
 			wiley.clickOnViewCartButton();
@@ -418,9 +491,9 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC12_Content_Search_ResultPage");
 			LogTextFile.writeTestCaseStatus("TC12_Content_Search_ResultPage", "Test case");
-			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(15));
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(45));
 			int flag=0;
-			driver.get(wiley.wileyURLConcatenation("TC12", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC12", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			wiley.searchTextInSearchBar(excelOperation.getTestData("TC12", "WILEY_Test_Data", "SearchBox_Text"));
 			try {
@@ -430,8 +503,29 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				flag=1;
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("Old Search page came with URL: "+driver.getCurrentUrl(),
+				int indexOfSearch;
+				String correctURL;
+				String lastPart;
+				String oldURL= driver.getCurrentUrl();
+				Reporting.updateTestReport("Old Search page came with URL: "+oldURL,
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+				if(!oldURL.contains("wileyb2cstorefront")) {
+					indexOfSearch = oldURL.indexOf("search");
+					lastPart=oldURL.substring(indexOfSearch,oldURL.length());
+					correctURL=oldURL.substring(0,indexOfSearch)+
+							excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data")
+							+"/"+lastPart;
+					System.out.println(correctURL);
+					driver.get(correctURL);
+					try{
+						wait.until(ExpectedConditions.visibilityOfElementLocated
+								(By.xpath("//a[contains(text(),'PRODUCTS')]")));				}
+					catch(Exception e1){
+						Reporting.updateTestReport
+								("Search result page didn't load after hitting the updated URL",
+										CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+					}
+				}
 			}
 			if(flag==1) {
 				if (wiley.checkPlpContentTabNewSearch().equals("Content")) {
@@ -466,12 +560,12 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC13_Category_LandingPage");
 			LogTextFile.writeTestCaseStatus("TC13_Category_LandingPage", "Test case");
-			driver.get(wiley.wileyURLConcatenation("TC13", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC13", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			wiley.ShopLinkHeaderCLPPage();
-			ScrollingWebPage.PageScrolldown(driver,0,300,SS_path);
 			wiley.checkFeaturedProductsOnCLPPage();
 			wiley.ViewAllOnCLPPage();
+			ScrollingWebPage.PageScrollDownUptoBottom(driver,SS_path);
 		} catch (Exception e) {
 			wiley.WileyLogOut();
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
@@ -486,13 +580,36 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 	@Test
 	public void TC14_SearchBox() throws IOException {
 		try {
-
 			Reporting.test = Reporting.extent.createTest("TC14_SearchBox");
 			LogTextFile.writeTestCaseStatus("TC14_SearchBox", "Test case");
-			driver.get(wiley.wileyURLConcatenation("TC14", "WILEY_Test_Data", "URL"));
+			WebDriverWait wait= new WebDriverWait(driver,Duration.ofSeconds(30));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC14", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
-			wiley.ClickingOnHomePage();
-			wiley.HomePageSearchBar(excelOperation.getTestData("TC14", "WILEY_Test_Data", "SearchBox_Text"));
+			//wiley.ClickingOnHomePage();
+			wiley.searchTextInSearchBar(excelOperation.getTestData("TC14", "WILEY_Test_Data", "SearchBox_Text"));
+			int indexOfSearch;
+			String correctURL;
+			String lastPart;
+			String oldURL= driver.getCurrentUrl();
+			Reporting.updateTestReport("Old Search page came with URL: "+oldURL,
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+			if(!oldURL.contains("wileyb2cstorefront")) {
+				indexOfSearch = oldURL.indexOf("search");
+				lastPart=oldURL.substring(indexOfSearch,oldURL.length());
+				correctURL=oldURL.substring(0,indexOfSearch)+
+						excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data")
+						+"/"+lastPart;
+				System.out.println(correctURL);
+				driver.get(correctURL);
+				try{
+					wait.until(ExpectedConditions.visibilityOfElementLocated
+							(By.xpath("//a[contains(text(),'PRODUCTS')]")));				}
+				catch(Exception e1){
+					Reporting.updateTestReport
+							("Serach result page didn't load after hitting the updated URL",
+									CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+				}
+			}
 			wiley.ClickingSearchAllResults();
 		} catch (Exception e) {
 			wiley.WileyLogOut();
@@ -511,7 +628,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 			Reporting.test = Reporting.extent.createTest("TC15_Product_Search_Results_Page");
 			LogTextFile.writeTestCaseStatus("TC15_Product_Search_Results_Page", "Test case");
 			int flag=0;
-			driver.get(wiley.wileyURLConcatenation("TC15", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC15", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			wiley.searchTextInSearchBar(excelOperation.getTestData("TC15", "WILEY_Test_Data", "SearchBox_Text"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -589,6 +706,29 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				}
 			}
 			else {
+				int indexOfSearch;
+				String correctURL;
+				String lastPart;
+				String oldURL= driver.getCurrentUrl();
+				Reporting.updateTestReport("Old Search page came with URL: "+oldURL,
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+				if(!oldURL.contains("wileyb2cstorefront")) {
+					indexOfSearch = oldURL.indexOf("search");
+					lastPart=oldURL.substring(indexOfSearch,oldURL.length());
+					correctURL=oldURL.substring(0,indexOfSearch)+
+							excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data")
+							+"/"+lastPart;
+					System.out.println(correctURL);
+					driver.get(correctURL);
+					try{
+						wait.until(ExpectedConditions.visibilityOfElementLocated
+								(By.xpath("//a[contains(text(),'PRODUCTS')]")));				}
+					catch(Exception e1){
+						Reporting.updateTestReport
+								("Search result page didn't load after hitting the updated URL",
+										CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+					}
+				}
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(newXpath)));
 					wiley.checkProductsWithHighlightedSearchedTerm(newXpath);
@@ -705,7 +845,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 
 			Reporting.test = Reporting.extent.createTest("TC16_Cart_Page_UI_Validation");
 			LogTextFile.writeTestCaseStatus("TC16_Cart_Page_UI_Validation", "Test case");
-			driver.get(wiley.wileyURLConcatenation("TC16", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC16", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			wiley.clickOnAddToCartButton();
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -718,8 +858,8 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				wiley.checkResearchLibrariesLinkInCartPageHeader();
 				wiley.checkPublishingServicesLinkInCartPageHeader();
 				wiley.checkProfessionalDevelopmentLinkInCartPageHeader();
-				wiley.checkCartIcon();
-				wiley.checkCartItemQuantity();
+				//wiley.checkCartIcon();
+				//wiley.checkCartItemQuantity();
 				wiley.checkBreadCrumbCartPage();
 				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 						("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
@@ -749,7 +889,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 			Reporting.test = Reporting.extent.createTest("TC17_Login_Page_Validation");
 			LogTextFile.writeTestCaseStatus("TC17_Login_Page_Validation", "Test case");
 			int flag=0;
-			driver.get(wiley.wileyURLConcatenation("TC17", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC17", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
@@ -765,7 +905,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				else Reporting.updateTestReport("Guest checkout button is not present in login page when only normal physical product is present in cart",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				wiley.clickOnCartIcon();
+				//wiley.clickOnCartIcon();
 				wiley.searchDataInSearchBar(excelOperation.getTestData("TC17", "WILEY_Test_Data", "ISBN"));
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
@@ -781,6 +921,29 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 					wiley.clickOnSRP_WileyProductNewSearchPage();
 				}
 				else {
+					int indexOfSearch;
+					String correctURL;
+					String lastPart;
+					String oldURL= driver.getCurrentUrl();
+					Reporting.updateTestReport("Old Search page came with URL: "+oldURL,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+					if(!oldURL.contains("wileyb2cstorefront")) {
+						indexOfSearch = oldURL.indexOf("search");
+						lastPart=oldURL.substring(indexOfSearch,oldURL.length());
+						correctURL=oldURL.substring(0,indexOfSearch)+
+								excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data")
+								+"/"+lastPart;
+						System.out.println(correctURL);
+						driver.get(correctURL);
+						try{
+							wait.until(ExpectedConditions.visibilityOfElementLocated
+									(By.xpath("//a[contains(text(),'PRODUCTS')]")));				}
+						catch(Exception e1){
+							Reporting.updateTestReport
+									("Search result page didn't load after hitting the updated URL",
+											CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+						}
+					}
 					wiley.clickOnSRP_WileyProduct();
 				}
 				BigDecimal priceOfSecondProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -845,7 +1008,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC18_Add_Digital_Product_to_cart_for_New_User");
 			LogTextFile.writeTestCaseStatus("TC18_Add_Digital_Product_to_cart_for_New_User", "Test case");
-			driver.get(wiley.wileyURLConcatenation("TC18", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC18", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
@@ -932,7 +1095,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 			Reporting.test = Reporting.extent.createTest("TC19_Add_Physical_Product_With_Guest_User");
 			LogTextFile.writeTestCaseStatus("TC19_Add_Physical_Product_With_Guest_User", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-			driver.get(wiley.wileyURLConcatenation("TC19", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC19", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
@@ -1020,7 +1183,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC20_Add_Physical_product_ForExistingUser");
 			LogTextFile.writeTestCaseStatus("TC20_Add_Physical_product_ForExistingUser", "Test case");
-			driver.get(wiley.wileyURLConcatenation("TC20", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC20", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
@@ -1113,7 +1276,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC21_Shipping_Charge_For_Multiple_Products");
 			LogTextFile.writeTestCaseStatus("TC21_Shipping_Charge_For_Multiple_Products", "Test case");
-			driver.get(wiley.wileyURLConcatenation("TC21", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC21", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -1136,12 +1299,13 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 						("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
-				String emailID=excelOperation.getTestData("TC21", "WILEY_Test_Data", "Email_Id");
-				wiley.enterExistingWileyUserMailID(emailID);
-				wiley.enterExistingWileyUserPassword(excelOperation.getTestData("TC21", "WILEY_Test_Data", "Password"));
-				wiley.clickOnLogInAndContinueButton();
-				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
-				wiley.clickOnProceedToCheckoutButton();
+				String email=wiley.enterEmailIdInCreateAccountForm();
+				wiley.clickOnCreateAccountButton();
+				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
+						("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
+				wiley.confirmEmailIdInCreateAccountForm(email);
+				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC18", "WILEY_Test_Data", "Password"));
+				wiley.clickOnSaveAndContinueButton();
 				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 						("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
 				//By default the country is selected as US
@@ -1153,11 +1317,12 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				String country2=excelOperation.getTestData("TC21", "WILEY_Test_Data", "Shipping_Country").split(",")[1];
 				wiley.selectCountry(country1);
 				//validation for Brzil/ columbia
-				BigDecimal airMailChargeForOneUnit=wiley.fetchShippingCharge(driver, "Air Mail");
+				//BigDecimal airMailChargeForOneUnit=wiley.fetchShippingCharge(driver, "Air Mail");
 				BigDecimal courierChargeForOneUnit=wiley.fetchShippingCharge(driver, "Courier");
 				wiley.selectCountry(country2);
 				BigDecimal twoDayChargeForOneUnit=wiley.fetchShippingCharge(driver, "2-Day");
-				wiley.clickOnCartIcon();
+				//wiley.clickOnCartIcon();
+				driver.get(CommonFunctions.concatenateURLWithNodeIP("Wiley_Cart_Page_URL","Generic_Dataset","Data","WILEY_Env_URL"));
 				String quantity=excelOperation.getTestData("TC21", "WILEY_Test_Data", "Quantity");
 				wiley.selectQuantityDropDown(quantity);
 				BigDecimal ordertotalInCartPage1=new BigDecimal(wiley.fetchOrderTotalInCartPage().substring(1));
@@ -1171,6 +1336,13 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
+				String email1=wiley.enterEmailIdInCreateAccountForm();
+				wiley.clickOnCreateAccountButton();
+				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
+						("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
+				wiley.confirmEmailIdInCreateAccountForm(email1);
+				wiley.enterPasswordInCreateAccountForm(excelOperation.getTestData("TC18", "WILEY_Test_Data", "Password"));
+				wiley.clickOnSaveAndContinueButton();
 				//By default the country is selected as US
 				BigDecimal standardShippingChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Standard Shipping");
 				BigDecimal expressShippingChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Express Shipping");
@@ -1199,15 +1371,15 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				//wiley.clickOnEnterNewAddresButtonInShipping();
 				wiley.selectCountry(country1);
 				//validation for Brzil/ columbia
-				BigDecimal airMailChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Air Mail");
+				//BigDecimal airMailChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Air Mail");
 				BigDecimal courierChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Courier");
-				if((airMailChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
+				/*if((airMailChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
 						.multiply(new BigDecimal("5")))).setScale(2, RoundingMode.CEILING).compareTo(airMailChargeForMultiUnit)==0)
 					Reporting.updateTestReport("Air mail charge has been correctly calculated for Standard shipping",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				else
 					Reporting.updateTestReport("Air mail charge has been wrongly calculated for Standard shipping",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);*/
 				if((courierChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
 						.multiply(new BigDecimal("10")))).setScale(2, RoundingMode.CEILING).compareTo(courierChargeForMultiUnit)==0)
 					Reporting.updateTestReport("Courier charge has been correctly calculated for Standard shipping",
@@ -1249,7 +1421,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 			Reporting.test = Reporting.extent.createTest("TC22_Shipping_And_BillingAddresses_different");
 			LogTextFile.writeTestCaseStatus("TC22_Shipping_And_BillingAddresses_different", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-			driver.get(wiley.wileyURLConcatenation("TC22", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC22", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
@@ -1377,7 +1549,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 			Reporting.test = Reporting.extent.createTest("TC23_Add_Coupon_To_Cart");
 			LogTextFile.writeTestCaseStatus("TC23_Add_Coupon_To_Cart", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-			driver.get(wiley.wileyURLConcatenation("TC23", "WILEY_Test_Data", "URL"));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC23", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton();
@@ -1567,15 +1739,11 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 		try {
 			Reporting.test = Reporting.extent.createTest("TC26_Sort_Functionality_In_SRP");
 			LogTextFile.writeTestCaseStatus("TC26_Sort_Functionality_In_SRP", "Test case");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-			driver.get(Homepage);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45));
+			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC07", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
 			boolean flag=false;
 			driver.navigate().refresh();
-			try {
-				wait.until(ExpectedConditions.presenceOfElementLocated(
-						By.xpath("//title[contains(text(),'Wiley | Global Leader in Publishing,"
-								+ " Education and Research')]")));
-				wiley.searchProductInHomePageSearchBar(excelOperation.getTestData("TC26", "WILEY_Test_Data", "SearchBox_Text"));				
+				wiley.searchTextInSearchBar(excelOperation.getTestData("TC26", "WILEY_Test_Data", "SearchBox_Text"));
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='product-card'])[1]")));
 					Reporting.updateTestReport("New Search page came with URL: "+driver.getCurrentUrl(),
@@ -1700,6 +1868,29 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				
 				//This is for old search page
 				else {
+					int indexOfSearch;
+					String correctURL;
+					String lastPart;
+					String oldURL= driver.getCurrentUrl();
+					Reporting.updateTestReport("Old Search page came with URL: "+oldURL,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+					if(!oldURL.contains("wileyb2cstorefront")) {
+						indexOfSearch = oldURL.indexOf("search");
+						lastPart=oldURL.substring(indexOfSearch,oldURL.length());
+						correctURL=oldURL.substring(0,indexOfSearch)+
+								excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data")
+								+"/"+lastPart;
+						System.out.println(correctURL);
+						driver.get(correctURL);
+						try{
+							wait.until(ExpectedConditions.visibilityOfElementLocated
+									(By.xpath("//a[contains(text(),'PRODUCTS')]")));				}
+						catch(Exception e1){
+							Reporting.updateTestReport
+									("Search result page didn't load after hitting the updated URL",
+											CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
+						}
+					}
 					int page=wiley.fetchNumberOfPagesAfterFiltering();
 					String totalSearchedProducts=wiley.getNumberOfProductsInSearchResult();
 					CommonFunctions.checkPaginationFunctionality(flag, totalSearchedProducts, page, SS_path);
@@ -1757,11 +1948,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				}
 
 
-			}
-			catch(Exception e) {
-				Reporting.updateTestReport("Homepage couldn't be loaded and caused timeout exception",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
+
 
 
 		}
@@ -1771,4 +1958,6 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+
+
 }

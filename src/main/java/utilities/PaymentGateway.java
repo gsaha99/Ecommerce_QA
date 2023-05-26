@@ -1,13 +1,11 @@
 package utilities;
 
 import java.io.IOException;
-import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import PageObjectRepo.app_AGS_Repo;
-import PageObjectRepo.app_VET_Repo;
 import PageObjectRepo.app_Wiley_Repo;
 
 public class PaymentGateway {
@@ -122,61 +120,7 @@ public class PaymentGateway {
 		}
 	}
 
-	/*
-	 * @Date: 16/3/23
-	 * @Description: This is a payment method which is used for entering card details in VET
-	 * paymentGateway-> passes a string among (WPS/ WPG) these two
-	 */
-	public static void paymentVET(String paymentGateway,WebDriver driver, app_VET_Repo VET, String tcNo, String path) throws IOException{
-		try {
-			if(paymentGateway.equalsIgnoreCase("WPG")) {
-				try{
-					driver.switchTo().frame(0);
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
-					VET.enterCardNumberWPG(excelOperation.getTestData(tcNo, "VET_Test_Data", "Card_Number"));
-					driver.switchTo().parentFrame();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
-					VET.selectExpiryMonthWPG();
-					driver.switchTo().parentFrame();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
-					VET.selectExpiryYearWPG();
-					driver.switchTo().parentFrame();
-					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='security code']")));
-					VET.enterSecurityCodeWPG(excelOperation.getTestData(tcNo, "VET_Test_Data", "CVV"));
-					driver.switchTo().parentFrame();
-					driver.switchTo().defaultContent();
-				}
-				catch(Exception e) {
-					Reporting.updateTestReport("Payment Details could not be entered for WPG in VET", CaptureScreenshot.getScreenshot(path),
-							StatusDetails.FAIL);
-				}
-			}
-			else if(paymentGateway.equalsIgnoreCase("WPS")) {
-				try{
-					driver.switchTo().frame("tokenFrame");
-					driver.switchTo().frame(0);
-					VET.enterCardNumber(excelOperation.getTestData(tcNo, "VET_Test_Data", "Card_Number"));
-					VET.enterExpiryDate(excelOperation.getTestData(tcNo, "VET_Test_Data", "Expiry_Date"));
-					VET.enterCVC(excelOperation.getTestData(tcNo, "VET_Test_Data", "CVV"));
-					driver.switchTo().parentFrame();
-					driver.switchTo().defaultContent();
 
-				}
-				catch(Exception e) {
-					Reporting.updateTestReport("Payment Details could not be entered for WPS in VET", CaptureScreenshot.getScreenshot(path),
-							StatusDetails.FAIL);
-				}
-			}
-			else
-				Reporting.updateTestReport("Valid string for Payment gateway was not passed and"
-						+ " payment details couldn't be entered", CaptureScreenshot.getScreenshot(path),
-						StatusDetails.FAIL);
-		}
-		catch(Exception e) {
-			Reporting.updateTestReport("Payment Details could not be entered for VET", CaptureScreenshot.getScreenshot(path),
-					StatusDetails.FAIL);
-		}
-	}
 
 
 }

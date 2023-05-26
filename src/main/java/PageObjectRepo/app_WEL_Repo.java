@@ -15,14 +15,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import TestSuite.WEL_Prod_Test_Suite;
+import TestSuite.WEL_Node_Test_Suite;
 import utilities.CaptureScreenshot;
 import utilities.Reporting;
 import utilities.StatusDetails;
 import utilities.excelOperation;
 
 public class app_WEL_Repo {
-	WEL_Prod_Test_Suite WEL_Test;
+	WEL_Node_Test_Suite WEL_Test;
 	public String SS_path = WEL_Test.SS_path;
 
 	// Homepage

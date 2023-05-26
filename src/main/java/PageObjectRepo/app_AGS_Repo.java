@@ -13,14 +13,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import TestSuite.AGS_Prod_Test_Suite;
+import TestSuite.AGS_Node_Test_Suite;
 import utilities.CaptureScreenshot;
 import utilities.Reporting;
 import utilities.StatusDetails;
 
 public class app_AGS_Repo {
 
-	AGS_Prod_Test_Suite AGS_Test;
+	AGS_Node_Test_Suite AGS_Test;
 	public String SS_path=AGS_Test.SS_path;
 
 	//Homepage 

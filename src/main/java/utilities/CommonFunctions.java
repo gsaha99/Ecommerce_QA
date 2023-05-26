@@ -71,6 +71,25 @@ public class CommonFunctions {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
+
+	/*
+	@Description: Concatenates the rest of the part of URL with the Node IP
+	 */
+	public static String concatenateURLWithNodeIP(String testCaseNumber, String sheetName, String field,String storefront) throws IOException{
+		try{
+			String nodeURL=excelOperation.getTestData("Node_URL", "Generic_Dataset", "Data");
+			String storefrontURL=excelOperation.getTestData(storefront,"Generic_Dataset", "Data");
+			String tcURL=excelOperation.getTestData(testCaseNumber, sheetName,field);
+			Reporting.updateTestReport("The concatenated URL: "+nodeURL+storefrontURL+"/"+tcURL+" was returned",
+					CaptureScreenshot.getScreenshot(""), StatusDetails.INFO);
+			return nodeURL+storefrontURL+"/"+tcURL;
+		}
+		catch(Exception e){
+			Reporting.updateTestReport("The URL couldn't be concatenated with the node IP",
+					CaptureScreenshot.getScreenshot(""), StatusDetails.FAIL);
+			return "";
+		}
+	}
 	
 	
 

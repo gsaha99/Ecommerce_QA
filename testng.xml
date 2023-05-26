@@ -5,13 +5,12 @@
 
 
 		<classes>
-			<class name="TestSuite.WEL_Prod_Test_Suite">	
+			<class name="TestSuite.Wiley_Node_Test_Suite">
 				<methods>
-					<include name="TC01_.*" />
-					<include name="TC02_.*" />
-					<include name="TC03_.*" />	
-					<include name="TC04_.*" />
-					<include name="TC05_.*" />
+					<include name="TC06_.*" />
+					<include name="TC08_.*" />
+					<include name="TC14_.*" />
+					<include name="TC26_.*" />
 		
 					
 				</methods>

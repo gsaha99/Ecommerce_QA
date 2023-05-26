@@ -28,7 +28,7 @@ import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
 import utilities.excelOperation;
 
-public class WEL_Prod_Test_Suite extends DriverModule {
+public class WEL_Node_Test_Suite extends DriverModule {
 
 	app_WEL_Repo WEL;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());

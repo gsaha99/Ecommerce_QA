@@ -26,7 +26,7 @@ import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
 import utilities.excelOperation;
 
-public class AGS_Prod_Test_Suite extends DriverModule {
+public class AGS_Node_Test_Suite extends DriverModule {
 	app_AGS_Repo AGS;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
