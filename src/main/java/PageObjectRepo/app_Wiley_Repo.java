@@ -39,7 +39,7 @@ public class app_Wiley_Repo {
 	WebElement CartIconHomePage;
 	@FindBy(xpath = "//a[@href='/']/img[@class='brand-logo']")
 	WebElement HomePageLogo;
-	@FindBy(xpath = "//input[@id='searchbar']")
+	@FindBy(xpath = "//input[@id='search-bar']")
 	WebElement HomePageSearchBar;
 	@FindBy(xpath = "//i[@class='wl-search-bar__icon']")
 	WebElement SearchBarIconHomePage;

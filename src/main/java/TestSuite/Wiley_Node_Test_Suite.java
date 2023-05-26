@@ -214,14 +214,12 @@ public class Wiley_Node_Test_Suite extends DriverModule{
 				wiley.clickonsitemap();
 				int indexOfSearch;
 				String correctURL;
-				String lastPart;
 				String oldURL= driver.getCurrentUrl();
 				if(!oldURL.contains("wileyb2cstorefront")) {
 					indexOfSearch = oldURL.indexOf("sitemap");
-					lastPart=oldURL.substring(indexOfSearch,oldURL.length());
 					correctURL=oldURL.substring(0,indexOfSearch)+
 							excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data")
-							+"/"+lastPart;
+							+"/"+oldURL.substring(indexOfSearch,oldURL.length());;
 					System.out.println(correctURL);
 					driver.get(correctURL);
 					try{
@@ -278,16 +276,14 @@ public class Wiley_Node_Test_Suite extends DriverModule{
 			catch(Exception e) {
 				int indexOfSearch;
 				String correctURL;
-				String lastPart;
 				String oldURL=driver.getCurrentUrl();
 				Reporting.updateTestReport("Old Search page came with URL: "+oldURL,
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				if(!oldURL.contains("wileyb2cstorefront")) {
 					indexOfSearch = oldURL.indexOf("search");
-					lastPart=oldURL.substring(indexOfSearch,oldURL.length());
 					correctURL=oldURL.substring(0,indexOfSearch)+
 							excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data")
-							+"/"+lastPart;
+							+"/"+oldURL.substring(indexOfSearch,oldURL.length());;
 					System.out.println(correctURL);
 					driver.get(correctURL);
 					try{
@@ -423,16 +419,14 @@ public class Wiley_Node_Test_Suite extends DriverModule{
 			catch(Exception e) {
 				int indexOfSearch;
 				String correctURL;
-				String lastPart;
 				String oldURL=driver.getCurrentUrl();
 				Reporting.updateTestReport("Old Search page came with URL: "+oldURL,
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				if(!oldURL.contains("wileyb2cstorefront")) {
 					indexOfSearch = oldURL.indexOf("search");
-					lastPart=oldURL.substring(indexOfSearch,oldURL.length());
 					correctURL=oldURL.substring(0,indexOfSearch)+
 							excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data")
-							+"/"+lastPart;
+							+"/"+oldURL.substring(indexOfSearch,oldURL.length());;
 					System.out.println(correctURL);
 					driver.get(correctURL);
 
@@ -505,16 +499,14 @@ public class Wiley_Node_Test_Suite extends DriverModule{
 			catch(Exception e) {
 				int indexOfSearch;
 				String correctURL;
-				String lastPart;
 				String oldURL= driver.getCurrentUrl();
 				Reporting.updateTestReport("Old Search page came with URL: "+oldURL,
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				if(!oldURL.contains("wileyb2cstorefront")) {
 					indexOfSearch = oldURL.indexOf("search");
-					lastPart=oldURL.substring(indexOfSearch,oldURL.length());
 					correctURL=oldURL.substring(0,indexOfSearch)+
 							excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data")
-							+"/"+lastPart;
+							+"/"+oldURL.substring(indexOfSearch,oldURL.length());;
 					System.out.println(correctURL);
 					driver.get(correctURL);
 					try{
@@ -583,22 +575,19 @@ public class Wiley_Node_Test_Suite extends DriverModule{
 			Reporting.test = Reporting.extent.createTest("TC14_SearchBox");
 			LogTextFile.writeTestCaseStatus("TC14_SearchBox", "Test case");
 			WebDriverWait wait= new WebDriverWait(driver,Duration.ofSeconds(30));
-			driver.get(CommonFunctions.concatenateURLWithNodeIP("TC14", "WILEY_Test_Data", "URL","WILEY_Env_URL"));
+			driver.get(Homepage);
 			driver.navigate().refresh();
-			//wiley.ClickingOnHomePage();
-			wiley.searchTextInSearchBar(excelOperation.getTestData("TC14", "WILEY_Test_Data", "SearchBox_Text"));
+			wiley.searchProductInHomePageSearchBar(excelOperation.getTestData("TC14", "WILEY_Test_Data", "SearchBox_Text"));
 			int indexOfSearch;
 			String correctURL;
-			String lastPart;
 			String oldURL= driver.getCurrentUrl();
 			Reporting.updateTestReport("Old Search page came with URL: "+oldURL,
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 			if(!oldURL.contains("wileyb2cstorefront")) {
 				indexOfSearch = oldURL.indexOf("search");
-				lastPart=oldURL.substring(indexOfSearch,oldURL.length());
 				correctURL=oldURL.substring(0,indexOfSearch)+
 						excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data")
-						+"/"+lastPart;
+						+"/"+oldURL.substring(indexOfSearch,oldURL.length());;
 				System.out.println(correctURL);
 				driver.get(correctURL);
 				try{
@@ -708,16 +697,14 @@ public class Wiley_Node_Test_Suite extends DriverModule{
 			else {
 				int indexOfSearch;
 				String correctURL;
-				String lastPart;
 				String oldURL= driver.getCurrentUrl();
 				Reporting.updateTestReport("Old Search page came with URL: "+oldURL,
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 				if(!oldURL.contains("wileyb2cstorefront")) {
 					indexOfSearch = oldURL.indexOf("search");
-					lastPart=oldURL.substring(indexOfSearch,oldURL.length());
 					correctURL=oldURL.substring(0,indexOfSearch)+
 							excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data")
-							+"/"+lastPart;
+							+"/"+oldURL.substring(indexOfSearch,oldURL.length());;
 					System.out.println(correctURL);
 					driver.get(correctURL);
 					try{
@@ -923,16 +910,14 @@ public class Wiley_Node_Test_Suite extends DriverModule{
 				else {
 					int indexOfSearch;
 					String correctURL;
-					String lastPart;
 					String oldURL= driver.getCurrentUrl();
 					Reporting.updateTestReport("Old Search page came with URL: "+oldURL,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					if(!oldURL.contains("wileyb2cstorefront")) {
 						indexOfSearch = oldURL.indexOf("search");
-						lastPart=oldURL.substring(indexOfSearch,oldURL.length());
 						correctURL=oldURL.substring(0,indexOfSearch)+
 								excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data")
-								+"/"+lastPart;
+								+"/"+oldURL.substring(indexOfSearch,oldURL.length());;
 						System.out.println(correctURL);
 						driver.get(correctURL);
 						try{
@@ -1870,16 +1855,14 @@ public class Wiley_Node_Test_Suite extends DriverModule{
 				else {
 					int indexOfSearch;
 					String correctURL;
-					String lastPart;
 					String oldURL= driver.getCurrentUrl();
 					Reporting.updateTestReport("Old Search page came with URL: "+oldURL,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					if(!oldURL.contains("wileyb2cstorefront")) {
 						indexOfSearch = oldURL.indexOf("search");
-						lastPart=oldURL.substring(indexOfSearch,oldURL.length());
 						correctURL=oldURL.substring(0,indexOfSearch)+
 								excelOperation.getTestData("WILEY_Env_URL", "Generic_Dataset", "Data")
-								+"/"+lastPart;
+								+"/"+oldURL.substring(indexOfSearch,oldURL.length());;
 						System.out.println(correctURL);
 						driver.get(correctURL);
 						try{
