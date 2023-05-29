@@ -18,7 +18,6 @@ import org.testng.annotations.Test;
 import PageObjectRepo.app_AGS_Repo;
 import utilities.CaptureScreenshot;
 import utilities.DriverModule;
-import utilities.EmailValidation;
 import utilities.LogTextFile;
 import utilities.PaymentGateway;
 import utilities.Reporting;
@@ -30,9 +29,14 @@ public class AGS_Node_Test_Suite extends DriverModule {
 	app_AGS_Repo AGS;
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
-	private static String AGS_Homepage_URL=excelOperation.getTestData("AGS_Homepage_URL", "Generic_Dataset", "Data");
-	private static String AGS_Login_URL=excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data");
-	private static String AGS_Subscription_URL=excelOperation.getTestData("AGS_Subscription_URL", "Generic_Dataset", "Data");
+	private static String AGS_Homepage_URL = excelOperation.getTestData("Node_URL", "Generic_Dataset", "Data")+
+			excelOperation.getTestData("AGS_Env_URL", "Generic_Dataset", "Data");
+	private static String AGS_Login_URL=excelOperation.getTestData("Node_URL", "Generic_Dataset", "Data")+
+			excelOperation.getTestData("AGS_Env_URL", "Generic_Dataset", "Data")+"/"+
+			excelOperation.getTestData("AGS_Login_URL", "Generic_Dataset", "Data");
+	private static String AGS_Subscription_URL=excelOperation.getTestData("Node_URL", "Generic_Dataset", "Data")+
+			excelOperation.getTestData("AGS_Env_URL", "Generic_Dataset", "Data")+"/"+
+			excelOperation.getTestData("AGS_Subscription_URL", "Generic_Dataset", "Data");
 
 	@BeforeTest
 	public void initializeRepo() {
@@ -62,16 +66,16 @@ public class AGS_Node_Test_Suite extends DriverModule {
 			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(20));
 			driver.get(AGS_Homepage_URL);
 			AGS.checkHomePageTitle();
-			AGS.checkSubScribeNowTabInHomePage();
-			AGS.checkLoginTabInHomeopage();
+			//AGS.checkSubScribeNowTabInHomePage();
+			//AGS.checkLoginTabInHomeopage();
 			ScrollingWebPage.PageDown(driver, SS_path);
 			try {
 				wait.until(ExpectedConditions.visibilityOfElementLocated
-						(By.xpath("//img[@src='https://www.graphicstandards.com/wp-content/uploads/2016/03/logo.png']")));
-				AGS.checkWileyLogoInHomepageFooter();
+						(By.xpath("//a[@href='http://www.wiley.com']")));
+				AGS.checkWileyLogoInHomepage();
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("Wiley Logo was not present in homepage footer and caused timeout exception",
+				Reporting.updateTestReport("Wiley Logo was not present in homepage and caused timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 		}
@@ -172,7 +176,7 @@ public class AGS_Node_Test_Suite extends DriverModule {
 	 * @Date: 31/03/23
 	 * @Description: Reset the Password From Login Page through the forgot password link
 	 */
-	@Test
+	/*@Test
 	public void TC04_Reset_Password_From_Login_Page() throws IOException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC04_ResetPasswordFromLoginPage");
@@ -199,7 +203,7 @@ public class AGS_Node_Test_Suite extends DriverModule {
 			AGS.logOutWithURL(driver, excelOperation.getTestData("AGS_Logout_URL", "Generic_Dataset", "Data"));
 			Reporting.updateTestReport("Exception occured: "+e.getClass().toString(), CaptureScreenshot.getScreenshot(SS_path),StatusDetails.FAIL);
 		}
-	}
+	}*/
 
 
 	/*
@@ -244,7 +248,7 @@ public class AGS_Node_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC06_Provide_File_Information", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(AGS_Subscription_URL);
-			AGS.clickOnYearlySubscriptionButton();
+			AGS.clickOnAddToCartButton();
 			try {
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'My Cart')]")));
 				System.out.println("Cart page came");

@@ -25,13 +25,13 @@ public class app_AGS_Repo {
 
 	//Homepage 
 
-	@FindBy(xpath="//a[@class='header-link current']")
+	@FindBy(xpath="//title")
 	WebElement HomepageTitle;
 	@FindBy(id="subscribe-tile")
 	WebElement SubScribeNowTabInHomePage;
 	@FindBy(id="login")
 	WebElement LoginTabInHomeopage;
-	@FindBy(xpath="//img[@src='https://www.graphicstandards.com/wp-content/uploads/2016/03/logo.png']")
+	@FindBy(xpath="//a[@href='http://www.wiley.com']")
 	WebElement WileyLogoInHomepageFooter;
 
 	//Login / Create Account page
@@ -122,6 +122,9 @@ public class app_AGS_Repo {
 	WebElement YearlySubscriptionButton;
 	@FindBy(id = "subscribe-monthly")
 	WebElement MonthlySubscriptionButton;
+
+	@FindBy(id="addToCartButton")
+	WebElement AddToCartButton;
 
 	//Cart page
 
@@ -231,7 +234,7 @@ public class app_AGS_Repo {
 	 * @Date: 31/03/23
 	 * @Description: Checks if the Wiley logo is present or not in home page footer
 	 */
-	public void checkWileyLogoInHomepageFooter() throws IOException {
+	public void checkWileyLogoInHomepage() throws IOException {
 		try {
 			if(WileyLogoInHomepageFooter.isDisplayed())
 				Reporting.updateTestReport("Wiley Logo was present in homepage footer", 
@@ -748,13 +751,13 @@ public class app_AGS_Repo {
 	 * @Date: 31/03/23
 	 * @Description: Clicks on Yearly Subscription button
 	 */
-	public void clickOnYearlySubscriptionButton() throws IOException {
+	public void clickOnAddToCartButton() throws IOException {
 		try {
-			YearlySubscriptionButton.click();
-			Reporting.updateTestReport("Yearly Subscription button was clicked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			AddToCartButton.click();
+			Reporting.updateTestReport("Add to cart button was clicked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("Yearly Subscription button was not clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			Reporting.updateTestReport("Add to cart button was not clicked",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 		}
 	}

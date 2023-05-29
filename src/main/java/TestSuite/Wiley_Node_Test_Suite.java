@@ -23,7 +23,6 @@ import org.testng.annotations.Test;
 import PageObjectRepo.app_Wiley_Repo;
 import utilities.CaptureScreenshot;
 import utilities.DriverModule;
-import utilities.EmailValidation;
 import utilities.LogTextFile;
 import utilities.PaymentGateway;
 import utilities.Reporting;
