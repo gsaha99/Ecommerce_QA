@@ -5,11 +5,9 @@ import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.apache.commons.lang3.SystemUtils;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.json.JSONObject;
+import org.openqa.selenium.JavascriptExecutor;
+
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -28,6 +26,7 @@ public class Reporting {
 	public static ExtentTest test;
 	public static ExtentReports extent;
 
+	public static int FlagBS=0;
 
 	public static String CreateTodayReportFolder()
 	{
@@ -104,13 +103,13 @@ public class Reporting {
 				
 				test.log(Status.FAIL, ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
 				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
+				FlagBS=1;
 				break;
 
 			case PASS :
 					
 				test.log(Status.PASS,ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
-				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
-							
+				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());			
 				break;
 
 			case WARNING :
@@ -139,6 +138,14 @@ public class Reporting {
 
 	}	
 	public static void summaryEndReport() {
+		
+		JavascriptExecutor jse = (JavascriptExecutor) DriverModule.getWebDriver();
+		
+		if(FlagBS==0)
+			 jse.executeScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\": \"passed\", \"reason\": \"All the TCs Passed\"}}");
+		else if (FlagBS==1)
+			 jse.executeScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\": \"failed\", \"reason\": \"Kindly check the Rpeort for more info\"}}");
+		
 		extent.flush();
 	}
 

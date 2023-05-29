@@ -6,7 +6,10 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+
+import org.json.JSONObject;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -48,7 +51,7 @@ public class DriverModule {
 			
 			HashMap<String, Object> browserstackOptions = new HashMap<String, Object>();
 			
-			//browserstackOptions.put("local", "true");
+			browserstackOptions.put("seleniumVersion", "4.8.0");
 			
 			if (DeviceType.equalsIgnoreCase("Desktop")) 
 			{
@@ -110,7 +113,7 @@ public class DriverModule {
 	@AfterTest
 	public void CloseBrowser(){	
 		
-		Reporting.summaryEndReport();
+		Reporting.summaryEndReport();		
 		driver.close();
 		driver.quit();
 		
