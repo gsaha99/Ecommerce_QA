@@ -36,10 +36,7 @@ public class DriverModule {
 
 	public  static WebDriver driver =null;
 	
-	public static final String username="gourabsaha_Nlruz2";
-	public static final String AccessToken ="WUrEEqUxwLoVAJEKWbyh";
 	
-	public static final String URL = "https://"+username+":"+AccessToken+"@hub-cloud.browserstack.com/wd/hub";
 	
 	@BeforeTest
 	@Parameters("browser")
@@ -49,47 +46,25 @@ public class DriverModule {
 			String date = new SimpleDateFormat("ddmmyyyyhhmmss").format(new Date());			
 			String testSuiteName=context.getCurrentXmlTest().getClasses().stream()
 		               .findFirst().get().getName().substring(10);			
-			DesiredCapabilities Caps= new DesiredCapabilities();
-			Caps.setCapability("name", "PPE Regression Suite");	
-			EdgeOptions edgeOptions = new EdgeOptions();
-			edgeOptions.addArguments("InPrivate");
-			ChromeOptions chromeOptions = new ChromeOptions();
-			chromeOptions.addArguments("--incognito");
+			
 			
 			//create firefox instance
 			if(browser.equalsIgnoreCase("firefox")){
+				driver=new FirefoxDriver();
 				
-				Caps.setCapability("os", "windows");
-				Caps.setCapability("os_version", "11");
-				Caps.setCapability("browser", browser);
-				Caps.setCapability("browser_version", "109");
 				
 			}
 				//Check if parameter passed as 'chrome'
 			else if(browser.equalsIgnoreCase("chrome")){			
-				Caps.setCapability("os", "windows");
-				Caps.setCapability("os_version", "10");
-				Caps.setCapability("browser", browser);
-				Caps.setCapability("browser_version", "110");
-				Caps.setCapability(ChromeOptions.CAPABILITY,chromeOptions);
+				driver=new ChromeDriver();
 				
 			}
-			else if(browser.equalsIgnoreCase("safari")){
-
-				Caps.setCapability("os", "OS X");
-				Caps.setCapability("os_version", "Ventura");
-				Caps.setCapability("browser", browser);
-				Caps.setCapability("browser_version", "16.3");
-				
-			}
+			
 			else if(browser.equalsIgnoreCase("Edge")){				
-				Caps.setCapability("os", "windows");
-				Caps.setCapability("os_version", "11");
-				Caps.setCapability("browser", browser);
-				Caps.setCapability("browser_version", "110");
+				driver=new EdgeDriver();
 			}
-			//driver= new RemoteWebDriver(new URL(URL), Caps);
-			driver=new EdgeDriver(edgeOptions);
+			
+			//driver=new EdgeDriver();
 			//driver=new FirefoxDriver();
 					
 			driver.manage().window().maximize();
@@ -98,7 +73,7 @@ public class DriverModule {
 			
 			Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
 			
-			String browserName = caps.getBrowserName();							
+			String browserName = browser;							
 			String browserVersion = caps.getBrowserVersion();				
 			String OS_Name = System.getProperty("os.name").toLowerCase();
 			

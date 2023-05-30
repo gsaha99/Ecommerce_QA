@@ -1144,6 +1144,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				wiley.clickOnProceedToCheckoutButton();
 				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 						("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
+				
 				//By default the country is selected as US
 				BigDecimal standardShippingChargeForOneUnit=wiley.fetchShippingCharge(driver, "Standard Shipping");
 				BigDecimal expressShippingChargeForOneUnit=wiley.fetchShippingCharge(driver, "Express Shipping");
@@ -1152,8 +1153,9 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				String country1=excelOperation.getTestData("TC21", "WILEY_Test_Data", "Shipping_Country").split(",")[0];
 				String country2=excelOperation.getTestData("TC21", "WILEY_Test_Data", "Shipping_Country").split(",")[1];
 				wiley.selectCountry(country1);
-				//validation for Brzil/ columbia
-				BigDecimal airMailChargeForOneUnit=wiley.fetchShippingCharge(driver, "Air Mail");
+				
+				//validation for Brzil/ columbia -> Air main has been commented out as it was removed for US REgional countries
+				//BigDecimal airMailChargeForOneUnit=wiley.fetchShippingCharge(driver, "Air Mail");
 				BigDecimal courierChargeForOneUnit=wiley.fetchShippingCharge(driver, "Courier");
 				wiley.selectCountry(country2);
 				BigDecimal twoDayChargeForOneUnit=wiley.fetchShippingCharge(driver, "2-Day");
@@ -1171,6 +1173,7 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
+				
 				//By default the country is selected as US
 				BigDecimal standardShippingChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Standard Shipping");
 				BigDecimal expressShippingChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Express Shipping");
@@ -1199,15 +1202,15 @@ public class Wiley_Prod_Test_Suite extends DriverModule{
 				//wiley.clickOnEnterNewAddresButtonInShipping();
 				wiley.selectCountry(country1);
 				//validation for Brzil/ columbia
-				BigDecimal airMailChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Air Mail");
+				//BigDecimal airMailChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Air Mail");
 				BigDecimal courierChargeForMultiUnit=wiley.fetchShippingCharge(driver, "Courier");
-				if((airMailChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
+				/*if((airMailChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
 						.multiply(new BigDecimal("5")))).setScale(2, RoundingMode.CEILING).compareTo(airMailChargeForMultiUnit)==0)
 					Reporting.updateTestReport("Air mail charge has been correctly calculated for Standard shipping",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				else
 					Reporting.updateTestReport("Air mail charge has been wrongly calculated for Standard shipping",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);*/
 				if((courierChargeForOneUnit.add((new BigDecimal(quantity).subtract(new BigDecimal("1")))
 						.multiply(new BigDecimal("10")))).setScale(2, RoundingMode.CEILING).compareTo(courierChargeForMultiUnit)==0)
 					Reporting.updateTestReport("Courier charge has been correctly calculated for Standard shipping",

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="25" total="26" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="26" passed="26" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-05-17T16:06:14 IST" name="Default suite" finished-at="2023-05-17T16:07:42 IST" duration-ms="88246">
+  <suite started-at="2023-05-30T19:15:19 IST" name="Default suite" finished-at="2023-05-30T19:45:24 IST" duration-ms="1804760">
     <groups>
     </groups>
-    <test started-at="2023-05-17T16:06:14 IST" name="Default test" finished-at="2023-05-17T16:07:42 IST" duration-ms="88246">
+    <test started-at="2023-05-30T19:15:19 IST" name="Default test" finished-at="2023-05-30T19:45:24 IST" duration-ms="1804760">
       <class name="TestSuite.Wiley_Prod_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@6f8f9349]" started-at="2023-05-17T16:06:14 IST" name="initiate" finished-at="2023-05-17T16:06:25 IST" duration-ms="11093" status="PASS">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:15:19 IST" name="initiate" finished-at="2023-05-30T19:15:30 IST" duration-ms="11166" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@6ddd1c51]]>
+                <![CDATA[org.testng.TestRunner@d2161b6]]>
               </value>
             </param>
             <param index="1">
@@ -23,11 +23,379 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@6f8f9349]" started-at="2023-05-17T16:06:25 IST" name="launchBrowser" finished-at="2023-05-17T16:06:25 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="79" status="PASS">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:15:30 IST" name="launchBrowser" finished-at="2023-05-30T19:15:30 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="157" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchBrowser -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@6f8f9349]" started-at="2023-05-17T16:06:25 IST" name="nameBefore" finished-at="2023-05-17T16:06:25 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:15:30 IST" name="nameBefore" finished-at="2023-05-30T19:15:30 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC01_MicroSites() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC01_MicroSites()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:15:30 IST" name="TC01_MicroSites" finished-at="2023-05-30T19:15:50 IST" duration-ms="19297" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC01_MicroSites -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:15:50 IST" name="nameAfter" finished-at="2023-05-30T19:15:50 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC01_MicroSites() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method signature="TC02_ProductDetailsPage()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:15:50 IST" name="TC02_ProductDetailsPage" finished-at="2023-05-30T19:16:11 IST" duration-ms="21271" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC02_ProductDetailsPage -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:15:50 IST" name="nameBefore" finished-at="2023-05-30T19:15:50 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC02_ProductDetailsPage() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:16:11 IST" name="nameAfter" finished-at="2023-05-30T19:16:11 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC02_ProductDetailsPage() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:16:11 IST" name="nameBefore" finished-at="2023-05-30T19:16:11 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC03_SiteFooter() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC03_SiteFooter()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:16:11 IST" name="TC03_SiteFooter" finished-at="2023-05-30T19:16:29 IST" duration-ms="18395" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC03_SiteFooter -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:16:29 IST" name="nameAfter" finished-at="2023-05-30T19:16:29 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC03_SiteFooter() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:16:29 IST" name="nameBefore" finished-at="2023-05-30T19:16:29 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC04_404_Errorpage() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC04_404_Errorpage()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:16:29 IST" name="TC04_404_Errorpage" finished-at="2023-05-30T19:16:38 IST" duration-ms="8238" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC04_404_Errorpage -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:16:38 IST" name="nameAfter" finished-at="2023-05-30T19:16:38 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC04_404_Errorpage() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method signature="TC05_AboutUsPage()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:16:38 IST" name="TC05_AboutUsPage" finished-at="2023-05-30T19:16:58 IST" duration-ms="20711" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC05_AboutUsPage -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:16:38 IST" name="nameBefore" finished-at="2023-05-30T19:16:38 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC05_AboutUsPage() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:16:58 IST" name="nameAfter" finished-at="2023-05-30T19:16:58 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC05_AboutUsPage() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:16:58 IST" name="nameBefore" finished-at="2023-05-30T19:16:58 IST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC06_SiteMap() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC06_SiteMap()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:16:58 IST" name="TC06_SiteMap" finished-at="2023-05-30T19:17:14 IST" duration-ms="15428" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC06_SiteMap -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:17:14 IST" name="nameAfter" finished-at="2023-05-30T19:17:14 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC06_SiteMap() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:17:14 IST" name="nameBefore" finished-at="2023-05-30T19:17:14 IST" duration-ms="6" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC07_ProductListPage() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC07_ProductListPage()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:17:14 IST" name="TC07_ProductListPage" finished-at="2023-05-30T19:17:50 IST" duration-ms="36208" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC07_ProductListPage -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:17:50 IST" name="nameAfter" finished-at="2023-05-30T19:17:50 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC07_ProductListPage() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:17:50 IST" name="nameBefore" finished-at="2023-05-30T19:17:50 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC08_HomePage() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC08_HomePage()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:17:50 IST" name="TC08_HomePage" finished-at="2023-05-30T19:17:56 IST" duration-ms="5693" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC08_HomePage -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:17:56 IST" name="nameAfter" finished-at="2023-05-30T19:17:56 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC08_HomePage() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method signature="TC09_SiteHeader()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:17:56 IST" name="TC09_SiteHeader" finished-at="2023-05-30T19:18:07 IST" duration-ms="11138" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC09_SiteHeader -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:17:56 IST" name="nameBefore" finished-at="2023-05-30T19:17:56 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC09_SiteHeader() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:18:07 IST" name="nameAfter" finished-at="2023-05-30T19:18:07 IST" duration-ms="2" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC09_SiteHeader() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:18:07 IST" name="nameBefore" finished-at="2023-05-30T19:18:07 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC10_SearchResultEmptyPage() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC10_SearchResultEmptyPage()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:18:07 IST" name="TC10_SearchResultEmptyPage" finished-at="2023-05-30T19:18:27 IST" duration-ms="20245" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC10_SearchResultEmptyPage -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:18:27 IST" name="nameAfter" finished-at="2023-05-30T19:18:27 IST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC10_SearchResultEmptyPage() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:18:27 IST" name="nameBefore" finished-at="2023-05-30T19:18:27 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC11_Add_To_Cart_PopUp() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC11_Add_To_Cart_PopUp()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:18:27 IST" name="TC11_Add_To_Cart_PopUp" finished-at="2023-05-30T19:19:13 IST" duration-ms="46243" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC11_Add_To_Cart_PopUp -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:19:14 IST" name="nameAfter" finished-at="2023-05-30T19:19:14 IST" duration-ms="2" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC11_Add_To_Cart_PopUp() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:19:14 IST" name="nameBefore" finished-at="2023-05-30T19:19:14 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC12_Content_Search_ResultPage() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC12_Content_Search_ResultPage()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:19:14 IST" name="TC12_Content_Search_ResultPage" finished-at="2023-05-30T19:20:00 IST" duration-ms="46542" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC12_Content_Search_ResultPage -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:20:00 IST" name="nameAfter" finished-at="2023-05-30T19:20:00 IST" duration-ms="11" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC12_Content_Search_ResultPage() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:20:00 IST" name="nameBefore" finished-at="2023-05-30T19:20:00 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC13_Category_LandingPage() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC13_Category_LandingPage()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:20:00 IST" name="TC13_Category_LandingPage" finished-at="2023-05-30T19:20:14 IST" duration-ms="13895" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC13_Category_LandingPage -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:20:14 IST" name="nameAfter" finished-at="2023-05-30T19:20:14 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC13_Category_LandingPage() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:20:14 IST" name="nameBefore" finished-at="2023-05-30T19:20:14 IST" duration-ms="3" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC14_SearchBox() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC14_SearchBox()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:20:14 IST" name="TC14_SearchBox" finished-at="2023-05-30T19:20:36 IST" duration-ms="22179" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC14_SearchBox -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:20:36 IST" name="nameAfter" finished-at="2023-05-30T19:20:36 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC14_SearchBox() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method signature="TC15_Product_Search_Results_Page_Facet_Validation()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:20:36 IST" name="TC15_Product_Search_Results_Page_Facet_Validation" finished-at="2023-05-30T19:21:58 IST" duration-ms="82165" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC15_Product_Search_Results_Page_Facet_Validation -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:20:36 IST" name="nameBefore" finished-at="2023-05-30T19:20:36 IST" duration-ms="0" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -38,11 +406,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameBefore -->
-        <test-method signature="TC15_Product_Search_Results_Page_Facet_Validation()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@6f8f9349]" started-at="2023-05-17T16:06:25 IST" name="TC15_Product_Search_Results_Page_Facet_Validation" finished-at="2023-05-17T16:07:40 IST" duration-ms="75213" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC15_Product_Search_Results_Page_Facet_Validation -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@6f8f9349]" started-at="2023-05-17T16:07:40 IST" name="nameAfter" finished-at="2023-05-17T16:07:40 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:21:58 IST" name="nameAfter" finished-at="2023-05-30T19:21:58 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -53,7 +417,293 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@6f8f9349]" started-at="2023-05-17T16:07:40 IST" name="CloseBrowser" finished-at="2023-05-17T16:07:42 IST" duration-ms="1764" status="PASS">
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:21:58 IST" name="nameBefore" finished-at="2023-05-30T19:21:58 IST" duration-ms="9" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC16_Cart_Page_UI_Validation() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC16_Cart_Page_UI_Validation()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:21:58 IST" name="TC16_Cart_Page_UI_Validation" finished-at="2023-05-30T19:23:00 IST" duration-ms="61600" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC16_Cart_Page_UI_Validation -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:23:00 IST" name="nameAfter" finished-at="2023-05-30T19:23:00 IST" duration-ms="22" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC16_Cart_Page_UI_Validation() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method signature="TC17_Login_Page_Validation()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:23:00 IST" name="TC17_Login_Page_Validation" finished-at="2023-05-30T19:26:00 IST" duration-ms="179515" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC17_Login_Page_Validation -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:23:00 IST" name="nameBefore" finished-at="2023-05-30T19:23:00 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC17_Login_Page_Validation() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:26:00 IST" name="nameAfter" finished-at="2023-05-30T19:26:00 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC17_Login_Page_Validation() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method signature="TC18_Add_Digital_Product_to_cart_for_New_User()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:26:00 IST" name="TC18_Add_Digital_Product_to_cart_for_New_User" finished-at="2023-05-30T19:28:02 IST" duration-ms="122211" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC18_Add_Digital_Product_to_cart_for_New_User -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:26:00 IST" name="nameBefore" finished-at="2023-05-30T19:26:00 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC18_Add_Digital_Product_to_cart_for_New_User() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:28:02 IST" name="nameAfter" finished-at="2023-05-30T19:28:02 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC18_Add_Digital_Product_to_cart_for_New_User() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:28:02 IST" name="nameBefore" finished-at="2023-05-30T19:28:02 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC19_Add_Physical_Product_With_Guest_User() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC19_Add_Physical_Product_With_Guest_User()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:28:02 IST" name="TC19_Add_Physical_Product_With_Guest_User" finished-at="2023-05-30T19:30:11 IST" duration-ms="129677" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC19_Add_Physical_Product_With_Guest_User -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:30:11 IST" name="nameAfter" finished-at="2023-05-30T19:30:11 IST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC19_Add_Physical_Product_With_Guest_User() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method signature="TC20_Add_Physical_product_ForExistingUser()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:30:11 IST" name="TC20_Add_Physical_product_ForExistingUser" finished-at="2023-05-30T19:32:39 IST" duration-ms="147809" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC20_Add_Physical_product_ForExistingUser -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:30:11 IST" name="nameBefore" finished-at="2023-05-30T19:30:11 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC20_Add_Physical_product_ForExistingUser() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:32:39 IST" name="nameAfter" finished-at="2023-05-30T19:32:39 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC20_Add_Physical_product_ForExistingUser() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:32:39 IST" name="nameBefore" finished-at="2023-05-30T19:32:39 IST" duration-ms="2" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC21_Shipping_Charge_For_Multiple_Products() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC21_Shipping_Charge_For_Multiple_Products()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:32:39 IST" name="TC21_Shipping_Charge_For_Multiple_Products" finished-at="2023-05-30T19:35:24 IST" duration-ms="164331" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC21_Shipping_Charge_For_Multiple_Products -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:35:24 IST" name="nameAfter" finished-at="2023-05-30T19:35:24 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC21_Shipping_Charge_For_Multiple_Products() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:35:24 IST" name="nameBefore" finished-at="2023-05-30T19:35:24 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC22_Shipping_And_BillingAddresses_different() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC22_Shipping_And_BillingAddresses_different()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:35:24 IST" name="TC22_Shipping_And_BillingAddresses_different" finished-at="2023-05-30T19:37:58 IST" duration-ms="154066" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC22_Shipping_And_BillingAddresses_different -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:37:58 IST" name="nameAfter" finished-at="2023-05-30T19:37:58 IST" duration-ms="9" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC22_Shipping_And_BillingAddresses_different() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:37:58 IST" name="nameBefore" finished-at="2023-05-30T19:37:58 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC23_Add_Coupon_To_Cart() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC23_Add_Coupon_To_Cart()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:37:58 IST" name="TC23_Add_Coupon_To_Cart" finished-at="2023-05-30T19:40:38 IST" duration-ms="159806" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC23_Add_Coupon_To_Cart -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:40:38 IST" name="nameAfter" finished-at="2023-05-30T19:40:38 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC23_Add_Coupon_To_Cart() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method signature="TC24_VAT_Tooltip_For_Asian_Countries()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:40:38 IST" name="TC24_VAT_Tooltip_For_Asian_Countries" finished-at="2023-05-30T19:41:10 IST" duration-ms="32944" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC24_VAT_Tooltip_For_Asian_Countries -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:40:38 IST" name="nameBefore" finished-at="2023-05-30T19:40:38 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC24_VAT_Tooltip_For_Asian_Countries() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:41:10 IST" name="nameAfter" finished-at="2023-05-30T19:41:10 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC24_VAT_Tooltip_For_Asian_Countries() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:41:10 IST" name="nameBefore" finished-at="2023-05-30T19:41:10 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC25_Generic_info_hover_text_EBook_PDP() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC25_Generic_info_hover_text_EBook_PDP()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:41:10 IST" name="TC25_Generic_info_hover_text_EBook_PDP" finished-at="2023-05-30T19:42:41 IST" duration-ms="90295" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC25_Generic_info_hover_text_EBook_PDP -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:42:41 IST" name="nameAfter" finished-at="2023-05-30T19:42:41 IST" duration-ms="11" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC25_Generic_info_hover_text_EBook_PDP() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:42:41 IST" name="nameBefore" finished-at="2023-05-30T19:42:41 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC26_Sort_Functionality_In_SRP_With_Pagination() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method signature="TC26_Sort_Functionality_In_SRP_With_Pagination()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:42:41 IST" name="TC26_Sort_Functionality_In_SRP_With_Pagination" finished-at="2023-05-30T19:45:20 IST" duration-ms="158774" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC26_Sort_Functionality_In_SRP_With_Pagination -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:45:20 IST" name="nameAfter" finished-at="2023-05-30T19:45:20 IST" duration-ms="3" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void TestSuite.Wiley_Prod_Test_Suite.TC26_Sort_Functionality_In_SRP_With_Pagination() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:TestSuite.Wiley_Prod_Test_Suite@5974109]" started-at="2023-05-30T19:45:20 IST" name="CloseBrowser" finished-at="2023-05-30T19:45:24 IST" duration-ms="4227" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
