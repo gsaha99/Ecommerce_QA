@@ -1,9 +1,12 @@
 package PageObjectRepo;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,13 +20,14 @@ import utilities.StatusDetails;
 import utilities.excelOperation;
 
 public class app_Hybris_BO_Repo {
-	Vet_Test_Suite Vet_Test;
-	public String SS_path=Vet_Test.SS_path;
-	@FindBy(xpath="//input[@name='j_username']")
+	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
+	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
+	
+	@FindBy(name="j_username")
 	WebElement UserNameHybrisBO;
-	@FindBy(xpath="//input[@name='j_password']")
+	@FindBy(name="j_password")
 	WebElement PasswordHybrisBO;
-	@FindBy(xpath="//button[text()='Login']")
+	@FindBy(xpath="//button[@type='submit']")
 	WebElement HybrisBOLoginButton;
 	@FindBy(xpath="//span[text()='Administration']")
 	WebElement AdministrationTextAfterLogin;
@@ -31,8 +35,6 @@ public class app_Hybris_BO_Repo {
 	WebElement SearchFieldInHybrisBO;
 	@FindBy(xpath="//span[text()='Wiley subscription']")
 	WebElement WileySubscriptionField;
-	@FindBy(xpath="//button[@title='Switch search mode']")
-	WebElement SearchButton;
 	@FindBy(xpath="//span[@class='ye-default-reference-editor-bandbox ye-default-reference-editor-bandbox-list-collapsed z-bandbox']/input[@class='z-bandbox-input'][1]")
 	WebElement CustomerIdField;
 	@FindBy(xpath="//div[@class='yw-buttons-container z-div']/button[@class='yw-textsearch-searchbutton y-btn-primary z-button']")
@@ -51,7 +53,7 @@ public class app_Hybris_BO_Repo {
 	WebElement RunButton;
 	@FindBy(xpath="//button[text()='Yes']")
 	WebElement CronjobRunYesButton;
-	@FindBy(xpath="//span[text()='Orders']")
+	@FindBy(xpath="//tr[@title='Orders']/td/div/div/span")
 	WebElement Orders;
 	@FindBy(xpath="//span[text()='2 items']")
 	WebElement SubscriptionItems;
@@ -59,43 +61,27 @@ public class app_Hybris_BO_Repo {
 	WebElement RenewalCronjob;
 	@FindBy(xpath="(//input[@class='ye-input-text ye-com_hybris_cockpitng_editor_defaulttext z-textbox'])[3]")
 	WebElement NewOrderID;
-	@FindBy(xpath="//a/span/img[@src='/backoffice/widgetClasspathResource/widgets/systemBarWidget/images/icon_system_logout.png']")
+	@FindBy(xpath="//a[@title='Logout']/span/img")
 	WebElement LogOutButton;
 	
 	
 	//Vishnu
 	
-	@FindBy(xpath = "(//input[@type='text'])[3]")
-	WebElement EnterorderId;
-	@FindBy(xpath = "//span[contains (text(),'Orders')]")
-	WebElement ClickOnOrders;
+	@FindBy(xpath = "(//input[@class='ye-input-text ye-com_hybris_cockpitng_editor_defaulttext z-textbox'])[1]")
+	WebElement FirstSearchFieldInAdvancedSearch;
 	@FindBy(xpath = "(//span[@class='yw-listview-cell-label z-label'])[1]")
 	WebElement ClickonOrderId;
 	@FindBy(xpath = "//div[@class='yw-caption-container z-caption']/div[@class='z-caption-content']//span[@class='z-label']")
 	WebElement OrderStatus;
-	@FindBy(xpath = "//button[contains(text(),'Search')]")
-	WebElement OrderSearch;
 	@FindBy(xpath = "//input[@placeholder='Filter Tree entries']")
 	WebElement BOSearchText;
-	
-	//Arun
-	@FindBy(xpath = "//input[@name='j_username']")
-	WebElement BackOffcieUserName;
-
-	@FindBy(xpath = "//input[@name='j_password']")
-	WebElement BackOffciePassword;
 
 	@FindBy(xpath = "//select[@class='z-select']")
 	WebElement SelectLanguage;
 
-	@FindBy(xpath = "//button[@type='submit']")
-	WebElement BOLoginButton;
-
 	@FindBy(xpath = "//button[contains(text(),'PROCEED')]")
 	WebElement ProceedButton;
 
-	@FindBy(xpath = "//span[contains(text(),'Orders')]")
-	WebElement OrdersOption;
 
 	@FindBy(xpath = "//button[@title='Switch search mode']")
 	WebElement SwitchSearchMode;
@@ -157,8 +143,8 @@ public class app_Hybris_BO_Repo {
 	@FindBy(xpath = "//span[contains(text(),'yopmail.com')]")
 	WebElement OriginalEmailId;
 
-	@FindBy(xpath = "//button[contains(text(),'Search')]")
-	WebElement SearchButton1;
+	@FindBy(xpath = "//button[@type='button' and text()='Search']")
+	WebElement SearchButtonInAdvanncedSearch;
 
 	@FindBy(xpath = "((((((((//div[@class='z-listbox-body']))[7])//table//colgroup//col)//following::tbody)[1]//tr//td)//following::td)//div//span)[1]")
 	WebElement OrderDetails;
@@ -255,22 +241,7 @@ public class app_Hybris_BO_Repo {
 			Reporting.updateTestReport("Wiley subscription field was not clicked "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	/*
-	 * @Author: Anindita
-	 * @Description: Clicks on the advanced search icon in Hybris Backoffice
-	 */
-	public void clickOnSearchButton() throws IOException{
-		try {
-			//SearchButton.click();
-			WebDriver driver=DriverModule.getWebDriver();
-			JavascriptExecutor jse = (JavascriptExecutor)driver;
-			jse.executeScript("arguments[0].click()", SearchButton);
-			Reporting.updateTestReport("User clicked on Search button successfuly ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-		}
-		catch(Exception e) {
-			Reporting.updateTestReport("Search button field was not clicked "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
+	
 	/*
 	 * @Author: Anindita
 	 * @Description: Enters the customer id in the search for subscription
@@ -292,15 +263,6 @@ public class app_Hybris_BO_Repo {
 		try {
 			String EmailHybrisBackOffice=excelOperation.getTestData("TC14", "VET_Test_Data", "Email_Id");
 			WebDriver driver=DriverModule.getWebDriver();		
-			/*
-			 * if(driver.findElement(By.xpath("(//span[contains(text(),'["+
-			 * EmailHybrisBackOffice+"]')])[2]")).isDisplayed())
-			 * {driver.findElement(By.xpath("(//span[contains(text(),'["+
-			 * EmailHybrisBackOffice+"]')])[2]")).click();
-			 * System.out.println("first xpath"); } else
-			 * {driver.findElement(By.xpath("//span[contains(text(),'["+
-			 * EmailHybrisBackOffice+"]')]")).click(); System.out.println("second xpath"); }
-			 */
 			driver.findElement(By.xpath("(//span[contains(text(),'["+EmailHybrisBackOffice+"]')])[2]")).click();
             //driver.findElement(By.xpath("//div[@class='yw-buttons-container z-div']/button[@class='yw-textsearch-searchbutton y-btn-primary z-button']")).click();
 			Reporting.updateTestReport("Customer id: "+EmailHybrisBackOffice+" was clicked successfuly ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -585,16 +547,7 @@ public class app_Hybris_BO_Repo {
 			catch(Exception e) {return null;}
 		}
 		
-		/*@Author: Anindita
-	     * @Added on 12/08/22
-	     * @Description: Returns the SearchButton element
-		 */
-		public WebElement returnSearchButton(){
-			try {
-				return (SearchButton);
-			}
-			catch(Exception e) {return null;}
-		}
+		
 		
 		/*@Author: Anindita
 	     * @Added on 14/08/22
@@ -656,47 +609,21 @@ public class app_Hybris_BO_Repo {
 			}
 		}
 		/* 
-		 * @Author: Vishnu
+		 * @Description: Enters value in the first field in advanced search form
 		 * 
 		 */
-		public void EnterorderId(String enterorderId) throws IOException {
+		public void enterValueInAdvancedSearch(String value) throws IOException {
 			try {
-				EnterorderId.sendKeys(enterorderId);
-				Reporting.updateTestReport("Order Id entered successfuly ", CaptureScreenshot.getScreenshot(SS_path),
+				FirstSearchFieldInAdvancedSearch.sendKeys(Keys.chord(Keys.CONTROL, "a"),value);
+				Reporting.updateTestReport(value+" was entered successfuly in the advanced search", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.PASS);
 			} catch (Exception e) {
-				Reporting.updateTestReport("Failed to enter orderId " + e.getClass().toString(),
+				Reporting.updateTestReport("Failed to enter value in advanced search form " + e.getClass().toString(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 		}
-		/* 
-		 * @Author: Vishnu
-		 * 
-		 */
-		public void clickOnSearchButtonForOrders() throws IOException {
-			try {
-				SearchButton.click();
-				Reporting.updateTestReport("User clicked on Search button successfuly ",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			} catch (Exception e) {
-				Reporting.updateTestReport("Search button field was not clicked " + e.getClass().toString(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-		}
-		/* 
-		 * @Author: Vishnu
-		 * 
-		 */
-		public void ClickOnOrders() throws IOException {
-			try {
-				ClickOnOrders.click();
-				Reporting.updateTestReport("Orders option clicked successfuly ", CaptureScreenshot.getScreenshot(SS_path),
-						StatusDetails.PASS);
-			} catch (Exception e) {
-				Reporting.updateTestReport("Failed to Click  the Orders option " + e.getClass().toString(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-		}
+		
+		
 		/* 
 		 * @Author: Vishnu
 		 * 
@@ -713,20 +640,7 @@ public class app_Hybris_BO_Repo {
 			}
 
 		}
-		/* 
-		 * @Author: Vishnu
-		 * 
-		 */
-		public void OrderSearch() throws IOException {
-			try {
-				OrderSearch.click();
-				Reporting.updateTestReport("User successfuly clicked on Search button for Order ",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			} catch (Exception e) {
-				Reporting.updateTestReport("Failed to click on Search button for Order " + e.getClass().toString(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-		}
+		
 		/*
 		 * @Author: Vishnu
 		 * 
@@ -834,18 +748,17 @@ public class app_Hybris_BO_Repo {
 		}
 
 		/*
-		 * Author : Arun 
-		 * Description : This Flow for Clicking on SearchButton after entered user MailId
+		 * Description : This Flow for Clicking on SearchButton 
 		 */
-		public void clickOnSearchButton1() throws IOException {
+		public void clickOnSearchButtonInAdvanncedSearch() throws IOException {
 
 			try {
-				SearchButton1.click();
-				Reporting.updateTestReport("SearchButton1 has been clicked successfully",
+				SearchButtonInAdvanncedSearch.click();
+				Reporting.updateTestReport("Search Button In Advannced Search was clicked successfully",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			} catch (Exception e) {
 				Reporting.updateTestReport(
-						"SearchButton1 is not clicked properly with the error message " + e.getClass().toString(),
+						"Search Button In Advannced Search was not clicked with the error message " + e.getClass().toString(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 		}
@@ -1070,21 +983,7 @@ public class app_Hybris_BO_Repo {
 			}
 		}
 
-		/*
-		 * Author : Arun 
-		 * Description : This Clicking on OrderOptions From Menu after logged into BackOffcie.  
-		 */
-		public void clickOnOrdersOption() throws IOException {
-
-			try {
-				OrdersOption.click();
-				Reporting.updateTestReport("OrdersOption was clicked successfully",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			} catch (Exception e) {
-				Reporting.updateTestReport("OrdersOption was not clicked with the error message " + e.getClass().toString(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-		}
+		
 
 		/*
 		 * Author : Arun 
@@ -1102,24 +1001,7 @@ public class app_Hybris_BO_Repo {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 		}
-
-		/*
-		 * Author : Arun 
-		 * Description : This Clicking on BackOffice LoginButton
-		 */
-		public void clickOnBOLoginButton() throws IOException {
-
-			try {
-				BOLoginButton.click();
-				Reporting.updateTestReport("BOLoginButton was clicked successfully",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			} catch (Exception e) {
-				Reporting.updateTestReport(
-						"BOLoginButton was not clicked with the error message " + e.getClass().toString(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-		}
-
+		
 		/*
 		 * Author : Arun 
 		 * Description : Selecting BackOffice Language From DropDown for VET_Refund
@@ -1135,42 +1017,8 @@ public class app_Hybris_BO_Repo {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 		}
+		
 
-		/*
-		 * Author : Arun 
-		 * Description : This Flow using for entering the BackOffice Password for VET_Refund
-		 */
-		public void enterBOPassword(String bopassword) throws IOException {
-
-			try {
-				BackOffciePassword.sendKeys(bopassword);
-				Reporting.updateTestReport("BackOffciePassword: " + bopassword + " has been entered successfully",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			} catch (Exception e) {
-				Reporting.updateTestReport(
-						"BackOffciePassword is not entered properly with the error message " + e.getClass().toString(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
-			}
-		}
-
-		/*
-		 * Author : Arun 
-		 * Description : This Flow using for entering the BackOffice UserName for VET_Refund
-		 */
-		public void enterBOUserName(String bousername) throws IOException {
-
-			try {
-				BackOffcieUserName.sendKeys(bousername);
-				Reporting.updateTestReport("BackOffcieUserName: " + bousername + " has been entered successfully",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-			} catch (Exception e) {
-				Reporting.updateTestReport(
-						"BackOffcieUserName was not entered properly with the error message " + e.getClass().toString(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
-			}
-		}
 
 	}
 
