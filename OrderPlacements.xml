@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="PPE_Regression">
+	<test thread-count="5" name="Wiley_Test_Suite">
+		<classes>
+			<class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
+				<methods>
+					
+					<include name="TC01_.*" />
+					<include name="TC02_.*" />
+					<include name="TC04_.*" />	
+					<include name="TC13_.*" />
+					<include name="TC17_.*" />
+					<include name="TC24_.*" />
+					<include name="TC31_.*" />
+					<include name="TC41_.*" />
+					<include name="TC42_.*" />
+					
+					
+				</methods>
+			</class>
+		</classes>
+	</test> 
+	<test name="AGS">
+		<classes>
+			<class name="Test_Suite.AGS_Test_Suite">
+				<methods>
+					<include name="TC01_.*"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="VET">
+		<classes>
+			<class name="Test_Suite.Vet_Test_Suite">
+				<methods>
+					<include name="TC01_.*"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	<test name="WileyPLUS">
+		<classes>
+			<class name="Test_Suite.WileyPLUS_Test_Suite">
+				<methods>
+					<include name="TC13_.*"></include>
+					<include name="TC23_.*"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	
+</suite>

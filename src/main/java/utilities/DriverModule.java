@@ -53,6 +53,7 @@ public class DriverModule {
 			Caps.setCapability("name", "PPE Regression Suite");	
 			EdgeOptions edgeOptions = new EdgeOptions();
 			edgeOptions.addArguments("InPrivate");
+			edgeOptions.addArguments("--remote-allow-origins=*");
 			ChromeOptions chromeOptions = new ChromeOptions();
 			chromeOptions.addArguments("--incognito");
 			

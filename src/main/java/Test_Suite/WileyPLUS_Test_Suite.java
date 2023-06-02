@@ -919,7 +919,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						excelOperation.updateTestData("TC15", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
 						excelOperation.updateTestData("TC15", "WileyPLUS_Test_Data", "Tax", taxInOrderConfirmation);
-						/*if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
+						if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 							Reporting.updateTestReport("Order Confirmation mail was received",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation," ",ordertotal);
@@ -927,7 +927,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						else {
 							Reporting.updateTestReport("Order Confirmation mail was not received",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						}*/				
+						}		
 					}			
 
 					else {
@@ -2163,7 +2163,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						String taxInOrderConfirmation = WileyPLUS.fetchTaxAmount();
 						excelOperation.updateTestData("TC23", "WileyPLUS_Test_Data", "Order_Total", ordertotal);
 						excelOperation.updateTestData("TC23", "WileyPLUS_Test_Data", "Tax", taxInOrderConfirmation);
-						/*if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
+						if(EmailValidation.checkIfOrderConfirmationMailReceived(email,driver,SS_path,EmailConfirmationText)) {
 							Reporting.updateTestReport("Order Confirmation mail was received",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							EmailValidation.validateOrderConfirmationMailContent("Wiley",driver,SS_path,taxInOrderConfirmation," ",ordertotal);
@@ -2171,7 +2171,7 @@ public class WileyPLUS_Test_Suite extends DriverModule{
 						else {
 							Reporting.updateTestReport("Order Confirmation mail was not received",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						}*/
+						}
 					}			
 
 					else {

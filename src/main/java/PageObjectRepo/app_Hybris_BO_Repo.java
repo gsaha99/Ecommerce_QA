@@ -9,6 +9,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
@@ -63,19 +64,14 @@ public class app_Hybris_BO_Repo {
 	WebElement NewOrderID;
 	@FindBy(xpath="//a[@title='Logout']/span/img")
 	WebElement LogOutButton;
-	
-	
-	//Vishnu
-	
 	@FindBy(xpath = "(//input[@class='ye-input-text ye-com_hybris_cockpitng_editor_defaulttext z-textbox'])[1]")
 	WebElement FirstSearchFieldInAdvancedSearch;
 	@FindBy(xpath = "(//span[@class='yw-listview-cell-label z-label'])[1]")
-	WebElement ClickonOrderId;
+	WebElement FirstSearchResult;
 	@FindBy(xpath = "//div[@class='yw-caption-container z-caption']/div[@class='z-caption-content']//span[@class='z-label']")
 	WebElement OrderStatus;
 	@FindBy(xpath = "//input[@placeholder='Filter Tree entries']")
 	WebElement BOSearchText;
-
 	@FindBy(xpath = "//select[@class='z-select']")
 	WebElement SelectLanguage;
 
@@ -161,6 +157,19 @@ public class app_Hybris_BO_Repo {
 	@FindBy(xpath = "//span[contains(text(),'CronJobs')]")
 	WebElement CronJobs1;
 
+	@FindBy(xpath="(//button[@class='yw-expandCollapse z-button'])[1]")
+	WebElement TopArrowButtonForExpand;
+	
+	//User Details page
+	
+	@FindBy(xpath="//span[@class='ye-default-reference-editor-selected-item-label z-label']")
+	WebElement UserSectionInOrderDetails;
+	@FindBy(xpath="//span[@title='firstName']/parent::div/following-sibling::div/input")
+	WebElement UserFirstName;
+	@FindBy(xpath="//span[@title='lastName']/parent::div/following-sibling::div/input")
+	WebElement UserLastName;
+	@FindBy(xpath="//span[@title='uid']/parent::div/following-sibling::div/input")
+	WebElement UserID;
 	
 	/*
 	 * @Author: Anindita
@@ -625,17 +634,17 @@ public class app_Hybris_BO_Repo {
 		
 		
 		/* 
-		 * @Author: Vishnu
+		 * @Description: Clicks on the first search result
 		 * 
 		 */
-		public void ClickonOrderId() throws IOException {
+		public void clickOnFirstSearchResult() throws IOException {
 			try {
-				ClickonOrderId.click();
-				Reporting.updateTestReport("OrderId clicked successfuly in Grid ", CaptureScreenshot.getScreenshot(SS_path),
+				FirstSearchResult.click();
+				Reporting.updateTestReport("First search result was clicked successfully", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.PASS);
 
 			} catch (Exception e) {
-				Reporting.updateTestReport("Failed to Click  the OrderId from Grid " + e.getClass().toString(),
+				Reporting.updateTestReport("Failed to Click  the First search result from Grid " + e.getClass().toString(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 
@@ -747,9 +756,11 @@ public class app_Hybris_BO_Repo {
 			}
 		}
 
+		
 		/*
 		 * Description : This Flow for Clicking on SearchButton 
 		 */
+		
 		public void clickOnSearchButtonInAdvanncedSearch() throws IOException {
 
 			try {
@@ -1018,7 +1029,88 @@ public class app_Hybris_BO_Repo {
 			}
 		}
 		
-
+		/*
+		 * @Description: Clicks on the top arrow up button to expand the lower order details part
+		 */
+		public void clickTopArrowButtonForExpand() throws IOException{
+			try {
+				TopArrowButtonForExpand.click();
+				Reporting.updateTestReport("The top arrow up button was clicked successfully to expand the lower order details part",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The top arrow up button couldn't be clicked to expand the lower order details part",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		
+		/*
+		 * @Description: Clicks on user details button in order details part
+		 */
+		public void clickOnUserSectionInOrderDetails(WebDriver driver) throws IOException{
+			try {
+				Actions act = new Actions(driver);
+				act.doubleClick(UserSectionInOrderDetails).perform();
+				Reporting.updateTestReport("The user details button was clicked successfully in order details part",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The user details button couldn't be clicked in order details part",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Description: Compares the first name entered with the first name in backoffice order section
+		 */
+		public void checkFirstNameInOrderDetails(String firstName) throws IOException {
+			try {
+				if(firstName.contentEquals(UserFirstName.getAttribute("value")))
+					Reporting.updateTestReport("The first name entered during checkout and the first name"
+							+ " saved in backoffice is same: "+firstName, CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("The first name entered during checkout: "+firstName+" and the first name"
+							+ " saved in backoffice is same: "+UserFirstName.getAttribute("value"), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The first name field in backoffice couldn't be validated", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Description: Compares the last name entered with the last name in backoffice order section
+		 */
+		public void checkLastNameInOrderDetails(String lastName) throws IOException {
+			try {
+				if(lastName.contentEquals(UserLastName.getAttribute("value")))
+					Reporting.updateTestReport("The last name entered during checkout and the last name"
+							+ " saved in backoffice is same: "+lastName, CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("The last name entered during checkout: "+lastName+" and the last name"
+							+ " saved in backoffice is same: "+UserLastName.getAttribute("value"), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The last name field in backoffice couldn't be validated", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Description: Compares the User ID entered with the User Id in backoffice order section
+		 */
+		public void checkUserIdInOrderDetails(String id) throws IOException {
+			try {
+				if(id.contentEquals(UserID.getAttribute("value")))
+					Reporting.updateTestReport("The User Id entered during checkout and the User Id"
+							+ " saved in backoffice is same: "+id, CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("The User Id entered during checkout: "+id+" and the User Id"
+							+ " saved in backoffice is same: "+UserID.getAttribute("value"), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The User Id field in backoffice couldn't be validated", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
 
 	}
 
