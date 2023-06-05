@@ -1,63 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="4" total="5" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-06-02T11:52:03 IST" name="Default suite" finished-at="2023-06-02T11:53:33 IST" duration-ms="90116">
+  <suite started-at="2023-06-05T17:28:02 IST" name="Default suite" finished-at="2023-06-05T18:11:49 IST" duration-ms="2626960">
     <groups>
     </groups>
-    <test started-at="2023-06-02T11:52:03 IST" name="Default test" finished-at="2023-06-02T11:53:33 IST" duration-ms="90116">
-      <class name="Test_Suite.BackOfficeOrderValidation">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:Test_Suite.BackOfficeOrderValidation@273444fe]" started-at="2023-06-02T11:52:03 IST" name="initiate" finished-at="2023-06-02T11:52:29 IST" duration-ms="26047" status="PASS">
+    <test started-at="2023-06-05T17:28:02 IST" name="Default test" finished-at="2023-06-05T18:11:49 IST" duration-ms="2626960">
+      <class name="Test_Suite.Manual_TestCase">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:Test_Suite.Manual_TestCase@1a75e76a]" started-at="2023-06-05T17:28:02 IST" name="initiate" finished-at="2023-06-05T17:28:12 IST" duration-ms="10333" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@7abeabe9]]>
+                <![CDATA[org.testng.TestRunner@2c9af700]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[edge]]>
+                <![CDATA[Edge]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.BackOfficeOrderValidation@273444fe]" started-at="2023-06-02T11:52:29 IST" name="launchBrowser" finished-at="2023-06-02T11:52:29 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="185" status="PASS">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.Manual_TestCase@1a75e76a]" started-at="2023-06-05T17:28:12 IST" name="launchBrowser" finished-at="2023-06-05T17:28:12 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="101" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchBrowser -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.BackOfficeOrderValidation@273444fe]" started-at="2023-06-02T11:52:29 IST" name="nameBefore" finished-at="2023-06-02T11:52:29 IST" duration-ms="2" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.BackOfficeOrderValidation.TC01_Check_Order_Details_for_Wiley() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
+        <test-method signature="DEC_Link_Updates()[pri:0, instance:Test_Suite.Manual_TestCase@1a75e76a]" started-at="2023-06-05T17:28:12 IST" name="DEC_Link_Updates" finished-at="2023-06-05T18:11:46 IST" duration-ms="2613874" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- nameBefore -->
-        <test-method signature="TC01_Check_Order_Details_for_Wiley()[pri:0, instance:Test_Suite.BackOfficeOrderValidation@273444fe]" started-at="2023-06-02T11:52:29 IST" name="TC01_Check_Order_Details_for_Wiley" finished-at="2023-06-02T11:53:28 IST" duration-ms="58632" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC01_Check_Order_Details_for_Wiley -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.BackOfficeOrderValidation@273444fe]" started-at="2023-06-02T11:53:28 IST" name="nameAfter" finished-at="2023-06-02T11:53:28 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void Test_Suite.BackOfficeOrderValidation.TC01_Check_Order_Details_for_Wiley() throws java.io.IOException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.BackOfficeOrderValidation@273444fe]" started-at="2023-06-02T11:53:28 IST" name="CloseBrowser" finished-at="2023-06-02T11:53:33 IST" duration-ms="5087" status="PASS">
+        </test-method> <!-- DEC_Link_Updates -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.Manual_TestCase@1a75e76a]" started-at="2023-06-05T18:11:46 IST" name="CloseBrowser" finished-at="2023-06-05T18:11:49 IST" duration-ms="2567" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
-      </class> <!-- Test_Suite.BackOfficeOrderValidation -->
+      </class> <!-- Test_Suite.Manual_TestCase -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

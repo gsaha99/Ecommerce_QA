@@ -2,8 +2,10 @@ package PageObjectRepo;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -170,6 +172,48 @@ public class app_Hybris_BO_Repo {
 	WebElement UserLastName;
 	@FindBy(xpath="//span[@title='uid']/parent::div/following-sibling::div/input")
 	WebElement UserID;
+	
+	//Generic elements
+	@FindBy(xpath="(//i[@class='z-icon-times'])[1]")
+	WebElement CloseBackofficePopUp;
+	@FindBy(xpath="//div[@class='z-tabbox-content']")
+	WebElement SideScrollBar;
+	@FindBy(xpath="(//i[@class='z-icon-chevron-right'])[3]")
+	WebElement RightScrollIcon;
+	
+	//Position and price tab
+	@FindBy(xpath="//li[@title='Positions and Prices']/span/div/div/span")
+	WebElement PositionAndPricesTab;
+	@FindBy(xpath="//span[@title='totalTax']/parent::div/following-sibling::div/input")
+	WebElement TotalTax;
+	@FindBy(xpath="//span[@title='deliveryCost']/parent::div/following-sibling::div/input")
+	WebElement ShippingCost;
+	
+	//Payment and delivery tab
+	@FindBy(xpath="//li[@title='Payment and Delivery']/span/div/div/span")
+	WebElement PaymentAndDeliveryTab;
+	@FindBy(xpath="//span[@title='paymentAddress']/parent::div/following-sibling::div/div[2]/div/div/table/tbody/tr/td/div/div/span")
+	WebElement PaymentAddressSectionInOrderDetails;
+	@FindBy(xpath="//span[@title='streetname']/parent::div/following-sibling::div/input")
+	WebElement StreetName;
+	@FindBy(xpath="//span[@title='postalcode']/parent::div/following-sibling::div/input")
+	WebElement PostalCode;
+	@FindBy(xpath="//span[@title='town']/parent::div/following-sibling::div/input")
+	WebElement Town;
+	@FindBy(xpath="//span[@title='country']/parent::div/following-sibling::div/div[2]/div/div/table/tbody/tr/td/div/div/span")
+	WebElement Country;
+	
+	//Administration tab
+	@FindBy(xpath="//li[@title='Administration']/span/div/div/span")
+	WebElement AdministrationTab;
+	@FindBy(xpath="//span[@title='orderProcess']/parent::div/following-sibling::div/div[2]/div/div/table/tbody/tr/td/div/div/span[contains(text(),'WileyOrderProcess')]")
+	WebElement WileyOrderProcessSectionInOrderDetails;
+	@FindBy(xpath="(//span[@title='taskLogs']/parent::div/following-sibling::div/div[2]/div/div/table/tbody/tr/td/div/div/span)[1]")
+	WebElement FirstOrderProcessStep;
+	@FindBy(xpath="//span[@title='returnCode']/parent::div/following-sibling::div/input")
+	WebElement ReturnCode;
+	@FindBy(xpath="//span[@title='logMessages']/parent::div/following-sibling::div/input")
+	WebElement LogMessage;
 	
 	/*
 	 * @Author: Anindita
@@ -588,7 +632,7 @@ public class app_Hybris_BO_Repo {
 				Reporting.updateTestReport("Logout button in BO was successfully clicked ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("Logout button in BO couldn't be clicked ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				Reporting.updateTestReport("Logout button in BO couldn't be clicked ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 			}
 		}
 		/*
@@ -1109,6 +1153,309 @@ public class app_Hybris_BO_Repo {
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("The User Id field in backoffice couldn't be validated", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Description: Clicks on the cross icon to close the details page of backoffice
+		 */
+		public void clickOnCloseBackofficePopUp() throws IOException{
+			try {
+				CloseBackofficePopUp.click();
+				Reporting.updateTestReport("The cross icon was clicked to close the details pop up in backoffice",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The cross icon couldn't be clicked to close the details pop up in backoffice",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Description: Clicks on the positions and prices tab
+		 */
+		public void clickOnPositionAndPricesTab() throws IOException{
+			try {
+				PositionAndPricesTab.click();
+				Reporting.updateTestReport("Positions and prices tab was clicked successfully",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Positions and prices tab couldn't be clicked",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+		}
+		
+		/*
+		 * @Description: Clicks on the Side Scroll Bar
+		 */
+		public void clickOnSideScrollBarAndScrollDown(WebDriver driver) throws IOException{
+			try {
+				SideScrollBar.click();
+				Actions at = new Actions(driver);
+				at.sendKeys(Keys.END).build().perform();
+				Thread.sleep(1000);
+				Reporting.updateTestReport("Side Scroll Bar was clicked successfully and the page was scrolled down",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Side Scroll Bar couldn't be clicked and the page couldn't be scrolled down",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+		}
+		
+		/*
+		 * @Description: Compares the tax in prder confirmation with the tax in backoffice order section
+		 */
+		public void checkTotalTaxInOrderDetails(String tax1) throws IOException {
+			try {
+				String tax=tax1.substring(1);
+				if(tax.contentEquals(TotalTax.getAttribute("value")))
+					Reporting.updateTestReport("The total tax in order during checkout and the tax"
+							+ " saved in backoffice is same: "+tax, CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("The total tax in order during checkout : "+tax+" and the tax"
+							+ " saved in backoffice is same: "+TotalTax.getAttribute("value"), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The total tax field in backoffice couldn't be validated", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Description: Compares the shipping cost in order confirmation with the shipping cost in backoffice order section
+		 */
+		public void checkShippingCostInOrderDetails(String shipping) throws IOException {
+			try {
+				if (shipping.equalsIgnoreCase(""))
+					shipping="0";
+				else
+					shipping=shipping.substring(1);
+				if(shipping.contentEquals(ShippingCost.getAttribute("value")))
+					Reporting.updateTestReport("The Shipping Cost in order during checkout and the Shipping Cost"
+							+ " saved in backoffice is same: "+shipping, CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("The Shipping Cost in order during checkout : "+shipping+" and the Shipping Cost"
+							+ " saved in backoffice is same: "+TotalTax.getAttribute("value"), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The ShippingCost field in backoffice couldn't be validated", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Description: Clicks on the Payment And Delivery Tab
+		 */
+		public void clickOnPaymentAndDeliveryTab() throws IOException{
+			try {
+				PaymentAndDeliveryTab.click();
+				Reporting.updateTestReport("Payment And Delivery tab was clicked successfully",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("Payment And Delivery tab couldn't be clicked",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+		}
+		
+		/*
+		 * @Description: Clicks on Payment Address Section In Order Details part
+		 */
+		public void clickOnPaymentAddressSectionInOrderDetails(WebDriver driver) throws IOException{
+			try {
+				Actions act = new Actions(driver);
+				act.doubleClick(PaymentAddressSectionInOrderDetails).perform();
+				Reporting.updateTestReport("The payment address section was clicked successfully in order details part",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The payment address section button couldn't be clicked in order details part",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		
+		/*
+		 * @Description: Compares the Street Name in order with the street in back office order section
+		 */
+		public void checkStreetNameInOrderDetails(String street) throws IOException {
+			try {
+				if(street.contentEquals(StreetName.getAttribute("value")))
+					Reporting.updateTestReport("The StreetName order during checkout and the StreetName"
+							+ " saved in backoffice is same: "+street, CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("The StreetName in order during checkout : "+street+" and the StreetName"
+							+ " saved in backoffice is not same: "+StreetName.getAttribute("value"), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The StreetName field in backoffice couldn't be validated", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Description: Compares the Postal Code in order with the Postal Code in back office order section
+		 */
+		public void checkPostalCodeInOrderDetails(String zip) throws IOException {
+			try {
+				if(zip.contentEquals(PostalCode.getAttribute("value")))
+					Reporting.updateTestReport("The PostalCode order during checkout and the PostalCode"
+							+ " saved in backoffice is same: "+zip, CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("The PostalCode in order during checkout : "+zip+" and the PostalCode"
+							+ " saved in backoffice is not same: "+PostalCode.getAttribute("value"), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The PostalCode field in backoffice couldn't be validated", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Description: Compares the Town in order with the Town in backoffice order section
+		 */
+		public void checkTownInOrderDetails(String town) throws IOException {
+			try {
+				if(town.contentEquals(Town.getAttribute("value")))
+					Reporting.updateTestReport("The Town in order during checkout and the Town"
+							+ " saved in backoffice is same: "+town, CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("The Town in order during checkout : "+town+" and the Town"
+							+ " saved in backoffice is not same: "+Town.getAttribute("value"), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The Town field in backoffice couldn't be validated", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Description: Compares the country in order with the country in backoffice order section
+		 */
+		public void checkCountryInOrderDetails(String country) throws IOException {
+			try {
+				if(Country.getText().contains(country))
+					Reporting.updateTestReport("The country in order during checkout and the country"
+							+ " saved in backoffice is same: "+country, CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else
+					Reporting.updateTestReport("The country in order during checkout : "+country+" and the country"
+							+ " saved in backoffice is same: "+Country.getAttribute("value"), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The Country field in backoffice couldn't be validated", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Description: Clicks on the right side scroll icon to the rightest end
+		 */
+		public void clickOnRightScrollIcon() throws IOException{
+			try {
+				for(int i=0;i<8;i++) {
+					RightScrollIcon.click();
+					Thread.sleep(500);
+				}
+				Reporting.updateTestReport("The right scroll icon was clicked successfully",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The right scroll icon couldn't be clicked ",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Description: Clicks on the administration tab
+		 */
+		public void clickOnAdministrationTab() throws IOException{
+			try {
+				AdministrationTab.click();
+				Reporting.updateTestReport("The Administration Tab was clicked successfully",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The Administration Tab couldn't be clicked ",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Description: Clicks on Wiley Order Process Section In Order Details part
+		 */
+		public void clickOnWileyOrderProcessSectionInOrderDetails(WebDriver driver) throws IOException{
+			try {
+				Actions act = new Actions(driver);
+				act.doubleClick(WileyOrderProcessSectionInOrderDetails).perform();
+				Reporting.updateTestReport("The Wiley Order Process Section was clicked successfully in order details part",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The Wiley Order Process Section button couldn't be clicked in order details part",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Description: Clicks on First Order Process Step Section In Order Details part
+		 */
+		public void clickOnFirstOrderProcessStep(WebDriver driver) throws IOException{
+			try {
+				Actions act = new Actions(driver);
+				act.doubleClick(FirstOrderProcessStep).perform();
+				Reporting.updateTestReport("The First Order Process Step section was clicked successfully in order details part",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The First Order Process Step section button couldn't be clicked in order details part",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Description: Checks if the return code is ok or not
+		 */
+		public void checkReturnCode(String step) throws IOException {
+			try {
+				String status=ReturnCode.getAttribute("value");
+				if(status.equalsIgnoreCase("OK"))
+					Reporting.updateTestReport("The return code was OK for step: "+step,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+				else {
+					Reporting.updateTestReport("The return code was "+status+" for step "+step+" with log message "+LogMessage.getAttribute("value"),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The return code couldn't be validated for this step"+e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		}
+		
+		/*
+		 * @Description: Checks the order process of Wiley orders
+		 */
+		public void checkWileyOrderProcess(WebDriver driver) throws IOException{
+			try {
+				
+				String[] orderProcessSteps=excelOperation.getTestData("Wiley_Order_Process_Steps", "Generic_Dataset", "Data").split(",");
+				System.out.println(orderProcessSteps.length);
+				for(int i=0;i<orderProcessSteps.length;i++) {
+					List<WebElement> elements=driver.findElements(By.xpath("//div[@class='yw-collection-prev-label z-div']/span[contains(text(),'"+
+				orderProcessSteps[i]+"')]"));
+					int number=elements.size();
+					try {
+						driver.findElement(By.xpath("(//div[@class='yw-collection-prev-label z-div']/span[contains(text(),'"+
+								orderProcessSteps[i]+"')])["+number+"]")).click();
+						Reporting.updateTestReport("The "+orderProcessSteps[i]+" step was clicked successfully in Wiley Order process model",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+						checkReturnCode(orderProcessSteps[i]);
+					}
+					catch(Exception e) {
+						Reporting.updateTestReport("The "+orderProcessSteps[i]+" step couldn't be clicked in Wiley Order process model",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				}
+			}
+			catch(Exception e) {
+				Reporting.updateTestReport("The Wiley Order Process model couldn't be validated for this order "+e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 		}
 

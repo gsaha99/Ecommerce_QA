@@ -5,9 +5,12 @@
     <classes>
       <class name="Test_Suite.BackOfficeOrderValidation">
         <methods>
-          <include name="CloseBrowser"/>
+          <include name="checkOrderForWiley"/>
+          <include name="nameBefore"/>
           <include name="initiate"/>
-          <include name="TC01_Check_Order_Details_for_Wiley"/>
+          <include name="CloseBrowser"/>
+          <include name="launchBrowser"/>
+          <include name="nameAfter"/>
         </methods>
       </class> <!-- Test_Suite.BackOfficeOrderValidation -->
     </classes>
