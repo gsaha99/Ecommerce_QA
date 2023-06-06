@@ -32,14 +32,14 @@
         </AuthManager>
         <hashTree/>
         <CacheManager guiclass="CacheManagerGui" testclass="CacheManager" testname="HTTP Cache Manager" enabled="true">
-          <boolProp name="clearEachIteration">false</boolProp>
+          <boolProp name="clearEachIteration">true</boolProp>
           <boolProp name="useExpires">true</boolProp>
           <boolProp name="CacheManager.controlledByThread">false</boolProp>
         </CacheManager>
         <hashTree/>
         <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
           <collectionProp name="CookieManager.cookies"/>
-          <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+          <boolProp name="CookieManager.clearEachIteration">true</boolProp>
           <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
         </CookieManager>
         <hashTree/>
@@ -258,35 +258,158 @@
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="clickonauthorize" enabled="false">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="clickonauthorize" enabled="true">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
           <boolProp name="TransactionController.parent">true</boolProp>
         </TransactionController>
         <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-            <collectionProp name="HeaderManager.headers"/>
-          </HeaderManager>
-          <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="true">
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import java.time.Instant;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.math.BigInteger;
+class Response{
+    public String timestamp;
+    public String md5;
+    Response(String timestamp, String md5){
+        this.timestamp=timestamp;
+        this.md5=md5;
+    }
+    public String toString(){
+        return &quot;{ timestamp :&quot;+timestamp+&quot;, md5 :&quot;+md5+&quot;}&quot;;
+    }
+}
+
+
+
+String vendorID = &quot;1&quot;;
+
+String method = &quot;HTTP&quot;;
+String description = &quot;Test Harness Description&quot;;
+String value = &quot;12.99&quot;;
+String currency = &quot;USD&quot;;
+String region = &quot;NA&quot;;
+String token = &quot;S4242427883664242&quot;;
+String authCode = &quot;&quot;;
+String address = &quot;&quot;;
+String postcode = &quot;&quot;;
+String countryCode = &quot;&quot;;
+String allowAVSFail = &quot;Y&quot;;
+String clientSecret = &quot;test@123&quot;;
+String timestamp = String.valueOf(Instant.now().getEpochSecond());
+String transID = timestamp;
+String md5 = timestamp+vendorID+transID+method+description+value+currency+region+authCode+address+postcode+countryCode+allowAVSFail+clientSecret;
+MessageDigest md = null;
+String hashtext = null;
+try {
+  md = MessageDigest.getInstance(&quot;MD5&quot;);
+  md.update(md5.getBytes());
+  hashtext = new BigInteger(1, md.digest()).toString(16);
+  while (hashtext.length() &lt; 32) {
+    hashtext = &quot;0&quot; + hashtext;
+  }
+  return new Response(timestamp, hashtext);
+} catch (NoSuchAlgorithmException e) {
+  System.out.println(&quot;Error occured&quot;);
+}
+</stringProp>
+            <stringProp name="scriptLanguage">java</stringProp>
+          </JSR223Sampler>
+          <hashTree>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+              <stringProp name="RegexExtractor.refname">Security</stringProp>
+              <stringProp name="RegexExtractor.regex">md5 :(.*?)}</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default"></stringProp>
+              <stringProp name="RegexExtractor.match_number">1</stringProp>
+            </RegexExtractor>
+            <hashTree/>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+              <stringProp name="RegexExtractor.refname">Timestamp</stringProp>
+              <stringProp name="RegexExtractor.regex">timestamp :(.*?),</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default"></stringProp>
+              <stringProp name="RegexExtractor.match_number">1</stringProp>
+            </RegexExtractor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="S01_WPS_Authorize_T01_ClickonContinue(iFrameLoading)" enabled="true">
+          <boolProp name="TransactionController.parent">true</boolProp>
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/-112" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
-            <stringProp name="HTTPSampler.domain">wps-test-harness-ui.perf.wps.wiley.host</stringProp>
-            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.domain">wps-payment-ui.perf.wps.wiley.host</stringProp>
+            <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.protocol">https</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/http/auth</stringProp>
+            <stringProp name="HTTPSampler.path">/</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-            <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
             <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
             <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
             <stringProp name="HTTPSampler.connect_timeout"></stringProp>
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
           </HTTPSamplerProxy>
-          <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/v1/api/payment/operations/-111" enabled="true">
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Sec-Fetch-Mode" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
+                  <stringProp name="Header.value">navigate</stringProp>
+                </elementProp>
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://wps-test-harness-ui.perf.wps.wiley.host/</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-Site" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
+                  <stringProp name="Header.value">same-site</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Language" elementType="Header">
+                  <stringProp name="Header.name">Accept-Language</stringProp>
+                  <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-User" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-User</stringProp>
+                  <stringProp name="Header.value">?1</stringProp>
+                </elementProp>
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8</stringProp>
+                </elementProp>
+                <elementProp name="Upgrade-Insecure-Requests" elementType="Header">
+                  <stringProp name="Header.name">Upgrade-Insecure-Requests</stringProp>
+                  <stringProp name="Header.value">1</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Encoding" elementType="Header">
+                  <stringProp name="Header.name">Accept-Encoding</stringProp>
+                  <stringProp name="Header.value">gzip, deflate, br</stringProp>
+                </elementProp>
+                <elementProp name="User-Agent" elementType="Header">
+                  <stringProp name="Header.name">User-Agent</stringProp>
+                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-Dest" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
+                  <stringProp name="Header.value">document</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/v1/api/payment/operations/-45" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="WPG_operation" elementType="HTTPArgument">
@@ -313,7 +436,7 @@
                 <elementProp name="WPG_transID" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">WPG_transID</stringProp>
-                  <stringProp name="Argument.value">1655805471654</stringProp>
+                  <stringProp name="Argument.value">${Timestamp}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
@@ -327,7 +450,7 @@
                 <elementProp name="WPG_description" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">WPG_description</stringProp>
-                  <stringProp name="Argument.value">Test+Harness+Description</stringProp>
+                  <stringProp name="Argument.value">Test Harness Description</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
@@ -380,17 +503,24 @@
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
+                <elementProp name="WPG_customerId" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">WPG_customerId</stringProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
                 <elementProp name="WPG_timestamp" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">WPG_timestamp</stringProp>
-                  <stringProp name="Argument.value">1655784396</stringProp>
+                  <stringProp name="Argument.value">${Timestamp}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="WPG_security" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">WPG_security</stringProp>
-                  <stringProp name="Argument.value">af6746b8c0023444cf59e99cd96ecf78</stringProp>
+                  <stringProp name="Argument.value">${Security}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
@@ -432,7 +562,7 @@
                 <elementProp name="WPG_CUSTOM_CURRENT_YEAR" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">WPG_CUSTOM_CURRENT_YEAR</stringProp>
-                  <stringProp name="Argument.value">2022</stringProp>
+                  <stringProp name="Argument.value">2023</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
@@ -652,7 +782,7 @@
                 </elementProp>
                 <elementProp name="User-Agent" elementType="Header">
                   <stringProp name="Header.name">User-Agent</stringProp>
-                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0</stringProp>
+                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/111.0</stringProp>
                 </elementProp>
                 <elementProp name="Sec-Fetch-Dest" elementType="Header">
                   <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -661,14 +791,23 @@
               </collectionProp>
             </HeaderManager>
             <hashTree/>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="false">
+              <stringProp name="RegexExtractor.useHeaders">true</stringProp>
+              <stringProp name="RegexExtractor.refname">encodedRequest</stringProp>
+              <stringProp name="RegexExtractor.regex">Set-Cookie:(.*?);</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default"></stringProp>
+              <stringProp name="RegexExtractor.match_number"></stringProp>
+            </RegexExtractor>
+            <hashTree/>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">Cookie</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">Set-Cookie:(.*?);</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
           </hashTree>
-        </hashTree>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="S01_WPS_Authorize_T01_ClickonContinue(iFrameLoading)" enabled="true">
-          <boolProp name="TransactionController.parent">true</boolProp>
-          <boolProp name="TransactionController.includeTimers">false</boolProp>
-        </TransactionController>
-        <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/-112" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/v1/clients/templates-113" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
@@ -676,84 +815,11 @@
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.protocol">https</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/</stringProp>
-            <stringProp name="HTTPSampler.method">GET</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-            <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          </HTTPSamplerProxy>
-          <hashTree>
-            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-              <collectionProp name="HeaderManager.headers">
-                <elementProp name="Sec-Fetch-Mode" elementType="Header">
-                  <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
-                  <stringProp name="Header.value">navigate</stringProp>
-                </elementProp>
-                <elementProp name="Referer" elementType="Header">
-                  <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://wps-test-harness-ui.perf.wps.wiley.host/</stringProp>
-                </elementProp>
-                <elementProp name="Sec-Fetch-Site" elementType="Header">
-                  <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
-                  <stringProp name="Header.value">same-site</stringProp>
-                </elementProp>
-                <elementProp name="Accept-Language" elementType="Header">
-                  <stringProp name="Header.name">Accept-Language</stringProp>
-                  <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
-                </elementProp>
-                <elementProp name="Sec-Fetch-User" elementType="Header">
-                  <stringProp name="Header.name">Sec-Fetch-User</stringProp>
-                  <stringProp name="Header.value">?1</stringProp>
-                </elementProp>
-                <elementProp name="Accept" elementType="Header">
-                  <stringProp name="Header.name">Accept</stringProp>
-                  <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8</stringProp>
-                </elementProp>
-                <elementProp name="Upgrade-Insecure-Requests" elementType="Header">
-                  <stringProp name="Header.name">Upgrade-Insecure-Requests</stringProp>
-                  <stringProp name="Header.value">1</stringProp>
-                </elementProp>
-                <elementProp name="Accept-Encoding" elementType="Header">
-                  <stringProp name="Header.name">Accept-Encoding</stringProp>
-                  <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                </elementProp>
-                <elementProp name="User-Agent" elementType="Header">
-                  <stringProp name="Header.name">User-Agent</stringProp>
-                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0</stringProp>
-                </elementProp>
-                <elementProp name="Sec-Fetch-Dest" elementType="Header">
-                  <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
-                  <stringProp name="Header.value">document</stringProp>
-                </elementProp>
-              </collectionProp>
-            </HeaderManager>
-            <hashTree/>
-          </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/v1/clients/templates-113" enabled="true">
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="encoded-request" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.name">encoded-request</stringProp>
-                  <stringProp name="Argument.value">eyJtZXJjaGFudCI6eyJtZXJjaGFudElkIjoxLCJtaWQiOiI1NDE2MTc2NjYyNDciLCJyZWdpb25JZCI6NiwiY3JlYXRlZEJ5IjoibWlncmF0aW9uIiwibW9kaWZpZWRCeSI6Im1pZ3JhdGlvbiIsInJlZ2lvbiI6eyJpZCI6NiwibmFtZSI6Ik5BIn0sImN1cnJlbmN5SWQiOjIsImN1cnJlbmN5Ijp7ImlkIjoyLCJuYW1lIjoiVVNEIn0sImNvbXBhbnlDb2RlSWQiOjEsImNvbXBhbnlDb2RlIjp7ImNvbXBhbnlDb2RlSWQiOjEsImNvbXBhbnlDb2RlIjoiMTAwMSIsImNvbXBhbnlOYW1lIjoiV2lsZXkifSwiYWNjb3VudCI6IldJTEVZIn0sImNvbXBhbnlDb2RlIjoiMTAwMSIsImN1c3RvbVRlbXBsYXRlVmFycyI6eyJCQVNLRVRfMl9uYW1lIjoiR29vZHMiLCJhZG9iZV9hbmFseXRpY3Nfc2NyaXB0X3VybCI6Ii8vYXNzZXRzLmFkb2JlZHRtLmNvbS81OTY0MGY5ZmE1MTAvYzRkNzllNWI3ZjdhL2xhdW5jaC03ZjExOTkzYzBkZTctZGV2ZWxvcG1lbnQuanMiLCJCQVNLRVRfZGlzY291bnQiOiIwLjAwIiwiQkFTS0VUX2N1cnJlbmN5X3N5bWJvbCI6IiQiLCJPcGVyYXRpb24iOiJXUEdfYXV0aCIsIkJBU0tFVF8yX3ByaWNlIjoiNzUuMDAiLCJDVVJSRU5UX1lFQVIiOiIyMDIyIiwiQkFTS0VUXzNfdG90YWwiOiI3NS4wMCIsIkJBU0tFVF8yX2Rlc2MiOiJBIGxvdmVseSB0ZXN0IGl0ZW0gbnVtYmVyZWQgMiBpbiB5ZWxsb3cgd2hpY2ggYWxzbyBoYXMgYSB2ZXJ5IGxvbmcgZGVzY3JpcHRpb24iLCJCQVNLRVRfMV9xdHkiOiIxIiwiQkFTS0VUXzFfZGVzYyI6IkEgbG92ZWx5IHRlc3QgaXRlbSBudW1iZXJlZCAxIGluIGdyZWVuIiwiQkFTS0VUX3N1YnRvdGFsIjoiMjI1LjAwIiwiQkFTS0VUXzFfdG90YWwiOiI3NS4wMCIsIkJBU0tFVF90b3RhbCI6IjIzNS4wMCIsImJhY2tfdXJsIjoiaHR0cHM6Ly93cHMtdGVzdC1oYXJuZXNzLXVpLnBlcmYud3BzLndpbGV5Lmhvc3QvaHR0cCIsIkdSQVBISUNTVEFOREFSRFNfTElOSyI6IiIsIkJBU0tFVF8xX3ByaWNlIjoiNzUuMDAiLCJCQVNLRVRfY291bnQiOiIzIiwiQkFTS0VUX1NISVBQSU5HIjoiMTAuMDAiLCJCQVNLRVRfMV9uYW1lIjoiVGVzdCBpdGVtIDEgd2hpY2ggaGFzIGEgdmVyeSBsb25nIHRleHQiLCJCQVNLRVRfMl9xdHkiOiIxIiwiQkFTS0VUXzNfcHJpY2UiOiI3NS4wMCIsIkJBU0tFVF8zX2Rlc2MiOiJBIGxvdmVseSB0ZXN0IGl0ZW0gbnVtYmVyZWQgMyBpbiBibHVlIiwic2l0ZV91cmwiOiIiLCJXSUxFWV9MSU5LIjoiIiwiQkFTS0VUXzNfbmFtZSI6IlRlc3QgSXRlbSAzIiwiQkFTS0VUXzJfdG90YWwiOiI3NS4wMCIsIkJBU0tFVF90YXgiOiIwLjAwIiwiQkFTS0VUXzNfcXR5IjoiMSJ9LCJXUEdfb3BlcmF0aW9uIjoiV1BHX2F1dGgiLCJXUEdfdGltZXN0YW1wIjoiMTY1NTc4NDM5NiIsIldQR192ZW5kb3JJRCI6IjEiLCJXUEdfdHJhbnNJRCI6IjE2NTU3ODQzNTY1NzEiLCJXUEdfbWV0aG9kIjoiSFRUUCIsIldQR19kZXNjcmlwdGlvbiI6IlRlc3QgSGFybmVzcyBEZXNjcmlwdGlvbiIsIldQR192YWx1ZSI6IjEyLjk5IiwiV1BHX2N1cnJlbmN5IjoiVVNEIiwiV1BHX3JlZ2lvbiI6Ik5BIiwiV1BHX2FkZHJlc3MiOiIiLCJXUEdfcG9zdGNvZGUiOiIiLCJXUEdfY291bnRyeUNvZGUiOiIiLCJXUEdfYWxsb3dBVlNGYWlsIjoiWSIsIldQR19zZWN1cml0eSI6ImFmNjc0NmI4YzAwMjM0NDRjZjU5ZTk5Y2Q5NmVjZjc4In0=</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-            <stringProp name="HTTPSampler.domain">wps-payment-ui.perf.wps.wiley.host</stringProp>
-            <stringProp name="HTTPSampler.port">443</stringProp>
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
             <stringProp name="HTTPSampler.path">/v1/clients/templates</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
             <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
             <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
             <stringProp name="HTTPSampler.connect_timeout"></stringProp>
@@ -770,13 +836,9 @@
                   <stringProp name="Header.name">Referer</stringProp>
                   <stringProp name="Header.value">https://wps-payment-ui.perf.wps.wiley.host/</stringProp>
                 </elementProp>
-                <elementProp name="Sec-Fetch-Site" elementType="Header">
-                  <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
-                  <stringProp name="Header.value">same-origin</stringProp>
-                </elementProp>
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
-                  <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
+                  <stringProp name="Header.value">en-US,en;q=0.9</stringProp>
                 </elementProp>
                 <elementProp name="Accept" elementType="Header">
                   <stringProp name="Header.name">Accept</stringProp>
@@ -784,7 +846,7 @@
                 </elementProp>
                 <elementProp name="content-type" elementType="Header">
                   <stringProp name="Header.name">content-type</stringProp>
-                  <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Encoding" elementType="Header">
                   <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -793,6 +855,77 @@
                 <elementProp name="User-Agent" elementType="Header">
                   <stringProp name="Header.name">User-Agent</stringProp>
                   <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-Dest" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
+                  <stringProp name="Header.value">empty</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
+                  <stringProp name="Header.value">same-origin</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Cookie</stringProp>
+                  <stringProp name="Header.value">${Cookie}</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+              <stringProp name="RegexExtractor.refname">clientsecret</stringProp>
+              <stringProp name="RegexExtractor.regex">clientSecret&quot;:&quot;(.*?)&quot;,</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default"></stringProp>
+              <stringProp name="RegexExtractor.match_number"></stringProp>
+            </RegexExtractor>
+            <hashTree/>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+              <stringProp name="RegexExtractor.refname">intentID</stringProp>
+              <stringProp name="RegexExtractor.regex">intentId&quot;:&quot;(.*?)&quot;}</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default"></stringProp>
+              <stringProp name="RegexExtractor.match_number"></stringProp>
+            </RegexExtractor>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://wps-payment-ui.perf.wps.wiley.host/v1/clients/templates" enabled="false">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">wps-payment-ui.perf.wps.wiley.host</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">v1/clients/templates</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="content-type" elementType="Header">
+                  <stringProp name="Header.name">content-type</stringProp>
+                  <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
+                </elementProp>
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">*/*</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-Site" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
+                  <stringProp name="Header.value">same-origin</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-Mode" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
+                  <stringProp name="Header.value">cors</stringProp>
                 </elementProp>
                 <elementProp name="Sec-Fetch-Dest" elementType="Header">
                   <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -1258,6 +1391,7 @@
                   <stringProp name="Argument.name">frame_width</stringProp>
                   <stringProp name="Argument.value">1263</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
@@ -12717,49 +12851,7 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="TestPlan.comments">Detected a redirect from the previous sample</stringProp>
         </HTTPSamplerProxy>
-        <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-            <collectionProp name="HeaderManager.headers">
-              <elementProp name="Sec-Fetch-Mode" elementType="Header">
-                <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
-                <stringProp name="Header.value">navigate</stringProp>
-              </elementProp>
-              <elementProp name="Referer" elementType="Header">
-                <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://wps-payment-ui.perf.wps.wiley.host/</stringProp>
-              </elementProp>
-              <elementProp name="Sec-Fetch-Site" elementType="Header">
-                <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
-                <stringProp name="Header.value">same-site</stringProp>
-              </elementProp>
-              <elementProp name="Accept-Language" elementType="Header">
-                <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
-              </elementProp>
-              <elementProp name="Accept" elementType="Header">
-                <stringProp name="Header.name">Accept</stringProp>
-                <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8</stringProp>
-              </elementProp>
-              <elementProp name="Upgrade-Insecure-Requests" elementType="Header">
-                <stringProp name="Header.name">Upgrade-Insecure-Requests</stringProp>
-                <stringProp name="Header.value">1</stringProp>
-              </elementProp>
-              <elementProp name="Accept-Encoding" elementType="Header">
-                <stringProp name="Header.name">Accept-Encoding</stringProp>
-                <stringProp name="Header.value">gzip, deflate, br</stringProp>
-              </elementProp>
-              <elementProp name="User-Agent" elementType="Header">
-                <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0</stringProp>
-              </elementProp>
-              <elementProp name="Sec-Fetch-Dest" elementType="Header">
-                <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
-                <stringProp name="Header.value">document</stringProp>
-              </elementProp>
-            </collectionProp>
-          </HeaderManager>
-          <hashTree/>
-        </hashTree>
+        <hashTree/>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
@@ -12823,45 +12915,7 @@
         <stringProp name="ProxyControlGui.content_type_exclude"></stringProp>
         <stringProp name="ProxyControlGui.domains">localhost.com</stringProp>
       </ProxyControl>
-      <hashTree>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
-          <boolProp name="ResultCollector.error_logging">false</boolProp>
-          <objProp>
-            <name>saveConfig</name>
-            <value class="SampleSaveConfiguration">
-              <time>true</time>
-              <latency>true</latency>
-              <timestamp>true</timestamp>
-              <success>true</success>
-              <label>true</label>
-              <code>true</code>
-              <message>true</message>
-              <threadName>true</threadName>
-              <dataType>true</dataType>
-              <encoding>false</encoding>
-              <assertions>true</assertions>
-              <subresults>true</subresults>
-              <responseData>false</responseData>
-              <samplerData>false</samplerData>
-              <xml>false</xml>
-              <fieldNames>true</fieldNames>
-              <responseHeaders>false</responseHeaders>
-              <requestHeaders>false</requestHeaders>
-              <responseDataOnError>false</responseDataOnError>
-              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-              <assertionsResultsToSave>0</assertionsResultsToSave>
-              <bytes>true</bytes>
-              <sentBytes>true</sentBytes>
-              <url>true</url>
-              <threadCounts>true</threadCounts>
-              <idleTime>true</idleTime>
-              <connectTime>true</connectTime>
-            </value>
-          </objProp>
-          <stringProp name="filename"></stringProp>
-        </ResultCollector>
-        <hashTree/>
-      </hashTree>
+      <hashTree/>
     </hashTree>
   </hashTree>
 </jmeterTestPlan>

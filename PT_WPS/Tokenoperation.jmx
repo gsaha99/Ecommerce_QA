@@ -28,7 +28,7 @@
         <boolProp name="CacheManager.controlledByThread">false</boolProp>
       </CacheManager>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TokenAuth" enabled="false">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TokenAuth" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -76,14 +76,14 @@ class Response{
 
 
 
-String vendorID = &quot;2134&quot;;
-String transID = &quot;${ID}&quot;;
+String vendorID = &quot;1&quot;;
+
 String method = &quot;HTTP&quot;;
 String description = &quot;Test Harness Description&quot;;
 String value = &quot;12.99&quot;;
 String currency = &quot;USD&quot;;
 String region = &quot;NA&quot;;
-String token = &quot;S4242427162274242&quot;;
+String token = &quot;S4242427666214242&quot;;
 String authCode = &quot;&quot;;
 String address = &quot;&quot;;
 String postcode = &quot;&quot;;
@@ -91,6 +91,7 @@ String countryCode = &quot;&quot;;
 String allowAVSFail = &quot;Y&quot;;
 String clientSecret = &quot;test@123&quot;;
 String timestamp = String.valueOf(Instant.now().getEpochSecond());
+String transID = timestamp;
 String md5 = timestamp+vendorID+transID+method+description+value+currency+region+token+authCode+address+postcode+countryCode+allowAVSFail+clientSecret;
 MessageDigest md = null;
 String hashtext = null;
@@ -167,14 +168,14 @@ try {
                 <elementProp name="WPG_transID" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">WPG_transID</stringProp>
-                  <stringProp name="Argument.value">${ID}</stringProp>
+                  <stringProp name="Argument.value">${Timestamp}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="WPG_vendorID" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">WPG_vendorID</stringProp>
-                  <stringProp name="Argument.value">2134</stringProp>
+                  <stringProp name="Argument.value">1</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
@@ -209,7 +210,7 @@ try {
                 <elementProp name="WPG_token" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">WPG_token</stringProp>
-                  <stringProp name="Argument.value">S4242427162274242</stringProp>
+                  <stringProp name="Argument.value">S4242427666214242</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
@@ -574,23 +575,23 @@ try {
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer" enabled="true">
+        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer" enabled="false">
           <intProp name="calcMode">1</intProp>
           <doubleProp>
             <name>throughput</name>
-            <value>1200.0</value>
+            <value>2400.0</value>
             <savedValue>0.0</savedValue>
           </doubleProp>
         </ConstantThroughputTimer>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TokenSettle" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TokenSettle" enabled="false">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <intProp name="LoopController.loops">-1</intProp>
+          <stringProp name="LoopController.loops">2</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">20</stringProp>
+        <stringProp name="ThreadGroup.num_threads">2</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.duration">3600</stringProp>
@@ -598,7 +599,7 @@ try {
         <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
       </ThreadGroup>
       <hashTree>
-        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Flow Control Action" enabled="true">
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Flow Control Action" enabled="false">
           <intProp name="ActionProcessor.action">1</intProp>
           <intProp name="ActionProcessor.target">0</intProp>
           <stringProp name="ActionProcessor.duration">60000</stringProp>
@@ -638,15 +639,15 @@ class Response{
 
 
 
-String vendorID = &quot;2134&quot;;
+String vendorID = &quot;1&quot;;
 String transID = &quot;1664523636640&quot;;
 String method = &quot;HTTP&quot;;
 String description = &quot;Test Harness Description&quot;;
 String value = &quot;12.99&quot;;
 String currency = &quot;USD&quot;;
 String region = &quot;NA&quot;;
-String token = &quot;S4242427162274242&quot;;
-String authCode = &quot;${authcode}&quot;;
+String token = &quot;S4242427666214242&quot;;
+String authCode = &quot;gnxTR1&quot;;
 String address = &quot;&quot;;
 String postcode = &quot;&quot;;
 String countryCode = &quot;&quot;;
@@ -736,7 +737,7 @@ try {
                 <elementProp name="WPG_vendorID" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">WPG_vendorID</stringProp>
-                  <stringProp name="Argument.value">2134</stringProp>
+                  <stringProp name="Argument.value">1</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
@@ -771,14 +772,14 @@ try {
                 <elementProp name="WPG_token" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">WPG_token</stringProp>
-                  <stringProp name="Argument.value">S4242427162274242</stringProp>
+                  <stringProp name="Argument.value">S4242427666214242</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="WPG_authCode" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">WPG_authCode</stringProp>
-                  <stringProp name="Argument.value">${authcode}</stringProp>
+                  <stringProp name="Argument.value">gnxTR1</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
@@ -1149,9 +1150,9 @@ try {
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <intProp name="LoopController.loops">-1</intProp>
+          <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">20</stringProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.duration">3600</stringProp>
@@ -1271,14 +1272,14 @@ class Response{
 
 
 
-String vendorID = &quot;2134&quot;;
+String vendorID = &quot;1&quot;;
 String transID = &quot;${ID}&quot;;
 String method = &quot;HTTP&quot;;
 String description = &quot;Test Harness Description&quot;;
 String value = &quot;12.99&quot;;
 String currency = &quot;USD&quot;;
 String region = &quot;NA&quot;;
-String token = &quot;${Token}&quot;;
+String token = &quot;S4242427666214242&quot;;
 String authCode = &quot;&quot;;
 String address = &quot;&quot;;
 String postcode = &quot;&quot;;
@@ -1369,7 +1370,7 @@ try {
                 <elementProp name="WPG_vendorID" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">WPG_vendorID</stringProp>
-                  <stringProp name="Argument.value">2134</stringProp>
+                  <stringProp name="Argument.value">1</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
@@ -1404,7 +1405,7 @@ try {
                 <elementProp name="WPG_token" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">WPG_token</stringProp>
-                  <stringProp name="Argument.value">${Token}</stringProp>
+                  <stringProp name="Argument.value">S4242427666214242</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
@@ -1711,7 +1712,7 @@ try {
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer" enabled="true">
+        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer" enabled="false">
           <intProp name="calcMode">1</intProp>
           <doubleProp>
             <name>throughput</name>
