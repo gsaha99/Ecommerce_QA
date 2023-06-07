@@ -1,0 +1,5 @@
+StoreFront_Validate_CLP_31182023111831 Regression Suite: -
+
+
+TC01_CategoryLandingPage --> Execution started
+

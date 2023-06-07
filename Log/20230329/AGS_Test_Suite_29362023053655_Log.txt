@@ -1,0 +1,18 @@
+AGS_Test_Suite_29362023053655 Regression Suite: -
+
+
+TC01_Anonymous_User_Registration --> Execution started
+
+Yearly Subscription button was clicked successfully --> PASS
+Continue Button in Cart Page was clicked successfully --> PASS
+First name: AGS was entered successfully  --> PASS
+Last name: User was entered successfully  --> PASS
+Email Id: autoags20230329053734@yopmail.com was entered successfully  --> PASS
+Password: Password@123 was entered successfully  --> PASS
+Create Account button was clicked successfully  --> PASS
+First name: AGS in billing address form was entered successfully --> PASS
+Last name: User in billing address form was entered successfully --> PASS
+Country has been selected successfully by user --> PASS
+Address line 1: 111 River St was entered --> PASS
+City: Hoboken was entered --> PASS
+State: New Jersey has been selected successfully by user --> PASS

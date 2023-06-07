@@ -1,0 +1,9 @@
+StoreFront_Validate_CLP_07442023014447 Regression Suite: -
+
+
+TC01_CategoryLandingPage --> Execution started
+
+CLP got shifted from Solr to Constructor https://devmonkey:d3Vm0nK3y@qa.store.wiley.com/en-us/en-us/en-us/en-us/subjects --> PASS
+CLP got shifted from Solr to Constructor https://devmonkey:d3Vm0nK3y@qa.store.wiley.com/en-us/en-us/en-us/Agriculture-c2-AG00 --> PASS
+CLP got shifted from Solr to Constructor https://devmonkey:d3Vm0nK3y@qa.store.wiley.com/en-us/en-us/en-us/General-Aquaculture%22-Fisheries-%26-Fish-Science-c2-AQ00 --> PASS
+CLP got shifted from Solr to Constructor https://devmonkey:d3Vm0nK3y@qa.store.wiley.com/en-us/en-us/en-us/General-%26-Introductory-Art-%26-Applied-Arts-c2-AA00 --> PASS

@@ -1,0 +1,7 @@
+StoreFront_Validate_CLP_31302023033051 Regression Suite: -
+
+
+TC01_CategoryLandingPage --> Execution started
+
+CLP got shifted from Solr to Constructor FAILED: Test_Suite.StoreFront_Validate_CLP.TC01_CategoryLandingPage --> PASS
+CLP got shifted from Solr to Constructor java.lang.IllegalStateException: The driver executable must exist: C:\chromedriver_win32\chromedriver.exe --> PASS
