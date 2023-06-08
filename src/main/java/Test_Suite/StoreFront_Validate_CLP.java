@@ -24,7 +24,7 @@ import java.lang.reflect.Method;
 import java.math.BigDecimal;
 
 import utilities.CaptureScreenshot;
-
+import utilities.CommonMethods;
 import utilities.LogTextFile;
 import utilities.DriverModule;
 
@@ -70,8 +70,9 @@ public class StoreFront_Validate_CLP extends DriverModule {
 
 			Reporting.test = Reporting.extent.createTest("TC01_CategoryLandingPage");
 			LogTextFile.writeTestCaseStatus("TC01_CategoryLandingPage", "Test case");
-			PrintStream text = new PrintStream(new FileOutputStream("C:\\URLs\\URL.txt", true));
-			System.setOut(text);
+
+			String filepath=CommonMethods.createURLFile();
+			
 
 			/* Invoking browser & fetching all the links */
 			driver.get(excelOperation.getTestData("Subject_Page", "StoreFront_CLP", "Data"));
@@ -80,7 +81,7 @@ public class StoreFront_Validate_CLP extends DriverModule {
 			List<WebElement> URLs = subjects.findElements(By.tagName("a"));
 			for (WebElement link : URLs) {
 				// System.out.println(link.getText()+"-->"+link.getAttribute("href"));
-				System.out.println(link.getAttribute("href"));
+				CommonMethods.AppendURLs(link.getAttribute("href"));
 			}
 			System.out.println("No of links--> " + URLs.size());
 
@@ -92,7 +93,7 @@ public class StoreFront_Validate_CLP extends DriverModule {
 			String newText = "-c2-";
 
 			try {
-				File file = new File("C:\\URLs\\URL.txt");
+				File file = new File(filepath);
 				BufferedReader reader = new BufferedReader(new FileReader(file));
 				StringBuffer stringBuffer = new StringBuffer();
 				String line;
@@ -109,14 +110,17 @@ public class StoreFront_Validate_CLP extends DriverModule {
 				bufferedWriter.close();
 				System.out.println("The URLs are updated successfully");
 
-			} catch (IOException e) {
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				Reporting.updateTestReport("Error was thrown while appending the text file " + e.getMessage(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				e.printStackTrace();
 			}
 
 			/* Hitting URLs */
 			FileReader read;
 			try {
-				read = new FileReader("C:\\URLs\\URL.txt");
+				read = new FileReader(filepath);
 				BufferedReader br = new BufferedReader(read);
 				List<String> urls = new ArrayList<String>();
 				String line;
@@ -136,10 +140,11 @@ public class StoreFront_Validate_CLP extends DriverModule {
 
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
-				Reporting.updateTestReport("CLP did not get shifted from Solr to Constructor " + e.getMessage(),
+				Reporting.updateTestReport("Error was thrown while reading the text file " + e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				e.printStackTrace();
 			}
+			CommonMethods.closeURLFile();
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
