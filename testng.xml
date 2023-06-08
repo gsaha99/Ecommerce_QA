@@ -6,11 +6,11 @@
 			<class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
 				<methods>
 					
-					<include name="TC12_.*" />
-					<include name="TC15_.*" />
-					<include name="TC22_.*" />	
-					<include name="TC24_.*" />
+					<include name="TC09_.*" />
+					<include name="TC22_.*" />
+					<include name="TC37_.*" />	
 					<include name="TC39_.*" />
+					<include name="TC40_.*" />
 					
 					
 				</methods>

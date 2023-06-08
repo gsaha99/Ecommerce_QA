@@ -3,16 +3,16 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Test_Suite.BackOfficeOrderValidation">
+      <class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
         <methods>
-          <include name="checkOrderForWiley"/>
           <include name="nameBefore"/>
+          <include name="launchBrowser"/>
           <include name="initiate"/>
           <include name="CloseBrowser"/>
-          <include name="launchBrowser"/>
           <include name="nameAfter"/>
+          <include name="TC35_EMEA_Catalog_Updates"/>
         </methods>
-      </class> <!-- Test_Suite.BackOfficeOrderValidation -->
+      </class> <!-- Test_Suite.Wiley_NA_Cart_Test_Suite -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -43,7 +43,7 @@ public class DriverModule {
 	
 	@BeforeTest
 	@Parameters("browser")
-	public void initiate(ITestContext context,@Optional("Edge") String browser)
+	public void initiate(ITestContext context,@Optional("chrome") String browser)
 	{
 		try {
 			String date = new SimpleDateFormat("ddmmyyyyhhmmss").format(new Date());			
@@ -91,6 +91,7 @@ public class DriverModule {
 			}
 			//driver= new RemoteWebDriver(new URL(URL), Caps);
 			driver=new EdgeDriver(edgeOptions);
+			//driver=new FirefoxDriver();
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));			
