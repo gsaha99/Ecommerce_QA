@@ -24,10 +24,10 @@ import java.lang.reflect.Method;
 import java.math.BigDecimal;
 
 import utilities.CaptureScreenshot;
-import utilities.EmailValidation;
+
 import utilities.LogTextFile;
 import utilities.DriverModule;
-import utilities.PaymentGateway;
+
 import utilities.Reporting;
 import utilities.StatusDetails;
 import utilities.excelOperation;
@@ -43,19 +43,10 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class StoreFront_Validate_CLP extends DriverModule {
-	// app_AGS_Repo AGS;
+	
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
-	// public static String
-	// EmailConfirmationText="//button/div[contains(text(),'Order Confirmation')]";
-	// app_Riskified_Repo RiskifiedRepo;
-
-	// @BeforeTest
-	// public void initializeRepo() {
-	// AGS = PageFactory.initElements(driver, app_AGS_Repo.class);
-	// RiskifiedRepo = PageFactory.initElements(driver, app_Riskified_Repo.class);
-	//
-	// }
+	
 	@BeforeMethod
 	public void nameBefore(Method method) {
 		System.out.println("Test case: " + method.getName() + " execution started");
