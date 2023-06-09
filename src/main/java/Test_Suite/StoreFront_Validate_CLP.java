@@ -19,7 +19,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 
@@ -31,22 +30,16 @@ import utilities.DriverModule;
 import utilities.Reporting;
 import utilities.StatusDetails;
 import utilities.excelOperation;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.BufferedReader;
+
 import java.io.*;
-import java.io.BufferedWriter;
 import java.util.List;
 import java.util.ArrayList;
 
 public class StoreFront_Validate_CLP extends DriverModule {
-	
+
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
-	
+
 	@BeforeMethod
 	public void nameBefore(Method method) {
 		System.out.println("Test case: " + method.getName() + " execution started");
@@ -58,21 +51,19 @@ public class StoreFront_Validate_CLP extends DriverModule {
 	}
 
 	/*
-	 * @Description: Changing the CLP from C to C2
-	 * 
+	 * @Description: Validating the CLP URL from c to c2
 	 * @Date: 29/05/23
 	 */
 	@Test
-	public void TC01_CategoryLandingPage() throws IOException, InterruptedException {
+	public void TC01_CategoryLandingPage() throws Exception {
 
-		/* Printing the output in text file */
+		/* Printing the URLs in text file */
 		try {
 
 			Reporting.test = Reporting.extent.createTest("TC01_CategoryLandingPage");
 			LogTextFile.writeTestCaseStatus("TC01_CategoryLandingPage", "Test case");
 
-			String filepath=CommonMethods.createURLFile();
-			
+			CommonMethods.createURLFile();
 
 			/* Invoking browser & fetching all the links */
 			driver.get(excelOperation.getTestData("Subject_Page", "StoreFront_CLP", "Data"));
@@ -80,78 +71,18 @@ public class StoreFront_Validate_CLP extends DriverModule {
 			WebElement subjects = driver.findElement(By.className("section-description"));
 			List<WebElement> URLs = subjects.findElements(By.tagName("a"));
 			for (WebElement link : URLs) {
-				// System.out.println(link.getText()+"-->"+link.getAttribute("href"));
+
 				CommonMethods.AppendURLs(link.getAttribute("href"));
 			}
-			System.out.println("No of links--> " + URLs.size());
 
-			/* Adding locale & Changing c to C2 */
-			String oldText1 = excelOperation.getTestData("URL_without_locale", "StoreFront_CLP", "Data");
-			String newText1 = excelOperation.getTestData("URL_with_locale", "StoreFront_CLP", "Data");
-
-			String oldText = "-c-";
-			String newText = "-c2-";
-
-			try {
-				File file = new File(filepath);
-				BufferedReader reader = new BufferedReader(new FileReader(file));
-				StringBuffer stringBuffer = new StringBuffer();
-				String line;
-
-				while ((line = reader.readLine()) != null) {
-					stringBuffer.append(line.replaceAll(oldText1, newText1).replace(oldText, newText) + "\n");
-				}
-				reader.close();
-
-				FileWriter writer = new FileWriter(file);
-				BufferedWriter bufferedWriter = new BufferedWriter(writer);
-
-				bufferedWriter.write(stringBuffer.toString());
-				bufferedWriter.close();
-				System.out.println("The URLs are updated successfully");
-
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				Reporting.updateTestReport("Error was thrown while appending the text file " + e.getMessage(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				e.printStackTrace();
-			}
-
-			/* Hitting URLs */
-			FileReader read;
-			try {
-				read = new FileReader(filepath);
-				BufferedReader br = new BufferedReader(read);
-				List<String> urls = new ArrayList<String>();
-				String line;
-				while ((line = br.readLine()) != null) {
-					urls.add(line);
-				}
-				br.close();
-				read.close();
-
-				for (String url : urls) {
-					driver.get(url);
-					Reporting.updateTestReport("CLP got shifted from Solr to Constructor " + url,
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-
-					Thread.sleep(4000);
-				}
-
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				Reporting.updateTestReport("Error was thrown while reading the text file " + e.getMessage(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				e.printStackTrace();
-			}
+			CommonMethods.ChangeURL(); 
+			CommonMethods.hittingURL();
 			CommonMethods.closeURLFile();
 
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			Reporting.updateTestReport("CLP did not get shifted from Solr to Constructor " + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			e.printStackTrace();
 		}
 	}
-
 }
