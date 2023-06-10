@@ -30,6 +30,7 @@ import utilities.PaymentGateway;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
+import utilities.WordDocumentReport;
 import utilities.excelOperation;
 
 public class AGS_Test_Suite extends DriverModule {
@@ -74,6 +75,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC01_Anonymous_User_Registration");
 			LogTextFile.writeTestCaseStatus("TC01_Anonymous_User_Registration", "Test case");
+			WordDocumentReport.writeTestcaseName("TC01_Anonymous_User_Registration");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(AGS_Subscription_URL_DEV);
 			driver.get(AGS_Subscription_URL_UAT3);
@@ -201,6 +203,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC02_User_Submit_Order_Monthly");
 			LogTextFile.writeTestCaseStatus("TC02_User_Submit_Order_Monthly", "Test case");
+			WordDocumentReport.writeTestcaseName("TC02_User_Submit_Order_Monthly");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(AGS_Subscription_URL_DEV);
 			driver.get(AGS_Subscription_URL_UAT3);
@@ -320,6 +323,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC03_Standalone_Registration_and_Login");
 			LogTextFile.writeTestCaseStatus("TC03_Standalone_Registration_and_Login", "Test case");
+			WordDocumentReport.writeTestcaseName("TC03_Standalone_Registration_and_Login");
 			driver.get(AGS_Subscription_URL_DEV);
 			driver.get(AGS_Subscription_URL_UAT3);
 			driver.get(AGS_Login_URL);
@@ -374,6 +378,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC04_Reset_Password_My_Account");
 			LogTextFile.writeTestCaseStatus("TC04_Reset_Password_My_Account", "Test case");
+			WordDocumentReport.writeTestcaseName("TC04_Reset_Password_My_Account");
 			driver.get(AGS_Subscription_URL_DEV);
 			driver.get(AGS_Subscription_URL_UAT3);
 			driver.get(AGS_Login_URL);
@@ -410,6 +415,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC05_ResetPasswordFromLoginPage");
 			LogTextFile.writeTestCaseStatus("TC05_ResetPasswordFromLoginPage", "Test case");
+			WordDocumentReport.writeTestcaseName("TC05_ResetPasswordFromLoginPage");
 			driver.get(AGS_Subscription_URL_DEV);
 			driver.get(AGS_Subscription_URL_UAT3);
 			driver.get(AGS_Login_URL);
@@ -440,6 +446,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC06_Zero_Dollar_Flow");
 			LogTextFile.writeTestCaseStatus("TC06_Zero_Dollar_Flow", "Test case");
+			WordDocumentReport.writeTestcaseName("TC06_Zero_Dollar_Flow");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(AGS_Subscription_URL_DEV);
 			driver.get(AGS_Subscription_URL_UAT3);
@@ -509,6 +516,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC07_Verify_tax_Non_US_Address");
 			LogTextFile.writeTestCaseStatus("TC07_Verify_tax_Non_US_Address", "Test case");
+			WordDocumentReport.writeTestcaseName("TC07_Verify_tax_Non_US_Address");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(AGS_Subscription_URL_DEV);
 			driver.get(AGS_Subscription_URL_UAT3);
@@ -633,6 +641,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC08_Place_Order_With_Discount_Code");
 			LogTextFile.writeTestCaseStatus("TC08_Place_Order_With_Discount_Code", "Test case");
+			WordDocumentReport.writeTestcaseName("TC08_Place_Order_With_Discount_Code");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(AGS_Subscription_URL_DEV);
 			driver.get(AGS_Subscription_URL_UAT3);
@@ -754,6 +763,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC09_Place_Order_With_Existing_User");
 			LogTextFile.writeTestCaseStatus("TC09_Place_Order_With_Existing_User", "Test case");
+			WordDocumentReport.writeTestcaseName("TC09_Place_Order_With_Existing_User");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(AGS_Subscription_URL_DEV);
 			driver.get(AGS_Subscription_URL_UAT3);
@@ -869,6 +879,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC10_Place_Order_Non_US_Address");
 			LogTextFile.writeTestCaseStatus("TC10_Place_Order_Non_US_Address", "Test case");
+			WordDocumentReport.writeTestcaseName("TC10_Place_Order_Non_US_Address");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(AGS_Subscription_URL_DEV);
 			driver.get(AGS_Subscription_URL_UAT3);
@@ -992,6 +1003,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC11_Edit_Profile");
 			LogTextFile.writeTestCaseStatus("TC11_Edit_Profile", "Test case");
+			WordDocumentReport.writeTestcaseName("TC11_Edit_Profile");
 			driver.get(AGS_Subscription_URL_DEV);
 			driver.get(AGS_Subscription_URL_UAT3);
 			driver.get(AGS_Login_URL);
@@ -1029,6 +1041,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC12_Edit_Billing_Address");
 			LogTextFile.writeTestCaseStatus("TC12_Edit_Billing_Address", "Test case");
+			WordDocumentReport.writeTestcaseName("TC12_Edit_Billing_Address");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(AGS_Subscription_URL_DEV);
 			driver.get(AGS_Subscription_URL_UAT3);
@@ -1088,6 +1101,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC13_Edit_Card_Details");
 			LogTextFile.writeTestCaseStatus("TC13_Edit_Card_Details", "Test case");
+			WordDocumentReport.writeTestcaseName("TC13_Edit_Card_Details");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(AGS_Subscription_URL_DEV);
 			driver.get(AGS_Subscription_URL_UAT3);
@@ -1152,6 +1166,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC14_Manage_Subscription_Auto_Renew_Toggle_validation");
 			LogTextFile.writeTestCaseStatus("TC14_Manage_Subscription_Auto_Renew_Toggle_validation", "Test case");
+			WordDocumentReport.writeTestcaseName("TC14_Manage_Subscription_Auto_Renew_Toggle_validation");
 			driver.get(AGS_Subscription_URL_DEV);
 			driver.get(AGS_Subscription_URL_UAT3);
 			driver.get(AGS_Login_URL);
@@ -1189,6 +1204,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC15_Riskified_Declined_Order");
 			LogTextFile.writeTestCaseStatus("TC15_Riskified_Declined_Order", "Test case");
+			WordDocumentReport.writeTestcaseName("TC15_Riskified_Declined_Order");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(AGS_Subscription_URL_DEV);
 			driver.get(AGS_Subscription_URL_UAT3);
@@ -1325,6 +1341,7 @@ public class AGS_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC16_Open_Homepage");
 			LogTextFile.writeTestCaseStatus("TC16_Open_Homepage", "Test case");
+			WordDocumentReport.writeTestcaseName("TC16_Open_Homepage");
 			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(20));
 			driver.get(AGS_Subscription_URL_DEV);
 			driver.get(AGS_Subscription_URL_UAT3);

@@ -87,8 +87,8 @@ public class DriverModule {
 				Caps.setCapability("browser", browser);
 				Caps.setCapability("browser_version", "110");
 			}
-			driver= new RemoteWebDriver(new URL(URL), Caps);
-			//driver=new EdgeDriver(edgeOptions);
+			//driver= new RemoteWebDriver(new URL(URL), Caps);
+			driver=new EdgeDriver(edgeOptions);
 			//driver=new FirefoxDriver();
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
@@ -103,6 +103,7 @@ public class DriverModule {
 			Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_In_"+browserName+"_"+date,
 					browserName,browserVersion,OS_Name);
 			LogTextFile.createTodayLog(testSuiteName+"_"+date,browserName,browserVersion,OS_Name);
+			WordDocumentReport.createWordDocumentReport(testSuiteName+"_"+date, browserName, browserVersion, OS_Name);
 					
 		}
 		catch(Exception e){ System.out.println(e.getMessage());}
@@ -116,6 +117,7 @@ public class DriverModule {
 
 		Reporting.summaryEndReport();
 		LogTextFile.closeLogFile();
+		WordDocumentReport.closeWordFile();
 		driver.close();
 		driver.quit();
 

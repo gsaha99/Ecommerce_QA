@@ -16,12 +16,12 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 
 public class WordDocumentReport {
-	public static XWPFDocument documentReport;
-	public static XWPFRun run;
-	public static XWPFParagraph paragraph;
+	public static XWPFDocument documentReport=new XWPFDocument();
+	public static XWPFParagraph paragraph=documentReport.createParagraph();
+	public static XWPFRun run=paragraph.createRun();
 	public static FileOutputStream fos;
 	
-	public static String CreateTodayReportFolder()
+	/*public static String CreateTodayReportFolder()
 	{
 		String dateName = new SimpleDateFormat("yyyyMMdd").format(new Date());
 		String path = System.getProperty("user.dir")+"\\Result\\"+dateName;
@@ -31,7 +31,7 @@ public class WordDocumentReport {
 			folder.mkdir();
 		}
 		return path;
-	}
+	}*/
 	
 	
 	
@@ -40,15 +40,8 @@ public class WordDocumentReport {
 	 */
 	public static void createWordDocumentReport(String suiteName,String browserName,String browserVersion,String OS_Name) {
 		try {
-			String path=CreateTodayReportFolder();
+			String path=Reporting.CreateTodayReportFolder();
 			fos=new FileOutputStream(path+"\\"+suiteName+"_Report.docx");
-			
-			//Creating a blank document
-			documentReport=new XWPFDocument();
-			
-			paragraph=documentReport.createParagraph();
-			
-			run=paragraph.createRun();
 			
 			String Hostname = SystemUtils.getHostName();
 			String Username = SystemUtils.getUserName();
@@ -76,9 +69,6 @@ public class WordDocumentReport {
 			run.setText(suiteName+" Regression Suite: -");
 			run.addCarriageReturn();
 			
-			
-			
-			
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -91,15 +81,6 @@ public class WordDocumentReport {
 	public static void writeTestCaseStatus(String TCName,String status,String SS_path) {
 		try {
 			
-			if(status.equalsIgnoreCase("Test case")) {
-				run.addCarriageReturn();
-				run.addCarriageReturn();
-				run.setText(TCName);
-				run.setText(" --> Execution started");
-				run.addCarriageReturn();
-			}
-			else  {
-				//System.out.println(SS_path);
 				FileInputStream imageData=new FileInputStream(SS_path);
 				int imageType=XWPFDocument.PICTURE_TYPE_PNG;
 				//String imageFileName=SS_path.split("/")[-1];
@@ -112,16 +93,28 @@ public class WordDocumentReport {
 				run.addCarriageReturn();
 				run.setText("--------------------------------------------------------------------");
 				run.addCarriageReturn();
-			}
-			
-			
-			
 			
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
 		
+	}
+	
+	/*
+	 * @Description: Indicates the testcase starting and ending
+	 */
+	public static void writeTestcaseName(String testCaseName) {
+		try {
+			run.addCarriageReturn();
+			run.addCarriageReturn();
+			run.setText(testCaseName);
+			run.setText(" --> Execution started");
+			run.addCarriageReturn();
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	/*
@@ -134,7 +127,10 @@ public class WordDocumentReport {
 			documentReport.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
+	
+	
 
 }
