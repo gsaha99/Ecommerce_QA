@@ -57,7 +57,7 @@ public class StoreFront_Validate_CLP extends DriverModule {
 	@Test
 	public void TC01_CategoryLandingPage() throws Exception {
 
-		/* Printing the URLs in text file */
+		
 		try {
 
 			Reporting.test = Reporting.extent.createTest("TC01_CategoryLandingPage");
@@ -65,7 +65,7 @@ public class StoreFront_Validate_CLP extends DriverModule {
 
 			CommonMethods.createURLFile();
 
-			/* Invoking browser & fetching all the links */
+			/*Invoking browser & fetching all the links*/
 			driver.get(excelOperation.getTestData("Subject_Page", "StoreFront_CLP", "Data"));
 			driver.manage().window().maximize();
 			WebElement subjects = driver.findElement(By.className("section-description"));
@@ -75,7 +75,7 @@ public class StoreFront_Validate_CLP extends DriverModule {
 				CommonMethods.AppendURLs(link.getAttribute("href"));
 			}
 
-			CommonMethods.ChangeURL(); 
+			CommonMethods.ChangeURL();
 			CommonMethods.hittingURL();
 			CommonMethods.closeURLFile();
 

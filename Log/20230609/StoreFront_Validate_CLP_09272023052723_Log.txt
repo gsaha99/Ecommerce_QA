@@ -1,0 +1,8 @@
+StoreFront_Validate_CLP_09272023052723 Regression Suite: -
+
+
+TC01_CategoryLandingPage --> Execution started
+
+Error was thrown while appending the text file  --> FAIL
+Error while opening the URL (The system cannot find the path specified) --> FAIL
+CLP did not get shifted from Solr to Constructor Cannot invoke "java.io.BufferedWriter.close()" because "utilities.CommonMethods.wr" is null --> FAIL
