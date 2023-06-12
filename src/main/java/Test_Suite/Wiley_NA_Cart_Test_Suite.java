@@ -24,6 +24,7 @@ import utilities.DriverModule;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
+import utilities.WordDocumentReport;
 import utilities.excelOperation;
 
 import java.io.IOException;
@@ -75,6 +76,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC01_Digital_Product_Purchase_New_User");
 			LogTextFile.writeTestCaseStatus("TC01_Digital_Product_Purchase_New_User", "Test case");
+			WordDocumentReport.writeTestcaseName("TC01_Digital_Product_Purchase_New_User");
 			driver.get(wiley.wileyURLConcatenation("TC01", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -238,6 +240,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC02_Digital_productpurchase_ForExistingUser");
 			LogTextFile.writeTestCaseStatus("TC02_Digital_productpurchase_ForExistingUser", "Test case");
+			WordDocumentReport.writeTestcaseName("TC02_Digital_productpurchase_ForExistingUser");
 			driver.get(wiley.wileyURLConcatenation("TC02", "WILEY_NA_Cart_Test_Data", "URL"));
 
 			driver.navigate().refresh();
@@ -399,6 +402,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC03_Physical_productpurchase_ForNewUser");
 			LogTextFile.writeTestCaseStatus("TC03_Physical_productpurchase_ForNewUser", "Test case");
+			WordDocumentReport.writeTestcaseName("TC03_Physical_productpurchase_ForNewUser");
 			driver.get(wiley.wileyURLConcatenation("TC03", "WILEY_NA_Cart_Test_Data", "URL"));
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.navigate().refresh();
@@ -576,6 +580,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC04_Physical_Product_Purchase_Guest_User");
 			LogTextFile.writeTestCaseStatus("TC04_Physical_Product_Purchase_Guest_User", "Test case");
+			WordDocumentReport.writeTestcaseName("TC04_Physical_Product_Purchase_Guest_User");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC04", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -744,6 +749,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC05_Physical_productpurchase_ForExistingUser");
 			LogTextFile.writeTestCaseStatus("TC05_Physical_productpurchase_ForExistingUser", "Test case");
+			WordDocumentReport.writeTestcaseName("TC05_Physical_productpurchase_ForExistingUser");
 			driver.get(wiley.wileyURLConcatenation("TC05", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -883,6 +889,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC06_Mixed_productpurchase_ForExistingUser");
 			LogTextFile.writeTestCaseStatus("TC06_Mixed_productpurchase_ForExistingUser", "Test case");
+			WordDocumentReport.writeTestcaseName("TC06_Mixed_productpurchase_ForExistingUser");
 			driver.get(wiley.wileyURLConcatenation("TC06", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -1053,6 +1060,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC07_Mixed_Product_Some_Stock_New_User");
 			LogTextFile.writeTestCaseStatus("TC07_Mixed_Product_Some_Stock_New_User", "Test case");
+			WordDocumentReport.writeTestcaseName("TC07_Mixed_Product_Some_Stock_New_User");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC07", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -1258,6 +1266,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC08__Mixed_Product_No_Stock_Guest_User");
 			LogTextFile.writeTestCaseStatus("TC08__Mixed_Product_No_Stock_Guest_User", "Test case");
+			WordDocumentReport.writeTestcaseName("TC08_Mixed_Product_No_Stock_Guest_User");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC08", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -1459,6 +1468,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC09_Higher_Education_Digitalproductpurchase_ForNewUser");
 			LogTextFile.writeTestCaseStatus("TC09_Higher_Education_Digitalproductpurchase_ForNewUser", "Test case");
+			WordDocumentReport.writeTestcaseName("TC09_Higher_Education_Digitalproductpurchase_ForNewUser");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC09", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -1634,6 +1644,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC10_Shipping_And_BillingAddresses_Same");
 			LogTextFile.writeTestCaseStatus("TC10_Shipping_And_BillingAddresses_Same", "Test case");
+			WordDocumentReport.writeTestcaseName("TC10_Shipping_And_BillingAddresses_Same");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC10", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -1808,6 +1819,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC11_Shipping_And_BillingAddresses_different");
 			LogTextFile.writeTestCaseStatus("TC11_Shipping_And_BillingAddresses_different", "Test case");
+			WordDocumentReport.writeTestcaseName("TC11_Shipping_And_BillingAddresses_different");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC11", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -2024,6 +2036,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC12_Product_having_ADD_Promotion");
 			LogTextFile.writeTestCaseStatus("TC12_Product_having_ADD_Promotion", "Test case");
+			WordDocumentReport.writeTestcaseName("TC12_Product_having_ADD_Promotion");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC12", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -2220,6 +2233,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC13_eBook_Rental_product_Purchase");
 			LogTextFile.writeTestCaseStatus("TC13_eBook_Rental_product_Purchase", "Test case");
+			WordDocumentReport.writeTestcaseName("TC13_eBook_Rental_product_Purchase");
 			driver.get(wiley.wileyURLConcatenation("TC13", "WILEY_NA_Cart_Test_Data", "URL"));
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
@@ -2389,6 +2403,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC14_Textbook_Rental_product_purchase");
 			LogTextFile.writeTestCaseStatus("TC14_Textbook_Rental_product_purchase", "Test case");
+			WordDocumentReport.writeTestcaseName("TC14_Textbook_Rental_product_purchase");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC14", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -2570,6 +2585,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC15_eBundle_product_purchase");
 			LogTextFile.writeTestCaseStatus("TC15_eBundle_product_purchase", "Test case");
+			WordDocumentReport.writeTestcaseName("TC15_eBundle_product_purchase");
 			driver.get(wiley.wileyURLConcatenation("TC15", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -2739,6 +2755,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC16_Higher_Education_Physical_product_purchase");
 			LogTextFile.writeTestCaseStatus("TC16_Higher_Education_Physical_product_purchase", "Test case");
+			WordDocumentReport.writeTestcaseName("TC16_Higher_Education_Physical_product_purchase");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC16", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -2918,6 +2935,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC17_Purchase_with_Coupon_Discount");
 			LogTextFile.writeTestCaseStatus("TC17_Purchase_with_Coupon_Discount", "Test case");
+			WordDocumentReport.writeTestcaseName("TC17_Purchase_with_Coupon_Discount");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC17", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -3135,6 +3153,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest(" TC18_Tax_Recalculation");
 			LogTextFile.writeTestCaseStatus("TC18_Tax_Recalculation", "Test case");
+			WordDocumentReport.writeTestcaseName("TC18_Tax_Recalculation");
 			driver.get(wiley.wileyURLConcatenation("TC18", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -3272,6 +3291,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC19_Country_Restriction_Validation");
 			LogTextFile.writeTestCaseStatus("TC19_Country_Restriction_Validation", "Test case");
+			WordDocumentReport.writeTestcaseName("TC19_Country_Restriction_Validation");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC19", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -3357,6 +3377,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC20_New_user_tax_for_physical_product");
 			LogTextFile.writeTestCaseStatus("TC20_New_user_tax_for_physical_product", "Test case");
+			WordDocumentReport.writeTestcaseName("TC20_New_user_tax_for_physical_product");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC20", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -3533,6 +3554,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC21_Existing_user_tax_for_physical_product");
 			LogTextFile.writeTestCaseStatus("TC21_Existing_user_tax_for_physical_product", "Test case");
+			WordDocumentReport.writeTestcaseName("TC21_Existing_user_tax_for_physical_product");
 			driver.get(wiley.wileyURLConcatenation("TC21", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -3672,6 +3694,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC22_New_User_Tax_for_Digital_product");
 			LogTextFile.writeTestCaseStatus("TC22_New_User_Tax_for_Digital_product", "Test case");
+			WordDocumentReport.writeTestcaseName("TC22_New_User_Tax_for_Digital_product");
 			driver.get(wiley.wileyURLConcatenation("TC22", "WILEY_NA_Cart_Test_Data", "URL"));
 
 			driver.navigate().refresh();
@@ -3842,6 +3865,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC23_Existing_User_Tax_for_Digital_Product");
 			LogTextFile.writeTestCaseStatus("TC23_Existing_User_Tax_for_Digital_Product", "Test case");
+			WordDocumentReport.writeTestcaseName("TC23_Existing_User_Tax_for_Digital_Product");
 			driver.get(wiley.wileyURLConcatenation("TC23", "WILEY_NA_Cart_Test_Data", "URL"));			
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -3998,6 +4022,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC24_Verify_Shipping_Methods_for_POD_Products");
 			LogTextFile.writeTestCaseStatus("TC24_Verify_Shipping_Methods_for_POD_Products", "Test case");
+			WordDocumentReport.writeTestcaseName("TC24_Verify_Shipping_Methods_for_POD_Products");
 			driver.get(wiley.wileyURLConcatenation("TC24", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -4189,6 +4214,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 			Reporting.test = Reporting.extent.createTest("TC25_Searching_by_Keyword_Rguroo");
 			LogTextFile.writeTestCaseStatus("TC25_Searching_by_Keyword_Rguroo", "Test case");
+			WordDocumentReport.writeTestcaseName("TC25_Searching_by_Keyword_Rguroo");
 			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
 			driver.get(wiley.wileyURLConcatenation("TC25", "WILEY_NA_Cart_Test_Data", "URL"));
 			try {
@@ -4216,6 +4242,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC28_Cart_Update_from_Digital_to_Phygital");
 			LogTextFile.writeTestCaseStatus("TC28_Cart_Update_from_Digital_to_Phygital", "Test case");
+			WordDocumentReport.writeTestcaseName("TC28_Cart_Update_from_Digital_to_Phygital");
 			driver.get(wiley.wileyURLConcatenation("TC28", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -4310,6 +4337,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 			Reporting.test = Reporting.extent.createTest("TC29_Cart_Page_UI_Validation");
 			LogTextFile.writeTestCaseStatus("TC29_Cart_Page_UI_Validation", "Test case");
+			WordDocumentReport.writeTestcaseName("TC29_Cart_Page_UI_Validation");
 			driver.get(wiley.wileyURLConcatenation("TC29", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.clickOnAddToCartButton(driver);
@@ -4355,6 +4383,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC30_Cart_Merge_Functionality");
 			LogTextFile.writeTestCaseStatus("TC30_Cart_Merge_Functionality", "Test case");
+			WordDocumentReport.writeTestcaseName("TC30_Cart_Merge_Functionality");
 			driver.get(wiley.wileyURLConcatenation("TC30", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -4430,6 +4459,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC31_Zero_Dollar_Flow_For_Digital_Product");
 			LogTextFile.writeTestCaseStatus("TC31_Zero_Dollar_Flow_For_Digital_Product", "Test case");
+			WordDocumentReport.writeTestcaseName("TC31_Zero_Dollar_Flow_For_Digital_Product");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC31", "WILEY_NA_Cart_Test_Data", "URL"));			
 			driver.navigate().refresh();
@@ -4577,6 +4607,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC32_Preorder_Backorder_Flow_With_Print_Pdf_Page");
 			LogTextFile.writeTestCaseStatus("TC32_Preorder_Backorder_Flow_With_Print_Pdf_Page", "Test case");
+			WordDocumentReport.writeTestcaseName("TC32_Preorder_Backorder_Flow_With_Print_Pdf_Page");
 			//This is the pdp page url for backorder product
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC32", "WILEY_NA_Cart_Test_Data", "URL"));
@@ -4798,6 +4829,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 			Reporting.test = Reporting.extent.createTest("TC33_Forgot_Password_Functionality");
 			LogTextFile.writeTestCaseStatus("TC33_Forgot_Password_Functionality", "Test case");
+			WordDocumentReport.writeTestcaseName("TC33_Forgot_Password_Functionality");
 			driver.get(wiley.wileyURLConcatenation("TC33", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.clickOnAddToCartButton(driver);
@@ -4875,6 +4907,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC26_Login_Page_Validation");
 			LogTextFile.writeTestCaseStatus("TC26_Login_Page_Validation", "Test case");
+			WordDocumentReport.writeTestcaseName("TC26_Login_Page_Validation");
 			driver.get(wiley.wileyURLConcatenation("TC26", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -4968,6 +5001,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC27_Validate_AEM_Header_Footer");
 			LogTextFile.writeTestCaseStatus("TC27_Validate_AEM_Header_Footer", "Test case");
+			WordDocumentReport.writeTestcaseName("TC27_Validate_AEM_Header_Footer");
 			driver.get(wiley.wileyURLConcatenation("TC27", "WILEY_NA_Cart_Test_Data", "URL"));
 			wiley.checkShopLinkInHomePageHeader();
 			wiley.checkResearchLibrariesLinkInHomePageHeader();
@@ -4996,6 +5030,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC34_Verify_VETCONSULT_Purchase_Option_on_PDPpage");
 			LogTextFile.writeTestCaseStatus("TC34_Verify_VETCONSULT_Purchase_Option_on_PDPpage", "Test case");
+			WordDocumentReport.writeTestcaseName("TC34_Verify_VETCONSULT_Purchase_Option_on_PDPpage");
 			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(15));
 			driver.get(wiley.wileyURLConcatenation("TC34", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -5060,6 +5095,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC35_EMEA_Catalog_Updates");
 			LogTextFile.writeTestCaseStatus("TC35_EMEA_Catalog_Updates", "Test case");
+			WordDocumentReport.writeTestcaseName("TC35_EMEA_Catalog_Updates");
 			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(30));
 			String[] regions=excelOperation.getTestData("TC35", "WILEY_NA_Cart_Test_Data", "URL").split(",");
 			String[] products=excelOperation.getTestData("TC35", "WILEY_NA_Cart_Test_Data", "ISBN").split(",");
@@ -5144,6 +5180,7 @@ public void TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP() throws
 	try {
 		Reporting.test = Reporting.extent.createTest("TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP");
 		LogTextFile.writeTestCaseStatus("TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP", "Test case");
+		WordDocumentReport.writeTestcaseName("TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP");
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		String[] regions=excelOperation.getTestData("TC36", "WILEY_NA_Cart_Test_Data", "URL").split(",");
 		String[] products=excelOperation.getTestData("TC36", "WILEY_NA_Cart_Test_Data", "ISBN").split(",");
@@ -5206,6 +5243,7 @@ public void TC37_Generic_info_hover_text_EBook_EBookRental_PDP_And_Price_Validat
 	try {
 		Reporting.test = Reporting.extent.createTest("TC37_Generic_info_hover_text_EBook_EBookRental_PDP");
 		LogTextFile.writeTestCaseStatus("TC37_Generic_info_hover_text_EBook_EBookRental_PDP", "Test case");
+		WordDocumentReport.writeTestcaseName("TC37_Generic_info_hover_text_EBook_EBookRental_PDP_And_Price_Validation");
 		BigDecimal priceOfEBook;
 		BigDecimal priceOfEBookRental;
 		String[] regions=excelOperation.getTestData("TC37", "WILEY_NA_Cart_Test_Data", "URL").split(",");
@@ -5283,6 +5321,7 @@ public void TC38_Validate_Payment_Status_For_Declined_card() throws IOException{
 	try {
 		Reporting.test = Reporting.extent.createTest("TC38_Validate_Payment_Status_For_Declined_card");
 		LogTextFile.writeTestCaseStatus("TC38_Validate_Payment_Status_For_Declined_card", "Test case");
+		WordDocumentReport.writeTestcaseName("TC38_Validate_Payment_Status_For_Declined_card");
 		driver.get(wiley.wileyURLConcatenation("TC38", "WILEY_NA_Cart_Test_Data", "URL"));
 		driver.navigate().refresh();
 		wiley.clickOnAddToCartButton(driver);
@@ -5374,6 +5413,7 @@ public void TC39_Riskified_Declined_Order_With_Last_Name_Decline() throws IOExce
 	try {
 		Reporting.test = Reporting.extent.createTest("TC39_Riskified_Declined_Order_With_Last_Name_Decline");
 		LogTextFile.writeTestCaseStatus("TC39_Riskified_Declined_Order_With_Last_Name_Decline", "Test case");
+		WordDocumentReport.writeTestcaseName("TC39_Riskified_Declined_Order_With_Last_Name_Decline");
 		driver.get(wiley.wileyURLConcatenation("TC39", "WILEY_NA_Cart_Test_Data", "URL"));
 		driver.navigate().refresh();
 		BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -5538,6 +5578,7 @@ public void TC40_Shipping_Charge_For_Multiple_Products() throws IOException{
 	try {
 		Reporting.test = Reporting.extent.createTest("TC40_Shipping_Charge_For_Multiple_Products");
 		LogTextFile.writeTestCaseStatus("TC40_Shipping_Charge_For_Multiple_Products", "Test case");
+		WordDocumentReport.writeTestcaseName("TC40_Shipping_Charge_For_Multiple_Products");
 		driver.get(wiley.wileyURLConcatenation("TC40", "WILEY_NA_Cart_Test_Data", "URL"));
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 		driver.navigate().refresh();
@@ -5676,6 +5717,7 @@ public void TC41_Create_Account_Funtionality_With_Wrong_Password_Formats() throw
 	try {
 		Reporting.test = Reporting.extent.createTest("TC41_Create_Account_Funtionality_With_Wrong_Password_Formats");
 		LogTextFile.writeTestCaseStatus("TC41_Create_Account_Funtionality_With_Wrong_Password_Formats", "Test case");
+		WordDocumentReport.writeTestcaseName("TC41_Create_Account_Funtionality_With_Wrong_Password_Formats");
 		driver.get(wiley.wileyURLConcatenation("TC41", "WILEY_NA_Cart_Test_Data", "URL"));
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 		driver.navigate().refresh();
@@ -5777,6 +5819,7 @@ public void TC42_Purchase_with_Order_Level_Discount() throws IOException{
 	try {
 		Reporting.test = Reporting.extent.createTest("TC42_Purchase_with_Order_Level_Discount");
 		LogTextFile.writeTestCaseStatus("TC42_Purchase_with_Order_Level_Discount", "Test case");
+		WordDocumentReport.writeTestcaseName("TC42_Purchase_with_Order_Level_Discount");
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
 		driver.get(wiley.wileyURLConcatenation("TC42", "WILEY_NA_Cart_Test_Data", "URL"));
 		driver.navigate().refresh();
@@ -6000,6 +6043,7 @@ public void TC43_Forgot_Password_Page_Password_Criteria_Negative_Scenarios() thr
 	try {
 		Reporting.test = Reporting.extent.createTest("TC43_Forgot_Password_Page_Password_Criteria_Negative_Scenarios");
 		LogTextFile.writeTestCaseStatus("TC43_Forgot_Password_Page_Password_Criteria_Negative_Scenarios", "Test case");
+		WordDocumentReport.writeTestcaseName("TC43_Forgot_Password_Page_Password_Criteria_Negative_Scenarios");
 		driver.get(wiley.wileyURLConcatenation("TC43", "WILEY_NA_Cart_Test_Data", "URL"));
 		driver.navigate().refresh();
 		wiley.clickOnAddToCartButton(driver);
@@ -6096,6 +6140,7 @@ public void TC44_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration
 	try {
 		Reporting.test = Reporting.extent.createTest("TC44_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page");
 		LogTextFile.writeTestCaseStatus("TC44_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page", "Test case");
+		WordDocumentReport.writeTestcaseName("TC44_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page");
 		driver.get(wiley.wileyURLConcatenation("TC44", "WILEY_NA_Cart_Test_Data", "URL"));
 		driver.navigate().refresh();
 		wiley.clickOnAddToCartButton(driver);

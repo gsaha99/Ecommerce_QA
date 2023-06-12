@@ -87,8 +87,8 @@ public class DriverModule {
 				Caps.setCapability("browser", browser);
 				Caps.setCapability("browser_version", "110");
 			}
-			//driver= new RemoteWebDriver(new URL(URL), Caps);
-			driver=new EdgeDriver(edgeOptions);
+			driver= new RemoteWebDriver(new URL(URL), Caps);
+			//driver=new EdgeDriver(edgeOptions);
 			//driver=new FirefoxDriver();
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();

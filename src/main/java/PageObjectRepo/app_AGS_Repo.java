@@ -585,7 +585,7 @@ public class app_AGS_Repo {
 			Reporting.updateTestReport("Payment details was submitted successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("Payment details couldn't be submitted with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			Reporting.updateTestReport("Payment details couldn't be submitted with error message "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
 
