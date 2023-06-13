@@ -1,5 +1,0 @@
-StoreFront_Validate_CLP_29492023124912 Regression Suite: -
-
-
-TC01_Anonymous_User_Registration --> Execution started
-

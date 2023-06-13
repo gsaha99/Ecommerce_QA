@@ -67,6 +67,8 @@ public class DriverModule {
 			
 			Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_In_"+browserName+"_"+date,
 					browserName,browserVersion,OS_Name);
+			
+			// log file code 
 			LogTextFile.createTodayLog(testSuiteName+"_"+date,browserName,browserVersion,OS_Name);
 		}
 				
