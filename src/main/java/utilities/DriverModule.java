@@ -15,6 +15,7 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.chromium.ChromiumDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -52,7 +53,13 @@ public class DriverModule {
 			//Check if parameter passed as 'chrome'
 			else if(browser.equalsIgnoreCase("chrome")) driver = new ChromeDriver();
 		
-			else if(browser.equalsIgnoreCase("Edge")) driver=new EdgeDriver();
+			else if(browser.equalsIgnoreCase("Edge")) 
+			{
+				EdgeOptions edgeOptions = new EdgeOptions();
+				edgeOptions.addArguments("InPrivate");
+				edgeOptions.addArguments("--remote-allow-origins=*");
+				driver=new EdgeDriver(edgeOptions);
+			}
 			
 
 			driver.manage().window().maximize();

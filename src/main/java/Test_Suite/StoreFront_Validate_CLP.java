@@ -67,9 +67,10 @@ public class StoreFront_Validate_CLP extends DriverModule {
 
 			/* Invoking browser & fetching all the links */
 			driver.get(excelOperation.getTestData("Subject_Page", "StoreFront_CLP", "Data"));
-			driver.manage().window().maximize();
+
 			WebElement subjects = driver.findElement(By.className("section-description"));
 			List<WebElement> URLs = subjects.findElements(By.tagName("a"));
+			
 			for (WebElement link : URLs) {
 
 				CommonMethods.AppendURLs(link.getAttribute("href"));
