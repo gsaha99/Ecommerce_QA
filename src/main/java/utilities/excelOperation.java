@@ -54,4 +54,14 @@ public class excelOperation {
 			}
 	}
 	
+	/*@Author : Shafati Ali 
+	 * @Description : It will fetch data from Excel using POI
+	 * @Parameter
+	 */
+	
+	public static void getTestDatPOI()
+	{
+		
+	}
 }
+
