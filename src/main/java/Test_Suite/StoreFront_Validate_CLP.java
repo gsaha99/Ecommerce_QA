@@ -57,7 +57,7 @@ public class StoreFront_Validate_CLP extends DriverModule {
 	@Test
 	public void TC01_CategoryLandingPage() throws Exception {
 
-		
+
 		try {
 
 			Reporting.test = Reporting.extent.createTest("TC01_CategoryLandingPage");
@@ -84,5 +84,28 @@ public class StoreFront_Validate_CLP extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			e.printStackTrace();
 		}
+	}
+
+	/*
+	 * @Description: Validating the bread crumbs in PDP URL
+	 * @Date: 13/06/23
+	 */
+	@Test
+	public void TC02_ProductDisplayPage() throws Exception {
+
+		try {
+			String URL="";
+			for (int i=1;i<=167031;i++) {
+			URL= excelOperation.getTestData(Integer.toString(i),"StoreFront_PDP","workingURL");
+			driver.get(URL);
+			}
+		} catch (Exception e) {
+			Reporting.updateTestReport("CLP did not get shifted from Solr to Constructor " + e.getMessage(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			e.printStackTrace();
+		}
+
+
+
 	}
 }
