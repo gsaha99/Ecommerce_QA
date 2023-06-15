@@ -57,7 +57,7 @@ public class StoreFront_Validate_CLP extends DriverModule {
 	@Test(enabled=false)
 	public void TC01_CategoryLandingPage() throws Exception {
 
-		/* Printing the URLs in text file */
+
 		try {
 
 			Reporting.test = Reporting.extent.createTest("TC01_CategoryLandingPage");
@@ -65,18 +65,18 @@ public class StoreFront_Validate_CLP extends DriverModule {
 
 			CommonMethods.createURLFile();
 
-			/* Invoking browser & fetching all the links */
+			/*Invoking browser & fetching all the links*/
 			driver.get(excelOperation.getTestData("Subject_Page", "StoreFront_CLP", "Data"));
 
 			WebElement subjects = driver.findElement(By.className("section-description"));
 			List<WebElement> URLs = subjects.findElements(By.tagName("a"));
-			
+
 			for (WebElement link : URLs) {
 
 				CommonMethods.AppendURLs(link.getAttribute("href"));
 			}
 
-			CommonMethods.ChangeURL(); 
+			CommonMethods.ChangeURL();
 			CommonMethods.hittingURL();
 			CommonMethods.closeURLFile();
 
@@ -92,18 +92,23 @@ public class StoreFront_Validate_CLP extends DriverModule {
     * @Date: 13/06/23
     */
 
-    @Test
-    public void TC02_ProductDisplayPage() throws Exception {
-        try {
-            String URL="";
-            for (int i=1;i<=160731;i++) {
+@Test
+public void TC02_ProductDisplayPage() throws Exception {
+	try {
+		excelOperation.getTestDatPOI();
+		/* String URL=null;
+        for (int i=1;i<=160731;i++) {
+            System.out.println(Integer.toString(i));
             URL= excelOperation.getTestData(Integer.toString(i),"StoreFront_PDP","workingURL");
             driver.get(URL);
-            }
-        } catch (Exception e) {
-            Reporting.updateTestReport("CLP did not get shifted from Solr to Constructor " + e.getMessage(),
-                    CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-            e.printStackTrace();
-        }
-    } 
+            Thread.sleep(500);
+            Reporting.updateTestReport(driver.getTitle().toString(),
+                    CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+        }*/
+	} catch (Exception e) {
+		Reporting.updateTestReport("CLP did not get shifted from Solr to Constructor " + e.getMessage(),
+				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		e.printStackTrace();
+	}
+}
 }

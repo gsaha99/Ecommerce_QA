@@ -1,0 +1,6 @@
+StoreFront_Validate_CLP_09442023074444 Regression Suite: -
+
+
+TC01_CategoryLandingPage --> Execution started
+
+CLP did not get shifted from Solr to Constructor Cannot invoke "org.openqa.selenium.WebDriver.get(String)" because "driver" is null --> FAIL
