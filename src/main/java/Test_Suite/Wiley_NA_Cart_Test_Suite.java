@@ -4044,6 +4044,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 						("OrderSummaryTabTextBeforeShipping","Generic_Messages", "Data"),driver);
+				wiley.validateMessageForPOD(excelOperation.getTestData("PrintOnDemandMessage", "Generic_Messages", "Data"));
 				ScrollingWebPage.PageScrolldown(driver,0,700,SS_path);
 				wiley.clickOnProceedToCheckoutButton();
 				String emailID = wiley.enterEmailIdInCreateAccountForm();
@@ -4065,7 +4066,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.enterShippingCity(excelOperation.getTestData("TC24", "WILEY_NA_Cart_Test_Data", "Shipping_City"));
 					wiley.enterState(excelOperation.getTestData("TC24", "WILEY_NA_Cart_Test_Data", "Shipping_State"));
 					wiley.enterPhoneNumberShipping(excelOperation.getTestData("TC24", "WILEY_NA_Cart_Test_Data", "Shipping_Phone_Number"));
-					wiley.validateShippingMethodMessageForPOD();
+					wiley.validateMessageForPOD(excelOperation.getTestData("PrintOnDemandMessage", "Generic_Messages", "Data"));
 					wiley.validateIfOnlyStandardShippingMethodIsPresentForPOD(driver);
 					String deliveryDate=wiley.fetchStandardShippingMethodDeliveryDateForPOD();
 					wiley.clickOnSaveAndContinueButton();
@@ -4188,13 +4189,14 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							+ " and caused timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
-				wiley.removeProductsFromCart(driver);
-				wiley.WileyLogOut(driver);
+				
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
+			wiley.removeProductsFromCart(driver);
+			wiley.WileyLogOut(driver);
 
 		}
 		catch(Exception e) {
@@ -5172,15 +5174,15 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 /*
  * @Author: Anindita
- * @Description: Validates if it is redirecting to new Onboarding link after clicking 
- * on Request Digital Evaluation copy link for US and CA regions
+ * @Description: Validates if it is redirecting to the old professor.wiley link for the other countrues which are not confirgured 
+ * for the secure.wiley DEC Link
  */
 @Test
-public void TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP() throws IOException{
+public void TC36_DEC_Link_for_Other_Countries_With_Prof_Wiley() throws IOException{
 	try {
-		Reporting.test = Reporting.extent.createTest("TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP");
-		LogTextFile.writeTestCaseStatus("TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP", "Test case");
-		WordDocumentReport.writeTestcaseName("TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP");
+		Reporting.test = Reporting.extent.createTest("TC36_DEC_Link_for_Other_Countries_With_Prof_Wiley");
+		LogTextFile.writeTestCaseStatus("TC36_DEC_Link_for_Other_Countries_With_Prof_Wiley", "Test case");
+		WordDocumentReport.writeTestcaseName("TC36_DEC_Link_for_Other_Countries_With_Prof_Wiley");
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		String[] regions=excelOperation.getTestData("TC36", "WILEY_NA_Cart_Test_Data", "URL").split(",");
 		String[] products=excelOperation.getTestData("TC36", "WILEY_NA_Cart_Test_Data", "ISBN").split(",");
@@ -5189,17 +5191,15 @@ public void TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP() throws
 				driver.get(wiley.wileyURLConcatenationwithRegions(region,
 						product));
 				driver.navigate().refresh();
-				wiley.clickOnPrintTab();
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(),'Request Digital Evaluation Copy')]")));
 					if(wiley.fetchHyperlinkForRequestDigitalEvaluationCopy()
-							.equalsIgnoreCase(excelOperation.getTestData("TC36", "WILEY_NA_Cart_Test_Data", "Expected_Result").split(",")[0]
-									+product))
+							.contains(excelOperation.getTestData("TC36", "WILEY_NA_Cart_Test_Data", "Expected_Result")))
 						Reporting.updateTestReport("The hyperlink was: "+
 								excelOperation.getTestData("TC36", "WILEY_NA_Cart_Test_Data", "Expected_URL")+product+", for "
 								+region+" region as expected.", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					else
-						Reporting.updateTestReport("The hyperlink was not as expoected",
+						Reporting.updateTestReport("The hyperlink was not as expected",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					wiley.clickOnRequestDigitalEvaluationCopyLink();
 					Set<String> allWindowHandles = driver.getWindowHandles();
@@ -5209,8 +5209,7 @@ public void TC36_Change_of_Hyperlink_for_comp_access_on_US_CA_wiley_PDP() throws
 					driver.switchTo().window(compCopyWindow);
 					driver.close();
 					driver.switchTo().window(ChildWindow);
-					if(driver.getCurrentUrl().equalsIgnoreCase(excelOperation.getTestData("TC36", "WILEY_NA_Cart_Test_Data", "Expected_Result")
-							.split(",")[1]+product.substring(product.length()-13)))
+					if(driver.getCurrentUrl().contains(excelOperation.getTestData("TC36", "WILEY_NA_Cart_Test_Data", "Expected_Result")))
 						Reporting.updateTestReport("User was redirected to : "+driver.getCurrentUrl()+" successfully, for "
 								+region+" region.", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					else

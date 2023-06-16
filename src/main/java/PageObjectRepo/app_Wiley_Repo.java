@@ -205,7 +205,7 @@ public class app_Wiley_Repo {
 	@FindBy(xpath="//div[@class='modal-content']")
 	WebElement CountryRestrictionModal;
 
-	@FindBy(xpath="(//span[@id='deliveryMethodMessage'])[2]/div/h5")
+	@FindBy(xpath="//div[@class='printOnDemandMsg']")
 	WebElement PODMessage;
 	
 	@FindBy(xpath="(//span[@class='delivery-item-description deliveryItemTitleDe'])[1]")
@@ -1603,19 +1603,20 @@ public class app_Wiley_Repo {
 	 * @Author: Anindita
 	 * @Description: Checks and fetches the message in shipping methods for POD Products
 	 */
-	public void validateShippingMethodMessageForPOD() throws IOException{
+	public void validateMessageForPOD(String message) throws IOException{
 		try {
-			if(PODMessage.isDisplayed()) {
-				String text=PODMessage.getText();
-				Reporting.updateTestReport("Shipping method related message was displayed: "+text, CaptureScreenshot.getScreenshot(SS_path),
+			String text=PODMessage.getText();
+			if(text.equalsIgnoreCase(message)) {
+				System.out.println(text);
+				Reporting.updateTestReport("POD related message was displayed: "+text, CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.PASS);
 
 			}
-			else Reporting.updateTestReport("Shipping method related message was not displayed: ", CaptureScreenshot.getScreenshot(SS_path),
+			else Reporting.updateTestReport("POD related message was not correct: "+text, CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.FAIL);
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("Shipping method related message was not displayed", CaptureScreenshot.getScreenshot(SS_path),
+			Reporting.updateTestReport("POD related message was not displayed", CaptureScreenshot.getScreenshot(SS_path),
 					StatusDetails.FAIL);
 		}
 	}

@@ -104,7 +104,7 @@ public class Reporting {
 				//test.log(Status.FAIL, MarkupHelper.createLabel(ObjectName,ExtentColor.RED ));
 				test.log(Status.FAIL, ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
 				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
-				Thread.sleep(400);
+				Thread.sleep(500);
 				WordDocumentReport.writeTestCaseStatus(ObjectName, st.toString(), SS_path);
 				break;
 
@@ -112,7 +112,7 @@ public class Reporting {
 				//test.log(Status.PASS, MarkupHelper.createLabel(ObjectName,ExtentColor.GREEN ));	
 				test.log(Status.PASS,ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
 				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
-				Thread.sleep(400);
+				Thread.sleep(500);
 				WordDocumentReport.writeTestCaseStatus(ObjectName, st.toString(), SS_path);
 							
 				break;
@@ -120,27 +120,27 @@ public class Reporting {
 			case INFO :
 				test.log(Status.INFO, ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
 				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
-				Thread.sleep(400);
+				Thread.sleep(500);
 				WordDocumentReport.writeTestCaseStatus(ObjectName, st.toString(), SS_path);
 				break;
 
 			case WARNING :
 				test.log(Status.WARNING,ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
 				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
-				Thread.sleep(400);
+				Thread.sleep(500);
 				WordDocumentReport.writeTestCaseStatus(ObjectName, st.toString(), SS_path);
 				break;
 
 			case ERROR :
 				test.log(Status.SKIP, MarkupHelper.createLabel(ObjectName,ExtentColor.GREY ));
 				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
-				Thread.sleep(400);
+				Thread.sleep(500);
 				WordDocumentReport.writeTestCaseStatus(ObjectName, st.toString(), SS_path);
 				break;
 			default :
 				test.log(Status.INFO,MarkupHelper.createLabel(ObjectName,ExtentColor.BLUE ));
 				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
-				Thread.sleep(400);
+				Thread.sleep(500);
 				WordDocumentReport.writeTestCaseStatus(ObjectName, st.toString(), SS_path);
 			}
 		}catch(Exception e){ System.out.println(e.getMessage()); }
