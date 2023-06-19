@@ -86,30 +86,30 @@ public class StoreFront_Validate_CLP extends DriverModule {
 			e.printStackTrace();
 		}
 	}
-
-
+	
 	/*
-	 * @Description: Validating the bread crumbs in PDP URL
-	 * @Date: 13/06/23
-	 */
+    * @Description: Validating the bread crumbs in PDP URL
+    * @Date: 13/06/23
+    */
 
-	@Test
-	public void TC02_ProductDisplayPage() throws Exception {
-		try {
-			excelOperation.getTestDatPOI();
-			/* String URL=null;
-            for (int i=1;i<=160731;i++) {
-	            System.out.println(Integer.toString(i));
-	            URL= excelOperation.getTestData(Integer.toString(i),"StoreFront_PDP","workingURL");
-	            driver.get(URL);
-	            Thread.sleep(500);
-	            Reporting.updateTestReport(driver.getTitle().toString(),
-	                    CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-            }*/
-		} catch (Exception e) {
-			Reporting.updateTestReport("CLP did not get shifted from Solr to Constructor " + e.getMessage(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			e.printStackTrace();
+@Test
+public void TC02_ProductDisplayPage() throws Exception {
+	try {
+		Reporting.test = Reporting.extent.createTest("TC02_ProductDisplayPage");
+		LogTextFile.writeTestCaseStatus("TC02_ProductDisplayPage", "Test case");
+
+		int rowCount = excelOperation.getRowCount();
+		for (int i=1;i<=rowCount;i++)
+		{
+			String url = excelOperation.getTestDataPOI(i);
+					driver.get(url);
+			Reporting.updateTestReport("CLP got shifted from Solr to Constructor" + url,
+			CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}
+	} catch (Exception e) {
+		Reporting.updateTestReport("CLP did not get shifted from Solr to Constructor " + e.getMessage(),
+				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		e.printStackTrace();
 	}
+}
 }
