@@ -11,11 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import utilities.DriverModule;
 
 public class CommonMethods {
 
@@ -79,7 +74,6 @@ public class CommonMethods {
 	}
 	public static void ChangeURL() throws Exception {			
 
-
 		String URL_without_locale = excelOperation.getTestData("URL_without_locale", "StoreFront_CLP", "Data");
 		String URL_with_locale = excelOperation.getTestData("URL_with_locale", "StoreFront_CLP", "Data");
 
@@ -92,7 +86,7 @@ public class CommonMethods {
 			StringBuffer stringBuffer = new StringBuffer();
 			String line;
 
-			while ((line = reader.readLine()) != null) {
+			while ((line = reader.readLine()) != null) {	
 				stringBuffer.append(line.replaceAll(URL_without_locale, URL_with_locale).replace(clp_solr, clp_constructor) + "\n");
 			}
 			reader.close();
@@ -105,14 +99,10 @@ public class CommonMethods {
 			System.out.println("The URLs are updated successfully");
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			Reporting.updateTestReport("Error was thrown while appending the text file " + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			e.printStackTrace();
 		}
-
-
-
 	}
 
 	public static void hittingURL() throws Exception {
@@ -139,15 +129,10 @@ public class CommonMethods {
 			Reporting.updateTestReport("CLP got shifted from Solr to Constructor " + urls,
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 
-
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			Reporting.updateTestReport("Error while opening the URL" + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			e.printStackTrace();
 		}
-
 	}
-
 }	
-

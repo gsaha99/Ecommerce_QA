@@ -23,7 +23,7 @@ public class excelOperation {
 		  try{
 
 		  Fillo fillo = new Fillo();
-  		  Connection conn = fillo.getConnection(".\\Test Data\\Automation_Datasheet.xlsx");
+  		  Connection conn = fillo.getConnection(".\\Test Data\\Automation_Datasheet_SF_TC01.xlsx");
   		  
 		  String Query = "Select * from "+sheetName+" where Test_Case='"+TCName+"'  ";
 		  Recordset recordSet = null;
@@ -50,7 +50,7 @@ public class excelOperation {
 		try{
 
 			  Fillo fillo = new Fillo();
-	  		  Connection conn = fillo.getConnection(".\\Test Data\\Automation_Datasheet.xlsx");
+	  		  Connection conn = fillo.getConnection(".\\Test Data\\Automation_Datasheet_SF_TC01.xlsx");
 	  		  String Query = "UPDATE "+sheetName+" Set "+column+"='"+NewData+"' where Test_Case='"+TCName+"'  ";
 	  		  System.out.println(Query);
 	  		  conn.executeUpdate (Query);
@@ -69,44 +69,56 @@ public class excelOperation {
 	 * @Parameter
 	 */
 	
-	public static void getTestDatPOI()
+	public static String getTestDataPOI(int rowNumber)
 	{
 		 //Create an object of File class to open xlsx file
-        try {
-			File file =    new File(".\\Test Data\\Automation_Datasheet.xlsx");
+		try {
+			File file =    new File(".\\Test Data\\Automation_Datasheet_SF_TC02.xlsx");
 
 			//Create an object of FileInputStream class to read excel file
 			FileInputStream inputStream = new FileInputStream(file);
 
-			
-			//Workbook wrkbk= StreamingReader.builder().rowCacheSize(200).bufferSize(4096).open(inputStream);
-					
 			XSSFWorkbook wb=new XSSFWorkbook(inputStream);
 
 			//creating a Sheet object
 			XSSFSheet sheet= wb.getSheet("StoreFront_PDP");
-			
-			//get all rows in the sheet
-			int rowCount=sheet.getLastRowNum()-sheet.getFirstRowNum();
-			
-			System.out.println("Total number of rows" + rowCount);
-			//iterate over all the row to print the data present in each cell.
-			for(int i=1;i<=rowCount;i++){
-			    
-			        System.out.print("Row"+i+ "-->" + sheet.getRow(i).getCell(4).getStringCellValue());
-			        System.out.println();
-			    }
-			   		
+
+			        String url =sheet.getRow(rowNumber).getCell(4).getStringCellValue();	    
+
 			wb.close();
 			inputStream.close();
+			return url;
 		} 
         catch (Exception e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();	
+			return "";
+		}
+	}
+
+	
+	public static int getRowCount()
+	{
+		 //Create an object of File class to open xlsx file
+		try {
+			File file =    new File(".\\Test Data\\Automation_Datasheet_SF_TC02.xlsx");
+
+			//Create an object of FileInputStream class to read excel file
+			FileInputStream inputStream = new FileInputStream(file);
+
+			XSSFWorkbook wb=new XSSFWorkbook(inputStream);
+
+			//creating a Sheet object
+			XSSFSheet sheet= wb.getSheet("StoreFront_PDP");
+
+			//get row count from the sheet
+			int rowCount=sheet.getLastRowNum()-sheet.getFirstRowNum();
+			wb.close();
+			inputStream.close();
+			return rowCount;
+		}
+		catch (Exception e) {
 			e.printStackTrace();
-		} 
- 
-		
-		
+			return 0;
+		}
 	}
 }
-
