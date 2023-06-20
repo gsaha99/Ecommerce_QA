@@ -1,6 +1,5 @@
 package utilities;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -120,7 +119,6 @@ public class CommonMethods {
 			read.close();
 
 			for (String url : urls) {
-
 				DriverModule.driver.get(url);
 				Thread.sleep(2000);
 				Reporting.updateTestReport("CLP got shifted from Solr to Constructor " + url,
