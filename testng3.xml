@@ -4,9 +4,16 @@
 
  <test name="TestHarness Portal_Test_Suite _Edge" >
   <parameter name="browser" value="Edge"/>
-  <parameter name="DeviceType" value="Mobile"/>
+  <parameter name="DeviceType" value="Desktop"/>
    <classes>
-		<class name="Test_Suite.TestHarness_RegressionSuite"/>
+		<class name="Test_Suite.TestHarness_RegressionSuite">
+		<methods>
+
+				<include name="TC01.*" />
+        		<include name="TC02.*" />
+
+			</methods>
+			</class>
 	</classes>
  </test> <!-- Test -->
   
@@ -14,7 +21,14 @@
   <parameter name="browser" value="chrome"/>
   <parameter name="DeviceType" value="Mobile"/>
    <classes>
-		<class name="Test_Suite.TestHarness_RegressionSuite"/>
+		<class name="Test_Suite.TestHarness_RegressionSuite">
+		<methods>
+
+				<include name="TC01.*" />
+        		<include name="TC02.*" />
+
+			</methods>
+		</class>
 	</classes>
 </test>
 

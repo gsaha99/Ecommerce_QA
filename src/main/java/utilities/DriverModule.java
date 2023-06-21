@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
-import org.json.JSONObject;
+
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +24,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-import com.browserstack.local.Local;
+
 
 
 public class DriverModule {
