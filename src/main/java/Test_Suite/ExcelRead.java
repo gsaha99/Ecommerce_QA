@@ -3,7 +3,9 @@ package Test_Suite;
 import java.io.FileInputStream;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -53,27 +55,31 @@ public class ExcelRead extends DriverModule {
 			for (Row row : sheet) {
 				Cell cell = row.getCell(columnNumber);
 				String cellValue=cell.getStringCellValue();
-				//System.out.println(cellValue);
 				DriverModule.driver.get(cellValue);
 				/*Hitting the last breadcrumb and changing it from Solr to Constructor Page*/
 				try { 
 					WebElement lastvalue= DriverModule.driver.findElement(By.xpath("//*[@id='breadcrumbStyle']/li[last()]"));
 					lastvalue.click();
-					Thread.sleep(5000);
 					String Solr_URL=DriverModule.driver.getCurrentUrl();
 					String Constructor_URL= Solr_URL.replace(clp_solr, clp_constructor);
-					
+
 					driver.get(Constructor_URL);
-					/*WebElement breadcrumb= DriverModule.driver.findElement(By.xpath("//*[@id='breadcrumbStyle']"));
-					ArrayList<String> nav= new ArrayList<String>();
-					nav.add(breadcrumb.toString());
-					System.out.println(nav);*/
-					
-					}catch (Exception e) {
+					WebElement breadcrumb_parent= DriverModule.driver.findElement(By.xpath("//*[@id='breadcrumbStyle']"));
+					List <WebElement> breadcrumb_child = breadcrumb_parent.findElements(By.tagName("li"));
+					ArrayList<WebElement> breadcrumbli= new ArrayList<WebElement>(breadcrumb_child);
+					for(int i=breadcrumbli.size()-1;i>=0;i--) {
+						WebElement breadcrumbItem=breadcrumbli.get(i);
+						breadcrumbItem.click();
+						if (i>0) {
+							driver.navigate().back();			
+						}
+					}
+
+				}catch (Exception e) {
 					Reporting.updateTestReport("404 Error while clicking the breadcrumb " + e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					e.printStackTrace();
-					}
+				}
 			}
 			wb.close();
 			file.close();
