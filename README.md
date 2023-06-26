@@ -1,2 +1,2 @@
 # Ecommerce_QA
-Automation suite for PPE and WPS Project
+Automation suite and Performance Script Repository for ECommerce QA Team
