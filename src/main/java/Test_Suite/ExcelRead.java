@@ -3,6 +3,7 @@ package Test_Suite;
 import java.io.FileInputStream;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -44,6 +47,7 @@ public class ExcelRead extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC02_ProductDisplayPage");
 			LogTextFile.writeTestCaseStatus("TC02_ProductDisplayPage", "Test case");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
 			String excel = "C:\\Ecommerce_QA\\Storefront\\Ecommerce_QA\\Test Data\\Automation_Test(10).xlsx";
 			FileInputStream file = new FileInputStream (excel);
@@ -62,22 +66,26 @@ public class ExcelRead extends DriverModule {
 					lastvalue.click();
 					String Solr_URL=DriverModule.driver.getCurrentUrl();
 					String Constructor_URL= Solr_URL.replace(clp_solr, clp_constructor);
-
 					driver.get(Constructor_URL);
-					WebElement breadcrumb_parent= DriverModule.driver.findElement(By.xpath("//*[@id='breadcrumbStyle']"));
+					WebElement breadcrumb_parent= DriverModule.driver.findElement(By.xpath("//*[@class='breadcrumb']"));
 					List <WebElement> breadcrumb_child = breadcrumb_parent.findElements(By.tagName("li"));
 					ArrayList<WebElement> breadcrumbli= new ArrayList<WebElement>(breadcrumb_child);
-					for(int i=breadcrumbli.size()-1;i>=0;i--) {
+					for(int i=breadcrumbli.size()-1;i>1;i--) {
 						WebElement breadcrumbItem=breadcrumbli.get(i);
 						breadcrumbItem.click();
-						if (i>0) {
-							driver.navigate().back();			
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Find Wiley products based on your area of interest')]")));
+							//Thread.sleep(3000);
+						}catch (Exception e) {
+							Reporting.updateTestReport("404 Error while clicking the breadcrumb and the correct Items are not dispayed" + cellValue + e.getMessage(),
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					}
 
 				}catch (Exception e) {
-					Reporting.updateTestReport("404 Error while clicking the breadcrumb " + e.getMessage(),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+					Reporting.updateTestReport("404 Error while hitting the PDP URL " + cellValue,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					e.printStackTrace();
 				}
 			}

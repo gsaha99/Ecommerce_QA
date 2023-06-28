@@ -6,6 +6,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +22,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import PageObjectRepo.Hybris_BO_Repo;
+import PageObjectRepo.Store_Front_CLP_Repo;
 
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
@@ -39,6 +46,12 @@ public class StoreFront_Validate_CLP extends DriverModule {
 
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
+	Store_Front_CLP_Repo StoreFrontRepo;
+
+	@BeforeTest
+	public void launchBrowser() {
+		StoreFrontRepo = PageFactory.initElements(driver, Store_Front_CLP_Repo.class);
+	}
 
 	@BeforeMethod
 	public void nameBefore(Method method) {
@@ -97,16 +110,54 @@ public class StoreFront_Validate_CLP extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC02_ProductDisplayPage");
 			LogTextFile.writeTestCaseStatus("TC02_ProductDisplayPage", "Test case");
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-			int rowCount = excelOperation.getRowCount();
-			for (int i=1;i<=rowCount;i++)
-			{
-				String url = excelOperation.getTestDataPOI(i);
-				driver.get(url);
-				Reporting.updateTestReport("CLP got shifted from Solr to Constructor" + url,
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			String excel = ".\\Test Data\\Automation_Test(10).xlsx";
+			FileInputStream file = new FileInputStream (excel);
+			XSSFWorkbook wb = new XSSFWorkbook(file);
+			XSSFSheet sheet = wb.getSheet("StoreFront_PDP");
+			
+			String clp_solr = "-c-";
+			String clp_constructor = "-c2-";
+			int columnNumber=4;
+			
+			for (Row row : sheet) {
+				Cell cell = row.getCell(columnNumber);
+				String cellValue=cell.getStringCellValue();
+				DriverModule.driver.get(cellValue);
+				/*Hitting the last breadcrumb and changing it from Solr to Constructor Page*/
+				try { 
+//					WebElement lastvalue= DriverModule.driver.findElement(By.xpath("//*[@id='breadcrumbStyle']/li[last()]"));
+					StoreFrontRepo.lastvalueClick();
+//					lastvalue.click();
+					String Solr_URL=DriverModule.driver.getCurrentUrl();
+					String Constructor_URL= Solr_URL.replace(clp_solr, clp_constructor);
+					driver.get(Constructor_URL);
+					WebElement breadcrumb_parent= DriverModule.driver.findElement(By.xpath("//*[@class='breadcrumb']"));
+					List <WebElement> breadcrumb_child = breadcrumb_parent.findElements(By.tagName("li"));
+					ArrayList<WebElement> breadcrumbli= new ArrayList<WebElement>(breadcrumb_child);
+					for(int i=breadcrumbli.size()-1;i>1;i--) {
+						WebElement breadcrumbItem=breadcrumbli.get(i);
+						breadcrumbItem.click();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Find Wiley products based on your area of interest')]")));
+							//Thread.sleep(3000);
+						}catch (Exception e) {
+							Reporting.updateTestReport("404 Error while clicking the breadcrumb and the correct Items are not dispayed" + cellValue + e.getMessage(),
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					}
+
+				}catch (Exception e) {
+					Reporting.updateTestReport("404 Error while hitting the PDP URL " + cellValue,
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+					e.printStackTrace();
+				}
 			}
-		} catch (Exception e) {
+			wb.close();
+			file.close();
+		}catch (Exception e) {
 			Reporting.updateTestReport("CLP did not get shifted from Solr to Constructor " + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			e.printStackTrace();
