@@ -1,0 +1,15 @@
+System Specifications:-
+
+OS: windows 10
+OS Version: 10.0
+HostName: ZAUSV-SHPRASA
+IP Address: 10.201.169.41
+UserName: shprasad
+Browser: edge
+Browser Version: 114.0.1823.51
+
+CoD_Regression_Test_Suite_22022023040224 Regression Suite: -
+
+
+TC01_Registration_And_Login_from_Checkout_Page --> Execution started
+

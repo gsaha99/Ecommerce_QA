@@ -1,0 +1,75 @@
+System Specifications:-
+
+OS: windows 10
+OS Version: 10.0
+HostName: ZAUSV-SHPRASA
+IP Address: 10.201.169.41
+UserName: shprasad
+Browser: edge
+Browser Version: 114.0.1823.51
+
+CoD_Regression_Test_Suite_22552023065538 Regression Suite: -
+
+
+TC01_Registration_And_Login_from_Checkout_Page --> Execution started
+
+Create a New Button Link is present --> PASS
+First Name: yqVjThSS was entered successfully  --> PASS
+Last Name: MgOUyAwT was entered successfully  --> PASS
+Email Text: Testp6sefbqwxe@mailinator.com was entered successfully  --> PASS
+Confirm Email Text: Testp6sefbqwxe@mailinator.com was entered successfully  --> PASS
+Password Text: testing@123 was entered successfully  --> PASS
+Confirm Password Text: testing@123 was entered successfully  --> PASS
+Offer checkbox is clicked successfully --> PASS
+Create Account Button is clicked successfully --> PASS
+
+
+TC03_Login_from_Login_Page --> Execution started
+
+Click on Navigation Menu --> PASS
+Select Login button --> PASS
+
+
+TC01_Open_Homepage --> Execution started
+
+Create a New Button Link is not present --> FAIL
+
+
+TC05_LoginForm_Field_Validation_In_LoginPage --> Execution started
+
+Click on Navigation Menu --> PASS
+Select Login button --> PASS
+Email input field is clicked --> PASS
+Password input field is not clicked --> FAIL
+
+
+TC07_Billing_Information_Fields_Validation --> Execution started
+
+
+
+TC11_Order_Placement --> Execution started
+
+Subscribe button is not clicked --> FAIL
+
+
+TC01_Open_Homepage --> Execution started
+
+Create a New Button Link is not present --> FAIL
+Data is not entered successfully --> FAIL
+Submit button was not clicked successfully --> FAIL
+Error Message for cards is not present class org.openqa.selenium.NoSuchElementException --> FAIL
+Data is not entered successfully --> FAIL
+Submit button was not clicked successfully --> FAIL
+Error Message for cards is not present class org.openqa.selenium.NoSuchElementException --> FAIL
+Data is not entered successfully --> FAIL
+Submit button was not clicked successfully --> FAIL
+Error Message for cards is not present class org.openqa.selenium.NoSuchElementException --> FAIL
+Data is not entered successfully --> FAIL
+Submit button was not clicked successfully --> FAIL
+Error Message for cards is not present class org.openqa.selenium.NoSuchElementException --> FAIL
+Data is not entered successfully --> FAIL
+Submit button was not clicked successfully --> FAIL
+Error Message for cards is not present class org.openqa.selenium.NoSuchElementException --> FAIL
+Data is not entered successfully --> FAIL
+Submit button was not clicked successfully --> FAIL
+Error Message for cards is not present class org.openqa.selenium.NoSuchElementException --> FAIL

@@ -1,0 +1,18 @@
+System Specifications:-
+
+OS: windows 10
+OS Version: 10.0
+HostName: ZAUSV-SHPRASA
+IP Address: 10.201.169.41
+UserName: shprasad
+Browser: edge
+Browser Version: 114.0.1823.58
+
+CoD_Regression_Test_Suite_28052023060548 Regression Suite: -
+
+
+TC59_3DS_PopUp_Fail --> Execution started
+
+Create a New Button Link is present --> PASS
+Subscribe button is not clicked --> FAIL
+Create a New Button Link is not presentclass org.openqa.selenium.NoSuchElementException --> FAIL

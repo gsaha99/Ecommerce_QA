@@ -1,0 +1,107 @@
+System Specifications:-
+
+OS: windows 10
+OS Version: 10.0
+HostName: ZAUSV-SHPRASA
+IP Address: 10.201.169.41
+UserName: shprasad
+Browser: edge
+Browser Version: 114.0.1823.51
+
+CoD_Regression_Test_Suite_23352023013543 Regression Suite: -
+
+
+TC01_Registration_from_Checkout_Page --> Execution started
+
+Create a New Button Link is present --> PASS
+First Name: MlpfVMnu was entered successfully  --> PASS
+Last Name: jgNTiJxN was entered successfully  --> PASS
+Email Text: Testsvyvdo8qf1@mailinator.com was entered successfully  --> PASS
+Confirm Email Text: Testsvyvdo8qf1@mailinator.com was entered successfully  --> PASS
+Password Text: testing@123 was entered successfully  --> PASS
+Confirm Password Text: testing@123 was entered successfully  --> PASS
+Offer checkbox is clicked successfully --> PASS
+Create Account Button is clicked successfully --> PASS
+Success message for account creation is correct --> PASS
+Click on edit button --> PASS
+
+
+TC02_Login_from_Checkout_Page --> Execution started
+
+
+
+TC03_Login_from_Login_Page --> Execution started
+
+Click on Navigation Menu --> PASS
+Select Login button --> PASS
+Login button is not present --> FAIL
+
+
+TC04_verify_Registration_Field_Validation_On_Checkout --> Execution started
+
+
+
+TC05_LoginForm_Field_Validation_In_LoginPage --> Execution started
+
+Click on Navigation Menu --> PASS
+Select Login button --> PASS
+Email input field is clicked --> PASS
+Password input field is not clicked --> FAIL
+
+
+TC07_Billing_Information_Fields_Validation --> Execution started
+
+Click on Navigation Menu --> PASS
+Select Login button --> PASS
+Enter email Address --> PASS
+Enter password got failed --> FAIL
+Click on login button --> FAIL
+Click On Test Subscription Details Subscribe Button --> PASS
+Click on Credit Card input box --> PASS
+Click on Address line 1 Input box --> PASS
+Credit card error message for blank field is not correct --> FAIL
+Address Line 1 message is not correct --> FAIL
+City / Town error message is not correct --> FAIL
+Postal Code / Postcode / ZIP Code error message is not correct --> FAIL
+Phone number message is not correctclass org.openqa.selenium.NoSuchElementException --> FAIL
+Not able to enter symbols in credit card fieldclass org.openqa.selenium.TimeoutException --> FAIL
+Credit card error message is not correctclass org.openqa.selenium.NoSuchElementException --> FAIL
+Not able to enter numbers in credit card fieldclass org.openqa.selenium.TimeoutException --> FAIL
+Not able to enter aplhanumeric in credit card field class org.openqa.selenium.TimeoutException --> FAIL
+Card Name was not entered with the error message class org.openqa.selenium.TimeoutException --> FAIL
+Not able to enter three characters in address line fieldclass org.openqa.selenium.TimeoutException --> FAIL
+Address line 1 message is not verifiedclass org.openqa.selenium.NoSuchElementException --> FAIL
+Address Line1 was not entered with the error message class org.openqa.selenium.TimeoutException --> FAIL
+City was not entered with the error message class org.openqa.selenium.TimeoutException --> FAIL
+ZipCode was not entered with the error message class org.openqa.selenium.TimeoutException --> FAIL
+Not able to enter Invalid Numbers in Phone Number Fieldclass org.openqa.selenium.TimeoutException --> FAIL
+Phone number message is not correctclass org.openqa.selenium.NoSuchElementException --> FAIL
+Click on edit button --> PASS
+
+
+TC11_Order_Placement --> Execution started
+
+Subscribe button is not clicked --> FAIL
+
+
+TC01_Open_Homepage --> Execution started
+
+Create a New Button Link is not present --> FAIL
+Data is not entered successfullyclass org.openqa.selenium.NoSuchFrameException --> FAIL
+Submit button was not clicked successfullyclass org.openqa.selenium.NoSuchFrameException --> FAIL
+Error Message for cards is not present class org.openqa.selenium.NoSuchElementException --> FAIL
+Data is not entered successfullyclass org.openqa.selenium.NoSuchFrameException --> FAIL
+Submit button was not clicked successfullyclass org.openqa.selenium.NoSuchFrameException --> FAIL
+Error Message for cards is not present class org.openqa.selenium.NoSuchElementException --> FAIL
+Data is not entered successfullyclass org.openqa.selenium.NoSuchFrameException --> FAIL
+Submit button was not clicked successfullyclass org.openqa.selenium.NoSuchFrameException --> FAIL
+Error Message for cards is not present class org.openqa.selenium.NoSuchElementException --> FAIL
+Data is not entered successfullyclass org.openqa.selenium.NoSuchFrameException --> FAIL
+Submit button was not clicked successfullyclass org.openqa.selenium.NoSuchFrameException --> FAIL
+Error Message for cards is not present class org.openqa.selenium.NoSuchElementException --> FAIL
+Data is not entered successfullyclass org.openqa.selenium.NoSuchFrameException --> FAIL
+Submit button was not clicked successfullyclass org.openqa.selenium.NoSuchFrameException --> FAIL
+Error Message for cards is not present class org.openqa.selenium.NoSuchElementException --> FAIL
+Data is not entered successfullyclass org.openqa.selenium.NoSuchFrameException --> FAIL
+Submit button was not clicked successfullyclass org.openqa.selenium.NoSuchFrameException --> FAIL
+Error Message for cards is not present class org.openqa.selenium.NoSuchElementException --> FAIL

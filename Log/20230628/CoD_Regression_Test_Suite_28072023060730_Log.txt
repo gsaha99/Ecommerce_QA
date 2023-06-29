@@ -1,0 +1,41 @@
+System Specifications:-
+
+OS: windows 10
+OS Version: 10.0
+HostName: ZAUSV-SHPRASA
+IP Address: 10.201.169.41
+UserName: shprasad
+Browser: edge
+Browser Version: 114.0.1823.58
+
+CoD_Regression_Test_Suite_28072023060730 Regression Suite: -
+
+
+TC59_3DS_PopUp_Fail --> Execution started
+
+Create a New Button Link is present --> PASS
+Subscribe button is not clicked --> FAIL
+Create a New Button Link is not presentclass org.openqa.selenium.NoSuchElementException --> FAIL
+First Name: HhOHrekD was entered successfully  --> PASS
+Last Name: fGEcDnJl was entered successfully  --> PASS
+Email Text: Testfisx4i569w@mailinator.com was entered successfully  --> PASS
+Confirm Email Text: Testfisx4i569w@mailinator.com was entered successfully  --> PASS
+Password Text: testing@123 was entered successfully  --> PASS
+Confirm Password Text: testing@123 was entered successfully  --> PASS
+Offer checkbox is clicked successfully --> PASS
+Create Account Button is clicked successfully --> PASS
+Success message for account creation is correct --> PASS
+Card Name:was entered successfully  --> PASS
+Address Line1:was entered successfully  --> PASS
+City:was entered successfully  --> PASS
+ZipCode was entered successfully  --> PASS
+Phone Number was entered successfully  --> PASS
+Month Subscription Fee Checkbox is present and Clicked --> PASS
+Secure Payment Button is Enabled --> PASS
+Secure Payment button is present and Clicked --> PASS
+Card Number:  was entered successfully  --> PASS
+Expiry Date: 12 29 was entered successfully  --> PASS
+CVC: 123 was entered successfully  --> PASS
+Submit button was clicked successfully  --> PASS
+Clicked on cancel button for 3d secure pop up --> PASS
+3D message is not correctclass org.openqa.selenium.NoSuchElementException --> FAIL

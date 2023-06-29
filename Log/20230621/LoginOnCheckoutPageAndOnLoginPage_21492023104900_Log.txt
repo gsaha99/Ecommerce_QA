@@ -1,0 +1,45 @@
+System Specifications:-
+
+OS: windows 10
+OS Version: 10.0
+HostName: ZAUSV-SHPRASA
+IP Address: 10.201.169.41
+UserName: shprasad
+Browser: edge
+Browser Version: 114.0.1823.51
+
+LoginOnCheckoutPageAndOnLoginPage_21492023104900 Regression Suite: -
+
+
+TC05_LoginForm_Field_Validation_In_LoginPage --> Execution started
+
+Email input field is clicked --> PASS
+Password input field is clicked --> PASS
+Blank password message text is correct --> PASS
+Email input field is clicked --> PASS
+blank password message text is correct --> PASS
+Enter symbols in email address field --> PASS
+Invalid email address message text is correct --> PASS
+Enter alphabets in email address field --> PASS
+Invalid email address message text is correct --> PASS
+Enter numbers in email address field --> PASS
+Invalid email address message text is correct --> PASS
+Enter symbols in passowrd field --> PASS
+Invalid password message text is correct --> PASS
+Enter alphabets in passowrd field --> PASS
+Invalid password message text is correct --> PASS
+Enter numbers in passowrd field --> PASS
+Invalid password message text is correct --> PASS
+Enter alphabets in email address field --> PASS
+Enter alphabets in passowrd field --> PASS
+Invalid email address message text is correct --> PASS
+blank password message text is correct --> PASS
+Generated random email --> PASS
+Enter alphabets in passowrd field --> PASS
+blank password message text is correct --> PASS
+Enter alphabets in email address field --> PASS
+Enter random string in passowrd field --> PASS
+Invalid email address message text is correct --> PASS
+Generated random email --> PASS
+Enter random string in passowrd field --> PASS
+Click on login button --> PASS

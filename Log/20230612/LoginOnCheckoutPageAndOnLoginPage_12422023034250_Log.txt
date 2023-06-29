@@ -1,0 +1,27 @@
+System Specifications:-
+
+OS: windows 10
+OS Version: 10.0
+HostName: ZAUSV-SHPRASA
+IP Address: 10.201.169.41
+UserName: shprasad
+Browser: edge
+Browser Version: 114.0.1823.43
+
+LoginOnCheckoutPageAndOnLoginPage_12422023034250 Regression Suite: -
+
+
+TC01_TC01_Login_from_Checkout_Page --> Execution started
+
+Click on create a new account link --> FAIL
+
+
+TC02_Login_from_Login_Page --> Execution started
+
+Enter email Address --> PASS
+Enter password --> PASS
+Click on login button --> PASS
+
+
+TC03_Billing_Information_Fields_Validation --> Execution started
+

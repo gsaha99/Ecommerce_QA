@@ -1,0 +1,46 @@
+System Specifications:-
+
+OS: windows 10
+OS Version: 10.0
+HostName: ZAUSV-SHPRASA
+IP Address: 10.201.169.41
+UserName: shprasad
+Browser: edge
+Browser Version: 114.0.1823.51
+
+CoD_Regression_Test_Suite_23332023013340 Regression Suite: -
+
+
+TC04_verify_Registration_Field_Validation_On_Checkout --> Execution started
+
+Create a New Button Link is present --> PASS
+Get Page Text Create Account is present --> PASS
+First Name:  was entered successfully  --> PASS
+Last Name:  was entered successfully  --> PASS
+Email Address  was entered successfully  --> PASS
+Confirm Email Address  was entered successfully  --> PASS
+Password  was entered successfully  --> PASS
+Confirm Password  was entered successfully  --> PASS
+First Name Field Validation is present --> PASS
+Last Name Field Validation is present --> PASS
+Email Field Validation is present --> PASS
+Confirm Email Field Validation is present --> PASS
+Password Field Validation is present --> PASS
+Confirm Password Field Validation is present --> PASS
+First Name: %Ali^555 was entered successfully  --> PASS
+Last Name: %Ali^555 was entered successfully  --> PASS
+First Name Field Validation is present --> PASS
+Last Name Field Validation is present --> PASS
+Email Address aa.aa was entered successfully  --> PASS
+Confirm Email Address aa.aa was entered successfully  --> PASS
+Email Field Validation is present --> PASS
+Confirm Email Field Validation is present --> PASS
+Email Address test12@gmail.com was entered successfully  --> PASS
+Confirm Email Address test123@gmail.com was entered successfully  --> PASS
+Confirm Email Field Validation is present --> PASS
+Password 123sdg was entered successfully  --> PASS
+Confirm Password 123sdg was entered successfully  --> PASS
+Password Field Validation is present --> PASS
+Password testing@123 was entered successfully  --> PASS
+Confirm Password 123sdg was entered successfully  --> PASS
+Confirm Password Field Validation is present --> PASS

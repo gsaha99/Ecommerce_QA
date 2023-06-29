@@ -1,0 +1,38 @@
+System Specifications:-
+
+OS: windows 10
+OS Version: 10.0
+HostName: ZAUSV-SHPRASA
+IP Address: 10.201.169.41
+UserName: shprasad
+Browser: edge
+Browser Version: 114.0.1823.58
+
+CoD_Regression_Test_Suite_28512023085124 Regression Suite: -
+
+
+TC09_verifyPriceOnOrderSummary --> Execution started
+
+Account login page verified --> PASS
+Create a New Button Link is present --> PASS
+Account login page is not presentclass org.openqa.selenium.NoSuchElementException --> FAIL
+Create a New Button Link is not presentclass org.openqa.selenium.NoSuchElementException --> FAIL
+First Name: gCtZpAYQ was entered successfully  --> PASS
+Last Name: oUVxwcmQ was entered successfully  --> PASS
+Email Text: Testk9qotvoo1y@mailinator.com was entered successfully  --> PASS
+Confirm Email Text: Testk9qotvoo1y@mailinator.com was entered successfully  --> PASS
+Password Text: testing@123 was entered successfully  --> PASS
+Confirm Password Text: testing@123 was entered successfully  --> PASS
+Offer checkbox is clicked successfully --> PASS
+Create Account Button is clicked successfully --> PASS
+Success message for account creation is correct --> PASS
+Card Name:was entered successfully  --> PASS
+Address Line1:was entered successfully  --> PASS
+City:was entered successfully  --> PASS
+ZipCode was entered successfully  --> PASS
+Phone Number was entered successfully  --> PASS
+Month Subscription Fee Checkbox is present and Clicked --> PASS
+Secure Payment Button is Enabled --> PASS
+Secure Payment button is present and Clicked --> PASS
+vat is visible in UI  --> PASS
+Recurring Monthly Bill is visible in UI  --> PASS

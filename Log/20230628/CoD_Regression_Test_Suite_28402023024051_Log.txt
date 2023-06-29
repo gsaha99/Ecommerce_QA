@@ -1,0 +1,25 @@
+System Specifications:-
+
+OS: windows 10
+OS Version: 10.0
+HostName: ZAUSV-SHPRASA
+IP Address: 10.201.169.41
+UserName: shprasad
+Browser: edge
+Browser Version: 114.0.1823.58
+
+CoD_Regression_Test_Suite_28402023024051 Regression Suite: -
+
+
+TC27_cancel_Subscription_Within_Grace_Period --> Execution started
+
+Create a New Button Link is present --> PASS
+First Name: inpWMvcX was entered successfully  --> PASS
+Last Name: tBejIalK was entered successfully  --> PASS
+Email Text: Testisoyy5yneu@mailinator.com was entered successfully  --> PASS
+Confirm Email Text: Testisoyy5yneu@mailinator.com was entered successfully  --> PASS
+Password Text: testing@123 was entered successfully  --> PASS
+Confirm Password Text: testing@123 was entered successfully  --> PASS
+Offer checkbox is clicked successfully --> PASS
+Create Account Button is clicked successfully --> PASS
+Success message for account creation is correct --> PASS

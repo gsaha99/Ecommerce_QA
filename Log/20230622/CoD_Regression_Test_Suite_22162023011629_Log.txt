@@ -1,0 +1,16 @@
+System Specifications:-
+
+OS: windows 10
+OS Version: 10.0
+HostName: ZAUSV-SHPRASA
+IP Address: 10.201.169.41
+UserName: shprasad
+Browser: edge
+Browser Version: 114.0.1823.51
+
+CoD_Regression_Test_Suite_22162023011629 Regression Suite: -
+
+
+TC11_Order_Placement --> Execution started
+
+Subscribe button is not clicked --> FAIL

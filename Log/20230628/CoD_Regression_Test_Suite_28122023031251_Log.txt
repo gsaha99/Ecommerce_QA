@@ -1,0 +1,50 @@
+System Specifications:-
+
+OS: windows 10
+OS Version: 10.0
+HostName: ZAUSV-SHPRASA
+IP Address: 10.201.169.41
+UserName: shprasad
+Browser: edge
+Browser Version: 114.0.1823.58
+
+CoD_Regression_Test_Suite_28122023031251 Regression Suite: -
+
+
+TC27_cancel_Subscription_Within_Grace_Period --> Execution started
+
+Create a New Button Link is present --> PASS
+First Name: kABJenwx was entered successfully  --> PASS
+Last Name: utYpPyui was entered successfully  --> PASS
+Email Text: Testn3vhu5r6d2@mailinator.com was entered successfully  --> PASS
+Confirm Email Text: Testn3vhu5r6d2@mailinator.com was entered successfully  --> PASS
+Password Text: testing@123 was entered successfully  --> PASS
+Confirm Password Text: testing@123 was entered successfully  --> PASS
+Offer checkbox is clicked successfully --> PASS
+Create Account Button is clicked successfully --> PASS
+Success message for account creation is correct --> PASS
+Card Name:was entered successfully  --> PASS
+Address Line1:was entered successfully  --> PASS
+City:was entered successfully  --> PASS
+ZipCode was entered successfully  --> PASS
+Phone Number was entered successfully  --> PASS
+Month Subscription Fee Checkbox is present and Clicked --> PASS
+Secure Payment Button is Enabled --> PASS
+Secure Payment button is present and Clicked --> PASS
+Card Number: 22230031 22003222 was entered successfully  --> PASS
+Expiry Date: 12 29 was entered successfully  --> PASS
+CVC: 123 was entered successfully  --> PASS
+Submit button was clicked successfully  --> PASS
+Thankyou message is correct --> PASS
+Click on Navigation Menu --> PASS
+Subscription button is selected --> PASS
+Subscription activation message is correct --> PASS
+Subscription information page is not visibleclass org.openqa.selenium.NoSuchElementException --> FAIL
+Cancel button is clicked --> PASS
+Cancel my subscription message within grace period is not correctclass org.openqa.selenium.NoSuchElementException --> FAIL
+Cancel button is clicked --> PASS
+Cancel my subscription message within grace period is not correctclass org.openqa.selenium.NoSuchElementException --> FAIL
+Cancel my subscription button pop up is clicked --> PASS
+Cancel my subscription button is not enabledclass org.openqa.selenium.NoSuchElementException --> FAIL
+Change billing information is not disabledclass org.openqa.selenium.NoSuchElementException --> FAIL
+Change payment information is not disabledclass org.openqa.selenium.NoSuchElementException --> FAIL

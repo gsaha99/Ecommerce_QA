@@ -1,0 +1,55 @@
+System Specifications:-
+
+OS: windows 10
+OS Version: 10.0
+HostName: ZAUSV-SHPRASA
+IP Address: 10.201.169.41
+UserName: shprasad
+Browser: edge
+Browser Version: 114.0.1823.51
+
+CoD_Regression_Test_Suite_23502023125054 Regression Suite: -
+
+
+TC01_Registration_from_Checkout_Page --> Execution started
+
+Create a New Button Link is present --> PASS
+First Name: aBRvhSWj was entered successfully  --> PASS
+Last Name: fNOACcFN was entered successfully  --> PASS
+Email Text: Testof6qvjlwkx@mailinator.com was entered successfully  --> PASS
+Confirm Email Text: Testof6qvjlwkx@mailinator.com was entered successfully  --> PASS
+Password Text: testing@123 was entered successfully  --> PASS
+Confirm Password Text: testing@123 was entered successfully  --> PASS
+Offer checkbox is clicked successfully --> PASS
+Create Account Button is clicked successfully --> PASS
+Success message for account creation is correct --> PASS
+Click on edit button --> PASS
+Clicking on Log into existing button is not working --> FAIL
+
+
+TC02_Login_from_Checkout_Page --> Execution started
+
+
+
+TC03_Login_from_Login_Page --> Execution started
+
+
+
+TC04_verify_Registration_Field_Validation_On_Checkout --> Execution started
+
+
+
+TC05_LoginForm_Field_Validation_In_LoginPage --> Execution started
+
+
+
+TC07_Billing_Information_Fields_Validation --> Execution started
+
+
+
+TC11_Order_Placement --> Execution started
+
+
+
+TC01_Open_Homepage --> Execution started
+

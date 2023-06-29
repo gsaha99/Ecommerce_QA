@@ -1,0 +1,27 @@
+System Specifications:-
+
+OS: windows 10
+OS Version: 10.0
+HostName: ZAUSV-SHPRASA
+IP Address: 10.201.169.41
+UserName: shprasad
+Browser: edge
+Browser Version: 114.0.1823.51
+
+CoD_Regression_Test_Suite_22572023035718 Regression Suite: -
+
+
+TC01_Registration_And_Login_from_Checkout_Page --> Execution started
+
+
+
+TC03_Login_from_Login_Page --> Execution started
+
+
+
+TC05_LoginForm_Field_Validation_In_LoginPage --> Execution started
+
+
+
+TC07_Billing_Information_Fields_Validation --> Execution started
+

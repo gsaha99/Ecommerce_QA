@@ -1,0 +1,41 @@
+System Specifications:-
+
+OS: windows 10
+OS Version: 10.0
+HostName: ZAUSV-SHPRASA
+IP Address: 10.201.169.41
+UserName: shprasad
+Browser: edge
+Browser Version: 114.0.1823.58
+
+CoD_Regression_Test_Suite_27182023061846 Regression Suite: -
+
+
+TC27_cancel_Subscription_Within_Grace_Period --> Execution started
+
+Create a New Button Link is present --> PASS
+First Name: mKGjbyEH was entered successfully  --> PASS
+Last Name: prsKAPBS was entered successfully  --> PASS
+Email Text: Test3xlkbjp08t@mailinator.com was entered successfully  --> PASS
+Confirm Email Text: Test3xlkbjp08t@mailinator.com was entered successfully  --> PASS
+Password Text: testing@123 was entered successfully  --> PASS
+Confirm Password Text: testing@123 was entered successfully  --> PASS
+Offer checkbox is clicked successfully --> PASS
+Create Account Button is clicked successfully --> PASS
+Success message for account creation is correct --> PASS
+Card Name:was entered successfully  --> PASS
+Address Line1:was entered successfully  --> PASS
+City:was entered successfully  --> PASS
+ZipCode was entered successfully  --> PASS
+Phone Number was entered successfully  --> PASS
+Month Subscription Fee Checkbox is present and Clicked --> PASS
+Secure Payment Button is Enabled --> PASS
+Secure Payment button is present and Clicked --> PASS
+Card Number: 22230031 22003222 was entered successfully  --> PASS
+Expiry Date:  was entered successfully  --> PASS
+CVC: 123 was entered successfully  --> PASS
+Submit button was clicked successfully  --> PASS
+Thankyou message is not correctclass org.openqa.selenium.TimeoutException --> FAIL
+Click on Navigation Menu --> PASS
+Subscription button is selected --> PASS
+Subscription activation message is not correctclass org.openqa.selenium.TimeoutException --> FAIL
