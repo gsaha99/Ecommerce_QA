@@ -88,7 +88,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	@FindBy(name="appShortName")
     WebElement enterClientAppShortName;
 	
-	@FindBy(xpath = "//option[@value='22']")
+	@FindBy(xpath = "//option[@value='147']")
     WebElement selectUserID;
 	
 	/*@FindBy(xpath = "//option[@value='22']")
@@ -294,7 +294,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 		 * Author : Jayanta
 		 * Description : Object repo to click Save in View Client App page. 
 		 */
-	    @FindBy(xpath = "//option[@value='41']")
+	    @FindBy(xpath = "//option[@value='155']")
 	    WebElement ClientAdminselectUserID;
 	    
 	
@@ -416,11 +416,13 @@ public class app_ClientPortal_Repo extends DriverModule {
 	public void WPSAdmin_ClickTransactionSearch() throws IOException {
 		try {
 			ClickTransactionSearch.click();
-			Thread.sleep(5000);
+			
+			Thread.sleep(6000);
 			ArrayList<String> newTb = new ArrayList<String>(driver.getWindowHandles());
 		    //switch to new tab
 		    driver.switchTo().window(newTb.get(1));
 		    System.out.println("Page title of new tab: " + driver.getTitle());
+		    System.out.println("Page url of new tab: " + driver.getCurrentUrl());
 		    if(driver.getTitle().contains("Elastic"))
 		    {
 		    Reporting.updateTestReport("Transaction Search is clicked successfully ",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
