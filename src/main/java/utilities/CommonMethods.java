@@ -3,6 +3,7 @@ package utilities;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -11,6 +12,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class CommonMethods {
 
@@ -133,5 +137,13 @@ public class CommonMethods {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			e.printStackTrace();
 		}
+	}
+
+	public static void ReadExcel_TC02() throws Exception {
+		// TODO Auto-generated method stub
+		String excel = ".\\Test Data\\Automation_Test(10).xlsx";
+		FileInputStream file = new FileInputStream (excel);
+		XSSFWorkbook wb = new XSSFWorkbook(file);
+		XSSFSheet sheet = wb.getSheet("StoreFront_PDP");
 	}
 }	

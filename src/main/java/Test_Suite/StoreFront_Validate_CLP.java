@@ -111,25 +111,24 @@ public class StoreFront_Validate_CLP extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC02_ProductDisplayPage");
 			LogTextFile.writeTestCaseStatus("TC02_ProductDisplayPage", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
+			
 			String excel = ".\\Test Data\\Automation_Test(10).xlsx";
 			FileInputStream file = new FileInputStream (excel);
 			XSSFWorkbook wb = new XSSFWorkbook(file);
-			XSSFSheet sheet = wb.getSheet("StoreFront_PDP");
+			XSSFSheet sheet1 = wb.getSheet("StoreFront_PDP");
 			
 			String clp_solr = "-c-";
 			String clp_constructor = "-c2-";
 			int columnNumber=4;
+			//CommonMethods.ReadExcel_TC02();
 			
-			for (Row row : sheet) {
+			for (Row row : sheet1) {
 				Cell cell = row.getCell(columnNumber);
 				String cellValue=cell.getStringCellValue();
 				DriverModule.driver.get(cellValue);
 				/*Hitting the last breadcrumb and changing it from Solr to Constructor Page*/
 				try { 
-//					WebElement lastvalue= DriverModule.driver.findElement(By.xpath("//*[@id='breadcrumbStyle']/li[last()]"));
 					StoreFrontRepo.lastvalueClick();
-//					lastvalue.click();
 					String Solr_URL=DriverModule.driver.getCurrentUrl();
 					String Constructor_URL= Solr_URL.replace(clp_solr, clp_constructor);
 					driver.get(Constructor_URL);
@@ -155,8 +154,8 @@ public class StoreFront_Validate_CLP extends DriverModule {
 					e.printStackTrace();
 				}
 			}
-			wb.close();
-			file.close();
+		//	wb.close();
+		//	file.close();
 		}catch (Exception e) {
 			Reporting.updateTestReport("CLP did not get shifted from Solr to Constructor " + e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);

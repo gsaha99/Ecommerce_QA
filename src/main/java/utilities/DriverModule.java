@@ -36,8 +36,8 @@ import org.testng.annotations.Test;
 public class DriverModule {
 
 	public  static WebDriver driver =null;
-	
-	
+
+
 	@BeforeTest
 	@Parameters("browser")
 	public void initiate(ITestContext context,@Optional("edge") String browser)
@@ -45,45 +45,48 @@ public class DriverModule {
 		try {
 			String date = new SimpleDateFormat("ddmmyyyyhhmmss").format(new Date());			
 			String testSuiteName=context.getCurrentXmlTest().getClasses().stream()
-		               .findFirst().get().getName().substring(11);			
-			
+					.findFirst().get().getName().substring(11);			
+
 			//create firefox instance
 			if(browser.equalsIgnoreCase("firefox")) driver = new FirefoxDriver();
-				
+
 			//Check if parameter passed as 'chrome'
 			else if(browser.equalsIgnoreCase("chrome")) driver = new ChromeDriver();
-		
+
 			else if(browser.equalsIgnoreCase("Edge")) 
 			{
 				EdgeOptions edgeOptions = new EdgeOptions();
 				edgeOptions.addArguments("InPrivate");
 				edgeOptions.addArguments("--remote-allow-origins=*");
+//				edgeOptions.addArguments("headless");
 				driver=new EdgeDriver(edgeOptions);
 			}
-			
+
 
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));			
-			
+
 			Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
-			
+
 			String browserName = caps.getBrowserName();							
 			String browserVersion = caps.getBrowserVersion();				
 			String OS_Name = System.getProperty("os.name").toLowerCase();
-			
+
 			Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_In_"+browserName+"_"+date,
 					browserName,browserVersion,OS_Name);
-			
+
 			// log file code 
 			LogTextFile.createTodayLog(testSuiteName+"_"+date,browserName,browserVersion,OS_Name);
 		}
-				
+
 		catch(Exception e){ System.out.println(e.getMessage());}
 
 	}
 
-	public static WebDriver getWebDriver() { return driver;}
+	public static WebDriver getWebDriver() {
+		return driver;
+	}
 
 	@AfterTest
 	public void CloseBrowser(){	
