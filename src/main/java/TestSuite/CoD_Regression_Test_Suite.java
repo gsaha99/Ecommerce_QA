@@ -435,7 +435,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
     public void TC17_changePaymentMethod() throws IOException, InterruptedException {
         Reporting.test = Reporting.extent.createTest("TC17_ChangePaymentMethod");
         LogTextFile.writeTestCaseStatus("TC17_ChangePaymentMethod", "Test case");
-        driver.get(cod_DEV_CreateAccount_URL);
+        driver.get(cod_QA_CreateAccount_URL);
         WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(20));
 
         accountLoginPageObject.verifyAccountLoginPage();
@@ -819,6 +819,44 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 			subscriptionAccountPageObject.enterCVV(updateCVV);
 			Assert.assertTrue(subscriptionAccountPageObject.verifyInCompleteExpiryDateFieldValidation()
 					.contains("expiration date is incomplete."));
+		}
+		
+		
+		@Test
+		public void TC021_verifyErrorIfCardNumberIsLessDigitInSubscriptionDetailsPage () throws IOException, InterruptedException {			
+			Reporting.test = Reporting.extent.createTest("TC17_ChangePaymentMethod");
+			LogTextFile.writeTestCaseStatus("TC17_ChangePaymentMethod", "Test case");
+			driver.get(cod_QA_CreateAccount_URL);
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(20));
+			
+			accountLoginPageObject.verifyAccountLoginPage();
+			createAccountPageObject.clickOnCreateANewAccountLink();
+			createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+			createAccountPageObject.getSuccessMessageForAccountCreation();
+			subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+			subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+
+			subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+			subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+			subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+			subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+			subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+			subscriptionAccountPageObject.clickOnSecurePaymentButton();
+			subscriptionAccountPageObject.enterWPSSecurePaymentDetails(visa, expiryDate, cvc, driver);
+			subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+			orderDetailsPageObject.verifyThankYouMessage();
+			loginPageObject.clickOnNavigationMenu();
+			orderDetailsPageObject.selectMySubscriptionButton();
+			orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
+			subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
+
+			subscriptionDetailsPageObject.clickOnChangePaymentMethod();
+			
+			subscriptionAccountPageObject.enterCardNumber(inCompleteCardNumber, driver);
+			subscriptionAccountPageObject.enterExpiryDate(expiryDate); 
+			Assert.assertEquals(subscriptionAccountPageObject.verifyInCompleteCardNumberFieldValidation(), 
+					"Your card number is incomplete.");
+					
 		}
 	 
 }
