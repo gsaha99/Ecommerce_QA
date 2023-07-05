@@ -72,6 +72,25 @@ public class LoginPageObject {
 	@FindBy(xpath = "//div[@class='no-sub__info-wrapper']/a")
 	private WebElement testSubscriptionDetailsSubscribeButton;
 	
+	@FindBy(xpath =  "//h1[text()='Login']")
+	private WebElement loginPageVerificationText;
+	
+	
+	public void verifyLoginPageText() throws IOException {
+		try {
+			String loginPageVerificationActualText = loginPageVerificationText.getText();
+			if (loginPageVerificationActualText.equals("Login")) {
+				Reporting.updateTestReport("Login page verification message is correct",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			} else {
+				Reporting.updateTestReport("Login page verification message is not correct",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		} catch (Exception e) {
+			Reporting.updateTestReport("Login page verification message is not correct" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}	
 	
 	public void clickOnTestSubscriptionDetailsSubscribeButon() throws IOException {
 		try {
@@ -79,9 +98,7 @@ public class LoginPageObject {
 			Reporting.updateTestReport("Click On Test Subscription Details Subscribe Button", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
 			Reporting.updateTestReport("Clicking On Test Subscription Details Subscribe Button is not working", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-		
-		
+		}	
 	}
 	
 	public void verifyInvalidCredentialMessageText() throws IOException {

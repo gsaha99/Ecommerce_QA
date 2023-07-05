@@ -79,6 +79,9 @@ public class SubscriptionAccountPageObject {
 	@FindBy(xpath = "//*[text()='Please enter your phone number in the following format: +XX XX XXXXXXXX']")
 	private WebElement phoneNumberErrorMessage;
 	
+	@FindBy(xpath = ".checkout__steps > span:nth-of-type(6)")
+	private WebElement paymentErrorMsg;
+	
 	@FindBy(name = "cardnumber")
     private WebElement cardNumber;
 	
@@ -133,6 +136,7 @@ public class SubscriptionAccountPageObject {
     @FindBy(xpath = "(//span[@class='payment-form__error-msg'])[2]")
     private WebElement failMessage3d;
     
+     
     public void onTestStart(ITestResult result) {
 		try {
 			utilities.Helper.takeScreenShot(result.getMethod().getMethodName());
@@ -142,6 +146,35 @@ public class SubscriptionAccountPageObject {
 			e.printStackTrace();
 		}	 
 	  }
+    
+    public void verifyInsufficientPaymentErrorMessageFor3D() throws IOException {	
+		try {
+			String errormsg = paymentErrorMsg.getText();
+			if(errormsg.equals("Your card has insufficient funds.")) {
+				Reporting.updateTestReport("3D card Payment error message is correct",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+			} else {
+				Reporting.updateTestReport("3D card Payment error message is not correct",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);				
+			}
+		} catch (Exception e) {
+			Reporting.updateTestReport("3D card Payment error message is not correct"+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}			
+	}
+    
+    public void clickOnFailAuthentication(WebDriver driver) throws IOException {
+    	try {
+    		driver.switchTo().frame(securePaymentFrame3D);
+    		driver.switchTo().frame(challengeFrame);
+    		driver.switchTo().frame(fullScreenFrame);
+    		utilities.Helper.scrollWindow(failAuthentication);
+    		utilities.Helper.click(failAuthentication);
+    		Reporting.updateTestReport("Clicking on fail authentication is not working",
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		} catch (Exception e) {
+			Reporting.updateTestReport("Clicking on fail authentication is not working"+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}	
+	}
     
     public void verify3DErrorMessage() throws IOException {
     	try {
