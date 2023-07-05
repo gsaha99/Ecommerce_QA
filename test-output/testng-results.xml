@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="44" total="45" passed="1" failed="0" skipped="0">
+<testng-results ignored="43" total="45" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-06-16T12:16:55 IST" name="Default suite" finished-at="2023-06-16T12:20:30 IST" duration-ms="214194">
+  <suite started-at="2023-07-05T12:46:47 IST" name="PPE_Regression" finished-at="2023-07-05T12:51:17 IST" duration-ms="269864">
     <groups>
     </groups>
-    <test started-at="2023-06-16T12:16:55 IST" name="Default test" finished-at="2023-06-16T12:20:30 IST" duration-ms="214194">
+    <test started-at="2023-07-05T12:46:47 IST" name="Wiley_Test_Suite" finished-at="2023-07-05T12:51:17 IST" duration-ms="269864">
       <class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
-        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@303cf2ba]" started-at="2023-06-16T12:16:55 IST" name="initiate" finished-at="2023-06-16T12:17:10 IST" duration-ms="14811" status="PASS">
+        <test-method is-config="true" signature="initiate(org.testng.ITestContext,java.lang.String,java.lang.String)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@dcfda20]" started-at="2023-07-05T12:46:48 IST" name="initiate" finished-at="2023-07-05T12:47:07 IST" duration-ms="19235" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@634aa81e]]>
+                <![CDATA[org.testng.TestRunner@18faaff6]]>
               </value>
             </param>
             <param index="1">
@@ -19,45 +19,76 @@
                 <![CDATA[chrome]]>
               </value>
             </param>
+            <param index="2">
+              <value>
+                <![CDATA[Desktop]]>
+              </value>
+            </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initiate -->
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@303cf2ba]" started-at="2023-06-16T12:17:10 IST" name="launchBrowser" finished-at="2023-06-16T12:17:10 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="121" status="PASS">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@dcfda20]" started-at="2023-07-05T12:47:07 IST" name="launchBrowser" finished-at="2023-07-05T12:47:07 IST" depends-on-methods="utilities.DriverModule.initiate" duration-ms="202" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchBrowser -->
-        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@303cf2ba]" started-at="2023-06-16T12:17:10 IST" name="nameBefore" finished-at="2023-06-16T12:17:10 IST" duration-ms="2" status="PASS">
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@dcfda20]" started-at="2023-07-05T12:47:07 IST" name="nameBefore" finished-at="2023-07-05T12:47:07 IST" duration-ms="2" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC24_Verify_Shipping_Methods_for_POD_Products() throws java.io.IOException]]>
+                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC09_Higher_Education_Digitalproductpurchase_ForNewUser() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameBefore -->
-        <test-method signature="TC24_Verify_Shipping_Methods_for_POD_Products()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@303cf2ba]" started-at="2023-06-16T12:17:10 IST" name="TC24_Verify_Shipping_Methods_for_POD_Products" finished-at="2023-06-16T12:20:26 IST" duration-ms="195394" status="PASS">
+        <test-method signature="TC09_Higher_Education_Digitalproductpurchase_ForNewUser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@dcfda20]" started-at="2023-07-05T12:47:07 IST" name="TC09_Higher_Education_Digitalproductpurchase_ForNewUser" finished-at="2023-07-05T12:49:03 IST" duration-ms="116341" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC24_Verify_Shipping_Methods_for_POD_Products -->
-        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@303cf2ba]" started-at="2023-06-16T12:20:26 IST" name="nameAfter" finished-at="2023-06-16T12:20:26 IST" duration-ms="9" status="PASS">
+        </test-method> <!-- TC09_Higher_Education_Digitalproductpurchase_ForNewUser -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@dcfda20]" started-at="2023-07-05T12:49:03 IST" name="nameAfter" finished-at="2023-07-05T12:49:03 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC24_Verify_Shipping_Methods_for_POD_Products() throws java.io.IOException]]>
+                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC09_Higher_Education_Digitalproductpurchase_ForNewUser() throws java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nameAfter -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@303cf2ba]" started-at="2023-06-16T12:20:26 IST" name="CloseBrowser" finished-at="2023-06-16T12:20:30 IST" duration-ms="3721" status="PASS">
+        <test-method signature="TC22_New_User_Tax_for_Digital_product()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@dcfda20]" started-at="2023-07-05T12:49:03 IST" name="TC22_New_User_Tax_for_Digital_product" finished-at="2023-07-05T12:51:14 IST" duration-ms="130170" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC22_New_User_Tax_for_Digital_product -->
+        <test-method is-config="true" signature="nameBefore(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@dcfda20]" started-at="2023-07-05T12:49:03 IST" name="nameBefore" finished-at="2023-07-05T12:49:03 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC22_New_User_Tax_for_Digital_product() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameBefore -->
+        <test-method is-config="true" signature="nameAfter(java.lang.reflect.Method)[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@dcfda20]" started-at="2023-07-05T12:51:14 IST" name="nameAfter" finished-at="2023-07-05T12:51:14 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test_Suite.Wiley_NA_Cart_Test_Suite.TC22_New_User_Tax_for_Digital_product() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- nameAfter -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Test_Suite.Wiley_NA_Cart_Test_Suite@dcfda20]" started-at="2023-07-05T12:51:14 IST" name="CloseBrowser" finished-at="2023-07-05T12:51:17 IST" duration-ms="3626" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
       </class> <!-- Test_Suite.Wiley_NA_Cart_Test_Suite -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- Wiley_Test_Suite -->
+  </suite> <!-- PPE_Regression -->
 </testng-results>

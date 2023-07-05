@@ -13,27 +13,15 @@ import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.openqa.selenium.support.Colors;
 
 
 public class WordDocumentReport {
-	public static XWPFDocument documentReport=new XWPFDocument();
-	public static XWPFParagraph paragraph=documentReport.createParagraph();
-	public static XWPFRun run=paragraph.createRun();
-	public static FileOutputStream fos;
 	
-	/*public static String CreateTodayReportFolder()
-	{
-		String dateName = new SimpleDateFormat("yyyyMMdd").format(new Date());
-		String path = System.getProperty("user.dir")+"\\Result\\"+dateName;
-		File folder = new File(path);
-
-		if (!folder.exists()) {
-			folder.mkdir();
-		}
-		return path;
-	}*/
-	
-	
+	private static XWPFDocument documentReport=new XWPFDocument();
+	private static XWPFParagraph paragraph=documentReport.createParagraph();
+	private static XWPFRun run=paragraph.createRun();
+	private static FileOutputStream fos;
 	
 	/*
 	 * @Description: Creates a word document report
@@ -41,7 +29,9 @@ public class WordDocumentReport {
 	public static void createWordDocumentReport(String suiteName,String browserName,String browserVersion,String OS_Name) {
 		try {
 			String path=Reporting.CreateTodayReportFolder();
-			fos=new FileOutputStream(path+"\\"+suiteName+"_Report.docx");
+			String startTime = new SimpleDateFormat("MMDDhhmmss").format(new Date());
+			
+			fos=new FileOutputStream(path+"\\"+suiteName+"_"+startTime+"_SummaryReport.docx");
 			
 			String Hostname = SystemUtils.getHostName();
 			String Username = SystemUtils.getUserName();
@@ -93,6 +83,7 @@ public class WordDocumentReport {
 				run.addCarriageReturn();
 				run.setText("--------------------------------------------------------------------");
 				run.addCarriageReturn();
+				run.addCarriageReturn();
 			
 		}
 		catch(Exception e) {
@@ -109,6 +100,7 @@ public class WordDocumentReport {
 			run.addCarriageReturn();
 			run.addCarriageReturn();
 			run.setText(testCaseName);
+			run.setBold(true);
 			run.setText(" --> Execution started");
 			run.addCarriageReturn();
 		}

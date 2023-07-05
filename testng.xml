@@ -8,11 +8,7 @@
 					
 					<include name="TC09_.*" />
 					<include name="TC22_.*" />
-					<include name="TC37_.*" />	
-					<include name="TC39_.*" />
-					<include name="TC40_.*" />
-					
-					
+										
 				</methods>
 			</class>
 		</classes>

@@ -5,16 +5,7 @@
 <suite name="PPE_Regression"  >
 
 
- <!--test name="ChromeTest">
-	<parameter name="browser" value="chrome"/>
-	<classes>
-			<class name="Test_Suite.Wiley_dot_com_Test_Suite">
-				
-			</class>
-		</classes>
-</test-->
-
-<test name="EdgeTest">
+<test name="AGS Suite">
 	<parameter name="browser" value="Edge" />
 	<classes>
 	<class name="Test_Suite.AGS_Test_Suite">
@@ -23,7 +14,7 @@
 	</classes>	
 </test> 
 
-<test name="FirefoxTest">
+<test name="VET Suite">
 	<parameter name="browser" value="firefox" />
 	<classes>
 	<class name="Test_Suite.Vet_Test_Suite">
@@ -31,7 +22,24 @@
 			</class>
 	</classes>	
 </test> 
+
+ <test name="Wiley Dot COM">
+	<parameter name="browser" value="Edge"/>
+	<classes>
+			<class name="Test_Suite.Wiley_dot_com_Test_Suite">
+				
+			</class>
+		</classes>
+</test>
  
+  <test name="WileyNA CART">
+	<parameter name="browser" value="Edge"/>
+	<classes>
+			<class name="Test_Suite.Wiley_NA_Cart_Test_Suite">
+				
+			</class>
+		</classes>
+</test>
  
 </suite> <!-- PPE Regression -->
 

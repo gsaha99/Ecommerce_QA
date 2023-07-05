@@ -4,6 +4,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import javax.naming.Context;
@@ -30,81 +31,94 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+
+/* Framework Developed By  : Gourab Saha
+ * Email ID : gsaha@wiley.com
+ * 
+ */
+
+
 public class DriverModule {
 
 	public  static WebDriver driver =null;
 	
-	public static final String username="arakshit_jcH98V";
-	public static final String AccessToken ="snS4qNFU3yjVeMNDfdSy";
+	private static final String username		= excelOperation.getTestData("BS_Username", "BrowserStack_Config", "Data");
+	private static final String AccessToken 	= excelOperation.getTestData("BS_Password", "BrowserStack_Config", "Data");
 	
 	public static final String URL = "https://"+username+":"+AccessToken+"@hub-cloud.browserstack.com/wd/hub";
 	
+	
 	@BeforeTest
-	@Parameters("browser")
-	public void initiate(ITestContext context,@Optional("chrome") String browser)
+	@Parameters({"browser","DeviceType"})
+	public void initiate(ITestContext context,@Optional("chrome") String browser,@Optional("Desktop")String DeviceType)
 	{
 		try {
-			String date = new SimpleDateFormat("ddmmyyyyhhmmss").format(new Date());			
-			String testSuiteName=context.getCurrentXmlTest().getClasses().stream()
-		               .findFirst().get().getName().substring(11);			
-			DesiredCapabilities Caps= new DesiredCapabilities();
-			Caps.setCapability("name", "PPE Regression Suite");	
-			EdgeOptions edgeOptions = new EdgeOptions();
-			edgeOptions.addArguments("InPrivate");
-			edgeOptions.addArguments("--remote-allow-origins=*");
-			ChromeOptions chromeOptions = new ChromeOptions();
-			chromeOptions.addArguments("--incognito");
 			
-			//create firefox instance
-			if(browser.equalsIgnoreCase("firefox")){
-				
-				Caps.setCapability("os", "windows");
-				Caps.setCapability("os_version", "11");
-				Caps.setCapability("browser", browser);
-				Caps.setCapability("browser_version", "109");
-				
+			
+			String date = new SimpleDateFormat("hhmmss").format(new Date());			
+			String testSuiteName=context.getCurrentXmlTest().getClasses().stream()
+		               .findFirst().get().getName().substring(11);
+			
+			DesiredCapabilities Caps= new DesiredCapabilities();
+			
+			HashMap<String, Object> browserstackOptions = new HashMap<String, Object>();
+			
+			browserstackOptions.put("seleniumVersion", "4.8.0");
+			
+			if (DeviceType.equalsIgnoreCase("Desktop")) 
+			{
+				browserstackOptions.put("os", excelOperation.getTestData("BS_OS_Desktop", "BrowserStack_Config", "Data"));
+				browserstackOptions.put("osVersion", excelOperation.getTestData("BS_OSVersion_Desktop", "BrowserStack_Config", "Data"));
 			}
-				//Check if parameter passed as 'chrome'
-			else if(browser.equalsIgnoreCase("chrome")){			
-				Caps.setCapability("os", "windows");
-				Caps.setCapability("os_version", "10");
-				Caps.setCapability("browser", browser);
-				Caps.setCapability("browser_version", "110");
-				Caps.setCapability(ChromeOptions.CAPABILITY,chromeOptions);
-				
+			else if (DeviceType.equalsIgnoreCase("Mobile")) 
+			{
+				browserstackOptions.put("os", excelOperation.getTestData("BS_OS_Mobile", "BrowserStack_Config", "Data"));
+				browserstackOptions.put("osVersion", excelOperation.getTestData("BS_OSVersion_Mobile", "BrowserStack_Config", "Data"));
+				browserstackOptions.put("deviceName",excelOperation.getTestData("BS_DeviceName_Mobile", "BrowserStack_Config", "Data"));
 			}
-			else if(browser.equalsIgnoreCase("safari")){
-
-				Caps.setCapability("os", "OS X");
-				Caps.setCapability("os_version", "Ventura");
-				Caps.setCapability("browser", browser);
-				Caps.setCapability("browser_version", "16.3");
-				
-			}
-			else if(browser.equalsIgnoreCase("Edge")){				
-				Caps.setCapability("os", "windows");
-				Caps.setCapability("os_version", "10");
-				Caps.setCapability("browser", browser);
-				Caps.setCapability("browser_version", "110");
-			}
-			//driver= new RemoteWebDriver(new URL(URL), Caps);
-			driver=new EdgeDriver(edgeOptions);
-			//driver=new FirefoxDriver();
+			
+			browserstackOptions.put("browserVersion",excelOperation.getTestData("BS_BrowserVersion", "BrowserStack_Config", "Data"));
+			
+			browserstackOptions.put("projectName", "PPE RegressionSuite");
+			browserstackOptions.put("buildName", testSuiteName);
+			browserstackOptions.put("sessionName", excelOperation.getTestData("BS_BuildNo", "BrowserStack_Config", "Data"));
+			//browserstackOptions.put("name", testSuiteName);
+			
+			browserstackOptions.put("interactiveDebugging", "true"); // Enable the Interactive session in runtime
+			browserstackOptions.put("debug", "true"); 		// to enable visual logs
+			browserstackOptions.put("consoleLogs", "info");  // Enable console logs
+			browserstackOptions.put("networkLogs", "true"); // to enable network logs to be logged
+			
+			browserstackOptions.put("resolution", "1024x768");	 // To set Resolution
+			
+			browserstackOptions.put("idleTimeout", "300"); // Default 90 sec and Max 300 Sec
+			
+			browserstackOptions.put("browser", browser); // Set the Browser
+							
+			Caps.setCapability("bstack:options", browserstackOptions);	
+			
+			driver= new RemoteWebDriver(new URL(URL), Caps);
+			
+			//driver=new ChromeDriver();
+		
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));			
 			
-			Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
 			
-			String browserName = caps.getBrowserName();							
-			String browserVersion = caps.getBrowserVersion();				
-			String OS_Name = System.getProperty("os.name").toLowerCase();
-			
+			String browserName 		= browserstackOptions.get("browser").toString();							
+			String browserVersion 	= browserstackOptions.get("browserVersion").toString();
+			String OS_Name			= browserstackOptions.get("os").toString();
+			String OS_Version 		= browserstackOptions.get("osVersion").toString();
+	
+		
 			Reporting.summaryReportdesign(testSuiteName+"_ReportSummary_In_"+browserName+"_"+date,
-					browserName,browserVersion,OS_Name);
+					browserName,browserVersion,OS_Name,OS_Version);
+			
 			LogTextFile.createTodayLog(testSuiteName+"_"+date,browserName,browserVersion,OS_Name);
-			WordDocumentReport.createWordDocumentReport(testSuiteName+"_"+date, browserName, browserVersion, OS_Name);
-					
+			
+			WordDocumentReport.createWordDocumentReport(testSuiteName, browserName, browserVersion, OS_Name);
+						
 		}
 		catch(Exception e){ System.out.println(e.getMessage());}
 
