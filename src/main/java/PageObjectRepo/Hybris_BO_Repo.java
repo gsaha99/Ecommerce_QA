@@ -57,6 +57,9 @@ public class Hybris_BO_Repo {
 	WebElement MediaURL;
 	@FindBy(xpath="(//*[@class='yw-expandCollapse z-button'])[8]")
 	WebElement EssentialArrowButtonForExpand;
+	@FindBy(xpath = "//button[@title='Switch search mode']")
+	WebElement SwitchSearchMode;
+	
 	
 	@FindBy(xpath="//span[@class='ye-default-reference-editor-bandbox ye-default-reference-editor-bandbox-list-collapsed z-bandbox']/input[@class='z-bandbox-input'][1]")
 	WebElement CustomerIdField;
@@ -101,8 +104,6 @@ public class Hybris_BO_Repo {
 	WebElement ProceedButton;
 
 
-	@FindBy(xpath = "//button[@title='Switch search mode']")
-	WebElement SwitchSearchMode;
 
 	@FindBy(xpath = "(//input[@type='text'])[19]")
 	WebElement OrderIDField;

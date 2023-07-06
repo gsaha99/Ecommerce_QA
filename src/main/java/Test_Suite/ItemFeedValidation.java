@@ -109,22 +109,30 @@ public class ItemFeedValidation extends DriverModule {
 									//											(By.xpath(("//*[@class='yw-expandCollapse z-button'])[8]"))));									
 									HybrisBO.clickEssentialArrowButtonForExpand();
 									System.out.println("Essential Arrow button clicked");
-									Thread.sleep(3000);
-									//									wait.until(ExpectedConditions.visibilityOfElementLocated
-									//											(By.xpath("//*[contains(text(),'Additional Multimedia Objects')]")));
-									//									ScrollingWebPage.PageDown(driver, SS_path);
-									//									ScrollingWebPage.PageScrollDownUptoBottom(driver, SS_path);
-									//									ScrollingWebPage.PageScrollDownUptoBottom(driver, SS_path);
 
-									HybrisBO.doubleClickOnExternalImage();
-									System.out.println("double clicked");
+									try {
+										Thread.sleep(3000);
 
-									Thread.sleep(3000);
-									System.out.println("waited for 3000ms");
-									wait.until(ExpectedConditions.visibilityOfElementLocated
-											(By.className("yw-editorarea-tabbox-tabs-tab z-tab z-tab-selected")));
-									HybrisBO.getMediaURL();
-									System.out.println("Media URL "+ HybrisBO.getMediaURL());
+										//									wait.until(ExpectedConditions.visibilityOfElementLocated
+										//											(By.xpath("//*[contains(text(),'Additional Multimedia Objects')]")));
+										//									ScrollingWebPage.PageDown(driver, SS_path);
+										//									ScrollingWebPage.PageScrollDownUptoBottom(driver, SS_path);
+										//									ScrollingWebPage.PageScrollDownUptoBottom(driver, SS_path);
+
+										HybrisBO.doubleClickOnExternalImage();
+										System.out.println("double clicked");
+
+										Thread.sleep(3000);
+										System.out.println("waited for 3000ms");
+										wait.until(ExpectedConditions.visibilityOfElementLocated
+												(By.className("yw-editorarea-tabbox-tabs-tab z-tab z-tab-selected")));
+										HybrisBO.getMediaURL();
+										System.out.println("Media URL "+ HybrisBO.getMediaURL());
+									}
+									catch (Exception e) {
+										Reporting.updateTestReport("Double click on External Image failed",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
 								}
 								catch (Exception e) {
 									Reporting.updateTestReport("Navigation to Multimedia tab failed",
