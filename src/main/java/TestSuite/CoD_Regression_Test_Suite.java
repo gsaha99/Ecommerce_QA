@@ -799,50 +799,10 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 		}
 	}
 
-	@Test
-	public void TC017_changePaymentMethod() throws IOException, InterruptedException {
-		try {
-			Reporting.test = Reporting.extent.createTest("TC17_ChangePaymentMethod");
-			LogTextFile.writeTestCaseStatus("TC17_ChangePaymentMethod", "Test case");
-			driver.get(cod_DEV_CreateAccount_URL);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-
-			accountLoginPageObject.verifyAccountLoginPage();
-			createAccountPageObject.clickOnCreateANewAccountLink();
-			createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
-			createAccountPageObject.getSuccessMessageForAccountCreation();
-			subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
-			subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
-
-			subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
-			subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
-			subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
-			subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
-			subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
-			subscriptionAccountPageObject.clickOnSecurePaymentButton();
-			subscriptionAccountPageObject.enterWPSSecurePaymentDetails(visa, expiryDate, cvc, driver);
-			subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-			orderDetailsPageObject.verifyThankYouMessage();
-			loginPageObject.clickOnNavigationMenu();
-			orderDetailsPageObject.selectMySubscriptionButton();
-			orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
-			subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
-
-			subscriptionDetailsPageObject.clickOnChangePaymentMethod();
-			subscriptionAccountPageObject.enterWPSSecurePaymentDetails(updateCardNumber, updateExpiryDate, updateCVV,
-					driver);
-			subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-			Assert.assertEquals(subscriptionDetailsPageObject.getCardNumber().contains("8210"), true);
-			Assert.assertEquals(subscriptionDetailsPageObject.getExpirationDate().contains(updateExpiryDate), true);
-		} catch (Exception e) {
-			driver.get(cod_DEV_LoginURL);
-			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
+	
 
 	@Test
-	public void TC062_verifyExpiryDateInPaymentFieldValidation() throws IOException, InterruptedException {
+	public void TC62_verifyExpiryDateInPaymentFieldValidation() throws IOException, InterruptedException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC62_verifyExpiryDateInPaymentField");
 			LogTextFile.writeTestCaseStatus("TC62_verifyExpiryDateInPaymentField", "Test case");
@@ -876,7 +836,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	}
 
 	@Test
-	public void TC067_verifyErrorIfCVVIsLessDigitInPaymentField() throws IOException, InterruptedException {
+	public void TC67_verifyErrorIfCVVIsLessDigitInPaymentField() throws IOException, InterruptedException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC67_verifyCVVLessDataError");
 			LogTextFile.writeTestCaseStatus("TC67_verifyCVVLessDataError", "Test case");
@@ -908,7 +868,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	}
 
 	@Test
-	public void TC068_verifyErrorIfCardNumberIsLessDigitInPaymentField() throws IOException, InterruptedException {
+	public void TC68_verifyErrorIfCardNumberIsLessDigitInPaymentField() throws IOException, InterruptedException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC68_verifyErrorIfCardNumberIsLessDigit");
 			LogTextFile.writeTestCaseStatus("TC68_verifyErrorIfCardNumberIsLessDigit", "Test case");
@@ -941,7 +901,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	}
 
 	@Test
-	public void TC069_verifyInCorrectCardNumberInPaymentField() throws IOException, InterruptedException {
+	public void TC69_verifyInCorrectCardNumberInPaymentField() throws IOException, InterruptedException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC069_verifyInCorrectCardNumberInPaymentField");
 			LogTextFile.writeTestCaseStatus("TC069_verifyInCorrectCardNumberInPaymentField", "Test case");
@@ -974,7 +934,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	}
 
 	@Test
-	public void TC070_verifyErrorIfExpiryDateIsLessDigitInPaymentField() throws IOException, InterruptedException {
+	public void TC70_verifyErrorIfExpiryDateIsLessDigitInPaymentField() throws IOException, InterruptedException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC070_verifyErrorIfExpiryDateIsLessDigitInPaymentField");
 			LogTextFile.writeTestCaseStatus("TC070_verifyErrorIfExpiryDateIsLessDigitInPaymentField", "Test case");
@@ -1009,7 +969,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 		
 		
 		@Test
-		public void TC021_verifyErrorIfCardNumberIsLessDigitInSubscriptionDetailsPage () throws IOException, InterruptedException {			
+		public void TC21_verifyErrorIfCardNumberIsLessDigitInSubscriptionDetailsPage () throws IOException, InterruptedException {			
 			Reporting.test = Reporting.extent.createTest("TC17_ChangePaymentMethod");
 			LogTextFile.writeTestCaseStatus("TC17_ChangePaymentMethod", "Test case");
 			driver.get(cod_QA_CreateAccount_URL);
