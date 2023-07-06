@@ -350,29 +350,27 @@ public class LoginPageObject {
 		}		
 	}
 	
-	public void enterPassword() throws IOException { 
+	public void enterEmailAddress(String emailAddressText) throws IOException {
 		try {
-			utilities.Helper.enterText(loginpwd, excelOperation.getTestData("Password", "CoD_Test_Data", "Test_Data"));
-			Reporting.updateTestReport("Enter password", 
+			utilities.Helper.enterText(emailAddress, emailAddressText);
+			Reporting.updateTestReport("Email address is entered",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
-			Reporting.updateTestReport("Enter password got failed", 
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-		
+			Reporting.updateTestReport("Email address is not entered"+ e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+		}				
 	}
-	
-	public void enterEmailAddress() throws IOException { 
+		
+	public void enterPassword(String passwordText) throws IOException {
 		try {
-			utilities.Helper.enterText(emailAddress, excelOperation.getTestData("EmailID", "CoD_Test_Data", "Test_Data"));
-			Reporting.updateTestReport("Enter email Address", 
+			utilities.Helper.enterText(loginpwd, passwordText );
+			Reporting.updateTestReport("passowrd is entered",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		} catch (Exception e) {
-			Reporting.updateTestReport("Enter Address was not entered", 
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			Reporting.updateTestReport("password is not entered"+ e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 		}		
-		
-	}
+	}	
 	
 	public boolean enterEmailID() throws IOException {	
 		try {
