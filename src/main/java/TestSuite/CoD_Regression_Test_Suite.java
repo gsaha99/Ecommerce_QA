@@ -48,7 +48,8 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
 	String firstName = utilities.Helper.generateRandomAlphabets();
 	String lastName = utilities.Helper.generateRandomAlphabets();
-	String emailAddress = "Test" + utilities.Helper.generateRandomString() + "@mailinator.com";
+	String emailAddress = "Test" + utilities.Helper.generateRandomString() + "@mailinator.com";	
+	String emailAddressFor3DCards = "Test" + utilities.Helper.generateRandomString() + "@mailinator.com";
 	private static String common_Password = excelOperation.getTestData("Password", "CoD_Test_Data", "Test_Data");
 	private static String cod_DEV_LoginURL = excelOperation.getTestData("Dev_URL", "CoD_Test_Data", "Test_Data");
 	private static String cod_DEV_CreateAccount_URL = excelOperation.getTestData("Dev_CreateAccount_URL",
@@ -132,9 +133,11 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 			driver.get(cod_QA_CreateAccount_URL);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 			try {
-				accountLoginPageObject.verifyAccountLoginPage();				
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Account Login']")));
+				accountLoginPageObject.verifyAccountLoginPage();			
 				createAccountPageObject.clickOnCreateANewAccountLink();
 				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.name("firstName")));
 					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
 					try {
 						createAccountPageObject.getSuccessMessageForAccountCreation();						
@@ -170,8 +173,9 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC02_Login_from_Checkout_Page", "Test case");
 			// driver.get(cod_DEV_CreateAccount_URL);
 			driver.get(cod_QA_CreateAccount_URL);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'login-account__submit-btn')]")));
 				accountLoginPageObject.veifyLoginButtonIsDisabled();
 				try {
 					accountLoginPageObject.enterEmailAddress(emailAddress);
@@ -211,11 +215,14 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC03_Login_from_Login_Page", "Test case");
 			//driver.get(cod_DEV_LoginURL);
 			driver.get(cod_QA_Login_URL);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='nav-menu']")));
 				loginPageObject.clickOnNavigationMenu();
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='user-dropdown__login-btn']")));
 				loginPageObject.selectLoginButton();
 				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("button[contains(@class,'login-account__submit-btn')]")));
 					loginPageObject.veifyLoginButtonIsDisabled();
 
 					try {
@@ -304,53 +311,108 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC05_LoginForm_Field_Validation_In_LoginPage");
 			LogTextFile.writeTestCaseStatus("TC05_LoginForm_Field_Validation_In_LoginPage", "Test case");
 			// driver.get(cod_DEV_LoginURL);
-			driver.get(cod_QA_CreateAccount_URL);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			driver.get(cod_QA_Login_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='nav-menu']")));
 				loginPageObject.clickOnNavigationMenu();
+				wait.until(ExpectedConditions
+						.elementToBeClickable(By.xpath("//button[@class='user-dropdown__login-btn']")));
 				loginPageObject.selectLoginButton();
 				loginPageObject.verifyLoginPageText();
 				try {
 					loginPageObject.clickOnEmailInputField();
 					loginPageObject.clickOnPasswordInputField();
-					loginPageObject.verifyEmailAddressBlankMessageText();
-					loginPageObject.clickOnEmailInputField();
-					loginPageObject.verifyBlankPasswordFieldMessageText();
-					/* Enter invalid details in Email address field */
-					loginPageObject.enterSymbolsInEmailAddressField();
-					loginPageObject.verifyInvalidEmailAddressMessageText();
-					loginPageObject.enterAlphabetsInEmailAddressField();
-					loginPageObject.verifyInvalidEmailAddressMessageText();
-					loginPageObject.enterNumbersInEmailAddressField();
-					loginPageObject.verifyInvalidEmailAddressMessageText();
-					loginPageObject.enterSymbolsInPasswordField();
-					/* Enter invalid details in password field */
-					loginPageObject.verifyInvalidPasswordMessageText();
-					loginPageObject.enterAlphabetsInPassswordField();
-					loginPageObject.verifyInvalidPasswordMessageText();
-					loginPageObject.enterNumbersInPasswordField();
-					loginPageObject.verifyInvalidPasswordMessageText();
-					/* Entering wrong email address and wrong password */
-					loginPageObject.enterAlphabetsInEmailAddressField();
-					loginPageObject.enterAlphabetsInPassswordField();
-					loginPageObject.verifyInvalidEmailAddressMessageText();
-					loginPageObject.verifyBlankPasswordFieldMessageText();
-					loginPageObject.veifyLoginButtonIsDisabled();
-					/* Entering correct email address but wrong password */
-					loginPageObject.enterRandomGenerationEmailForEmailAddressField();
-					loginPageObject.enterAlphabetsInPassswordField();
-					loginPageObject.verifyBlankPasswordFieldMessageText();
-					loginPageObject.veifyLoginButtonIsDisabled();
-					/* Entering invalid email address but right password */
-					loginPageObject.enterAlphabetsInEmailAddressField();
-					loginPageObject.enterRandomStringForPasswordAddressField();
-					loginPageObject.verifyInvalidEmailAddressMessageText();
-					loginPageObject.veifyLoginButtonIsDisabled();
-					/* Enter Invalid credentials */
-					loginPageObject.enterRandomGenerationEmailForEmailAddressField();
-					loginPageObject.enterRandomStringForPasswordAddressField();
-					loginPageObject.clickOnLoginButton();
-					loginPageObject.verifyInvalidCredentialMessageText();
+					try {
+						loginPageObject.verifyEmailAddressBlankMessageText();
+						loginPageObject.clickOnEmailInputField();
+						loginPageObject.verifyBlankPasswordFieldMessageText();
+						try {
+							/* Enter invalid details in Email address field */
+							loginPageObject.enterSymbolsInEmailAddressField();
+							loginPageObject.verifyInvalidEmailAddressMessageText();
+							loginPageObject.enterAlphabetsInEmailAddressField();
+							loginPageObject.verifyInvalidEmailAddressMessageText();
+							loginPageObject.enterNumbersInEmailAddressField();
+							loginPageObject.verifyInvalidEmailAddressMessageText();
+							loginPageObject.enterSymbolsInPasswordField();
+							try {
+								/* Enter invalid details in password field */
+								loginPageObject.verifyInvalidPasswordMessageText();
+								loginPageObject.enterAlphabetsInPassswordField();
+								loginPageObject.verifyInvalidPasswordMessageText();
+								loginPageObject.enterNumbersInPasswordField();
+								loginPageObject.verifyInvalidPasswordMessageText();
+								try {
+									/* Entering wrong email address and wrong password */
+									loginPageObject.enterAlphabetsInEmailAddressField();
+									loginPageObject.enterAlphabetsInPassswordField();
+									loginPageObject.verifyInvalidEmailAddressMessageText();
+									loginPageObject.verifyBlankPasswordFieldMessageText();
+									loginPageObject.veifyLoginButtonIsDisabled();
+									try {
+										/* Entering correct email address but wrong password */
+										loginPageObject.enterRandomGenerationEmailForEmailAddressField();
+										loginPageObject.enterAlphabetsInPassswordField();
+										loginPageObject.verifyBlankPasswordFieldMessageText();
+										loginPageObject.veifyLoginButtonIsDisabled();
+										try {
+											/* Entering invalid email address but right password */
+											loginPageObject.enterAlphabetsInEmailAddressField();
+											loginPageObject.enterRandomStringForPasswordAddressField();
+											loginPageObject.verifyInvalidEmailAddressMessageText();
+											loginPageObject.veifyLoginButtonIsDisabled();
+											try {
+												/* Enter Invalid credentials */
+												loginPageObject.enterRandomGenerationEmailForEmailAddressField();
+												loginPageObject.enterRandomStringForPasswordAddressField();
+												loginPageObject.clickOnLoginButton();
+												//wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='There was an unexpected problem with your login. Please check your credentials.']")));
+												loginPageObject.verifyInvalidCredentialMessageText();
+											} catch (Exception e) {
+												Reporting.updateTestReport(
+														"Invalid email credetials message is worng message is wrong "
+																+ e.getClass().toString(),
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											}
+											/* Enter Invalid credentials */
+											loginPageObject.enterRandomGenerationEmailForEmailAddressField();
+											loginPageObject.enterRandomStringForPasswordAddressField();
+											loginPageObject.clickOnLoginButton();
+											loginPageObject.verifyInvalidCredentialMessageText();
+										} catch (Exception e) {
+											Reporting.updateTestReport(
+													"Invalid email address message is wrong " + e.getClass().toString(),
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										}
+									} catch (Exception e) {
+										Reporting.updateTestReport(
+												"Blank password field message is wrong " + e.getClass().toString(),
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+								} catch (Exception e) {
+									Reporting.updateTestReport(
+											"Not able to enter wrong details in email and password field "
+													+ e.getClass().toString(),
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"Not able to enter invalid details in password field "
+												+ e.getClass().toString(),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+						} catch (Exception e) {
+							Reporting.updateTestReport(
+									"Not able to enter symbols in email field " + e.getClass().toString(),
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport(
+								"Clicking on email input field and passowrd input field is not working "
+										+ e.getClass().toString(),
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Invalid data message is not correct " + e.getClass().toString(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -371,52 +433,72 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC07_Billing_Information_Fields_Validation");
 			LogTextFile.writeTestCaseStatus("TC07_Billing_Information_Fields_Validation", "Test case");
-			driver.get(cod_DEV_LoginURL);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			driver.get(cod_QA_CreateAccount_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
 			try {
-				loginPageObject.clickOnNavigationMenu();
-				loginPageObject.selectLoginButton();
+				wait.until(ExpectedConditions.elementToBeClickable(By.name("email")));
+				accountLoginPageObject.enterEmailAddress(emailAddress);
+				accountLoginPageObject.enterPassword(common_Password);
+				accountLoginPageObject.clickOnLoginButton();
 				try {
-					loginPageObject.enterEmailAddress(emailAddress);
-					loginPageObject.enterPassword(common_Password);
-					loginPageObject.clickOnLoginButton();
-					loginPageObject.clickOnTestSubscriptionDetailsSubscribeButon();
+					wait.until(ExpectedConditions.elementToBeClickable(By.name("CCname")));
 					subscriptionAccountPageObject.clickOnCreditCardInputBox();
 					subscriptionAccountPageObject.clickOnAddressLine1InputBox();
-					subscriptionAccountPageObject.verifyCreditCardErrorMessageForBlankField();
-					subscriptionAccountPageObject.clickOnCityTownInputBox();
-					subscriptionAccountPageObject.verifyAddressLine1RequiredErrorMessageForBlankField();
-					subscriptionAccountPageObject.clickOnStateInputBox();
-					subscriptionAccountPageObject.verifyCityTownErrorMessageForBlankField();
-					subscriptionAccountPageObject.clickOnZipCodeInputBox();
-					subscriptionAccountPageObject.clickOnPhoneNumberInputBox();
-					subscriptionAccountPageObject.verifyZipCodeErrorMessageForBlankField();
-					subscriptionAccountPageObject.clickOnZipCodeInputBox();
-					subscriptionAccountPageObject.verifyPhoneNumberErrorMessageForBlankField();
-					subscriptionAccountPageObject.enterSymbolsInCreditCardField();
-					subscriptionAccountPageObject.verifyCreditCardErrorMessage();
-					subscriptionAccountPageObject.enterNumbersInCreditCardField();
-					// Assert.assertEquals(subscriptionAccountPageObject.verifyCreditCardErrorMessage(),"First
-					// Name must contain only letters, apostrophes or dashes.");
-					subscriptionAccountPageObject.enterAlphaNumericInCreditCardField();
-					// Assert.assertEquals(subscriptionAccountPageObject.verifyCreditCardErrorMessage(),"First
-					// Name must contain only letters, apostrophes or dashes.");
-					subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
-					subscriptionAccountPageObject.enterThreeCharInAddressLine1Field();
-					subscriptionAccountPageObject.verifyAddressLine1ErrorMessage();
-					subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
-					subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
-					subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
-					subscriptionAccountPageObject.enterInvalidNumbersInPhoneNumberField();
-					subscriptionAccountPageObject.verifyPhoneNumberErrorMessage();
-					createAccountPageObject.clickOnEditButton();
+					try {
+						subscriptionAccountPageObject.verifyCreditCardErrorMessageForBlankField();
+						subscriptionAccountPageObject.clickOnCityTownInputBox();
+						subscriptionAccountPageObject.verifyAddressLine1RequiredErrorMessageForBlankField();
+						subscriptionAccountPageObject.clickOnStateInputBox();
+						try {
+							subscriptionAccountPageObject.verifyCityTownErrorMessageForBlankField();
+							subscriptionAccountPageObject.clickOnZipCodeInputBox();
+							subscriptionAccountPageObject.clickOnPhoneNumberInputBox();
+							try {
+								subscriptionAccountPageObject.verifyZipCodeErrorMessageForBlankField();
+								subscriptionAccountPageObject.clickOnZipCodeInputBox();
+								subscriptionAccountPageObject.verifyPhoneNumberErrorMessageForBlankField();
+								subscriptionAccountPageObject.enterSymbolsInCreditCardField();
+								subscriptionAccountPageObject.verifyCreditCardErrorMessage();
+								subscriptionAccountPageObject.enterNumbersInCreditCardField();
+								// Assert.assertEquals(subscriptionAccountPageObject.verifyCreditCardErrorMessage(),"First
+								// Name must contain only letters, apostrophes or dashes.");
+								subscriptionAccountPageObject.enterAlphaNumericInCreditCardField();
+								// Assert.assertEquals(subscriptionAccountPageObject.verifyCreditCardErrorMessage(),"First
+								// Name must contain only letters, apostrophes or dashes.");
+								subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+								subscriptionAccountPageObject.enterThreeCharInAddressLine1Field();
+								subscriptionAccountPageObject.verifyAddressLine1ErrorMessage();
+								subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+								subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+								subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+								subscriptionAccountPageObject.enterInvalidNumbersInPhoneNumberField();
+								subscriptionAccountPageObject.verifyPhoneNumberErrorMessage();
+								createAccountPageObject.clickOnEditButton();
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"zip input box or phone number input field is not clicked "
+												+ e.getClass().toString(),
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+						} catch (Exception e) {
+							Reporting.updateTestReport(
+									"city or state input field is not clicked " + e.getClass().toString(),
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport(
+								"Credit card or address line1 input field is not clicked " + e.getClass().toString(),
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+
 				} catch (Exception e) {
 					Reporting.updateTestReport(
 							"Billing address testing  for invalid data is failed " + e.getClass().toString(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			} catch (Exception e) {
-				Reporting.updateTestReport("Login button is not visible " + e.getClass().toString(),
+				Reporting.updateTestReport(
+						"Login button is not visible or user was not created " + e.getClass().toString(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 		} catch (Exception e) {
@@ -620,16 +702,16 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 
 	
 	@Test
-	public void TC71_securePaymentValidation3DInsufficientFunds() throws InterruptedException, IOException {
+	public void TC60_securePaymentValidation3DInsufficientFunds() throws InterruptedException, IOException {
 		try {
-		Reporting.test = Reporting.extent.createTest("TC71_securePayment_Validation_3DInsufficient_Funds");
-		LogTextFile.writeTestCaseStatus("TC71_securePayment_Validation_3DInsufficient_Funds", "Test case");
+		Reporting.test = Reporting.extent.createTest("TC60_securePayment_Validation_3DInsufficient_Funds");
+		LogTextFile.writeTestCaseStatus("TC60_securePayment_Validation_3DInsufficient_Funds", "Test case");
 		driver.get(cod_DEV_CreateAccount_URL);
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		createAccountPageObject.clickOnCreateANewAccountLink();
 		loginPageObject.clickOnSubscribeButton();
 		createAccountPageObject.clickOnCreateANewAccountLink();
-		createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+		createAccountPageObject.creationOfAccount(firstName, lastName, emailAddressFor3DCards, password);
 		createAccountPageObject.getSuccessMessageForAccountCreation();
 		subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
 		subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
@@ -670,7 +752,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 			createAccountPageObject.clickOnCreateANewAccountLink();
 			loginPageObject.clickOnSubscribeButton();
 			createAccountPageObject.clickOnCreateANewAccountLink();
-			createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+			createAccountPageObject.creationOfAccount(firstName, lastName, emailAddressFor3DCards, password);
 			createAccountPageObject.getSuccessMessageForAccountCreation();
 			subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
 			subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
@@ -694,16 +776,16 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	}
 
 	@Test
-	public void TC60_3DCardSuccessfullPayment() throws InterruptedException, IOException {
+	public void TC71_3DCardSuccessfullPayment() throws InterruptedException, IOException {
 		try {
-			Reporting.test = Reporting.extent.createTest("TC60_3D_Card_Successfull_Payment");
-			LogTextFile.writeTestCaseStatus("TC60_3D_Card_Successfull_Payment", "Test case");
+			Reporting.test = Reporting.extent.createTest("TC71_3D_Card_Successfull_Payment");
+			LogTextFile.writeTestCaseStatus("TC71_3D_Card_Successfull_Payment", "Test case");
 			driver.get(cod_DEV_CreateAccount_URL);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 			createAccountPageObject.clickOnCreateANewAccountLink();
 			loginPageObject.clickOnSubscribeButton();
 			createAccountPageObject.clickOnCreateANewAccountLink();
-			createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+			createAccountPageObject.creationOfAccount(firstName, lastName, emailAddressFor3DCards, password);
 			createAccountPageObject.getSuccessMessageForAccountCreation();
 			subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
 			subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();

@@ -252,7 +252,7 @@ public class LoginPageObject {
 	public void verifyEmailAddressBlankMessageText() throws IOException {
 		try {
 			String blankEmailFieldActualMessage = blankEmailFieldMessage.getText();	
-			if(blankEmailFieldActualMessage.equals("Blank field Email Address is not correct")) {
+			if(blankEmailFieldActualMessage.equals(blankEmailFieldExpectedMessage)) {
 				Reporting.updateTestReport("Blank email message text is correct",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			} else {
