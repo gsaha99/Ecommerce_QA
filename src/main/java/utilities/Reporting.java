@@ -2,6 +2,9 @@ package utilities;
 
 import java.io.File;
 import java.net.InetAddress;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.apache.commons.lang3.SystemUtils;
@@ -25,11 +28,16 @@ public class Reporting {
 	public static ExtentTest test;
 	public static ExtentReports extent;
 
-	public static int FlagBS=0;
-
+	private static int FlagBS=0;
+	private static String wordDocPath;
+	
+	public static String dateName = new SimpleDateFormat("yyyyMMdd").format(new Date());
+	
+	
+	
 	public static String CreateTodayReportFolder()
 	{
-		String dateName = new SimpleDateFormat("yyyyMMdd").format(new Date());
+		
 		String path = System.getProperty("user.dir")+"\\Result\\"+dateName;
 		File folder = new File(path);
 
@@ -42,14 +50,28 @@ public class Reporting {
 	
 	public static String CreateExecutionScreenshotFolder(String startTime)
 	{ 
-		//String startTime =new SimpleDateFormat("hhmmss").format(new Date()); 
-	   // String dateName = new SimpleDateFormat("yyyyMMdd").format(new Date()); 
-		String path=CreateTodayReportFolder();
-	    String SS_path =path+"\\"+startTime; 
-	    File screenshotfolder=new File(SS_path); 
-	    screenshotfolder.mkdir(); 
-	    return SS_path;
-
+			 String path=CreateTodayReportFolder();
+		
+			 String SS_path =path+"\\"+startTime; 
+	      	    
+			 File screenshotfolder=new File(SS_path); 
+			 screenshotfolder.mkdir(); 
+	    	   
+			 wordDocPath= WordScrrenshotLocation(startTime);
+			
+			return SS_path;
+	}
+	
+	public static String WordScrrenshotLocation(String ss)
+	{
+		String path1=CreateTodayReportFolder();
+		
+		String Word_SS_Path =path1+"\\"+ss+"_WordSS";
+	    
+	    File Word_screenshotfolder=new File(Word_SS_Path); 
+	    Word_screenshotfolder.mkdir();	
+	    
+	    return Word_SS_Path;
 	}
 	 
 	public static void summaryReportdesign(String filename,String BrowserName,String BrowserVersion,String OS_Name,String OS_Version) 
@@ -91,63 +113,78 @@ public class Reporting {
 
 	}
 
-
 	public static void updateTestReport(String ObjectName,String SS_path, StatusDetails st){
 
 		try{
+			String startTime1 = new SimpleDateFormat("MMDDhhmmss").format(new Date());
+			String wordPath = wordDocPath +"\\"+startTime1+".png";
+						
+			Path src = Paths.get(SS_path);
+			Path dest = Paths.get(wordPath); 
+			Files.copy(src, dest);
 			
+
 			switch(st){
 
 			case FAIL :			
 				
 				test.log(Status.FAIL, ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
-				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
+				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());				
+				WordDocumentReport.writeTestCaseStatus(ObjectName, st.toString(), wordPath);
 				FlagBS=1;
 				break;
 
 			case PASS :
 					
 				test.log(Status.PASS,ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
-				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());			
-				break;
-
-			case WARNING :
-				
-				test.log(Status.WARNING, ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
 				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
+				WordDocumentReport.writeTestCaseStatus(ObjectName, st.toString(), wordPath);
+							
 				break;
 				
 			case INFO :
-				
 				test.log(Status.INFO, ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
 				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
-				break;	
+				WordDocumentReport.writeTestCaseStatus(ObjectName, st.toString(), wordPath);
+				break;
+
+			case WARNING :
+				test.log(Status.WARNING,ObjectName,MediaEntityBuilder.createScreenCaptureFromPath(SS_path).build());
+				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
+				WordDocumentReport.writeTestCaseStatus(ObjectName, st.toString(), wordPath);
+				break;
 
 			case ERROR :
-				
 				test.log(Status.SKIP, MarkupHelper.createLabel(ObjectName,ExtentColor.GREY ));
 				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
+				WordDocumentReport.writeTestCaseStatus(ObjectName, st.toString(), wordPath);
 				break;
-				
 			default :
 				test.log(Status.INFO,MarkupHelper.createLabel(ObjectName,ExtentColor.BLUE ));
 				LogTextFile.writeTestCaseStatus(ObjectName, st.toString());
+				WordDocumentReport.writeTestCaseStatus(ObjectName, st.toString(), wordPath);
 			}
 		}catch(Exception e){ System.out.println(e.getMessage()); }
 
 	}	
+	
+	/* Author : Gourab Saha
+	 * Description : Javascript is used to update the status in Browser stack
+	 */
+	
 	public static void summaryEndReport() {
+	
 		
 		JavascriptExecutor jse = (JavascriptExecutor) DriverModule.getWebDriver();
 		
 		if(FlagBS==0)
-			 jse.executeScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\": \"passed\", \"reason\": \"All the TCs Passed\"}}");
+			 jse.executeScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\": \"passed\", \"reason\": \"All TCs are Passed\"}}");
 		else if (FlagBS==1)
-			 jse.executeScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\": \"failed\", \"reason\": \"Kindly check the Rpeort for more info\"}}");
+			 jse.executeScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\": \"failed\", \"reason\": \"Kindly check the Report for more info\"}}");
+		
 		
 		extent.flush();
 	}
-
 }
 
 

@@ -2,26 +2,26 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="WPS_Regression" >
 
- <test name="TestHarness Portal_Test_Suite _Edge" >
+ <!-- test name="TestHarness Portal_Test_Suite _Edge" >
   <parameter name="browser" value="Edge"/>
-  <parameter name="DeviceType" value="Desktop"/>
+  <parameter name="DeviceType" value="Mobile"/>
    <classes>
 		<class name="Test_Suite.TestHarness_RegressionSuite">
 		<methods>
 
 				<include name="TC01.*" />
-        		<include name="TC02.*" />
+        		<include name="TC22.*" />
 
 			</methods>
 			</class>
 	</classes>
- </test> <!-- Test -->
+ </test--> 
   
-<test name="TestHarness Portal_Test_Suite_Chrome" >
+<test name="ClientPortal_Test_Suite_Chrome" >
   <parameter name="browser" value="chrome"/>
-  <parameter name="DeviceType" value="Mobile"/>
+  <parameter name="DeviceType" value="Desktop"/>
    <classes>
-		<class name="Test_Suite.TestHarness_RegressionSuite">
+		<class name="Test_Suite.ClientPortal_RegressionSuite">
 		<methods>
 
 				<include name="TC01.*" />

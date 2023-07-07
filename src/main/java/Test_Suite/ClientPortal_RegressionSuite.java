@@ -24,6 +24,7 @@ import utilities.LogTextFile;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
+import utilities.WordDocumentReport;
 import utilities.dbOperation;
 import utilities.excelOperation;
 
@@ -84,6 +85,13 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					+ " user should be able to logout from the application on top right corner there is a down arrow"
 					+ "on click of that Logout is visible.", "Test case");
 			
+			WordDocumentReport.writeTestcaseName("TC01_Client Portal:"
+					+ "	Validate that the user should be able to see the user name on top right corner,"
+					+ "	 WPS Admin user contains the Home,Create New Application, Register new User, My Work List,"
+					+ "Transaction search  options  on header of the page,"
+					+ "user should be able to logout from the application on top right corner there is a down arrow"
+					+ "on click of that Logout is visible.");
+			
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			CommonPage.LogIN(driver,CPortal, WPSAdmin_emailID, WPSAdmin_pwd,SS_path);
@@ -105,7 +113,7 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 					     CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		      }
 		    
-		    CPortal.WPSAdmin_ClickTransactionSearch();
+		    //CPortal.WPSAdmin_ClickTransactionSearch();
 		    CPortal.WPSAdmin_ClickLogOut();
 		    CPortal.WPSAdmin_ClickLogOutImage();
 			
@@ -136,6 +144,10 @@ public class ClientPortal_RegressionSuite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC02_Client Portal: "
 					+ "Verify whether WPS admin is able to create New Client Application,"
 					+ "and verify the filter functionality at home screen", "Test case");
+			
+			WordDocumentReport.writeTestcaseName("TC02_Client Portal:"
+					+ "Verify whether WPS admin is able to create New Client Application,"
+					+ "and verify the filter functionality at home screen");
 			
 			driver.get(excelOperation.getTestData("ClientPortal_URL", "Generic_Dataset", "Data"));
 			CommonPage.LogIN(driver,CPortal, WPSAdmin_emailID, WPSAdmin_pwd,SS_path);

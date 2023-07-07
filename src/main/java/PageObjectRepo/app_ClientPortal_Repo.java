@@ -415,6 +415,7 @@ public class app_ClientPortal_Repo extends DriverModule {
 	
 	public void WPSAdmin_ClickTransactionSearch() throws IOException {
 		try {
+			
 			ClickTransactionSearch.click();
 			
 			Thread.sleep(6000);

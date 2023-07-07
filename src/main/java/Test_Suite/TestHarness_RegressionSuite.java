@@ -24,6 +24,7 @@ import utilities.LogTextFile;
 import utilities.Reporting;
 import utilities.ScrollingWebPage;
 import utilities.StatusDetails;
+import utilities.WordDocumentReport;
 import utilities.excelOperation;
 
 public class TestHarness_RegressionSuite extends DriverModule {
@@ -67,6 +68,11 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that Probe option is available and on clicking perform,"
 					+ " proper response is displayed then click on back button in response page,"
 					+ " check whether user is redirected to the probe page of that interface.", "Test case");
+			
+			WordDocumentReport.writeTestcaseName("TC01_HTTP Client:"
+					+ "Validate that Probe option is available and on clicking perform,"
+					+ "proper response is displayed then click on back button in response page,"
+					+ "check whether user is redirected to the probe page of that interface.");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -115,6 +121,9 @@ public class TestHarness_RegressionSuite extends DriverModule {
 			
 			LogTextFile.writeTestCaseStatus("TC02_HTTP Client: Validate that for Tokenise operation,"
 					+ " Request and Result page is displayed successfully with all the required details", "Test case");
+			
+			WordDocumentReport.writeTestcaseName("TC02_HTTP Client: Validate that for Tokenise operation,"
+					+ "Request and Result page is displayed successfully with all the required details");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickHttp_Interface();
@@ -1903,6 +1912,11 @@ public class TestHarness_RegressionSuite extends DriverModule {
 					+ "Validate that for Probe Operation,"
 					+ "Request page, Response page is displayed successfully with all the required details"
 					+ "and proper data is displayed in elastic as well as Stripe", "Test case");
+			
+			WordDocumentReport.writeTestcaseName("TC22_SOAP Client:"
+					+ "Validate that for Probe Operation,"
+					+ "Request page, Response page is displayed successfully with all the required details"
+					+ "and proper data is displayed in elastic as well as Stripe");
 			
 			driver.get(excelOperation.getTestData("TestHarness_URL", "Generic_Dataset", "Data"));
 			THarness.ClickSOAP_Interface();

@@ -86,6 +86,8 @@ public class DriverModule {
 			Caps.setCapability("bstack:options", browserstackOptions);	
 			
 			driver= new RemoteWebDriver(new URL(URL), Caps);
+			
+			//driver=new ChromeDriver();
 		
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
@@ -102,6 +104,8 @@ public class DriverModule {
 					browserName,browserVersion,OS_Name,OS_Version);
 			
 			LogTextFile.createTodayLog(testSuiteName+"_"+date,browserName,browserVersion,OS_Name);
+			
+			WordDocumentReport.createWordDocumentReport(testSuiteName, browserName, browserVersion, OS_Name,OS_Version);
 						
 		}
 		catch(Exception e){ System.out.println(e.getMessage());}
@@ -113,7 +117,9 @@ public class DriverModule {
 	@AfterTest
 	public void CloseBrowser(){	
 		
-		Reporting.summaryEndReport();		
+		Reporting.summaryEndReport();
+		LogTextFile.closeLogFile();
+		WordDocumentReport.closeWordFile();
 		driver.close();
 		driver.quit();
 		
