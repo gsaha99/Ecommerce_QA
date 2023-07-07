@@ -126,7 +126,7 @@ public class SubscriptionDetailsPageObject {
 	public void verifySubscriptionInformationPage(WebDriver driver) throws IOException {		
 		try {
 			//WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(3));
-			Thread.sleep(30000);
+			Thread.sleep(40000);
 			utilities.Helper.refreshThePage();		
 			String errormsg = subscriptionInformationText.getText();
 			if (errormsg.equals("Subscription Information")) {

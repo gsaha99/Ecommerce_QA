@@ -13,7 +13,7 @@ public class excelOperation {
 		  try{
 
 		  Fillo fillo = new Fillo();
-  		  Connection conn = fillo.getConnection(".\\Test Data\\Automation_Datasheet.xlsx");
+  		  Connection conn = fillo.getConnection(".\\Test_Data\\Automation_Datasheet.xlsx");
   		  
 		  String Query = "Select * from "+sheetName+" where Test_Case='"+TCName+"'  ";
 		  Recordset recordSet = null;
@@ -40,7 +40,7 @@ public class excelOperation {
 		try{
 
 			  Fillo fillo = new Fillo();
-	  		  Connection conn = fillo.getConnection(".\\Test Data\\Automation_Datasheet.xlsx");
+	  		  Connection conn = fillo.getConnection(".\\Test_Data\\Automation_Datasheet.xlsx");
 	  		  String Query = "UPDATE "+sheetName+" Set "+column+"='"+NewData+"' where Test_Case='"+TCName+"'  ";
 	  		  System.out.println(Query);
 	  		  conn.executeUpdate (Query);
