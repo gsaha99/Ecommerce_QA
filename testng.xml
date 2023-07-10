@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="PPE_Regression">
-	<test  name="VET_Test_Suite">
+<suite name="COD_Regression">
+<test  name="COD_Test_Suite">
+
+ 
 
 
-		<classes>
-			<class name="TestSuite.WEL_Prod_Test_Suite">	
-				<methods>
-					<include name="TC01_.*" />
-					<include name="TC02_.*" />
-					<include name="TC03_.*" />	
-					<include name="TC04_.*" />
-					<include name="TC05_.*" />
-		
-					
-				</methods>
-			</class>
-			
-		</classes>
-	</test> <!-- Test_Regression -->
+<classes>
+<class name="TestSuite.CoD_Regression_Test_Suite">    
+<methods>
+<include name="TC01_.*" />
+<include name="TC02_.*" />
+<include name="TC03_.*" />    
+<include name="TC05_.*" />
+<include name="TC07_.*" />
+
+
+</methods>
+</class>
+
+</classes>
+</test> <!-- Test_Regression -->
 </suite> <!-- PPE Regression -->

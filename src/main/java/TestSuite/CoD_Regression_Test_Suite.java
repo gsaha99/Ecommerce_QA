@@ -48,7 +48,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
 	String firstName = utilities.Helper.generateRandomAlphabets();
 	String lastName = utilities.Helper.generateRandomAlphabets();
-	String emailAddress = "Test" + utilities.Helper.generateRandomString() + "@mailinator.com";	
+	String emailAddress = "Test" + utilities.Helper.generateRandomString() + "@mailinator.com";
 	String emailAddressFor3DCards = "Test" + utilities.Helper.generateRandomString() + "@mailinator.com";
 	private static String common_Password = excelOperation.getTestData("Password", "CoD_Test_Data", "Test_Data");
 	private static String cod_DEV_LoginURL = excelOperation.getTestData("Dev_URL", "CoD_Test_Data", "Test_Data");
@@ -102,8 +102,8 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	private static String vat = excelOperation.getTestData("vat", "CoD_Test_Data", "Test_Data");
 	private static String recurringMonthlyBill = excelOperation.getTestData("recurringMonthlyBill", "CoD_Test_Data",
 			"Test_Data");
-	private static String cardNumber3D_Insufficientfunds = excelOperation.getTestData("3d_CardInsufficientBalance", "CoD_Test_Data",
-			"Test_Data");
+	private static String cardNumber3D_Insufficientfunds = excelOperation.getTestData("3d_CardInsufficientBalance",
+			"CoD_Test_Data", "Test_Data");
 
 	@BeforeTest
 	public void initializeRepo() {
@@ -134,13 +134,13 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Account Login']")));
-				accountLoginPageObject.verifyAccountLoginPage();			
+				accountLoginPageObject.verifyAccountLoginPage();
 				createAccountPageObject.clickOnCreateANewAccountLink();
 				try {
 					wait.until(ExpectedConditions.elementToBeClickable(By.name("firstName")));
 					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
 					try {
-						createAccountPageObject.getSuccessMessageForAccountCreation();						
+						createAccountPageObject.getSuccessMessageForAccountCreation();
 						try {
 							createAccountPageObject.clickOnEditButton();
 						} catch (Exception e) {
@@ -175,7 +175,8 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 			driver.get(cod_QA_CreateAccount_URL);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'login-account__submit-btn')]")));
+				wait.until(ExpectedConditions
+						.elementToBeClickable(By.xpath("//button[contains(@class,'login-account__submit-btn')]")));
 				accountLoginPageObject.veifyLoginButtonIsDisabled();
 				try {
 					accountLoginPageObject.enterEmailAddress(emailAddress);
@@ -207,22 +208,24 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-	
+
 	@Test
 	public void TC03_verifyLoginFromLoginPage() throws IOException, InterruptedException {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC03_Login_from_Login_Page");
 			LogTextFile.writeTestCaseStatus("TC03_Login_from_Login_Page", "Test case");
-			//driver.get(cod_DEV_LoginURL);
+			// driver.get(cod_DEV_LoginURL);
 			driver.get(cod_QA_Login_URL);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='nav-menu']")));
 				loginPageObject.clickOnNavigationMenu();
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='user-dropdown__login-btn']")));
+				wait.until(ExpectedConditions
+						.elementToBeClickable(By.xpath("//button[@class='user-dropdown__login-btn']")));
 				loginPageObject.selectLoginButton();
 				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("button[contains(@class,'login-account__submit-btn')]")));
+					wait.until(ExpectedConditions
+							.elementToBeClickable(By.xpath("button[contains(@class,'login-account__submit-btn')]")));
 					loginPageObject.veifyLoginButtonIsDisabled();
 
 					try {
@@ -243,7 +246,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 				} catch (Exception e) {
 					Reporting.updateTestReport("Login button is enabled" + e.getClass().toString(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
+				}
 			} catch (Exception e) {
 				Reporting.updateTestReport("Login button is not visible" + e.getClass().toString(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -257,52 +260,69 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 
 	@Test
 	public void TC04_verifyRegistrationFieldValidationOnCheckout() throws IOException, InterruptedException {
-		Reporting.test = Reporting.extent.createTest("TC04_verify_Registration_Field_Validation_On_Checkout");
-		LogTextFile.writeTestCaseStatus("TC04_verify_Registration_Field_Validation_On_Checkout", "Test case");
-		driver.get(cod_DEV_CreateAccount_URL);
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-		createAccountPageObject.clickOnCreateANewAccountLink();
-		Assert.assertEquals(createAccountPageObject.getPageTextCreateAccount(), "Create Account");
-		createAccountPageObject.enterFirstName("");
-		createAccountPageObject.enterLastName("");
-		createAccountPageObject.enterEmailAddress("");
-		createAccountPageObject.enterConfirmEmailAddress("");
-		createAccountPageObject.enterPassword("");
-		createAccountPageObject.enterConfirmPassword("");
-		Assert.assertEquals(createAccountPageObject.clickOnOffersCheckBox(), true, "Offers Checkbox is not visible");
-		Assert.assertEquals(createAccountPageObject.verifyFirstNameFieldValidation(), "First Name is required.");
-		Assert.assertEquals(createAccountPageObject.verifyLastNameFieldValidation(), "Last Name is required.");
-		Assert.assertEquals(createAccountPageObject.verifyEmailFieldValidation(), "Email is required.");
-		Assert.assertEquals(createAccountPageObject.verifyConfirmEmailFieldValidation(),
-				"Confirmed email is required.");
-		Assert.assertEquals(createAccountPageObject.verifyPasswordFieldValidation(), "Password is required.");
-		Assert.assertEquals(createAccountPageObject.verifyConfirmPasswordFieldValidation(),
-				"Confirmed password is required.");
-		createAccountPageObject.enterFirstName(inValidFirstName);
-		createAccountPageObject.enterLastName(inValidLastName);
-		Assert.assertEquals(createAccountPageObject.verifyFirstNameFieldValidation(),
-				"First Name must contain only letters, apostrophes or dashes.");
-		Assert.assertEquals(createAccountPageObject.verifyLastNameFieldValidation(),
-				"Last Name must contain only letters, apostrophes or dashes.");
+		try {
+			Reporting.test = Reporting.extent.createTest("TC04_verify_Registration_Field_Validation_On_Checkout");
+			LogTextFile.writeTestCaseStatus("TC04_verify_Registration_Field_Validation_On_Checkout", "Test case");
+			driver.get(cod_QA_CreateAccount_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-		createAccountPageObject.enterEmailAddress(inValidEmail);
-		createAccountPageObject.enterConfirmEmailAddress(inValidEmail);
-		Assert.assertEquals(createAccountPageObject.verifyEmailFieldValidation(), "Email address is not valid.");
-		Assert.assertEquals(createAccountPageObject.verifyConfirmEmailFieldValidation(),
-				"Confirmed email address is not valid.");
-		createAccountPageObject.enterEmailAddress(differentEmail);
-		createAccountPageObject.enterConfirmEmailAddress(differentConfirmEmail);
-		Assert.assertEquals(createAccountPageObject.verifyConfirmEmailFieldValidation(),
-				"Your email addresses must match.");
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				createAccountPageObject.enterFirstName("");
+				createAccountPageObject.enterLastName("");
+				createAccountPageObject.enterEmailAddress("");
+				createAccountPageObject.enterConfirmEmailAddress("");
+				createAccountPageObject.enterPassword("");
+				createAccountPageObject.enterConfirmPassword("");
+				createAccountPageObject.clickOnOffersCheckBox();
+				Assert.assertEquals(createAccountPageObject.verifyFirstNameFieldValidation(),
+						"First Name is required.");
+				Assert.assertEquals(createAccountPageObject.verifyLastNameFieldValidation(), "Last Name is required.");
+				Assert.assertEquals(createAccountPageObject.verifyEmailFieldValidation(), "Email is required.");
+				Assert.assertEquals(createAccountPageObject.verifyConfirmEmailFieldValidation(),
+						"Confirmed email is required.");
+				Assert.assertEquals(createAccountPageObject.verifyPasswordFieldValidation(), "Password is required.");
+				Assert.assertEquals(createAccountPageObject.verifyConfirmPasswordFieldValidation(),
+						"Confirmed password is required.");
 
-		createAccountPageObject.enterPassword(inValidPassword);
-		createAccountPageObject.enterConfirmPassword(inValidConfirmPassword);
-		Assert.assertEquals(createAccountPageObject.verifyPasswordFieldValidation(),
-				"Password does not meet all the requirements.");
-		createAccountPageObject.enterPassword(password);
-		createAccountPageObject.enterConfirmPassword(inValidConfirmPassword);
-		Assert.assertEquals(createAccountPageObject.verifyConfirmPasswordFieldValidation(),
-				"Your passwords do not match.");
+				createAccountPageObject.enterFirstName(inValidFirstName);
+				createAccountPageObject.enterLastName(inValidLastName);
+				Assert.assertEquals(createAccountPageObject.verifyFirstNameFieldValidation(),
+						"First Name must contain only letters, apostrophes or dashes.");
+				Assert.assertEquals(createAccountPageObject.verifyLastNameFieldValidation(),
+						"Last Name must contain only letters, apostrophes or dashes.");
+
+				createAccountPageObject.enterEmailAddress(inValidEmail);
+				createAccountPageObject.enterConfirmEmailAddress(inValidEmail);
+				Assert.assertEquals(createAccountPageObject.verifyEmailFieldValidation(),
+						"Email address is not valid.");
+				Assert.assertEquals(createAccountPageObject.verifyConfirmEmailFieldValidation(),
+						"Confirmed email address is not valid.");
+				createAccountPageObject.enterEmailAddress(differentEmail);
+				createAccountPageObject.enterConfirmEmailAddress(differentConfirmEmail);
+				Assert.assertEquals(createAccountPageObject.verifyConfirmEmailFieldValidation(),
+						"Your email addresses must match.");
+
+				createAccountPageObject.enterPassword(inValidPassword);
+				createAccountPageObject.enterConfirmPassword(inValidConfirmPassword);
+				Assert.assertEquals(createAccountPageObject.verifyPasswordFieldValidation(),
+						"Password does not meet all the requirements.");
+				createAccountPageObject.enterPassword(password);
+				createAccountPageObject.enterConfirmPassword(inValidConfirmPassword);
+				Assert.assertEquals(createAccountPageObject.verifyConfirmPasswordFieldValidation(),
+						"Your passwords do not match.");
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		} catch (Exception e) {
+			driver.get(cod_DEV_LoginURL);
+			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
 	}
 
 	@Test
@@ -367,7 +387,9 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 												loginPageObject.enterRandomGenerationEmailForEmailAddressField();
 												loginPageObject.enterRandomStringForPasswordAddressField();
 												loginPageObject.clickOnLoginButton();
-												//wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='There was an unexpected problem with your login. Please check your credentials.']")));
+												// wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='There
+												// was an unexpected problem with your login. Please check your
+												// credentials.']")));
 												loginPageObject.verifyInvalidCredentialMessageText();
 											} catch (Exception e) {
 												Reporting.updateTestReport(
@@ -511,37 +533,53 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC09_verifyPriceOnOrderSummary() throws IOException, InterruptedException, Exception {
 		try {
-			Reporting.test = Reporting.extent.createTest("TC09_verifyPriceOnOrderSummary");
-			LogTextFile.writeTestCaseStatus("TC09_verifyPriceOnOrderSummary", "Test case");
-			driver.get(cod_DEV_CreateAccount_URL);
+			Reporting.test = Reporting.extent.createTest("TC45_verifyGenericDecline");
+			LogTextFile.writeTestCaseStatus("TC45_verifyGenericDecline", "Test case");
+			driver.get(cod_QA_CreateAccount_URL);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
 			try {
 				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
 				createAccountPageObject.clickOnCreateANewAccountLink();
 				try {
 					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
 					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
+
+							Assert.assertEquals(subscriptionAccountPageObject.getVatValue().contains(vat), true,
+									"Vat value is not visible");
+							Assert.assertEquals(subscriptionAccountPageObject.getRecurringMonthlyBillValue().contains(
+									recurringMonthlyBill), true, "Recurring Monthly Bill value is not visible");
+						} catch (Exception e) {
+							Reporting.updateTestReport("Vat value and Recurring Bill value message not found",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
 				} catch (Exception e) {
-					Reporting.updateTestReport("User is not logged in" + e.getClass().toString(),
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
+
 			} catch (Exception e) {
-				Reporting.updateTestReport("Create new account link is not working" + e.getClass().toString(),
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-			subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
-			subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
-			subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
-			subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
-			subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
-			subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
-			subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
-			subscriptionAccountPageObject.clickOnSecurePaymentButton();
-			Assert.assertEquals(subscriptionAccountPageObject.getVatValue().contains(vat), true,
-					"Vat value is not visible");
-			Assert.assertEquals(
-					subscriptionAccountPageObject.getRecurringMonthlyBillValue().contains(recurringMonthlyBill), true,
-					"Recurring Monthly Bill value is not visible");
 		} catch (Exception e) {
 			driver.get(cod_DEV_LoginURL);
 			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
@@ -551,42 +589,83 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 
 	@Test
 	public void TC11_orderPlacement() throws InterruptedException, IOException {
-		Reporting.test = Reporting.extent.createTest("TC11_Order_Placement");
-		LogTextFile.writeTestCaseStatus("TC11_Order_Placement", "Test case");
-		driver.get(cod_DEV_CreateAccount_URL);
-		WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(20));
-		createAccountPageObject.clickOnCreateANewAccountLink();
-		createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, common_Password);
-		createAccountPageObject.getSuccessMessageForAccountCreation();				
-		subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
-		subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
-		// subscriptionAccountPageObject.clickOnAddressLine2Field();
-		subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
-		subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
-		subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
-		subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
-		Assert.assertEquals(subscriptionAccountPageObject.isSecurePaymentButtonEnabled(), true,
-				"Secure Payment button is not disabled");
-		subscriptionAccountPageObject.clickOnSecurePaymentButton();
-		subscriptionAccountPageObject.enterWPSSecurePaymentDetails(visa, expiryDate, cvc, driver);
-		subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-		orderDetailsPageObject.verifyThankYouMessage();
-		loginPageObject.clickOnNavigationMenu();
-		orderDetailsPageObject.selectMySubscriptionButton();
-		orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
-		subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);		
+		try {
+			Reporting.test = Reporting.extent.createTest("TC11_orderPlacement");
+			LogTextFile.writeTestCaseStatus("TC11_orderPlacement", "Test case");
+			driver.get(cod_QA_CreateAccount_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
+							try {
+								subscriptionAccountPageObject.enterWPSSecurePaymentDetails(visa, expiryDate, cvc,
+										driver);
+								subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+								try {
+									orderDetailsPageObject.verifyThankYouMessage();
+									loginPageObject.clickOnNavigationMenu();
+									orderDetailsPageObject.selectMySubscriptionButton();
+									orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
+									subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
+								} catch (Exception e) {
+									Reporting.updateTestReport("Subscription Information Page is verified",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport("Unable to click on submit order button",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+						} catch (Exception e) {
+							Reporting.updateTestReport("Secure payment button is not enabled",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		} catch (Exception e) {
+			driver.get(cod_QA_CreateAccount_URL);
+			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
 	}
 
-	
 	@Test
-	public void TC15_subscriptionDetailsPageVerification () throws InterruptedException, IOException {
+	public void TC15_subscriptionDetailsPageVerification() throws InterruptedException, IOException {
 		Reporting.test = Reporting.extent.createTest("TC15_Subscription_Details_Page_Verification");
 		LogTextFile.writeTestCaseStatus("TC11_Subscription_Details_Page_Verification", "Test case");
 		driver.get(cod_DEV_CreateAccount_URL);
-		WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(20));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		createAccountPageObject.clickOnCreateANewAccountLink();
 		createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, common_Password);
-		createAccountPageObject.getSuccessMessageForAccountCreation();				
+		createAccountPageObject.getSuccessMessageForAccountCreation();
 		subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
 		subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
 		// subscriptionAccountPageObject.clickOnAddressLine2Field();
@@ -603,10 +682,9 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 		loginPageObject.clickOnNavigationMenu();
 		orderDetailsPageObject.selectMySubscriptionButton();
 		orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
-		subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);		
+		subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
 	}
-	
-	
+
 	@Test
 	public void TC27_cancelSubscriptionWithinGracePeriod() throws InterruptedException, IOException {
 
@@ -662,79 +740,125 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC17_changePaymentMethod() throws IOException, InterruptedException {
 		try {
+			Reporting.test = Reporting.extent.createTest("TC17_changePaymentMethod");
+			LogTextFile.writeTestCaseStatus("TC17_changePaymentMethod", "Test case");
+			driver.get(cod_QA_CreateAccount_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
 
-			Reporting.test = Reporting.extent.createTest("TC17_ChangePaymentMethod");
-			LogTextFile.writeTestCaseStatus("TC17_ChangePaymentMethod", "Test case");
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
+							try {
+								subscriptionAccountPageObject.enterWPSSecurePaymentDetails(visa, expiryDate, cvc,
+										driver);
+								subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+								try {
+									orderDetailsPageObject.verifyThankYouMessage();
+									loginPageObject.clickOnNavigationMenu();
+									orderDetailsPageObject.selectMySubscriptionButton();
+									orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
+									subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
+									try {
+										wait.until(ExpectedConditions.visibilityOfElementLocated(
+												By.xpath("//button[text()='Change Payment Method']")));
+										subscriptionDetailsPageObject.clickOnChangePaymentMethod();
+										subscriptionAccountPageObject.enterWPSSecurePaymentDetails(updateCardNumber,
+												updateExpiryDate, updateCVV, driver);
+										subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+										Assert.assertEquals(
+												subscriptionDetailsPageObject.getCardNumber().contains("8210"), true);
+										Assert.assertEquals(subscriptionDetailsPageObject.getExpirationDate()
+												.contains(updateExpiryDate), true);
+									} catch (Exception e) {
+										Reporting.updateTestReport("Card number and expiration date message not found",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+								} catch (Exception e) {
+									Reporting.updateTestReport("Subscription Information Page is verified",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport("Unable to click on submit order button",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+						} catch (Exception e) {
+							Reporting.updateTestReport("Secure payment button is not enabled",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		} catch (Exception e) {
+			driver.get(cod_QA_CreateAccount_URL);
+			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+
+	@Test
+	public void TC60_securePaymentValidation3DInsufficientFunds() throws InterruptedException, IOException {
+		try {
+			Reporting.test = Reporting.extent.createTest("TC60_securePayment_Validation_3DInsufficient_Funds");
+			LogTextFile.writeTestCaseStatus("TC60_securePayment_Validation_3DInsufficient_Funds", "Test case");
 			driver.get(cod_DEV_CreateAccount_URL);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-
-			accountLoginPageObject.verifyAccountLoginPage();
 			createAccountPageObject.clickOnCreateANewAccountLink();
-			createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+			loginPageObject.clickOnSubscribeButton();
+			createAccountPageObject.clickOnCreateANewAccountLink();
+			createAccountPageObject.creationOfAccount(firstName, lastName, emailAddressFor3DCards, password);
 			createAccountPageObject.getSuccessMessageForAccountCreation();
 			subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
 			subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+			// subscriptionAccountPageObject.clickOnAddressLine2Field();
 			subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
 			subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
 			subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
 			subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
-			subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+			Assert.assertEquals(subscriptionAccountPageObject.isSecurePaymentButtonEnabled(), true,
+					"Secure Payment button is not disabled");
 			subscriptionAccountPageObject.clickOnSecurePaymentButton();
-			subscriptionAccountPageObject.enterWPSSecurePaymentDetails(visa, expiryDate, cvc, driver);
-			subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-			orderDetailsPageObject.verifyThankYouMessage();
-			loginPageObject.clickOnNavigationMenu();
-			orderDetailsPageObject.selectMySubscriptionButton();
-			orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
-			subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
-			subscriptionDetailsPageObject.clickOnChangePaymentMethod();
-			subscriptionAccountPageObject.enterWPSSecurePaymentDetails(updateCardNumber, updateExpiryDate, updateCVV,
+			subscriptionAccountPageObject.enterWPSSecurePaymentDetails(cardNumber3D_Insufficientfunds, expiryDate, cvc,
 					driver);
 			subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-			Assert.assertEquals(subscriptionDetailsPageObject.getCardNumber().contains("8210"), true);
-			Assert.assertEquals(subscriptionDetailsPageObject.getExpirationDate().contains(updateExpiryDate), true);
-		} catch (Exception e) {
-			driver.get(cod_DEV_LoginURL);
-			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-	}
-
-	
-	@Test
-	public void TC60_securePaymentValidation3DInsufficientFunds() throws InterruptedException, IOException {
-		try {
-		Reporting.test = Reporting.extent.createTest("TC60_securePayment_Validation_3DInsufficient_Funds");
-		LogTextFile.writeTestCaseStatus("TC60_securePayment_Validation_3DInsufficient_Funds", "Test case");
-		driver.get(cod_DEV_CreateAccount_URL);
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-		createAccountPageObject.clickOnCreateANewAccountLink();
-		loginPageObject.clickOnSubscribeButton();
-		createAccountPageObject.clickOnCreateANewAccountLink();
-		createAccountPageObject.creationOfAccount(firstName, lastName, emailAddressFor3DCards, password);
-		createAccountPageObject.getSuccessMessageForAccountCreation();
-		subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
-		subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
-		// subscriptionAccountPageObject.clickOnAddressLine2Field();
-		subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
-		subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
-		subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
-		subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
-		Assert.assertEquals(subscriptionAccountPageObject.isSecurePaymentButtonEnabled(), true,
-				"Secure Payment button is not disabled");
-		subscriptionAccountPageObject.clickOnSecurePaymentButton();
-		subscriptionAccountPageObject.enterWPSSecurePaymentDetails(cardNumber3D_Insufficientfunds, expiryDate, cvc, driver);
-		subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);	
-		subscriptionAccountPageObject.clickOnCancelButtonOn3DSecurePopUp(driver);
-		subscriptionAccountPageObject.verify3DErrorMessage();		
-		subscriptionAccountPageObject.enterWPSSecurePaymentDetails(cardNumber3D_Insufficientfunds, expiryDate, cvc, driver);
-		subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);		
-		subscriptionAccountPageObject.clickOnFailAuthentication(driver);		
-		subscriptionAccountPageObject.verify3DErrorMessage();		
-		subscriptionAccountPageObject.enterWPSSecurePaymentDetails(cardNumber3D_Insufficientfunds, expiryDate, cvc, driver);
-		subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-		subscriptionAccountPageObject.clickOnCompleteAuthentication(driver);		
-		subscriptionAccountPageObject.verifyInsufficientPaymentErrorMessageFor3D();		
+			subscriptionAccountPageObject.clickOnCancelButtonOn3DSecurePopUp(driver);
+			subscriptionAccountPageObject.verify3DErrorMessage();
+			subscriptionAccountPageObject.enterWPSSecurePaymentDetails(cardNumber3D_Insufficientfunds, expiryDate, cvc,
+					driver);
+			subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+			subscriptionAccountPageObject.clickOnFailAuthentication(driver);
+			subscriptionAccountPageObject.verify3DErrorMessage();
+			subscriptionAccountPageObject.enterWPSSecurePaymentDetails(cardNumber3D_Insufficientfunds, expiryDate, cvc,
+					driver);
+			subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+			subscriptionAccountPageObject.clickOnCompleteAuthentication(driver);
+			subscriptionAccountPageObject.verifyInsufficientPaymentErrorMessageFor3D();
 		} catch (Exception e) {
 			driver.get(cod_DEV_LoginURL);
 			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
@@ -811,26 +935,54 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC45_verifyGenericDecline() throws InterruptedException, IOException {
 		try {
-			Reporting.test = Reporting.extent.createTest("TC01_Open_Homepage");
-			LogTextFile.writeTestCaseStatus("TC01_Open_Homepage", "Test case");
-			driver.get(cod_DEV_CreateAccount_URL);
+			Reporting.test = Reporting.extent.createTest("TC45_verifyGenericDecline");
+			LogTextFile.writeTestCaseStatus("TC45_verifyGenericDecline", "Test case");
+			driver.get(cod_QA_CreateAccount_URL);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-			createAccountPageObject.clickOnCreateANewAccountLink();
-			createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, common_Password);
-			subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
-			subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
-			subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
-			subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
-			subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
-			subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
-			Assert.assertEquals(subscriptionAccountPageObject.isSecurePaymentButtonEnabled(), true,
-					"Secure Payment button is not disabled");
-			subscriptionAccountPageObject.clickOnSecurePaymentButton();
-			subscriptionAccountPageObject.enterWPSSecurePaymentDetails(genericDecline, expiryDate, cvc, driver);
-			subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-			Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
-					"Your card has been declined.");
 
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
+
+							subscriptionAccountPageObject.enterWPSSecurePaymentDetails(genericDecline, expiryDate, cvc,
+									driver);
+							subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+							Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
+									"Your card has been declined.");
+						} catch (Exception e) {
+							Reporting.updateTestReport("Card decline message not found",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 		} catch (Exception e) {
 			driver.get(cod_DEV_LoginURL);
 			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
@@ -841,11 +993,54 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC46_verifyInsufficientFundDecline() throws InterruptedException, IOException {
 		try {
-			subscriptionAccountPageObject.enterWPSSecurePaymentDetails(insufficientFundDecline, expiryDate, cvc,
-					driver);
-			subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-			Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
-					"Your card has insufficient funds.");
+			Reporting.test = Reporting.extent.createTest("TC46_verifyInsufficientFundDecline");
+			LogTextFile.writeTestCaseStatus("TC46_verifyInsufficientFundDecline", "Test case");
+			driver.get(cod_QA_CreateAccount_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
+
+							subscriptionAccountPageObject.enterWPSSecurePaymentDetails(insufficientFundDecline,
+									expiryDate, cvc, driver);
+							subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+							Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
+									"Your card has insufficient funds.");
+						} catch (Exception e) {
+							Reporting.updateTestReport("Insufficient funds message not found",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 		} catch (Exception e) {
 			driver.get(cod_DEV_LoginURL);
 			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
@@ -856,10 +1051,54 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC47_verifyLostCardDecline() throws InterruptedException, IOException {
 		try {
-			subscriptionAccountPageObject.enterWPSSecurePaymentDetails(lostCardDecline, expiryDate, cvc, driver);
-			subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-			Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
-					"Your card has been declined.");
+			Reporting.test = Reporting.extent.createTest("TC47_verifyLostCardDecline");
+			LogTextFile.writeTestCaseStatus("TC47_verifyLostCardDecline", "Test case");
+			driver.get(cod_QA_CreateAccount_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
+
+							subscriptionAccountPageObject.enterWPSSecurePaymentDetails(lostCardDecline, expiryDate, cvc,
+									driver);
+							subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+							Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
+									"Your card has been declined.");
+						} catch (Exception e) {
+							Reporting.updateTestReport("Cards decline message not found",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 		} catch (Exception e) {
 			driver.get(cod_DEV_LoginURL);
 			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
@@ -870,10 +1109,54 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC48_verifyStolenCardDecline() throws InterruptedException, IOException {
 		try {
-			subscriptionAccountPageObject.enterWPSSecurePaymentDetails(stolenCardDecline, expiryDate, cvc, driver);
-			subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-			Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
-					"Your card has been declined.");
+			Reporting.test = Reporting.extent.createTest("TC48_verifyStolenCardDecline");
+			LogTextFile.writeTestCaseStatus("TC48_verifyStolenCardDecline", "Test case");
+			driver.get(cod_QA_CreateAccount_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
+
+							subscriptionAccountPageObject.enterWPSSecurePaymentDetails(stolenCardDecline, expiryDate,
+									cvc, driver);
+							subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+							Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
+									"Your card has been declined.");
+						} catch (Exception e) {
+							Reporting.updateTestReport("Cards decline message not found",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 		} catch (Exception e) {
 			driver.get(cod_DEV_LoginURL);
 			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
@@ -884,9 +1167,54 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC49_verifyExpiredCardDecline() throws InterruptedException, IOException {
 		try {
-			subscriptionAccountPageObject.enterWPSSecurePaymentDetails(expiredCardDecline, expiryDate, cvc, driver);
-			subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-			Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(), "Your card has expired.");
+			Reporting.test = Reporting.extent.createTest("TC49_verifyExpiredCardDecline");
+			LogTextFile.writeTestCaseStatus("TC49_verifyExpiredCardDecline", "Test case");
+			driver.get(cod_QA_CreateAccount_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
+
+							subscriptionAccountPageObject.enterWPSSecurePaymentDetails(expiredCardDecline, expiryDate,
+									cvc, driver);
+							subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+							Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
+									"Your card has expired.");
+						} catch (Exception e) {
+							Reporting.updateTestReport("Cards expired message not found",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 		} catch (Exception e) {
 			driver.get(cod_DEV_LoginURL);
 			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
@@ -897,10 +1225,54 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC50_verifyIncorrectCVCCardDecline() throws InterruptedException, IOException {
 		try {
-			subscriptionAccountPageObject.enterWPSSecurePaymentDetails(incorrectCVCDecline, expiryDate, cvc, driver);
-			subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-			Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
-					"Your card's security code is incorrect.");
+			Reporting.test = Reporting.extent.createTest("TC50_verifyIncorrectCVCCardDecline");
+			LogTextFile.writeTestCaseStatus("TC50_verifyIncorrectCVCCardDecline", "Test case");
+			driver.get(cod_QA_CreateAccount_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
+
+							subscriptionAccountPageObject.enterWPSSecurePaymentDetails(incorrectCVCDecline, expiryDate,
+									cvc, driver);
+							subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+							Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
+									"Your card's security code is incorrect.");
+						} catch (Exception e) {
+							Reporting.updateTestReport("Cards Security code message not found",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 		} catch (Exception e) {
 			driver.get(cod_DEV_LoginURL);
 			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
@@ -911,10 +1283,54 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC51_verifyProcessingErrorCardDecline() throws InterruptedException, IOException {
 		try {
-			subscriptionAccountPageObject.enterWPSSecurePaymentDetails(processingErrorDecline, expiryDate, cvc, driver);
-			subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-			Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
-					"An error occurred while processing your card. Try again in a little bit.");
+			Reporting.test = Reporting.extent.createTest("TC51_verifyProcessingErrorCardDecline");
+			LogTextFile.writeTestCaseStatus("TC51_verifyProcessingErrorCardDecline", "Test case");
+			driver.get(cod_QA_CreateAccount_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
+
+							subscriptionAccountPageObject.enterWPSSecurePaymentDetails(processingErrorDecline,
+									expiryDate, cvc, driver);
+							subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+							Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
+									"An error occurred while processing your card. Try again in a little bit.");
+						} catch (Exception e) {
+							Reporting.updateTestReport("Cards error processing message not found",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 		} catch (Exception e) {
 			driver.get(cod_DEV_LoginURL);
 			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
@@ -922,35 +1338,57 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 		}
 	}
 
-	
-
 	@Test
 	public void TC62_verifyExpiryDateInPaymentFieldValidation() throws IOException, InterruptedException {
 		try {
-			Reporting.test = Reporting.extent.createTest("TC62_verifyExpiryDateInPaymentField");
-			LogTextFile.writeTestCaseStatus("TC62_verifyExpiryDateInPaymentField", "Test case");
-			driver.get(cod_DEV_CreateAccount_URL);
+			Reporting.test = Reporting.extent.createTest("TC62_verifyExpiryDateInPaymentFieldValidation");
+			LogTextFile.writeTestCaseStatus("TC62_verifyExpiryDateInPaymentFieldValidation", "Test case");
+			driver.get(cod_QA_CreateAccount_URL);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-			accountLoginPageObject.verifyAccountLoginPage();
-			createAccountPageObject.clickOnCreateANewAccountLink();
-			createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
-			createAccountPageObject.getSuccessMessageForAccountCreation();
-			subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
-			subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
 
-			subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
-			subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
-			subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
-			subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
-			subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
-			subscriptionAccountPageObject.clickOnSecurePaymentButton();
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
 
-			subscriptionAccountPageObject.enterCardNumber(visa, driver);
-			subscriptionAccountPageObject.enterExpiryDate(inValidExpiryDate);
-			subscriptionAccountPageObject.enterCVV(updateCVV);
-			Assert.assertTrue(subscriptionAccountPageObject.verifyInValidExpiryDateFieldValidation()
-					.contains("Your card's expiration year is in the past."));
+							subscriptionAccountPageObject.enterCardNumber(visa, driver);
+							subscriptionAccountPageObject.enterExpiryDate(inValidExpiryDate);
+							subscriptionAccountPageObject.enterCVV(updateCVV);
+							Assert.assertTrue(subscriptionAccountPageObject.verifyInValidExpiryDateFieldValidation()
+									.contains("Your card's expiration year is in the past."));
+						} catch (Exception e) {
+							Reporting.updateTestReport("Card's expiration message not found",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 		} catch (Exception e) {
 			driver.get(cod_DEV_LoginURL);
 			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
@@ -963,26 +1401,53 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC67_verifyErrorIfCVVIsLessDigitInPaymentField");
 			LogTextFile.writeTestCaseStatus("TC67_verifyErrorIfCVVIsLessDigitInPaymentField", "Test case");
-			driver.get(cod_DEV_CreateAccount_URL);
+			driver.get(cod_QA_CreateAccount_URL);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-			accountLoginPageObject.verifyAccountLoginPage();
-			createAccountPageObject.clickOnCreateANewAccountLink();
-			createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
-			createAccountPageObject.getSuccessMessageForAccountCreation();
-			subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
-			subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
-			subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
-			subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
-			subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
-			subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
-			subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
-			subscriptionAccountPageObject.clickOnSecurePaymentButton();
-			subscriptionAccountPageObject.enterCardNumber(visa, driver);
-			subscriptionAccountPageObject.enterExpiryDate(expiryDate);
-			subscriptionAccountPageObject.enterCVV(inValidCVV);
-			subscriptionAccountPageObject.enterExpiryDate(expiryDate);
-			Assert.assertTrue(subscriptionAccountPageObject.verifyInCompleteCVVFieldValidation()
-					.contains("security code is incomplete."));
+
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
+
+							subscriptionAccountPageObject.enterCardNumber(visa, driver);
+							subscriptionAccountPageObject.enterExpiryDate(expiryDate);
+							subscriptionAccountPageObject.enterCVV(inValidCVV);
+							subscriptionAccountPageObject.enterExpiryDate(expiryDate);
+							Assert.assertTrue(subscriptionAccountPageObject.verifyInCompleteCVVFieldValidation()
+									.contains("security code is incomplete."));
+						} catch (Exception e) {
+							Reporting.updateTestReport("Security Coder Incomplete message not found",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 		} catch (Exception e) {
 			driver.get(cod_DEV_LoginURL);
 			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
@@ -993,29 +1458,54 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC68_verifyErrorIfCardNumberIsLessDigitInPaymentField() throws IOException, InterruptedException {
 		try {
-			Reporting.test = Reporting.extent.createTest("TC68_verifyErrorIfCardNumberIsLessDigit");
-			LogTextFile.writeTestCaseStatus("TC68_verifyErrorIfCardNumberIsLessDigit", "Test case");
-			driver.get(cod_DEV_CreateAccount_URL);
+			Reporting.test = Reporting.extent.createTest("TC68_verifyErrorIfCardNumberIsLessDigitInPaymentField");
+			LogTextFile.writeTestCaseStatus("TC68_verifyErrorIfCardNumberIsLessDigitInPaymentField", "Test case");
+			driver.get(cod_QA_CreateAccount_URL);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-			accountLoginPageObject.verifyAccountLoginPage();
-			createAccountPageObject.clickOnCreateANewAccountLink();
-			createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
-			createAccountPageObject.getSuccessMessageForAccountCreation();
-			subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
-			subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
 
-			subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
-			subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
-			subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
-			subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
-			subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
-			subscriptionAccountPageObject.clickOnSecurePaymentButton();
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
 
-			subscriptionAccountPageObject.enterCardNumber(inCompleteCardNumber, driver);
-			subscriptionAccountPageObject.enterExpiryDate(expiryDate);
-			Assert.assertEquals(subscriptionAccountPageObject.verifyInCompleteCardNumberFieldValidation(),
-					"Your card number is incomplete.");
+							subscriptionAccountPageObject.enterCardNumber(inCompleteCardNumber, driver);
+							subscriptionAccountPageObject.enterExpiryDate(expiryDate);
+							Assert.assertEquals(
+									subscriptionAccountPageObject.verifyInCompleteCardNumberFieldValidation(),
+									"Your card number is incomplete.");
+						} catch (Exception e) {
+							Reporting.updateTestReport("Card number Incomplete message not found",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 		} catch (Exception e) {
 			driver.get(cod_DEV_LoginURL);
 			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
@@ -1028,27 +1518,51 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC69_verifyInCorrectCardNumberInPaymentField");
 			LogTextFile.writeTestCaseStatus("TC69_verifyInCorrectCardNumberInPaymentField", "Test case");
-			driver.get(cod_DEV_CreateAccount_URL);
+			driver.get(cod_QA_CreateAccount_URL);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-			accountLoginPageObject.verifyAccountLoginPage();
-			createAccountPageObject.clickOnCreateANewAccountLink();
-			createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
-			createAccountPageObject.getSuccessMessageForAccountCreation();
-			subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
-			subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
 
-			subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
-			subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
-			subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
-			subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
-			subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
-			subscriptionAccountPageObject.clickOnSecurePaymentButton();
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
 
-			subscriptionAccountPageObject.enterCardNumber(inValidCardNumber, driver);
-			subscriptionAccountPageObject.enterExpiryDate(expiryDate);
-			Assert.assertEquals(subscriptionAccountPageObject.verifyInValidCardNumberFieldValidation(),
-					"Your card number is invalid.");
+							subscriptionAccountPageObject.enterCardNumber(inValidCardNumber, driver);
+							subscriptionAccountPageObject.enterExpiryDate(expiryDate);
+							Assert.assertEquals(subscriptionAccountPageObject.verifyInValidCardNumberFieldValidation(),
+									"Your card number is invalid.");
+						} catch (Exception e) {
+							Reporting.updateTestReport("Invalid Card number message not found",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
 		} catch (Exception e) {
 			driver.get(cod_DEV_LoginURL);
 			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
@@ -1061,391 +1575,402 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC70_verifyErrorIfExpiryDateIsLessDigitInPaymentField");
 			LogTextFile.writeTestCaseStatus("TC70_verifyErrorIfExpiryDateIsLessDigitInPaymentField", "Test case");
-			driver.get(cod_DEV_CreateAccount_URL);
+			driver.get(cod_QA_CreateAccount_URL);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
 			try {
-			accountLoginPageObject.verifyAccountLoginPage();
-			wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
-			createAccountPageObject.clickOnCreateANewAccountLink();
-			try {
-			createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
-			createAccountPageObject.getSuccessMessageForAccountCreation();
-			try {
-			subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
-			subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
 
-			subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
-			subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
-			subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
-			subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
-			try {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
-			subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
-			subscriptionAccountPageObject.clickOnSecurePaymentButton();
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
 
-			subscriptionAccountPageObject.enterCardNumber(visa, driver);
-			subscriptionAccountPageObject.enterExpiryDate(inCompleteExpiryDate);
-			subscriptionAccountPageObject.enterCVV(updateCVV);		
-			Assert.assertTrue(subscriptionAccountPageObject.verifyInCompleteExpiryDateFieldValidation()
-					.contains("expiration date is incomplete."));
+							subscriptionAccountPageObject.enterCardNumber(visa, driver);
+							subscriptionAccountPageObject.enterExpiryDate(inCompleteExpiryDate);
+							subscriptionAccountPageObject.enterCVV(updateCVV);
+							Assert.assertTrue(subscriptionAccountPageObject.verifyInCompleteExpiryDateFieldValidation()
+									.contains("expiration date is incomplete."));
+						} catch (Exception e) {
+							Reporting.updateTestReport("Expiration date incomplete message not found",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
 			} catch (Exception e) {
-				Reporting.updateTestReport("Expiration date incomplete message not found",
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-		 } catch (Exception e) {
-			Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		} } catch (Exception e) {
-			Reporting.updateTestReport("Unable to get the success Message for Account Creation",
-					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-		}
-
-	} catch (Exception e) {
-		Reporting.updateTestReport("Unable to Click on Create a new account link",
-				CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-	}
 		} catch (Exception e) {
 			driver.get(cod_DEV_LoginURL);
 			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 	}
-		
-		
-		@Test
-		public void TC20_verifyErrorIfCardNumberIsLessDigitInSubscriptionDetailsPage () throws IOException, InterruptedException {			
-			try {
-				Reporting.test = Reporting.extent
-						.createTest("TC20_verifyErrorIfCardNumberIsLessDigitInSubscriptionDetailsPage");
-				LogTextFile.writeTestCaseStatus("TC20_verifyErrorIfCardNumberIsLessDigitInSubscriptionDetailsPage",
-						"Test case");
-				driver.get(cod_QA_CreateAccount_URL);
-				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-				try {
-					accountLoginPageObject.verifyAccountLoginPage();
-					wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
-					createAccountPageObject.clickOnCreateANewAccountLink();
-					try {
-						createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
-						createAccountPageObject.getSuccessMessageForAccountCreation();
-						try {
-							subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
-							subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
 
-							subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
-							subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
-							subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
-							subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+	@Test
+	public void TC20_verifyErrorIfCardNumberIsLessDigitInSubscriptionDetailsPage()
+			throws IOException, InterruptedException {
+		try {
+			Reporting.test = Reporting.extent
+					.createTest("TC20_verifyErrorIfCardNumberIsLessDigitInSubscriptionDetailsPage");
+			LogTextFile.writeTestCaseStatus("TC20_verifyErrorIfCardNumberIsLessDigitInSubscriptionDetailsPage",
+					"Test case");
+			driver.get(cod_QA_CreateAccount_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
 							try {
-								wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
-								subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
-								subscriptionAccountPageObject.clickOnSecurePaymentButton();
+								subscriptionAccountPageObject.enterWPSSecurePaymentDetails(visa, expiryDate, cvc,
+										driver);
+								subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
 								try {
-									subscriptionAccountPageObject.enterWPSSecurePaymentDetails(visa, expiryDate, cvc,
-											driver);
-									subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+									orderDetailsPageObject.verifyThankYouMessage();
+									loginPageObject.clickOnNavigationMenu();
+									orderDetailsPageObject.selectMySubscriptionButton();
+									orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
+									subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
 									try {
-										orderDetailsPageObject.verifyThankYouMessage();
-										loginPageObject.clickOnNavigationMenu();
-										orderDetailsPageObject.selectMySubscriptionButton();
-										orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
-										subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
-										try {
-											wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Change Payment Method']")));
-											subscriptionDetailsPageObject.clickOnChangePaymentMethod();
-											subscriptionAccountPageObject.enterCardNumber(inCompleteCardNumber, driver);
-											subscriptionAccountPageObject.enterExpiryDate(expiryDate); 
-											Assert.assertEquals(subscriptionAccountPageObject.verifyInCompleteCardNumberFieldValidation(), 
-													"Your card number is incomplete.");
-										} catch (Exception e) {
-											Reporting.updateTestReport("Cards number incomplete error message not found",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
+										wait.until(ExpectedConditions.visibilityOfElementLocated(
+												By.xpath("//button[text()='Change Payment Method']")));
+										subscriptionDetailsPageObject.clickOnChangePaymentMethod();
+										subscriptionAccountPageObject.enterCardNumber(inCompleteCardNumber, driver);
+										subscriptionAccountPageObject.enterExpiryDate(expiryDate);
+										Assert.assertEquals(
+												subscriptionAccountPageObject
+														.verifyInCompleteCardNumberFieldValidation(),
+												"Your card number is incomplete.");
 									} catch (Exception e) {
-										Reporting.updateTestReport("Subscription Information Page is verified",
+										Reporting.updateTestReport("Cards number incomplete error message not found",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 								} catch (Exception e) {
-									Reporting.updateTestReport("Unable to click on submit order button",
+									Reporting.updateTestReport("Subscription Information Page is verified",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 							} catch (Exception e) {
-								Reporting.updateTestReport("Secure payment button is not enabled",
+								Reporting.updateTestReport("Unable to click on submit order button",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 						} catch (Exception e) {
-							Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+							Reporting.updateTestReport("Secure payment button is not enabled",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					} catch (Exception e) {
-						Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
-
 				} catch (Exception e) {
-					Reporting.updateTestReport("Unable to Click on Create a new account link",
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
+
 			} catch (Exception e) {
-				driver.get(cod_QA_CreateAccount_URL);
-				Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
-
-	}
-		
-		
-		@Test
-		public void TC21_verifyErrorIfExpiryDateIsInPastDigitInSubscriptionDetailsPage () throws IOException, InterruptedException {			
-			try {
-				Reporting.test = Reporting.extent
-						.createTest("TC21_verifyErrorIfExpiryDateIsInPastDigitInSubscriptionDetailsPage");
-				LogTextFile.writeTestCaseStatus("TC21_verifyErrorIfExpiryDateIsInPastDigitInSubscriptionDetailsPage",
-						"Test case");
-				driver.get(cod_QA_CreateAccount_URL);
-				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-				try {
-					accountLoginPageObject.verifyAccountLoginPage();
-					wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
-					createAccountPageObject.clickOnCreateANewAccountLink();
-					try {
-						createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
-						createAccountPageObject.getSuccessMessageForAccountCreation();
-						try {
-							subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
-							subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
-
-							subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
-							subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
-							subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
-							subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
-							try {
-								wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
-								subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
-								subscriptionAccountPageObject.clickOnSecurePaymentButton();
-								try {
-									subscriptionAccountPageObject.enterWPSSecurePaymentDetails(visa, expiryDate, cvc,
-											driver);
-									subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-									try {
-										orderDetailsPageObject.verifyThankYouMessage();
-										loginPageObject.clickOnNavigationMenu();
-										orderDetailsPageObject.selectMySubscriptionButton();
-										orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
-										subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
-										try {
-											wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Change Payment Method']")));
-											subscriptionDetailsPageObject.clickOnChangePaymentMethod();			
-											subscriptionAccountPageObject.enterCardNumber(visa, driver);
-											subscriptionAccountPageObject.enterExpiryDate(inValidExpiryDate);
-											subscriptionAccountPageObject.enterCVV(updateCVV);
-											Assert.assertTrue(subscriptionAccountPageObject.verifyInValidExpiryDateFieldValidation()
-													.contains("Your card's expiration year is in the past."));
-										} catch (Exception e) {
-											Reporting.updateTestReport("Cards expiration year error message not found",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
-									} catch (Exception e) {
-										Reporting.updateTestReport("Subscription Information Page is verified",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									}
-								} catch (Exception e) {
-									Reporting.updateTestReport("Unable to click on ubmit order button",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
-							} catch (Exception e) {
-								Reporting.updateTestReport("Secure payment button is not enabled",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
-						} catch (Exception e) {
-							Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						}
-					} catch (Exception e) {
-						Reporting.updateTestReport("Unable to get the success Message for Account Creation",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
-
-				} catch (Exception e) {
-					Reporting.updateTestReport("Unable to Click on Create a new account link",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
-			} catch (Exception e) {
-				driver.get(cod_QA_CreateAccount_URL);
-				Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-
-	}
-		
-		
-		@Test
-		public void TC22_verifyErrorIfCardNumberIsIncorrectInSubscriptionDetailsPage () throws IOException, InterruptedException {			
-			try {
-				Reporting.test = Reporting.extent
-						.createTest("TC22_verifyErrorIfCardNumberIsIncorrectInSubscriptionDetailsPage");
-				LogTextFile.writeTestCaseStatus("TC22_verifyErrorIfCardNumberIsIncorrectInSubscriptionDetailsPage",
-						"Test case");
-				driver.get(cod_QA_CreateAccount_URL);
-				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-				try {
-					accountLoginPageObject.verifyAccountLoginPage();
-					wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
-					createAccountPageObject.clickOnCreateANewAccountLink();
-					try {
-						createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
-						createAccountPageObject.getSuccessMessageForAccountCreation();
-						try {
-							subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
-							subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
-
-							subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
-							subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
-							subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
-							subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
-							try {
-								wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
-								subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
-								subscriptionAccountPageObject.clickOnSecurePaymentButton();
-								try {
-									subscriptionAccountPageObject.enterWPSSecurePaymentDetails(visa, expiryDate, cvc,
-											driver);
-									subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-									try {
-										orderDetailsPageObject.verifyThankYouMessage();
-										loginPageObject.clickOnNavigationMenu();
-										orderDetailsPageObject.selectMySubscriptionButton();
-										orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
-										subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
-										try {
-											wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Change Payment Method']")));
-											subscriptionDetailsPageObject.clickOnChangePaymentMethod();
-											subscriptionAccountPageObject.enterCardNumber(inValidCardNumber, driver);
-											subscriptionAccountPageObject.enterExpiryDate(expiryDate);
-											Assert.assertEquals(subscriptionAccountPageObject.verifyInValidCardNumberFieldValidation(),
-													"Your card number is invalid.");
-										} catch (Exception e) {
-											Reporting.updateTestReport("Invalid card number error message not found",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
-									} catch (Exception e) {
-										Reporting.updateTestReport("Subscription Information Page is verified",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									}
-								} catch (Exception e) {
-									Reporting.updateTestReport("Unable to click on ubmit order button",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
-							} catch (Exception e) {
-								Reporting.updateTestReport("Secure payment button is not enabled",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
-						} catch (Exception e) {
-							Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						}
-					} catch (Exception e) {
-						Reporting.updateTestReport("Unable to get the success Message for Account Creation",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
-
-				} catch (Exception e) {
-					Reporting.updateTestReport("Unable to Click on Create a new account link",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
-			} catch (Exception e) {
-				driver.get(cod_QA_CreateAccount_URL);
-				Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-
-	}
-		
-		@Test
-		public void TC23_verifyErrorIfCVVIsIncorrectInSubscriptionDetailsPage()
-				throws IOException, InterruptedException {
-			try {
-				Reporting.test = Reporting.extent
-						.createTest("TC23_verifyErrorIfCVVIsIncorrectInSubscriptionDetailsPage");
-				LogTextFile.writeTestCaseStatus("TC23_verifyErrorIfCVVIsIncorrectInSubscriptionDetailsPage",
-						"Test case");
-				driver.get(cod_QA_CreateAccount_URL);
-				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-				try {
-					accountLoginPageObject.verifyAccountLoginPage();
-					wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
-					createAccountPageObject.clickOnCreateANewAccountLink();
-					try {
-						createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
-						createAccountPageObject.getSuccessMessageForAccountCreation();
-						try {
-							subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
-							subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
-
-							subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
-							subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
-							subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
-							subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
-							try {
-								wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
-								subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
-								subscriptionAccountPageObject.clickOnSecurePaymentButton();
-								try {
-									subscriptionAccountPageObject.enterWPSSecurePaymentDetails(visa, expiryDate, cvc,
-											driver);
-									subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-									try {
-										orderDetailsPageObject.verifyThankYouMessage();
-										loginPageObject.clickOnNavigationMenu();
-										orderDetailsPageObject.selectMySubscriptionButton();
-										orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
-										subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
-										try {
-											wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Change Payment Method']")));
-											subscriptionDetailsPageObject.clickOnChangePaymentMethod();
-											subscriptionAccountPageObject.enterCardNumber(visa, driver);
-											subscriptionAccountPageObject.enterExpiryDate(expiryDate);
-											subscriptionAccountPageObject.enterCVV(inValidCVV);
-											subscriptionAccountPageObject.enterExpiryDate(expiryDate);
-											Assert.assertTrue(
-													subscriptionAccountPageObject.verifyInCompleteCVVFieldValidation()
-															.contains("security code is incomplete."));
-										} catch (Exception e) {
-											Reporting.updateTestReport("Security Code message has been verified",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
-									} catch (Exception e) {
-										Reporting.updateTestReport("Subscription Information Page is verified",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									}
-								} catch (Exception e) {
-									Reporting.updateTestReport("Unable to click on ubmit order button",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
-							} catch (Exception e) {
-								Reporting.updateTestReport("Secure payment button is not enabled",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
-						} catch (Exception e) {
-							Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						}
-					} catch (Exception e) {
-						Reporting.updateTestReport("Unable to get the success Message for Account Creation",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
-
-				} catch (Exception e) {
-					Reporting.updateTestReport("Unable to Click on Create a new account link",
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-				}
-			} catch (Exception e) {
-				driver.get(cod_QA_CreateAccount_URL);
-				Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			}
-
+		} catch (Exception e) {
+			driver.get(cod_QA_CreateAccount_URL);
+			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 
 	}
+
+	@Test
+	public void TC21_verifyErrorIfExpiryDateIsInPastDigitInSubscriptionDetailsPage()
+			throws IOException, InterruptedException {
+		try {
+			Reporting.test = Reporting.extent
+					.createTest("TC21_verifyErrorIfExpiryDateIsInPastDigitInSubscriptionDetailsPage");
+			LogTextFile.writeTestCaseStatus("TC21_verifyErrorIfExpiryDateIsInPastDigitInSubscriptionDetailsPage",
+					"Test case");
+			driver.get(cod_QA_CreateAccount_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
+							try {
+								subscriptionAccountPageObject.enterWPSSecurePaymentDetails(visa, expiryDate, cvc,
+										driver);
+								subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+								try {
+									orderDetailsPageObject.verifyThankYouMessage();
+									loginPageObject.clickOnNavigationMenu();
+									orderDetailsPageObject.selectMySubscriptionButton();
+									orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
+									subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
+									try {
+										wait.until(ExpectedConditions.visibilityOfElementLocated(
+												By.xpath("//button[text()='Change Payment Method']")));
+										subscriptionDetailsPageObject.clickOnChangePaymentMethod();
+										subscriptionAccountPageObject.enterCardNumber(visa, driver);
+										subscriptionAccountPageObject.enterExpiryDate(inValidExpiryDate);
+										subscriptionAccountPageObject.enterCVV(updateCVV);
+										Assert.assertTrue(
+												subscriptionAccountPageObject.verifyInValidExpiryDateFieldValidation()
+														.contains("Your card's expiration year is in the past."));
+									} catch (Exception e) {
+										Reporting.updateTestReport("Cards expiration year error message not found",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+								} catch (Exception e) {
+									Reporting.updateTestReport("Subscription Information Page is verified",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport("Unable to click on submit order button",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+						} catch (Exception e) {
+							Reporting.updateTestReport("Secure payment button is not enabled",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		} catch (Exception e) {
+			driver.get(cod_QA_CreateAccount_URL);
+			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+
+	@Test
+	public void TC22_verifyErrorIfCardNumberIsIncorrectInSubscriptionDetailsPage()
+			throws IOException, InterruptedException {
+		try {
+			Reporting.test = Reporting.extent
+					.createTest("TC22_verifyErrorIfCardNumberIsIncorrectInSubscriptionDetailsPage");
+			LogTextFile.writeTestCaseStatus("TC22_verifyErrorIfCardNumberIsIncorrectInSubscriptionDetailsPage",
+					"Test case");
+			driver.get(cod_QA_CreateAccount_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
+							try {
+								subscriptionAccountPageObject.enterWPSSecurePaymentDetails(visa, expiryDate, cvc,
+										driver);
+								subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+								try {
+									orderDetailsPageObject.verifyThankYouMessage();
+									loginPageObject.clickOnNavigationMenu();
+									orderDetailsPageObject.selectMySubscriptionButton();
+									orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
+									subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
+									try {
+										wait.until(ExpectedConditions.visibilityOfElementLocated(
+												By.xpath("//button[text()='Change Payment Method']")));
+										subscriptionDetailsPageObject.clickOnChangePaymentMethod();
+										subscriptionAccountPageObject.enterCardNumber(inValidCardNumber, driver);
+										subscriptionAccountPageObject.enterExpiryDate(expiryDate);
+										Assert.assertEquals(
+												subscriptionAccountPageObject.verifyInValidCardNumberFieldValidation(),
+												"Your card number is invalid.");
+									} catch (Exception e) {
+										Reporting.updateTestReport("Invalid card number error message not found",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+								} catch (Exception e) {
+									Reporting.updateTestReport("Subscription Information Page is verified",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport("Unable to click on submit order button",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+						} catch (Exception e) {
+							Reporting.updateTestReport("Secure payment button is not enabled",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		} catch (Exception e) {
+			driver.get(cod_QA_CreateAccount_URL);
+			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+
+	@Test
+	public void TC23_verifyErrorIfCVVIsIncorrectInSubscriptionDetailsPage() throws IOException, InterruptedException {
+		try {
+			Reporting.test = Reporting.extent.createTest("TC23_verifyErrorIfCVVIsIncorrectInSubscriptionDetailsPage");
+			LogTextFile.writeTestCaseStatus("TC23_verifyErrorIfCVVIsIncorrectInSubscriptionDetailsPage", "Test case");
+			driver.get(cod_QA_CreateAccount_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
+							try {
+								subscriptionAccountPageObject.enterWPSSecurePaymentDetails(visa, expiryDate, cvc,
+										driver);
+								subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+								try {
+									orderDetailsPageObject.verifyThankYouMessage();
+									loginPageObject.clickOnNavigationMenu();
+									orderDetailsPageObject.selectMySubscriptionButton();
+									orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
+									subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
+									try {
+										wait.until(ExpectedConditions.visibilityOfElementLocated(
+												By.xpath("//button[text()='Change Payment Method']")));
+										subscriptionDetailsPageObject.clickOnChangePaymentMethod();
+										subscriptionAccountPageObject.enterCardNumber(visa, driver);
+										subscriptionAccountPageObject.enterExpiryDate(expiryDate);
+										subscriptionAccountPageObject.enterCVV(inValidCVV);
+										subscriptionAccountPageObject.enterExpiryDate(expiryDate);
+										Assert.assertTrue(
+												subscriptionAccountPageObject.verifyInCompleteCVVFieldValidation()
+														.contains("security code is incomplete."));
+									} catch (Exception e) {
+										Reporting.updateTestReport("Security Code message has been verified",
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									}
+								} catch (Exception e) {
+									Reporting.updateTestReport("Subscription Information Page is verified",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport("Unable to click on ubmit order button",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							}
+						} catch (Exception e) {
+							Reporting.updateTestReport("Secure payment button is not enabled",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		} catch (Exception e) {
+			driver.get(cod_QA_CreateAccount_URL);
+			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+
+	}
+
+}
