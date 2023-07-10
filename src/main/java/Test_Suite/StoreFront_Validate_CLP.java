@@ -111,17 +111,17 @@ public class StoreFront_Validate_CLP extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC02_ProductDisplayPage");
 			LogTextFile.writeTestCaseStatus("TC02_ProductDisplayPage", "Test case");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-			
+
 			String excel = ".\\Test Data\\Automation_Test(10).xlsx";
 			FileInputStream file = new FileInputStream (excel);
 			XSSFWorkbook wb = new XSSFWorkbook(file);
 			XSSFSheet sheet1 = wb.getSheet("StoreFront_PDP");
-			
+
 			String clp_solr = "-c-";
 			String clp_constructor = "-c2-";
 			int columnNumber=4;
 			//CommonMethods.ReadExcel_TC02();
-			
+
 			for (Row row : sheet1) {
 				Cell cell = row.getCell(columnNumber);
 				String cellValue=cell.getStringCellValue();
@@ -129,10 +129,10 @@ public class StoreFront_Validate_CLP extends DriverModule {
 				/*Hitting the last breadcrumb and changing it from Solr to Constructor Page*/
 				try { 
 					StoreFrontRepo.lastvalueClick();
-					String Solr_URL=DriverModule.driver.getCurrentUrl();
+					String Solr_URL=driver.getCurrentUrl();
 					String Constructor_URL= Solr_URL.replace(clp_solr, clp_constructor);
-					driver.get(Constructor_URL);
-					WebElement breadcrumb_parent= DriverModule.driver.findElement(By.xpath("//*[@class='breadcrumb']"));
+					driver.get(Constructor_URL);					
+					WebElement breadcrumb_parent= DriverModule.driver.findElement(By.className("breadcrumb"));
 					List <WebElement> breadcrumb_child = breadcrumb_parent.findElements(By.tagName("li"));
 					ArrayList<WebElement> breadcrumbli= new ArrayList<WebElement>(breadcrumb_child);
 					for(int i=breadcrumbli.size()-1;i>1;i--) {
@@ -141,25 +141,24 @@ public class StoreFront_Validate_CLP extends DriverModule {
 						try {
 							wait.until(ExpectedConditions
 									.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Find Wiley products based on your area of interest')]")));
-							//Thread.sleep(3000);
 						}catch (Exception e) {
-							Reporting.updateTestReport("404 Error while clicking the breadcrumb and the correct Items are not dispayed" + cellValue + e.getMessage(),
+							Reporting.updateTestReport("404 Error while clicking the breadcrumb and the correct Items are not dispayed" + cellValue + e.getClass(),
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					}
 
 				}catch (Exception e) {
 					Reporting.updateTestReport("404 Error while hitting the PDP URL " + cellValue,
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-					e.printStackTrace();
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					//e.printStackTrace();
 				}
 			}
-		//	wb.close();
-		//	file.close();
+			wb.close();
+			file.close();
 		}catch (Exception e) {
-			Reporting.updateTestReport("CLP did not get shifted from Solr to Constructor " + e.getMessage(),
+			Reporting.updateTestReport("CLP did not get shifted from Solr to Constructor " + e.getClass(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 }

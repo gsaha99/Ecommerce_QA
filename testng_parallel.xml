@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="3" parallel="tests" name="Test_Suite">
+  <test thread-count="3" parallel="tests" name="StoreFront_Validate_CLP">
+    <classes>
+		<class name="Test_Suite.StoreFront_Validate_CLP"/>
+    </classes>
+  </test> <!-- StoreFront_Validate_CLP -->
+</suite> <!-- Test_Suite -->

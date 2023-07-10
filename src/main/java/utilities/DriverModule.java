@@ -40,7 +40,7 @@ public class DriverModule {
 
 	@BeforeTest
 	@Parameters("browser")
-	public void initiate(ITestContext context,@Optional("edge") String browser)
+	public void initiate(ITestContext context,@Optional("chrome") String browser)
 	{
 		try {
 			String date = new SimpleDateFormat("ddmmyyyyhhmmss").format(new Date());			

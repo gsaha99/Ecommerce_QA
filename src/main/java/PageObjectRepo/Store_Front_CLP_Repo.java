@@ -227,7 +227,7 @@ public class Store_Front_CLP_Repo {
 	public void lastvalueClick() throws IOException{
 		try {
 			lastvalue.click();
-			Reporting.updateTestReport("Last bread crumb is clicked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS); 
+			//Reporting.updateTestReport("Last bread crumb is clicked successfully",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS); 
 		}
 		catch(Exception e) {
 			Reporting.updateTestReport("Last bread crumb is not clicked "+e.getClass().toString(),CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);

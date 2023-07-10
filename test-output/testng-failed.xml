@@ -6,9 +6,10 @@
       <class name="Test_Suite.StoreFront_Validate_CLP">
         <methods>
           <include name="nameAfter"/>
-          <include name="TC01_CategoryLandingPage"/>
-          <include name="CloseBrowser"/>
+          <include name="TC02_ProductDisplayPage"/>
           <include name="initiate"/>
+          <include name="CloseBrowser"/>
+          <include name="launchBrowser"/>
           <include name="nameBefore"/>
         </methods>
       </class> <!-- Test_Suite.StoreFront_Validate_CLP -->
