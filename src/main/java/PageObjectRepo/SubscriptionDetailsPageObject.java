@@ -85,6 +85,7 @@ public class SubscriptionDetailsPageObject {
 	
 	public void verifyCancelMySubscriptionButtonIsDisabed() throws IOException {	
 		try {
+			utilities.Helper.refreshThePage();
 			if (cancelMySubscriptionButton.isEnabled()) {
 				Reporting.updateTestReport("Cancel my subscription button is enabled", CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.PASS);
