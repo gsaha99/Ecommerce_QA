@@ -80,7 +80,7 @@ public class CreateAccountPageObject {
 	@FindBy (xpath = "//button[@class='existing-login-btn']")
 	private WebElement logIntoExistingAccountLink;
 	
-	@FindBy(xpath = "//button[@class='checkout__edit-btn']")
+	@FindBy(css = ".checkout__edit-btn")
 	private WebElement editButton;
 		
 	
@@ -98,8 +98,8 @@ public class CreateAccountPageObject {
 
 	public void clickOnEditButton() throws InterruptedException, IOException {
 		try {
-			 utilities.Helper.click(editButton);
-			 Thread.sleep(2000);
+			Thread.sleep(3000); 
+			utilities.Helper.click(editButton);			 
 			 Reporting.updateTestReport("Click on edit button",CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			 
 		} catch (Exception e) {
