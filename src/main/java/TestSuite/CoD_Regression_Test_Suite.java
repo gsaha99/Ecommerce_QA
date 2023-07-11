@@ -622,9 +622,13 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 									orderDetailsPageObject.selectMySubscriptionButton();
 									orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
 									subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
+									loginPageObject.clickOnNavigationMenu();
+									loginPageObject.clickOnLogoutButton();
 								} catch (Exception e) {
 									Reporting.updateTestReport("Subscription Information Page is verified",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									loginPageObject.clickOnNavigationMenu();
+									loginPageObject.clickOnLogoutButton();
 								}
 							} catch (Exception e) {
 								Reporting.updateTestReport("Unable to click on submit order button",
@@ -696,9 +700,13 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 									orderDetailsPageObject.selectMySubscriptionButton();
 									orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
 									subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
+									loginPageObject.clickOnNavigationMenu();
+									loginPageObject.clickOnLogoutButton();
 								} catch (Exception e) {
 									Reporting.updateTestReport("Subscription Information Page is verified",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									loginPageObject.clickOnNavigationMenu();
+									loginPageObject.clickOnLogoutButton();
 								}
 							} catch (Exception e) {
 								Reporting.updateTestReport("Unable to click on submit order button",
@@ -821,6 +829,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC17_changePaymentMethod() throws IOException, InterruptedException {
 		try {
+			String emailAddress = "Testsad" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent.createTest("TC17_changePaymentMethod");
 			LogTextFile.writeTestCaseStatus("TC17_changePaymentMethod", "Test case");
 			driver.get(cod_QA_CreateAccount_URL);
@@ -1122,6 +1131,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC45_verifyGenericDecline() throws InterruptedException, IOException {
 		try {
+			String emailAddress = "Testsae" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent.createTest("TC45_verifyGenericDecline");
 			LogTextFile.writeTestCaseStatus("TC45_verifyGenericDecline", "Test case");
 			driver.get(cod_QA_CreateAccount_URL);
@@ -1153,9 +1163,11 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 							subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
 							Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
 									"Your card has been declined.");
+							createAccountPageObject.clickOnEditButton();
 						} catch (Exception e) {
 							Reporting.updateTestReport("Card decline message not found",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
@@ -1180,6 +1192,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC46_verifyInsufficientFundDecline() throws InterruptedException, IOException {
 		try {
+			String emailAddress = "Testsaf" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent.createTest("TC46_verifyInsufficientFundDecline");
 			LogTextFile.writeTestCaseStatus("TC46_verifyInsufficientFundDecline", "Test case");
 			driver.get(cod_QA_CreateAccount_URL);
@@ -1211,13 +1224,16 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 							subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
 							Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
 									"Your card has insufficient funds.");
+							createAccountPageObject.clickOnEditButton();
 						} catch (Exception e) {
 							Reporting.updateTestReport("Insufficient funds message not found",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
@@ -1238,6 +1254,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC47_verifyLostCardDecline() throws InterruptedException, IOException {
 		try {
+			String emailAddress = "Testsag" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent.createTest("TC47_verifyLostCardDecline");
 			LogTextFile.writeTestCaseStatus("TC47_verifyLostCardDecline", "Test case");
 			driver.get(cod_QA_CreateAccount_URL);
@@ -1269,13 +1286,16 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 							subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
 							Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
 									"Your card has been declined.");
+							createAccountPageObject.clickOnEditButton();
 						} catch (Exception e) {
 							Reporting.updateTestReport("Cards decline message not found",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
@@ -1296,6 +1316,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC48_verifyStolenCardDecline() throws InterruptedException, IOException {
 		try {
+			String emailAddress = "Testsah" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent.createTest("TC48_verifyStolenCardDecline");
 			LogTextFile.writeTestCaseStatus("TC48_verifyStolenCardDecline", "Test case");
 			driver.get(cod_QA_CreateAccount_URL);
@@ -1327,13 +1348,16 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 							subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
 							Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
 									"Your card has been declined.");
+							createAccountPageObject.clickOnEditButton();
 						} catch (Exception e) {
 							Reporting.updateTestReport("Cards decline message not found",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
@@ -1354,6 +1378,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC49_verifyExpiredCardDecline() throws InterruptedException, IOException {
 		try {
+			String emailAddress = "Testsai" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent.createTest("TC49_verifyExpiredCardDecline");
 			LogTextFile.writeTestCaseStatus("TC49_verifyExpiredCardDecline", "Test case");
 			driver.get(cod_QA_CreateAccount_URL);
@@ -1385,13 +1410,16 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 							subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
 							Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
 									"Your card has expired.");
+							createAccountPageObject.clickOnEditButton();
 						} catch (Exception e) {
 							Reporting.updateTestReport("Cards expired message not found",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
@@ -1412,6 +1440,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC50_verifyIncorrectCVCCardDecline() throws InterruptedException, IOException {
 		try {
+			String emailAddress = "Testsaj" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent.createTest("TC50_verifyIncorrectCVCCardDecline");
 			LogTextFile.writeTestCaseStatus("TC50_verifyIncorrectCVCCardDecline", "Test case");
 			driver.get(cod_QA_CreateAccount_URL);
@@ -1443,13 +1472,16 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 							subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
 							Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
 									"Your card's security code is incorrect.");
+							createAccountPageObject.clickOnEditButton();
 						} catch (Exception e) {
 							Reporting.updateTestReport("Cards Security code message not found",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
@@ -1470,6 +1502,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC51_verifyProcessingErrorCardDecline() throws InterruptedException, IOException {
 		try {
+			String emailAddress = "Testsak" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent.createTest("TC51_verifyProcessingErrorCardDecline");
 			LogTextFile.writeTestCaseStatus("TC51_verifyProcessingErrorCardDecline", "Test case");
 			driver.get(cod_QA_CreateAccount_URL);
@@ -1501,13 +1534,16 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 							subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
 							Assert.assertEquals(subscriptionAccountPageObject.verifyErrorMessageForCards(),
 									"An error occurred while processing your card. Try again in a little bit.");
+							createAccountPageObject.clickOnEditButton();
 						} catch (Exception e) {
 							Reporting.updateTestReport("Cards error processing message not found",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
@@ -1528,6 +1564,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC62_verifyExpiryDateInPaymentFieldValidation() throws IOException, InterruptedException {
 		try {
+			String emailAddress = "Testsal" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent.createTest("TC62_verifyExpiryDateInPaymentFieldValidation");
 			LogTextFile.writeTestCaseStatus("TC62_verifyExpiryDateInPaymentFieldValidation", "Test case");
 			driver.get(cod_QA_CreateAccount_URL);
@@ -1559,13 +1596,16 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 							subscriptionAccountPageObject.enterCVV(updateCVV);
 							Assert.assertTrue(subscriptionAccountPageObject.verifyInValidExpiryDateFieldValidation()
 									.contains("Your card's expiration year is in the past."));
+							createAccountPageObject.clickOnEditButton();
 						} catch (Exception e) {
 							Reporting.updateTestReport("Card's expiration message not found",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
@@ -1586,6 +1626,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC67_verifyErrorIfCVVIsLessDigitInPaymentField() throws IOException, InterruptedException {
 		try {
+			String emailAddress = "Testsam" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent.createTest("TC67_verifyErrorIfCVVIsLessDigitInPaymentField");
 			LogTextFile.writeTestCaseStatus("TC67_verifyErrorIfCVVIsLessDigitInPaymentField", "Test case");
 			driver.get(cod_QA_CreateAccount_URL);
@@ -1618,13 +1659,16 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 							subscriptionAccountPageObject.enterExpiryDate(expiryDate);
 							Assert.assertTrue(subscriptionAccountPageObject.verifyInCompleteCVVFieldValidation()
 									.contains("security code is incomplete."));
+							createAccountPageObject.clickOnEditButton();
 						} catch (Exception e) {
 							Reporting.updateTestReport("Security Coder Incomplete message not found",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
@@ -1645,6 +1689,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC68_verifyErrorIfCardNumberIsLessDigitInPaymentField() throws IOException, InterruptedException {
 		try {
+			String emailAddress = "Testsan" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent.createTest("TC68_verifyErrorIfCardNumberIsLessDigitInPaymentField");
 			LogTextFile.writeTestCaseStatus("TC68_verifyErrorIfCardNumberIsLessDigitInPaymentField", "Test case");
 			driver.get(cod_QA_CreateAccount_URL);
@@ -1676,13 +1721,16 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 							Assert.assertEquals(
 									subscriptionAccountPageObject.verifyInCompleteCardNumberFieldValidation(),
 									"Your card number is incomplete.");
+							createAccountPageObject.clickOnEditButton();
 						} catch (Exception e) {
 							Reporting.updateTestReport("Card number Incomplete message not found",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
@@ -1703,6 +1751,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC69_verifyInCorrectCardNumberInPaymentField() throws IOException, InterruptedException {
 		try {
+			String emailAddress = "Testsao" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent.createTest("TC69_verifyInCorrectCardNumberInPaymentField");
 			LogTextFile.writeTestCaseStatus("TC69_verifyInCorrectCardNumberInPaymentField", "Test case");
 			driver.get(cod_QA_CreateAccount_URL);
@@ -1733,13 +1782,16 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 							subscriptionAccountPageObject.enterExpiryDate(expiryDate);
 							Assert.assertEquals(subscriptionAccountPageObject.verifyInValidCardNumberFieldValidation(),
 									"Your card number is invalid.");
+							createAccountPageObject.clickOnEditButton();
 						} catch (Exception e) {
 							Reporting.updateTestReport("Invalid Card number message not found",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
@@ -1760,6 +1812,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC70_verifyErrorIfExpiryDateIsLessDigitInPaymentField() throws IOException, InterruptedException {
 		try {
+			String emailAddress = "Testsap" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent.createTest("TC70_verifyErrorIfExpiryDateIsLessDigitInPaymentField");
 			LogTextFile.writeTestCaseStatus("TC70_verifyErrorIfExpiryDateIsLessDigitInPaymentField", "Test case");
 			driver.get(cod_QA_CreateAccount_URL);
@@ -1791,13 +1844,16 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 							subscriptionAccountPageObject.enterCVV(updateCVV);
 							Assert.assertTrue(subscriptionAccountPageObject.verifyInCompleteExpiryDateFieldValidation()
 									.contains("expiration date is incomplete."));
+							createAccountPageObject.clickOnEditButton();
 						} catch (Exception e) {
 							Reporting.updateTestReport("Expiration date incomplete message not found",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
@@ -1819,6 +1875,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	public void TC20_verifyErrorIfCardNumberIsLessDigitInSubscriptionDetailsPage()
 			throws IOException, InterruptedException {
 		try {
+			String emailAddress = "Testsaq" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent
 					.createTest("TC20_verifyErrorIfCardNumberIsLessDigitInSubscriptionDetailsPage");
 			LogTextFile.writeTestCaseStatus("TC20_verifyErrorIfCardNumberIsLessDigitInSubscriptionDetailsPage",
@@ -1865,25 +1922,34 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 												subscriptionAccountPageObject
 														.verifyInCompleteCardNumberFieldValidation(),
 												"Your card number is incomplete.");
+										loginPageObject.clickOnNavigationMenu();
+										loginPageObject.clickOnLogoutButton();
 									} catch (Exception e) {
 										Reporting.updateTestReport("Cards number incomplete error message not found",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										loginPageObject.clickOnNavigationMenu();
+										loginPageObject.clickOnLogoutButton();
 									}
 								} catch (Exception e) {
 									Reporting.updateTestReport("Subscription Information Page is verified",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									loginPageObject.clickOnNavigationMenu();
+									loginPageObject.clickOnLogoutButton();
 								}
 							} catch (Exception e) {
 								Reporting.updateTestReport("Unable to click on submit order button",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								createAccountPageObject.clickOnEditButton();
 							}
 						} catch (Exception e) {
 							Reporting.updateTestReport("Secure payment button is not enabled",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
@@ -1906,6 +1972,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	public void TC21_verifyErrorIfExpiryDateIsInPastDigitInSubscriptionDetailsPage()
 			throws IOException, InterruptedException {
 		try {
+			String emailAddress = "Testsar" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent
 					.createTest("TC21_verifyErrorIfExpiryDateIsInPastDigitInSubscriptionDetailsPage");
 			LogTextFile.writeTestCaseStatus("TC21_verifyErrorIfExpiryDateIsInPastDigitInSubscriptionDetailsPage",
@@ -1952,25 +2019,34 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 										Assert.assertTrue(
 												subscriptionAccountPageObject.verifyInValidExpiryDateFieldValidation()
 														.contains("Your card's expiration year is in the past."));
+										loginPageObject.clickOnNavigationMenu();
+										loginPageObject.clickOnLogoutButton();
 									} catch (Exception e) {
 										Reporting.updateTestReport("Cards expiration year error message not found",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										loginPageObject.clickOnNavigationMenu();
+										loginPageObject.clickOnLogoutButton();
 									}
 								} catch (Exception e) {
 									Reporting.updateTestReport("Subscription Information Page is verified",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									loginPageObject.clickOnNavigationMenu();
+									loginPageObject.clickOnLogoutButton();
 								}
 							} catch (Exception e) {
 								Reporting.updateTestReport("Unable to click on submit order button",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								createAccountPageObject.clickOnEditButton();
 							}
 						} catch (Exception e) {
 							Reporting.updateTestReport("Secure payment button is not enabled",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
@@ -1993,6 +2069,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	public void TC22_verifyErrorIfCardNumberIsIncorrectInSubscriptionDetailsPage()
 			throws IOException, InterruptedException {
 		try {
+			String emailAddress = "Testsas" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent
 					.createTest("TC22_verifyErrorIfCardNumberIsIncorrectInSubscriptionDetailsPage");
 			LogTextFile.writeTestCaseStatus("TC22_verifyErrorIfCardNumberIsIncorrectInSubscriptionDetailsPage",
@@ -2038,25 +2115,34 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 										Assert.assertEquals(
 												subscriptionAccountPageObject.verifyInValidCardNumberFieldValidation(),
 												"Your card number is invalid.");
+										loginPageObject.clickOnNavigationMenu();
+										loginPageObject.clickOnLogoutButton();
 									} catch (Exception e) {
 										Reporting.updateTestReport("Invalid card number error message not found",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										loginPageObject.clickOnNavigationMenu();
+										loginPageObject.clickOnLogoutButton();
 									}
 								} catch (Exception e) {
 									Reporting.updateTestReport("Subscription Information Page is verified",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									loginPageObject.clickOnNavigationMenu();
+									loginPageObject.clickOnLogoutButton();
 								}
 							} catch (Exception e) {
 								Reporting.updateTestReport("Unable to click on submit order button",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								createAccountPageObject.clickOnEditButton();
 							}
 						} catch (Exception e) {
 							Reporting.updateTestReport("Secure payment button is not enabled",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
@@ -2078,6 +2164,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 	@Test
 	public void TC23_verifyErrorIfCVVIsIncorrectInSubscriptionDetailsPage() throws IOException, InterruptedException {
 		try {
+			String emailAddress = "Testsat" + utilities.Helper.generateRandomString() + "@mailinator.com";
 			Reporting.test = Reporting.extent.createTest("TC23_verifyErrorIfCVVIsIncorrectInSubscriptionDetailsPage");
 			LogTextFile.writeTestCaseStatus("TC23_verifyErrorIfCVVIsIncorrectInSubscriptionDetailsPage", "Test case");
 			driver.get(cod_QA_CreateAccount_URL);
@@ -2123,25 +2210,34 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 										Assert.assertTrue(
 												subscriptionAccountPageObject.verifyInCompleteCVVFieldValidation()
 														.contains("security code is incomplete."));
+										loginPageObject.clickOnNavigationMenu();
+										loginPageObject.clickOnLogoutButton();
 									} catch (Exception e) {
 										Reporting.updateTestReport("Security Code message has been verified",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										loginPageObject.clickOnNavigationMenu();
+										loginPageObject.clickOnLogoutButton();
 									}
 								} catch (Exception e) {
 									Reporting.updateTestReport("Subscription Information Page is verified",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									loginPageObject.clickOnNavigationMenu();
+									loginPageObject.clickOnLogoutButton();
 								}
 							} catch (Exception e) {
-								Reporting.updateTestReport("Unable to click on ubmit order button",
+								Reporting.updateTestReport("Unable to click on submit order button",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								createAccountPageObject.clickOnEditButton();
 							}
 						} catch (Exception e) {
 							Reporting.updateTestReport("Secure payment button is not enabled",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
 						}
 					} catch (Exception e) {
 						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
 					}
 				} catch (Exception e) {
 					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
