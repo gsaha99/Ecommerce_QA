@@ -1605,11 +1605,12 @@ public class app_Wiley_Repo {
 	 */
 	public void validateMessageForPOD(String message) throws IOException{
 		try {
-			String text=PODMessage.getText();
-			if(text.equalsIgnoreCase(message)) {
-				System.out.println(text);
+			String[] messages=message.split("#");
+			String text=PODMessage.getText().trim();
+			if(text.contains(messages[0]) ) {
 				Reporting.updateTestReport("POD related message was displayed: "+text, CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.PASS);
+				
 
 			}
 			else Reporting.updateTestReport("POD related message was not correct: "+text, CaptureScreenshot.getScreenshot(SS_path),

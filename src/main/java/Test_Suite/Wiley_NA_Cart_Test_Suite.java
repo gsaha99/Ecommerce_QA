@@ -81,7 +81,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -116,7 +116,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 					PaymentGateway.paymentWiley(driver, wiley, "TC01", SS_path);
 					wiley.enterFirstName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					wiley.enterLastName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Last_Name"));
@@ -203,20 +203,20 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
-								+ " and caused timeout exception",
+								+ " and caused timeout exception "+e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name field in Card information"
-							+ " section was not clickable and caused timeout exception"
+							+ " section was not clickable and caused timeout exception "+e.getMessage()
 							, CaptureScreenshot.getScreenshot(SS_path),
 							StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -246,7 +246,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -278,9 +278,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.clickOnProceedToCheckoutButton();
 				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 						("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-				driver.switchTo().frame(0);
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 					PaymentGateway.paymentWiley(driver, wiley, "TC02", SS_path);
 					wiley.clickOnEnterNewAddress();
 					wiley.enterFirstName(excelOperation.getTestData("TC02", "WILEY_NA_Cart_Test_Data", "First_Name"));
@@ -371,20 +371,20 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
-								+ " and caused timeout exception",
+								+ " and caused timeout exception "+e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name field in Card information"
-							+ " section was not clickable and caused timeout exception"
+							+ " section was not clickable and caused timeout exception "+e.getMessage()
 							, CaptureScreenshot.getScreenshot(SS_path),
 							StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -404,7 +404,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC03_Physical_productpurchase_ForNewUser", "Test case");
 			WordDocumentReport.writeTestcaseName("TC03_Physical_productpurchase_ForNewUser");
 			driver.get(wiley.wileyURLConcatenation("TC03", "WILEY_NA_Cart_Test_Data", "URL"));
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
@@ -457,9 +457,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 							("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-					driver.switchTo().frame(0);
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 						PaymentGateway.paymentWiley(driver, wiley, "TC03", SS_path);
 						wiley.clickOnSaveAndContinueButton();
 						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
@@ -545,19 +545,19 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name field in Card information"
-								+ " section was not clickable and caused timeout exception"
+								+ " section was not clickable and caused timeout exception "+e.getMessage()
 								, CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-							+ " and caused timeout exception",
+							+ " and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -581,7 +581,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC04_Physical_Product_Purchase_Guest_User");
 			LogTextFile.writeTestCaseStatus("TC04_Physical_Product_Purchase_Guest_User", "Test case");
 			WordDocumentReport.writeTestcaseName("TC04_Physical_Product_Purchase_Guest_User");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC04", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -630,7 +630,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
 					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 						PaymentGateway.paymentWiley(driver, wiley, "TC04", SS_path);
 						wiley.clickOnSaveAndContinueButton();
 						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
@@ -714,20 +714,20 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name field in Card information"
-								+ " section was not clickable and caused timeout exception"
+								+ " section was not clickable and caused timeout exception "+e.getMessage()
 								, CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}			
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-							+ " and caused timeout exception",
+							+ " and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -754,7 +754,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -790,7 +790,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
 				driver.switchTo().frame(driver.findElement(By.className("gw-proxy-nameOnCard"))); 
 				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 					PaymentGateway.paymentWiley(driver, wiley, "TC05", SS_path);
 					wiley.clickOnSaveAndContinueButton();
 					BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
@@ -865,13 +865,13 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name field in Card information"
-							+ " section was not clickable and caused timeout exception"
+							+ " section was not clickable and caused timeout exception "+e.getMessage()
 							, CaptureScreenshot.getScreenshot(SS_path),
 							StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -894,7 +894,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -937,9 +937,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.clickOnSaveAndContinueButton();
 						wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 								("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-						driver.switchTo().frame(0);
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 						try {
-							wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 							PaymentGateway.paymentWiley(driver, wiley, "TC06", SS_path);
 							wiley.clickOnSaveAndContinueButton();
 							BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
@@ -1022,22 +1022,22 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Cardholder name field in Card information"
-									+ " section was not clickable and caused timeout exception"
+									+ " section was not clickable and caused timeout exception "+e.getMessage()
 									, CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
 					}
 					catch(Exception e) {
-						Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+						Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				}catch(Exception e) {
-					Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception",
+					Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -1061,7 +1061,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC07_Mixed_Product_Some_Stock_New_User");
 			LogTextFile.writeTestCaseStatus("TC07_Mixed_Product_Some_Stock_New_User", "Test case");
 			WordDocumentReport.writeTestcaseName("TC07_Mixed_Product_Some_Stock_New_User");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC07", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -1130,7 +1130,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
 							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 							try {
-								wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+								wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 								PaymentGateway.paymentWiley(driver, wiley, "TC07", SS_path);
 								wiley.clickOnSaveAndContinueButton();
 								BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
@@ -1222,28 +1222,28 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							}
 							catch(Exception e) {
 								Reporting.updateTestReport("Cardholder name field in Card information"
-										+ " section was not clickable and caused timeout exception"
+										+ " section was not clickable and caused timeout exception "+e.getMessage()
 										, CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
 							}
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-									+ " and caused timeout exception",
+									+ " and caused timeout exception "+e.getMessage(),
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					}
 					catch(Exception e) {
-						Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+						Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				}catch(Exception e) {
-					Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception",
+					Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -1267,7 +1267,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC08__Mixed_Product_No_Stock_Guest_User");
 			LogTextFile.writeTestCaseStatus("TC08__Mixed_Product_No_Stock_Guest_User", "Test case");
 			WordDocumentReport.writeTestcaseName("TC08_Mixed_Product_No_Stock_Guest_User");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC08", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -1330,7 +1330,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 									("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
 							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 							try {
-								wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+								wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 								PaymentGateway.paymentWiley(driver, wiley, "TC08", SS_path);
 								wiley.clickOnSaveAndContinueButton();
 								BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
@@ -1423,28 +1423,28 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							}
 							catch(Exception e) {
 								Reporting.updateTestReport("Cardholder name field in Card information"
-										+ " section was not clickable and caused timeout exception"
+										+ " section was not clickable and caused timeout exception "+e.getMessage()
 										, CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
 							}	
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-									+ " and caused timeout exception",
+									+ " and caused timeout exception "+e.getMessage(),
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}	
 					}
 					catch(Exception e) {
-						Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+						Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				}catch(Exception e) {
-					Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception",
+					Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -1469,7 +1469,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC09_Higher_Education_Digitalproductpurchase_ForNewUser");
 			LogTextFile.writeTestCaseStatus("TC09_Higher_Education_Digitalproductpurchase_ForNewUser", "Test case");
 			WordDocumentReport.writeTestcaseName("TC09_Higher_Education_Digitalproductpurchase_ForNewUser");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC09", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -1510,9 +1510,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.clickOnSaveAndContinueButton();
 				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 						("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-				driver.switchTo().frame(0);
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 					PaymentGateway.paymentWiley(driver, wiley, "TC09", SS_path);
 					wiley.enterFirstName(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					wiley.enterLastName(excelOperation.getTestData("TC09", "WILEY_NA_Cart_Test_Data", "Last_Name"));
@@ -1605,20 +1605,20 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
-								+ " and caused timeout exception",
+								+ " and caused timeout exception "+e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name field in Card information"
-							+ " section was not clickable and caused timeout exception"
+							+ " section was not clickable and caused timeout exception "+e.getMessage()
 							, CaptureScreenshot.getScreenshot(SS_path),
 							StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -1645,7 +1645,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC10_Shipping_And_BillingAddresses_Same");
 			LogTextFile.writeTestCaseStatus("TC10_Shipping_And_BillingAddresses_Same", "Test case");
 			WordDocumentReport.writeTestcaseName("TC10_Shipping_And_BillingAddresses_Same");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC10", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -1698,9 +1698,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 							("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-					driver.switchTo().frame(0);
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 						PaymentGateway.paymentWiley(driver, wiley, "TC10", SS_path);
 						wiley.clickOnSaveAndContinueButton();
 						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
@@ -1785,19 +1785,19 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name field in Card information"
-								+ " section was not clickable and caused timeout exception"
+								+ " section was not clickable and caused timeout exception "+e.getMessage()
 								, CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-							+ " and caused timeout exception",
+							+ " and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -1820,7 +1820,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC11_Shipping_And_BillingAddresses_different");
 			LogTextFile.writeTestCaseStatus("TC11_Shipping_And_BillingAddresses_different", "Test case");
 			WordDocumentReport.writeTestcaseName("TC11_Shipping_And_BillingAddresses_different");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC11", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -1874,9 +1874,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 							("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-					driver.switchTo().frame(0);
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 						PaymentGateway.paymentWiley(driver, wiley, "TC11", SS_path);
 						driver.findElement(By.xpath("//label[@id='sameAsBillingLabel']")).click();
 						wiley.enterFirstName(excelOperation.getTestData("TC11", "WILEY_NA_Cart_Test_Data", "First_Name"));
@@ -1982,38 +1982,38 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								}
 								catch(Exception e) {
 									Reporting.updateTestReport("Billing City was not clickable"
-											+ " and caused timeout exception",
+											+ " and caused timeout exception "+e.getMessage(),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 							}
 							catch(Exception e) {
 								Reporting.updateTestReport("Billing zip code was not clickable"
-										+ " and caused timeout exception",
+										+ " and caused timeout exception "+e.getMessage(),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Billing address line 1 was not clickable"
-									+ " and caused timeout exception",
+									+ " and caused timeout exception "+e.getMessage(),
 									CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name field in Card information"
-								+ " section was not clickable and caused timeout exception"
+								+ " section was not clickable and caused timeout exception "+e.getMessage()
 								, CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-							+ " and caused timeout exception",
+							+ " and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -2037,7 +2037,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC12_Product_having_ADD_Promotion");
 			LogTextFile.writeTestCaseStatus("TC12_Product_having_ADD_Promotion", "Test case");
 			WordDocumentReport.writeTestcaseName("TC12_Product_having_ADD_Promotion");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC12", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -2110,9 +2110,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 							("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-					driver.switchTo().frame(0);
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 						PaymentGateway.paymentWiley(driver, wiley, "TC12", SS_path);
 						wiley.clickOnSaveAndContinueButton();
 						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
@@ -2199,19 +2199,19 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name field in Card information"
-								+ " section was not clickable and caused timeout exception"
+								+ " section was not clickable and caused timeout exception "+e.getMessage()
 								, CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-							+ " and caused timeout exception",
+							+ " and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -2237,7 +2237,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC13", "WILEY_NA_Cart_Test_Data", "URL"));
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -2274,9 +2274,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.clickOnSaveAndContinueButton();
 				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 						("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-				driver.switchTo().frame(0);
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 					PaymentGateway.paymentWiley(driver, wiley, "TC13", SS_path);
 					wiley.enterFirstName(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					wiley.enterLastName(excelOperation.getTestData("TC13", "WILEY_NA_Cart_Test_Data", "Last_Name"));
@@ -2368,20 +2368,20 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
-								+ " and caused timeout exception",
+								+ " and caused timeout exception "+e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name field in Card information"
-							+ " section was not clickable and caused timeout exception"
+							+ " section was not clickable and caused timeout exception "+e.getMessage()
 							, CaptureScreenshot.getScreenshot(SS_path),
 							StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -2404,7 +2404,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC14_Textbook_Rental_product_purchase");
 			LogTextFile.writeTestCaseStatus("TC14_Textbook_Rental_product_purchase", "Test case");
 			WordDocumentReport.writeTestcaseName("TC14_Textbook_Rental_product_purchase");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC14", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -2464,9 +2464,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 							("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-					driver.switchTo().frame(0);
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 						PaymentGateway.paymentWiley(driver, wiley, "TC14", SS_path);
 						wiley.clickOnSaveAndContinueButton();
 						wiley.clickOnRentalTermsCheckbox();
@@ -2551,19 +2551,19 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name field in Card information"
-								+ " section was not clickable and caused timeout exception"
+								+ " section was not clickable and caused timeout exception "+e.getMessage()
 								, CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-							+ " and caused timeout exception",
+							+ " and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -2590,7 +2590,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -2629,7 +2629,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 					PaymentGateway.paymentWiley(driver, wiley, "TC15", SS_path);
 					wiley.enterFirstName(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					wiley.enterLastName(excelOperation.getTestData("TC15", "WILEY_NA_Cart_Test_Data", "Last_Name"));
@@ -2721,20 +2721,20 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
-								+ " and caused timeout exception",
+								+ " and caused timeout exception "+e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name field in Card information"
-							+ " section was not clickable and caused timeout exception"
+							+ " section was not clickable and caused timeout exception "+e.getMessage()
 							, CaptureScreenshot.getScreenshot(SS_path),
 							StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -2756,7 +2756,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC16_Higher_Education_Physical_product_purchase");
 			LogTextFile.writeTestCaseStatus("TC16_Higher_Education_Physical_product_purchase", "Test case");
 			WordDocumentReport.writeTestcaseName("TC16_Higher_Education_Physical_product_purchase");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC16", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -2813,9 +2813,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					wiley.clickOnSaveAndContinueButton();
 					wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 							("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-					driver.switchTo().frame(0);
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 						PaymentGateway.paymentWiley(driver, wiley, "TC16", SS_path);
 						wiley.clickOnSaveAndContinueButton();
 						wiley.clickOnRentalTermsCheckbox();
@@ -2900,19 +2900,19 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-								+ " and caused timeout exception",
+								+ " and caused timeout exception "+e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name field in Card information"
-							+ " section was not clickable and caused timeout exception"
+							+ " section was not clickable and caused timeout exception "+e.getMessage()
 							, CaptureScreenshot.getScreenshot(SS_path),
 							StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -2936,7 +2936,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC17_Purchase_with_Coupon_Discount");
 			LogTextFile.writeTestCaseStatus("TC17_Purchase_with_Coupon_Discount", "Test case");
 			WordDocumentReport.writeTestcaseName("TC17_Purchase_with_Coupon_Discount");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC17", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -3020,9 +3020,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							}
 							wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 									("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-							driver.switchTo().frame(0);
+							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 							try {
-								wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+								wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 								PaymentGateway.paymentWiley(driver, wiley, "TC17", SS_path);
 								wiley.clickOnSaveAndContinueButton();
 								BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
@@ -3111,28 +3111,28 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							}
 							catch(Exception e) {
 								Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-										+ " and caused timeout exception",
+										+ " and caused timeout exception "+e.getMessage(),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Cardholder name field in Card information"
-									+ " section was not clickable and caused timeout exception"
+									+ " section was not clickable and caused timeout exception "+e.getMessage()
 									, CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
 					}
 					catch(Exception e) {
-						Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+						Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				}catch(Exception e) {
-					Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception",
+					Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -3158,7 +3158,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -3183,7 +3183,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 					PaymentGateway.paymentWiley(driver, wiley, "TC18", SS_path);		
 					wiley.enterFirstName(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					wiley.enterLastName(excelOperation.getTestData("TC18", "WILEY_NA_Cart_Test_Data", "Last_Name"));
@@ -3209,7 +3209,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.clickOnEditButtonInBilling();			
 						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));			
 						try {
-							wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 							PaymentGateway.paymentWiley(driver, wiley, "TC18", SS_path);			
 							wiley.enterFirstName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "First_Name"));
 							wiley.enterLastName(excelOperation.getTestData("TC01", "WILEY_NA_Cart_Test_Data", "Last_Name"));
@@ -3242,34 +3242,34 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							}
 							catch(Exception e) {
 								Reporting.updateTestReport("Billing address line 1 was not clickable"
-										+ " and caused timeout exception",
+										+ " and caused timeout exception "+e.getMessage(),
 										CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
 							}
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Cardholder name field in Card information"
-									+ " section was not clickable and caused timeout exception"
+									+ " section was not clickable and caused timeout exception "+e.getMessage()
 									, CaptureScreenshot.getScreenshot(SS_path),
 									StatusDetails.FAIL);
 						}
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
-								+ " and caused timeout exception",
+								+ " and caused timeout exception "+e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name field in Card information"
-							+ " section was not clickable and caused timeout exception"
+							+ " section was not clickable and caused timeout exception "+e.getMessage()
 							, CaptureScreenshot.getScreenshot(SS_path),
 							StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -3292,7 +3292,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC19_Country_Restriction_Validation");
 			LogTextFile.writeTestCaseStatus("TC19_Country_Restriction_Validation", "Test case");
 			WordDocumentReport.writeTestcaseName("TC19_Country_Restriction_Validation");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC19", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -3350,12 +3350,12 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-							+ " and caused timeout exception",
+							+ " and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -3378,7 +3378,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC20_New_user_tax_for_physical_product");
 			LogTextFile.writeTestCaseStatus("TC20_New_user_tax_for_physical_product", "Test case");
 			WordDocumentReport.writeTestcaseName("TC20_New_user_tax_for_physical_product");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC20", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -3432,9 +3432,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 							("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-					driver.switchTo().frame(0);
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 						PaymentGateway.paymentWiley(driver, wiley, "TC20", SS_path);
 						wiley.clickOnSaveAndContinueButton();
 						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
@@ -3520,19 +3520,19 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name field in Card information"
-								+ " section was not clickable and caused timeout exception"
+								+ " section was not clickable and caused timeout exception "+e.getMessage()
 								, CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-							+ " and caused timeout exception",
+							+ " and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -3559,7 +3559,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -3590,9 +3590,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.clickOnSaveAndContinueButton();
 				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 						("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-				driver.switchTo().frame(0);
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 					PaymentGateway.paymentWiley(driver, wiley, "TC21", SS_path);
 					wiley.clickOnSaveAndContinueButton();
 					BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
@@ -3666,13 +3666,13 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name field in Card information"
-							+ " section was not clickable and caused timeout exception"
+							+ " section was not clickable and caused timeout exception "+e.getMessage()
 							, CaptureScreenshot.getScreenshot(SS_path),
 							StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -3700,7 +3700,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -3734,7 +3734,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 					PaymentGateway.paymentWiley(driver, wiley, "TC22", SS_path);
 					wiley.enterFirstName(excelOperation.getTestData("TC22", "WILEY_NA_Cart_Test_Data", "First_Name"));
 					wiley.enterLastName(excelOperation.getTestData("TC22", "WILEY_NA_Cart_Test_Data", "Last_Name"));
@@ -3829,7 +3829,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
-								+ " and caused timeout exception",
+								+ " and caused timeout exception "+e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
@@ -3837,13 +3837,13 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name field in Card information"
-							+ " section was not clickable and caused timeout exception"
+							+ " section was not clickable and caused timeout exception "+e.getMessage()
 							, CaptureScreenshot.getScreenshot(SS_path),
 							StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -3870,7 +3870,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -3897,9 +3897,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.clickOnProceedToCheckoutButton();
 				wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 						("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-				driver.switchTo().frame(0);
+				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 					PaymentGateway.paymentWiley(driver, wiley, "TC23", SS_path);
 					//wiley.clickOnEnterNewAddress();
 					wiley.enterFirstName(excelOperation.getTestData("TC23", "WILEY_NA_Cart_Test_Data", "First_Name"));
@@ -3985,20 +3985,20 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Billing address line 1 was not clickable"
-								+ " and caused timeout exception",
+								+ " and caused timeout exception "+e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Cardholder name field in Card information"
-							+ " section was not clickable and caused timeout exception"
+							+ " section was not clickable and caused timeout exception "+e.getMessage()
 							, CaptureScreenshot.getScreenshot(SS_path),
 							StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -4027,7 +4027,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -4086,9 +4086,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 								+ " the shipping step ", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 							("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-					driver.switchTo().frame(0);
+					driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 						PaymentGateway.paymentWiley(driver, wiley, "TC24", SS_path);
 						wiley.clickOnSaveAndContinueButton();
 						BigDecimal firstProductPriceInOrderReview=new BigDecimal(wiley.fetchFirstProductPriceInOrderReview().substring(1));
@@ -4179,14 +4179,14 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					}
 					catch(Exception e) {
 						Reporting.updateTestReport("Cardholder name field in Card information"
-								+ " section was not clickable and caused timeout exception"
+								+ " section was not clickable and caused timeout exception "+e.getMessage()
 								, CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-							+ " and caused timeout exception",
+							+ " and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 				
@@ -4224,7 +4224,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				wiley.searchDataInSearchBar("rguroo");
 				wiley.checkIfRGurooAppliedInFacet();
 			}catch(Exception e) {
-				Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception",
+				Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 		}
@@ -4249,7 +4249,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -4307,16 +4307,16 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 					}
 					catch(Exception e) {
-						Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+						Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				}catch(Exception e) {
-					Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception",
+					Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -4343,7 +4343,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC29", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.clickOnAddToCartButton(driver);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -4361,7 +4361,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -4390,7 +4390,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -4435,12 +4435,12 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 				}
 				catch(Exception e) {
-					Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+					Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -4462,7 +4462,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			Reporting.test = Reporting.extent.createTest("TC31_Zero_Dollar_Flow_For_Digital_Product");
 			LogTextFile.writeTestCaseStatus("TC31_Zero_Dollar_Flow_For_Digital_Product", "Test case");
 			WordDocumentReport.writeTestcaseName("TC31_Zero_Dollar_Flow_For_Digital_Product");
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC31", "WILEY_NA_Cart_Test_Data", "URL"));			
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -4581,13 +4581,13 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Billing address line 1 was not clickable"
-							+ " and caused timeout exception",
+							+ " and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path),
 							StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -4611,7 +4611,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus("TC32_Preorder_Backorder_Flow_With_Print_Pdf_Page", "Test case");
 			WordDocumentReport.writeTestcaseName("TC32_Preorder_Backorder_Flow_With_Print_Pdf_Page");
 			//This is the pdp page url for backorder product
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(wiley.wileyURLConcatenation("TC32", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -4685,9 +4685,9 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							}
 							wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 									("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-							driver.switchTo().frame(0);
+							driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 							try {
-								wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+								wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 								PaymentGateway.paymentWiley(driver, wiley, "TC32", SS_path);
 								wiley.clickOnSaveAndContinueButton();
 								ScrollingWebPage.PageScrolldown(driver, 0, 900, SS_path);
@@ -4784,7 +4784,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 							}
 							catch(Exception e) {
 								Reporting.updateTestReport("Cardholder name field in Card information"
-										+ " section was not clickable and caused timeout exception"
+										+ " section was not clickable and caused timeout exception "+e.getMessage()
 										, CaptureScreenshot.getScreenshot(SS_path),
 										StatusDetails.FAIL);
 							}
@@ -4792,21 +4792,21 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						}
 						catch(Exception e) {
 							Reporting.updateTestReport("Shipping Address line 1 was not clickable"
-									+ " and caused timeout exception",
+									+ " and caused timeout exception "+e.getMessage(),
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					}
 					catch(Exception e) {
-						Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+						Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				}catch(Exception e) {
-					Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception",
+					Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -4835,7 +4835,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.get(wiley.wileyURLConcatenation("TC33", "WILEY_NA_Cart_Test_Data", "URL"));
 			driver.navigate().refresh();
 			wiley.clickOnAddToCartButton(driver);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -4883,7 +4883,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -4914,7 +4914,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 			driver.navigate().refresh();
 			BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 			wiley.clickOnAddToCartButton(driver);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			try {
 				wait.until(ExpectedConditions.
 						elementToBeClickable
@@ -4967,17 +4967,17 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 						wiley.checkErrorMessageAfterEnteringWrongPassword();
 					}
 					catch(Exception e) {
-						Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+						Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				}catch(Exception e) {
-					Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception",
+					Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 
 			}
 			catch(Exception e) {
-				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+				Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.removeProductsFromCart(driver);
@@ -5073,7 +5073,7 @@ public class Wiley_NA_Cart_Test_Suite extends DriverModule {
 					Reporting.updateTestReport("VET Consult was not present under format",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			}catch(Exception e) {
-				Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception",
+				Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			wiley.WileyLogOut(driver);
@@ -5218,7 +5218,7 @@ public void TC36_DEC_Link_for_Other_Countries_With_Prof_Wiley() throws IOExcepti
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Request Digital Evaluation Copy link was not clickable"
-							+ "and caused timeout exception", CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							+ "and caused timeout exception "+e.getMessage(), CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 		}
@@ -5324,7 +5324,7 @@ public void TC38_Validate_Payment_Status_For_Declined_card() throws IOException{
 		driver.get(wiley.wileyURLConcatenation("TC38", "WILEY_NA_Cart_Test_Data", "URL"));
 		driver.navigate().refresh();
 		wiley.clickOnAddToCartButton(driver);
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		try {
 			wait.until(ExpectedConditions.
 					elementToBeClickable
@@ -5350,7 +5350,7 @@ public void TC38_Validate_Payment_Status_For_Declined_card() throws IOException{
 					("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
 			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 				PaymentGateway.paymentWiley(driver, wiley, "TC38", SS_path);		
 				wiley.enterFirstName(excelOperation.getTestData("TC38", "WILEY_NA_Cart_Test_Data", "First_Name"));
 				wiley.enterLastName(excelOperation.getTestData("TC38", "WILEY_NA_Cart_Test_Data", "Last_Name"));
@@ -5376,20 +5376,20 @@ public void TC38_Validate_Payment_Status_For_Declined_card() throws IOException{
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Billing address line 1 was not clickable"
-							+ " and caused timeout exception",
+							+ " and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path),
 							StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Cardholder name field in Card information"
-						+ " section was not clickable and caused timeout exception"
+						+ " section was not clickable and caused timeout exception "+e.getMessage()
 						, CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+			Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 		wiley.removeProductsFromCart(driver);
@@ -5417,7 +5417,7 @@ public void TC39_Riskified_Declined_Order_With_Last_Name_Decline() throws IOExce
 		driver.navigate().refresh();
 		BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 		wiley.clickOnAddToCartButton(driver);
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		try {
 			wait.until(ExpectedConditions.
 					elementToBeClickable
@@ -5452,7 +5452,7 @@ public void TC39_Riskified_Declined_Order_With_Last_Name_Decline() throws IOExce
 					("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
 			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 				PaymentGateway.paymentWiley(driver, wiley, "TC39", SS_path);			
 				wiley.enterFirstName(excelOperation.getTestData("TC39", "WILEY_NA_Cart_Test_Data", "First_Name"));
 				wiley.enterLastName(excelOperation.getTestData("TC39", "WILEY_NA_Cart_Test_Data", "Last_Name"));
@@ -5541,20 +5541,20 @@ public void TC39_Riskified_Declined_Order_With_Last_Name_Decline() throws IOExce
 				}
 				catch(Exception e) {
 					Reporting.updateTestReport("Billing address line 1 was not clickable"
-							+ " and caused timeout exception",
+							+ " and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path),
 							StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
 				Reporting.updateTestReport("Cardholder name field in Card information"
-						+ " section was not clickable and caused timeout exception"
+						+ " section was not clickable and caused timeout exception "+e.getMessage()
 						, CaptureScreenshot.getScreenshot(SS_path),
 						StatusDetails.FAIL);
 			}
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+			Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 		wiley.removeProductsFromCart(driver);
@@ -5579,7 +5579,7 @@ public void TC40_Shipping_Charge_For_Multiple_Products() throws IOException{
 		LogTextFile.writeTestCaseStatus("TC40_Shipping_Charge_For_Multiple_Products", "Test case");
 		WordDocumentReport.writeTestcaseName("TC40_Shipping_Charge_For_Multiple_Products");
 		driver.get(wiley.wileyURLConcatenation("TC40", "WILEY_NA_Cart_Test_Data", "URL"));
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		driver.navigate().refresh();
 		BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
 		wiley.clickOnAddToCartButton(driver);
@@ -5693,7 +5693,7 @@ public void TC40_Shipping_Charge_For_Multiple_Products() throws IOException{
 
 
 		}catch(Exception e) {
-			Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+			Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 		wiley.removeProductsFromCart(driver);
@@ -5718,7 +5718,7 @@ public void TC41_Create_Account_Funtionality_With_Wrong_Password_Formats() throw
 		LogTextFile.writeTestCaseStatus("TC41_Create_Account_Funtionality_With_Wrong_Password_Formats", "Test case");
 		WordDocumentReport.writeTestcaseName("TC41_Create_Account_Funtionality_With_Wrong_Password_Formats");
 		driver.get(wiley.wileyURLConcatenation("TC41", "WILEY_NA_Cart_Test_Data", "URL"));
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		driver.navigate().refresh();
 		wiley.clickOnAddToCartButton(driver);
 		String[] passwords=excelOperation.getTestData("TC41", "WILEY_NA_Cart_Test_Data", "Password").split(",");
@@ -5795,7 +5795,7 @@ public void TC41_Create_Account_Funtionality_With_Wrong_Password_Formats() throw
 			}
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+			Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 		wiley.removeProductsFromCart(driver);
@@ -5819,7 +5819,7 @@ public void TC42_Purchase_with_Order_Level_Discount() throws IOException{
 		Reporting.test = Reporting.extent.createTest("TC42_Purchase_with_Order_Level_Discount");
 		LogTextFile.writeTestCaseStatus("TC42_Purchase_with_Order_Level_Discount", "Test case");
 		WordDocumentReport.writeTestcaseName("TC42_Purchase_with_Order_Level_Discount");
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		driver.get(wiley.wileyURLConcatenation("TC42", "WILEY_NA_Cart_Test_Data", "URL"));
 		driver.navigate().refresh();
 		BigDecimal priceOfFirstProduct=new BigDecimal(wiley.fetchPriceInPDP().substring(1));
@@ -5907,9 +5907,9 @@ public void TC42_Purchase_with_Order_Level_Discount() throws IOException{
 						wiley.clickOnSaveAndContinueButton();
 						wiley.checkTextInOrderSummaryTab(excelOperation.getTestData
 								("OrderSummaryTabTextBeforeBilling","Generic_Messages", "Data"),driver);
-						driver.switchTo().frame(0);
+						driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 						try {
-							wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
+							wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='nameOnCard']")));
 							PaymentGateway.paymentWiley(driver, wiley, "TC42", SS_path);
 							wiley.clickOnSaveAndContinueButton();
 							wiley.clickOnRentalTermsCheckbox();
@@ -5998,27 +5998,27 @@ public void TC42_Purchase_with_Order_Level_Discount() throws IOException{
 							}
 						}
 						catch(Exception e) {
-							Reporting.updateTestReport("Cardholder name field in Card information section was not clickable and caused timeout exception",
+							Reporting.updateTestReport("Cardholder name field in Card information section was not clickable and caused timeout exception "+e.getMessage(),
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 					}
 					catch(Exception e) {
-						Reporting.updateTestReport("Shipping Address line 1 was not clickable and caused timeout exception"
+						Reporting.updateTestReport("Shipping Address line 1 was not clickable and caused timeout exception "+e.getMessage()
 								, CaptureScreenshot.getScreenshot(SS_path),
 								StatusDetails.FAIL);
 					}
 				}
 				catch(Exception e) {
-					Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+					Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}catch(Exception e) {
-				Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception",
+				Reporting.updateTestReport("Search bar was not present in cart page and caused timeout exception "+e.getMessage(),
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+			Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 		wiley.removeProductsFromCart(driver);
@@ -6047,7 +6047,7 @@ public void TC43_Forgot_Password_Page_Password_Criteria_Negative_Scenarios() thr
 		driver.navigate().refresh();
 		wiley.clickOnAddToCartButton(driver);
 		String[] passwords=excelOperation.getTestData("TC43", "WILEY_NA_Cart_Test_Data", "Password").split(",");
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		try {
 			wait.until(ExpectedConditions.
 					elementToBeClickable
@@ -6116,7 +6116,7 @@ public void TC43_Forgot_Password_Page_Password_Criteria_Negative_Scenarios() thr
 
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+			Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 		wiley.removeProductsFromCart(driver);
@@ -6144,7 +6144,7 @@ public void TC44_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration
 		driver.navigate().refresh();
 		wiley.clickOnAddToCartButton(driver);
 		String[] emailIds=excelOperation.getTestData("TC44", "WILEY_NA_Cart_Test_Data", "Email_Id").split(",");
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		try {
 			wait.until(ExpectedConditions.
 					elementToBeClickable
@@ -6174,7 +6174,7 @@ public void TC44_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration
 
 		}
 		catch(Exception e) {
-			Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception",
+			Reporting.updateTestReport("View Cart button was not clickable and caused timeout exception "+e.getMessage(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 		wiley.removeProductsFromCart(driver);

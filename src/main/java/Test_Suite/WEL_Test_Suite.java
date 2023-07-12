@@ -39,8 +39,7 @@ public class WEL_Test_Suite extends DriverModule {
 	public static String startTime = new SimpleDateFormat("hhmmss").format(new Date());
 	public static String SS_path = Reporting.CreateExecutionScreenshotFolder(startTime);
 	public static String EmailConfirmationText = "//td[contains(text(),'Order Confirmation')]";
-	private static String WELHomepageURL=excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data");
-	
+	private static String WELHomepageURL = excelOperation.getTestData("WEL_Env_URL", "Generic_Dataset", "Data");
 
 	@BeforeTest
 	public void initializeRepo() {
@@ -77,7 +76,7 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.ClickingOnLoginButton();
 			WEL.ClickOnCreateOne();
 			try {
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("standloneRegTitle")));
 				WEL.EnterFirstName(excelOperation.getTestData("TC01", "WEL_Test_Data", "First_Name"));
 				WEL.EnterLastName(excelOperation.getTestData("TC01", "WEL_Test_Data", "Last_Name"));
 				String email = WEL.enterEmailIdInCreateAccountForm();
@@ -100,7 +99,7 @@ public class WEL_Test_Suite extends DriverModule {
 				excelOperation.updateTestData("TC04", "WEL_Test_Data", "Email_Address", email);
 
 			} catch (Exception e) {
-				Reporting.updateTestReport("Help button was not visible and caused timeout exception",
+				Reporting.updateTestReport("Create Wiley Accounti s not visible",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
@@ -167,7 +166,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"Checkout button was not clickable in the cart page"
 													+ " and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 							}
@@ -229,7 +228,8 @@ public class WEL_Test_Suite extends DriverModule {
 					.createTest("TC03_UserRegistration_DuringCheckoutForDigitalCartwith_NonUSBillingAddress");
 			LogTextFile.writeTestCaseStatus(
 					"TC03_UserRegistration_DuringCheckoutForDigitalCartwith_NonUSBillingAddress", "Test case");
-			WordDocumentReport.writeTestcaseName("TC03_UserRegistration_DuringCheckoutForDigitalCartwith_NonUSBillingAddress");
+			WordDocumentReport
+					.writeTestcaseName("TC03_UserRegistration_DuringCheckoutForDigitalCartwith_NonUSBillingAddress");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
@@ -281,7 +281,7 @@ public class WEL_Test_Suite extends DriverModule {
 											Reporting.updateTestReport(
 													"Checkout button was not clickable in the cart page"
 															+ " and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 
 									}
@@ -344,12 +344,12 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"First Product price - Discount "
 														+ " = Order total in Order Review step",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 									else
 										Reporting.updateTestReport(
 												"First Product price + Tax "
 														+ " is not equal to Order total in Order Review step",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 								} catch (Exception e) {
 									Reporting.updateTestReport("Order Summary tab was not visible" + e.getMessage(),
@@ -495,7 +495,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -580,52 +580,17 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.ClickonForgotPassword();
 			WEL.EnterEmailAddressOnForgotPassword(excelOperation.getTestData("TC01", "WEL_Test_Data", "Email_Address"));
 			WEL.ClickSubmitButtonnForgotPasswordPage();
-			driver.get(excelOperation.getTestData("Yopmail_URL", "Generic_Dataset", "Data"));
-			WEL.enteryopmail(excelOperation.getTestData("TC06", "WEL_Test_Data", "Email_Address"));
-			WEL.clickonbutton();
-			wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-			int timeOutSeconds = 60;
-			int flag = 0;
-			WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-			WebElement element2 = null;
-			/* The purpose of this loop is to wait for maximum of 60 seconds */
-			for (int i = 0; i < timeOutSeconds / 5; i++) {
-
-				try {
-					driver.switchTo().frame("ifinbox");
-					element2 = wait.until(ExpectedConditions
-							.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Password Reset Request')]")));
-
-					if (element2.isDisplayed() == true) {
-						flag = 1;
-						element2.click();
-						driver.switchTo().defaultContent();
-						break;
-					}
-
-				} catch (Exception e) {
-					driver.switchTo().defaultContent();
-					element1.click();
-				}
-			}
+			int flag = EmailValidation.forgotPasswordEmailForWEL(
+					excelOperation.getTestData("TC06", "WEL_Test_Data", "Email_Address"), driver, SS_path, WEL);
 
 			if (flag == 1) {
-				driver.switchTo().frame("ifmail");
-				Thread.sleep(5000);
-				WEL.clickOnResetPasswordLink();
-				Set<String> allWindowHandles = driver.getWindowHandles();
-				java.util.Iterator<String> iterator = allWindowHandles.iterator();
-				String yopmailHandle = iterator.next();
-				String ChildWindow = iterator.next();
-				driver.switchTo().window(ChildWindow);
 				WEL.enterNewPasswordInResetPassword(excelOperation.getTestData("TC06", "WEL_Test_Data", "Password"));
 				WEL.enterConfirmPasswordInResetPassword(
 						excelOperation.getTestData("TC06", "WEL_Test_Data", "Password"));
 				WEL.clickOnResetPasswordSubmit();
-				driver.switchTo().window(yopmailHandle);
-				driver.close();
-				driver.switchTo().window(ChildWindow);
-			}
+			} else
+				Reporting.updateTestReport("Forgot Password mail was not received:",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 		}
 
 		catch (Exception e) {
@@ -691,7 +656,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -703,55 +668,20 @@ public class WEL_Test_Suite extends DriverModule {
 								WEL.EnterEmailAddressOnForgotPassword(
 										excelOperation.getTestData("TC07", "WEL_Test_Data", "Email_Address"));
 								WEL.ClickSubmitButtonnForgotPasswordPage();
-								driver.get(excelOperation.getTestData("Yopmail_URL", "Generic_Dataset", "Data"));
-								WEL.enteryopmail(excelOperation.getTestData("TC07", "WEL_Test_Data", "Email_Address"));
-								WEL.clickonbutton();
-								wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-								int timeOutSeconds = 60;
-								int flag = 0;
-								WebElement element1 = driver.findElement(By.xpath("//button[@id='refresh']"));
-								WebElement element2 = null;
-								/* The purpose of this loop is to wait for maximum of 60 seconds */
-								for (int i = 0; i < timeOutSeconds / 5; i++) {
-
-									try {
-										driver.switchTo().frame("ifinbox");
-										element2 = wait.until(ExpectedConditions.visibilityOfElementLocated(
-												By.xpath("//div[contains(text(),'Password Reset Request')]")));
-
-										if (element2.isDisplayed() == true) {
-											flag = 1;
-											element2.click();
-											driver.switchTo().defaultContent();
-											break;
-										}
-
-									} catch (Exception e) {
-										driver.switchTo().defaultContent();
-										element1.click();
-									}
-								}
+								int flag = EmailValidation.forgotPasswordEmailForWEL(
+										excelOperation.getTestData("TC07", "WEL_Test_Data", "Email_Address"), driver,
+										SS_path, WEL);
 
 								if (flag == 1) {
-									driver.switchTo().frame("ifmail");
-									Thread.sleep(5000);
-									WEL.clickOnResetPasswordLink();
-									Set<String> allWindowHandles = driver.getWindowHandles();
-									java.util.Iterator<String> iterator = allWindowHandles.iterator();
-									String yopmailHandle = iterator.next();
-									String ChildWindow = iterator.next();
-									driver.switchTo().window(ChildWindow);
 									WEL.enterNewPasswordInResetPassword(
 											excelOperation.getTestData("TC07", "WEL_Test_Data", "Password"));
 									WEL.enterConfirmPasswordInResetPassword(
 											excelOperation.getTestData("TC07", "WEL_Test_Data", "Password"));
 									WEL.clickOnResetPasswordSubmit();
+								} else
+									Reporting.updateTestReport("Forgot Password mail was not received:",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
-									driver.switchTo().window(yopmailHandle);
-									driver.close();
-									driver.switchTo().window(ChildWindow);
-
-								}
 							} catch (Exception e) {
 								Reporting.updateTestReport("Failed to click on CMAProduct",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -793,7 +723,8 @@ public class WEL_Test_Suite extends DriverModule {
 					.createTest("TC08_UserRedirection_ToForgotORChangePassword_PageAfter3Failed_AttemptsToLogin");
 			LogTextFile.writeTestCaseStatus(
 					"TC08_UserRedirection_ToForgotORChangePassword_PageAfter3Failed_AttemptsToLogin", "Test case");
-			WordDocumentReport.writeTestcaseName("TC08_UserRedirection_ToForgotORChangePassword_PageAfter3Failed_AttemptsToLogin");
+			WordDocumentReport.writeTestcaseName(
+					"TC08_UserRedirection_ToForgotORChangePassword_PageAfter3Failed_AttemptsToLogin");
 			driver.get(WELHomepageURL);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
@@ -887,7 +818,7 @@ public class WEL_Test_Suite extends DriverModule {
 											Reporting.updateTestReport(
 													"Checkout button was not clickable in the cart page"
 															+ " and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 
 									}
@@ -1002,7 +933,7 @@ public class WEL_Test_Suite extends DriverModule {
 											Reporting.updateTestReport(
 													"Checkout button was not clickable in the cart page"
 															+ " and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 
 									}
@@ -1140,7 +1071,7 @@ public class WEL_Test_Suite extends DriverModule {
 											Reporting.updateTestReport(
 													"Checkout button was not clickable in the cart page"
 															+ " and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 
 									}
@@ -1251,7 +1182,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -1362,7 +1293,7 @@ public class WEL_Test_Suite extends DriverModule {
 							Reporting.updateTestReport(
 									"Checkout button was not clickable in the cart page"
 											+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 
 					}
@@ -1375,7 +1306,7 @@ public class WEL_Test_Suite extends DriverModule {
 				try {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(
 							By.xpath("//button[@type='submit' and @class='add-to-cart-btn  ']")));
-					ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+					ScrollingWebPage.PageScrolldown(driver, 0, 400, SS_path);
 					BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 					BigDecimal secondProductPriceWIthoutDiscount = new BigDecimal(
 							WEL.fetchOldPriceInPDP().substring(1));
@@ -1393,14 +1324,14 @@ public class WEL_Test_Suite extends DriverModule {
 										.isDisplayed()) {
 									Reporting.updateTestReport(
 											"Server error came in cart page and the page was refreshed",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									driver.navigate().refresh();
 								}
 							} catch (Exception e1) {
 								Reporting.updateTestReport(
 										"Checkout button was not clickable in the cart page"
 												+ " and caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 
 						}
@@ -1408,7 +1339,7 @@ public class WEL_Test_Suite extends DriverModule {
 						Reporting.updateTestReport("Failed to click on Add To Cart button due to timeout exception",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
-					ScrollingWebPage.PageDown(driver, SS_path);
+					// ScrollingWebPage.PageDown(driver, SS_path);
 					WEL.ClickOnAddaDiscountCode();
 					WEL.EnterExtraDiscountCodeOnCartPage(
 							excelOperation.getTestData("TC13", "WEL_Test_Data", "PromoCode"));
@@ -1422,7 +1353,7 @@ public class WEL_Test_Suite extends DriverModule {
 
 						Reporting.updateTestReport(
 								"The addition of all the products' pricedidn't match with the subtotal in cart page",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					}
 					WEL.ClickonCheckOutOnCartPage();
 					WEL.EnterexistingUserName(excelOperation.getTestData("TC13", "WEL_Test_Data", "Email_Address"));
@@ -1444,7 +1375,7 @@ public class WEL_Test_Suite extends DriverModule {
 							Reporting.updateTestReport(
 									"Checkout button was not clickable in the cart page"
 											+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 
 					}
@@ -1497,22 +1428,22 @@ public class WEL_Test_Suite extends DriverModule {
 							if (firstProductPriceWIthoutDiscount.compareTo(firstproductprice2) == 0)
 								Reporting.updateTestReport(
 										"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-										+ " is same as price in Order Review " + firstproductprice2,
+												+ " is same as price in Order Review " + firstproductprice2,
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							else
 								Reporting.updateTestReport(
 										"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-										+ " is not same as price in Order Review " + firstproductprice2,
+												+ " is not same as price in Order Review " + firstproductprice2,
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							if (secondProductPriceWIthoutDiscount.compareTo(secondproductprice2) == 0)
 								Reporting.updateTestReport(
 										"The price of second product in PDP: " + secondProductPriceWIthoutDiscount
-										+ " is same as price in Order Review " + secondproductprice2,
+												+ " is same as price in Order Review " + secondproductprice2,
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							else
 								Reporting.updateTestReport(
 										"The price of second product in PDP: " + secondProductPriceWIthoutDiscount
-										+ " is same not as price in Order Review " + secondproductprice2,
+												+ " is same not as price in Order Review " + secondproductprice2,
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(tax1)
 									.subtract(discountinorderreview);
@@ -1525,12 +1456,12 @@ public class WEL_Test_Suite extends DriverModule {
 								Reporting.updateTestReport(
 										"First Product price + Second Product price -discount + Tax "
 												+ " = Order total in Order Review step",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							else
 								Reporting.updateTestReport(
 										"First Product price + Tax "
 												+ " is not equal to Order total in Order Review step",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 						} catch (Exception e) {
 							Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
@@ -1547,14 +1478,15 @@ public class WEL_Test_Suite extends DriverModule {
 						excelOperation.updateTestData("TC13", "WEL_Test_Data", "Order_Total", orderTotal);
 						WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 					} catch (Exception e) {
-						Reporting.updateTestReport("Failed to click on CPAAdd To cart timeout exception",
+						Reporting.updateTestReport(
+								"Card Details was not enetred due to Time Out Exception: " + e.getClass().toString(),
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 				} catch (Exception e) {
-					Reporting.updateTestReport(
-							"Card Details was not enetred due to Time Out Exception: " + e.getClass().toString(),
+					Reporting.updateTestReport("Failed to click on CPAAdd To cart timeout exception",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
+
 			} catch (Exception e) {
 				Reporting.updateTestReport("Failed to click on Add to cart button due to  timeout exception",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -1622,7 +1554,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -1857,104 +1789,99 @@ public class WEL_Test_Suite extends DriverModule {
 				WEL.enterCVV_Number(excelOperation.getTestData("TC15", "WEL_Test_Data", "CVV"));
 				driver.switchTo().defaultContent();
 				WEL.SaveAndContinueCheckOut();
+
 				try {
-					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-					try {
-						if (WEL.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed())
-							WEL.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-					} catch (Exception e) {
-						Reporting.updateTestReport(
-								"Failed to click Address on Address SUggestion due to timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-					}
-
-					try {
-						wait.until(ExpectedConditions
-								.visibilityOfElementLocated(By.xpath("//div[@id='orderSummaryProductTotalValue']")));
-						// This statement is we are getting the firstProduct price in Order Review page
-						// and Storing in String Object
-
-						BigDecimal firstproductprice2 = new BigDecimal(
-								WEL.fetchFirstProductPriceInOrderReview().substring(1));
-
-						BigDecimal secondproductprice2 = new BigDecimal(
-								WEL.fetchSecondProductPriceInOrderReview().substring(1));
-
-						BigDecimal thirdproductprice2 = new BigDecimal(
-								WEL.fetchThirdProductPriceInOrderReview().substring(1));
-
-						BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-						if (firstProductPriceWIthoutDiscount.compareTo(firstproductprice2) == 0)
-							Reporting.updateTestReport(
-									"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-									+ " is same as price in Order Review " + firstproductprice2,
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport(
-									"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-									+ " is not same as price in Order Review " + firstproductprice2,
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						if (secondproductprice.compareTo(secondproductprice2) == 0)
-							Reporting.updateTestReport(
-									"The price of second product in PDP: " + secondproductprice
-									+ " is same as price in Order Review " + secondproductprice2,
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport(
-									"The price of second product in PDP: " + secondproductprice
-									+ " is same not as price in Order Review " + secondproductprice2,
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
-						if (thirdproductprice.compareTo(thirdproductprice2) == 0)
-							Reporting.updateTestReport(
-									"The price of third product in PDP: " + thirdproductprice
-									+ " is same as price in Order Review " + thirdproductprice2,
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport(
-									"The price of third product in PDP: " + thirdproductprice
-									+ " is same not as price in Order Review " + thirdproductprice2,
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						String discount = WEL.fetchDiscountInOrderReview();
-						if (discount.contains(","))
-							discount = discount.replace(",", "");
-						BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
-
-						BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(thirdproductprice2)
-								.add(tax1).subtract(discountinorderreview);
-
-						String totalorderReview = WEL.fetchTotalInOrderReview();
-						if (totalorderReview.contains(","))
-							totalorderReview = totalorderReview.replace(",", "");
-						BigDecimal orderTotalPrice1 = new BigDecimal(totalorderReview.substring(1));
-						if (totalprice.compareTo(orderTotalPrice1) == 0)
-							Reporting.updateTestReport(
-									"First Product price + Second Product price + Third Product price -discount + Tax "
-											+ " = Order total in Order Review step",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport(
-									"First Product price + Tax " + " is not equal to Order total in Order Review step",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
-					} catch (Exception e) {
-						Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
-
-					WEL.clickOnPlaceOrderButton();
-					String orderID = WEL.fetchOrderId();
-					excelOperation.updateTestData("TC15", "WEL_Test_Data", "Order_Id", orderID);
-					ScrollingWebPage.PageDown(driver, SS_path);
-					String tax = WEL.fetchTaxValue();
-					excelOperation.updateTestData("TC15", "WEL_Test_Data", "Tax", tax);
-					String orderTotal = WEL.fetchOrderTotal();
-					excelOperation.updateTestData("TC15", "WEL_Test_Data", "Order_Total", orderTotal);
-					WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+					if (WEL.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed())
+						WEL.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 				} catch (Exception e) {
-					Reporting.updateTestReport("Help button was not appeared due to timeout exception",
+					Reporting.updateTestReport("Failed to click Address on Address SUggestion due to timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+				}
+
+				try {
+					wait.until(ExpectedConditions
+							.visibilityOfElementLocated(By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+					// This statement is we are getting the firstProduct price in Order Review page
+					// and Storing in String Object
+
+					BigDecimal firstproductprice2 = new BigDecimal(
+							WEL.fetchFirstProductPriceInOrderReview().substring(1));
+
+					BigDecimal secondproductprice2 = new BigDecimal(
+							WEL.fetchSecondProductPriceInOrderReview().substring(1));
+
+					BigDecimal thirdproductprice2 = new BigDecimal(
+							WEL.fetchThirdProductPriceInOrderReview().substring(1));
+
+					BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
+					if (firstProductPriceWIthoutDiscount.compareTo(firstproductprice2) == 0)
+						Reporting.updateTestReport(
+								"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+										+ " is same as price in Order Review " + firstproductprice2,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+										+ " is not same as price in Order Review " + firstproductprice2,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					if (secondproductprice.compareTo(secondproductprice2) == 0)
+						Reporting.updateTestReport(
+								"The price of second product in PDP: " + secondproductprice
+										+ " is same as price in Order Review " + secondproductprice2,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"The price of second product in PDP: " + secondproductprice
+										+ " is same not as price in Order Review " + secondproductprice2,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+					if (thirdproductprice.compareTo(thirdproductprice2) == 0)
+						Reporting.updateTestReport(
+								"The price of third product in PDP: " + thirdproductprice
+										+ " is same as price in Order Review " + thirdproductprice2,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"The price of third product in PDP: " + thirdproductprice
+										+ " is same not as price in Order Review " + thirdproductprice2,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					String discount = WEL.fetchDiscountInOrderReview();
+					if (discount.contains(","))
+						discount = discount.replace(",", "");
+					BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
+
+					BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(thirdproductprice2)
+							.add(tax1).subtract(discountinorderreview);
+
+					String totalorderReview = WEL.fetchTotalInOrderReview();
+					if (totalorderReview.contains(","))
+						totalorderReview = totalorderReview.replace(",", "");
+					BigDecimal orderTotalPrice1 = new BigDecimal(totalorderReview.substring(1));
+					if (totalprice.compareTo(orderTotalPrice1) == 0)
+						Reporting.updateTestReport(
+								"First Product price + Second Product price + Third Product price -discount + Tax "
+										+ " = Order total in Order Review step",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"First Product price + Tax " + " is not equal to Order total in Order Review step",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+				} catch (Exception e) {
+					Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
+
+				WEL.clickOnPlaceOrderButton();
+				String orderID = WEL.fetchOrderId();
+				excelOperation.updateTestData("TC15", "WEL_Test_Data", "Order_Id", orderID);
+				ScrollingWebPage.PageDown(driver, SS_path);
+				String tax = WEL.fetchTaxValue();
+				excelOperation.updateTestData("TC15", "WEL_Test_Data", "Tax", tax);
+				String orderTotal = WEL.fetchOrderTotal();
+				excelOperation.updateTestData("TC15", "WEL_Test_Data", "Order_Total", orderTotal);
+				WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+
 			} catch (Exception e) {
 				Reporting.updateTestReport(
 						"The name field in card information step was not clickable and caused timeout exception",
@@ -1980,7 +1907,8 @@ public class WEL_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent.createTest("TC16_PlaceOrder_CMACPACFA_DigitalProducts_ForExistingUser");
 			LogTextFile.writeTestCaseStatus("TC16_PlaceOrder_CMACPACFA_DigitalProducts_ForExistingUser", "Test case");
-			WordDocumentReport.writeTestcaseName("TC17_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForNewUser");
+			WordDocumentReport.writeTestcaseName(
+					"TC17_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForNewUser");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
 			driver.get(WELHomepageURL);
@@ -2146,102 +2074,97 @@ public class WEL_Test_Suite extends DriverModule {
 				WEL.enterCVV_Number(excelOperation.getTestData("TC16", "WEL_Test_Data", "CVV"));
 				driver.switchTo().defaultContent();
 				WEL.SaveAndContinueCheckOut();
+
 				try {
-					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
-					try {
-						if (WEL.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed())
-							WEL.clickOnUseSelectedBillingAddressButtonAddressDoctor();
-					} catch (Exception e) {
-						Reporting.updateTestReport(
-								"Failed to click Address on Address SUggestion due to timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
-					}
-					try {
-						wait.until(ExpectedConditions
-								.visibilityOfElementLocated(By.xpath("//div[@id='orderSummaryProductTotalValue']")));
-						// This statement is we are getting the firstProduct price in Order Review page
-						// and Storing in String Object
-
-						BigDecimal firstproductprice2 = new BigDecimal(
-								WEL.fetchFirstProductPriceInOrderReview().substring(1));
-
-						BigDecimal secondproductprice2 = new BigDecimal(
-								WEL.fetchSecondProductPriceInOrderReview().substring(1));
-
-						BigDecimal thirdproductprice2 = new BigDecimal(
-								WEL.fetchThirdProductPriceInOrderReview().substring(1));
-						if (firstProductPriceWIthoutDiscount.compareTo(firstproductprice2) == 0)
-							Reporting.updateTestReport(
-									"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-									+ " is same as price in Order Review " + firstproductprice2,
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport(
-									"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-									+ " is not same as price in Order Review " + firstproductprice2,
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						if (secondproductprice.compareTo(secondproductprice2) == 0)
-							Reporting.updateTestReport(
-									"The price of second product in PDP: " + secondproductprice
-									+ " is same as price in Order Review " + secondproductprice2,
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport(
-									"The price of second product in PDP: " + secondproductprice
-									+ " is same not as price in Order Review " + secondproductprice2,
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
-						if (thirdproductprice.compareTo(thirdproductprice2) == 0)
-							Reporting.updateTestReport(
-									"The price of third product in PDP: " + thirdproductprice
-									+ " is same as price in Order Review " + thirdproductprice2,
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport(
-									"The price of third product in PDP: " + thirdproductprice
-									+ " is same not as price in Order Review " + thirdproductprice2,
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-						BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
-						String discount = WEL.fetchDiscountInOrderReview();
-						if (discount.contains(","))
-							discount = discount.replace(",", "");
-						BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
-
-						BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(thirdproductprice2)
-								.add(tax1).subtract(discountinorderreview);
-
-						String totalorderReview = WEL.fetchTotalInOrderReview();
-						if (totalorderReview.contains(","))
-							totalorderReview = totalorderReview.replace(",", "");
-						BigDecimal orderTotalPrice1 = new BigDecimal(totalorderReview.substring(1));
-						if (totalprice.compareTo(orderTotalPrice1) == 0)
-							Reporting.updateTestReport(
-									"First Product price + Second Product price + Third Product price -discount + Tax "
-											+ " = Order total in Order Review step",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport(
-									"First Product price + Tax " + " is not equal to Order total in Order Review step",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-
-					} catch (Exception e) {
-						Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
-
-					WEL.clickOnPlaceOrderButton();
-					String orderID = WEL.fetchOrderId();
-					excelOperation.updateTestData("TC16", "WEL_Test_Data", "Order_Id", orderID);
-					ScrollingWebPage.PageDown(driver, SS_path);
-					String tax = WEL.fetchTaxValue();
-					excelOperation.updateTestData("TC16", "WEL_Test_Data", "Tax", tax);
-					String orderTotal = WEL.fetchOrderTotal();
-					excelOperation.updateTestData("TC16", "WEL_Test_Data", "Order_Total", orderTotal);
-					WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+					if (WEL.returnUseSelectedBillingAddressButtonAddressDoctorPopUp().isDisplayed())
+						WEL.clickOnUseSelectedBillingAddressButtonAddressDoctor();
 				} catch (Exception e) {
-					Reporting.updateTestReport("Help button was not appeared due to timeout exception",
+					Reporting.updateTestReport("Failed to click Address on Address SUggestion due to timeout exception",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+				}
+				try {
+					wait.until(ExpectedConditions
+							.visibilityOfElementLocated(By.xpath("//div[@id='orderSummaryProductTotalValue']")));
+					// This statement is we are getting the firstProduct price in Order Review page
+					// and Storing in String Object
+
+					BigDecimal firstproductprice2 = new BigDecimal(
+							WEL.fetchFirstProductPriceInOrderReview().substring(1));
+
+					BigDecimal secondproductprice2 = new BigDecimal(
+							WEL.fetchSecondProductPriceInOrderReview().substring(1));
+
+					BigDecimal thirdproductprice2 = new BigDecimal(
+							WEL.fetchThirdProductPriceInOrderReview().substring(1));
+					if (firstProductPriceWIthoutDiscount.compareTo(firstproductprice2) == 0)
+						Reporting.updateTestReport(
+								"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+										+ " is same as price in Order Review " + firstproductprice2,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
+										+ " is not same as price in Order Review " + firstproductprice2,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					if (secondproductprice.compareTo(secondproductprice2) == 0)
+						Reporting.updateTestReport(
+								"The price of second product in PDP: " + secondproductprice
+										+ " is same as price in Order Review " + secondproductprice2,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"The price of second product in PDP: " + secondproductprice
+										+ " is same not as price in Order Review " + secondproductprice2,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+					if (thirdproductprice.compareTo(thirdproductprice2) == 0)
+						Reporting.updateTestReport(
+								"The price of third product in PDP: " + thirdproductprice
+										+ " is same as price in Order Review " + thirdproductprice2,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"The price of third product in PDP: " + thirdproductprice
+										+ " is same not as price in Order Review " + thirdproductprice2,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
+					String discount = WEL.fetchDiscountInOrderReview();
+					if (discount.contains(","))
+						discount = discount.replace(",", "");
+					BigDecimal discountinorderreview = new BigDecimal(discount.substring(1));
+
+					BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(thirdproductprice2)
+							.add(tax1).subtract(discountinorderreview);
+
+					String totalorderReview = WEL.fetchTotalInOrderReview();
+					if (totalorderReview.contains(","))
+						totalorderReview = totalorderReview.replace(",", "");
+					BigDecimal orderTotalPrice1 = new BigDecimal(totalorderReview.substring(1));
+					if (totalprice.compareTo(orderTotalPrice1) == 0)
+						Reporting.updateTestReport(
+								"First Product price + Second Product price + Third Product price -discount + Tax "
+										+ " = Order total in Order Review step",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport(
+								"First Product price + Tax " + " is not equal to Order total in Order Review step",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+
+				} catch (Exception e) {
+					Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
+
+				WEL.clickOnPlaceOrderButton();
+				String orderID = WEL.fetchOrderId();
+				excelOperation.updateTestData("TC16", "WEL_Test_Data", "Order_Id", orderID);
+				ScrollingWebPage.PageDown(driver, SS_path);
+				String tax = WEL.fetchTaxValue();
+				excelOperation.updateTestData("TC16", "WEL_Test_Data", "Tax", tax);
+				String orderTotal = WEL.fetchOrderTotal();
+				excelOperation.updateTestData("TC16", "WEL_Test_Data", "Order_Total", orderTotal);
+				WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
+
 			} catch (Exception e) {
 				Reporting.updateTestReport(
 						"The name field in card information step was not clickable and caused timeout exception",
@@ -2272,32 +2195,35 @@ public class WEL_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus(
 					"TC17_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForNewUser",
 					"Test case");
-			WordDocumentReport.writeTestcaseName("TC17_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForNewUser");
+			WordDocumentReport.writeTestcaseName(
+					"TC17_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForNewUser");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
 			BigDecimal Firstproductprice;
 			BigDecimal secondproductprice;
 			BigDecimal thirdproductprice;
-			BigDecimal firstProductPriceWIthoutDiscount;
+			
 			BigDecimal secondProductPriceWIthoutDiscount;
 
 			driver.get(WELHomepageURL);
 			String urls[] = excelOperation.getTestData("TC17", "WEL_Test_Data", "URL").split(",");
 			driver.get(urls[0]);
+			ScrollingWebPage.PageDown(driver, SS_path);
 			try {
-				wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-						"//div[@id='Ultimate_CPA Review Course 2022 (Mentorship & Tutoring Bundle)']//form//button")));
+				wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+						"//h4[@data-target='fe-wel5']")));
 				ScrollingWebPage.PageDown(driver, SS_path);
 				Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-				firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
-
+				
+				
 				WEL.clickOnAddToCartButtonOnPDP();
 			} catch (Exception e) {
 				driver.navigate().refresh();
-				wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-						"//div[@id='Ultimate_CPA Review Course 2022 (Mentorship & Tutoring Bundle)']//form//button")));
+				wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+						"//h4[@data-target='fe-wel5']")));
 				Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-				firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+			//	firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+				ScrollingWebPage.PageDown(driver, SS_path);
 				WEL.clickOnAddToCartButtonOnPDP();
 			}
 			try {
@@ -2390,7 +2316,7 @@ public class WEL_Test_Suite extends DriverModule {
 			else
 				Reporting.updateTestReport(
 						"The addition of all the products' pricedidn't match with the subtotal in cart page",
-						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 			WEL.ClickonCheckOutOnCartPage();
 			String GuestEmail = WEL.EnterGuestUser();
 			WEL.ClickingOnCreateAccoutButton();
@@ -2450,36 +2376,27 @@ public class WEL_Test_Suite extends DriverModule {
 
 						BigDecimal thirdproductprice2 = new BigDecimal(
 								WEL.fetchThirdProductPriceInOrderReview().substring(1));
-						if (firstProductPriceWIthoutDiscount.compareTo(firstproductprice2) == 0)
-							Reporting.updateTestReport(
-									"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-									+ " is same as price in Order Review " + firstproductprice2,
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport(
-									"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-									+ " is not same as price in Order Review " + firstproductprice2,
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						
 						if (secondProductPriceWIthoutDiscount.compareTo(secondproductprice2) == 0)
 							Reporting.updateTestReport(
 									"The price of second product in PDP: " + secondProductPriceWIthoutDiscount
-									+ " is same as price in Order Review " + secondproductprice2,
+											+ " is same as price in Order Review " + secondproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
 							Reporting.updateTestReport(
 									"The price of second product in PDP: " + secondProductPriceWIthoutDiscount
-									+ " is same not as price in Order Review " + secondproductprice2,
+											+ " is same not as price in Order Review " + secondproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 						if (thirdproductprice.compareTo(thirdproductprice2) == 0)
 							Reporting.updateTestReport(
 									"The price of third product in PDP: " + thirdproductprice
-									+ " is same as price in Order Review " + thirdproductprice2,
+											+ " is same as price in Order Review " + thirdproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
 							Reporting.updateTestReport(
 									"The price of third product in PDP: " + thirdproductprice
-									+ " is same not as price in Order Review " + thirdproductprice2,
+											+ " is same not as price in Order Review " + thirdproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 
@@ -2499,7 +2416,7 @@ public class WEL_Test_Suite extends DriverModule {
 							Reporting.updateTestReport(
 									"First Product price + Second Product price + Third Product price -discount + Tax "
 											+ " = Order total in Order Review step",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
 							Reporting.updateTestReport(
 									"First Product price + Tax " + " is not equal to Order total in Order Review step",
@@ -2552,30 +2469,32 @@ public class WEL_Test_Suite extends DriverModule {
 			LogTextFile.writeTestCaseStatus(
 					"TC18_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForExistingUser",
 					"Test case");
-			WordDocumentReport.writeTestcaseName("TC18_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForExistingUser");
+			WordDocumentReport.writeTestcaseName(
+					"TC18_PlaceOrderof_CPACMA_PhysitalProducts_And_CFAPhysicalReviewCourse_ProductForExistingUser");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
 			BigDecimal Firstproductprice;
 			BigDecimal secondproductprice;
 			BigDecimal thirdproductprice;
-			BigDecimal firstProductPriceWIthoutDiscount;
+			
 			BigDecimal secondProductPriceWIthoutDiscount;
 			driver.get(WELHomepageURL);
 			String urls[] = excelOperation.getTestData("TC17", "WEL_Test_Data", "URL").split(",");
 			driver.get(urls[0]);
 			try {
-				wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-						"//div[@id='Ultimate_CPA Review Course 2022 (Mentorship & Tutoring Bundle)']//form//button")));
+				wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+						"//h4[@data-target='fe-wel5']")));
 				ScrollingWebPage.PageDown(driver, SS_path);
 				Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-				firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+				//firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
 				WEL.clickOnAddToCartButtonOnPDP();
 			} catch (Exception e) {
 				driver.navigate().refresh();
-				wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-						"//div[@id='Ultimate_CPA Review Course 2022 (Mentorship & Tutoring Bundle)']//form//button")));
+				wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+						"//h4[@data-target='fe-wel5']")));
 				Firstproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
-				firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+				//firstProductPriceWIthoutDiscount = new BigDecimal(WEL.fetchOldPriceInPDP().substring(1));
+				ScrollingWebPage.PageDown(driver, SS_path);
 				WEL.clickOnAddToCartButtonOnPDP();
 			}
 			try {
@@ -2726,36 +2645,27 @@ public class WEL_Test_Suite extends DriverModule {
 
 						BigDecimal thirdproductprice2 = new BigDecimal(
 								WEL.fetchThirdProductPriceInOrderReview().substring(1));
-						if (firstProductPriceWIthoutDiscount.compareTo(firstproductprice2) == 0)
-							Reporting.updateTestReport(
-									"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-									+ " is same as price in Order Review " + firstproductprice2,
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
-						else
-							Reporting.updateTestReport(
-									"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-									+ " is not same as price in Order Review " + firstproductprice2,
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					
 						if (secondProductPriceWIthoutDiscount.compareTo(secondproductprice2) == 0)
 							Reporting.updateTestReport(
 									"The price of second product in PDP: " + secondProductPriceWIthoutDiscount
-									+ " is same as price in Order Review " + secondproductprice2,
+											+ " is same as price in Order Review " + secondproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
 							Reporting.updateTestReport(
 									"The price of second product in PDP: " + secondProductPriceWIthoutDiscount
-									+ " is same not as price in Order Review " + secondproductprice2,
+											+ " is same not as price in Order Review " + secondproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 						if (thirdproductprice.compareTo(thirdproductprice2) == 0)
 							Reporting.updateTestReport(
 									"The price of third product in PDP: " + thirdproductprice
-									+ " is same as price in Order Review " + thirdproductprice2,
+											+ " is same as price in Order Review " + thirdproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
 							Reporting.updateTestReport(
 									"The price of third product in PDP: " + thirdproductprice
-									+ " is same not as price in Order Review " + thirdproductprice2,
+											+ " is same not as price in Order Review " + thirdproductprice2,
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 						String discount = WEL.fetchDiscountInOrderReview();
@@ -2774,7 +2684,7 @@ public class WEL_Test_Suite extends DriverModule {
 							Reporting.updateTestReport(
 									"First Product price + Second Product price + Third Product price -discount + Tax "
 											+ " = Order total in Order Review step",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 						else
 							Reporting.updateTestReport(
 									"First Product price + Tax " + " is not equal to Order total in Order Review step",
@@ -2986,33 +2896,33 @@ public class WEL_Test_Suite extends DriverModule {
 				if (Firstproductprice.compareTo(firstproductprice2) == 0)
 					Reporting.updateTestReport(
 							"The price of first product in PDP: " + Firstproductprice
-							+ " is same as price in Order Review " + firstproductprice2,
+									+ " is same as price in Order Review " + firstproductprice2,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				else
 					Reporting.updateTestReport(
 							"The price of first product in PDP: " + Firstproductprice
-							+ " is not same as price in Order Review " + firstproductprice2,
+									+ " is not same as price in Order Review " + firstproductprice2,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				if (secondproductprice.compareTo(secondproductprice2) == 0)
 					Reporting.updateTestReport(
 							"The price of second product in PDP: " + secondproductprice
-							+ " is same as price in Order Review " + secondproductprice2,
+									+ " is same as price in Order Review " + secondproductprice2,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				else
 					Reporting.updateTestReport(
 							"The price of second product in PDP: " + secondproductprice
-							+ " is same not as price in Order Review " + secondproductprice2,
+									+ " is same not as price in Order Review " + secondproductprice2,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 				if (thirdproductprice.compareTo(thirdproductprice2) == 0)
 					Reporting.updateTestReport(
 							"The price of third product in PDP: " + thirdproductprice
-							+ " is same as price in Order Review " + thirdproductprice2,
+									+ " is same as price in Order Review " + thirdproductprice2,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				else
 					Reporting.updateTestReport(
 							"The price of third product in PDP: " + thirdproductprice
-							+ " is same not as price in Order Review " + thirdproductprice2,
+									+ " is same not as price in Order Review " + thirdproductprice2,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 				BigDecimal totalprice = firstproductprice2.add(secondproductprice2).add(thirdproductprice2).add(tax1);
@@ -3024,7 +2934,7 @@ public class WEL_Test_Suite extends DriverModule {
 					Reporting.updateTestReport(
 							"First Product price + Second Product price + Third Product price + Tax "
 									+ " = Order total in Order Review step",
-									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				else
 					Reporting.updateTestReport(
 							"First Product price + Tax " + " is not equal to Order total in Order Review step",
@@ -3139,8 +3049,8 @@ public class WEL_Test_Suite extends DriverModule {
 														Reporting.updateTestReport(
 																"Checkout button was not clickable in the cart page"
 																		+ " and caused timeout exception",
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.FAIL);
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
 													}
 
 												}
@@ -3230,32 +3140,32 @@ public class WEL_Test_Suite extends DriverModule {
 																		+ firstProductPriceWIthoutDiscount
 																		+ " is same as price in Order Review "
 																		+ firstproductprice2,
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.PASS);
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
 													else
 														Reporting.updateTestReport(
 																"The price of first product in PDP: "
 																		+ firstProductPriceWIthoutDiscount
 																		+ " is not same as price in Order Review "
 																		+ firstproductprice2,
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.FAIL);
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
 													if (secondproductprice.compareTo(secondproductprice2) == 0)
 														Reporting.updateTestReport(
 																"The price of second product in PDP: "
 																		+ secondproductprice
 																		+ " is same as price in Order Review "
 																		+ secondproductprice2,
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.PASS);
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
 													else
 														Reporting.updateTestReport(
 																"The price of second product in PDP: "
 																		+ secondproductprice
 																		+ " is same not as price in Order Review "
 																		+ secondproductprice2,
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.FAIL);
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
 													BigDecimal tax1 = new BigDecimal(
 															WEL.fetchTaxInOrderReview().substring(1));
 
@@ -3277,8 +3187,8 @@ public class WEL_Test_Suite extends DriverModule {
 														Reporting.updateTestReport(
 																"First Product price + Second Product price  -discount + Tax "
 																		+ " = Order total in Order Review step",
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.PASS);
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
 													else
 														Reporting.updateTestReport("First Product price + Tax "
 																+ " is not equal to Order total in Order Review step",
@@ -3743,7 +3653,7 @@ public class WEL_Test_Suite extends DriverModule {
 											Reporting.updateTestReport(
 													"Checkout button was not clickable in the cart page"
 															+ " and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 
 									}
@@ -3790,29 +3700,29 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 								}
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 								try {
 									wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 									WEL.enterCardHolderName(
 											excelOperation.getTestData("TC03", "WEL_Test_Data", "Guest_Fname"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 									WEL.enterCardNumber(
 											excelOperation.getTestData("TC16", "WEL_Test_Data", "Card_Number"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 									WEL.selectExpirationMonthFromDropDown(
 											excelOperation.getTestData("TC16", "WEL_Test_Data", "Expiry_Month"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
 									WEL.selectExpirationYearFromDropDown(
 											excelOperation.getTestData("TC16", "WEL_Test_Data", "Expiry_Year"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
 									WEL.enterCVV_Number(excelOperation.getTestData("TC16", "WEL_Test_Data", "CVV"));
 									driver.switchTo().defaultContent();
 									WEL.SaveAndContinueCheckOut();
@@ -3853,18 +3763,18 @@ public class WEL_Test_Suite extends DriverModule {
 												Reporting.updateTestReport(
 														"First Product price + Tax - Discount"
 																+ " = Order total in Order Review step",
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 											else
 												Reporting.updateTestReport(
 														"First Product price + Tax "
 																+ " is not equal to Order total in Order Review step",
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 										} catch (Exception e) {
 											Reporting.updateTestReport(
 													"Failed to fetch the first product price on Order Summary page"
 															+ e.getMessage(),
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 									} catch (Exception e) {
 
@@ -3974,7 +3884,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -4106,8 +4016,8 @@ public class WEL_Test_Suite extends DriverModule {
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			driver.get(urls[1]);
-			// ScrollingWebPage.PageDown(driver, SS_path);
-			ScrollingWebPage.PageScrolldown(driver, 0, 200, SS_path);
+			
+			ScrollingWebPage.PageScrolldown(driver, 0, 500, SS_path);
 			Thread.sleep(2000);
 			BigDecimal secondproductprice = new BigDecimal(WEL.fetchProductPriceInPDP().substring(1));
 			try {
@@ -4221,7 +4131,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -4278,14 +4188,14 @@ public class WEL_Test_Suite extends DriverModule {
 										.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-											+ " is same as price in Order Review "
-											+ new BigDecimal(orderprice.substring(1)),
+													+ " is same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-											+ " is not same as price in Order Review "
-											+ new BigDecimal(orderprice.substring(1)),
+													+ " is not same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								String totalorderReview = WEL.fetchTotalInOrderReview();
 								if (totalorderReview.contains(","))
@@ -4396,7 +4306,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -4460,14 +4370,14 @@ public class WEL_Test_Suite extends DriverModule {
 										.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-											+ " is same as price in Order Review "
-											+ new BigDecimal(orderprice.substring(1)),
+													+ " is same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-											+ " is not same as price in Order Review "
-											+ new BigDecimal(orderprice.substring(1)),
+													+ " is not same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								String shippingcharge = WEL.fetchShippingChargeInOrderReview();
 
@@ -4637,7 +4547,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -4866,7 +4776,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -4888,35 +4798,33 @@ public class WEL_Test_Suite extends DriverModule {
 								WEL.ClickonLoginAndContinue();
 								WEL.SelectingUSEButton();
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 								try {
 									wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 									WEL.enterCardHolderName(
 											excelOperation.getTestData("TC30", "WEL_Test_Data", "Guest_Fname"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 									WEL.enterCardNumber(
 											excelOperation.getTestData("TC30", "WEL_Test_Data", "Card_Number"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 									WEL.selectExpirationMonthFromDropDown(
 											excelOperation.getTestData("TC30", "WEL_Test_Data", "Expiry_Month"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
 									WEL.selectExpirationYearFromDropDown(
 											excelOperation.getTestData("TC30", "WEL_Test_Data", "Expiry_Year"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
 									WEL.enterCVV_Number(excelOperation.getTestData("TC30", "WEL_Test_Data", "CVV"));
 									driver.switchTo().defaultContent();
 
-									try {
-										wait.until(ExpectedConditions
-												.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+									
 
 										WEL.SaveAndContinueCheckOut();
 										try {
@@ -4938,16 +4846,16 @@ public class WEL_Test_Suite extends DriverModule {
 																	+ firstProductPriceWIthoutDiscount
 																	+ " is same as price in Order Review "
 																	+ new BigDecimal(orderprice.substring(1)),
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.PASS);
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.PASS);
 												else
 													Reporting.updateTestReport(
 															"The price of first product in PDP: "
 																	+ firstProductPriceWIthoutDiscount
 																	+ " is not same as price in Order Review "
 																	+ orderproductprice,
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.FAIL);
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
 												String discount = WEL.fetchDiscountInOrderReview();
 												if (discount.contains(","))
 													discount = discount.replace(",", "");
@@ -4968,8 +4876,8 @@ public class WEL_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"First Product price + Tax - Discount"
 																	+ " = Order total in Order Review step",
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.PASS);
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.PASS);
 												else
 													Reporting.updateTestReport("First Product price + Tax "
 															+ " is not equal to Order total in Order Review step",
@@ -4979,7 +4887,7 @@ public class WEL_Test_Suite extends DriverModule {
 												Reporting.updateTestReport(
 														"Failed to fetch the first product price on Order Summary page"
 																+ e.getMessage(),
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 
 										} catch (Exception e) {
@@ -4998,12 +4906,6 @@ public class WEL_Test_Suite extends DriverModule {
 										String orderTotal = WEL.fetchOrderTotal();
 										excelOperation.updateTestData("TC30", "WEL_Test_Data", "Order_Total",
 												orderTotal);
-
-									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Help button was not visible and caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									}
 
 								} catch (Exception e) {
 									Reporting.updateTestReport(
@@ -5100,7 +5002,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -5135,18 +5037,18 @@ public class WEL_Test_Suite extends DriverModule {
 							WEL.ShipPhoneNumber(excelOperation.getTestData("TC15", "WEL_Test_Data", "Sh_Phone_Number"));
 							WEL.ShipSaveAndContinueButton();
 							driver.switchTo()
-							.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+									.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 							try {
 								wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 								WEL.enterCardHolderName(
 										excelOperation.getTestData("TC03", "WEL_Test_Data", "Guest_Fname"));
 								driver.switchTo().defaultContent();
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 								WEL.enterCardNumber(excelOperation.getTestData("TC15", "WEL_Test_Data", "Card_Number"));
 								driver.switchTo().defaultContent();
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 								WEL.selectExpirationMonthFromDropDown(
 										excelOperation.getTestData("TC15", "WEL_Test_Data", "Expiry_Month"));
 								driver.switchTo().defaultContent();
@@ -5155,7 +5057,7 @@ public class WEL_Test_Suite extends DriverModule {
 										excelOperation.getTestData("TC31", "WEL_Test_Data", "Expiry_Year"));
 								driver.switchTo().defaultContent();
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
 								WEL.enterCVV_Number(excelOperation.getTestData("TC15", "WEL_Test_Data", "CVV"));
 								driver.switchTo().defaultContent();
 								WEL.SaveAndContinueCheckOut();
@@ -5170,14 +5072,14 @@ public class WEL_Test_Suite extends DriverModule {
 											.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
 										Reporting.updateTestReport(
 												"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-												+ " is same as price in Order Review "
-												+ new BigDecimal(orderprice.substring(1)),
+														+ " is same as price in Order Review "
+														+ new BigDecimal(orderprice.substring(1)),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 									else
 										Reporting.updateTestReport(
 												"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-												+ " is not same as price in Order Review "
-												+ new BigDecimal(orderprice.substring(1)),
+														+ " is not same as price in Order Review "
+														+ new BigDecimal(orderprice.substring(1)),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 									BigDecimal orderproductpriceincludingtax = orderproductprice.add(tax1);
@@ -5297,7 +5199,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -5345,14 +5247,14 @@ public class WEL_Test_Suite extends DriverModule {
 										.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-											+ " is same as price in Order Review "
-											+ new BigDecimal(orderprice.substring(1)),
+													+ " is same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-											+ " is not same as price in Order Review "
-											+ new BigDecimal(orderprice.substring(1)),
+													+ " is not same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal discount = new BigDecimal(WEL.fetchDiscountInOrderReview().substring(1));
 								BigDecimal orderTotalpriceafterDiscount = orderproductprice.subtract(discount);
@@ -5375,9 +5277,7 @@ public class WEL_Test_Suite extends DriverModule {
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
 							WEL.ShipSaveAndContinueButton();
-							try {
-								wait.until(ExpectedConditions
-										.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+							
 								ScrollingWebPage.PageScrolldown(driver, 0, 500, SS_path);
 								try {
 									wait.until(ExpectedConditions
@@ -5428,11 +5328,7 @@ public class WEL_Test_Suite extends DriverModule {
 											"Shipping same as billing was not clickable and caused timeout exception",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
-							} catch (Exception e) {
-								Reporting.updateTestReport(
-										"The help button was not visible and caused timeout exception",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-							}
+							
 						} catch (Exception e) {
 							Reporting.updateTestReport(
 									"Add to cart button on CIA PDP was not clickable and caused timeout exception",
@@ -5523,7 +5419,7 @@ public class WEL_Test_Suite extends DriverModule {
 											Reporting.updateTestReport(
 													"Checkout button was not clickable in the cart page"
 															+ " and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 
 									}
@@ -5558,35 +5454,33 @@ public class WEL_Test_Suite extends DriverModule {
 								WEL.EnterPhoneNumber(
 										excelOperation.getTestData("TC33", "WEL_Test_Data", "Bill_Phone_Number"));
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 								try {
 									wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 									WEL.enterCardHolderName(
 											excelOperation.getTestData("TC33", "WEL_Test_Data", "Guest_Fname"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 									WEL.enterCardNumber(
 											excelOperation.getTestData("TC33", "WEL_Test_Data", "Card_Number"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 									WEL.selectExpirationMonthFromDropDown(
 											excelOperation.getTestData("TC33", "WEL_Test_Data", "Expiry_Month"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
 									WEL.selectExpirationYearFromDropDown(
 											excelOperation.getTestData("TC33", "WEL_Test_Data", "Expiry_Year"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
 									WEL.enterCVV_Number(excelOperation.getTestData("TC33", "WEL_Test_Data", "CVV"));
 									driver.switchTo().defaultContent();
 									WEL.SaveAndContinueCheckOut();
-									try {
-										wait.until(ExpectedConditions
-												.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+							
 										try {
 											if (WEL.returnUseSelectedBillingAddressButtonAddressDoctorPopUp()
 													.isDisplayed())
@@ -5599,11 +5493,7 @@ public class WEL_Test_Suite extends DriverModule {
 										WEL.ClickOnBackTOCart();
 										WEL.ClickOnRemoveOnCartPage();
 
-									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Help button was not visible and caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									}
+									
 								} catch (Exception e) {
 									Reporting.updateTestReport(
 											"The name field in card information step was not clickable and caused timeout exception",
@@ -5697,7 +5587,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -5754,14 +5644,14 @@ public class WEL_Test_Suite extends DriverModule {
 										.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-											+ " is same as price in Order Review "
-											+ new BigDecimal(orderprice.substring(1)),
+													+ " is same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-											+ " is not same as price in Order Review "
-											+ new BigDecimal(orderprice.substring(1)),
+													+ " is not same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 								BigDecimal totalprice = orderproductprice.add(tax1);
@@ -5778,12 +5668,12 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"First Product price - Discount + Tax "
 													+ " = Order total in Order Review step",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
 									Reporting.updateTestReport(
 											"First Product price + Tax "
 													+ " is not equal to Order total in Order Review step",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
 								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
@@ -5882,7 +5772,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -5945,14 +5835,14 @@ public class WEL_Test_Suite extends DriverModule {
 										.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-											+ " is same as price in Order Review "
-											+ new BigDecimal(orderprice.substring(1)),
+													+ " is same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-											+ " is not same as price in Order Review "
-											+ new BigDecimal(orderprice.substring(1)),
+													+ " is not same as price in Order Review "
+													+ new BigDecimal(orderprice.substring(1)),
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								String discount = WEL.fetchDiscountInOrderReview();
 								if (discount.contains(","))
@@ -5973,7 +5863,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"First Product price + Tax "
 													+ " is not equal to Order total in Order Review step",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
 								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
@@ -6070,7 +5960,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -6164,24 +6054,24 @@ public class WEL_Test_Suite extends DriverModule {
 															+ firstProductPriceWIthoutDiscount
 															+ " is same as price in Order Review "
 															+ new BigDecimal(orderprice.substring(1)),
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
 											Reporting.updateTestReport(
 													"The price of first product in PDP: "
 															+ firstProductPriceWIthoutDiscount
 															+ " is not same as price in Order Review "
 															+ new BigDecimal(orderprice.substring(1)),
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										if (orderTotalDiscount.compareTo(orderTotalPrice) == 0)
 											Reporting.updateTestReport(
 													"First Product price - Dsicount + Tax "
 															+ " = Order total in Order Review step",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
 											Reporting.updateTestReport(
 													"First Product price + Tax "
 															+ " is not equal to Order total in Order Review step",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
 										Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
@@ -6291,7 +6181,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -6389,24 +6279,24 @@ public class WEL_Test_Suite extends DriverModule {
 															+ firstProductPriceWIthoutDiscount
 															+ " is same as price in Order Review "
 															+ new BigDecimal(orderprice.substring(1)),
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
 											Reporting.updateTestReport(
 													"The price of first product in PDP: "
 															+ firstProductPriceWIthoutDiscount
 															+ " is not same as price in Order Review "
 															+ new BigDecimal(orderprice.substring(1)),
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										if (orderTotalDiscount.compareTo(orderTotalPrice) == 0)
 											Reporting.updateTestReport(
 													"First Product price - Dsicount + Tax "
 															+ " = Order total in Order Review step",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
 											Reporting.updateTestReport(
 													"First Product price + Tax "
 															+ " is not equal to Order total in Order Review step",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
 										Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
@@ -6517,7 +6407,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -6572,17 +6462,17 @@ public class WEL_Test_Suite extends DriverModule {
 												excelOperation.getTestData("TC38", "WEL_Test_Data", "Guest_Fname"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 										WEL.enterCardNumber(
 												excelOperation.getTestData("TC38", "WEL_Test_Data", "Card_Number"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 										WEL.selectExpirationMonthFromDropDown(
 												excelOperation.getTestData("TC38", "WEL_Test_Data", "Expiry_Month"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
 										WEL.selectExpirationYearFromDropDown(
 												excelOperation.getTestData("TC38", "WEL_Test_Data", "Expiry_Year"));
 										driver.switchTo().defaultContent();
@@ -6725,8 +6615,8 @@ public class WEL_Test_Suite extends DriverModule {
 																Reporting.updateTestReport(
 																		"Multiple to and fro naviagtion between billing and shipping"
 																				+ " was successful",
-																				CaptureScreenshot.getScreenshot(SS_path),
-																				StatusDetails.PASS);
+																		CaptureScreenshot.getScreenshot(SS_path),
+																		StatusDetails.PASS);
 																driver.get(excelOperation.getTestData("WEL_Logout_URL",
 																		"Generic_Dataset", "Data"));
 															} catch (Exception e) {
@@ -6906,9 +6796,7 @@ public class WEL_Test_Suite extends DriverModule {
 						Reporting.updateTestReport("Address Suggestiond page is not appering on Shipping page",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 					}
-					try {
-						wait.until(
-								ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+					
 						try {
 							wait.until(ExpectedConditions.visibilityOfElementLocated(
 									By.xpath("//div[@id='orderSummaryProductTotalValue']")));
@@ -6921,14 +6809,14 @@ public class WEL_Test_Suite extends DriverModule {
 									.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
 								Reporting.updateTestReport(
 										"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-										+ " is same as price in Order Review "
-										+ new BigDecimal(orderprice.substring(1)),
+												+ " is same as price in Order Review "
+												+ new BigDecimal(orderprice.substring(1)),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 							else
 								Reporting.updateTestReport(
 										"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-										+ " is not same as price in Order Review "
-										+ new BigDecimal(orderprice.substring(1)),
+												+ " is not same as price in Order Review "
+												+ new BigDecimal(orderprice.substring(1)),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 							BigDecimal totalprice = orderproductprice.add(tax1);
@@ -6948,7 +6836,7 @@ public class WEL_Test_Suite extends DriverModule {
 								Reporting.updateTestReport(
 										"First Product price + Tax "
 												+ " is not equal to Order total in Order Review step",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 						} catch (Exception e) {
 							Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
@@ -6965,11 +6853,6 @@ public class WEL_Test_Suite extends DriverModule {
 						excelOperation.updateTestData("TC42", "WEL_Test_Data", "Order_Total", orderTotal);
 
 						excelOperation.updateTestData("TC61", "WEL_Test_Data", "Email_Address", GuestEmail);
-
-					} catch (Exception e) {
-						Reporting.updateTestReport("Help button was not visible and caused timeout exception",
-								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-					}
 
 				} catch (Exception e) {
 					Reporting.updateTestReport(
@@ -7044,7 +6927,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -7105,14 +6988,14 @@ public class WEL_Test_Suite extends DriverModule {
 											.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
 										Reporting.updateTestReport(
 												"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-												+ " is same as price in Order Review "
-												+ new BigDecimal(orderprice.substring(1)),
+														+ " is same as price in Order Review "
+														+ new BigDecimal(orderprice.substring(1)),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 									else
 										Reporting.updateTestReport(
 												"The price of first product in PDP: " + firstProductPriceWIthoutDiscount
-												+ " is not same as price in Order Review "
-												+ new BigDecimal(orderprice.substring(1)),
+														+ " is not same as price in Order Review "
+														+ new BigDecimal(orderprice.substring(1)),
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									String discount = WEL.fetchDiscountInOrderReview();
 									if (discount.contains(","))
@@ -7127,12 +7010,12 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"First Product price - Discount "
 														+ " = Order total in Order Review step",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 									else
 										Reporting.updateTestReport(
 												"First Product price + Tax "
 														+ " is not equal to Order total in Order Review step",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 								} catch (Exception e) {
 									Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
@@ -7231,7 +7114,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"Checkout button was not clickable in the cart page"
 													+ " and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 							}
@@ -7277,18 +7160,18 @@ public class WEL_Test_Suite extends DriverModule {
 							}
 
 							driver.switchTo()
-							.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+									.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 							try {
 								wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 								WEL.enterCardHolderName(
 										excelOperation.getTestData("TC44", "WEL_Test_Data", "Guest_Fname"));
 								driver.switchTo().defaultContent();
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 								WEL.enterCardNumber(excelOperation.getTestData("TC44", "WEL_Test_Data", "Card_Number"));
 								driver.switchTo().defaultContent();
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 								WEL.selectExpirationMonthFromDropDown(
 										excelOperation.getTestData("TC44", "WEL_Test_Data", "Expiry_Month"));
 								driver.switchTo().defaultContent();
@@ -7297,7 +7180,7 @@ public class WEL_Test_Suite extends DriverModule {
 										excelOperation.getTestData("TC44", "WEL_Test_Data", "Expiry_Year"));
 								driver.switchTo().defaultContent();
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
 								WEL.enterCVV_Number(excelOperation.getTestData("TC44", "WEL_Test_Data", "CVV"));
 								driver.switchTo().defaultContent();
 								WEL.SaveAndContinueCheckOut();
@@ -7319,14 +7202,14 @@ public class WEL_Test_Suite extends DriverModule {
 															+ firstProductPriceWIthoutDiscount
 															+ " is same as price in Order Review "
 															+ new BigDecimal(orderprice.substring(1)),
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
 											Reporting.updateTestReport(
 													"The price of first product in PDP: "
 															+ firstProductPriceWIthoutDiscount
 															+ " is not same as price in Order Review "
 															+ new BigDecimal(orderprice.substring(1)),
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 										BigDecimal totalprice = orderproductprice.add(tax1);
 										String discount = WEL.fetchDiscountInOrderReview();
@@ -7345,12 +7228,12 @@ public class WEL_Test_Suite extends DriverModule {
 											Reporting.updateTestReport(
 													"First Product price - Discount + Tax "
 															+ " = Order total in Order Review step",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
 											Reporting.updateTestReport(
 													"First Product price + Tax "
 															+ " is not equal to Order total in Order Review step",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
 										Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
@@ -7370,7 +7253,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"Place Order button was not clicked due to timeout exception"
 													+ e.getClass().toString(),
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 							} catch (Exception e) {
 								Reporting.updateTestReport("Card Details was not enetred" + e.getClass().toString(),
@@ -7458,7 +7341,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"Checkout button was not clickable in the cart page"
 													+ " and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 							}
@@ -7509,28 +7392,28 @@ public class WEL_Test_Suite extends DriverModule {
 
 								try {
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 									wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 									WEL.enterCardHolderName(
 											excelOperation.getTestData("TC46", "WEL_Test_Data", "Guest_Fname"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 									WEL.enterCardNumber(
 											excelOperation.getTestData("TC46", "WEL_Test_Data", "Card_Number"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 									WEL.selectExpirationMonthFromDropDown(
 											excelOperation.getTestData("TC46", "WEL_Test_Data", "Expiry_Month"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
 									WEL.selectExpirationYearFromDropDown(
 											excelOperation.getTestData("TC46", "WEL_Test_Data", "Expiry_Year"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
 									WEL.enterCVV_Number(excelOperation.getTestData("TC46", "WEL_Test_Data", "CVV"));
 									driver.switchTo().defaultContent();
 									WEL.SaveAndContinueCheckOut();
@@ -7550,14 +7433,14 @@ public class WEL_Test_Suite extends DriverModule {
 															+ firstProductPriceWIthoutDiscount
 															+ " is same as price in Order Review "
 															+ new BigDecimal(orderprice.substring(1)),
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
 											Reporting.updateTestReport(
 													"The price of first product in PDP: "
 															+ firstProductPriceWIthoutDiscount
 															+ " is not same as price in Order Review "
 															+ new BigDecimal(orderprice.substring(1)),
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										String discount = WEL.fetchDiscountInOrderReview();
 										if (discount.contains(","))
 											discount = discount.replace(",", "");
@@ -7582,12 +7465,12 @@ public class WEL_Test_Suite extends DriverModule {
 											Reporting.updateTestReport(
 													"First Product price + Tax - Discount + Shipping charge"
 															+ " = Order total in Order Review step",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
 											Reporting.updateTestReport(
 													"First Product price + Tax -Discount "
 															+ " is not equal to Order total in Order Review step",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
 										Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
@@ -7657,12 +7540,12 @@ public class WEL_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"The tax was not recalculated after editing the shipping address and "
 																	+ "the tax value was : " + tax1 + " in both cases",
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.INFO);
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.INFO);
 												else
 													Reporting.updateTestReport(
 															"The tax was recalculated from " + tax1 + " to " + tax2
-															+ " after editing the shipping address",
+																	+ " after editing the shipping address",
 															CaptureScreenshot.getScreenshot(SS_path),
 															StatusDetails.PASS);
 
@@ -7678,12 +7561,12 @@ public class WEL_Test_Suite extends DriverModule {
 													if (firstProductPriceWIthoutDiscount
 															.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
 														Reporting
-														.updateTestReport(
-																"The price of first product in PDP: "
-																		+ firstProductPriceWIthoutDiscount
-																		+ " is same as price in Order Review "
-																		+ new BigDecimal(
-																				orderprice.substring(1)),
+																.updateTestReport(
+																		"The price of first product in PDP: "
+																				+ firstProductPriceWIthoutDiscount
+																				+ " is same as price in Order Review "
+																				+ new BigDecimal(
+																						orderprice.substring(1)),
 																		CaptureScreenshot.getScreenshot(SS_path),
 																		StatusDetails.PASS);
 													else
@@ -7692,8 +7575,8 @@ public class WEL_Test_Suite extends DriverModule {
 																		+ firstProductPriceWIthoutDiscount
 																		+ " is not same as price in Order Review "
 																		+ new BigDecimal(orderprice.substring(1)),
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.FAIL);
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
 													String discount = WEL.fetchDiscountInOrderReview();
 													if (discount.contains(","))
 														discount = discount.replace(",", "");
@@ -7722,8 +7605,8 @@ public class WEL_Test_Suite extends DriverModule {
 														Reporting.updateTestReport(
 																"First Product price + Tax - Discount"
 																		+ " = Order total in Order Review step",
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.PASS);
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
 													else
 														Reporting.updateTestReport("First Product price + Tax "
 																+ " is not equal to Order total in Order Review step",
@@ -7847,7 +7730,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -7903,17 +7786,17 @@ public class WEL_Test_Suite extends DriverModule {
 												excelOperation.getTestData("TC47", "WEL_Test_Data", "Guest_Fname"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 										WEL.enterCardNumber(
 												excelOperation.getTestData("TC47", "WEL_Test_Data", "Card_Number"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 										WEL.selectExpirationMonthFromDropDown(
 												excelOperation.getTestData("TC47", "WEL_Test_Data", "Expiry_Month"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
 										WEL.selectExpirationYearFromDropDown(
 												excelOperation.getTestData("TC47", "WEL_Test_Data", "Expiry_Year"));
 										driver.switchTo().defaultContent();
@@ -7961,12 +7844,12 @@ public class WEL_Test_Suite extends DriverModule {
 												Reporting.updateTestReport(
 														"First Product price + Tax - Discount + Shipping charge"
 																+ " = Order total in Order Review step",
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 											else
 												Reporting.updateTestReport(
 														"First Product price -Discount + shippingcharge "
 																+ " is not equal to Order total in Order Review step",
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 										} catch (Exception e) {
 											Reporting.updateTestReport(
@@ -8044,12 +7927,12 @@ public class WEL_Test_Suite extends DriverModule {
 																"The tax was not recalculated after editing the shipping address and "
 																		+ "the tax value was : " + tax1
 																		+ " in both cases",
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.FAIL);
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
 													else
 														Reporting.updateTestReport(
 																"The tax was recalculated from " + tax1 + " to " + tax2
-																+ " after editing the shipping address",
+																		+ " after editing the shipping address",
 																CaptureScreenshot.getScreenshot(SS_path),
 																StatusDetails.PASS);
 													try {
@@ -8091,14 +7974,14 @@ public class WEL_Test_Suite extends DriverModule {
 															Reporting.updateTestReport(
 																	"First Product price + Tax - Discount + Shipping charge"
 																			+ " = Order total in Order Review step",
-																			CaptureScreenshot.getScreenshot(SS_path),
-																			StatusDetails.PASS);
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.PASS);
 														else
 															Reporting.updateTestReport(
 																	"First Product price + Tax -Discount "
 																			+ " is not equal to Order total in Order Review step",
-																			CaptureScreenshot.getScreenshot(SS_path),
-																			StatusDetails.FAIL);
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
 
 													} catch (Exception e) {
 														Reporting.updateTestReport(
@@ -8224,7 +8107,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"Checkout button was not clickable in the cart page"
 													+ " and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 							}
@@ -8261,29 +8144,29 @@ public class WEL_Test_Suite extends DriverModule {
 								WEL.EnterPhoneNumber(
 										excelOperation.getTestData("TC48", "WEL_Test_Data", "Bill_Phone_Number"));
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 								try {
 									wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 									WEL.enterCardHolderName(
 											excelOperation.getTestData("TC48", "WEL_Test_Data", "Guest_Fname"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 									WEL.enterCardNumber(
 											excelOperation.getTestData("TC48", "WEL_Test_Data", "Card_Number"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 									WEL.selectExpirationMonthFromDropDown(
 											excelOperation.getTestData("TC48", "WEL_Test_Data", "Expiry_Month"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
 									WEL.selectExpirationYearFromDropDown(
 											excelOperation.getTestData("TC48", "WEL_Test_Data", "Expiry_Year"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
 									WEL.enterCVV_Number(excelOperation.getTestData("TC48", "WEL_Test_Data", "CVV"));
 									driver.switchTo().defaultContent();
 									WEL.SaveAndContinueCheckOut();
@@ -8307,7 +8190,7 @@ public class WEL_Test_Suite extends DriverModule {
 													"The price of first product in PDP: "
 															+ firstProductPriceWIthoutDiscount
 															+ " is same as price in Order Review " + orderproductprice,
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
 											Reporting.updateTestReport("The price of first product in PDP: "
 													+ firstProductPriceWIthoutDiscount
@@ -8331,12 +8214,12 @@ public class WEL_Test_Suite extends DriverModule {
 											Reporting.updateTestReport(
 													"First Product price + Tax - Discount "
 															+ " = Order total in Order Review step",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
 											Reporting.updateTestReport(
 													"First Product price + Tax -Discount "
 															+ " is not equal to Order total in Order Review step",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 									} catch (Exception e) {
 										Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
@@ -8402,11 +8285,11 @@ public class WEL_Test_Suite extends DriverModule {
 												Reporting.updateTestReport(
 														"The tax was not recalculated after editing the Billing address and "
 																+ "the tax value was : " + tax1 + " in both cases",
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											else
 												Reporting.updateTestReport(
 														"The tax was recalculated from " + tax1 + " to " + tax2
-														+ " after editing the Billing address",
+																+ " after editing the Billing address",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 											try {
 												wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -8438,8 +8321,8 @@ public class WEL_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"First Product price + Tax - Discount"
 																	+ " = Order total in Order Review step",
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.PASS);
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.PASS);
 												else
 													Reporting.updateTestReport("First Product price +Tax - Discount"
 															+ " is not equal to Order total in Order Review step",
@@ -8558,7 +8441,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"Checkout button was not clickable in the cart page"
 													+ " and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 							}
@@ -8587,9 +8470,7 @@ public class WEL_Test_Suite extends DriverModule {
 
 								WEL.ShipAddressLineOne(
 										excelOperation.getTestData("TC49", "WEL_Test_Data", "Sh_Address_line1"));
-								try {
-									wait.until(ExpectedConditions
-											.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+								
 									WEL.ShipPostCode(
 											excelOperation.getTestData("TC49", "WEL_Test_Data", "Sh_Zip_Code"));
 									WEL.ShipPhoneNumber(
@@ -8605,24 +8486,24 @@ public class WEL_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 									}
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 										WEL.enterCardHolderName(
 												excelOperation.getTestData("TC49", "WEL_Test_Data", "Guest_Fname"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 										WEL.enterCardNumber(
 												excelOperation.getTestData("TC49", "WEL_Test_Data", "Card_Number"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 										WEL.selectExpirationMonthFromDropDown(
 												excelOperation.getTestData("TC49", "WEL_Test_Data", "Expiry_Month"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
 										WEL.selectExpirationYearFromDropDown(
 												excelOperation.getTestData("TC49", "WEL_Test_Data", "Expiry_Year"));
 										driver.switchTo().defaultContent();
@@ -8630,9 +8511,7 @@ public class WEL_Test_Suite extends DriverModule {
 												driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
 										WEL.enterCVV_Number(excelOperation.getTestData("TC49", "WEL_Test_Data", "CVV"));
 										driver.switchTo().defaultContent();
-										try {
-											wait.until(ExpectedConditions.visibilityOfElementLocated(
-													By.xpath("//div[@class='helpButton']")));
+										
 											WEL.SaveAndContinueCheckOut();
 											try {
 												wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -8648,15 +8527,15 @@ public class WEL_Test_Suite extends DriverModule {
 													if (price.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
 														Reporting.updateTestReport(
 																"The price of first product in PDP: " + price
-																+ " is same as price in Order Review "
-																+ orderproductprice,
+																		+ " is same as price in Order Review "
+																		+ orderproductprice,
 																CaptureScreenshot.getScreenshot(SS_path),
 																StatusDetails.PASS);
 													else
 														Reporting.updateTestReport(
 																"The price of first product in PDP: " + price
-																+ " is not same as price in Order Review "
-																+ orderproductprice,
+																		+ " is not same as price in Order Review "
+																		+ orderproductprice,
 																CaptureScreenshot.getScreenshot(SS_path),
 																StatusDetails.FAIL);
 													BigDecimal tax = new BigDecimal(
@@ -8673,20 +8552,20 @@ public class WEL_Test_Suite extends DriverModule {
 														Reporting.updateTestReport(
 																"First Product price + Tax "
 																		+ " = Order total in Order Review step",
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.PASS);
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.PASS);
 													else
 														Reporting.updateTestReport(
 																"First Product price + Tax -Discount "
 																		+ " is not equal to Order total in Order Review step",
-																		CaptureScreenshot.getScreenshot(SS_path),
-																		StatusDetails.FAIL);
+																CaptureScreenshot.getScreenshot(SS_path),
+																StatusDetails.FAIL);
 												} catch (Exception e) {
 													Reporting.updateTestReport(
 															"Failed to fetch the first product price on Order Summary page"
 																	+ e.getMessage(),
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.FAIL);
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
 												}
 											} catch (Exception e) {
 												Reporting.updateTestReport(
@@ -8706,22 +8585,12 @@ public class WEL_Test_Suite extends DriverModule {
 											excelOperation.updateTestData("TC49", "WEL_Test_Data", "Order_Total",
 													orderTotal);
 
-										} catch (Exception e) {
-											Reporting.updateTestReport(
-													"Help button was not visible and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
 									} catch (Exception e) {
 										Reporting.updateTestReport(
 												"The name field in card information step was not clickable and caused timeout exception",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
-								} catch (Exception e) {
-									Reporting.updateTestReport(
-											"Help button was not visible and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
-
+								
 							} catch (Exception e) {
 								Reporting.updateTestReport(
 										"Address line 1 was not clickable and caused timeout exception",
@@ -8811,7 +8680,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"Checkout button was not clickable in the cart page"
 													+ " and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 							}
@@ -8842,14 +8711,10 @@ public class WEL_Test_Suite extends DriverModule {
 								try {
 									wait.until(ExpectedConditions
 											.visibilityOfElementLocated(By.xpath("//input[@id='line1']")));
-									try {
-										wait.until(ExpectedConditions
-												.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+									
 										WEL.ShipAddressLineOne(excelOperation.getTestData("TC50", "WEL_Test_Data",
 												"Sh_Address_line1"));
-										try {
-											wait.until(ExpectedConditions.visibilityOfElementLocated(
-													By.xpath("//div[@class='helpButton']")));
+										
 											WEL.ShipPostCode(
 													excelOperation.getTestData("TC50", "WEL_Test_Data", "Sh_Zip_Code"));
 											WEL.ShipTownCity(excelOperation.getTestData("TC50", "WEL_Test_Data",
@@ -8895,9 +8760,7 @@ public class WEL_Test_Suite extends DriverModule {
 												WEL.enterCVV_Number(
 														excelOperation.getTestData("TC30", "WEL_Test_Data", "CVV"));
 												driver.switchTo().defaultContent();
-												try {
-													wait.until(ExpectedConditions.visibilityOfElementLocated(
-															By.xpath("//div[@class='helpButton']")));
+												
 													WEL.SaveAndContinueCheckOut();
 													ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
 													try {
@@ -8916,16 +8779,16 @@ public class WEL_Test_Suite extends DriverModule {
 																			+ firstProductPriceWIthoutDiscount
 																			+ " is same as price in Order Review "
 																			+ orderproductprice,
-																			CaptureScreenshot.getScreenshot(SS_path),
-																			StatusDetails.PASS);
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.PASS);
 														else
 															Reporting.updateTestReport(
 																	"The price of first product in PDP: "
 																			+ firstProductPriceWIthoutDiscount
 																			+ " is not same as price in Order Review "
 																			+ orderproductprice,
-																			CaptureScreenshot.getScreenshot(SS_path),
-																			StatusDetails.FAIL);
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
 														String discount = WEL.fetchDiscountInOrderReview();
 														if (discount.contains(","))
 															discount = discount.replace(",", "");
@@ -8955,14 +8818,14 @@ public class WEL_Test_Suite extends DriverModule {
 															Reporting.updateTestReport(
 																	"First Product price + Tax - Discount + Shipping charge"
 																			+ " = Order total in Order Review step",
-																			CaptureScreenshot.getScreenshot(SS_path),
-																			StatusDetails.PASS);
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.PASS);
 														else
 															Reporting.updateTestReport(
 																	"First Product price + Tax -Discount "
 																			+ " is not equal to Order total in Order Review step",
-																			CaptureScreenshot.getScreenshot(SS_path),
-																			StatusDetails.FAIL);
+																	CaptureScreenshot.getScreenshot(SS_path),
+																	StatusDetails.FAIL);
 
 													} catch (Exception e) {
 														Reporting.updateTestReport(
@@ -8981,27 +8844,13 @@ public class WEL_Test_Suite extends DriverModule {
 													excelOperation.updateTestData("TC50", "WEL_Test_Data",
 															"Order_Total", orderTotal);
 
-												} catch (Exception e) {
-													Reporting.updateTestReport(
-															"Help button was not visible and caused timeout exception",
-															CaptureScreenshot.getScreenshot(SS_path),
-															StatusDetails.FAIL);
-												}
+												
 											} catch (Exception e) {
 												Reporting.updateTestReport(
 														"The name field in card information step was not clickable and caused timeout exception",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-											}
-										} catch (Exception e) {
-											Reporting.updateTestReport(
-													"Help button was not visible and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
-									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Help button was not visible and caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									}
+											}	
+									
 								} catch (Exception e) {
 									Reporting.updateTestReport("Failed to enter the username caused timeout exception",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -9094,7 +8943,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"Checkout button was not clickable in the cart page"
 													+ " and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 							}
@@ -9118,9 +8967,7 @@ public class WEL_Test_Suite extends DriverModule {
 							WEL.GuestLastName(excelOperation.getTestData("TC51", "WEL_Test_Data", "Guest_Lname"));
 							WEL.selectShipCountry(excelOperation.getTestData("TC51", "WEL_Test_Data", "Sh_Country"));
 							Thread.sleep(500);
-							try {
-								wait.until(ExpectedConditions
-										.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+							
 								wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
 								WEL.ShipAddressLineOne(
 										excelOperation.getTestData("TC51", "WEL_Test_Data", "Sh_Address_line1"));
@@ -9160,34 +9007,32 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 								}
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 								try {
 									wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 									WEL.enterCardHolderName(
 											excelOperation.getTestData("TC51", "WEL_Test_Data", "Guest_Fname"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 									WEL.enterCardNumber(
 											excelOperation.getTestData("TC51", "WEL_Test_Data", "Card_Number"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 									WEL.selectExpirationMonthFromDropDown(
 											excelOperation.getTestData("TC51", "WEL_Test_Data", "Expiry_Month"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
 									WEL.selectExpirationYearFromDropDown(
 											excelOperation.getTestData("TC51", "WEL_Test_Data", "Expiry_Year"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
 									WEL.enterCVV_Number(excelOperation.getTestData("TC51", "WEL_Test_Data", "CVV"));
 									driver.switchTo().defaultContent();
-									try {
-										wait.until(ExpectedConditions
-												.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+
 										WEL.SaveAndContinueCheckOut();
 										try {
 											wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -9212,8 +9057,8 @@ public class WEL_Test_Suite extends DriverModule {
 																	+ firstProductPriceWIthoutDiscount
 																	+ " is not same as price in Order Review "
 																	+ orderproductprice,
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.FAIL);
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
 												String discount = WEL.fetchDiscountInOrderReview();
 												if (discount.contains(","))
 													discount = discount.replace(",", "");
@@ -9242,8 +9087,8 @@ public class WEL_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"First Product price + Tax - Discount + Shipping charge"
 																	+ " = Order total in Order Review step",
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.PASS);
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.PASS);
 												else
 													Reporting.updateTestReport("First Product price + Tax -Discount "
 															+ " is not equal to Order total in Order Review step",
@@ -9253,7 +9098,7 @@ public class WEL_Test_Suite extends DriverModule {
 												Reporting.updateTestReport(
 														"Failed to fetch the first product price on Order Summary page"
 																+ e.getMessage(),
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 
 										} catch (Exception e) {
@@ -9272,16 +9117,8 @@ public class WEL_Test_Suite extends DriverModule {
 										String orderTotal = WEL.fetchOrderTotal();
 										excelOperation.updateTestData("TC51", "WEL_Test_Data", "Order_Total",
 												orderTotal);
-									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Help button was not visible and caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									}
-								} catch (Exception e) {
-									Reporting.updateTestReport(
-											"The name field in card information step was not clickable and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+									
+								
 
 							} catch (Exception e) {
 								Reporting.updateTestReport(
@@ -9371,7 +9208,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"Checkout button was not clickable in the cart page"
 													+ " and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 							}
@@ -9395,8 +9232,7 @@ public class WEL_Test_Suite extends DriverModule {
 							WEL.GuestLastName(excelOperation.getTestData("TC52", "WEL_Test_Data", "Guest_Lname"));
 							WEL.selectShipCountry(excelOperation.getTestData("TC52", "WEL_Test_Data", "Sh_Country"));
 							try {
-								wait.until(ExpectedConditions
-										.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+								
 								wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
 								WEL.ShipAddressLineOne(
 										excelOperation.getTestData("TC52", "WEL_Test_Data", "Sh_Address_line1"));
@@ -9436,34 +9272,32 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 								}
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 								try {
 									wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 									WEL.enterCardHolderName(
 											excelOperation.getTestData("TC52", "WEL_Test_Data", "Guest_Fname"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 									WEL.enterCardNumber(
 											excelOperation.getTestData("TC52", "WEL_Test_Data", "Card_Number"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 									WEL.selectExpirationMonthFromDropDown(
 											excelOperation.getTestData("TC52", "WEL_Test_Data", "Expiry_Month"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
 									WEL.selectExpirationYearFromDropDown(
 											excelOperation.getTestData("TC52", "WEL_Test_Data", "Expiry_Year"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
 									WEL.enterCVV_Number(excelOperation.getTestData("TC52", "WEL_Test_Data", "CVV"));
 									driver.switchTo().defaultContent();
-									try {
-										wait.until(ExpectedConditions
-												.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+									
 										WEL.SaveAndContinueCheckOut();
 										try {
 											wait.until(ExpectedConditions
@@ -9509,12 +9343,12 @@ public class WEL_Test_Suite extends DriverModule {
 												Reporting.updateTestReport(
 														"First Product price + Tax - Discount + Shipping charge"
 																+ " = Order total in Order Review step",
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 											else
 												Reporting.updateTestReport(
 														"First Product price + Tax -Discount "
 																+ " is not equal to Order total in Order Review step",
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 										} catch (Exception e) {
 											Reporting.updateTestReport(
@@ -9532,11 +9366,7 @@ public class WEL_Test_Suite extends DriverModule {
 										String orderTotal = WEL.fetchOrderTotal();
 										excelOperation.updateTestData("TC52", "WEL_Test_Data", "Order_Total",
 												orderTotal);
-									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Help button was not visible and caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									}
+									
 								} catch (Exception e) {
 									Reporting.updateTestReport(
 											"The name field in card information step was not clickable and caused timeout exception",
@@ -9631,7 +9461,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"Checkout button was not clickable in the cart page"
 													+ " and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 							}
@@ -9656,8 +9486,6 @@ public class WEL_Test_Suite extends DriverModule {
 							WEL.selectShipCountry(excelOperation.getTestData("TC53", "WEL_Test_Data", "Sh_Country"));
 							Thread.sleep(500);
 							try {
-								wait.until(ExpectedConditions
-										.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
 								wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
 								WEL.ShipAddressLineOne(
 										excelOperation.getTestData("TC53", "WEL_Test_Data", "Sh_Address_line1"));
@@ -9697,34 +9525,32 @@ public class WEL_Test_Suite extends DriverModule {
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 								}
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 								try {
 									wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 									WEL.enterCardHolderName(
 											excelOperation.getTestData("TC53", "WEL_Test_Data", "Guest_Fname"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 									WEL.enterCardNumber(
 											excelOperation.getTestData("TC53", "WEL_Test_Data", "Card_Number"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 									WEL.selectExpirationMonthFromDropDown(
 											excelOperation.getTestData("TC53", "WEL_Test_Data", "Expiry_Month"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
 									WEL.selectExpirationYearFromDropDown(
 											excelOperation.getTestData("TC53", "WEL_Test_Data", "Expiry_Year"));
 									driver.switchTo().defaultContent();
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
 									WEL.enterCVV_Number(excelOperation.getTestData("TC53", "WEL_Test_Data", "CVV"));
 									driver.switchTo().defaultContent();
-									try {
-										wait.until(ExpectedConditions
-												.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+									
 										WEL.SaveAndContinueCheckOut();
 										try {
 											wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -9770,12 +9596,12 @@ public class WEL_Test_Suite extends DriverModule {
 												Reporting.updateTestReport(
 														"First Product price + Tax - Discount + Shipping charge"
 																+ " = Order total in Order Review step",
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 											else
 												Reporting.updateTestReport(
 														"First Product price + Tax -Discount "
 																+ " is not equal to Order total in Order Review step",
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 										} catch (Exception e) {
 											Reporting.updateTestReport(
@@ -9793,11 +9619,7 @@ public class WEL_Test_Suite extends DriverModule {
 										String orderTotal = WEL.fetchOrderTotal();
 										excelOperation.updateTestData("TC53", "WEL_Test_Data", "Order_Total",
 												orderTotal);
-									} catch (Exception e) {
-										Reporting.updateTestReport(
-												"Help button was not visible and caused timeout exception",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-									}
+									
 								} catch (Exception e) {
 									Reporting.updateTestReport(
 											"The name field in card information step was not clickable and caused timeout exception",
@@ -9876,7 +9698,7 @@ public class WEL_Test_Suite extends DriverModule {
 						Reporting.updateTestReport(
 								"wel-cart cookie was present with value: "
 										+ driver.manage().getCookieNamed("wel-cart").getValue(),
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					} catch (Exception e) {
 						Reporting.updateTestReport("wel-cart cookie was not present",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -9885,7 +9707,7 @@ public class WEL_Test_Suite extends DriverModule {
 						Reporting.updateTestReport(
 								"wel-cart-total-items cookie was present with value: "
 										+ driver.manage().getCookieNamed("wel-cart-total-items").getValue(),
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					} catch (Exception e) {
 						Reporting.updateTestReport("wel-cart-total-items cookie was not present",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -9894,7 +9716,7 @@ public class WEL_Test_Suite extends DriverModule {
 						Reporting.updateTestReport(
 								"AccessToken cookie was present with value: "
 										+ driver.manage().getCookieNamed("AccessToken").getValue(),
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 					} catch (Exception e) {
 						Reporting.updateTestReport("AccessToken cookie was not present",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -9926,14 +9748,14 @@ public class WEL_Test_Suite extends DriverModule {
 												.equalsIgnoreCase("1"))
 											Reporting.updateTestReport(
 													"wel-cart-total-items cookie was present with value: " + driver
-													.manage().getCookieNamed("wel-cart-total-items").getValue()
-													+ " as expected",
+															.manage().getCookieNamed("wel-cart-total-items").getValue()
+															+ " as expected",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 										else
 											Reporting.updateTestReport(
 													"wel-cart-total-items cookie was present with value: " + driver
-													.manage().getCookieNamed("wel-cart-total-items").getValue()
-													+ " iinstead of 1",
+															.manage().getCookieNamed("wel-cart-total-items").getValue()
+															+ " iinstead of 1",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									} catch (Exception e) {
 										Reporting.updateTestReport("wel-cart-total-items cookie was not present",
@@ -10034,7 +9856,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -10086,24 +9908,24 @@ public class WEL_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 									}
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 										WEL.enterCardHolderName(
 												excelOperation.getTestData("TC62", "WEL_Test_Data", "Guest_Fname"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 										WEL.enterCardNumber(
 												excelOperation.getTestData("TC62", "WEL_Test_Data", "Card_Number"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 										WEL.selectExpirationMonthFromDropDown(
 												excelOperation.getTestData("TC62", "WEL_Test_Data", "Expiry_Month"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
 										WEL.selectExpirationYearFromDropDown(
 												excelOperation.getTestData("TC62", "WEL_Test_Data", "Expiry_Year"));
 										driver.switchTo().defaultContent();
@@ -10111,9 +9933,7 @@ public class WEL_Test_Suite extends DriverModule {
 												driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
 										WEL.enterCVV_Number(excelOperation.getTestData("TC62", "WEL_Test_Data", "CVV"));
 										driver.switchTo().defaultContent();
-										try {
-											wait.until(ExpectedConditions.visibilityOfElementLocated(
-													By.xpath("//div[@class='helpButton']")));
+										
 											WEL.SaveAndContinueCheckOut();
 											try {
 												wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -10136,8 +9956,8 @@ public class WEL_Test_Suite extends DriverModule {
 																	+ firstProductPriceWIthoutDiscount
 																	+ " is not same as price in Order Review "
 																	+ orderproductprice,
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.FAIL);
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
 												String discount = WEL.fetchDiscountInOrderReview();
 												if (discount.contains(","))
 													discount = discount.replace(",", "");
@@ -10158,8 +9978,8 @@ public class WEL_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"First Product price + Tax - Discount"
 																	+ " = Order total in Order Review step",
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.PASS);
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.PASS);
 												else
 													Reporting.updateTestReport("First Product price + Tax "
 															+ " is not equal to Order total in Order Review step",
@@ -10185,8 +10005,8 @@ public class WEL_Test_Suite extends DriverModule {
 													orderTotal);
 											WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL",
 													"Generic_Dataset", "Data"));
-											if (EmailValidation.checkIfOrderConfirmationMailReceived(GuestEmail,driver, SS_path,
-													EmailConfirmationText)) {
+											if (EmailValidation.checkIfOrderConfirmationMailReceived(GuestEmail, driver,
+													SS_path, EmailConfirmationText)) {
 												ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
 												Reporting.updateTestReport("Order Confirmation mail was received",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -10207,12 +10027,7 @@ public class WEL_Test_Suite extends DriverModule {
 												"The name field in card information step was not clickable and caused timeout exception",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
-								} catch (Exception e) {
-									Reporting.updateTestReport(
-											"Help button was not visible and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
-
+								
 							} catch (Exception e) {
 								Reporting.updateTestReport(
 										"Address line 1 was not clickable and caused timeout exception",
@@ -10301,7 +10116,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"Checkout button was not clickable in the cart page"
 													+ " and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 							}
@@ -10352,7 +10167,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"First Product price - Discount "
 													+ " is not equal to Order total in Order Review step",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
 								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
@@ -10404,7 +10219,8 @@ public class WEL_Test_Suite extends DriverModule {
 					.createTest("TC69_PlaceNewUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax");
 			LogTextFile.writeTestCaseStatus(
 					"TC69_PlaceNewUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax", "Test case");
-			WordDocumentReport.writeTestcaseName("TC69_PlaceNewUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax");
+			WordDocumentReport
+					.writeTestcaseName("TC69_PlaceNewUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("TC69", "WEL_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -10434,7 +10250,7 @@ public class WEL_Test_Suite extends DriverModule {
 							Reporting.updateTestReport(
 									"Checkout button was not clickable in the cart page"
 											+ " and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
 
 					}
@@ -10509,12 +10325,12 @@ public class WEL_Test_Suite extends DriverModule {
 								if (price.compareTo(new BigDecimal(orderprice.substring(1))) == 0)
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + price
-											+ " is same as price in Order Review " + orderproductprice,
+													+ " is same as price in Order Review " + orderproductprice,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + price
-											+ " is not same as price in Order Review " + orderproductprice,
+													+ " is not same as price in Order Review " + orderproductprice,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 								BigDecimal totalprice = orderproductprice.add(tax1);
@@ -10531,7 +10347,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"First Product price + Tax "
 													+ " is not equal to Order total in Order Review step",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
 								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
@@ -10568,7 +10384,7 @@ public class WEL_Test_Suite extends DriverModule {
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 		} catch (
 
-				Exception e) {
+		Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
@@ -10589,7 +10405,8 @@ public class WEL_Test_Suite extends DriverModule {
 					.createTest("TC70_PlaceExistingUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax");
 			LogTextFile.writeTestCaseStatus(
 					"TC70_PlaceExistingUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax", "Test case");
-			WordDocumentReport.writeTestcaseName("TC70_PlaceExistingUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax");
+			WordDocumentReport.writeTestcaseName(
+					"TC70_PlaceExistingUser_OrderForPhysicalProduct_CFALevelI_PlatinumAndValidateThetax");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(excelOperation.getTestData("TC70", "WEL_Test_Data", "URL"));
 			driver.navigate().refresh();
@@ -10686,12 +10503,12 @@ public class WEL_Test_Suite extends DriverModule {
 								if (price.compareTo(firstproductprice) == 0)
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + price
-											+ " is same as price in Order Review " + firstproductprice,
+													+ " is same as price in Order Review " + firstproductprice,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + price
-											+ " is not same as price in Order Review " + firstproductprice,
+													+ " is not same as price in Order Review " + firstproductprice,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 								BigDecimal totalprice = firstproductprice.add(tax1);
@@ -10706,12 +10523,12 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"First Product price + Tax + Shipping"
 													+ " = Order total in Order Review step",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
 									Reporting.updateTestReport(
 											"First Product price + Tax "
 													+ " is not equal to Order total in Order Review step",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 
 							} catch (Exception e) {
 								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
@@ -10765,7 +10582,8 @@ public class WEL_Test_Suite extends DriverModule {
 					.createTest("TC71_PlaceNewUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax");
 			LogTextFile.writeTestCaseStatus("TC71_PlaceNewUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax",
 					"Test case");
-			WordDocumentReport.writeTestcaseName("TC71_PlaceNewUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax");
+			WordDocumentReport
+					.writeTestcaseName("TC71_PlaceNewUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			driver.get(WELHomepageURL);
@@ -10809,7 +10627,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"Checkout button was not clickable in the cart page"
 													+ " and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 							}
@@ -10840,18 +10658,18 @@ public class WEL_Test_Suite extends DriverModule {
 									excelOperation.getTestData("TC71", "WEL_Test_Data", "Bill_Phone_Number"));
 							WEL.enterState(excelOperation.getTestData("TC72", "WEL_Test_Data", "Bill_State"));
 							driver.switchTo()
-							.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+									.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 							try {
 								wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 								WEL.enterCardHolderName(
 										excelOperation.getTestData("TC71", "WEL_Test_Data", "Guest_Fname"));
 								driver.switchTo().defaultContent();
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 								WEL.enterCardNumber(excelOperation.getTestData("TC71", "WEL_Test_Data", "Card_Number"));
 								driver.switchTo().defaultContent();
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 								WEL.selectExpirationMonthFromDropDown(
 										excelOperation.getTestData("TC71", "WEL_Test_Data", "Expiry_Month"));
 								driver.switchTo().defaultContent();
@@ -10860,7 +10678,7 @@ public class WEL_Test_Suite extends DriverModule {
 										excelOperation.getTestData("TC71", "WEL_Test_Data", "Expiry_Year"));
 								driver.switchTo().defaultContent();
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
 								WEL.enterCVV_Number(excelOperation.getTestData("TC71", "WEL_Test_Data", "CVV"));
 								driver.switchTo().defaultContent();
 								WEL.SaveAndContinueCheckOut();
@@ -10889,12 +10707,12 @@ public class WEL_Test_Suite extends DriverModule {
 								if (price.compareTo(orderproductprice) == 0)
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + price
-											+ " is same as price in Order Review " + orderproductprice,
+													+ " is same as price in Order Review " + orderproductprice,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + price
-											+ " is not same as price in Order Review " + orderproductprice,
+													+ " is not same as price in Order Review " + orderproductprice,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 								BigDecimal totalprice = orderproductprice.add(tax1);
@@ -10911,7 +10729,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"First Product price + Tax "
 													+ " is not equal to Order total in Order Review step",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							} catch (Exception e) {
 								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -10962,8 +10780,10 @@ public class WEL_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent
 					.createTest("TC72_PlaceExistingUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax");
-			LogTextFile.writeTestCaseStatus("TC72_PlaceExistingUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax", "Test case");
-			WordDocumentReport.writeTestcaseName("TC72_PlaceExistingUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax");
+			LogTextFile.writeTestCaseStatus(
+					"TC72_PlaceExistingUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax", "Test case");
+			WordDocumentReport
+					.writeTestcaseName("TC72_PlaceExistingUser_OrderForDigitalProduct_CPATestBank_AndValidatThetax");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			driver.get(WELHomepageURL);
@@ -11010,7 +10830,7 @@ public class WEL_Test_Suite extends DriverModule {
 										Reporting.updateTestReport(
 												"Checkout button was not clickable in the cart page"
 														+ " and caused timeout exception",
-														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
 								}
@@ -11045,18 +10865,18 @@ public class WEL_Test_Suite extends DriverModule {
 									excelOperation.getTestData("TC72", "WEL_Test_Data", "Bill_Phone_Number"));
 							WEL.enterState(excelOperation.getTestData("TC72", "WEL_Test_Data", "Bill_State"));
 							driver.switchTo()
-							.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+									.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 							try {
 								wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 								WEL.enterCardHolderName(
 										excelOperation.getTestData("TC72", "WEL_Test_Data", "Guest_Fname"));
 								driver.switchTo().defaultContent();
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 								WEL.enterCardNumber(excelOperation.getTestData("TC72", "WEL_Test_Data", "Card_Number"));
 								driver.switchTo().defaultContent();
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 								WEL.selectExpirationMonthFromDropDown(
 										excelOperation.getTestData("TC72", "WEL_Test_Data", "Expiry_Month"));
 								driver.switchTo().defaultContent();
@@ -11065,7 +10885,7 @@ public class WEL_Test_Suite extends DriverModule {
 										excelOperation.getTestData("TC72", "WEL_Test_Data", "Expiry_Year"));
 								driver.switchTo().defaultContent();
 								driver.switchTo()
-								.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
+										.frame(driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
 								WEL.enterCVV_Number(excelOperation.getTestData("TC72", "WEL_Test_Data", "CVV"));
 								driver.switchTo().defaultContent();
 								WEL.SaveAndContinueCheckOut();
@@ -11094,12 +10914,12 @@ public class WEL_Test_Suite extends DriverModule {
 								if (price.compareTo(orderproductprice) == 0)
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + price
-											+ " is same as price in Order Review " + orderproductprice,
+													+ " is same as price in Order Review " + orderproductprice,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								else
 									Reporting.updateTestReport(
 											"The price of first product in PDP: " + price
-											+ " is not same as price in Order Review " + orderproductprice,
+													+ " is not same as price in Order Review " + orderproductprice,
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								BigDecimal tax1 = new BigDecimal(WEL.fetchTaxInOrderReview().substring(1));
 								BigDecimal totalprice = orderproductprice.add(tax1);
@@ -11116,7 +10936,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"First Product price + Tax "
 													+ " is not equal to Order total in Order Review step",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							} catch (Exception e) {
 								Reporting.updateTestReport("Order summary tab was not visible" + e.getMessage(),
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
@@ -11212,7 +11032,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"Checkout button was not clickable in the cart page"
 													+ " and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 							}
@@ -11237,9 +11057,7 @@ public class WEL_Test_Suite extends DriverModule {
 							Thread.sleep(3000);
 							try {
 								wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='line1']")));
-								try {
-									wait.until(ExpectedConditions
-											.visibilityOfElementLocated(By.xpath("//div[@class='helpButton']")));
+								
 									WEL.ShipAddressLineOne(
 											excelOperation.getTestData("TC73", "WEL_Test_Data", "Sh_Address_line1"));
 									WEL.ShipPostCode(
@@ -11279,24 +11097,24 @@ public class WEL_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 									}
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 										WEL.enterCardHolderName(
 												excelOperation.getTestData("TC73", "WEL_Test_Data", "Guest_Fname"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 										WEL.enterCardNumber(
 												excelOperation.getTestData("TC73", "WEL_Test_Data", "Card_Number"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 										WEL.selectExpirationMonthFromDropDown(
 												excelOperation.getTestData("TC73", "WEL_Test_Data", "Expiry_Month"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
 										WEL.selectExpirationYearFromDropDown(
 												excelOperation.getTestData("TC73", "WEL_Test_Data", "Expiry_Year"));
 										driver.switchTo().defaultContent();
@@ -11304,9 +11122,7 @@ public class WEL_Test_Suite extends DriverModule {
 												driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
 										WEL.enterCVV_Number(excelOperation.getTestData("TC73", "WEL_Test_Data", "CVV"));
 										driver.switchTo().defaultContent();
-										try {
-											wait.until(ExpectedConditions.visibilityOfElementLocated(
-													By.xpath("//div[@class='helpButton']")));
+										
 											WEL.SaveAndContinueCheckOut();
 											try {
 												wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -11328,8 +11144,8 @@ public class WEL_Test_Suite extends DriverModule {
 																	+ firstProductPriceWIthoutDiscount
 																	+ " is not same as price in Order Review "
 																	+ orderproductprice,
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.FAIL);
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
 												String discount = WEL.fetchDiscountInOrderReview();
 												if (discount.contains(","))
 													discount = discount.replace(",", "");
@@ -11358,8 +11174,8 @@ public class WEL_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"First Product price + Tax - Discount + Shipping charge"
 																	+ " = Order total in Order Review step",
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.PASS);
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.PASS);
 												else
 													Reporting.updateTestReport("First Product price + Tax -Discount "
 															+ " is not equal to Order total in Order Review step",
@@ -11381,22 +11197,13 @@ public class WEL_Test_Suite extends DriverModule {
 											String orderTotal = WEL.fetchOrderTotal();
 											excelOperation.updateTestData("TC73", "WEL_Test_Data", "Order_Total",
 													orderTotal);
-										} catch (Exception e) {
-											Reporting.updateTestReport(
-													"Help button was not visible and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-										}
+										
 									} catch (Exception e) {
 										Reporting.updateTestReport(
 												"The name field in card information step was not clickable and caused timeout exception",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
-
-								} catch (Exception e) {
-									Reporting.updateTestReport(
-											"Help button was not visible and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
+								
 							} catch (Exception e) {
 								Reporting.updateTestReport(
 										"Address line 1 was not clickable and caused timeout exception",
@@ -11503,7 +11310,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"Checkout button was not clickable in the cart page"
 													+ " and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 							}
@@ -11512,7 +11319,7 @@ public class WEL_Test_Suite extends DriverModule {
 								Reporting.updateTestReport(
 										"User was on cart page "
 												+ "after clicking on Add to cart in recommendation title",
-												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 								driver.get(excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 							} catch (Exception e) {
 								Reporting.updateTestReport(
@@ -11528,7 +11335,7 @@ public class WEL_Test_Suite extends DriverModule {
 						Reporting.updateTestReport(
 								"User was not on the PDP after clicking on View Product link and"
 										+ "it caused timeout exception",
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
 
 				} catch (Exception e) {
@@ -11561,7 +11368,8 @@ public class WEL_Test_Suite extends DriverModule {
 		try {
 			Reporting.test = Reporting.extent
 					.createTest("TC75_Check_Add_To_Cart_Functionality_for_Heads_Up_Validation");
-			LogTextFile.writeTestCaseStatus("TC75_Check_Add_To_Cart_Functionality_for_Heads_Up_Validation", "Test case");
+			LogTextFile.writeTestCaseStatus("TC75_Check_Add_To_Cart_Functionality_for_Heads_Up_Validation",
+					"Test case");
 			WordDocumentReport.writeTestcaseName("TC75_Check_Add_To_Cart_Functionality_for_Heads_Up_Validation");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(WELHomepageURL);
@@ -11818,7 +11626,7 @@ public class WEL_Test_Suite extends DriverModule {
 									Reporting.updateTestReport(
 											"Checkout button was not clickable in the cart page"
 													+ " and caused timeout exception",
-													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
 
 							}
@@ -11865,24 +11673,24 @@ public class WEL_Test_Suite extends DriverModule {
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
 									}
 									driver.switchTo()
-									.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
+											.frame(driver.findElement(By.xpath(".//iframe[@title='cardholder name']")));
 									try {
 										wait.until(ExpectedConditions.elementToBeClickable(By.id("nameOnCard")));
 										WEL.enterCardHolderName(
 												excelOperation.getTestData("TC79", "WEL_Test_Data", "Guest_Fname"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 										WEL.enterCardNumber(
 												excelOperation.getTestData("TC79", "WEL_Test_Data", "Card_Number"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));
 										WEL.selectExpirationMonthFromDropDown(
 												excelOperation.getTestData("TC79", "WEL_Test_Data", "Expiry_Month"));
 										driver.switchTo().defaultContent();
 										driver.switchTo()
-										.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
+												.frame(driver.findElement(By.xpath(".//iframe[@title='expiryYear']")));
 										WEL.selectExpirationYearFromDropDown(
 												excelOperation.getTestData("TC79", "WEL_Test_Data", "Expiry_Year"));
 										driver.switchTo().defaultContent();
@@ -11890,9 +11698,7 @@ public class WEL_Test_Suite extends DriverModule {
 												driver.findElement(By.xpath(".//iframe[@title='securityCode']")));
 										WEL.enterCVV_Number(excelOperation.getTestData("TC79", "WEL_Test_Data", "CVV"));
 										driver.switchTo().defaultContent();
-										try {
-											wait.until(ExpectedConditions.visibilityOfElementLocated(
-													By.xpath("//div[@class='helpButton']")));
+								
 											WEL.SaveAndContinueCheckOut();
 											try {
 												wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -11914,8 +11720,8 @@ public class WEL_Test_Suite extends DriverModule {
 																	+ firstProductPriceWIthoutDiscount
 																	+ " is not same as price in Order Review "
 																	+ orderproductprice,
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.FAIL);
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.FAIL);
 												String discount = WEL.fetchDiscountInOrderReview();
 												if (discount.contains(","))
 													discount = discount.replace(",", "");
@@ -11945,8 +11751,8 @@ public class WEL_Test_Suite extends DriverModule {
 													Reporting.updateTestReport(
 															"First Product price + Tax - Discount + Shipping charge"
 																	+ " = Order total in Order Review step",
-																	CaptureScreenshot.getScreenshot(SS_path),
-																	StatusDetails.PASS);
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.PASS);
 												else
 													Reporting.updateTestReport("First Product price + Tax -Discount "
 															+ " is not equal to Order total in Order Review step",
@@ -11972,8 +11778,8 @@ public class WEL_Test_Suite extends DriverModule {
 													orderTotal);
 											WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL",
 													"Generic_Dataset", "Data"));
-											if (EmailValidation.checkIfOrderConfirmationMailReceived(GuestEmail,driver, SS_path,
-													EmailConfirmationText)) {
+											if (EmailValidation.checkIfOrderConfirmationMailReceived(GuestEmail, driver,
+													SS_path, EmailConfirmationText)) {
 												ScrollingWebPage.PageScrolldown(driver, 0, 300, SS_path);
 												Reporting.updateTestReport("Order Confirmation mail was received",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
@@ -12008,12 +11814,7 @@ public class WEL_Test_Suite extends DriverModule {
 												"The name field in card information step was not clickable and caused timeout exception",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
-								} catch (Exception e) {
-									Reporting.updateTestReport(
-											"Help button was not visible and caused timeout exception",
-											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								}
-
+								
 							} catch (Exception e) {
 								Reporting.updateTestReport(
 										"Address line 1 was not clickable and caused timeout exception",
@@ -12049,140 +11850,151 @@ public class WEL_Test_Suite extends DriverModule {
 
 	/*
 	 * @Author: Anindita
+	 * 
 	 * @Description: Checks the email format in checkout login / registration page
 	 */
 	@Test
 	public void TC80_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page() throws IOException {
 		try {
-			Reporting.test = Reporting.extent.createTest("TC80_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page");
-			LogTextFile.writeTestCaseStatus("TC80_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page", "Test case");
-			WordDocumentReport.writeTestcaseName("TC80_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page");
+			Reporting.test = Reporting.extent
+					.createTest("TC80_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page");
+			LogTextFile.writeTestCaseStatus("TC80_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page",
+					"Test case");
+			WordDocumentReport
+					.writeTestcaseName("TC80_Validate_the_Email_Id_Format_In_Checkout_Login_And_Registration_Page");
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-			String[] emailIds=excelOperation.getTestData("TC80", "WEL_Test_Data", "Email_Address").split(",");
+			String[] emailIds = excelOperation.getTestData("TC80", "WEL_Test_Data", "Email_Address").split(",");
 			driver.get(WELHomepageURL);
 			try {
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@aria-label='login']")));
 				ScrollingWebPage.PageDown(driver, SS_path);
 				try {
-					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@data-for='productTooltipCIA' and @data-key='2']")));
+					wait.until(ExpectedConditions
+							.elementToBeClickable(By.xpath("//a[@data-for='productTooltipCIA' and @data-key='2']")));
 					WEL.ClickOnCIAProduct();
 					try {
-						wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='col-xs-12 col-sm-6 col-md-5 col-lg-5 "
-								+ "col-xl-4 shop-courses-btn-container']/a/button")));
+						wait.until(ExpectedConditions
+								.elementToBeClickable(By.xpath("//div[@class='col-xs-12 col-sm-6 col-md-5 col-lg-5 "
+										+ "col-xl-4 shop-courses-btn-container']/a/button")));
 						driver.navigate().refresh();
 						WEL.ClickOnShopCourseForCIAProduct();
 						try {
-							wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='col compare-wiley-heading']")));
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.xpath("//div[@class='col compare-wiley-heading']")));
 							ScrollingWebPage.PageDown(driver, SS_path);
 							try {
-								wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//a[@href='/cia/products/cia-review-course/'"
-										+ " and contains(text(),'View Course')])[1]")));
+								wait.until(ExpectedConditions
+										.elementToBeClickable(By.xpath("(//a[@href='/cia/products/cia-review-course/'"
+												+ " and contains(text(),'View Course')])[1]")));
 								WEL.ClickOnViewCourseForCIAProduct();
 								try {
-									wait.until(ExpectedConditions.
-											visibilityOfElementLocated(By.xpath("//label[@for='Print0']")));
+									wait.until(ExpectedConditions
+											.visibilityOfElementLocated(By.xpath("//label[@for='Print0']")));
 									ScrollingWebPage.PageDown(driver, SS_path);
 
 									try {
-										wait.until(ExpectedConditions.elementToBeClickable(
-												By.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
+										wait.until(ExpectedConditions.elementToBeClickable(By
+												.xpath("//button[@type='submit' and contains(text(),'ADD TO CART')]")));
 										WEL.clickOnAddToCartButtonOnPDP();
 										try {
-											wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cartPageMainTitle")));
-										}
-										catch(Exception e) {
+											wait.until(ExpectedConditions
+													.visibilityOfElementLocated(By.id("cartPageMainTitle")));
+										} catch (Exception e) {
 											try {
-												if (driver.findElement(By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
+												if (driver
+														.findElement(
+																By.xpath("//h1[contains(text(),'SERVER ERROR (500)')]"))
 														.isDisplayed()) {
 													Reporting.updateTestReport(
 															"Server error came in cart page and the page was refreshed",
-															CaptureScreenshot.getScreenshot(SS_path), StatusDetails.INFO);
+															CaptureScreenshot.getScreenshot(SS_path),
+															StatusDetails.INFO);
 													driver.navigate().refresh();
 												}
 											} catch (Exception e1) {
 												Reporting.updateTestReport(
 														"User was not in the cart page"
 																+ " and caused timeout exception",
-																CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
 										}
 										try {
-											wait.until(ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
+											wait.until(
+													ExpectedConditions.elementToBeClickable(By.id("cartCheckoutBtn")));
 											WEL.ClickonCheckOutOnCartPage();
 											try {
-												wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("checkoutLogRegPageTitle")));
-												
-												//Checking for various invalid email ids in create account email id field
-												for(String email:emailIds) {
-													WEL.enterNewUserIdInCheckoutLoginRegistrationNonAutoGenerated(email);
+												wait.until(ExpectedConditions
+														.visibilityOfElementLocated(By.id("checkoutLogRegPageTitle")));
+
+												// Checking for various invalid email ids in create account email id
+												// field
+												for (String email : emailIds) {
+													WEL.enterNewUserIdInCheckoutLoginRegistrationNonAutoGenerated(
+															email);
 													WEL.clickOutsideTheEmailIdField();
 													WEL.checkOnClickErrorMessageInCheckoutLoginRegistrationPage();
 												}
-												
+
 												driver.navigate().refresh();
-												
-												//Checking for various invalid email ids in existing user email id field
-												for(String email:emailIds) {
+
+												// Checking for various invalid email ids in existing user email id
+												// field
+												for (String email : emailIds) {
 													WEL.EnterexistingUserName(email);
-													WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC80", "WEL_Test_Data", "Password"));
+													WEL.EnterPasswordLoginPage(excelOperation.getTestData("TC80",
+															"WEL_Test_Data", "Password"));
 													WEL.clickOutsideTheEmailIdField();
 													WEL.checkOnClickErrorMessageInCheckoutLoginRegistrationPage();
 												}
-												
-											}
-											catch(Exception e) {
+
+											} catch (Exception e) {
 												Reporting.updateTestReport(
 														"User was not redirected to checkout login/ registration page and caused timeout exception",
 														CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 											}
-										}
-										catch(Exception e) {
+										} catch (Exception e) {
 											Reporting.updateTestReport(
 													"Checkout button was not clickable in cart page and caused timeout exception",
 													CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 										}
 
-
-									}
-									catch(Exception e) {
-										Reporting.updateTestReport("Add To Cart button on product page was not clickable and caused timeout exception ",
+									} catch (Exception e) {
+										Reporting.updateTestReport(
+												"Add To Cart button on product page was not clickable and caused timeout exception ",
 												CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 									}
 
-								}
-								catch(Exception e) {
-									Reporting.updateTestReport("CIA Product details page didn't appear and caused timeout exception",
+								} catch (Exception e) {
+									Reporting.updateTestReport(
+											"CIA Product details page didn't appear and caused timeout exception",
 											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 								}
-							}
-							catch(Exception e) {
-								Reporting.updateTestReport("View Course button on product page was not clickable and caused timeout exception ",
+							} catch (Exception e) {
+								Reporting.updateTestReport(
+										"View Course button on product page was not clickable and caused timeout exception ",
 										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 							}
-						}
-						catch(Exception e) {
-							Reporting.updateTestReport("After clicking on explore course button, the page didn't show the prices and caused timeout exception ",
+						} catch (Exception e) {
+							Reporting.updateTestReport(
+									"After clicking on explore course button, the page didn't show the prices and caused timeout exception ",
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 						}
-					}
-					catch(Exception e) {
-						Reporting.updateTestReport("Shop course button on product page was not clickable and caused timeout exception ",
+					} catch (Exception e) {
+						Reporting.updateTestReport(
+								"Shop course button on product page was not clickable and caused timeout exception ",
 								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 					}
-				}
-				catch(Exception e) {
+				} catch (Exception e) {
 					Reporting.updateTestReport("CIA Link on homepage was not clickable and caused timeout exception ",
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
-			}
-			catch(Exception e) {
+			} catch (Exception e) {
 				Reporting.updateTestReport("Login button on homepage was not clickable and caused timeout exception ",
 						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			}
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));
 
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			Reporting.updateTestReport("Exception occured: " + e.getClass().toString(),
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			WEL.logOutWEL(driver, excelOperation.getTestData("WEL_Logout_URL", "Generic_Dataset", "Data"));

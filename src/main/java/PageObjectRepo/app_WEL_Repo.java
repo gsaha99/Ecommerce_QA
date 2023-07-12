@@ -4443,7 +4443,7 @@ public class app_WEL_Repo {
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 			return pdpoldprice;
 		} catch (Exception e) {
-			Reporting.updateTestReport("Price of the product in PDP could not be returned",
+			Reporting.updateTestReport("Price of the product without discount in PDP could not be returned",
 					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 			return "";
 		}

@@ -144,7 +144,7 @@ public class PaymentGateway {
 			driver.switchTo().defaultContent();
 			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='card number']")));
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.id("number")));
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='number']")));
 				wiley.enterCardNumber(excelOperation.getTestData(tcNo, "WILEY_NA_Cart_Test_Data", "Card_Number"));
 				driver.switchTo().defaultContent();
 				driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[@title='expiryMonth']")));

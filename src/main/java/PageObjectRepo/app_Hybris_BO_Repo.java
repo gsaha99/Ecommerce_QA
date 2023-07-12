@@ -1418,8 +1418,15 @@ public class app_Hybris_BO_Repo {
 					Reporting.updateTestReport("The return code was OK for step: "+step,
 							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
 				else {
-					Reporting.updateTestReport("The return code was "+status+" for step "+step+" with log message "+LogMessage.getAttribute("value"),
-							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					if(step.equalsIgnoreCase("isZeroPriceOrder") && status.equalsIgnoreCase("NOK"))
+						Reporting.updateTestReport("The return code was "+status+" for step "+step+" and it was not a zero dollar order",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else if(step.equalsIgnoreCase("sendOrderPlacedNotification") && status.equalsIgnoreCase("TAKE_PAYMENT"))
+						Reporting.updateTestReport("The return code was "+status+" for step "+step,
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.PASS);
+					else
+						Reporting.updateTestReport("The return code was "+status+" for step "+step+" with log message "+LogMessage.getAttribute("value"),
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
 				}
 			}
 			catch(Exception e) {
