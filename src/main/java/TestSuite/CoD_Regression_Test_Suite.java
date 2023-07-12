@@ -57,11 +57,23 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 			"CoD_Test_Data", "Test_Data");
 	private static String cod_QA_Login_URL = excelOperation.getTestData("QA_Login_URL", "CoD_Test_Data", "Test_Data");
 	private static String cod_QA_CreateAccount_URL = excelOperation.getTestData("QA_URL", "CoD_Test_Data", "Test_Data");
+	private static String cod_QA_FreeTrial_CreateAccount_URL = excelOperation.getTestData("QA_FREE1DAY_Trial_URL", "CoD_Test_Data", "Test_Data");
 	private static String visa = excelOperation.getTestData("Visa", "Valid_Cards", "Test_Data");
 	private static String secure_3d = excelOperation.getTestData("3d_card", "Valid_Cards", "Test_Data");
 	private static String expiryDate = excelOperation.getTestData("expiryDate", "CoD_Test_Data", "Test_Data");
 	private static String cvc = excelOperation.getTestData("completeCVV", "CoD_Test_Data", "Test_Data");
 	private static String genericDecline = excelOperation.getTestData("genericDecline", "CoD_Test_Data", "Test_Data");
+	private static String unionPayDebitCard = excelOperation.getTestData("UnionPay_debit", "Valid_Cards", "Test_Data");
+	private static String unionPay = excelOperation.getTestData("UnionPay", "Valid_Cards", "Test_Data");
+	private static String unionPay19DigitCard = excelOperation.getTestData("UnionPay_19-digitcard", "Valid_Cards", "Test_Data");
+	private static String visaDebit = excelOperation.getTestData("Visa_debit", "Valid_Cards", "Test_Data");
+	private static String mastercardDebit = excelOperation.getTestData("Mastercard_debit", "Valid_Cards", "Test_Data");
+	private static String mastercardPrepaid = excelOperation.getTestData("Mastercard_prepaid", "Valid_Cards", "Test_Data");
+	private static String americanExpress = excelOperation.getTestData("American_Express", "Valid_Cards", "Test_Data");
+	private static String discover = excelOperation.getTestData("Discover", "Valid_Cards", "Test_Data");
+	private static String discoverDebit = excelOperation.getTestData("Discover_debit", "Valid_Cards", "Test_Data");
+	private static String dinersClub = excelOperation.getTestData("Diners_Club", "Valid_Cards", "Test_Data");
+	private static String dinersClub14Digit = excelOperation.getTestData("Diners Club_14-digitcard", "Valid_Cards", "Test_Data");
 	private static String mastercard2series = excelOperation.getTestData("Mastercard_2series", "Valid_Cards",
 			"Test_Data");
 	private static String insufficientFundDecline = excelOperation.getTestData("insufficientFundDecline",
@@ -661,6 +673,83 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 		}
 
 	}
+	
+	@Test
+	public void TC13_placeOrderWithFreeTrial() throws InterruptedException, IOException {		
+		try {
+			String emailAddress = "Testfre" + utilities.Helper.generateRandomString() + "@mailinator.com";
+			Reporting.test = Reporting.extent.createTest("TC13_Place_Order_With_Free_Trial");
+			LogTextFile.writeTestCaseStatus("TC13_Place_Order_With_Free_Trial", "Test case");
+			driver.get(cod_QA_FreeTrial_CreateAccount_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			try {
+				accountLoginPageObject.verifyAccountLoginPage();
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				try {
+					createAccountPageObject.creationOfAccount(firstName, lastName, emailAddress, password);
+					createAccountPageObject.getSuccessMessageForAccountCreation();
+					try {
+						subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+						subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						try {
+							wait.until(ExpectedConditions
+									.visibilityOfElementLocated(By.cssSelector("#continue-to-payment-btn")));
+							subscriptionAccountPageObject.isSecurePaymentButtonEnabled();
+							subscriptionAccountPageObject.clickOnSecurePaymentButton();
+							try {
+								subscriptionAccountPageObject.enterWPSSecurePaymentDetails(unionPayDebitCard, expiryDate, cvc,
+										driver);
+								subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+								try {
+									orderDetailsPageObject.verifyThankYouMessage();
+									loginPageObject.clickOnNavigationMenu();
+									orderDetailsPageObject.selectMySubscriptionButton();
+									orderDetailsPageObject.verifySubscriptionActivationDetailsMessage();
+									subscriptionDetailsPageObject.verifySubscriptionInformationPage(driver);
+									loginPageObject.clickOnNavigationMenu();
+									loginPageObject.clickOnLogoutButton();
+								} catch (Exception e) {
+									Reporting.updateTestReport("Subscription Information Page is verified",
+											CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+									loginPageObject.clickOnNavigationMenu();
+									loginPageObject.clickOnLogoutButton();
+								}
+							} catch (Exception e) {
+								Reporting.updateTestReport("Unable to click on submit order button",
+										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+								createAccountPageObject.clickOnEditButton();
+							}
+						} catch (Exception e) {
+							Reporting.updateTestReport("Secure payment button is not enabled",
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
+						}
+					} catch (Exception e) {
+						Reporting.updateTestReport("Unable to click on Monthly Subscription Checkbox button",
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
+					}
+				} catch (Exception e) {
+					Reporting.updateTestReport("Unable to get the success Message for Account Creation",
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+				}
+
+			} catch (Exception e) {
+				Reporting.updateTestReport("Unable to Click on Create a new account link",
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}
+		} catch (Exception e) {
+			driver.get(cod_QA_CreateAccount_URL);
+			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 
 	@Test
 	public void TC15_subscriptionDetailsPageVerification() throws InterruptedException, IOException {		
@@ -915,13 +1004,65 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 
 	}
 
-	
+	@Test
+	public void TC25_3DSPopUpFail() throws InterruptedException, IOException {
+		try {
+			Reporting.test = Reporting.extent.createTest("TC25_3DS_PopUp_Fail");
+			LogTextFile.writeTestCaseStatus("TC25_3DS_PopUp_Fail", "Test case");
+			driver.get(cod_QA_CreateAccount_URL);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));			
+			try {				
+				wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".create-account-btn")));
+				createAccountPageObject.clickOnCreateANewAccountLink();
+				createAccountPageObject.creationOfAccount(firstName, lastName, emailAddressFor3DCards, password);
+				createAccountPageObject.getSuccessMessageForAccountCreation();
+				try {
+					subscriptionAccountPageObject.enterAlphabetsInCreditCardField();
+					subscriptionAccountPageObject.enterAlphaNumericInAddressLine1Field();
+					try {
+						// subscriptionAccountPageObject.clickOnAddressLine2Field();
+						subscriptionAccountPageObject.enterAlphaNumericInCityTownField();
+						subscriptionAccountPageObject.enterAlphaNumericInZipCodeField();
+						subscriptionAccountPageObject.enterValidNumbersInPhoneNumberField();
+						subscriptionAccountPageObject.clickOnMonthlySubscriptionFeeCheckbox();
+						subscriptionAccountPageObject.clickOnSecurePaymentButton();
+						try {					
+							subscriptionAccountPageObject.enterWPSSecurePaymentDetails(cardNumber3D_Insufficientfunds, expiryDate, cvc,
+									driver);
+							subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
+							subscriptionAccountPageObject.clickOnFailAuthentication(driver);
+							subscriptionAccountPageObject.verify3DErrorMessage();													
+						} catch (Exception e) {
+							Reporting.updateTestReport("Fail authentication is not clicked " + e.getClass().toString(),
+									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+							createAccountPageObject.clickOnEditButton();
+							}						
+					} catch (Exception e) {
+						Reporting.updateTestReport("Not able to enter values in city, zipcode or phone numbe field " + e.getClass().toString(),
+								CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+						createAccountPageObject.clickOnEditButton();
+					}					
+				} catch (Exception e) {
+					Reporting.updateTestReport("Not able to enter values in credit cards or address line1 field " + e.getClass().toString(),
+							CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+					createAccountPageObject.clickOnEditButton();
+				}				
+			} catch (Exception e) {
+				Reporting.updateTestReport("Account success message is not correct " + e.getClass().toString(),
+						CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+			}			
+		} catch (Exception e) {
+			driver.get(cod_DEV_LoginURL);
+			Reporting.updateTestReport("Exception occured" + e.getClass().toString(),
+					CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
+		}
+	}
 
 	@Test
-	public void TC59_3DSPopUpFail() throws InterruptedException, IOException {
+	public void TC59_3DSPopUpCancel() throws InterruptedException, IOException {
 		try {
-			Reporting.test = Reporting.extent.createTest("TC59_3DS_PopUp_Fail");
-			LogTextFile.writeTestCaseStatus("TC59_3DS_PopUp_Fail", "Test case");
+			Reporting.test = Reporting.extent.createTest("TC59_3DS_PopUp_Cancel");
+			LogTextFile.writeTestCaseStatus("TC59_3DS_PopUp_Cancel", "Test case");
 			driver.get(cod_QA_CreateAccount_URL);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));			
 			try {				
@@ -943,18 +1084,7 @@ public class CoD_Regression_Test_Suite extends DriverModule {
 							subscriptionAccountPageObject.enterWPSSecurePaymentDetails(secure_3d, expiryDate, cvc, driver);
 							subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
 							subscriptionAccountPageObject.clickOnCancelButtonOn3DSecurePopUp(driver);
-							subscriptionAccountPageObject.verify3DErrorMessage();
-							try {												
-								subscriptionAccountPageObject.enterWPSSecurePaymentDetails(cardNumber3D_Insufficientfunds, expiryDate, cvc,
-										driver);
-								subscriptionAccountPageObject.clickOnSubmitOrderButton(driver);
-								subscriptionAccountPageObject.clickOnFailAuthentication(driver);
-								subscriptionAccountPageObject.verify3DErrorMessage();
-							} catch (Exception e) {
-								Reporting.updateTestReport("Fail message for 3D is not correct " + e.getClass().toString(),
-										CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
-								createAccountPageObject.clickOnEditButton();
-							}							
+							subscriptionAccountPageObject.verify3DErrorMessage();												
 						} catch (Exception e) {
 							Reporting.updateTestReport("Cancel for 3D did not work " + e.getClass().toString(),
 									CaptureScreenshot.getScreenshot(SS_path), StatusDetails.FAIL);
